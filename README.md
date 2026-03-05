@@ -158,6 +158,27 @@ code PLAN.md   # 或使用任意編輯器
 
 ---
 
+## 🎬 15 分鐘體感示範
+
+**最快上手方式**: 閱讀 `examples/todo-app-demo/DEMO_LOG.md`，看完整的 AI 對話紀錄。
+
+```bash
+# 直接閱讀示範
+cat examples/todo-app-demo/DEMO_LOG.md
+```
+
+### 示範內容
+
+| 場景 | 無治理結果 | 有治理結果 |
+|------|----------|----------|
+| 請求計畫外功能（登入） | ❌ AI 直接開始做 JWT | ✅ AI 提出 3 個選項讓你決定 |
+| 請求計畫內功能（CRUD） | AI 可能做也可能偏離 | ✅ AI 確認在計畫中才開始 |
+| 任務完成後 | AI 等你下指令 | ✅ AI 主動推進下一個 Sprint 任務 |
+
+> 📂 **[examples/todo-app-demo/](examples/todo-app-demo/)** — 包含已填好的 PLAN.md 範本
+
+---
+
 ## 💡 PLAN.md — 最重要的文件
 
 **PLAN.md** 是治理架構的核心，定義了「AI 今天該做什麼」。
@@ -298,6 +319,11 @@ ai-governance-framework/
 │   ├── architecture-theory.md  ← 建築師轉型理論
 │   └── governance-vs-prompting.md ← 治理 vs Prompting
 │
+├── examples/                    ← 示範專案 ⭐ 新手必看
+│   └── todo-app-demo/          ← 15 分鐘體感示範
+│       ├── PLAN.md             ← 已填好的計畫範本
+│       └── DEMO_LOG.md         ← AI 對話示範紀錄
+│
 └── archive/                     ← 記憶歸檔區 (由 memory_janitor 使用)
 ```
 
@@ -312,6 +338,11 @@ ai-governance-framework/
 - **[AGENT.md](governance/AGENT.md)** - 任務執行流程
 - **[ARCHITECTURE.md](governance/ARCHITECTURE.md)** - 架構紅線
 - **[HUMAN-OVERSIGHT.md](governance/HUMAN-OVERSIGHT.md)** - 強制停機
+
+### 示範
+
+- **[examples/todo-app-demo/DEMO_LOG.md](examples/todo-app-demo/DEMO_LOG.md)** ⭐ - 15 分鐘體感示範（新手必看！）
+- **[examples/todo-app-demo/PLAN.md](examples/todo-app-demo/PLAN.md)** - 已填好的 PLAN.md 範本
 
 ### 整合指南
 

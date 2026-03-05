@@ -31,12 +31,12 @@
 ```
 階段進度:
 ├─ [✓] Phase A: 框架基礎建立       (2026/03/05 完成)
-├─ [🔄] Phase B: 可採用性基礎       (進行中，預計 2026/04/15)
-├─ [⏳] Phase C: 工具強化           (待開始，預計 2026/05/15)
+├─ [✓] Phase B: 可採用性基礎        (2026/03/05 完成)
+├─ [🔄] Phase C: 工具強化           (進行中，預計 2026/05/15)
 └─ [⏳] Phase D: 整合成熟           (待開始，預計 2026/06/30)
 ```
 
-**當前 Phase**: **Phase B — 可採用性基礎**
+**當前 Phase**: **Phase C — 工具強化**
 
 ---
 
@@ -60,7 +60,7 @@
 
 ---
 
-### Phase B: 可採用性基礎 (進行中 🔄)
+### Phase B: 可採用性基礎 (已完成 ✓)
 
 **目標**: 讓「別人 15 分鐘內能體感框架價值」
 
@@ -69,18 +69,18 @@
 ├─ [✓] B1. Governance Contract Validator  (2026/03/05 完成)
 ├─ [✓] B2. PLAN.md Freshness 機制  (2026/03/05 完成)
 ├─ [✓] B3. memory_janitor 改為 copy+pointer+manifest  (2026/03/05 完成)
-└─ [🔄] B4. 範例 toy repo + demo log  ← 當前進行中
+└─ [✓] B4. 範例 toy repo + demo log  (2026/03/05 完成)
 ```
 
 **Gate 條件**:
 - [x] Validator 能機器判定 AI 初始化是否合規
 - [x] PLAN.md 有 freshness 欄位且有工具提醒
 - [x] memory_janitor 歸檔後原檔保留 pointer
-- [ ] Toy repo 可讓新用戶照做並體感「AI 開始問計畫」
+- [x] Toy repo 可讓新用戶照做並體感「AI 開始問計畫」
 
 ---
 
-### Phase C: 工具強化 (待開始 ⏳)
+### Phase C: 工具強化 (進行中 🔄)
 
 **目標**: 讓 governance_tools 達到可信賴的生產品質
 
@@ -133,12 +133,12 @@
 - [x] B3-b. 改為 copy+pointer 模式：原位保留 pointer 區塊
 - [x] B3-c. 加入 `manifest.json` 紀錄每次歸檔操作
 - [x] B3-d. 加入 `--manifest` 和 `--format json` 支援
-- [ ] B4-a. 建立 `examples/` 目錄與基本結構
-- [ ] B4-b. 撰寫 terminal demo log（15 分鐘體感流程）
-- [ ] B4-c. 更新 README.md 說明 examples/
+- [x] B4-a. 建立 `examples/` 目錄與基本結構
+- [x] B4-b. 撰寫 terminal demo log（15 分鐘體感流程）
+- [x] B4-c. 更新 README.md 說明 examples/
 
 **下一步**:
-完成 B4 → Phase B Gate 全部通過 → 進入 Phase C
+Phase B Gate 全部通過 ✅ → 進入 Phase C
 
 **當前阻礙**: 無
 
@@ -156,7 +156,7 @@
 - [x] B3. memory_janitor copy+pointer+manifest（修補 audit trail 缺口）✓ 2026/03/05
 
 ### 中優先 (P1)
-- [ ] B4. Toy repo 範例專案 + terminal demo log
+- [x] B4. Toy repo 範例專案 + terminal demo log ✓ 2026/03/05
 - [ ] C1. 工具輸出 --format json
 - [ ] C2. memory_janitor 單元測試
 - [ ] C3. linear_integrator 錯誤處理強化
@@ -199,17 +199,17 @@
 ### Phase B Gate
 
 **功能完整性**:
-- [ ] Validator 腳本可機器執行，輸出合規/不合規結論
-- [ ] PLAN.md freshness 欄位存在且工具能偵測過期
-- [ ] memory_janitor 歸檔後原檔有 pointer，有 manifest 紀錄
+- [x] Validator 腳本可機器執行，輸出合規/不合規結論
+- [x] PLAN.md freshness 欄位存在且工具能偵測過期
+- [x] memory_janitor 歸檔後原檔有 pointer，有 manifest 紀錄
 
 **工具品質**:
-- [ ] 所有新工具有 --help 說明
-- [ ] 所有新工具有 --dry-run 模式
+- [x] 所有新工具有 --help 說明
+- [x] 所有新工具有 --dry-run 模式
 
 **文件完整性**:
-- [ ] README.md 同步更新新功能
-- [ ] 每個新工具有對應的使用說明
+- [x] README.md 同步更新新功能
+- [x] 每個新工具有對應的使用說明
 
 ---
 
@@ -218,7 +218,7 @@
 | 里程碑 | 目標日期 | 狀態 | 交付物 |
 |---|---|---|---|
 | M1: 框架基礎完成 | 2026/03/05 | ✅ | 8 大法典 + 基礎工具 |
-| M2: 可採用性基礎 | 2026/04/15 | 🔄 | Validator + Freshness + Toy repo |
+| M2: 可採用性基礎 | 2026/03/05 | ✅ | Validator + Freshness + Toy repo |
 | M3: 工具品質提升 | 2026/05/15 | ⏳ | JSON 輸出 + 測試 + 錯誤處理 |
 | M4: 整合成熟 | 2026/06/30 | ⏳ | Linear 策略 + CI 範例 |
 
@@ -228,7 +228,7 @@
 
 | ID | 問題 | 嚴重程度 | 狀態 | 負責人 |
 |---|---|---|---|---|
-| BUG-001 | memory_janitor --execute 為移動而非複製+pointer，audit trail 有洞 | P0 | ⏳ 待修 | GavinWu |
+| BUG-001 | memory_janitor --execute 為移動而非複製+pointer，audit trail 有洞 | P0 | ✅ 已修 (B3) | GavinWu |
 | BUG-002 | Linear 整合無 source of truth 定義，有雙主系統風險 | P1 | ⏳ 待修 | GavinWu |
 | BUG-003 | 記憶壓力只靠行數，單一指標有被規避的風險 | P2 | ⏳ 待評估 | GavinWu |
 
