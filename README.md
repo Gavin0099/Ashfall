@@ -114,6 +114,7 @@ cp -r governance_tools /path/to/your/project/
 ```
 your-project/
 ├── PLAN.md              ← 自動生成的模板，填寫後即可使用 ⭐
+├── .governance-state.yaml  ← 由 state_generator.py 生成（可選）
 ├── governance/          ← 8 大法典
 ├── governance_tools/    ← 自動化工具
 └── memory/              ← 建議手動建立，供 AI 記憶使用
@@ -121,7 +122,10 @@ your-project/
     ├── 01_active_task.md
     ├── 02_tech_stack.md
     ├── 03_knowledge_base.md
-    └── 04_review_log.md  ← AI reviewer 的完整審查紀錄
+    ├── 04_review_log.md  ← AI reviewer 的完整審查紀錄
+    └── archive/          ← memory_janitor 歸檔目錄
+        ├── manifest.json         ← 所有歸檔操作的 audit trail
+        └── active_task_*.md      ← 歸檔的完整記憶快照
 ```
 
 ### 3. 告訴 AI 讀取治理文件
@@ -324,6 +328,7 @@ ai-governance-framework/
 - **[contract_validator.py](governance_tools/contract_validator.py)** ⭐ - AI 合規驗證工具
 - **[plan_freshness.py](governance_tools/plan_freshness.py)** ⭐ - PLAN.md 新鮮度檢查工具
 - **[state_generator.py](governance_tools/state_generator.py)** ⭐ - PLAN.md → machine-readable state
+- **[memory_janitor.py](governance_tools/memory_janitor.py)** - 記憶掃除（copy+pointer+manifest）
 - **[governance_tools/](governance_tools/)** - 輔助工具集
 
 ---
@@ -507,6 +512,63 @@ freshness:
 ```
 
 > ⚠️ **注意**: 每次更新 PLAN.md 後，執行 `state_generator.py` 重新生成。勿手動編輯此檔。
+
+---
+
+## 🧹 Memory Janitor — 記憶掃除工具
+
+`governance_tools/memory_janitor.py` 監控 `memory/01_active_task.md` 的行數壓力，並在超過閾值時執行安全歸檔（**copy + pointer + manifest**，不破壞 audit trail）。
+
+### 壓力等級
+
+| 等級 | 行數 | 行為 |
+|------|------|------|
+| SAFE | < 180 | 無動作 |
+| WARNING | 180–199 | 警告訊息 |
+| CRITICAL | 200–249 | 建議執行掃除 |
+| EMERGENCY | ≥ 250 | 強制停止，立即掃除 |
+
+### 用法
+
+```bash
+# 檢查目前狀態
+python governance_tools/memory_janitor.py --memory-root ./memory --check
+
+# JSON 輸出（接 CI）
+python governance_tools/memory_janitor.py --memory-root ./memory --check --format json
+
+# 模擬掃除（顯示將執行的操作）
+python governance_tools/memory_janitor.py --memory-root ./memory --execute --dry-run
+
+# 執行實際掃除（copy + pointer + manifest）
+python governance_tools/memory_janitor.py --memory-root ./memory --execute
+
+# 查看歸檔清單
+python governance_tools/memory_janitor.py --memory-root ./memory --manifest
+```
+
+### 掃除後的檔案結構
+
+**執行前**:
+```
+memory/01_active_task.md  ← 185 行（CRITICAL）
+```
+
+**執行後**:
+```
+memory/01_active_task.md  ← 截短版（pointer + header + Next Steps）
+memory/archive/
+  ├── active_task_20260305_150000.md  ← 完整備份（185 行）
+  └── manifest.json  ← {"archives": [{timestamp, archive_file, original_lines, ...}]}
+```
+
+`01_active_task.md` 頂部會插入 pointer 區塊：
+
+```markdown
+<!-- ARCHIVED: active_task_20260305_150000.md (2026-03-05 15:00:00) -->
+> **[歸檔紀錄]** 2026-03-05 15:00:00 — 本檔案已歸檔至 `archive/active_task_20260305_150000.md`
+> 歸檔原因: 記憶壓力 CRITICAL（原始 185 行）
+```
 
 ---
 
