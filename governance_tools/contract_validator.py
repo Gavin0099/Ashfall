@@ -164,6 +164,25 @@ def validate_contract(text: str) -> ValidationResult:
         if "(" not in pressure or "/" not in pressure:
             warnings.append("PRESSURE 建議包含行數資訊，格式: SAFE (45/200)")
 
+    # ── AGENT_ID / SESSION（optional，但若有 AGENT_ID 則 SESSION 為必填） ──
+    agent_id = fields.get("AGENT_ID", "").strip()
+    session = fields.get("SESSION", "").strip()
+
+    if agent_id:
+        # SESSION 格式驗證: YYYY-MM-DD-NN
+        import re as _re
+        if not session:
+            errors.append(
+                "AGENT_ID 存在時 SESSION 為必填（格式: YYYY-MM-DD-NN，例: 2026-03-05-01）"
+            )
+        elif not _re.fullmatch(r'\d{4}-\d{2}-\d{2}-\d+', session):
+            errors.append(
+                f"SESSION 格式錯誤: '{session}'，正確格式: YYYY-MM-DD-NN（例: 2026-03-05-01）"
+            )
+    elif session:
+        # 有 SESSION 但無 AGENT_ID → 只是警告
+        warnings.append("SESSION 存在但 AGENT_ID 缺失（建議一起填寫）")
+
     return ValidationResult(
         compliant=len(errors) == 0,
         contract_found=True,
@@ -186,7 +205,7 @@ def format_human(result: ValidationResult) -> str:
     lines.append("")
 
     # 欄位摘要
-    for key in ["LANG", "LEVEL", "SCOPE", "PLAN", "LOADED", "CONTEXT", "PRESSURE"]:
+    for key in ["LANG", "LEVEL", "SCOPE", "PLAN", "LOADED", "CONTEXT", "PRESSURE", "AGENT_ID", "SESSION"]:
         val = result.fields.get(key, "⚠️  缺失")
         lines.append(f"  {key:<10} = {val}")
 

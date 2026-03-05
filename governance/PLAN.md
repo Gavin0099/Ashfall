@@ -56,6 +56,9 @@ PLAN.md = 施工計畫表
 > **技術棧**: [語言/框架]
 > **複雜度**: L1 / L2 / L3
 > **預計工期**: [開始] ~ [結束]
+> **最後更新**: YYYY-MM-DD
+> **Owner**: [姓名]
+> **Freshness**: Sprint (7d)
 
 ---
 
@@ -83,6 +86,33 @@ PLAN.md = 施工計畫表
 
 ## 🔄 變更歷史
 ```
+
+---
+
+## § 2.1 Freshness 欄位規範
+
+**`最後更新`、`Owner`、`Freshness` 為必填 header 欄位。**
+
+```markdown
+> **最後更新**: YYYY-MM-DD   ← 每次修改 PLAN.md 時必須更新
+> **Owner**: <姓名>          ← 對 PLAN.md 內容負責的人
+> **Freshness**: Sprint (7d) ← freshness policy
+```
+
+**Freshness Policy 選項**:
+
+| Policy | 格式 | 含義 |
+|--------|------|------|
+| Sprint  | `Sprint (7d)`  | Sprint 週期，>7d 發出 STALE 警告 |
+| Phase   | `Phase (30d)`  | Phase 週期，>30d 發出 STALE 警告 |
+| Custom  | `Custom (Nd)`  | 自訂天數 |
+
+**閾值規則**:
+- `FRESH` — 距今 ≤ threshold
+- `STALE` — 距今 > threshold（警告但不阻擋）
+- `CRITICAL` — 距今 > 2× threshold（強烈警告）
+
+**工具**: `governance_tools/plan_freshness.py` 自動偵測並輸出狀態。
 
 ---
 

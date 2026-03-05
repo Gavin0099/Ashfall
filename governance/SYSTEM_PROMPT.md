@@ -85,6 +85,8 @@ PLAN     = <current phase> / <sprint> / <task>
 LOADED   = <comma-separated list of loaded governance docs>
 CONTEXT  = <context name> — <responsible for X>; NOT: <not responsible for Y>
 PRESSURE = <SAFE|WARNING|CRITICAL|EMERGENCY> (<line count>/200)
+AGENT_ID = <agent-id>       ← optional; required in multi-agent sessions
+SESSION  = <YYYY-MM-DD-NN>  ← optional; required when AGENT_ID is present
 ```
 
 **Field rules**:
@@ -95,6 +97,8 @@ PRESSURE = <SAFE|WARNING|CRITICAL|EMERGENCY> (<line count>/200)
 - `LOADED`: must include at minimum `SYSTEM_PROMPT, HUMAN-OVERSIGHT`
 - `CONTEXT`: must have both `—` separator and `NOT:` clause
 - `PRESSURE`: must include level label and line count
+- `AGENT_ID`: free text identifier (e.g. `coder-01`, `reviewer-01`) — include when acting as a named agent in a multi-agent workflow
+- `SESSION`: format `YYYY-MM-DD-NN` (e.g. `2026-03-05-01`) — **required when AGENT_ID is present**
 
 ❌ Missing or malformed contract block → human may reject the response using the validator.
 
