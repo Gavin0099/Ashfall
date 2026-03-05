@@ -17,18 +17,30 @@ Priority: 9 (Productivity Tooling)
 import os
 import re
 import json
+import time
 from pathlib import Path
 from datetime import datetime
-from typing import Dict, List, Optional
+from typing import Dict, List, Optional, Tuple
 import urllib.request
 import urllib.error
 
 
 class LinearClient:
     """Linear GraphQL API 客戶端"""
-    
+
     API_ENDPOINT = "https://api.linear.app/graphql"
-    
+    REQUEST_TIMEOUT = 30  # seconds
+    MAX_RETRIES = 3
+    _RETRY_DELAYS = (1, 2, 4)  # exponential backoff (seconds)
+
+    # 敏感資訊偵測規則 (pattern, label)
+    _SENSITIVE_PATTERNS: List[Tuple[re.Pattern, str]] = [
+        (re.compile(r'(lin_api_|sk-|xox[baprs]-)[A-Za-z0-9_\-]{10,}', re.IGNORECASE), 'API_KEY'),
+        (re.compile(r'\b(password|passwd|secret|token)\s*[=:]\s*\S+', re.IGNORECASE), 'CREDENTIAL'),
+        (re.compile(r'-----BEGIN\s+(?:\w+\s+)?PRIVATE KEY-----', re.IGNORECASE), 'PRIVATE_KEY'),
+        (re.compile(r'[A-Za-z0-9+/]{40,}={0,2}(?=\s|$)'), 'POSSIBLE_SECRET'),  # base64 blob
+    ]
+
     def __init__(self, api_key: Optional[str] = None):
         """
         Args:
@@ -41,44 +53,86 @@ class LinearClient:
                 "請設定環境變數: export LINEAR_API_KEY='your_key_here'\n"
                 "或在 ~/.bashrc 中加入此行"
             )
-    
+
+    def scan_sensitive(self, text: str) -> List[str]:
+        """
+        掃描文字中的敏感資訊。
+
+        Returns:
+            偵測到的敏感類型清單 (空清單表示安全)
+        """
+        found = []
+        for pattern, label in self._SENSITIVE_PATTERNS:
+            if pattern.search(text):
+                found.append(label)
+        return found
+
     def _graphql_request(self, query: str, variables: Optional[Dict] = None) -> Dict:
         """
-        執行 GraphQL 請求
-        
-        Args:
-            query: GraphQL 查詢字串
-            variables: 查詢變數
-        
-        Returns:
-            API 回應 (dict)
-        
+        執行 GraphQL 請求（含 timeout）。
+
         Raises:
-            urllib.error.HTTPError: API 請求失敗
+            urllib.error.HTTPError: HTTP 層錯誤
+            urllib.error.URLError: 網路層錯誤（DNS、連線失敗等）
         """
-        payload = {
-            "query": query,
-            "variables": variables or {}
-        }
-        
+        payload = {"query": query, "variables": variables or {}}
         headers = {
             "Content-Type": "application/json",
-            "Authorization": self.api_key
+            "Authorization": self.api_key,
         }
-        
         request = urllib.request.Request(
             self.API_ENDPOINT,
-            data=json.dumps(payload).encode('utf-8'),
+            data=json.dumps(payload).encode("utf-8"),
             headers=headers,
-            method='POST'
+            method="POST",
         )
-        
         try:
-            with urllib.request.urlopen(request) as response:
-                return json.loads(response.read().decode('utf-8'))
+            with urllib.request.urlopen(request, timeout=self.REQUEST_TIMEOUT) as response:
+                return json.loads(response.read().decode("utf-8"))
         except urllib.error.HTTPError as e:
-            error_body = e.read().decode('utf-8')
-            raise Exception(f"Linear API 錯誤 ({e.code}): {error_body}")
+            error_body = e.read().decode("utf-8", errors="replace")
+            raise urllib.error.HTTPError(e.url, e.code, error_body, e.headers, None)
+        except urllib.error.URLError as e:
+            raise urllib.error.URLError(f"網路錯誤: {e.reason}")
+
+    def _graphql_request_with_retry(
+        self, query: str, variables: Optional[Dict] = None
+    ) -> Dict:
+        """
+        帶重試機制的 GraphQL 請求。
+
+        - HTTP 429 / 5xx → 指數退避重試（最多 MAX_RETRIES 次）
+        - 其他錯誤    → 直接拋出
+
+        Raises:
+            Exception: 超過重試次數或不可重試的錯誤
+        """
+        last_exc: Optional[Exception] = None
+        for attempt, delay in enumerate(self._RETRY_DELAYS, start=1):
+            try:
+                return self._graphql_request(query, variables)
+            except urllib.error.HTTPError as e:
+                last_exc = e
+                retryable = e.code in (429, 502, 503, 504)
+                if retryable and attempt < self.MAX_RETRIES:
+                    print(
+                        f"⚠️  Linear API {e.code} (attempt {attempt}/{self.MAX_RETRIES})，"
+                        f"{delay}s 後重試..."
+                    )
+                    time.sleep(delay)
+                    continue
+                raise Exception(
+                    f"Linear API 錯誤 ({e.code}): {e.reason}\n"
+                    f"{'已達重試上限。' if retryable else '請確認 API Key 與參數。'}"
+                ) from e
+            except urllib.error.URLError as e:
+                last_exc = e
+                if attempt < self.MAX_RETRIES:
+                    print(f"⚠️  {e.reason} (attempt {attempt}/{self.MAX_RETRIES})，{delay}s 後重試...")
+                    time.sleep(delay)
+                    continue
+                raise Exception(f"網路錯誤: {e.reason}") from e
+        raise Exception(f"請求失敗，已重試 {self.MAX_RETRIES} 次") from last_exc
     
     def create_issue(
         self,
@@ -128,14 +182,23 @@ class LinearClient:
             }
         }
         
-        result = self._graphql_request(query, variables)
-        
+        # 敏感資訊防護：掃描 title 與 description
+        for field, value in [("title", title), ("description", description)]:
+            hits = self.scan_sensitive(value)
+            if hits:
+                raise ValueError(
+                    f"拒絕送出：{field} 含疑似敏感資訊 {hits}\n"
+                    f"  請移除 API Key、密碼、Token 等內容後再重試。"
+                )
+
+        result = self._graphql_request_with_retry(query, variables)
+
         if result.get("data", {}).get("issueCreate", {}).get("success"):
             issue = result["data"]["issueCreate"]["issue"]
             return {
                 "id": issue["id"],
                 "url": issue["url"],
-                "identifier": issue["identifier"]
+                "identifier": issue["identifier"],
             }
         else:
             errors = result.get("errors", [])
@@ -163,7 +226,7 @@ class LinearClient:
         }
         """
         
-        result = self._graphql_request(query)
+        result = self._graphql_request_with_retry(query)
         return result.get("data", {}).get("teams", {}).get("nodes", [])
     
     def update_issue_status(self, issue_id: str, state_id: str) -> bool:
@@ -190,7 +253,7 @@ class LinearClient:
             "input": {"stateId": state_id}
         }
         
-        result = self._graphql_request(query, variables)
+        result = self._graphql_request_with_retry(query, variables)
         return result.get("data", {}).get("issueUpdate", {}).get("success", False)
 
 
@@ -334,57 +397,103 @@ class LinearIntegrator:
 def main():
     """CLI 入口"""
     import argparse
-    
+    import sys
+
+    # Windows 終端機 UTF-8 相容性
+    if hasattr(sys.stdout, "reconfigure"):
+        sys.stdout.reconfigure(encoding="utf-8", errors="replace")
+
     parser = argparse.ArgumentParser(description="Linear Integrator - Linear API 整合工具")
-    parser.add_argument('--memory-root', default='./memory', help='memory/ 目錄路徑')
-    parser.add_argument('--list-teams', action='store_true', help='列出所有 Team')
-    parser.add_argument('--sync', action='store_true', help='同步所有未完成任務到 Linear')
-    parser.add_argument('--team-id', help='Linear Team ID (用於 --sync)')
-    parser.add_argument('--priority', type=int, default=2, help='優先級 (0-4, 預設 2=High)')
-    
+    parser.add_argument("--memory-root", default="./memory", help="memory/ 目錄路徑")
+    parser.add_argument("--list-teams", action="store_true", help="列出所有 Team")
+    parser.add_argument("--sync", action="store_true", help="同步所有未完成任務到 Linear")
+    parser.add_argument("--team-id", help="Linear Team ID (用於 --sync)")
+    parser.add_argument("--priority", type=int, default=2, help="優先級 (0-4, 預設 2=High)")
+    parser.add_argument(
+        "--batch-delay", type=float, default=0.5,
+        help="批次同步時每個 Issue 間的延遲秒數（預設 0.5，降低 rate limit 風險）"
+    )
+    parser.add_argument(
+        "--format", choices=["human", "json"], default="human",
+        help="輸出格式 (預設: human)"
+    )
+
     args = parser.parse_args()
-    
+
+    def _output(data: dict):
+        """根據 --format 輸出結果"""
+        if args.format == "json":
+            print(json.dumps(data, ensure_ascii=False))
+        else:
+            # human-readable 已在各操作內 print，此處輸出摘要
+            status = data.get("status", "ok")
+            if status != "ok":
+                print(f"❌ {data.get('error', status)}")
+
     try:
         linear = LinearClient()
         integrator = LinearIntegrator(Path(args.memory_root), linear)
-        
+
         if args.list_teams:
             teams = linear.get_team_info()
-            print("📋 可用的 Teams:")
-            for team in teams:
-                print(f"  - {team['name']} (Key: {team['key']}, ID: {team['id']})")
-        
+            if args.format == "json":
+                print(json.dumps({"teams": teams}, ensure_ascii=False))
+            else:
+                print("📋 可用的 Teams:")
+                for team in teams:
+                    print(f"  - {team['name']} (Key: {team['key']}, ID: {team['id']})")
+
         elif args.sync:
             if not args.team_id:
-                print("❌ 錯誤: 請使用 --team-id 指定 Team")
-                print("   提示: 先執行 --list-teams 查看可用的 Team ID")
-                return
-            
+                _output({"status": "error", "error": "請使用 --team-id 指定 Team（先執行 --list-teams 查看）"})
+                sys.exit(1)
+
             tasks = integrator.parse_active_task()
-            incomplete_tasks = [t for t in tasks if not t['is_completed'] and not t['linear_id']]
-            
-            print(f"📊 找到 {len(incomplete_tasks)} 個未同步的任務")
-            
+            incomplete_tasks = [t for t in tasks if not t["is_completed"] and not t["linear_id"]]
+
+            if args.format != "json":
+                print(f"📊 找到 {len(incomplete_tasks)} 個未同步的任務")
+
             task_id_mapping = {}
-            for task in incomplete_tasks:
+            errors = []
+            for i, task in enumerate(incomplete_tasks):
+                if i > 0 and args.batch_delay > 0:
+                    time.sleep(args.batch_delay)
                 linear_id = integrator.sync_task_to_linear(
-                    task,
-                    team_id=args.team_id,
-                    priority=args.priority
+                    task, team_id=args.team_id, priority=args.priority
                 )
                 if linear_id:
-                    task_id_mapping[task['title']] = linear_id
-            
+                    task_id_mapping[task["title"]] = linear_id
+                else:
+                    errors.append(task["title"])
+
             if task_id_mapping:
                 integrator.update_active_task_with_linear_ids(task_id_mapping)
-        
+
+            if args.format == "json":
+                print(json.dumps({
+                    "status": "ok" if not errors else "partial",
+                    "synced": list(task_id_mapping.values()),
+                    "failed": errors,
+                }, ensure_ascii=False))
+
         else:
             parser.print_help()
-    
+
     except ValueError as e:
-        print(f"❌ 設定錯誤: {e}")
+        msg = str(e)
+        if args.format == "json":
+            print(json.dumps({"status": "error", "error": msg}, ensure_ascii=False))
+        else:
+            print(f"❌ 設定錯誤: {msg}")
+        sys.exit(1)
     except Exception as e:
-        print(f"❌ 執行錯誤: {e}")
+        msg = str(e)
+        if args.format == "json":
+            print(json.dumps({"status": "error", "error": msg}, ensure_ascii=False))
+        else:
+            print(f"❌ 執行錯誤: {msg}")
+        sys.exit(1)
 
 
 if __name__ == "__main__":
