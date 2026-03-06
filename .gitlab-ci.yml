@@ -1,0 +1,84 @@
+##############################################################
+# AI Governance Framework — GitLab CI
+#
+# 兩個 job 與 GitHub Actions 的 governance.yml 邏輯完全相同，
+# 差別只在 YAML 語法（image vs runs-on、script vs run、
+# allow_failure vs continue-on-error、rules vs on）。
+##############################################################
+
+stages:
+  - governance
+
+variables:
+  PIP_CACHE_DIR: "$CI_PROJECT_DIR/.cache/pip"
+
+# ─────────────────────────────────────────────────────────────
+# Job 1: PLAN.md 新鮮度檢查
+# CRITICAL → pipeline 失敗 (exit 1)
+# STALE    → warning 訊息，不擋
+# FRESH    → 通過
+# ─────────────────────────────────────────────────────────────
+plan-freshness:
+  stage: governance
+  image: python:3.11-slim
+  cache:
+    paths:
+      - .cache/pip
+  script:
+    - |
+      python governance_tools/plan_freshness.py --format json | python - <<'EOF'
+      import json, sys
+      r = json.load(sys.stdin)
+      status = r["status"]
+      days   = r["days_since_update"]
+      limit  = r.get("threshold_days", "?")
+      print(f"PLAN.md status: {status} ({days}d since last update, threshold: {limit}d)")
+      if status == "CRITICAL":
+          print("ERROR: PLAN.md is CRITICAL stale — please update before pushing.")
+          sys.exit(1)
+      elif status == "STALE":
+          print(f"WARNING: PLAN.md is STALE ({days}d). Consider updating soon.")
+      EOF
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "push"'
+    - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
+
+# ─────────────────────────────────────────────────────────────
+# Job 2: 記憶壓力監控（advisory — allow_failure: true）
+# EMERGENCY → pipeline 失敗（即使 allow_failure 也會標示 warning）
+# CRITICAL  → 警告訊息，不擋
+# WARNING   → 通知訊息，不擋
+# ─────────────────────────────────────────────────────────────
+memory-pressure:
+  stage: governance
+  image: python:3.11-slim
+  allow_failure: true    # advisory only
+  cache:
+    paths:
+      - .cache/pip
+  script:
+    - |
+      # memory/ 目錄不存在時直接跳過（新 repo 正常現象）
+      if [ ! -d "memory" ]; then
+        echo "memory/ not found — skipping pressure check"
+        exit 0
+      fi
+      python governance_tools/memory_janitor.py \
+        --memory-root ./memory --check --format json | python - <<'EOF'
+      import json, sys
+      r = json.load(sys.stdin)
+      status = r["status"]
+      lines  = r["line_count"]
+      hard   = r.get("hard_limit", 200)
+      print(f"Memory status: {status} ({lines}/{hard} lines)")
+      if status == "EMERGENCY":
+          print("ERROR: Memory EMERGENCY — run: python governance_tools/memory_janitor.py --execute")
+          sys.exit(1)
+      elif status == "CRITICAL":
+          print(f"WARNING: Memory CRITICAL ({lines} lines). Run memory_janitor --execute soon.")
+      elif status == "WARNING":
+          print(f"NOTICE: Memory WARNING ({lines} lines). Monitor and plan cleanup.")
+      EOF
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "push"'
+    - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'

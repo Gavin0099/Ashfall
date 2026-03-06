@@ -297,6 +297,9 @@ ai-governance-framework/
 ├── CONTRIBUTING.md              ← 貢獻指南
 ├── PLAN.md                      ← 本專案的開發計畫 ⭐
 ├── .governance-state.yaml       ← PLAN.md 的機器可讀萃取版 (auto-generated)
+├── .github/workflows/
+│   └── governance.yml           ← GitHub Actions CI ⭐
+├── .gitlab-ci.yml               ← GitLab CI ⭐
 ├── deploy_to_memory.sh          ← 部署腳本
 │
 ├── governance/                  ← 8 大法典
@@ -559,72 +562,37 @@ rm .git/hooks/pre-commit .git/hooks/pre-push
 
 governance_tools 的設計原則：**純 Python + exit code + `--format json`**，意味著它們可以無縫插入任何 CI 系統，**不需要修改工具本身**，只需寫對應平台的 YAML。
 
+> 📄 **實際設定檔已就緒**:
+> - GitHub Actions: [`.github/workflows/governance.yml`](.github/workflows/governance.yml)
+> - GitLab CI: [`.gitlab-ci.yml`](.gitlab-ci.yml)
+>
+> 直接 fork 使用，或複製到你的專案即可。
+
 ### 工具 ↔ CI 對應關係
 
-| 工具 | exit 0 | exit 1/2 | CI 用途 |
-|------|--------|----------|---------|
-| `plan_freshness.py` | FRESH | STALE/CRITICAL | PLAN.md 過期擋 pipeline |
-| `contract_validator.py` | 合規 | 不合規 | AI 初始化驗證 gate |
-| `memory_janitor.py --check` | SAFE | WARNING/CRITICAL | 記憶壓力監控 |
+| 工具 | exit 0 | exit 非 0 | CI 行為 |
+|------|--------|-----------|---------|
+| `plan_freshness.py` | FRESH/STALE | CRITICAL | **擋截** pipeline（需更新 PLAN.md） |
+| `memory_janitor.py --check` | SAFE～CRITICAL | EMERGENCY | **警告**（advisory，不擋截） |
 
-### GitHub Actions 範例
-
-```yaml
-# .github/workflows/governance.yml
-name: Governance Check
-
-on: [push, pull_request]
-
-jobs:
-  plan-freshness:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
-        with:
-          python-version: '3.11'
-      - name: Check PLAN.md freshness
-        run: |
-          python governance_tools/plan_freshness.py --format json | tee result.json
-          python -c "
-          import json, sys
-          r = json.load(open('result.json'))
-          print(f\"Status: {r['status']} ({r['days_since_update']}d)\")
-          sys.exit(0 if r['status'] in ('FRESH', 'STALE') else 1)
-          "
-```
-
-### GitLab CI 範例
-
-```yaml
-# .gitlab-ci.yml
-governance-check:
-  image: python:3.11-slim
-  stage: test
-  script:
-    - python governance_tools/plan_freshness.py --format json > result.json
-    - |
-      python -c "
-      import json, sys
-      r = json.load(open('result.json'))
-      print(f\"Status: {r['status']} ({r['days_since_update']}d)\")
-      sys.exit(0 if r['status'] in ('FRESH', 'STALE') else 1)
-      "
-  rules:
-    - if: '$CI_PIPELINE_SOURCE == "push"'
-```
-
-### 兩者的差異只在 YAML，工具完全一致
+### Job 設計原則
 
 ```
-GitHub Actions              GitLab CI
-──────────────────          ──────────────────
-on: [push]                  rules: - if: push
-runs-on: ubuntu-latest      image: python:3.11-slim
-steps: - run: python ...    script: - python ...
+plan-freshness    → 必要 gate（CRITICAL 擋截）
+memory-pressure   → 建議性監控（allow_failure / continue-on-error）
 ```
 
-> **重點**: `plan_freshness.py`、`contract_validator.py`、`memory_janitor.py` 這三支工具的行為在兩個平台上**完全相同**，不需要任何修改。
+### 平台差異對照（邏輯完全相同）
+
+| 設定點 | GitHub Actions | GitLab CI |
+|--------|---------------|-----------|
+| 觸發條件 | `on: push / pull_request` | `rules: if push / merge_request_event` |
+| 執行環境 | `runs-on: ubuntu-latest` | `image: python:3.11-slim` |
+| 指令區塊 | `steps: - run:` | `script:` |
+| 允許失敗 | `continue-on-error: true` | `allow_failure: true` |
+| CI 標注 | `::error::` / `::warning::` | 純文字輸出 |
+
+> **重點**: `plan_freshness.py`、`memory_janitor.py` 工具本身在兩個平台**完全相同**，不需要任何修改。
 
 ---
 

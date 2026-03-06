@@ -1,0 +1,82 @@
+name: Governance Check
+
+on:
+  push:
+    branches: [main, 'feature/**']
+  pull_request:
+    branches: [main]
+
+jobs:
+  # ─────────────────────────────────────────────
+  # Job 1: PLAN.md 新鮮度檢查
+  # CRITICAL → pipeline 失敗 (exit 1)
+  # STALE    → warning annotation，但不擋
+  # FRESH    → 通過
+  # ─────────────────────────────────────────────
+  plan-freshness:
+    name: PLAN.md Freshness
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Check PLAN.md freshness
+        run: |
+          python governance_tools/plan_freshness.py --format json | python - <<'EOF'
+          import json, sys
+          r = json.load(sys.stdin)
+          status = r["status"]
+          days   = r["days_since_update"]
+          limit  = r.get("threshold_days", "?")
+          print(f"PLAN.md status: {status} ({days}d since last update, threshold: {limit}d)")
+          if status == "CRITICAL":
+              print("::error file=PLAN.md::PLAN.md is CRITICAL stale — please update before pushing.")
+              sys.exit(1)
+          elif status == "STALE":
+              print(f"::warning file=PLAN.md::PLAN.md is STALE ({days}d). Consider updating soon.")
+          EOF
+
+  # ─────────────────────────────────────────────
+  # Job 2: 記憶壓力監控
+  # EMERGENCY → pipeline 失敗
+  # CRITICAL  → warning，不擋
+  # WARNING   → notice，不擋
+  # (allow_failure 設為 true by design — 記憶壓力是 advisory)
+  # ─────────────────────────────────────────────
+  memory-pressure:
+    name: Memory Pressure
+    runs-on: ubuntu-latest
+    continue-on-error: true   # advisory only
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Check memory pressure
+        run: |
+          # memory/ 目錄不存在時直接跳過（新 repo 正常現象）
+          if [ ! -d "memory" ]; then
+            echo "memory/ not found — skipping pressure check"
+            exit 0
+          fi
+          python governance_tools/memory_janitor.py \
+            --memory-root ./memory --check --format json | python - <<'EOF'
+          import json, sys
+          r = json.load(sys.stdin)
+          status = r["status"]
+          lines  = r["line_count"]
+          hard   = r.get("hard_limit", 200)
+          print(f"Memory status: {status} ({lines}/{hard} lines)")
+          if status == "EMERGENCY":
+              print("::error::Memory EMERGENCY — run: python governance_tools/memory_janitor.py --execute")
+              sys.exit(1)
+          elif status == "CRITICAL":
+              print(f"::warning::Memory CRITICAL ({lines} lines). Run memory_janitor --execute soon.")
+          elif status == "WARNING":
+              print(f"::notice::Memory WARNING ({lines} lines). Monitor and plan cleanup.")
+          EOF

@@ -106,13 +106,13 @@
 **任務清單**:
 ```
 ├─ [✓] D1. Linear 同步策略文件（PLAN vs Linear 誰為準、衝突解法）  (2026/03/05 完成)
-├─ [⏳] D2. GitHub Actions + GitLab CI 實際 YAML 設定檔
+├─ [✓] D2. GitHub Actions + GitLab CI 實際 YAML 設定檔  (2026/03/06 完成)
 └─ [⏳] D3. 第二個平台整合（Jira 或 Notion）
 ```
 
 **Gate 條件**:
-- [ ] Linear 整合有明確的「單一 Source of Truth」定義
-- [ ] 有可運行的 CI 範例（GitHub Actions）
+- [x] Linear 整合有明確的「單一 Source of Truth」定義
+- [x] 有可運行的 CI 範例（GitHub Actions + GitLab CI）
 
 ---
 
@@ -164,7 +164,7 @@ Phase B Gate 全部通過 ✅ → 進入 Phase C
 
 ### 低優先 (P2)
 - [x] C4. Git hook 一鍵安裝 ✓ 2026/03/05
-- [ ] D2. GitHub Actions + GitLab CI 範例（實際 YAML 設定檔）
+- [x] D2. GitHub Actions + GitLab CI 範例（實際 YAML 設定檔）✓ 2026/03/06
 - [ ] D3. Jira / Notion 整合
 
 ---
