@@ -26,13 +26,14 @@
     "end_reason": { "type": ["string", "null"] },
     "player_final": {
       "type": "object",
-      "required": ["hp", "food", "ammo", "medkits", "scrap"],
+      "required": ["hp", "food", "ammo", "medkits", "scrap", "radiation"],
       "properties": {
         "hp": { "type": "integer" },
         "food": { "type": "integer" },
         "ammo": { "type": "integer" },
         "medkits": { "type": "integer" },
-        "scrap": { "type": "integer" }
+        "scrap": { "type": "integer" },
+        "radiation": { "type": "integer" }
       },
       "additionalProperties": false
     },
@@ -50,12 +51,13 @@
           "combat_triggered": { "type": "boolean" },
           "player_after": {
             "type": "object",
-            "required": ["hp", "food", "ammo", "medkits"],
+            "required": ["hp", "food", "ammo", "medkits", "radiation"],
             "properties": {
               "hp": { "type": "integer" },
               "food": { "type": "integer" },
               "ammo": { "type": "integer" },
-              "medkits": { "type": "integer" }
+              "medkits": { "type": "integer" },
+              "radiation": { "type": "integer" }
             },
             "additionalProperties": false
           }

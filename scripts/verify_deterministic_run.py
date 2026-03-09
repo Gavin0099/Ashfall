@@ -58,10 +58,11 @@ def run_once(seed: int) -> Dict:
         "player": {
             "hp": run.player.hp,
             "food": run.player.food,
-            "ammo": run.player.ammo,
-            "medkits": run.player.medkits,
-            "scrap": run.player.scrap,
-        },
+                "ammo": run.player.ammo,
+                "medkits": run.player.medkits,
+                "scrap": run.player.scrap,
+                "radiation": run.player.radiation,
+            },
         "event_outcome": event_outcome,
     }
 

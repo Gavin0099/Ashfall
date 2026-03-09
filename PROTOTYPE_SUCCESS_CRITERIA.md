@@ -1,4 +1,4 @@
-# Prototype Success Criteria — Ashfall v0.1
+# Prototype Success Criteria - Ashfall v0.1
 
 ## Goal
 Validate whether route choice can create repeatable high-stakes tension in a CLI wasteland roguelite prototype.
@@ -62,3 +62,4 @@ Validate whether route choice can create repeatable high-stakes tension in a CLI
 - Playability Threshold ">=3 pressure choices per run": PASS (v2 = 5/5 runs passing)
 - Analytics Contract: PASS (`schemas/run_analytics_schema.json` + `output/analytics/run_*.json`)
 - Balance Sampling: PASS (`scripts/run_balance_metrics.py` captured 20 deterministic analytics runs)
+- Irreversible-State Signal: PASS (`radiation` integrated into event effects, travel attrition, and death attribution)

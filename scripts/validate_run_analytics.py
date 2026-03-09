@@ -24,7 +24,7 @@ def ensure(condition: bool, message: str) -> None:
 
 
 def validate_player_final(data: dict[str, Any], src: Path) -> None:
-    required = {"hp", "food", "ammo", "medkits", "scrap"}
+    required = {"hp", "food", "ammo", "medkits", "scrap", "radiation"}
     ensure(required.issubset(data.keys()), f"{src}: player_final missing keys")
     for key in required:
         ensure(isinstance(data[key], int), f"{src}: player_final.{key} must be integer")
@@ -42,7 +42,7 @@ def validate_decision_log(entries: list[dict[str, Any]], src: Path) -> None:
         ensure(isinstance(entry.get("combat_triggered"), bool), f"{src}: combat_triggered must be boolean")
         player_after = entry.get("player_after")
         ensure(isinstance(player_after, dict), f"{src}: player_after missing")
-        for key in ("hp", "food", "ammo", "medkits"):
+        for key in ("hp", "food", "ammo", "medkits", "radiation"):
             ensure(isinstance(player_after.get(key), int), f"{src}: player_after.{key} must be integer")
 
 

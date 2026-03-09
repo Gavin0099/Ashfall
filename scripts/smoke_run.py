@@ -71,6 +71,7 @@ def main() -> int:
                 "ammo": run.player.ammo,
                 "medkits": run.player.medkits,
                 "scrap": run.player.scrap,
+                "radiation": run.player.radiation,
             },
             "event_outcome": event_outcome,
         }

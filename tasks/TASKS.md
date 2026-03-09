@@ -10,12 +10,12 @@ Phase/Gate/Milestone Truth: `PLAN.md`
 ## Current Sprint (2026/03/09 - 2026/03/15)
 
 ### In Progress
-- [ ] D6 Add irreversible-state prototype signal (radiation/injury minimal variant)
+- [ ] D7 Publish v0.1 balancing notes
 
 ### Ready
 - [ ] D1 Add run-end reward and unlock rules
 - [ ] D2 Add meta progression state transitions
-- [ ] D6 Add irreversible-state prototype signal (radiation/injury minimal variant)
+- [ ] PT-1 Run first manual playtest round with 5-8 players using `PLAYTEST_PROTOCOL.md`
 
 ### Playability Check
 - [x] PLY-1 Run 5 manual playthroughs with different route choices
@@ -48,6 +48,7 @@ Artifacts: `output/playability/summary.json`, `output/playability/run_*.json`
 - [x] D3 Implement run analytics log output + schema validation
 - [x] D4 Add event template system (catalog + deterministic generation)
 - [x] D5 Run balancing simulations and collect metrics
+- [x] D6 Add irreversible-state prototype signal (`radiation`) and analytics coverage
 
 ---
 
@@ -95,8 +96,10 @@ Gate:
 - [x] D3 Implement run analytics log output + schema validation
 - [x] D4 Add event template system (catalog + deterministic generation)
 - [x] D5 Run balancing simulations and collect metrics
-- [ ] D6 Add irreversible-state prototype signal (radiation/injury minimal variant)
+- [x] D6 Add irreversible-state prototype signal (radiation/injury minimal variant)
 - [ ] D7 Publish v0.1 balancing notes
+- [ ] PT-1 Run first manual playtest round and capture observation sheets
+- [ ] PT-2 Merge observation findings with analytics summaries
 
 Gate:
 - [x] 20 analytics logs captured and summarized

@@ -38,9 +38,12 @@ class RunEngine:
         run.player.food -= 1
         run.visit(next_node_id)
         node = self.map_state.get_node(next_node_id)
+        self.apply_travel_attrition(run)
 
-        if run.player.is_dead():
-            run.end(victory=False, reason="death")
+        if run.player.food <= 0:
+            run.end(victory=False, reason="starvation")
+        elif run.player.hp <= 0:
+            run.end(victory=False, reason="radiation_death" if run.player.radiation > 0 else "death")
         elif node.is_final:
             run.end(victory=True, reason="reached_final_node")
 
@@ -55,7 +58,7 @@ class RunEngine:
         if outcome["combat_triggered"]:
             outcome["combat"] = self.resolve_combat(run)
         if run.player.is_dead():
-            run.end(victory=False, reason="event_or_resource_death")
+            run.end(victory=False, reason=self._resolve_noncombat_death_reason(run))
         return outcome
 
     def resolve_combat(self, run: RunState) -> Dict[str, Any]:
@@ -67,6 +70,17 @@ class RunEngine:
         if not result["victory"]:
             run.end(victory=False, reason="combat_death")
         return {"skipped": False, "enemy_id": enemy_id, **result}
+
+    def apply_travel_attrition(self, run: RunState) -> None:
+        if run.player.radiation > 0:
+            run.player.hp -= 1
+
+    def _resolve_noncombat_death_reason(self, run: RunState) -> str:
+        if run.player.food <= 0:
+            return "starvation"
+        if run.player.hp <= 0 and run.player.radiation > 0:
+            return "radiation_death"
+        return "event_or_resource_death"
 
 
 def build_map(node_payloads: Dict[str, dict], start_node_id: str, final_node_id: str | None = None) -> MapState:

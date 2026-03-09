@@ -73,6 +73,16 @@ def test_event_failures() -> None:
         ValueError,
         "combat_chance_out_of_range",
     )
+    unsupported_effect_event = {
+        "id": "unsupported",
+        "description": "bad effect",
+        "options": [{"text": "bad", "effects": {"morale": 1}, "combat_chance": 0.0}],
+    }
+    expect_raises(
+        lambda: resolve_event_choice(player, unsupported_effect_event, 0, __import__("random").Random(1)),
+        ValueError,
+        "unsupported_effect_key",
+    )
 
 
 def test_run_failures() -> None:
@@ -108,6 +118,40 @@ def test_run_failures() -> None:
     expect_raises(lambda: engine.resolve_node_event(map_state.get_node("node_a"), run, option_index=99), IndexError, "invalid_event_option")
 
 
+def test_radiation_attrition() -> None:
+    node_payloads = {
+        "node_start": {
+            "id": "node_start",
+            "node_type": "story",
+            "connections": ["node_a"],
+            "event_pool": ["abandoned_store"],
+            "is_start": True,
+        },
+        "node_a": {
+            "id": "node_a",
+            "node_type": "resource",
+            "connections": ["node_final"],
+            "event_pool": ["abandoned_store"],
+        },
+        "node_final": {
+            "id": "node_final",
+            "node_type": "story",
+            "connections": [],
+            "event_pool": ["abandoned_store"],
+            "is_final": True,
+        },
+    }
+    map_state = build_map(node_payloads, start_node_id="node_start", final_node_id="node_final")
+    engine = RunEngine(map_state=map_state, seed=9, event_catalog={"abandoned_store": load_json(ROOT / "schemas" / "samples" / "events" / "abandoned_store.json")})
+    run = engine.create_run(PlayerState(hp=2, food=5, ammo=1, medkits=0, radiation=1), seed=9)
+    engine.move_to(run, "node_a")
+    if run.player.hp != 1:
+        raise AssertionError("radiation attrition should reduce hp on move")
+    engine.move_to(run, "node_final")
+    if not run.ended or run.end_reason != "radiation_death":
+        raise AssertionError("radiation death should be attributable")
+
+
 def test_combat_boundaries() -> None:
     engine = CombatEngine(seed=7)
     player = PlayerState(hp=10, food=5, ammo=1, medkits=1)
@@ -127,6 +171,7 @@ def main() -> int:
     test_combat_boundaries()
     test_event_failures()
     test_run_failures()
+    test_radiation_attrition()
     print("Failure-path tests passed")
     return 0
 

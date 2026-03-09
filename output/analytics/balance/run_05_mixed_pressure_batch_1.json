@@ -9,13 +9,14 @@
   ],
   "ended": true,
   "victory": false,
-  "end_reason": "event_or_resource_death",
+  "end_reason": "radiation_death",
   "player_final": {
     "hp": 0,
     "food": 3,
     "ammo": 0,
     "medkits": 2,
-    "scrap": 0
+    "scrap": 0,
+    "radiation": 1
   },
   "decision_log": [
     {
@@ -29,7 +30,8 @@
         "hp": 4,
         "food": 7,
         "ammo": 2,
-        "medkits": 1
+        "medkits": 1,
+        "radiation": 0
       }
     },
     {
@@ -43,7 +45,8 @@
         "hp": 4,
         "food": 5,
         "ammo": 2,
-        "medkits": 2
+        "medkits": 2,
+        "radiation": 0
       }
     },
     {
@@ -57,7 +60,8 @@
         "hp": 1,
         "food": 4,
         "ammo": 0,
-        "medkits": 2
+        "medkits": 2,
+        "radiation": 0
       }
     },
     {
@@ -71,13 +75,14 @@
         "hp": 0,
         "food": 3,
         "ammo": 0,
-        "medkits": 2
+        "medkits": 2,
+        "radiation": 1
       }
     }
   ],
   "summary": {
     "pressure_count": 4,
     "death_cause_attribution": true,
-    "resource_signature": "hp:0|food:3|ammo:0|medkits:2|scrap:0"
+    "resource_signature": "hp:0|food:3|ammo:0|medkits:2|scrap:0|radiation:1"
   }
 }

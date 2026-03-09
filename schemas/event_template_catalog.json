@@ -79,7 +79,8 @@
           ],
           "effects": {
             "hp": -1,
-            "ammo": 1
+            "ammo": 1,
+            "radiation": 1
           },
           "combat_chance": 0.6
         },
@@ -122,7 +123,8 @@
             "Strip the stalls before the owners return"
           ],
           "effects": {
-            "food": 2
+            "food": 2,
+            "radiation": 1
           },
           "combat_chance": 0.7
         }
@@ -143,7 +145,8 @@
             "Push the caravan straight through the mud"
           ],
           "effects": {
-            "food": -1
+            "food": -1,
+            "radiation": 1
           },
           "combat_chance": 0.4
         },
@@ -216,7 +219,8 @@
             "Sprint the ridge and trust momentum"
           ],
           "effects": {
-            "hp": -1
+            "hp": -1,
+            "radiation": 1
           },
           "combat_chance": 0.4
         }

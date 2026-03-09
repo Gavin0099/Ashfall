@@ -10,12 +10,13 @@
   "pressure_count": 4,
   "ended": true,
   "victory": false,
-  "end_reason": "event_or_resource_death",
+  "end_reason": "starvation",
   "player_final": {
     "hp": 10,
     "food": -1,
     "ammo": 3,
-    "medkits": 2
+    "medkits": 2,
+    "radiation": 0
   },
   "moments": [
     {
@@ -31,7 +32,8 @@
         "hp": 10,
         "food": 5,
         "ammo": 3,
-        "medkits": 1
+        "medkits": 1,
+        "radiation": 0
       },
       "pressure": true
     },
@@ -48,7 +50,8 @@
         "hp": 10,
         "food": 3,
         "ammo": 3,
-        "medkits": 2
+        "medkits": 2,
+        "radiation": 0
       },
       "pressure": true
     },
@@ -65,7 +68,8 @@
         "hp": 10,
         "food": 1,
         "ammo": 3,
-        "medkits": 2
+        "medkits": 2,
+        "radiation": 0
       },
       "pressure": true
     },
@@ -82,7 +86,8 @@
         "hp": 10,
         "food": -1,
         "ammo": 3,
-        "medkits": 2
+        "medkits": 2,
+        "radiation": 0
       },
       "pressure": true
     }
@@ -98,13 +103,14 @@
     ],
     "ended": true,
     "victory": false,
-    "end_reason": "event_or_resource_death",
+    "end_reason": "starvation",
     "player_final": {
       "hp": 10,
       "food": -1,
       "ammo": 3,
       "medkits": 2,
-      "scrap": 0
+      "scrap": 0,
+      "radiation": 0
     },
     "decision_log": [
       {
@@ -118,7 +124,8 @@
           "hp": 10,
           "food": 5,
           "ammo": 3,
-          "medkits": 1
+          "medkits": 1,
+          "radiation": 0
         }
       },
       {
@@ -132,7 +139,8 @@
           "hp": 10,
           "food": 3,
           "ammo": 3,
-          "medkits": 2
+          "medkits": 2,
+          "radiation": 0
         }
       },
       {
@@ -146,7 +154,8 @@
           "hp": 10,
           "food": 1,
           "ammo": 3,
-          "medkits": 2
+          "medkits": 2,
+          "radiation": 0
         }
       },
       {
@@ -160,14 +169,15 @@
           "hp": 10,
           "food": -1,
           "ammo": 3,
-          "medkits": 2
+          "medkits": 2,
+          "radiation": 0
         }
       }
     ],
     "summary": {
       "pressure_count": 4,
       "death_cause_attribution": true,
-      "resource_signature": "hp:10|food:-1|ammo:3|medkits:2|scrap:0"
+      "resource_signature": "hp:10|food:-1|ammo:3|medkits:2|scrap:0|radiation:0"
     }
   }
 }

@@ -23,44 +23,49 @@
   ],
   "summary": {
     "run_count": 20,
-    "victory_rate": 0.3,
+    "victory_rate": 0.2,
     "avg_pressure_count": 3.35,
     "avg_decision_count": 3.35,
     "avg_final_resources": {
-      "hp": 3.5,
+      "hp": 3.15,
       "food": 3.3,
-      "ammo": 1.0,
-      "medkits": 1.1
+      "ammo": 1.05,
+      "medkits": 1.1,
+      "radiation": 0.9
     },
     "death_reasons": {
-      "event_or_resource_death": 14
+      "starvation": 4,
+      "radiation_death": 9,
+      "event_or_resource_death": 3
     },
     "decision_trace_coverage_rate": 1.0,
     "death_cause_attribution_rate": 1.0,
-    "distinct_outcome_signatures": 14,
+    "distinct_outcome_signatures": 15,
     "resource_divergence": {
-      "pairwise_average": 10.33,
-      "pairwise_max": 25,
+      "pairwise_average": 11.27,
+      "pairwise_max": 26,
       "pairwise_min": 0
     },
     "route_family_summary": {
       "north": {
         "runs": 8,
-        "victory_rate": 0.25,
+        "victory_rate": 0.12,
         "avg_pressure_count": 3.75,
-        "avg_final_hp": 5.75,
+        "avg_final_hp": 5.12,
         "avg_final_food": 1.75,
-        "avg_final_ammo": 2.0,
-        "avg_final_medkits": 1.38
+        "avg_final_ammo": 2.12,
+        "avg_final_medkits": 1.38,
+        "avg_final_radiation": 0.88
       },
       "south": {
         "runs": 8,
-        "victory_rate": 0.38,
+        "victory_rate": 0.25,
         "avg_pressure_count": 2.75,
-        "avg_final_hp": 2.62,
+        "avg_final_hp": 2.38,
         "avg_final_food": 4.88,
         "avg_final_ammo": 0.25,
-        "avg_final_medkits": 0.62
+        "avg_final_medkits": 0.62,
+        "avg_final_radiation": 1.0
       },
       "mixed": {
         "runs": 4,
@@ -69,7 +74,8 @@
         "avg_final_hp": 0.75,
         "avg_final_food": 3.25,
         "avg_final_ammo": 0.5,
-        "avg_final_medkits": 1.5
+        "avg_final_medkits": 1.5,
+        "avg_final_radiation": 0.75
       }
     },
     "balance_gate": {

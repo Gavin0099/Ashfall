@@ -8,7 +8,7 @@ Guard Ashfall v0.1 prototype contracts from accidental AI-driven drift.
 
 - change core `RunState` fields or semantics without explicit plan update
 - change deterministic seed logic or random initialization behavior
-- add/remove core resource types (`hp`, `food`, `ammo`, `medkits`, `scrap`) in v0.1
+- add/remove core resource types beyond the approved v0.1 set (`hp`, `food`, `ammo`, `medkits`, `scrap`, `radiation`)
 - change map topology invariants (reachable final node, directed graph contract)
 - bypass or weaken phase gates in `PLAN.md`
 

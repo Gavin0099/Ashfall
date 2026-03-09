@@ -12,10 +12,11 @@
   "victory": true,
   "end_reason": "reached_final_node",
   "player_final": {
-    "hp": 4,
+    "hp": 2,
     "food": 4,
     "ammo": 3,
-    "medkits": 1
+    "medkits": 1,
+    "radiation": 2
   },
   "moments": [
     {
@@ -31,7 +32,8 @@
         "hp": 10,
         "food": 7,
         "ammo": 5,
-        "medkits": 1
+        "medkits": 1,
+        "radiation": 0
       },
       "pressure": true
     },
@@ -65,7 +67,8 @@
         "hp": 5,
         "food": 6,
         "ammo": 2,
-        "medkits": 1
+        "medkits": 1,
+        "radiation": 1
       },
       "pressure": true
     },
@@ -79,10 +82,11 @@
         "combat_triggered": false
       },
       "player": {
-        "hp": 5,
+        "hp": 4,
         "food": 5,
         "ammo": 3,
-        "medkits": 1
+        "medkits": 1,
+        "radiation": 1
       },
       "pressure": true
     },
@@ -96,10 +100,11 @@
         "combat_triggered": false
       },
       "player": {
-        "hp": 4,
+        "hp": 2,
         "food": 4,
         "ammo": 3,
-        "medkits": 1
+        "medkits": 1,
+        "radiation": 2
       },
       "pressure": true
     }
@@ -117,11 +122,12 @@
     "victory": true,
     "end_reason": "reached_final_node",
     "player_final": {
-      "hp": 4,
+      "hp": 2,
       "food": 4,
       "ammo": 3,
       "medkits": 1,
-      "scrap": 0
+      "scrap": 0,
+      "radiation": 2
     },
     "decision_log": [
       {
@@ -135,7 +141,8 @@
           "hp": 10,
           "food": 7,
           "ammo": 5,
-          "medkits": 1
+          "medkits": 1,
+          "radiation": 0
         }
       },
       {
@@ -149,7 +156,8 @@
           "hp": 5,
           "food": 6,
           "ammo": 2,
-          "medkits": 1
+          "medkits": 1,
+          "radiation": 1
         }
       },
       {
@@ -160,10 +168,11 @@
         "pressure": true,
         "combat_triggered": false,
         "player_after": {
-          "hp": 5,
+          "hp": 4,
           "food": 5,
           "ammo": 3,
-          "medkits": 1
+          "medkits": 1,
+          "radiation": 1
         }
       },
       {
@@ -174,17 +183,18 @@
         "pressure": true,
         "combat_triggered": false,
         "player_after": {
-          "hp": 4,
+          "hp": 2,
           "food": 4,
           "ammo": 3,
-          "medkits": 1
+          "medkits": 1,
+          "radiation": 2
         }
       }
     ],
     "summary": {
       "pressure_count": 4,
       "death_cause_attribution": true,
-      "resource_signature": "hp:4|food:4|ammo:3|medkits:1|scrap:0"
+      "resource_signature": "hp:2|food:4|ammo:3|medkits:1|scrap:0|radiation:2"
     }
   }
 }

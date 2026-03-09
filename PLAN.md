@@ -112,13 +112,14 @@ Meta 與平衡:
 ├─ [✓] 3. run analytics log schema 與輸出驗證
 ├─ [✓] 4. event template system（catalog + deterministic generation）
 ├─ [✓] 5. 節點/敵人/事件機率調參
-└─ [🔄] 6. 首輪 playtest 與數據回填      ← 當前進行中
+└─ [🔄] 6. balancing notes + 首輪 playtest protocol      ← 當前進行中
 ```
 
 **Gate 條件**:
 - [ ] meta progression 規則寫入 spec，並有對應資料欄位
 - [ ] 同 seed 可重現同地圖，平衡調整不破壞可重現性
 - [x] 至少完成 20 局 analytics log 紀錄（勝率、平均回合、死亡原因、decision trace）
+- [x] 至少 1 個不可逆狀態信號已接入主循環，且死亡原因可歸因
 
 ---
 
@@ -145,10 +146,12 @@ Meta 與平衡:
 - [x] 建立 run analytics schema 與輸出驗證（4h）
 - [x] 建立 event template catalog 與 deterministic instantiation（6h）
 - [x] 執行 balance metrics 蒐集（analytics 20 局）（6h）
+- [x] 實作最小不可逆狀態（radiation）並接入 analytics（6h）
 
 **下一步**:
-1. 補最小不可逆狀態（radiation/injury）驗證長期賭注感
-2. 根據 20 局 metrics 撰寫 v0.1 balancing notes
+1. 根據 radiation 後的 20 局 metrics 撰寫 v0.1 balancing notes
+2. 依 `PLAYTEST_PROTOCOL.md` 執行第一輪人工 playtest
+3. 規劃 run-end reward 與 meta progression state transition
 
 **當前阻礙**:
 - 無
@@ -309,3 +312,5 @@ Meta 與平衡:
 | 2026/03/09 | 完成 D3：`output/analytics/` 正式輸出與 `validate_run_analytics.py` 驗證腳本 | 讓後續平衡與 decision trace 具備機器可驗證資料契約 |
 | 2026/03/09 | 完成 D4：事件模板目錄與 deterministic instantiation 接入 playability pipeline | 提升內容熵，同時維持 seed 可重現性與 event schema 契約 |
 | 2026/03/09 | 完成 D5：20 局 analytics balance sampling 與 route-family metrics 摘要 | 把「可玩」進一步轉成可量化平衡資料，並定位下一步壓力調整方向 |
+| 2026/03/09 | 新增 `PLAYTEST_PROTOCOL.md`，定義 v0.1 第一輪人工測試流程與成功標準 | 補上 machine gate 之外的人類玩法驗證流程，避免只看系統數據 |
+| 2026/03/09 | 完成 D6：導入 `radiation` 不可逆狀態、travel attrition、analytics 欄位與死亡歸因 | 將「短期資源壓力」升級為「長期代價壓力」，強化 route gamble 感 |

@@ -8,8 +8,8 @@
   ],
   "metrics": {
     "distinct_outcome_signatures": 5,
-    "death_runs": 2,
-    "rerun_signal_runs": 4
+    "death_runs": 3,
+    "rerun_signal_runs": 5
   },
   "playability_gate": {
     "pressure_choices_per_run": true,

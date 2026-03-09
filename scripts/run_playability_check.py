@@ -67,14 +67,16 @@ def is_pressure_moment(run: RunState, event_payload: dict, option_index: int, ou
     option = event_payload["options"][option_index]
     effects = option.get("effects", {})
     has_negative_effect = any(value < 0 for value in effects.values())
+    has_irreversible_effect = int(effects.get("radiation", 0)) > 0
     high_risk_choice = float(option.get("combat_chance", 0.0)) >= 0.5
     fragile_state = (
         run.player.hp <= 4
         or run.player.food <= 2
         or run.player.ammo <= 1
         or run.player.medkits <= 0
+        or run.player.radiation >= 2
     )
-    return bool(outcome.get("combat_triggered") or high_risk_choice or has_negative_effect or fragile_state)
+    return bool(outcome.get("combat_triggered") or high_risk_choice or has_negative_effect or has_irreversible_effect or fragile_state)
 
 
 def run_plan(plan: RoutePlan, nodes: Dict[str, dict], events: Dict[str, dict], enemies: Dict[str, dict]) -> dict:
@@ -99,7 +101,13 @@ def run_plan(plan: RoutePlan, nodes: Dict[str, dict], events: Dict[str, dict], e
                 "node": next_node,
                 "option_index": option_index,
                 "event_outcome": outcome,
-                "player": {"hp": run.player.hp, "food": run.player.food, "ammo": run.player.ammo, "medkits": run.player.medkits},
+                "player": {
+                    "hp": run.player.hp,
+                    "food": run.player.food,
+                    "ammo": run.player.ammo,
+                    "medkits": run.player.medkits,
+                    "radiation": run.player.radiation,
+                },
                 "pressure": pressure,
             }
         )
@@ -116,6 +124,7 @@ def run_plan(plan: RoutePlan, nodes: Dict[str, dict], events: Dict[str, dict], e
                     "food": run.player.food,
                     "ammo": run.player.ammo,
                     "medkits": run.player.medkits,
+                    "radiation": run.player.radiation,
                 },
             }
         )
@@ -123,7 +132,10 @@ def run_plan(plan: RoutePlan, nodes: Dict[str, dict], events: Dict[str, dict], e
     if not run.ended and run.current_node == "node_final":
         run.end(victory=True, reason="reached_final_node")
 
-    resource_signature = f"hp:{run.player.hp}|food:{run.player.food}|ammo:{run.player.ammo}|medkits:{run.player.medkits}|scrap:{run.player.scrap}"
+    resource_signature = (
+        f"hp:{run.player.hp}|food:{run.player.food}|ammo:{run.player.ammo}|"
+        f"medkits:{run.player.medkits}|scrap:{run.player.scrap}|radiation:{run.player.radiation}"
+    )
     analytics = {
         "run_id": plan.name,
         "seed": plan.seed,
@@ -137,6 +149,7 @@ def run_plan(plan: RoutePlan, nodes: Dict[str, dict], events: Dict[str, dict], e
             "ammo": run.player.ammo,
             "medkits": run.player.medkits,
             "scrap": run.player.scrap,
+            "radiation": run.player.radiation,
         },
         "decision_log": decision_log,
         "summary": {
@@ -154,7 +167,13 @@ def run_plan(plan: RoutePlan, nodes: Dict[str, dict], events: Dict[str, dict], e
         "ended": run.ended,
         "victory": run.victory,
         "end_reason": run.end_reason,
-        "player_final": {"hp": run.player.hp, "food": run.player.food, "ammo": run.player.ammo, "medkits": run.player.medkits},
+        "player_final": {
+            "hp": run.player.hp,
+            "food": run.player.food,
+            "ammo": run.player.ammo,
+            "medkits": run.player.medkits,
+            "radiation": run.player.radiation,
+        },
         "moments": moments,
         "analytics": analytics,
     }
@@ -170,6 +189,7 @@ def evaluate_gates(results: List[dict]) -> dict:
             r["player_final"]["food"],
             r["player_final"]["ammo"],
             r["player_final"]["medkits"],
+            r["player_final"]["radiation"],
         )
         for r in results
     }

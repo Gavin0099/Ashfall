@@ -13,6 +13,7 @@ class PlayerState:
     ammo: int
     medkits: int
     scrap: int = 0
+    radiation: int = 0
 
     def is_dead(self) -> bool:
         return self.hp <= 0 or self.food <= 0
@@ -87,5 +88,7 @@ def apply_effects(player: PlayerState, effects: Dict[str, int]) -> None:
             player.medkits += delta
         elif key == "scrap":
             player.scrap += delta
+        elif key == "radiation":
+            player.radiation += delta
         else:
             raise ValueError(f"Unsupported effect key: {key}")

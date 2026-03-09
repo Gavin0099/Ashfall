@@ -24,13 +24,16 @@ If the prototype proves replayable, prepare the project for Steam release.
 - Phase A complete: specs and schemas are defined and validated.
 - Phase B complete: deterministic run loop works from start to victory/death.
 - Phase C complete: combat, event-triggered combat, pressure validation, and run analytics are working.
-- Phase D in progress: analytics-driven balancing baseline is complete; irreversible-state pressure and meta systems remain.
+- Phase D in progress: analytics-driven balancing and the first irreversible-state signal are complete; balancing notes and external playtest remain.
 
 Prototype contract:
 - [PROTOTYPE_SUCCESS_CRITERIA.md](PROTOTYPE_SUCCESS_CRITERIA.md)
 
 AI change boundaries:
 - [SYSTEM_CONSTRAINTS.md](SYSTEM_CONSTRAINTS.md)
+
+Manual playtest protocol:
+- [PLAYTEST_PROTOCOL.md](PLAYTEST_PROTOCOL.md)
 
 ## What v0.1 Must Prove
 
@@ -53,6 +56,7 @@ AI change boundaries:
 
 - [PLAN.md](PLAN.md): strategy truth for phases, gates, milestones
 - [tasks/TASKS.md](tasks/TASKS.md): execution truth for sprint/task state
+- [PLAYTEST_PROTOCOL.md](PLAYTEST_PROTOCOL.md): first-round human playtest procedure
 - [specs/](specs): gameplay and system specs
 - [schemas/](schemas): data contracts
 - [src/](src): runtime prototype code
@@ -99,10 +103,12 @@ Current playability gate status:
 From `output/analytics/balance_summary.json`:
 
 - `run_count = 20`
-- `victory_rate = 0.3`
+- `victory_rate = 0.2`
 - `avg_pressure_count = 3.35`
-- `distinct_outcome_signatures = 14`
-- `resource_divergence.pairwise_average = 10.33`
+- `avg_final_radiation = 0.9`
+- `distinct_outcome_signatures = 15`
+- `resource_divergence.pairwise_average = 11.27`
+- `death_reasons = {starvation: 4, radiation_death: 9, event_or_resource_death: 3}`
 
 ## Event Entropy Strategy
 
@@ -139,8 +145,9 @@ Generated artifacts:
 
 ## Next Work
 
-- D6: add a minimal irreversible-state signal (`radiation` or `injury`)
 - D7: publish v0.1 balancing notes
+- PT-1: run first external playtest round using `PLAYTEST_PROTOCOL.md`
+- D1/D2: connect run-end rewards and meta progression state transitions
 
 ## Repository Note
 

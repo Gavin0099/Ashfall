@@ -15,7 +15,8 @@
     "hp": 10,
     "food": 2,
     "ammo": 1,
-    "medkits": 2
+    "medkits": 2,
+    "radiation": 0
   },
   "moments": [
     {
@@ -31,7 +32,8 @@
         "hp": 10,
         "food": 6,
         "ammo": 2,
-        "medkits": 2
+        "medkits": 2,
+        "radiation": 0
       },
       "pressure": true
     },
@@ -48,7 +50,8 @@
         "hp": 10,
         "food": 6,
         "ammo": 1,
-        "medkits": 2
+        "medkits": 2,
+        "radiation": 0
       },
       "pressure": true
     },
@@ -65,7 +68,8 @@
         "hp": 10,
         "food": 4,
         "ammo": 1,
-        "medkits": 2
+        "medkits": 2,
+        "radiation": 0
       },
       "pressure": true
     },
@@ -82,7 +86,8 @@
         "hp": 10,
         "food": 2,
         "ammo": 1,
-        "medkits": 2
+        "medkits": 2,
+        "radiation": 0
       },
       "pressure": true
     }
@@ -104,7 +109,8 @@
       "food": 2,
       "ammo": 1,
       "medkits": 2,
-      "scrap": 0
+      "scrap": 0,
+      "radiation": 0
     },
     "decision_log": [
       {
@@ -118,7 +124,8 @@
           "hp": 10,
           "food": 6,
           "ammo": 2,
-          "medkits": 2
+          "medkits": 2,
+          "radiation": 0
         }
       },
       {
@@ -132,7 +139,8 @@
           "hp": 10,
           "food": 6,
           "ammo": 1,
-          "medkits": 2
+          "medkits": 2,
+          "radiation": 0
         }
       },
       {
@@ -146,7 +154,8 @@
           "hp": 10,
           "food": 4,
           "ammo": 1,
-          "medkits": 2
+          "medkits": 2,
+          "radiation": 0
         }
       },
       {
@@ -160,14 +169,15 @@
           "hp": 10,
           "food": 2,
           "ammo": 1,
-          "medkits": 2
+          "medkits": 2,
+          "radiation": 0
         }
       }
     ],
     "summary": {
       "pressure_count": 4,
       "death_cause_attribution": true,
-      "resource_signature": "hp:10|food:2|ammo:1|medkits:2|scrap:0"
+      "resource_signature": "hp:10|food:2|ammo:1|medkits:2|scrap:0|radiation:0"
     }
   }
 }
