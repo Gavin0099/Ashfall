@@ -1,0 +1,83 @@
+{
+  "run_id": "north_aggressive_batch_2",
+  "seed": 201,
+  "route": [
+    "node_north_1",
+    "node_north_2",
+    "node_mid",
+    "node_final"
+  ],
+  "ended": true,
+  "victory": true,
+  "end_reason": "reached_final_node",
+  "player_final": {
+    "hp": 2,
+    "food": 4,
+    "ammo": 1,
+    "medkits": 1,
+    "scrap": 0
+  },
+  "decision_log": [
+    {
+      "step": 1,
+      "node": "node_north_1",
+      "event_id": "evt_scrapyard",
+      "option_index": 0,
+      "pressure": true,
+      "combat_triggered": true,
+      "player_after": {
+        "hp": 6,
+        "food": 7,
+        "ammo": 1,
+        "medkits": 1
+      }
+    },
+    {
+      "step": 2,
+      "node": "node_north_2",
+      "event_id": "evt_tunnel",
+      "option_index": 0,
+      "pressure": true,
+      "combat_triggered": false,
+      "player_after": {
+        "hp": 5,
+        "food": 6,
+        "ammo": 2,
+        "medkits": 1
+      }
+    },
+    {
+      "step": 3,
+      "node": "node_mid",
+      "event_id": "evt_checkpoint",
+      "option_index": 0,
+      "pressure": true,
+      "combat_triggered": true,
+      "player_after": {
+        "hp": 3,
+        "food": 5,
+        "ammo": 1,
+        "medkits": 1
+      }
+    },
+    {
+      "step": 4,
+      "node": "node_final",
+      "event_id": "evt_final",
+      "option_index": 1,
+      "pressure": true,
+      "combat_triggered": false,
+      "player_after": {
+        "hp": 2,
+        "food": 4,
+        "ammo": 1,
+        "medkits": 1
+      }
+    }
+  ],
+  "summary": {
+    "pressure_count": 4,
+    "death_cause_attribution": true,
+    "resource_signature": "hp:2|food:4|ammo:1|medkits:1|scrap:0"
+  }
+}

@@ -69,11 +69,11 @@ def validate_run_file(path: Path) -> None:
 
 def main() -> int:
     try:
-        run_files = sorted(ANALYTICS_DIR.glob("run_*.json"))
+        run_files = sorted(ANALYTICS_DIR.rglob("run_*.json"))
         ensure(len(run_files) >= 1, "No analytics run files found")
         for run_file in run_files:
             validate_run_file(run_file)
-        print("Run analytics validation passed")
+        print(f"Run analytics validation passed ({len(run_files)} files)")
         return 0
     except ValidationError as exc:
         print(f"Run analytics validation failed: {exc}")

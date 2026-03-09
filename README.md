@@ -1,10 +1,15 @@
 # Ashfall
 
-Ashfall is a CLI-first roguelite survival strategy prototype focused on one core question:
+Ashfall is a CLI-first roguelite survival prototype used to validate a spec-driven AI development workflow.
+
+The project focuses on a single gameplay question:
 
 Can route choice reliably create repeatable high-stakes tension?
 
-This repository is not optimizing for release polish yet. It is optimizing for prototype validation.
+The repository therefore serves two purposes:
+
+1. validating the Ashfall gameplay prototype
+2. exercising a governance model for AI-assisted development
 
 ## Primary Goal
 
@@ -19,7 +24,7 @@ If the prototype proves replayable, prepare the project for Steam release.
 - Phase A complete: specs and schemas are defined and validated.
 - Phase B complete: deterministic run loop works from start to victory/death.
 - Phase C complete: combat, event-triggered combat, pressure validation, and run analytics are working.
-- Phase D in progress: meta systems, analytics-driven balancing, and content entropy improvements.
+- Phase D in progress: analytics-driven balancing baseline is complete; irreversible-state pressure and meta systems remain.
 
 Prototype contract:
 - [PROTOTYPE_SUCCESS_CRITERIA.md](PROTOTYPE_SUCCESS_CRITERIA.md)
@@ -62,6 +67,7 @@ Run the current validation pipeline:
 python scripts/validate_phase_a.py
 python scripts/test_failure_paths.py
 python scripts/run_playability_check.py
+python scripts/run_balance_metrics.py
 python scripts/validate_run_analytics.py
 python scripts/validate_event_templates.py
 ```
@@ -71,6 +77,7 @@ What they cover:
 - `validate_phase_a.py`: spec/schema baseline
 - `test_failure_paths.py`: invalid input, boundary, and failure-path checks
 - `run_playability_check.py`: 5-run playability evaluation with deterministic routes
+- `run_balance_metrics.py`: 20-run balancing sample with route-family summaries
 - `validate_run_analytics.py`: validates analytics output contract
 - `validate_event_templates.py`: validates deterministic event template generation
 
@@ -88,6 +95,14 @@ Current playability gate status:
 - `route_diversity`: pass
 - `death_explainable_from_logs`: pass
 - `rerun_signal_3_of_5`: pass
+
+From `output/analytics/balance_summary.json`:
+
+- `run_count = 20`
+- `victory_rate = 0.3`
+- `avg_pressure_count = 3.35`
+- `distinct_outcome_signatures = 14`
+- `resource_divergence.pairwise_average = 10.33`
 
 ## Event Entropy Strategy
 
@@ -112,17 +127,18 @@ Reference:
 Generated artifacts:
 - `output/analytics/run_*.json`
 - `output/analytics/summary.json`
+- `output/analytics/balance/run_*.json`
+- `output/analytics/balance_summary.json`
 
 ## Development Principles
 
 - protect deterministic behavior
 - do not mutate core state contracts casually
-- prefer validation gates over subjective “done”
+- prefer validation gates over subjective judgment
 - optimize for gameplay proof before productization
 
 ## Next Work
 
-- D5: run balancing simulations and collect metrics
 - D6: add a minimal irreversible-state signal (`radiation` or `injury`)
 - D7: publish v0.1 balancing notes
 

@@ -111,14 +111,14 @@ Meta 與平衡:
 ├─ [⏳] 2. run 結束獎勵結算
 ├─ [✓] 3. run analytics log schema 與輸出驗證
 ├─ [✓] 4. event template system（catalog + deterministic generation）
-├─ [🔄] 5. 節點/敵人/事件機率調參        ← 當前進行中
-└─ [⏳] 6. 首輪 playtest 與數據回填
+├─ [✓] 5. 節點/敵人/事件機率調參
+└─ [🔄] 6. 首輪 playtest 與數據回填      ← 當前進行中
 ```
 
 **Gate 條件**:
 - [ ] meta progression 規則寫入 spec，並有對應資料欄位
 - [ ] 同 seed 可重現同地圖，平衡調整不破壞可重現性
-- [ ] 至少完成 20 局 analytics log 紀錄（勝率、平均回合、死亡原因、decision trace）
+- [x] 至少完成 20 局 analytics log 紀錄（勝率、平均回合、死亡原因、decision trace）
 
 ---
 
@@ -144,11 +144,11 @@ Meta 與平衡:
 - [x] 調整事件壓力分布，讓每局壓力選擇 >= 3（6h）
 - [x] 建立 run analytics schema 與輸出驗證（4h）
 - [x] 建立 event template catalog 與 deterministic instantiation（6h）
-- [ ] 執行 balance metrics 蒐集（analytics 20 局）（6h）
+- [x] 執行 balance metrics 蒐集（analytics 20 局）（6h）
 
 **下一步**:
-1. 執行 analytics-based balance metrics 蒐集
-2. 補最小不可逆狀態（radiation/injury）驗證長期賭注感
+1. 補最小不可逆狀態（radiation/injury）驗證長期賭注感
+2. 根據 20 局 metrics 撰寫 v0.1 balancing notes
 
 **當前阻礙**:
 - 無
@@ -308,3 +308,4 @@ Meta 與平衡:
 | 2026/03/09 | 新增 `SYSTEM_CONSTRAINTS.md`、`schemas/run_analytics_schema.json`、`specs/event_template_system.md` | 鎖定 state contract、防止 AI 漂移，並提升事件內容熵策略 |
 | 2026/03/09 | 完成 D3：`output/analytics/` 正式輸出與 `validate_run_analytics.py` 驗證腳本 | 讓後續平衡與 decision trace 具備機器可驗證資料契約 |
 | 2026/03/09 | 完成 D4：事件模板目錄與 deterministic instantiation 接入 playability pipeline | 提升內容熵，同時維持 seed 可重現性與 event schema 契約 |
+| 2026/03/09 | 完成 D5：20 局 analytics balance sampling 與 route-family metrics 摘要 | 把「可玩」進一步轉成可量化平衡資料，並定位下一步壓力調整方向 |

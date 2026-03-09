@@ -1,0 +1,82 @@
+{
+  "run_ids": [
+    "north_aggressive_batch_1",
+    "north_cautious_batch_1",
+    "south_aggressive_batch_1",
+    "south_cautious_batch_1",
+    "mixed_pressure_batch_1",
+    "north_aggressive_batch_2",
+    "north_cautious_batch_2",
+    "south_aggressive_batch_2",
+    "south_cautious_batch_2",
+    "mixed_pressure_batch_2",
+    "north_aggressive_batch_3",
+    "north_cautious_batch_3",
+    "south_aggressive_batch_3",
+    "south_cautious_batch_3",
+    "mixed_pressure_batch_3",
+    "north_aggressive_batch_4",
+    "north_cautious_batch_4",
+    "south_aggressive_batch_4",
+    "south_cautious_batch_4",
+    "mixed_pressure_batch_4"
+  ],
+  "summary": {
+    "run_count": 20,
+    "victory_rate": 0.3,
+    "avg_pressure_count": 3.35,
+    "avg_decision_count": 3.35,
+    "avg_final_resources": {
+      "hp": 3.5,
+      "food": 3.3,
+      "ammo": 1.0,
+      "medkits": 1.1
+    },
+    "death_reasons": {
+      "event_or_resource_death": 14
+    },
+    "decision_trace_coverage_rate": 1.0,
+    "death_cause_attribution_rate": 1.0,
+    "distinct_outcome_signatures": 14,
+    "resource_divergence": {
+      "pairwise_average": 10.33,
+      "pairwise_max": 25,
+      "pairwise_min": 0
+    },
+    "route_family_summary": {
+      "north": {
+        "runs": 8,
+        "victory_rate": 0.25,
+        "avg_pressure_count": 3.75,
+        "avg_final_hp": 5.75,
+        "avg_final_food": 1.75,
+        "avg_final_ammo": 2.0,
+        "avg_final_medkits": 1.38
+      },
+      "south": {
+        "runs": 8,
+        "victory_rate": 0.38,
+        "avg_pressure_count": 2.75,
+        "avg_final_hp": 2.62,
+        "avg_final_food": 4.88,
+        "avg_final_ammo": 0.25,
+        "avg_final_medkits": 0.62
+      },
+      "mixed": {
+        "runs": 4,
+        "victory_rate": 0.25,
+        "avg_pressure_count": 3.75,
+        "avg_final_hp": 0.75,
+        "avg_final_food": 3.25,
+        "avg_final_ammo": 0.5,
+        "avg_final_medkits": 1.5
+      }
+    },
+    "balance_gate": {
+      "twenty_runs_captured": true,
+      "decision_trace_complete": true,
+      "death_attribution_complete": true,
+      "route_divergence_visible": true
+    }
+  }
+}

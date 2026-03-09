@@ -1,0 +1,83 @@
+{
+  "run_id": "south_cautious_batch_1",
+  "seed": 104,
+  "route": [
+    "node_south_1",
+    "node_south_2",
+    "node_mid",
+    "node_final"
+  ],
+  "ended": true,
+  "victory": true,
+  "end_reason": "reached_final_node",
+  "player_final": {
+    "hp": 10,
+    "food": 2,
+    "ammo": 1,
+    "medkits": 2,
+    "scrap": 0
+  },
+  "decision_log": [
+    {
+      "step": 1,
+      "node": "node_south_1",
+      "event_id": "evt_village",
+      "option_index": 0,
+      "pressure": true,
+      "combat_triggered": false,
+      "player_after": {
+        "hp": 10,
+        "food": 6,
+        "ammo": 2,
+        "medkits": 2
+      }
+    },
+    {
+      "step": 2,
+      "node": "node_south_2",
+      "event_id": "evt_floodplain",
+      "option_index": 1,
+      "pressure": true,
+      "combat_triggered": false,
+      "player_after": {
+        "hp": 10,
+        "food": 6,
+        "ammo": 1,
+        "medkits": 2
+      }
+    },
+    {
+      "step": 3,
+      "node": "node_mid",
+      "event_id": "evt_checkpoint",
+      "option_index": 1,
+      "pressure": true,
+      "combat_triggered": false,
+      "player_after": {
+        "hp": 10,
+        "food": 4,
+        "ammo": 1,
+        "medkits": 2
+      }
+    },
+    {
+      "step": 4,
+      "node": "node_final",
+      "event_id": "evt_final",
+      "option_index": 0,
+      "pressure": true,
+      "combat_triggered": false,
+      "player_after": {
+        "hp": 10,
+        "food": 2,
+        "ammo": 1,
+        "medkits": 2
+      }
+    }
+  ],
+  "summary": {
+    "pressure_count": 4,
+    "death_cause_attribution": true,
+    "resource_signature": "hp:10|food:2|ammo:1|medkits:2|scrap:0"
+  }
+}
