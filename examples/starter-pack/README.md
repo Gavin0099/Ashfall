@@ -4,15 +4,18 @@
 
 > **AI 在長對話中會忘記你的計畫，然後做它自己覺得對的事。**
 
+**先看效果**: [demo.md](demo.md) — 5 分鐘看懂治理在運作時長什麼樣子 ⭐
+
 ---
 
-## 你需要的 3 個文件
+## 你需要的文件
 
 | 文件 | 來源 | 作用 |
 |------|------|------|
 | `SYSTEM_PROMPT.md` | 本目錄 | 告訴 AI 如何行動、何時停止 |
 | `PLAN.md` | 本目錄（填入後使用） | AI 每次對話都讀，決定任務範圍 |
-| `memory_janitor.py` | `../../governance_tools/` | 監控 AI 記憶體壓力 |
+| `memory/01_active_task.md` | 本目錄 | AI 跨 session 的狀態記憶 |
+| `memory_janitor.py` | `../../governance_tools/` | 監控記憶體壓力 |
 
 ---
 
@@ -20,12 +23,12 @@
 
 ```bash
 # 從這個 repo 複製
-cp examples/starter-pack/SYSTEM_PROMPT.md  /your/project/
-cp examples/starter-pack/PLAN.md           /your/project/
-cp governance_tools/memory_janitor.py      /your/project/
+cp examples/starter-pack/SYSTEM_PROMPT.md        /your/project/
+cp examples/starter-pack/PLAN.md                 /your/project/
+cp governance_tools/memory_janitor.py            /your/project/
 
-# 建立 memory 資料夾（memory_janitor 需要）
-mkdir -p /your/project/memory
+# memory 目錄（含預建的狀態文件）
+cp -r examples/starter-pack/memory/             /your/project/
 ```
 
 ---

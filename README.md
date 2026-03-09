@@ -408,10 +408,13 @@ ai-governance-framework/
 │   └── LIMITATIONS.md           ← 框架邊界與誠實評估 ⚠️
 │
 ├── examples/                    ← 示範專案 ⭐ 新手必看
-│   ├── starter-pack/           ← 3 文件最小可用版 ⭐ 新手入口
+│   ├── starter-pack/           ← 最小可用版 ⭐ 新手入口
 │   │   ├── SYSTEM_PROMPT.md    ← 簡化版（2 欄位 Contract）
 │   │   ├── PLAN.md             ← 可填入範本
-│   │   └── README.md           ← 5 分鐘 quickstart
+│   │   ├── demo.md             ← before/after 對話示範 ⭐
+│   │   ├── README.md           ← 5 分鐘 quickstart
+│   │   └── memory/
+│   │       └── 01_active_task.md ← 預建狀態文件
 │   ├── todo-app-demo/          ← 15 分鐘體感示範
 │   │   ├── PLAN.md             ← 已填好的計畫範本
 │   │   └── DEMO_LOG.md         ← AI 對話示範紀錄
