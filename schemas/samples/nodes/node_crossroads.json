@@ -1,0 +1,13 @@
+﻿{
+  "id": "node_crossroads",
+  "node_type": "combat",
+  "connections": ["node_final"],
+  "event_pool": ["collapsed_checkpoint"],
+  "is_start": false,
+  "is_final": false,
+  "resource_cost": {
+    "food": 1,
+    "ammo": 0,
+    "medkits": 0
+  }
+}

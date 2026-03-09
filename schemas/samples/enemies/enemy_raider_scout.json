@@ -1,0 +1,22 @@
+﻿{
+  "id": "enemy_raider_scout",
+  "name": "Raider Scout",
+  "archetype": "raider",
+  "hp": 5,
+  "damage_range": {
+    "min": 1,
+    "max": 2
+  },
+  "loot_table": [
+    {
+      "resource": "ammo",
+      "amount": 1,
+      "chance": 0.7
+    },
+    {
+      "resource": "scrap",
+      "amount": 2,
+      "chance": 0.4
+    }
+  ]
+}

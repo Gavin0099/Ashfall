@@ -1,0 +1,48 @@
+﻿{
+  "type": "object",
+  "required": ["id", "name", "hp", "damage_range"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "name": {
+      "type": "string",
+      "minLength": 1
+    },
+    "archetype": {
+      "type": "string",
+      "enum": ["raider", "mutant", "beast", "machine", "boss"]
+    },
+    "hp": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "damage_range": {
+      "type": "object",
+      "required": ["min", "max"],
+      "properties": {
+        "min": { "type": "integer", "minimum": 0 },
+        "max": { "type": "integer", "minimum": 0 }
+      },
+      "additionalProperties": false
+    },
+    "loot_table": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["resource", "amount"],
+        "properties": {
+          "resource": {
+            "type": "string",
+            "enum": ["food", "ammo", "medkits", "scrap"]
+          },
+          "amount": { "type": "integer", "minimum": 1 },
+          "chance": { "type": "number", "minimum": 0, "maximum": 1 }
+        },
+        "additionalProperties": false
+      }
+    }
+  },
+  "additionalProperties": false
+}

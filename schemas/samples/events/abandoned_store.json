@@ -1,0 +1,21 @@
+﻿{
+  "id": "abandoned_store",
+  "description": "You discover an abandoned supermarket.",
+  "options": [
+    {
+      "text": "Search the shelves",
+      "effects": {
+        "food": 3,
+        "ammo": 1
+      },
+      "combat_chance": 0.3
+    },
+    {
+      "text": "Leave immediately",
+      "effects": {
+        "food": 0
+      },
+      "combat_chance": 0.0
+    }
+  ]
+}

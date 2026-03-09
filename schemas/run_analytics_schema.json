@@ -1,0 +1,78 @@
+﻿{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Run Analytics Schema",
+  "type": "object",
+  "required": [
+    "run_id",
+    "seed",
+    "route",
+    "ended",
+    "victory",
+    "end_reason",
+    "player_final",
+    "decision_log",
+    "summary"
+  ],
+  "properties": {
+    "run_id": { "type": "string", "minLength": 1 },
+    "seed": { "type": "integer" },
+    "route": {
+      "type": "array",
+      "items": { "type": "string", "minLength": 1 },
+      "minItems": 1
+    },
+    "ended": { "type": "boolean" },
+    "victory": { "type": "boolean" },
+    "end_reason": { "type": ["string", "null"] },
+    "player_final": {
+      "type": "object",
+      "required": ["hp", "food", "ammo", "medkits", "scrap"],
+      "properties": {
+        "hp": { "type": "integer" },
+        "food": { "type": "integer" },
+        "ammo": { "type": "integer" },
+        "medkits": { "type": "integer" },
+        "scrap": { "type": "integer" }
+      },
+      "additionalProperties": false
+    },
+    "decision_log": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["step", "node", "event_id", "option_index", "pressure", "player_after"],
+        "properties": {
+          "step": { "type": "integer", "minimum": 1 },
+          "node": { "type": "string" },
+          "event_id": { "type": "string" },
+          "option_index": { "type": "integer", "minimum": 0 },
+          "pressure": { "type": "boolean" },
+          "combat_triggered": { "type": "boolean" },
+          "player_after": {
+            "type": "object",
+            "required": ["hp", "food", "ammo", "medkits"],
+            "properties": {
+              "hp": { "type": "integer" },
+              "food": { "type": "integer" },
+              "ammo": { "type": "integer" },
+              "medkits": { "type": "integer" }
+            },
+            "additionalProperties": false
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "summary": {
+      "type": "object",
+      "required": ["pressure_count", "death_cause_attribution", "resource_signature"],
+      "properties": {
+        "pressure_count": { "type": "integer", "minimum": 0 },
+        "death_cause_attribution": { "type": "boolean" },
+        "resource_signature": { "type": "string", "minLength": 1 }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}

@@ -1,0 +1,13 @@
+﻿{
+  "id": "node_start",
+  "node_type": "story",
+  "connections": ["node_crossroads"],
+  "event_pool": ["abandoned_store"],
+  "is_start": true,
+  "is_final": false,
+  "resource_cost": {
+    "food": 1,
+    "ammo": 0,
+    "medkits": 0
+  }
+}

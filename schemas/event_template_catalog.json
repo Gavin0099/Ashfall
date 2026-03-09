@@ -1,0 +1,226 @@
+{
+  "events": [
+    {
+      "event_id": "evt_departure",
+      "template_type": "survivor_contact",
+      "description_variants": [
+        "Departure under an ash storm.",
+        "The caravan rolls out beneath a bruised sky.",
+        "A bitter wind pushes ash across the road."
+      ],
+      "options": [
+        {
+          "text_variants": [
+            "Push hard before dark",
+            "Force the pace before the storm thickens"
+          ],
+          "effects": {
+            "food": -1
+          },
+          "combat_chance": 0.0
+        },
+        {
+          "text_variants": [
+            "Move cautiously",
+            "Advance in a tight defensive march"
+          ],
+          "effects": {
+            "food": 0
+          },
+          "combat_chance": 0.0
+        }
+      ]
+    },
+    {
+      "event_id": "evt_scrapyard",
+      "template_type": "scavenger_encounter",
+      "description_variants": [
+        "Scrapyard with raider shadows between wrecks.",
+        "A field of stripped vehicles hides fresh footprints.",
+        "Broken engines and scavenger fires litter the yard."
+      ],
+      "options": [
+        {
+          "text_variants": [
+            "Force a quick loot run",
+            "Rush the best wrecks before anyone reacts"
+          ],
+          "effects": {
+            "food": 1,
+            "ammo": 2
+          },
+          "combat_chance": 0.8
+        },
+        {
+          "text_variants": [
+            "Bypass and conserve",
+            "Keep moving and save strength for later"
+          ],
+          "effects": {
+            "food": -1
+          },
+          "combat_chance": 0.0
+        }
+      ]
+    },
+    {
+      "event_id": "evt_tunnel",
+      "template_type": "ruined_infrastructure",
+      "description_variants": [
+        "A collapsed tunnel smells of gas and rust.",
+        "The tunnel is half buried and dangerously unstable.",
+        "Concrete dust hangs in the tunnel air."
+      ],
+      "options": [
+        {
+          "text_variants": [
+            "Rush through debris",
+            "Climb the rubble and gamble on speed"
+          ],
+          "effects": {
+            "hp": -1,
+            "ammo": 1
+          },
+          "combat_chance": 0.6
+        },
+        {
+          "text_variants": [
+            "Set camp and wait",
+            "Hold position and move at first light"
+          ],
+          "effects": {
+            "food": -1,
+            "medkits": 1
+          },
+          "combat_chance": 0.1
+        }
+      ]
+    },
+    {
+      "event_id": "evt_village",
+      "template_type": "survivor_contact",
+      "description_variants": [
+        "A silent village market still has barter tokens on the ground.",
+        "The market square is empty but not abandoned for long.",
+        "Weathered stalls creak in the wind."
+      ],
+      "options": [
+        {
+          "text_variants": [
+            "Barter ammo for medkit",
+            "Trade munitions for supplies"
+          ],
+          "effects": {
+            "ammo": -1,
+            "medkits": 1
+          },
+          "combat_chance": 0.0
+        },
+        {
+          "text_variants": [
+            "Raid abandoned stalls",
+            "Strip the stalls before the owners return"
+          ],
+          "effects": {
+            "food": 2
+          },
+          "combat_chance": 0.7
+        }
+      ]
+    },
+    {
+      "event_id": "evt_floodplain",
+      "template_type": "environmental_hazard",
+      "description_variants": [
+        "Mud and black water slow the caravan to a crawl.",
+        "The floodplain is soaked and unstable underfoot.",
+        "Waterlogged ground drags on every wheel."
+      ],
+      "options": [
+        {
+          "text_variants": [
+            "Cross quickly",
+            "Push the caravan straight through the mud"
+          ],
+          "effects": {
+            "food": -1
+          },
+          "combat_chance": 0.4
+        },
+        {
+          "text_variants": [
+            "Forage detour",
+            "Take a slower line and search for dry ground"
+          ],
+          "effects": {
+            "food": 1,
+            "ammo": -1
+          },
+          "combat_chance": 0.2
+        }
+      ]
+    },
+    {
+      "event_id": "evt_checkpoint",
+      "template_type": "checkpoint_conflict",
+      "description_variants": [
+        "An old military checkpoint still commands the road.",
+        "Concrete barriers and firing slits choke the route ahead.",
+        "A dead checkpoint still feels like a trap."
+      ],
+      "options": [
+        {
+          "text_variants": [
+            "Assault the line",
+            "Hit the checkpoint before it hits back"
+          ],
+          "effects": {
+            "ammo": 1
+          },
+          "combat_chance": 0.9
+        },
+        {
+          "text_variants": [
+            "Sneak around",
+            "Burn daylight on a longer detour"
+          ],
+          "effects": {
+            "food": -1
+          },
+          "combat_chance": 0.0
+        }
+      ]
+    },
+    {
+      "event_id": "evt_final",
+      "template_type": "environmental_hazard",
+      "description_variants": [
+        "The final ridge before sanctuary is exposed and steep.",
+        "The last climb offers no cover and little time.",
+        "Sanctuary is visible, but the ridge is cruel."
+      ],
+      "options": [
+        {
+          "text_variants": [
+            "Spend supplies to secure route",
+            "Use scarce supplies to make the climb safe"
+          ],
+          "effects": {
+            "food": -1
+          },
+          "combat_chance": 0.2
+        },
+        {
+          "text_variants": [
+            "Risk a fast climb",
+            "Sprint the ridge and trust momentum"
+          ],
+          "effects": {
+            "hp": -1
+          },
+          "combat_chance": 0.4
+        }
+      ]
+    }
+  ]
+}

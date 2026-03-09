@@ -1,0 +1,23 @@
+{
+  "type": "object",
+  "required": ["id", "description", "options"],
+  "properties": {
+    "id": {
+      "type": "string"
+    },
+    "description": {
+      "type": "string"
+    },
+    "options": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "text": {"type": "string"},
+          "effects": {"type": "object"},
+          "combat_chance": {"type": "number"}
+        }
+      }
+    }
+  }
+}

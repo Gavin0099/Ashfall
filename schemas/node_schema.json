@@ -1,0 +1,38 @@
+﻿{
+  "type": "object",
+  "required": ["id", "node_type", "connections", "event_pool"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "node_type": {
+      "type": "string",
+      "enum": ["resource", "combat", "trade", "story"]
+    },
+    "connections": {
+      "type": "array",
+      "items": { "type": "string", "minLength": 1 },
+      "minItems": 0,
+      "uniqueItems": true
+    },
+    "event_pool": {
+      "type": "array",
+      "items": { "type": "string", "minLength": 1 },
+      "minItems": 1,
+      "uniqueItems": true
+    },
+    "is_start": { "type": "boolean" },
+    "is_final": { "type": "boolean" },
+    "resource_cost": {
+      "type": "object",
+      "properties": {
+        "food": { "type": "integer", "minimum": 0 },
+        "ammo": { "type": "integer", "minimum": 0 },
+        "medkits": { "type": "integer", "minimum": 0 }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}

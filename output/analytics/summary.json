@@ -1,0 +1,20 @@
+{
+  "run_ids": [
+    "north_aggressive",
+    "north_cautious",
+    "south_aggressive",
+    "south_cautious",
+    "mixed_pressure"
+  ],
+  "metrics": {
+    "distinct_outcome_signatures": 5,
+    "death_runs": 2,
+    "rerun_signal_runs": 4
+  },
+  "playability_gate": {
+    "pressure_choices_per_run": true,
+    "route_diversity": true,
+    "death_explainable_from_logs": true,
+    "rerun_signal_3_of_5": true
+  }
+}

@@ -1,0 +1,21 @@
+﻿{
+  "id": "collapsed_checkpoint",
+  "description": "A military checkpoint has collapsed into rubble.",
+  "options": [
+    {
+      "text": "Scavenge the armored crate",
+      "effects": {
+        "ammo": 2,
+        "medkits": 1
+      },
+      "combat_chance": 0.5
+    },
+    {
+      "text": "Move on before sunset",
+      "effects": {
+        "food": -1
+      },
+      "combat_chance": 0.0
+    }
+  ]
+}

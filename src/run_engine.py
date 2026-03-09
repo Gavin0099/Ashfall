@@ -1,0 +1,135 @@
+﻿from __future__ import annotations
+
+import random
+from typing import Any, Dict, Optional
+
+from .combat_engine import CombatEngine
+from .event_engine import pick_event_id, resolve_event_choice
+
+from .state_models import EnemyState, MapState, NodeState, PlayerState, RunState
+
+
+class RunEngine:
+    """Minimal run-loop skeleton for Phase B integration."""
+
+    def __init__(
+        self,
+        map_state: MapState,
+        seed: int,
+        event_catalog: Optional[Dict[str, Dict[str, Any]]] = None,
+        enemy_catalog: Optional[Dict[str, Dict[str, Any]]] = None,
+    ) -> None:
+        self.map_state = map_state
+        self.rng = random.Random(seed)
+        self.event_catalog = event_catalog or {}
+        self.enemy_catalog = enemy_catalog or {}
+
+    def create_run(self, player: PlayerState, seed: int) -> RunState:
+        start = self.map_state.start_node_id
+        run = RunState(player=player, map_seed=seed, current_node=start)
+        run.visit(start)
+        return run
+
+    def move_to(self, run: RunState, next_node_id: str) -> NodeState:
+        current = self.map_state.get_node(run.current_node)
+        if next_node_id not in current.connections:
+            raise ValueError(f"Invalid move: {run.current_node} -> {next_node_id}")
+
+        run.player.food -= 1
+        run.visit(next_node_id)
+        node = self.map_state.get_node(next_node_id)
+
+        if run.player.is_dead():
+            run.end(victory=False, reason="death")
+        elif node.is_final:
+            run.end(victory=True, reason="reached_final_node")
+
+        return node
+
+    def resolve_node_event(self, node: NodeState, run: RunState, option_index: int = 0) -> Dict[str, Any]:
+        event_id = pick_event_id(node, self.rng)
+        if event_id not in self.event_catalog:
+            raise KeyError(f"Missing event payload for event_id: {event_id}")
+        event_payload = self.event_catalog[event_id]
+        outcome = resolve_event_choice(run.player, event_payload, option_index, self.rng)
+        if outcome["combat_triggered"]:
+            outcome["combat"] = self.resolve_combat(run)
+        if run.player.is_dead():
+            run.end(victory=False, reason="event_or_resource_death")
+        return outcome
+
+    def resolve_combat(self, run: RunState) -> Dict[str, Any]:
+        if not self.enemy_catalog:
+            return {"skipped": True, "reason": "enemy_catalog_empty"}
+        enemy_id = self.rng.choice(sorted(self.enemy_catalog.keys()))
+        enemy = _enemy_from_payload(self.enemy_catalog[enemy_id])
+        result = CombatEngine(seed=run.map_seed + len(run.visited_nodes)).run_auto_combat(run.player, enemy)
+        if not result["victory"]:
+            run.end(victory=False, reason="combat_death")
+        return {"skipped": False, "enemy_id": enemy_id, **result}
+
+
+def build_map(node_payloads: Dict[str, dict], start_node_id: str, final_node_id: str | None = None) -> MapState:
+    nodes = {}
+    for node_id, payload in node_payloads.items():
+        nodes[node_id] = NodeState(
+            id=payload["id"],
+            node_type=payload["node_type"],
+            connections=payload.get("connections", []),
+            event_pool=payload.get("event_pool", []),
+            is_start=payload.get("is_start", False),
+            is_final=payload.get("is_final", False),
+            resource_cost=payload.get("resource_cost", {}),
+        )
+
+    resolved_final = final_node_id
+    if resolved_final is None:
+        for node in nodes.values():
+            if node.is_final:
+                resolved_final = node.id
+                break
+
+    map_state = MapState(nodes=nodes, start_node_id=start_node_id, final_node_id=resolved_final)
+    validate_map_connectivity(map_state)
+    return map_state
+
+
+def validate_map_connectivity(map_state: MapState) -> None:
+    if map_state.start_node_id not in map_state.nodes:
+        raise ValueError(f"Start node missing: {map_state.start_node_id}")
+    if map_state.final_node_id is None:
+        raise ValueError("Final node is not defined")
+    if map_state.final_node_id not in map_state.nodes:
+        raise ValueError(f"Final node missing: {map_state.final_node_id}")
+
+    for node in map_state.nodes.values():
+        for connection in node.connections:
+            if connection not in map_state.nodes:
+                raise ValueError(f"Node {node.id} has unknown connection: {connection}")
+
+    reachable = _bfs_reachable(map_state, map_state.start_node_id)
+    if map_state.final_node_id not in reachable:
+        raise ValueError("Final node is unreachable from start node")
+
+
+def _bfs_reachable(map_state: MapState, start_node_id: str) -> set[str]:
+    visited: set[str] = set()
+    queue = [start_node_id]
+    while queue:
+        node_id = queue.pop(0)
+        if node_id in visited:
+            continue
+        visited.add(node_id)
+        queue.extend(map_state.get_node(node_id).connections)
+    return visited
+
+
+def _enemy_from_payload(payload: Dict[str, Any]) -> EnemyState:
+    damage = payload.get("damage_range", {})
+    return EnemyState(
+        id=payload["id"],
+        name=payload.get("name", payload["id"]),
+        hp=int(payload["hp"]),
+        damage_min=int(damage.get("min", 1)),
+        damage_max=int(damage.get("max", 2)),
+    )

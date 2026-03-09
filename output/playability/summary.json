@@ -1,0 +1,946 @@
+{
+  "runs": [
+    {
+      "plan": "north_aggressive",
+      "seed": 101,
+      "route": [
+        "node_north_1",
+        "node_north_2",
+        "node_mid",
+        "node_final"
+      ],
+      "pressure_count": 4,
+      "ended": true,
+      "victory": true,
+      "end_reason": "reached_final_node",
+      "player_final": {
+        "hp": 4,
+        "food": 4,
+        "ammo": 3,
+        "medkits": 1
+      },
+      "moments": [
+        {
+          "node": "node_north_1",
+          "option_index": 0,
+          "event_outcome": {
+            "event_id": "evt_scrapyard",
+            "option_index": 0,
+            "option_text": "Rush the best wrecks before anyone reacts",
+            "combat_triggered": false
+          },
+          "player": {
+            "hp": 10,
+            "food": 7,
+            "ammo": 5,
+            "medkits": 1
+          },
+          "pressure": true
+        },
+        {
+          "node": "node_north_2",
+          "option_index": 0,
+          "event_outcome": {
+            "event_id": "evt_tunnel",
+            "option_index": 0,
+            "option_text": "Rush through debris",
+            "combat_triggered": true,
+            "combat": {
+              "skipped": false,
+              "enemy_id": "enemy_mutant_brute",
+              "victory": true,
+              "rounds": 4,
+              "player_hp": 5,
+              "enemy_hp": 0,
+              "log": [
+                "R1: player attacks for 1",
+                "R1: enemy attacks for 1",
+                "R2: player attacks for 3",
+                "R2: enemy attacks for 1",
+                "R3: player attacks for 2",
+                "R3: enemy attacks for 2",
+                "R4: player attacks for 1"
+              ]
+            }
+          },
+          "player": {
+            "hp": 5,
+            "food": 6,
+            "ammo": 2,
+            "medkits": 1
+          },
+          "pressure": true
+        },
+        {
+          "node": "node_mid",
+          "option_index": 0,
+          "event_outcome": {
+            "event_id": "evt_checkpoint",
+            "option_index": 0,
+            "option_text": "Hit the checkpoint before it hits back",
+            "combat_triggered": false
+          },
+          "player": {
+            "hp": 5,
+            "food": 5,
+            "ammo": 3,
+            "medkits": 1
+          },
+          "pressure": true
+        },
+        {
+          "node": "node_final",
+          "option_index": 1,
+          "event_outcome": {
+            "event_id": "evt_final",
+            "option_index": 1,
+            "option_text": "Sprint the ridge and trust momentum",
+            "combat_triggered": false
+          },
+          "player": {
+            "hp": 4,
+            "food": 4,
+            "ammo": 3,
+            "medkits": 1
+          },
+          "pressure": true
+        }
+      ],
+      "analytics": {
+        "run_id": "north_aggressive",
+        "seed": 101,
+        "route": [
+          "node_north_1",
+          "node_north_2",
+          "node_mid",
+          "node_final"
+        ],
+        "ended": true,
+        "victory": true,
+        "end_reason": "reached_final_node",
+        "player_final": {
+          "hp": 4,
+          "food": 4,
+          "ammo": 3,
+          "medkits": 1,
+          "scrap": 0
+        },
+        "decision_log": [
+          {
+            "step": 1,
+            "node": "node_north_1",
+            "event_id": "evt_scrapyard",
+            "option_index": 0,
+            "pressure": true,
+            "combat_triggered": false,
+            "player_after": {
+              "hp": 10,
+              "food": 7,
+              "ammo": 5,
+              "medkits": 1
+            }
+          },
+          {
+            "step": 2,
+            "node": "node_north_2",
+            "event_id": "evt_tunnel",
+            "option_index": 0,
+            "pressure": true,
+            "combat_triggered": true,
+            "player_after": {
+              "hp": 5,
+              "food": 6,
+              "ammo": 2,
+              "medkits": 1
+            }
+          },
+          {
+            "step": 3,
+            "node": "node_mid",
+            "event_id": "evt_checkpoint",
+            "option_index": 0,
+            "pressure": true,
+            "combat_triggered": false,
+            "player_after": {
+              "hp": 5,
+              "food": 5,
+              "ammo": 3,
+              "medkits": 1
+            }
+          },
+          {
+            "step": 4,
+            "node": "node_final",
+            "event_id": "evt_final",
+            "option_index": 1,
+            "pressure": true,
+            "combat_triggered": false,
+            "player_after": {
+              "hp": 4,
+              "food": 4,
+              "ammo": 3,
+              "medkits": 1
+            }
+          }
+        ],
+        "summary": {
+          "pressure_count": 4,
+          "death_cause_attribution": true,
+          "resource_signature": "hp:4|food:4|ammo:3|medkits:1|scrap:0"
+        }
+      }
+    },
+    {
+      "plan": "north_cautious",
+      "seed": 102,
+      "route": [
+        "node_north_1",
+        "node_north_2",
+        "node_mid",
+        "node_final"
+      ],
+      "pressure_count": 4,
+      "ended": true,
+      "victory": false,
+      "end_reason": "event_or_resource_death",
+      "player_final": {
+        "hp": 10,
+        "food": -1,
+        "ammo": 3,
+        "medkits": 2
+      },
+      "moments": [
+        {
+          "node": "node_north_1",
+          "option_index": 1,
+          "event_outcome": {
+            "event_id": "evt_scrapyard",
+            "option_index": 1,
+            "option_text": "Bypass and conserve",
+            "combat_triggered": false
+          },
+          "player": {
+            "hp": 10,
+            "food": 5,
+            "ammo": 3,
+            "medkits": 1
+          },
+          "pressure": true
+        },
+        {
+          "node": "node_north_2",
+          "option_index": 1,
+          "event_outcome": {
+            "event_id": "evt_tunnel",
+            "option_index": 1,
+            "option_text": "Hold position and move at first light",
+            "combat_triggered": false
+          },
+          "player": {
+            "hp": 10,
+            "food": 3,
+            "ammo": 3,
+            "medkits": 2
+          },
+          "pressure": true
+        },
+        {
+          "node": "node_mid",
+          "option_index": 1,
+          "event_outcome": {
+            "event_id": "evt_checkpoint",
+            "option_index": 1,
+            "option_text": "Sneak around",
+            "combat_triggered": false
+          },
+          "player": {
+            "hp": 10,
+            "food": 1,
+            "ammo": 3,
+            "medkits": 2
+          },
+          "pressure": true
+        },
+        {
+          "node": "node_final",
+          "option_index": 0,
+          "event_outcome": {
+            "event_id": "evt_final",
+            "option_index": 0,
+            "option_text": "Use scarce supplies to make the climb safe",
+            "combat_triggered": false
+          },
+          "player": {
+            "hp": 10,
+            "food": -1,
+            "ammo": 3,
+            "medkits": 2
+          },
+          "pressure": true
+        }
+      ],
+      "analytics": {
+        "run_id": "north_cautious",
+        "seed": 102,
+        "route": [
+          "node_north_1",
+          "node_north_2",
+          "node_mid",
+          "node_final"
+        ],
+        "ended": true,
+        "victory": false,
+        "end_reason": "event_or_resource_death",
+        "player_final": {
+          "hp": 10,
+          "food": -1,
+          "ammo": 3,
+          "medkits": 2,
+          "scrap": 0
+        },
+        "decision_log": [
+          {
+            "step": 1,
+            "node": "node_north_1",
+            "event_id": "evt_scrapyard",
+            "option_index": 1,
+            "pressure": true,
+            "combat_triggered": false,
+            "player_after": {
+              "hp": 10,
+              "food": 5,
+              "ammo": 3,
+              "medkits": 1
+            }
+          },
+          {
+            "step": 2,
+            "node": "node_north_2",
+            "event_id": "evt_tunnel",
+            "option_index": 1,
+            "pressure": true,
+            "combat_triggered": false,
+            "player_after": {
+              "hp": 10,
+              "food": 3,
+              "ammo": 3,
+              "medkits": 2
+            }
+          },
+          {
+            "step": 3,
+            "node": "node_mid",
+            "event_id": "evt_checkpoint",
+            "option_index": 1,
+            "pressure": true,
+            "combat_triggered": false,
+            "player_after": {
+              "hp": 10,
+              "food": 1,
+              "ammo": 3,
+              "medkits": 2
+            }
+          },
+          {
+            "step": 4,
+            "node": "node_final",
+            "event_id": "evt_final",
+            "option_index": 0,
+            "pressure": true,
+            "combat_triggered": false,
+            "player_after": {
+              "hp": 10,
+              "food": -1,
+              "ammo": 3,
+              "medkits": 2
+            }
+          }
+        ],
+        "summary": {
+          "pressure_count": 4,
+          "death_cause_attribution": true,
+          "resource_signature": "hp:10|food:-1|ammo:3|medkits:2|scrap:0"
+        }
+      }
+    },
+    {
+      "plan": "south_aggressive",
+      "seed": 103,
+      "route": [
+        "node_south_1",
+        "node_south_2",
+        "node_mid",
+        "node_final"
+      ],
+      "pressure_count": 4,
+      "ended": true,
+      "victory": true,
+      "end_reason": "reached_final_node",
+      "player_final": {
+        "hp": 3,
+        "food": 4,
+        "ammo": 0,
+        "medkits": 1
+      },
+      "moments": [
+        {
+          "node": "node_south_1",
+          "option_index": 1,
+          "event_outcome": {
+            "event_id": "evt_village",
+            "option_index": 1,
+            "option_text": "Strip the stalls before the owners return",
+            "combat_triggered": false
+          },
+          "player": {
+            "hp": 10,
+            "food": 8,
+            "ammo": 3,
+            "medkits": 1
+          },
+          "pressure": true
+        },
+        {
+          "node": "node_south_2",
+          "option_index": 0,
+          "event_outcome": {
+            "event_id": "evt_floodplain",
+            "option_index": 0,
+            "option_text": "Cross quickly",
+            "combat_triggered": false
+          },
+          "player": {
+            "hp": 10,
+            "food": 6,
+            "ammo": 3,
+            "medkits": 1
+          },
+          "pressure": true
+        },
+        {
+          "node": "node_mid",
+          "option_index": 0,
+          "event_outcome": {
+            "event_id": "evt_checkpoint",
+            "option_index": 0,
+            "option_text": "Assault the line",
+            "combat_triggered": true,
+            "combat": {
+              "skipped": false,
+              "enemy_id": "enemy_raider_scout",
+              "victory": true,
+              "rounds": 4,
+              "player_hp": 4,
+              "enemy_hp": -2,
+              "log": [
+                "R1: player attacks for 1",
+                "R1: enemy attacks for 2",
+                "R2: player attacks for 2",
+                "R2: enemy attacks for 2",
+                "R3: player attacks for 1",
+                "R3: enemy attacks for 2",
+                "R4: player attacks for 3"
+              ]
+            }
+          },
+          "player": {
+            "hp": 4,
+            "food": 5,
+            "ammo": 0,
+            "medkits": 1
+          },
+          "pressure": true
+        },
+        {
+          "node": "node_final",
+          "option_index": 1,
+          "event_outcome": {
+            "event_id": "evt_final",
+            "option_index": 1,
+            "option_text": "Sprint the ridge and trust momentum",
+            "combat_triggered": false
+          },
+          "player": {
+            "hp": 3,
+            "food": 4,
+            "ammo": 0,
+            "medkits": 1
+          },
+          "pressure": true
+        }
+      ],
+      "analytics": {
+        "run_id": "south_aggressive",
+        "seed": 103,
+        "route": [
+          "node_south_1",
+          "node_south_2",
+          "node_mid",
+          "node_final"
+        ],
+        "ended": true,
+        "victory": true,
+        "end_reason": "reached_final_node",
+        "player_final": {
+          "hp": 3,
+          "food": 4,
+          "ammo": 0,
+          "medkits": 1,
+          "scrap": 0
+        },
+        "decision_log": [
+          {
+            "step": 1,
+            "node": "node_south_1",
+            "event_id": "evt_village",
+            "option_index": 1,
+            "pressure": true,
+            "combat_triggered": false,
+            "player_after": {
+              "hp": 10,
+              "food": 8,
+              "ammo": 3,
+              "medkits": 1
+            }
+          },
+          {
+            "step": 2,
+            "node": "node_south_2",
+            "event_id": "evt_floodplain",
+            "option_index": 0,
+            "pressure": true,
+            "combat_triggered": false,
+            "player_after": {
+              "hp": 10,
+              "food": 6,
+              "ammo": 3,
+              "medkits": 1
+            }
+          },
+          {
+            "step": 3,
+            "node": "node_mid",
+            "event_id": "evt_checkpoint",
+            "option_index": 0,
+            "pressure": true,
+            "combat_triggered": true,
+            "player_after": {
+              "hp": 4,
+              "food": 5,
+              "ammo": 0,
+              "medkits": 1
+            }
+          },
+          {
+            "step": 4,
+            "node": "node_final",
+            "event_id": "evt_final",
+            "option_index": 1,
+            "pressure": true,
+            "combat_triggered": false,
+            "player_after": {
+              "hp": 3,
+              "food": 4,
+              "ammo": 0,
+              "medkits": 1
+            }
+          }
+        ],
+        "summary": {
+          "pressure_count": 4,
+          "death_cause_attribution": true,
+          "resource_signature": "hp:3|food:4|ammo:0|medkits:1|scrap:0"
+        }
+      }
+    },
+    {
+      "plan": "south_cautious",
+      "seed": 104,
+      "route": [
+        "node_south_1",
+        "node_south_2",
+        "node_mid",
+        "node_final"
+      ],
+      "pressure_count": 4,
+      "ended": true,
+      "victory": true,
+      "end_reason": "reached_final_node",
+      "player_final": {
+        "hp": 10,
+        "food": 2,
+        "ammo": 1,
+        "medkits": 2
+      },
+      "moments": [
+        {
+          "node": "node_south_1",
+          "option_index": 0,
+          "event_outcome": {
+            "event_id": "evt_village",
+            "option_index": 0,
+            "option_text": "Barter ammo for medkit",
+            "combat_triggered": false
+          },
+          "player": {
+            "hp": 10,
+            "food": 6,
+            "ammo": 2,
+            "medkits": 2
+          },
+          "pressure": true
+        },
+        {
+          "node": "node_south_2",
+          "option_index": 1,
+          "event_outcome": {
+            "event_id": "evt_floodplain",
+            "option_index": 1,
+            "option_text": "Take a slower line and search for dry ground",
+            "combat_triggered": false
+          },
+          "player": {
+            "hp": 10,
+            "food": 6,
+            "ammo": 1,
+            "medkits": 2
+          },
+          "pressure": true
+        },
+        {
+          "node": "node_mid",
+          "option_index": 1,
+          "event_outcome": {
+            "event_id": "evt_checkpoint",
+            "option_index": 1,
+            "option_text": "Sneak around",
+            "combat_triggered": false
+          },
+          "player": {
+            "hp": 10,
+            "food": 4,
+            "ammo": 1,
+            "medkits": 2
+          },
+          "pressure": true
+        },
+        {
+          "node": "node_final",
+          "option_index": 0,
+          "event_outcome": {
+            "event_id": "evt_final",
+            "option_index": 0,
+            "option_text": "Use scarce supplies to make the climb safe",
+            "combat_triggered": false
+          },
+          "player": {
+            "hp": 10,
+            "food": 2,
+            "ammo": 1,
+            "medkits": 2
+          },
+          "pressure": true
+        }
+      ],
+      "analytics": {
+        "run_id": "south_cautious",
+        "seed": 104,
+        "route": [
+          "node_south_1",
+          "node_south_2",
+          "node_mid",
+          "node_final"
+        ],
+        "ended": true,
+        "victory": true,
+        "end_reason": "reached_final_node",
+        "player_final": {
+          "hp": 10,
+          "food": 2,
+          "ammo": 1,
+          "medkits": 2,
+          "scrap": 0
+        },
+        "decision_log": [
+          {
+            "step": 1,
+            "node": "node_south_1",
+            "event_id": "evt_village",
+            "option_index": 0,
+            "pressure": true,
+            "combat_triggered": false,
+            "player_after": {
+              "hp": 10,
+              "food": 6,
+              "ammo": 2,
+              "medkits": 2
+            }
+          },
+          {
+            "step": 2,
+            "node": "node_south_2",
+            "event_id": "evt_floodplain",
+            "option_index": 1,
+            "pressure": true,
+            "combat_triggered": false,
+            "player_after": {
+              "hp": 10,
+              "food": 6,
+              "ammo": 1,
+              "medkits": 2
+            }
+          },
+          {
+            "step": 3,
+            "node": "node_mid",
+            "event_id": "evt_checkpoint",
+            "option_index": 1,
+            "pressure": true,
+            "combat_triggered": false,
+            "player_after": {
+              "hp": 10,
+              "food": 4,
+              "ammo": 1,
+              "medkits": 2
+            }
+          },
+          {
+            "step": 4,
+            "node": "node_final",
+            "event_id": "evt_final",
+            "option_index": 0,
+            "pressure": true,
+            "combat_triggered": false,
+            "player_after": {
+              "hp": 10,
+              "food": 2,
+              "ammo": 1,
+              "medkits": 2
+            }
+          }
+        ],
+        "summary": {
+          "pressure_count": 4,
+          "death_cause_attribution": true,
+          "resource_signature": "hp:10|food:2|ammo:1|medkits:2|scrap:0"
+        }
+      }
+    },
+    {
+      "plan": "mixed_pressure",
+      "seed": 105,
+      "route": [
+        "node_north_1",
+        "node_north_2",
+        "node_mid",
+        "node_final"
+      ],
+      "pressure_count": 4,
+      "ended": true,
+      "victory": false,
+      "end_reason": "event_or_resource_death",
+      "player_final": {
+        "hp": 0,
+        "food": 3,
+        "ammo": 0,
+        "medkits": 2
+      },
+      "moments": [
+        {
+          "node": "node_north_1",
+          "option_index": 0,
+          "event_outcome": {
+            "event_id": "evt_scrapyard",
+            "option_index": 0,
+            "option_text": "Rush the best wrecks before anyone reacts",
+            "combat_triggered": true,
+            "combat": {
+              "skipped": false,
+              "enemy_id": "enemy_mutant_brute",
+              "victory": true,
+              "rounds": 3,
+              "player_hp": 4,
+              "enemy_hp": 0,
+              "log": [
+                "R1: player attacks for 1",
+                "R1: enemy attacks for 3",
+                "R2: player attacks for 3",
+                "R2: enemy attacks for 3",
+                "R3: player attacks for 3"
+              ]
+            }
+          },
+          "player": {
+            "hp": 4,
+            "food": 7,
+            "ammo": 2,
+            "medkits": 1
+          },
+          "pressure": true
+        },
+        {
+          "node": "node_north_2",
+          "option_index": 1,
+          "event_outcome": {
+            "event_id": "evt_tunnel",
+            "option_index": 1,
+            "option_text": "Hold position and move at first light",
+            "combat_triggered": false
+          },
+          "player": {
+            "hp": 4,
+            "food": 5,
+            "ammo": 2,
+            "medkits": 2
+          },
+          "pressure": true
+        },
+        {
+          "node": "node_mid",
+          "option_index": 0,
+          "event_outcome": {
+            "event_id": "evt_checkpoint",
+            "option_index": 0,
+            "option_text": "Hit the checkpoint before it hits back",
+            "combat_triggered": true,
+            "combat": {
+              "skipped": false,
+              "enemy_id": "enemy_raider_scout",
+              "victory": true,
+              "rounds": 3,
+              "player_hp": 1,
+              "enemy_hp": -2,
+              "log": [
+                "R1: player attacks for 2",
+                "R1: enemy attacks for 1",
+                "R2: player attacks for 2",
+                "R2: enemy attacks for 2",
+                "R3: player attacks for 3"
+              ]
+            }
+          },
+          "player": {
+            "hp": 1,
+            "food": 4,
+            "ammo": 0,
+            "medkits": 2
+          },
+          "pressure": true
+        },
+        {
+          "node": "node_final",
+          "option_index": 1,
+          "event_outcome": {
+            "event_id": "evt_final",
+            "option_index": 1,
+            "option_text": "Sprint the ridge and trust momentum",
+            "combat_triggered": false
+          },
+          "player": {
+            "hp": 0,
+            "food": 3,
+            "ammo": 0,
+            "medkits": 2
+          },
+          "pressure": true
+        }
+      ],
+      "analytics": {
+        "run_id": "mixed_pressure",
+        "seed": 105,
+        "route": [
+          "node_north_1",
+          "node_north_2",
+          "node_mid",
+          "node_final"
+        ],
+        "ended": true,
+        "victory": false,
+        "end_reason": "event_or_resource_death",
+        "player_final": {
+          "hp": 0,
+          "food": 3,
+          "ammo": 0,
+          "medkits": 2,
+          "scrap": 0
+        },
+        "decision_log": [
+          {
+            "step": 1,
+            "node": "node_north_1",
+            "event_id": "evt_scrapyard",
+            "option_index": 0,
+            "pressure": true,
+            "combat_triggered": true,
+            "player_after": {
+              "hp": 4,
+              "food": 7,
+              "ammo": 2,
+              "medkits": 1
+            }
+          },
+          {
+            "step": 2,
+            "node": "node_north_2",
+            "event_id": "evt_tunnel",
+            "option_index": 1,
+            "pressure": true,
+            "combat_triggered": false,
+            "player_after": {
+              "hp": 4,
+              "food": 5,
+              "ammo": 2,
+              "medkits": 2
+            }
+          },
+          {
+            "step": 3,
+            "node": "node_mid",
+            "event_id": "evt_checkpoint",
+            "option_index": 0,
+            "pressure": true,
+            "combat_triggered": true,
+            "player_after": {
+              "hp": 1,
+              "food": 4,
+              "ammo": 0,
+              "medkits": 2
+            }
+          },
+          {
+            "step": 4,
+            "node": "node_final",
+            "event_id": "evt_final",
+            "option_index": 1,
+            "pressure": true,
+            "combat_triggered": false,
+            "player_after": {
+              "hp": 0,
+              "food": 3,
+              "ammo": 0,
+              "medkits": 2
+            }
+          }
+        ],
+        "summary": {
+          "pressure_count": 4,
+          "death_cause_attribution": true,
+          "resource_signature": "hp:0|food:3|ammo:0|medkits:2|scrap:0"
+        }
+      }
+    }
+  ],
+  "summary": {
+    "playability_gate": {
+      "pressure_choices_per_run": true,
+      "route_diversity": true,
+      "death_explainable_from_logs": true,
+      "rerun_signal_3_of_5": true
+    },
+    "metrics": {
+      "distinct_outcome_signatures": 5,
+      "death_runs": 2,
+      "rerun_signal_runs": 4
+    }
+  }
+}
