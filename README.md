@@ -35,6 +35,7 @@ AI change boundaries:
 Manual playtest protocol:
 - [PLAYTEST_PROTOCOL.md](PLAYTEST_PROTOCOL.md)
 - [schemas/human_playtest_log_schema.json](schemas/human_playtest_log_schema.json)
+- [BALANCING_NOTES_v0_1.md](BALANCING_NOTES_v0_1.md)
 
 ## What v0.1 Must Prove
 
@@ -59,6 +60,7 @@ Manual playtest protocol:
 - [tasks/TASKS.md](tasks/TASKS.md): execution truth for sprint/task state
 - [PLAYTEST_PROTOCOL.md](PLAYTEST_PROTOCOL.md): first-round human playtest procedure
 - [specs/human_playtest_analytics.md](specs/human_playtest_analytics.md): machine-vs-human tension comparison rules
+- [BALANCING_NOTES_v0_1.md](BALANCING_NOTES_v0_1.md): current balance conclusions and next controlled experiments
 - [specs/](specs): gameplay and system specs
 - [schemas/](schemas): data contracts
 - [src/](src): runtime prototype code
@@ -148,10 +150,10 @@ Generated artifacts:
 
 ## Next Work
 
-- D7: publish v0.1 balancing notes
 - PT-1: run first external playtest round using `PLAYTEST_PROTOCOL.md`
 - PT-2: compare human hesitation/regret logs against machine `failure_analysis`
 - D1/D2: connect run-end rewards and meta progression state transitions
+- EXP-1: evaluate explicit irreversible trade only after Blind CLI results
 
 ## Repository Note
 

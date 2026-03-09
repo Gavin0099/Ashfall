@@ -10,12 +10,11 @@ Phase/Gate/Milestone Truth: `PLAN.md`
 ## Current Sprint (2026/03/09 - 2026/03/15)
 
 ### In Progress
-- [ ] D7 Publish v0.1 balancing notes
+- [ ] PT-1 Run first manual playtest round with 5-8 players using `PLAYTEST_PROTOCOL.md`
 
 ### Ready
 - [ ] D1 Add run-end reward and unlock rules
 - [ ] D2 Add meta progression state transitions
-- [ ] PT-1 Run first manual playtest round with 5-8 players using `PLAYTEST_PROTOCOL.md`
 - [ ] PT-2 Compare human playtest logs against machine `failure_analysis`
 - [ ] EXP-1 Prototype explicit irreversible trade (`max_hp` sacrifice for short-term survival)
 
@@ -53,6 +52,7 @@ Artifacts: `output/playability/summary.json`, `output/playability/run_*.json`
 - [x] D6 Add irreversible-state prototype signal (`radiation`) and analytics coverage
 - [x] Add weighted regret/blame analysis to `run_analytics`
 - [x] Add human playtest log schema and observation template
+- [x] D7 Publish v0.1 balancing notes
 
 ---
 
@@ -101,7 +101,7 @@ Gate:
 - [x] D4 Add event template system (catalog + deterministic generation)
 - [x] D5 Run balancing simulations and collect metrics
 - [x] D6 Add irreversible-state prototype signal (radiation/injury minimal variant)
-- [ ] D7 Publish v0.1 balancing notes
+- [x] D7 Publish v0.1 balancing notes
 - [ ] PT-1 Run first manual playtest round and capture observation sheets
 - [ ] PT-2 Merge observation findings with analytics summaries
 

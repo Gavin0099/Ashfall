@@ -112,7 +112,7 @@ Meta 與平衡:
 ├─ [✓] 3. run analytics log schema 與輸出驗證
 ├─ [✓] 4. event template system（catalog + deterministic generation）
 ├─ [✓] 5. 節點/敵人/事件機率調參
-└─ [🔄] 6. balancing notes + 首輪 playtest protocol      ← 當前進行中
+└─ [🔄] 6. balancing notes 完成，首輪 playtest protocol 進行中      ← 當前進行中
 ```
 
 **Gate 條件**:
@@ -149,11 +149,10 @@ Meta 與平衡:
 - [x] 實作最小不可逆狀態（radiation）並接入 analytics（6h）
 
 **下一步**:
-1. 根據 radiation 後的 20 局 metrics 撰寫 v0.1 balancing notes
-2. 依 `PLAYTEST_PROTOCOL.md` 與 human playtest log schema 執行第一輪人工 playtest
-3. 對比 human regret / hesitation 與 machine `failure_analysis`
-4. 規劃 run-end reward 與 meta progression state transition
-5. 以受控實驗方式評估 explicit irreversible trade（例如 `max_hp` 交換生存）
+1. 依 `PLAYTEST_PROTOCOL.md` 與 human playtest log schema 執行第一輪人工 playtest
+2. 對比 human regret / hesitation 與 machine `failure_analysis`
+3. 規劃 run-end reward 與 meta progression state transition
+4. 以受控實驗方式評估 explicit irreversible trade（例如 `max_hp` 交換生存）
 
 **當前阻礙**:
 - 無
@@ -317,3 +316,4 @@ Meta 與平衡:
 | 2026/03/09 | 新增 `PLAYTEST_PROTOCOL.md`，定義 v0.1 第一輪人工測試流程與成功標準 | 補上 machine gate 之外的人類玩法驗證流程，避免只看系統數據 |
 | 2026/03/09 | 完成 D6：導入 `radiation` 不可逆狀態、travel attrition、analytics 欄位與死亡歸因 | 將「短期資源壓力」升級為「長期代價壓力」，強化 route gamble 感 |
 | 2026/03/09 | 新增 weighted regret/blame analysis 與 human playtest log 契約 | 避免單點虛假歸因，並讓 Blind CLI test 能與 machine analytics 直接對照 |
+| 2026/03/09 | 完成 D7：發布 `BALANCING_NOTES_v0_1.md`，總結 radiation 後的平衡結論與下一步實驗順序 | 將 machine metrics 轉成明確設計決策，避免在 UI 或新系統前失去焦點 |
