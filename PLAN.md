@@ -33,10 +33,10 @@
 ├─ [✓] Phase A: 框架基礎建立       (2026/03/05 完成)
 ├─ [✓] Phase B: 可採用性基礎        (2026/03/05 完成)
 ├─ [✓] Phase C: 工具強化            (2026/03/05 完成)
-└─ [🔄] Phase D: 整合成熟           (進行中，預計 2026/06/30)
+└─ [✓] Phase D: 整合成熟            (2026/03/06 完成)
 ```
 
-**當前 Phase**: **Phase D — 整合成熟**
+**當前 Phase**: **全部完成 ✓ — 進入維護期**
 
 ---
 
@@ -117,35 +117,22 @@
 
 ---
 
-## 🔥 本週聚焦 (Sprint 1)
+## 🔥 當前聚焦 — 維護期
 
-**Sprint 1** (2026/03/05 - 2026/03/16)
+**所有 Phase（A/B/C/D）已完成**。框架進入維護期。
 
-**目標**: 完成 Phase B Gate（B3 + B4）
-
-**已完成**:
-- [x] B1 Governance Contract Validator（2026/03/05）
-- [x] B2 PLAN.md Freshness 機制（2026/03/05）
-  - 額外完成: `.governance-state.yaml` + `state_generator.py`
-  - 額外完成: Agent Identity（AGENT_ID/SESSION）
-
-**進行中**:
-- [x] B3-a. 分析 memory_janitor.py 現有 `--execute` 行為（移動邏輯）
-- [x] B3-b. 改為 copy+pointer 模式：原位保留 pointer 區塊
-- [x] B3-c. 加入 `manifest.json` 紀錄每次歸檔操作
-- [x] B3-d. 加入 `--manifest` 和 `--format json` 支援
-- [x] B4-a. 建立 `examples/` 目錄與基本結構
-- [x] B4-b. 撰寫 terminal demo log（15 分鐘體感流程）
-- [x] B4-c. 更新 README.md 說明 examples/
-
-**下一步**:
-Phase B Gate 全部通過 ✅ → 進入 Phase C
+**待處理（技術債與品質提升）**:
+- [ ] 補齊工具單元測試（contract_validator、plan_freshness、state_generator、linear_integrator、notion_integrator）
+- [ ] 更新 governance_tools/README.md（補 B1/B2/D3 工具說明）
+- [ ] 修復 docs/ 斷鏈（linear/notion-source-of-truth.md 引用不存在的 02_workflow.md）
+- [ ] 評估 BUG-003（記憶壓力多維度指標）
 
 **當前阻礙**: 無
 
 **已決策**:
 - ✅ Validator 使用正規表達式驗證（更彈性，支援 markdown code block 與純文字兩種格式）
 - ✅ state_generator.py 使用 YAML 輸出（pyyaml 非必要，自製序列化避免依賴）
+- ✅ PLAN.md 為 Single Source of Truth，Linear / Notion 為從屬同步目標
 
 ---
 
@@ -185,7 +172,7 @@ Phase B Gate 全部通過 ✅ → 進入 Phase C
 **AI 在實作任何功能前，必須確認**:
 
 1. ✅ 這項任務在「本週聚焦」或「下一步」中嗎?
-2. ✅ 是否符合當前 Phase D 的範圍（整合成熟）?
+2. ✅ 是否在「維護期待辦清單」或 Backlog 中?
 3. ✅ 是否在「不要做」清單中?
 
 **如果不符合上述條件**:
@@ -220,7 +207,7 @@ Phase B Gate 全部通過 ✅ → 進入 Phase C
 |---|---|---|---|
 | M1: 框架基礎完成 | 2026/03/05 | ✅ | 8 大法典 + 基礎工具 |
 | M2: 可採用性基礎 | 2026/03/05 | ✅ | Validator + Freshness + Toy repo |
-| M3: 工具品質提升 | 2026/05/15 | ⏳ | JSON 輸出 + 測試 + 錯誤處理 |
+| M3: 工具品質提升 | 2026/03/05 | ✅ | JSON 輸出 + 測試 + 錯誤處理 |
 | M4: 整合成熟 | 2026/03/06 | ✅ | Linear 策略 + CI 範例 + Notion 整合 |
 
 ---

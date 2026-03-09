@@ -1,152 +1,220 @@
-# 🛡️ Memory 治理架構 v5.2 - 部署包
+# governance_tools/ — AI Governance Framework 工具集
 
-## 📦 這是什麼?
-
-這是一個**完整的 memory/ 層治理架構**,包含:
-- 治理規則 (SYSTEM_PROMPT.md v5.2)
-- 自動化工具 (記憶掃除 + Linear 整合)
-- 整合文件
-
-**特點**: 開箱即用,直接整合到任何專案的 `memory/` 目錄。
+> **版本**: 當前（Phase A–D 全部完成）
+> **最後更新**: 2026-03-06
+> **相依**: Python 3.9+，僅 stdlib（無需 pip install）
 
 ---
 
-## 🗂️ 目錄結構
+## 工具一覽
 
-```
-memory/
-├── governance/
-│   └── SYSTEM_PROMPT.md (v5.2)     ← 更新後的核心意識
-│
-├── governance_tools/               ← 自動化工具
-│   ├── README.md                   ← 工具使用說明
-│   ├── memory_janitor.py
-│   └── linear_integrator.py
-│
-├── docs/                           ← 治理文件
-│   └── INTEGRATION_GUIDE.md        ← 完整部署指南
-│
-└── archive/                        ← 歸檔目錄 (空白,供工具使用)
-```
-
-**注意**: 其他治理文件 (AGENT.md, ARCHITECTURE.md 等) 與狀態檔案 (00-03.md) 請從您原有的 memory/ 保留。
+| 工具 | 功能 | 主要用途 |
+|------|------|---------|
+| [memory_janitor.py](#memory_janitorpy) | 記憶壓力監控與歸檔 | 防止 context 過載 |
+| [contract_validator.py](#contract_validatorpy) | AI 初始化合規驗證 | CI gate |
+| [plan_freshness.py](#plan_freshnesspy) | PLAN.md 新鮮度檢查 | CI gate / Git hook |
+| [state_generator.py](#state_generatorpy) | .governance-state.yaml 生成 | 狀態快照 |
+| [linear_integrator.py](#linear_integratorpy) | PLAN.md → Linear 同步 | 任務追蹤 |
+| [notion_integrator.py](#notion_integratorpy) | PLAN.md → Notion 同步 | 任務追蹤 |
 
 ---
 
-## 🚀 快速部署 (3 步驟)
+## memory_janitor.py
 
-### 方式 A: 手動部署
+記憶壓力監控工具。分析 `memory/` 目錄中的熱記憶體行數，判斷是否需要歸檔。
 
-```bash
-# 1. 解壓縮後,進入您的專案根目錄
-cd <your-project>
+**狀態閾值**:
 
-# 2. 複製整個 memory/ 結構 (會保留現有檔案)
-cp -r memory_architecture_v5.2/* memory/
+| 狀態 | 行數 | 行動 |
+|------|------|------|
+| SAFE | ≤ 150 | 無需動作 |
+| WARNING | 151–180 | 計畫清理 |
+| CRITICAL | 181–200 | 盡快執行 `--execute` |
+| EMERGENCY | > 200 | 立即停止並手動整理 |
 
-# 3. 驗證
-python memory/governance_tools/memory_janitor.py --check
-```
-
----
-
-### 方式 B: 使用自動化腳本 (推薦)
-
-```bash
-# 1. 複製部署腳本到專案根目錄
-cp memory_architecture_v5.2/deploy_to_memory.sh ./
-
-# 2. 執行部署 (會自動備份現有 SYSTEM_PROMPT.md)
-bash deploy_to_memory.sh
-
-# 3. 驗證
-python memory/governance_tools/memory_janitor.py --check
-```
-
----
-
-## 📋 部署檢查清單
-
-部署完成後,確認以下項目:
-
-- [ ] `memory/governance/SYSTEM_PROMPT.md` 版本為 v5.2
-- [ ] `memory/governance_tools/` 目錄已建立,包含 2 個 .py 檔案
-- [ ] `memory/docs/INTEGRATION_GUIDE.md` 存在
-- [ ] `memory/archive/` 目錄已建立
-- [ ] 執行 `python memory/governance_tools/memory_janitor.py --check` 無錯誤
-
----
-
-## 🔄 跨專案部署
-
-這個架構設計為**可攜式**,您可以:
-
-1. 將整個 `memory_architecture_v5.2/` 打包為 `.zip` 或 `.tar.gz`
-2. 在任何新專案中解壓縮
-3. 執行 `deploy_to_memory.sh` 即可完成部署
-
-**範例**:
-```bash
-# 打包
-tar -czf memory_governance_v5.2.tar.gz memory_architecture_v5.2/
-
-# 在新專案中解壓縮
-cd new-project/
-tar -xzf memory_governance_v5.2.tar.gz
-bash memory_architecture_v5.2/deploy_to_memory.sh
-```
-
----
-
-## 🛠️ 工具使用
-
-### 記憶掃除
 ```bash
 # 檢查狀態
-python memory/governance_tools/memory_janitor.py --check
+python governance_tools/memory_janitor.py --check
 
-# 產出計畫
-python memory/governance_tools/memory_janitor.py --plan
+# 查看歸檔計畫
+python governance_tools/memory_janitor.py --plan
 
-# 執行掃除
-python memory/governance_tools/memory_janitor.py --execute
+# 執行歸檔（copy+pointer 模式，原檔保留 pointer）
+python governance_tools/memory_janitor.py --execute
+
+# 查看歸檔紀錄
+python governance_tools/memory_janitor.py --manifest
+
+# JSON 輸出（CI/dashboard 用）
+python governance_tools/memory_janitor.py --check --format json
 ```
 
-### Linear 整合
+**歸檔行為**: `--execute` 採用 copy+pointer 模式 — 內容複製到 `memory/archive/`，原位置留下 pointer 區塊，`manifest.json` 記錄每次操作。
+
+---
+
+## contract_validator.py
+
+驗證 AI 初始化是否符合治理規範（Governance Contract）。檢查 8 大法典是否已載入。
+
 ```bash
-# 列出 Teams
-python memory/governance_tools/linear_integrator.py --list-teams
+# 基本驗證
+python governance_tools/contract_validator.py
 
-# 同步任務
-python memory/governance_tools/linear_integrator.py \
-  --sync \
-  --team-id <team-id> \
-  --priority 2
+# 指定 memory 目錄
+python governance_tools/contract_validator.py --memory-root ./memory
+
+# JSON 輸出（CI 用）
+python governance_tools/contract_validator.py --format json
+```
+
+**退出碼**:
+- `0` = 合規
+- `1` = 不合規（有缺失項）
+
+---
+
+## plan_freshness.py
+
+檢查 PLAN.md 的 `最後更新` 欄位是否在有效期內。用於 CI gate 和 Git hook。
+
+```bash
+# 基本檢查（讀取當前目錄 PLAN.md）
+python governance_tools/plan_freshness.py
+
+# 指定 PLAN.md 路徑
+python governance_tools/plan_freshness.py --file /path/to/PLAN.md
+
+# 覆寫閾值（天）
+python governance_tools/plan_freshness.py --threshold 14
+
+# JSON 輸出（CI 用）
+python governance_tools/plan_freshness.py --format json
+```
+
+**退出碼**:
+- `0` = FRESH（距今 ≤ threshold）
+- `1` = STALE（距今 > threshold，≤ 2×threshold）
+- `2` = CRITICAL（距今 > 2×threshold）或欄位缺失
+
+**PLAN.md 必要欄位**（blockquote 格式）:
+```markdown
+> **最後更新**: 2026-03-06
+> **Owner**: GavinWu
+> **Freshness**: Sprint (7d)
 ```
 
 ---
 
-## 📚 詳細文件
+## state_generator.py
 
-所有功能說明、故障排除請參閱:
-- **memory/docs/INTEGRATION_GUIDE.md** (完整指南)
-- **memory/governance_tools/README.md** (工具說明)
+讀取 PLAN.md header，生成 `.governance-state.yaml` 狀態快照，供 AI session 初始化使用。
+
+```bash
+# 生成狀態快照
+python governance_tools/state_generator.py
+
+# 指定來源與輸出路徑
+python governance_tools/state_generator.py \
+  --plan PLAN.md \
+  --output .governance-state.yaml
+```
+
+**輸出範例（.governance-state.yaml）**:
+```yaml
+last_updated: "2026-03-06"
+owner: "GavinWu"
+freshness_policy: "Sprint (7d)"
+generated_at: "2026-03-06T10:00:00"
+```
 
 ---
 
-## 🆘 常見問題
+## linear_integrator.py
 
-### Q: 會覆蓋我現有的治理文件嗎?
-**A**: 不會。此部署包僅更新 `SYSTEM_PROMPT.md`,其他 6 個文件 (AGENT.md 等) 不會被觸碰。
+將 `memory/01_active_task.md` 中的未完成任務同步到 Linear，並將 Issue ID 寫回本地。
 
-### Q: 會影響我的專案狀態檔案嗎?
-**A**: 不會。`00_master_plan.md`, `01_active_task.md` 等檔案完全不受影響。
+**前置**:
+```bash
+export LINEAR_API_KEY='your_linear_api_key'
+```
 
-### Q: 如果我的專案沒有 memory/ 目錄怎麼辦?
-**A**: 直接將 `memory_architecture_v5.2/` 重新命名為 `memory/`,然後補齊其他 6 個治理文件與 4 個狀態檔案。
+```bash
+# 列出可用 Teams
+python governance_tools/linear_integrator.py --list-teams
+
+# 同步未完成任務到指定 Team
+python governance_tools/linear_integrator.py --sync --team-id <TEAM_ID>
+
+# 指定優先級（0=無, 1=緊急, 2=高, 3=中, 4=低）
+python governance_tools/linear_integrator.py --sync --team-id <TEAM_ID> --priority 2
+
+# JSON 輸出（CI/dashboard 用）
+python governance_tools/linear_integrator.py --sync --team-id <TEAM_ID> --format json
+```
+
+**同步後**：任務後面會加上 `[LINEAR:ENG-123]` 標記，防止重複建立。
+
+**策略文件**: [docs/linear-source-of-truth.md](../docs/linear-source-of-truth.md)
 
 ---
 
-**版本**: v5.2  
-**最後更新**: 2025-02-25  
-**相容性**: 向後相容 v5.1,可安全升級
+## notion_integrator.py
+
+將 `memory/01_active_task.md` 中的未完成任務同步到 Notion Database，並將短 ID 寫回本地。
+
+**前置**:
+```bash
+export NOTION_API_KEY='secret_xxxx'        # Notion Integration Token
+export NOTION_DATABASE_ID='<DB_ID>'        # 可選，也可用 --database-id 傳入
+```
+
+> 取得 Token：https://www.notion.so/my-integrations → 建立 Integration
+> 建立後需在目標 Database 頁面加入此 Integration（右上角 `...` → Add connections）
+
+```bash
+# 列出 Integration 可存取的 Database
+python governance_tools/notion_integrator.py --list-databases
+
+# 同步未完成任務到指定 Database
+python governance_tools/notion_integrator.py --sync --database-id <DB_ID>
+
+# JSON 輸出（CI/dashboard 用）
+python governance_tools/notion_integrator.py --sync --database-id <DB_ID> --format json
+```
+
+**同步後**：任務後面會加上 `[NOTION:XXXXXXXX]` 標記（8 字元短 ID），防止重複建立。
+
+**策略文件**: [docs/notion-source-of-truth.md](../docs/notion-source-of-truth.md)
+
+---
+
+## 共通設計原則
+
+- **零依賴**: 所有工具僅使用 Python stdlib（urllib、re、json、pathlib）
+- **敏感資訊防護**: linear_integrator / notion_integrator 送出前掃描 title/description，偵測到 API key、密碼、private key 時拒絕送出
+- **--format json**: 所有工具支援 JSON 輸出，可接 CI pipeline 或 dashboard
+- **--help**: 所有工具有完整說明（`python <tool>.py --help`）
+- **錯誤降級**: API 失敗時不影響本地工作流
+
+---
+
+## CI 整合
+
+`.github/workflows/governance.yml` 和 `.gitlab-ci.yml` 已整合以下兩個自動檢查：
+
+| Job | 工具 | 失敗條件 |
+|-----|------|---------|
+| `plan-freshness` | plan_freshness.py | CRITICAL（擋 push） |
+| `memory-pressure` | memory_janitor.py | EMERGENCY（advisory，不擋） |
+
+---
+
+## Git Hook
+
+```bash
+# 一鍵安裝（PLAN.md 過期擋 commit）
+bash scripts/install-hooks.sh
+```
+
+安裝後：`git commit` 時自動執行 `plan_freshness.py`，CRITICAL 狀態會擋下 commit。
