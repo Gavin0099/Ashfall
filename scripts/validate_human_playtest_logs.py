@@ -59,12 +59,23 @@ def validate_log(path: Path) -> None:
         ensure(isinstance(entry.get("verbal_note", ""), str), f"{path}: verbal_note invalid")
 
     post_run = data["post_run"]
-    for key in ("hardest_choice", "perceived_death_cause", "regret_choice", "replay_intent"):
+    for key in (
+        "hardest_choice",
+        "perceived_death_cause",
+        "regret_choice",
+        "replay_intent",
+        "judgment_regret_note",
+        "frustration_regret_note",
+        "immediate_replay_reason",
+    ):
         ensure(key in post_run, f"{path}: post_run missing {key}")
     ensure(isinstance(post_run["hardest_choice"], str), f"{path}: hardest_choice invalid")
     ensure(isinstance(post_run["perceived_death_cause"], str), f"{path}: perceived_death_cause invalid")
     ensure(isinstance(post_run["regret_choice"], str), f"{path}: regret_choice invalid")
     ensure(isinstance(post_run["replay_intent"], bool), f"{path}: replay_intent invalid")
+    ensure(isinstance(post_run["judgment_regret_note"], str), f"{path}: judgment_regret_note invalid")
+    ensure(isinstance(post_run["frustration_regret_note"], str), f"{path}: frustration_regret_note invalid")
+    ensure(isinstance(post_run["immediate_replay_reason"], str), f"{path}: immediate_replay_reason invalid")
 
 
 def main() -> int:

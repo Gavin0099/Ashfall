@@ -85,11 +85,20 @@ Ask only these three questions:
 2. When you died, or almost died, what do you think caused it?
 3. If you ran again, which choice would you change?
 
+Then ask these classification questions:
+
+4. Which regret felt like your own judgment mistake?
+5. Which regret felt caused by unclear information or punishment that was too heavy?
+6. Do you want to start another run right now? Why?
+
 Desired signal quality:
 
 - Q1 should identify a route or event choice
 - Q2 should point to a previous decision, not only randomness
 - Q3 should show decision memory and route learning
+- Q4 should identify learnable regret
+- Q5 should separate frustration from tension
+- Q6 should test actual replay desire, not polite approval
 
 ### Step 4: Optional Second Run
 

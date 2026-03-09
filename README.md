@@ -26,6 +26,28 @@ If the prototype proves replayable, prepare the project for Steam release.
 - Phase C complete: combat, event-triggered combat, pressure validation, and run analytics are working.
 - Phase D in progress: analytics-driven balancing and the first irreversible-state signal are complete; balancing notes and external playtest remain.
 
+## Evidence Status
+
+Completed evidence:
+
+- deterministic CLI runs terminate correctly
+- route divergence is measurable in machine runs
+- death attribution and weighted regret analysis are present in analytics
+- CLI warning signals for radiation are implemented
+- 50-run balance sampling exists and is reproducible
+
+Pipeline ready, but not yet externally validated:
+
+- human playtest log schema
+- Blind CLI playtest checklist
+- machine-vs-human comparison tooling
+
+Not yet proven:
+
+- that current proxy metrics truly represent high-stakes human tension
+- that replay signal in analytics maps to genuine player replay desire
+- that measured regret corresponds to meaningful, learnable regret rather than frustration
+
 Prototype contract:
 - [PROTOTYPE_SUCCESS_CRITERIA.md](PROTOTYPE_SUCCESS_CRITERIA.md)
 
@@ -36,6 +58,7 @@ Manual playtest protocol:
 - [PLAYTEST_PROTOCOL.md](PLAYTEST_PROTOCOL.md)
 - [PT1_CHECKLIST.md](PT1_CHECKLIST.md)
 - [schemas/human_playtest_log_schema.json](schemas/human_playtest_log_schema.json)
+- [playtests/README.md](playtests/README.md)
 - [BALANCING_NOTES_v0_1.md](BALANCING_NOTES_v0_1.md)
 
 ## What v0.1 Must Prove
@@ -124,6 +147,12 @@ From `output/analytics/balance_summary.json`:
 - `trash_time_death_rate = 0.0`
 - `avg_steps_from_regret_to_death = 0.26`
 - `failure_analysis` records weighted regret nodes, regret distance, and `is_trash_time_death`
+
+Interpretation note:
+
+- `avg_steps_from_regret_to_death = 0.26` is currently a risk indicator, not a success indicator
+- the value is low enough that regret may be arriving too late for players to feel recoverability
+- this must be tested in PT-1 before treating the metric as useful evidence of tension
 
 ## Event Entropy Strategy
 

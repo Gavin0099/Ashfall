@@ -43,6 +43,9 @@
     "hardest_choice": "node_final",
     "perceived_death_cause": "I stacked too much radiation on the south route.",
     "regret_choice": "node_south_1",
-    "replay_intent": true
+    "replay_intent": true,
+    "judgment_regret_note": "Taking the greedy village option was my own mistake.",
+    "frustration_regret_note": "I understood the warning, so this did not feel unfair.",
+    "immediate_replay_reason": "I want to try the same seed with a safer south route."
   }
 }

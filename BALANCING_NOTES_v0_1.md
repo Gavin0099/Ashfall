@@ -78,6 +78,27 @@ Interpretation:
 
 - post-run explanation quality is now good enough for Blind CLI testing
 
+## Measurement Risk
+
+These metrics are still proxy metrics.
+
+They show:
+
+- divergence
+- attribution
+- repeatability
+- pressure instrumentation
+
+They do not yet prove:
+
+- that players experience the current pressure as desirable tension
+- that replay desire is real rather than analytical novelty
+- that regret is meaningful and learnable rather than merely punitive
+
+The biggest current measurement risk is:
+
+- treating machine-readable regret as if it already equals human-perceived regret
+
 ## What Is Not Balanced Yet
 
 ### 1. South route pressure is still too low
@@ -125,6 +146,21 @@ Decision:
 
 - keep `radiation` in place for the next human test round
 - avoid adding a second irreversible system before gathering human evidence
+
+### 4. Regret is likely arriving too late
+
+- `avg_steps_from_regret_to_death = 0.26`
+
+Interpretation:
+
+- most machine-attributed regret is very close to death
+- this may mean the system is identifying terminal mistakes, not recoverable mistakes
+- if PT-1 players describe these moments as "I was already dead," this is a design failure, not a metric win
+
+Decision:
+
+- treat regret distance as a danger signal
+- do not celebrate low regret distance
 
 ## Regret Analysis Read
 

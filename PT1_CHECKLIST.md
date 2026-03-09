@@ -14,8 +14,9 @@ Use this for the first Blind CLI playtest round.
   - [play_cli_run.py](e:\BackUp\Git_EE\Ashfall\scripts\play_cli_run.py)
   - [human_playtest_log_schema.json](e:\BackUp\Git_EE\Ashfall\schemas\human_playtest_log_schema.json)
   - [observation_sheet_template.md](e:\BackUp\Git_EE\Ashfall\playtests\observation_sheet_template.md)
+  - [PT1_session_template.json](e:\BackUp\Git_EE\Ashfall\playtests\PT1_session_template.json)
 - [ ] Prepare one blank observation sheet per player
-- [ ] Prepare one JSON log file per player using `playtests/sample_session_log.json` as the template
+- [ ] Prepare one JSON log file per player using `playtests/PT1_session_template.json` as the template
 
 Recommended naming:
 
@@ -85,6 +86,9 @@ Ask exactly:
 1. Which choice was hardest to make?
 2. When you died, or almost died, what do you think caused it?
 3. If you ran again, which choice would you change?
+4. Which regret felt like your own judgment mistake?
+5. Which regret felt caused by unclear information or punishment that was too heavy?
+6. Do you want to start another run right now? Why?
 
 Then record:
 
@@ -92,6 +96,9 @@ Then record:
 - `perceived_death_cause`
 - `regret_choice`
 - `replay_intent`
+- `judgment_regret_note`
+- `frustration_regret_note`
+- `immediate_replay_reason`
 
 ## After Each Session
 
@@ -145,6 +152,8 @@ Interpretation target for PT-1:
 - If hesitation is low: pressure signals are not visible enough
 - If regret match is low: failure attribution is too machine-centric or too late
 - If replay intent is low: route divergence may exist, but felt strategy may still be weak
+- If players say "I was already dead": regret distance is too short and recoverability is weak
+- If players say "I couldn't know that": information clarity is too weak, even if metrics look good
 
 Do not respond by adding UI first.
 

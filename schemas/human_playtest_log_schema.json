@@ -51,13 +51,19 @@
         "hardest_choice",
         "perceived_death_cause",
         "regret_choice",
-        "replay_intent"
+        "replay_intent",
+        "judgment_regret_note",
+        "frustration_regret_note",
+        "immediate_replay_reason"
       ],
       "properties": {
         "hardest_choice": { "type": "string" },
         "perceived_death_cause": { "type": "string" },
         "regret_choice": { "type": "string" },
-        "replay_intent": { "type": "boolean" }
+        "replay_intent": { "type": "boolean" },
+        "judgment_regret_note": { "type": "string" },
+        "frustration_regret_note": { "type": "string" },
+        "immediate_replay_reason": { "type": "string" }
       },
       "additionalProperties": false
     }
