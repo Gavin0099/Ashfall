@@ -152,9 +152,11 @@ Meta 與平衡:
 **下一步**:
 1. 依 `PLAYTEST_PROTOCOL.md` 與 human playtest log schema 執行第一輪人工 playtest
 2. 對比 human regret / hesitation 與 machine `failure_analysis`
-3. 規劃 run-end reward 與 meta progression state transition
-4. 以受控實驗方式評估 explicit irreversible trade（例如 `max_hp` 交換生存）
-5. 以 `compare_playtest_vs_machine.py` 產出 PT-1 對照摘要
+3. 執行 `SEED_101_OBSERVATION.md` 的 first-node dominance / conservative survivability / risk-payoff 驗證
+4. 規劃 run-end reward 與 meta progression state transition
+5. 以受控實驗方式評估 explicit irreversible trade（例如 `max_hp` 交換生存）
+6. 以 `compare_playtest_vs_machine.py` 產出 PT-1 對照摘要
+7. 若 PT-1 顯示選項影響過短，評估 `specs/travel_mode_experiment.md` 的 `EXP-2 Travel Mode`
 
 **當前阻礙**:
 - 無
@@ -180,6 +182,7 @@ Meta 與平衡:
 - [ ] 加入難度等級（easy/normal/hard）
 - [ ] 增加敵人類型特性（armor, dodge, special attack）
 - [ ] 增加 run summary 輸出模板
+- [ ] 若 PT-1 確認 consequence depth 偏低，建立 `Travel Mode` 實驗分支
 
 ---
 
@@ -321,3 +324,5 @@ Meta 與平衡:
 | 2026/03/09 | 完成 D7：發布 `BALANCING_NOTES_v0_1.md`，總結 radiation 後的平衡結論與下一步實驗順序 | 將 machine metrics 轉成明確設計決策，避免在 UI 或新系統前失去焦點 |
 | 2026/03/09 | 補 interactive CLI warning、50-run balance sample、runtime invariant 與 gameplay gate CI | 優先修復 repo 信任層與 state correctness，而不是堆疊新功能 |
 | 2026/03/09 | 新增 `PT1_CHECKLIST.md`，把 Blind CLI test 轉成可執行現場流程 | 降低第一輪真人測試的操作摩擦，確保 playtest 後可直接產出對照資料 |
+| 2026/03/09 | 新增 `SEED_101_OBSERVATION.md`，將 deterministic 手動觀察轉成可驗證的平衡假設 | 把平衡判斷從直覺提升為 gameplay research artifact |
+| 2026/03/09 | 新增 `specs/travel_mode_experiment.md`，將 Travel Mode 限定為 PT-1 後的受控實驗 | 提升 decision depth 討論的可執行性，同時避免過早污染主線假設 |

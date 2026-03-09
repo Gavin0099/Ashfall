@@ -16,7 +16,11 @@ Phase/Gate/Milestone Truth: `PLAN.md`
 - [ ] D1 Add run-end reward and unlock rules
 - [ ] D2 Add meta progression state transitions
 - [ ] PT-2 Compare human playtest logs against machine `failure_analysis`
+- [ ] OBS-1 Run first-node dominance test from `SEED_101_OBSERVATION.md`
+- [ ] OBS-2 Test conservative survivability across multiple seeds
+- [ ] OBS-3 Compare high-risk vs low-risk event payoff across >=100 runs
 - [ ] EXP-1 Prototype explicit irreversible trade (`max_hp` sacrifice for short-term survival)
+- [ ] EXP-2 Evaluate `travel mode` as a controlled decision-depth experiment
 
 ### Playability Check
 - [x] PLY-1 Run 5 manual playthroughs with different route choices
@@ -58,6 +62,7 @@ Artifacts: `output/playability/summary.json`, `output/playability/run_*.json`
 - [x] Add gameplay validation scripts to phase gate verification
 - [x] Add human playtest log validator and comparison script
 - [x] Add `PT1_CHECKLIST.md` for live session execution
+- [x] Publish `SEED_101_OBSERVATION.md` as deterministic design research note
 
 ---
 
@@ -132,6 +137,7 @@ Gate:
 - [ ] Difficulty presets
 - [ ] Enemy archetypes and special abilities
 - [ ] Run summary template and telemetry fields
+- [ ] Travel-mode prototype branch if PT-1 confirms low consequence depth
 
 ---
 

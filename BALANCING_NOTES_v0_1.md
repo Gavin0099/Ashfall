@@ -206,7 +206,26 @@ Reason:
 3. If humans still fail to feel tension on south route, increase explicit trade intensity on south templates
 4. Only after human comparison, evaluate one controlled experiment:
    - `EXP-1`: explicit irreversible trade (`max_hp` sacrifice)
+   - `EXP-2`: `Travel Mode` for consequence-length testing
    - or volatility-based `radiation`
+
+## Decision Depth Read
+
+Current concern:
+
+- the loop may have adequate pressure density but insufficient consequence length
+
+This does not necessarily mean "too few options".
+It may mean:
+
+- decision impact is too short-lived
+- route choices still resolve as local arithmetic
+
+Current response:
+
+- do not solve this by writing more events first
+- do not add a third event option by default
+- if PT-1 players describe the loop as bookkeeping, evaluate `specs/travel_mode_experiment.md` as a controlled experiment
 
 ## Recommended South-Route Adjustment Candidate
 
