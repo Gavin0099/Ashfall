@@ -22,6 +22,80 @@ from src.state_models import PlayerState
 
 
 OUTPUT_DIR = ROOT / "output" / "cli"
+NODE_LABELS = {
+    "node_start": "出發點",
+    "node_north_1": "北線廢車場",
+    "node_north_2": "北線崩塌隧道",
+    "node_south_1": "南線荒村集市",
+    "node_south_2": "南線泥濘氾濫地",
+    "node_mid": "中央檢查站",
+    "node_final": "終點山脊",
+}
+
+ENEMY_LABELS = {
+    "enemy_raider_scout": "掠奪者斥候",
+    "enemy_mutant_brute": "變種蠻兵",
+}
+
+RESOURCE_LABELS = {
+    "hp": "生命",
+    "food": "食物",
+    "ammo": "彈藥",
+    "medkits": "醫療包",
+    "scrap": "零件",
+    "radiation": "輻射",
+}
+
+END_REASON_LABELS = {
+    "reached_final_node": "抵達終點",
+    "starvation": "食物耗盡",
+    "radiation_death": "死於輻射",
+    "combat_death": "死於戰鬥",
+    "event_or_resource_death": "死於事件或資源耗盡",
+    "death": "死亡",
+}
+
+
+def format_status(player: PlayerState) -> str:
+    return (
+        f"生命={player.hp} 食物={player.food} 彈藥={player.ammo} "
+        f"醫療包={player.medkits} 輻射={player.radiation}"
+    )
+
+
+def format_effects(effects: dict[str, int]) -> str:
+    parts = []
+    for key, value in effects.items():
+        label = RESOURCE_LABELS.get(key, key)
+        parts.append(f"{label} {value:+d}")
+    return "，".join(parts)
+
+
+def format_node(node_id: str) -> str:
+    return NODE_LABELS.get(node_id, node_id)
+
+
+def localize_warning(text: str) -> str:
+    replacements = {
+        "WARNING: radiation will continue to threaten future travel.": "警告：輻射會持續威脅後續移動。",
+        "WARNING: this option adds radiation and increases long-term risk.": "警告：這個選項會增加輻射，拉高長期風險。",
+        "CRITICAL: another irradiated move may kill you.": "危急：再進行一次帶輻射的移動，你可能會死亡。",
+        "WARNING: food is low and route slack is nearly gone.": "警告：食物偏低，路線容錯已經快耗盡。",
+        "DANGER: this choice carries a high combat risk.": "危險：這個選項有很高的戰鬥風險。",
+        "CRITICAL: no medkits remain to buffer future radiation attrition.": "危急：你已經沒有醫療包，之後很難承受輻射消耗。",
+        "radiation will burn you for 1 HP on travel": "移動時會受到 1 點輻射傷害",
+        "Current radiation": "目前輻射值",
+        "another irradiated move may kill you": "再移動一次你可能就會死",
+        "high radiation risk": "高輻射風險",
+        "low food": "食物偏低",
+        "low hp": "生命偏低",
+        "low ammo": "彈藥偏低",
+        "medkit last charge": "醫療包只剩最後一次",
+    }
+    localized = text
+    for source, target in replacements.items():
+        localized = localized.replace(source, target)
+    return localized
 
 
 def prompt_index(label: str, options: list[str]) -> int:
@@ -32,7 +106,7 @@ def prompt_index(label: str, options: list[str]) -> int:
         raw = input("> ").strip()
         if raw.isdigit() and 0 <= int(raw) < len(options):
             return int(raw)
-        print("Invalid choice. Enter the option number.")
+        print("無效選項，請輸入對應的數字。")
 
 
 def estimate_remaining_steps(map_state, node_id: str) -> int:
@@ -62,9 +136,9 @@ def main() -> int:
     engine = RunEngine(map_state=map_state, seed=seed, event_catalog=events, enemy_catalog=enemies)
     run = engine.create_run(PlayerState(hp=10, food=7, ammo=3, medkits=1), seed=seed)
 
-    print(f"Ashfall CLI Run")
+    print("Ashfall 文字原型")
     print(f"Seed: {seed}")
-    print("Goal: survive to the end.")
+    print("目標：活到終點。")
 
     decision_log: list[dict] = []
 
@@ -72,21 +146,21 @@ def main() -> int:
         current = map_state.get_node(run.current_node)
         if current.connections:
             if run.player.radiation > 0:
-                print(f"WARNING: radiation will burn you for 1 HP on travel. Current radiation: {run.player.radiation}")
+                print(f"警告：移動時會受到 1 點輻射傷害。 目前輻射值：{run.player.radiation}")
                 if run.player.hp <= run.player.radiation + 1:
-                    print("CRITICAL: another irradiated move may kill you.")
+                    print("危急：再進行一次帶輻射的移動，你可能會死亡。")
             route_choice = prompt_index(
-                f"\nCurrent node: {run.current_node}\nStatus: hp={run.player.hp} food={run.player.food} ammo={run.player.ammo} medkits={run.player.medkits} radiation={run.player.radiation}\nChoose next route:",
-                current.connections,
+                f"\n目前節點：{format_node(run.current_node)}\n狀態：{format_status(run.player)}\n請選擇下一條路線：",
+                [format_node(node_id) for node_id in current.connections],
             )
             next_node = current.connections[route_choice]
             hp_before_move = run.player.hp
             food_before_move = run.player.food
             node = engine.move_to(run, next_node)
             if run.player.radiation > 0 and run.player.hp < hp_before_move:
-                print(f"Radiation burns you for {hp_before_move - run.player.hp} HP during travel.")
+                print(f"移動途中受到輻射灼傷，失去 {hp_before_move - run.player.hp} 點生命。")
             if run.player.food < food_before_move:
-                print("Travel consumes 1 food.")
+                print(f"移動消耗了 {food_before_move - run.player.food} 點食物。")
             if run.ended:
                 break
         else:
@@ -95,17 +169,18 @@ def main() -> int:
         event_id = pick_event_id(node, engine.rng)
         event_payload = events[event_id]
         remaining_steps = estimate_remaining_steps(map_state, node.id)
-        print(f"\nEvent: {event_payload['description']}")
+        print(f"\n事件：{event_payload['description']}")
 
         option_lines = []
         warning_cache: list[list[str]] = []
         for index, option in enumerate(event_payload["options"]):
             warnings = build_warning_signals(run.player, event_payload, index, remaining_steps)
             warning_cache.append(warnings)
-            warning_label = f" [{'; '.join(warnings)}]" if warnings else ""
+            localized_warnings = [localize_warning(warning) for warning in warnings]
+            warning_label = f" [{'; '.join(localized_warnings)}]" if localized_warnings else ""
             option_lines.append(f"{option['text']}{warning_label}")
 
-        option_index = prompt_index("Choose an option:", option_lines)
+        option_index = prompt_index("請選擇一個行動：", option_lines)
         pre_choice_state = {
             "hp": run.player.hp,
             "food": run.player.food,
@@ -117,7 +192,8 @@ def main() -> int:
         if outcome["combat_triggered"]:
             combat = engine.resolve_combat(run)
             outcome["combat"] = combat
-            print(f"Combat triggered: {combat['enemy_id']}")
+            enemy_label = ENEMY_LABELS.get(combat["enemy_id"], combat["enemy_id"])
+            print(f"觸發戰鬥：{enemy_label}")
             for line in combat["log"]:
                 print(f"  {line}")
         if run.player.is_dead():
@@ -125,12 +201,11 @@ def main() -> int:
 
         effects = dict(event_payload["options"][option_index].get("effects", {}))
         if effects:
-            effect_text = ", ".join(f"{key} {value:+d}" for key, value in effects.items())
-            print(f"Effects: {effect_text}")
+            print(f"效果：{format_effects(effects)}")
         if run.player.radiation > pre_choice_state["radiation"]:
-            print(f"WARNING: radiation increased to {run.player.radiation}. Future travel is more dangerous.")
+            print(f"警告：輻射上升到 {run.player.radiation}。之後移動會更危險。")
         if run.player.hp <= 3 and run.player.radiation > 0:
-            print("CRITICAL: you are low HP and still irradiated.")
+            print("危急：你的生命已經很低，而且仍處於輻射狀態。")
 
         decision_log.append(
             {
@@ -176,9 +251,19 @@ def main() -> int:
     output_path = OUTPUT_DIR / f"latest_seed_{seed}.json"
     output_path.write_text(json.dumps(result, indent=2), encoding="utf-8")
 
-    print("\nRun complete")
-    print(json.dumps({"victory": run.victory, "end_reason": run.end_reason, "failure_analysis": failure_analysis}, indent=2))
-    print(f"Saved: {output_path}")
+    print("\n本局結束")
+    print(
+        json.dumps(
+            {
+                "勝利": run.victory,
+                "結束原因": END_REASON_LABELS.get(run.end_reason or "", run.end_reason),
+                "失敗分析": failure_analysis,
+            },
+            indent=2,
+            ensure_ascii=False,
+        )
+    )
+    print(f"已儲存：{output_path}")
     return 0
 
 

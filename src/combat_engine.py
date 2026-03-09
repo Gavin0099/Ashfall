@@ -47,12 +47,12 @@ class CombatEngine:
             rounds += 1
             if player.ammo > 0:
                 dealt = self.player_attack(player, enemy)
-                log.append(f"R{rounds}: player attacks for {dealt}")
+                log.append(f"第 {rounds} 回合：你攻擊並造成 {dealt} 點傷害")
             elif player.medkits > 0 and player.hp <= 4:
                 healed = self.player_use_medkit(player)
-                log.append(f"R{rounds}: player uses medkit for +{healed} hp")
+                log.append(f"第 {rounds} 回合：你使用醫療包，回復 {healed} 點生命")
             else:
-                log.append(f"R{rounds}: player cannot act effectively")
+                log.append(f"第 {rounds} 回合：你沒有有效行動")
 
             if enemy.hp <= 0:
                 return {
@@ -64,7 +64,7 @@ class CombatEngine:
                 }
 
             taken = self.enemy_attack(player, enemy)
-            log.append(f"R{rounds}: enemy attacks for {taken}")
+            log.append(f"第 {rounds} 回合：敵人攻擊，造成 {taken} 點傷害")
 
         return {
             "victory": enemy.hp <= 0 and player.hp > 0,

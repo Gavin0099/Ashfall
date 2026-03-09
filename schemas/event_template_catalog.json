@@ -4,15 +4,15 @@
       "event_id": "evt_departure",
       "template_type": "survivor_contact",
       "description_variants": [
-        "Departure under an ash storm.",
-        "The caravan rolls out beneath a bruised sky.",
-        "A bitter wind pushes ash across the road."
+        "灰燼風暴下，你們踏上旅程。",
+        "車隊在陰沉的天色下緩緩出發。",
+        "刺骨的風把灰燼一路掃過地面。"
       ],
       "options": [
         {
           "text_variants": [
-            "Push hard before dark",
-            "Force the pace before the storm thickens"
+            "趁天黑前強行趕路",
+            "在風暴加劇前先拉開距離"
           ],
           "effects": {
             "food": -1
@@ -21,8 +21,8 @@
         },
         {
           "text_variants": [
-            "Move cautiously",
-            "Advance in a tight defensive march"
+            "謹慎前進",
+            "保持隊形穩定推進"
           ],
           "effects": {
             "food": 0
@@ -35,15 +35,15 @@
       "event_id": "evt_scrapyard",
       "template_type": "scavenger_encounter",
       "description_variants": [
-        "Scrapyard with raider shadows between wrecks.",
-        "A field of stripped vehicles hides fresh footprints.",
-        "Broken engines and scavenger fires litter the yard."
+        "廢車場殘骸間有掠奪者的影子晃動。",
+        "被拆光的車殼之間還留著新鮮腳印。",
+        "破碎引擎與拾荒者的火堆散落四周。"
       ],
       "options": [
         {
           "text_variants": [
-            "Force a quick loot run",
-            "Rush the best wrecks before anyone reacts"
+            "強行搶一輪物資",
+            "趁沒人反應過來先衝最好的殘骸"
           ],
           "effects": {
             "food": 1,
@@ -53,8 +53,8 @@
         },
         {
           "text_variants": [
-            "Bypass and conserve",
-            "Keep moving and save strength for later"
+            "繞過去，保留體力",
+            "持續前進，把力氣留到後面"
           ],
           "effects": {
             "food": -1
@@ -67,15 +67,15 @@
       "event_id": "evt_tunnel",
       "template_type": "ruined_infrastructure",
       "description_variants": [
-        "A collapsed tunnel smells of gas and rust.",
-        "The tunnel is half buried and dangerously unstable.",
-        "Concrete dust hangs in the tunnel air."
+        "崩塌隧道裡瀰漫著汽油與鐵鏽味。",
+        "隧道半埋在碎石下，結構極不穩定。",
+        "混凝土粉塵在隧道裡久久不散。"
       ],
       "options": [
         {
           "text_variants": [
-            "Rush through debris",
-            "Climb the rubble and gamble on speed"
+            "硬闖碎石堆",
+            "踩著瓦礫賭一把速度"
           ],
           "effects": {
             "hp": -1,
@@ -86,8 +86,8 @@
         },
         {
           "text_variants": [
-            "Set camp and wait",
-            "Hold position and move at first light"
+            "紮營等天亮",
+            "先穩住位置，等視線好一點再動"
           ],
           "effects": {
             "food": -1,
@@ -101,15 +101,15 @@
       "event_id": "evt_village",
       "template_type": "survivor_contact",
       "description_variants": [
-        "A silent village market still has barter tokens on the ground.",
-        "The market square is empty but not abandoned for long.",
-        "Weathered stalls creak in the wind."
+        "沉寂的村落市集裡，地上還散著交易代幣。",
+        "市場空無一人，但不像會空太久。",
+        "風裡只剩下老舊攤棚的嘎吱聲。"
       ],
       "options": [
         {
           "text_variants": [
-            "Barter ammo for medkit",
-            "Trade munitions for supplies"
+            "拿彈藥換醫療包",
+            "用子彈換一點能活下去的補給"
           ],
           "effects": {
             "ammo": -1,
@@ -119,8 +119,8 @@
         },
         {
           "text_variants": [
-            "Raid abandoned stalls",
-            "Strip the stalls before the owners return"
+            "搜刮被棄置的攤位",
+            "趁主人回來前把攤位翻個乾淨"
           ],
           "effects": {
             "food": 2,
@@ -134,15 +134,15 @@
       "event_id": "evt_floodplain",
       "template_type": "environmental_hazard",
       "description_variants": [
-        "Mud and black water slow the caravan to a crawl.",
-        "The floodplain is soaked and unstable underfoot.",
-        "Waterlogged ground drags on every wheel."
+        "泥漿和黑水讓車隊幾乎寸步難行。",
+        "整片氾濫地濕滑鬆軟，腳下隨時會陷落。",
+        "積水的地面拖住每一個輪子。"
       ],
       "options": [
         {
           "text_variants": [
-            "Cross quickly",
-            "Push the caravan straight through the mud"
+            "快速硬穿過去",
+            "逼車隊直接衝過泥地"
           ],
           "effects": {
             "food": -1,
@@ -152,8 +152,8 @@
         },
         {
           "text_variants": [
-            "Forage detour",
-            "Take a slower line and search for dry ground"
+            "繞路順便搜糧",
+            "走慢一點，順便找乾燥地帶"
           ],
           "effects": {
             "food": 1,
@@ -167,15 +167,15 @@
       "event_id": "evt_checkpoint",
       "template_type": "checkpoint_conflict",
       "description_variants": [
-        "An old military checkpoint still commands the road.",
-        "Concrete barriers and firing slits choke the route ahead.",
-        "A dead checkpoint still feels like a trap."
+        "前方的老軍事檢查站仍然控制著道路。",
+        "混凝土路障和射擊孔把整條路掐住了。",
+        "這座死去的檢查站依然像個陷阱。"
       ],
       "options": [
         {
           "text_variants": [
-            "Assault the line",
-            "Hit the checkpoint before it hits back"
+            "正面強攻",
+            "在對方開火前先打穿整條防線"
           ],
           "effects": {
             "ammo": 1
@@ -184,8 +184,8 @@
         },
         {
           "text_variants": [
-            "Sneak around",
-            "Burn daylight on a longer detour"
+            "偷偷繞過去",
+            "多花一點時間走遠路"
           ],
           "effects": {
             "food": -1
@@ -198,15 +198,15 @@
       "event_id": "evt_final",
       "template_type": "environmental_hazard",
       "description_variants": [
-        "The final ridge before sanctuary is exposed and steep.",
-        "The last climb offers no cover and little time.",
-        "Sanctuary is visible, but the ridge is cruel."
+        "通往避難地的最後一道山脊又陡又暴露。",
+        "最後的爬坡沒有掩體，也沒多少時間。",
+        "終點已經看得見，但這段山脊一點都不仁慈。"
       ],
       "options": [
         {
           "text_variants": [
-            "Spend supplies to secure route",
-            "Use scarce supplies to make the climb safe"
+            "花補給換安全路線",
+            "用稀缺物資換一段更穩的登坡"
           ],
           "effects": {
             "food": -1
@@ -215,8 +215,8 @@
         },
         {
           "text_variants": [
-            "Risk a fast climb",
-            "Sprint the ridge and trust momentum"
+            "賭一把快速衝坡",
+            "沿著山脊硬衝，賭自己撐得住"
           ],
           "effects": {
             "hp": -1,
