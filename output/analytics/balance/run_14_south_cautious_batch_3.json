@@ -87,9 +87,11 @@
         "node_id": "node_south_2",
         "event_id": "evt_floodplain",
         "blame_score": 1.0,
-        "description": "accepted combat risk"
+        "description": "accepted combat risk",
+        "steps_to_death": 0
       }
     ],
+    "steps_from_regret_to_death": 0,
     "is_trash_time_death": false
   }
 }

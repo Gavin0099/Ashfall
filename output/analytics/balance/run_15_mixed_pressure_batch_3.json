@@ -117,21 +117,25 @@
         "node_id": "node_north_2",
         "event_id": "evt_tunnel",
         "blame_score": 0.36,
-        "description": "lost 1 food"
+        "description": "lost 1 food",
+        "steps_to_death": 1
       },
       {
         "node_id": "node_mid",
         "event_id": "evt_checkpoint",
         "blame_score": 0.34,
-        "description": "accepted combat risk"
+        "description": "accepted combat risk",
+        "steps_to_death": 0
       },
       {
         "node_id": "node_north_1",
         "event_id": "evt_scrapyard",
         "blame_score": 0.3,
-        "description": "accepted combat risk"
+        "description": "accepted combat risk",
+        "steps_to_death": 2
       }
     ],
+    "steps_from_regret_to_death": 1,
     "is_trash_time_death": false
   }
 }

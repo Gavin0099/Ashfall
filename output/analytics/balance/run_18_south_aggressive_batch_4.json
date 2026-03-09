@@ -64,9 +64,11 @@
         "node_id": "node_south_1",
         "event_id": "evt_village",
         "blame_score": 1.0,
-        "description": "took +1 radiation, accepted combat risk"
+        "description": "took +1 radiation, accepted combat risk",
+        "steps_to_death": 0
       }
     ],
+    "steps_from_regret_to_death": 0,
     "is_trash_time_death": false
   }
 }

@@ -106,6 +106,7 @@ def analyze_failure(decision_log: List[dict], ended: bool, victory: bool, end_re
             "death_chain_length": 0,
             "primary_blame_factor": None,
             "regret_nodes": [],
+            "steps_from_regret_to_death": 0,
             "is_trash_time_death": False,
         }
 
@@ -160,6 +161,7 @@ def analyze_failure(decision_log: List[dict], ended: bool, victory: bool, end_re
             {
                 "node_id": entry["node"],
                 "event_id": entry["event_id"],
+                "step": index,
                 "score": score,
                 "description": ", ".join(description_bits) if description_bits else "risk accumulated here",
                 "factors": factors,
@@ -171,6 +173,7 @@ def analyze_failure(decision_log: List[dict], ended: bool, victory: bool, end_re
             "death_chain_length": 0,
             "primary_blame_factor": end_reason,
             "regret_nodes": [],
+            "steps_from_regret_to_death": 0,
             "is_trash_time_death": False,
         }
 
@@ -182,6 +185,7 @@ def analyze_failure(decision_log: List[dict], ended: bool, victory: bool, end_re
                 "event_id": item["event_id"],
                 "blame_score": round(item["score"] / total_score, 2),
                 "description": item["description"],
+                "steps_to_death": total_steps - item["step"],
             }
         )
 
@@ -203,6 +207,7 @@ def analyze_failure(decision_log: List[dict], ended: bool, victory: bool, end_re
         "death_chain_length": len(regret_nodes),
         "primary_blame_factor": primary_blame_factor,
         "regret_nodes": regret_nodes,
+        "steps_from_regret_to_death": regret_nodes[0]["steps_to_death"] if regret_nodes else 0,
         "is_trash_time_death": is_trash_time_death,
     }
 

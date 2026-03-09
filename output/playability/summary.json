@@ -308,6 +308,7 @@
           "death_chain_length": 0,
           "primary_blame_factor": null,
           "regret_nodes": [],
+          "steps_from_regret_to_death": 0,
           "is_trash_time_death": false
         }
       }
@@ -327,7 +328,7 @@
       "end_reason": "starvation",
       "player_final": {
         "hp": 10,
-        "food": -1,
+        "food": 0,
         "ammo": 3,
         "medkits": 2,
         "radiation": 0
@@ -434,7 +435,7 @@
           },
           "player": {
             "hp": 10,
-            "food": -1,
+            "food": 0,
             "ammo": 3,
             "medkits": 2,
             "radiation": 0
@@ -456,7 +457,7 @@
         "end_reason": "starvation",
         "player_final": {
           "hp": 10,
-          "food": -1,
+          "food": 0,
           "ammo": 3,
           "medkits": 2,
           "scrap": 0,
@@ -566,7 +567,7 @@
             },
             "player_after": {
               "hp": 10,
-              "food": -1,
+              "food": 0,
               "ammo": 3,
               "medkits": 2,
               "radiation": 0
@@ -576,7 +577,7 @@
         "summary": {
           "pressure_count": 4,
           "death_cause_attribution": true,
-          "resource_signature": "hp:10|food:-1|ammo:3|medkits:2|scrap:0|radiation:0"
+          "resource_signature": "hp:10|food:0|ammo:3|medkits:2|scrap:0|radiation:0"
         },
         "failure_analysis": {
           "death_chain_length": 3,
@@ -586,21 +587,25 @@
               "node_id": "node_final",
               "event_id": "evt_final",
               "blame_score": 0.27,
-              "description": "lost 1 food"
+              "description": "lost 1 food",
+              "steps_to_death": 0
             },
             {
               "node_id": "node_mid",
               "event_id": "evt_checkpoint",
               "blame_score": 0.26,
-              "description": "lost 1 food"
+              "description": "lost 1 food",
+              "steps_to_death": 1
             },
             {
               "node_id": "node_north_2",
               "event_id": "evt_tunnel",
               "blame_score": 0.24,
-              "description": "lost 1 food"
+              "description": "lost 1 food",
+              "steps_to_death": 2
             }
           ],
+          "steps_from_regret_to_death": 0,
           "is_trash_time_death": false
         }
       }
@@ -918,21 +923,25 @@
               "node_id": "node_final",
               "event_id": "evt_final",
               "blame_score": 0.37,
-              "description": "took +1 radiation, lost 1 hp"
+              "description": "took +1 radiation, lost 1 hp",
+              "steps_to_death": 0
             },
             {
               "node_id": "node_south_2",
               "event_id": "evt_floodplain",
               "blame_score": 0.32,
-              "description": "took +1 radiation, lost 1 food"
+              "description": "took +1 radiation, lost 1 food",
+              "steps_to_death": 2
             },
             {
               "node_id": "node_south_1",
               "event_id": "evt_village",
               "blame_score": 0.23,
-              "description": "took +1 radiation"
+              "description": "took +1 radiation",
+              "steps_to_death": 3
             }
           ],
+          "steps_from_regret_to_death": 0,
           "is_trash_time_death": false
         }
       }
@@ -1200,6 +1209,7 @@
           "death_chain_length": 0,
           "primary_blame_factor": null,
           "regret_nodes": [],
+          "steps_from_regret_to_death": 0,
           "is_trash_time_death": false
         }
       }
@@ -1518,21 +1528,25 @@
               "node_id": "node_final",
               "event_id": "evt_final",
               "blame_score": 0.61,
-              "description": "took +1 radiation, lost 1 hp"
+              "description": "took +1 radiation, lost 1 hp",
+              "steps_to_death": 0
             },
             {
               "node_id": "node_north_2",
               "event_id": "evt_tunnel",
               "blame_score": 0.14,
-              "description": "lost 1 food"
+              "description": "lost 1 food",
+              "steps_to_death": 2
             },
             {
               "node_id": "node_mid",
               "event_id": "evt_checkpoint",
               "blame_score": 0.13,
-              "description": "accepted combat risk"
+              "description": "accepted combat risk",
+              "steps_to_death": 1
             }
           ],
+          "steps_from_regret_to_death": 0,
           "is_trash_time_death": false
         }
       }

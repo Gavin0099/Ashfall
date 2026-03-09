@@ -12,7 +12,7 @@ if str(ROOT) not in sys.path:
 from src.combat_engine import CombatEngine
 from src.event_engine import resolve_event_choice
 from src.run_engine import RunEngine, build_map
-from src.state_models import EnemyState, PlayerState
+from src.state_models import EnemyState, PlayerState, apply_effects
 
 
 def expect_raises(fn, exc_type: type[BaseException], label: str) -> None:
@@ -152,6 +152,57 @@ def test_radiation_attrition() -> None:
         raise AssertionError("radiation death should be attributable")
 
 
+def test_apply_effects_clamp() -> None:
+    player = PlayerState(hp=1, food=1, ammo=0, medkits=0, scrap=0, radiation=0)
+    apply_effects(player, {"hp": -5, "food": -2, "ammo": -1, "medkits": -1, "scrap": -3, "radiation": -2})
+    if any(value < 0 for value in (player.hp, player.food, player.ammo, player.medkits, player.scrap, player.radiation)):
+        raise AssertionError("apply_effects should clamp state to lower bounds")
+
+
+def test_create_run_copies_player_state() -> None:
+    node_payloads = {
+        "node_start": {"id": "node_start", "node_type": "story", "connections": [], "event_pool": [], "is_start": True, "is_final": True}
+    }
+    map_state = build_map(node_payloads, start_node_id="node_start", final_node_id="node_start")
+    player = PlayerState(hp=10, food=5, ammo=1, medkits=0)
+    run = RunEngine(map_state=map_state, seed=1, event_catalog={}).create_run(player, seed=1)
+    run.player.hp = 1
+    if player.hp != 10:
+        raise AssertionError("create_run should isolate player state from caller mutations")
+
+
+def test_node_resource_cost() -> None:
+    node_payloads = {
+        "node_start": {
+            "id": "node_start",
+            "node_type": "story",
+            "connections": ["node_cost"],
+            "event_pool": ["abandoned_store"],
+            "is_start": True,
+        },
+        "node_cost": {
+            "id": "node_cost",
+            "node_type": "resource",
+            "connections": ["node_final"],
+            "event_pool": ["abandoned_store"],
+            "resource_cost": {"food": 2, "ammo": 1},
+        },
+        "node_final": {
+            "id": "node_final",
+            "node_type": "story",
+            "connections": [],
+            "event_pool": ["abandoned_store"],
+            "is_final": True,
+        },
+    }
+    map_state = build_map(node_payloads, start_node_id="node_start", final_node_id="node_final")
+    engine = RunEngine(map_state=map_state, seed=2, event_catalog={"abandoned_store": load_json(ROOT / "schemas" / "samples" / "events" / "abandoned_store.json")})
+    run = engine.create_run(PlayerState(hp=10, food=5, ammo=2, medkits=0), seed=2)
+    engine.move_to(run, "node_cost")
+    if run.player.food != 3 or run.player.ammo != 1:
+        raise AssertionError("node resource_cost should apply instead of hardcoded travel cost")
+
+
 def test_combat_boundaries() -> None:
     engine = CombatEngine(seed=7)
     player = PlayerState(hp=10, food=5, ammo=1, medkits=1)
@@ -172,6 +223,9 @@ def main() -> int:
     test_event_failures()
     test_run_failures()
     test_radiation_attrition()
+    test_apply_effects_clamp()
+    test_create_run_copies_player_state()
+    test_node_resource_cost()
     print("Failure-path tests passed")
     return 0
 

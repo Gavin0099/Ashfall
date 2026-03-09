@@ -1,0 +1,111 @@
+{
+  "run_id": "south_aggressive_batch_6",
+  "seed": 603,
+  "route": [
+    "node_south_1",
+    "node_south_2",
+    "node_mid",
+    "node_final"
+  ],
+  "ended": true,
+  "victory": false,
+  "end_reason": "radiation_death",
+  "player_final": {
+    "hp": -1,
+    "food": 6,
+    "ammo": 0,
+    "medkits": 0,
+    "scrap": 0,
+    "radiation": 2
+  },
+  "decision_log": [
+    {
+      "step": 1,
+      "node": "node_south_1",
+      "event_id": "evt_village",
+      "option_index": 1,
+      "warning_signals": [
+        "WARNING: radiation will continue to threaten future travel.",
+        "WARNING: this option adds radiation and increases long-term risk.",
+        "DANGER: this choice carries a high combat risk."
+      ],
+      "pre_choice_state": {
+        "hp": 10,
+        "food": 6,
+        "ammo": 3,
+        "medkits": 1,
+        "radiation": 0
+      },
+      "pressure": true,
+      "combat_triggered": true,
+      "effects": {
+        "food": 2,
+        "radiation": 1
+      },
+      "player_after": {
+        "hp": 6,
+        "food": 8,
+        "ammo": 0,
+        "medkits": 1,
+        "radiation": 1
+      }
+    },
+    {
+      "step": 2,
+      "node": "node_south_2",
+      "event_id": "evt_floodplain",
+      "option_index": 0,
+      "warning_signals": [
+        "WARNING: radiation will continue to threaten future travel.",
+        "WARNING: this option adds radiation and increases long-term risk."
+      ],
+      "pre_choice_state": {
+        "hp": 5,
+        "food": 7,
+        "ammo": 0,
+        "medkits": 1,
+        "radiation": 1
+      },
+      "pressure": true,
+      "combat_triggered": true,
+      "effects": {
+        "food": -1,
+        "radiation": 1
+      },
+      "player_after": {
+        "hp": -1,
+        "food": 6,
+        "ammo": 0,
+        "medkits": 0,
+        "radiation": 2
+      }
+    }
+  ],
+  "summary": {
+    "pressure_count": 2,
+    "death_cause_attribution": true,
+    "resource_signature": "hp:-1|food:6|ammo:0|medkits:0|scrap:0|radiation:2"
+  },
+  "failure_analysis": {
+    "death_chain_length": 2,
+    "primary_blame_factor": "radiation",
+    "regret_nodes": [
+      {
+        "node_id": "node_south_2",
+        "event_id": "evt_floodplain",
+        "blame_score": 0.58,
+        "description": "took +1 radiation, lost 1 food, accepted combat risk",
+        "steps_to_death": 0
+      },
+      {
+        "node_id": "node_south_1",
+        "event_id": "evt_village",
+        "blame_score": 0.42,
+        "description": "took +1 radiation, accepted combat risk",
+        "steps_to_death": 1
+      }
+    ],
+    "steps_from_regret_to_death": 0,
+    "is_trash_time_death": false
+  }
+}

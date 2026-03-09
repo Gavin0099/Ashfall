@@ -53,6 +53,9 @@ Artifacts: `output/playability/summary.json`, `output/playability/run_*.json`
 - [x] Add weighted regret/blame analysis to `run_analytics`
 - [x] Add human playtest log schema and observation template
 - [x] D7 Publish v0.1 balancing notes
+- [x] Add interactive CLI runner with pre-choice and travel radiation warnings
+- [x] Enforce runtime state invariants (`apply_effects`, `create_run`, `resource_cost`)
+- [x] Add gameplay validation scripts to phase gate verification
 
 ---
 
@@ -106,7 +109,7 @@ Gate:
 - [ ] PT-2 Merge observation findings with analytics summaries
 
 Gate:
-- [x] 20 analytics logs captured and summarized
+- [x] 50 analytics logs captured and summarized
 - [ ] Meta progression rules are documented and tested
 
 ---

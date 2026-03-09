@@ -124,21 +124,25 @@
         "node_id": "node_south_2",
         "event_id": "evt_floodplain",
         "blame_score": 0.46,
-        "description": "took +1 radiation, lost 1 food"
+        "description": "took +1 radiation, lost 1 food",
+        "steps_to_death": 1
       },
       {
         "node_id": "node_south_1",
         "event_id": "evt_village",
         "blame_score": 0.42,
-        "description": "took +1 radiation, accepted combat risk"
+        "description": "took +1 radiation, accepted combat risk",
+        "steps_to_death": 2
       },
       {
         "node_id": "node_mid",
         "event_id": "evt_checkpoint",
         "blame_score": 0.11,
-        "description": "accepted combat risk"
+        "description": "accepted combat risk",
+        "steps_to_death": 0
       }
     ],
+    "steps_from_regret_to_death": 1,
     "is_trash_time_death": false
   }
 }

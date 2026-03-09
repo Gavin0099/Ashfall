@@ -1,6 +1,7 @@
 ﻿from __future__ import annotations
 
 import random
+from dataclasses import replace
 from typing import Any, Dict, Optional
 
 from .combat_engine import CombatEngine
@@ -26,7 +27,7 @@ class RunEngine:
 
     def create_run(self, player: PlayerState, seed: int) -> RunState:
         start = self.map_state.start_node_id
-        run = RunState(player=player, map_seed=seed, current_node=start)
+        run = RunState(player=replace(player), map_seed=seed, current_node=start)
         run.visit(start)
         return run
 
@@ -35,9 +36,9 @@ class RunEngine:
         if next_node_id not in current.connections:
             raise ValueError(f"Invalid move: {run.current_node} -> {next_node_id}")
 
-        run.player.food -= 1
-        run.visit(next_node_id)
         node = self.map_state.get_node(next_node_id)
+        self.apply_node_cost(run, node)
+        run.visit(next_node_id)
         self.apply_travel_attrition(run)
 
         if run.player.food <= 0:
@@ -74,6 +75,27 @@ class RunEngine:
     def apply_travel_attrition(self, run: RunState) -> None:
         if run.player.radiation > 0:
             run.player.hp -= 1
+            run.player.hp = max(0, run.player.hp)
+
+    def apply_node_cost(self, run: RunState, node: NodeState) -> None:
+        cost = dict(node.resource_cost) if node.resource_cost else {"food": 1}
+        for key, amount in cost.items():
+            if amount < 0:
+                raise ValueError(f"Node resource_cost must be non-negative: {node.id} {key}={amount}")
+            if key == "food":
+                run.player.food = max(0, run.player.food - amount)
+            elif key == "hp":
+                run.player.hp = max(0, run.player.hp - amount)
+            elif key == "ammo":
+                run.player.ammo = max(0, run.player.ammo - amount)
+            elif key == "medkits":
+                run.player.medkits = max(0, run.player.medkits - amount)
+            elif key == "scrap":
+                run.player.scrap = max(0, run.player.scrap - amount)
+            elif key == "radiation":
+                run.player.radiation = max(0, run.player.radiation - amount)
+            else:
+                raise ValueError(f"Unsupported resource_cost key: {key}")
 
     def _resolve_noncombat_death_reason(self, run: RunState) -> str:
         if run.player.food <= 0:

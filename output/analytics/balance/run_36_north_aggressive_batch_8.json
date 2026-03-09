@@ -1,0 +1,112 @@
+{
+  "run_id": "north_aggressive_batch_8",
+  "seed": 801,
+  "route": [
+    "node_north_1",
+    "node_north_2",
+    "node_mid",
+    "node_final"
+  ],
+  "ended": true,
+  "victory": false,
+  "end_reason": "radiation_death",
+  "player_final": {
+    "hp": -2,
+    "food": 6,
+    "ammo": 0,
+    "medkits": 1,
+    "scrap": 0,
+    "radiation": 1
+  },
+  "decision_log": [
+    {
+      "step": 1,
+      "node": "node_north_1",
+      "event_id": "evt_scrapyard",
+      "option_index": 0,
+      "warning_signals": [
+        "DANGER: this choice carries a high combat risk."
+      ],
+      "pre_choice_state": {
+        "hp": 10,
+        "food": 6,
+        "ammo": 3,
+        "medkits": 1,
+        "radiation": 0
+      },
+      "pressure": true,
+      "combat_triggered": true,
+      "effects": {
+        "food": 1,
+        "ammo": 2
+      },
+      "player_after": {
+        "hp": 2,
+        "food": 7,
+        "ammo": 0,
+        "medkits": 1,
+        "radiation": 0
+      }
+    },
+    {
+      "step": 2,
+      "node": "node_north_2",
+      "event_id": "evt_tunnel",
+      "option_index": 0,
+      "warning_signals": [
+        "WARNING: radiation will continue to threaten future travel.",
+        "WARNING: this option adds radiation and increases long-term risk.",
+        "CRITICAL: another irradiated move may kill you.",
+        "DANGER: this choice carries a high combat risk."
+      ],
+      "pre_choice_state": {
+        "hp": 2,
+        "food": 6,
+        "ammo": 0,
+        "medkits": 1,
+        "radiation": 0
+      },
+      "pressure": true,
+      "combat_triggered": true,
+      "effects": {
+        "hp": -1,
+        "ammo": 1,
+        "radiation": 1
+      },
+      "player_after": {
+        "hp": -2,
+        "food": 6,
+        "ammo": 0,
+        "medkits": 1,
+        "radiation": 1
+      }
+    }
+  ],
+  "summary": {
+    "pressure_count": 2,
+    "death_cause_attribution": true,
+    "resource_signature": "hp:-2|food:6|ammo:0|medkits:1|scrap:0|radiation:1"
+  },
+  "failure_analysis": {
+    "death_chain_length": 2,
+    "primary_blame_factor": "radiation",
+    "regret_nodes": [
+      {
+        "node_id": "node_north_2",
+        "event_id": "evt_tunnel",
+        "blame_score": 0.86,
+        "description": "took +1 radiation, lost 1 hp, accepted combat risk",
+        "steps_to_death": 0
+      },
+      {
+        "node_id": "node_north_1",
+        "event_id": "evt_scrapyard",
+        "blame_score": 0.14,
+        "description": "accepted combat risk",
+        "steps_to_death": 1
+      }
+    ],
+    "steps_from_regret_to_death": 0,
+    "is_trash_time_death": false
+  }
+}

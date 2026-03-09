@@ -24,7 +24,7 @@ from scripts.validate_run_analytics import ValidationError, validate_run_file
 
 BALANCE_DIR = ROOT / "output" / "analytics" / "balance"
 SUMMARY_PATH = ROOT / "output" / "analytics" / "balance_summary.json"
-SEED_OFFSETS = (0, 100, 200, 300)
+SEED_OFFSETS = (0, 100, 200, 300, 400, 500, 600, 700, 800, 900)
 
 
 def build_balance_plans() -> list[RoutePlan]:
@@ -118,6 +118,13 @@ def summarize_results(results: list[dict]) -> dict:
     attributable_deaths = [
         result for result in results if (not result["victory"] and result["analytics"]["summary"]["death_cause_attribution"])
     ]
+    losing_runs = [result for result in results if not result["victory"]]
+    trash_time_runs = [result for result in losing_runs if result["analytics"]["failure_analysis"]["is_trash_time_death"]]
+    regret_distance_values = [
+        float(result["analytics"]["failure_analysis"]["steps_from_regret_to_death"])
+        for result in losing_runs
+        if result["analytics"]["failure_analysis"]["steps_from_regret_to_death"] >= 0
+    ]
 
     summary = {
         "run_count": len(results),
@@ -134,6 +141,8 @@ def summarize_results(results: list[dict]) -> dict:
         "death_reasons": dict(death_reasons),
         "decision_trace_coverage_rate": round(decision_trace_coverage / len(results), 2) if results else 0.0,
         "death_cause_attribution_rate": round(len(attributable_deaths) / max(1, sum(1 for result in results if not result["victory"])), 2),
+        "trash_time_death_rate": round(len(trash_time_runs) / max(1, len(losing_runs)), 2),
+        "avg_steps_from_regret_to_death": average(regret_distance_values),
         "distinct_outcome_signatures": len(outcome_signatures),
         "resource_divergence": pairwise_resource_distance(results),
         "route_family_summary": summarize_family(results),

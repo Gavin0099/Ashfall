@@ -312,21 +312,25 @@
           "node_id": "node_final",
           "event_id": "evt_final",
           "blame_score": 0.61,
-          "description": "took +1 radiation, lost 1 hp"
+          "description": "took +1 radiation, lost 1 hp",
+          "steps_to_death": 0
         },
         {
           "node_id": "node_north_2",
           "event_id": "evt_tunnel",
           "blame_score": 0.14,
-          "description": "lost 1 food"
+          "description": "lost 1 food",
+          "steps_to_death": 2
         },
         {
           "node_id": "node_mid",
           "event_id": "evt_checkpoint",
           "blame_score": 0.13,
-          "description": "accepted combat risk"
+          "description": "accepted combat risk",
+          "steps_to_death": 1
         }
       ],
+      "steps_from_regret_to_death": 0,
       "is_trash_time_death": false
     }
   }

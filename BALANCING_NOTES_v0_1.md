@@ -20,27 +20,28 @@ It is a prototype-balance readout for deciding the next controlled changes.
 
 ## Snapshot
 
-- runs sampled: `20`
-- victory rate: `0.20`
-- avg pressure count: `3.35`
-- distinct outcome signatures: `15`
-- avg final radiation: `0.9`
+- runs sampled: `50`
+- victory rate: `0.24`
+- avg pressure count: `3.28`
+- distinct outcome signatures: `28`
+- avg final radiation: `0.78`
 - death attribution rate: `1.0`
-- trash-time deaths: `0 / 20`
+- trash-time deaths: `0 / 38 losses`
+- avg steps from primary regret to death: `0.26`
 
 Death reasons:
 
-- `radiation_death`: `9`
-- `starvation`: `4`
-- `event_or_resource_death`: `3`
-- `reached_final_node`: `4`
+- `radiation_death`: `21`
+- `starvation`: `10`
+- `event_or_resource_death`: `7`
+- `reached_final_node`: `12`
 
 ## What Is Working
 
 ### 1. Route divergence is real
 
-- `pairwise_average resource divergence = 11.27`
-- `distinct_outcome_signatures = 15`
+- `pairwise_average resource divergence = 10.98`
+- `distinct_outcome_signatures = 28`
 
 Interpretation:
 
@@ -50,7 +51,7 @@ Interpretation:
 ### 2. Radiation is creating long-term stakes
 
 - `radiation_death` is the most common failure mode
-- `failure_analysis.primary_blame_factor = radiation` in `9` balance runs
+- `failure_analysis.primary_blame_factor = radiation` remains the dominant losing-run factor
 
 Interpretation:
 
@@ -59,7 +60,7 @@ Interpretation:
 
 ### 3. Current radiation implementation is not obviously producing garbage time
 
-- `failure_analysis.is_trash_time_death = false` in all `20` sampled runs
+- `failure_analysis.is_trash_time_death = false` in all sampled runs
 
 Interpretation:
 
@@ -71,6 +72,7 @@ Interpretation:
 - decision trace coverage: `1.0`
 - death cause attribution rate: `1.0`
 - weighted `regret_nodes` now exist for each losing run
+- average primary regret distance is still short (`0.26`), which means most machine-attributed regret is near the death point
 
 Interpretation:
 
@@ -82,9 +84,9 @@ Interpretation:
 
 Route family summary:
 
-- `north avg_pressure_count = 3.75`
-- `south avg_pressure_count = 2.75`
-- `mixed avg_pressure_count = 3.75`
+- `north avg_pressure_count = 3.55`
+- `south avg_pressure_count = 2.95`
+- `mixed avg_pressure_count = 3.4`
 
 Interpretation:
 
@@ -98,7 +100,7 @@ Likely cause:
 
 ### 2. Victory rate is slightly on the harsh side
 
-- current victory rate: `0.20`
+- current victory rate: `0.24`
 
 Interpretation:
 
@@ -112,7 +114,7 @@ Decision:
 
 ### 3. Radiation is dominating the failure landscape
 
-- `9 / 16` losses are `radiation_death`
+- `21 / 38` losses are `radiation_death`
 
 Interpretation:
 
@@ -137,6 +139,7 @@ Observed value:
 
 - radiation runs usually show regret split across multiple nodes rather than a fake single culprit
 - this is closer to the actual design question: was the player squeezed by one bad bet, or by a chain of bets?
+- but the average regret distance is still short, so machine regret currently points to "late regret" more often than "recoverable regret"
 
 ## Decisions
 

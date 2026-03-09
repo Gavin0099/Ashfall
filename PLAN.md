@@ -118,7 +118,7 @@ Meta 與平衡:
 **Gate 條件**:
 - [ ] meta progression 規則寫入 spec，並有對應資料欄位
 - [ ] 同 seed 可重現同地圖，平衡調整不破壞可重現性
-- [x] 至少完成 20 局 analytics log 紀錄（勝率、平均回合、死亡原因、decision trace）
+- [x] 至少完成 50 局 analytics log 紀錄（勝率、平均回合、死亡原因、decision trace）
 - [x] 至少 1 個不可逆狀態信號已接入主循環，且死亡原因可歸因
 
 ---
@@ -145,8 +145,9 @@ Meta 與平衡:
 - [x] 調整事件壓力分布，讓每局壓力選擇 >= 3（6h）
 - [x] 建立 run analytics schema 與輸出驗證（4h）
 - [x] 建立 event template catalog 與 deterministic instantiation（6h）
-- [x] 執行 balance metrics 蒐集（analytics 20 局）（6h）
+- [x] 執行 balance metrics 蒐集（analytics 50 局）（6h）
 - [x] 實作最小不可逆狀態（radiation）並接入 analytics（6h）
+- [x] 補 interactive CLI warning 與 runtime invariant（6h）
 
 **下一步**:
 1. 依 `PLAYTEST_PROTOCOL.md` 與 human playtest log schema 執行第一輪人工 playtest
@@ -317,3 +318,4 @@ Meta 與平衡:
 | 2026/03/09 | 完成 D6：導入 `radiation` 不可逆狀態、travel attrition、analytics 欄位與死亡歸因 | 將「短期資源壓力」升級為「長期代價壓力」，強化 route gamble 感 |
 | 2026/03/09 | 新增 weighted regret/blame analysis 與 human playtest log 契約 | 避免單點虛假歸因，並讓 Blind CLI test 能與 machine analytics 直接對照 |
 | 2026/03/09 | 完成 D7：發布 `BALANCING_NOTES_v0_1.md`，總結 radiation 後的平衡結論與下一步實驗順序 | 將 machine metrics 轉成明確設計決策，避免在 UI 或新系統前失去焦點 |
+| 2026/03/09 | 補 interactive CLI warning、50-run balance sample、runtime invariant 與 gameplay gate CI | 優先修復 repo 信任層與 state correctness，而不是堆疊新功能 |

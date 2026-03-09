@@ -306,6 +306,7 @@
       "death_chain_length": 0,
       "primary_blame_factor": null,
       "regret_nodes": [],
+      "steps_from_regret_to_death": 0,
       "is_trash_time_death": false
     }
   }

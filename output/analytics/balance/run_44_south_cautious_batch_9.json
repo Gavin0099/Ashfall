@@ -1,0 +1,156 @@
+{
+  "run_id": "south_cautious_batch_9",
+  "seed": 904,
+  "route": [
+    "node_south_1",
+    "node_south_2",
+    "node_mid",
+    "node_final"
+  ],
+  "ended": true,
+  "victory": false,
+  "end_reason": "event_or_resource_death",
+  "player_final": {
+    "hp": 0,
+    "food": 2,
+    "ammo": 0,
+    "medkits": 0,
+    "scrap": 0,
+    "radiation": 0
+  },
+  "decision_log": [
+    {
+      "step": 1,
+      "node": "node_south_1",
+      "event_id": "evt_village",
+      "option_index": 0,
+      "warning_signals": [],
+      "pre_choice_state": {
+        "hp": 10,
+        "food": 6,
+        "ammo": 3,
+        "medkits": 1,
+        "radiation": 0
+      },
+      "pressure": true,
+      "combat_triggered": false,
+      "effects": {
+        "ammo": -1,
+        "medkits": 1
+      },
+      "player_after": {
+        "hp": 10,
+        "food": 6,
+        "ammo": 2,
+        "medkits": 2,
+        "radiation": 0
+      }
+    },
+    {
+      "step": 2,
+      "node": "node_south_2",
+      "event_id": "evt_floodplain",
+      "option_index": 1,
+      "warning_signals": [],
+      "pre_choice_state": {
+        "hp": 10,
+        "food": 5,
+        "ammo": 2,
+        "medkits": 2,
+        "radiation": 0
+      },
+      "pressure": true,
+      "combat_triggered": false,
+      "effects": {
+        "food": 1,
+        "ammo": -1
+      },
+      "player_after": {
+        "hp": 10,
+        "food": 6,
+        "ammo": 1,
+        "medkits": 2,
+        "radiation": 0
+      }
+    },
+    {
+      "step": 3,
+      "node": "node_mid",
+      "event_id": "evt_checkpoint",
+      "option_index": 1,
+      "warning_signals": [],
+      "pre_choice_state": {
+        "hp": 10,
+        "food": 5,
+        "ammo": 1,
+        "medkits": 2,
+        "radiation": 0
+      },
+      "pressure": true,
+      "combat_triggered": false,
+      "effects": {
+        "food": -1
+      },
+      "player_after": {
+        "hp": 10,
+        "food": 4,
+        "ammo": 1,
+        "medkits": 2,
+        "radiation": 0
+      }
+    },
+    {
+      "step": 4,
+      "node": "node_final",
+      "event_id": "evt_final",
+      "option_index": 0,
+      "warning_signals": [],
+      "pre_choice_state": {
+        "hp": 10,
+        "food": 3,
+        "ammo": 1,
+        "medkits": 2,
+        "radiation": 0
+      },
+      "pressure": true,
+      "combat_triggered": true,
+      "effects": {
+        "food": -1
+      },
+      "player_after": {
+        "hp": 0,
+        "food": 2,
+        "ammo": 0,
+        "medkits": 0,
+        "radiation": 0
+      }
+    }
+  ],
+  "summary": {
+    "pressure_count": 4,
+    "death_cause_attribution": true,
+    "resource_signature": "hp:0|food:2|ammo:0|medkits:0|scrap:0|radiation:0"
+  },
+  "failure_analysis": {
+    "death_chain_length": 2,
+    "primary_blame_factor": "resource_exhaustion",
+    "regret_nodes": [
+      {
+        "node_id": "node_final",
+        "event_id": "evt_final",
+        "blame_score": 0.66,
+        "description": "lost 1 food, accepted combat risk",
+        "steps_to_death": 0
+      },
+      {
+        "node_id": "node_mid",
+        "event_id": "evt_checkpoint",
+        "blame_score": 0.34,
+        "description": "lost 1 food",
+        "steps_to_death": 1
+      }
+    ],
+    "steps_from_regret_to_death": 0,
+    "is_trash_time_death": false
+  }
+}

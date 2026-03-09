@@ -74,6 +74,7 @@ Run the current validation pipeline:
 ```bash
 python scripts/validate_phase_a.py
 python scripts/test_failure_paths.py
+python scripts/play_cli_run.py 103
 python scripts/run_playability_check.py
 python scripts/run_balance_metrics.py
 python scripts/validate_run_analytics.py
@@ -84,8 +85,9 @@ What they cover:
 
 - `validate_phase_a.py`: spec/schema baseline
 - `test_failure_paths.py`: invalid input, boundary, and failure-path checks
+- `play_cli_run.py`: interactive CLI run with pre-choice and travel warnings
 - `run_playability_check.py`: 5-run playability evaluation with deterministic routes
-- `run_balance_metrics.py`: 20-run balancing sample with route-family summaries
+- `run_balance_metrics.py`: 50-run balancing sample with route-family summaries
 - `validate_run_analytics.py`: validates analytics output contract
 - `validate_event_templates.py`: validates deterministic event template generation
 
@@ -94,8 +96,8 @@ What they cover:
 From `output/analytics/summary.json`:
 
 - `distinct_outcome_signatures = 5`
-- `death_runs = 2`
-- `rerun_signal_runs = 4`
+- `death_runs = 3`
+- `rerun_signal_runs = 5`
 
 Current playability gate status:
 
@@ -106,14 +108,16 @@ Current playability gate status:
 
 From `output/analytics/balance_summary.json`:
 
-- `run_count = 20`
-- `victory_rate = 0.2`
-- `avg_pressure_count = 3.35`
-- `avg_final_radiation = 0.9`
-- `distinct_outcome_signatures = 15`
-- `resource_divergence.pairwise_average = 11.27`
-- `death_reasons = {starvation: 4, radiation_death: 9, event_or_resource_death: 3}`
-- `failure_analysis` now records weighted regret nodes and `is_trash_time_death`
+- `run_count = 50`
+- `victory_rate = 0.24`
+- `avg_pressure_count = 3.28`
+- `avg_final_radiation = 0.78`
+- `distinct_outcome_signatures = 28`
+- `resource_divergence.pairwise_average = 10.98`
+- `death_reasons = {starvation: 10, radiation_death: 21, event_or_resource_death: 7}`
+- `trash_time_death_rate = 0.0`
+- `avg_steps_from_regret_to_death = 0.26`
+- `failure_analysis` records weighted regret nodes, regret distance, and `is_trash_time_death`
 
 ## Event Entropy Strategy
 
@@ -140,6 +144,7 @@ Generated artifacts:
 - `output/analytics/summary.json`
 - `output/analytics/balance/run_*.json`
 - `output/analytics/balance_summary.json`
+- `output/cli/latest_seed_*.json`
 
 ## Development Principles
 

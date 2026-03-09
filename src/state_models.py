@@ -92,3 +92,10 @@ def apply_effects(player: PlayerState, effects: Dict[str, int]) -> None:
             player.radiation += delta
         else:
             raise ValueError(f"Unsupported effect key: {key}")
+
+    player.hp = max(0, player.hp)
+    player.food = max(0, player.food)
+    player.ammo = max(0, player.ammo)
+    player.medkits = max(0, player.medkits)
+    player.scrap = max(0, player.scrap)
+    player.radiation = max(0, player.radiation)

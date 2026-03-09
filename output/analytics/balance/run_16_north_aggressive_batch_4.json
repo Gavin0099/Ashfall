@@ -94,15 +94,18 @@
         "node_id": "node_north_2",
         "event_id": "evt_tunnel",
         "blame_score": 0.86,
-        "description": "took +1 radiation, lost 1 hp, accepted combat risk"
+        "description": "took +1 radiation, lost 1 hp, accepted combat risk",
+        "steps_to_death": 0
       },
       {
         "node_id": "node_north_1",
         "event_id": "evt_scrapyard",
         "blame_score": 0.14,
-        "description": "accepted combat risk"
+        "description": "accepted combat risk",
+        "steps_to_death": 1
       }
     ],
+    "steps_from_regret_to_death": 0,
     "is_trash_time_death": false
   }
 }

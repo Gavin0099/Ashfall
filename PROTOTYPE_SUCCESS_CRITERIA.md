@@ -61,5 +61,5 @@ Validate whether route choice can create repeatable high-stakes tension in a CLI
 - Metric 3: PASS (death reasons recorded in logs)
 - Playability Threshold ">=3 pressure choices per run": PASS (v2 = 5/5 runs passing)
 - Analytics Contract: PASS (`schemas/run_analytics_schema.json` + `output/analytics/run_*.json`)
-- Balance Sampling: PASS (`scripts/run_balance_metrics.py` captured 20 deterministic analytics runs)
+- Balance Sampling: PASS (`scripts/run_balance_metrics.py` captured 50 deterministic analytics runs)
 - Irreversible-State Signal: PASS (`radiation` integrated into event effects, travel attrition, and death attribution)

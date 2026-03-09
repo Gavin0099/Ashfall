@@ -69,6 +69,11 @@ def validate_failure_analysis(data: dict[str, Any], src: Path) -> None:
         ensure(isinstance(entry.get("blame_score"), (int, float)), f"{src}: regret blame_score invalid")
         ensure(0 <= float(entry["blame_score"]) <= 1, f"{src}: regret blame_score out of range")
         ensure(isinstance(entry.get("description"), str) and entry["description"], f"{src}: regret description invalid")
+        ensure(isinstance(entry.get("steps_to_death"), int) and entry["steps_to_death"] >= 0, f"{src}: regret steps_to_death invalid")
+    ensure(
+        isinstance(data.get("steps_from_regret_to_death"), int) and data["steps_from_regret_to_death"] >= 0,
+        f"{src}: steps_from_regret_to_death invalid",
+    )
     ensure(isinstance(data.get("is_trash_time_death"), bool), f"{src}: is_trash_time_death invalid")
 
 

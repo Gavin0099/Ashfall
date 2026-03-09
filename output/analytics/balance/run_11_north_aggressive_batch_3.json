@@ -11,7 +11,7 @@
   "victory": false,
   "end_reason": "radiation_death",
   "player_final": {
-    "hp": -1,
+    "hp": 0,
     "food": 4,
     "ammo": 1,
     "medkits": 1,
@@ -133,7 +133,7 @@
         "radiation": 1
       },
       "player_after": {
-        "hp": -1,
+        "hp": 0,
         "food": 4,
         "ammo": 1,
         "medkits": 1,
@@ -144,7 +144,7 @@
   "summary": {
     "pressure_count": 4,
     "death_cause_attribution": true,
-    "resource_signature": "hp:-1|food:4|ammo:1|medkits:1|scrap:0|radiation:2"
+    "resource_signature": "hp:0|food:4|ammo:1|medkits:1|scrap:0|radiation:2"
   },
   "failure_analysis": {
     "death_chain_length": 3,
@@ -154,21 +154,25 @@
         "node_id": "node_final",
         "event_id": "evt_final",
         "blame_score": 0.48,
-        "description": "took +1 radiation, lost 1 hp, accepted combat risk"
+        "description": "took +1 radiation, lost 1 hp, accepted combat risk",
+        "steps_to_death": 0
       },
       {
         "node_id": "node_north_2",
         "event_id": "evt_tunnel",
         "blame_score": 0.36,
-        "description": "took +1 radiation, lost 1 hp"
+        "description": "took +1 radiation, lost 1 hp",
+        "steps_to_death": 2
       },
       {
         "node_id": "node_mid",
         "event_id": "evt_checkpoint",
         "blame_score": 0.08,
-        "description": "accepted combat risk"
+        "description": "accepted combat risk",
+        "steps_to_death": 1
       }
     ],
+    "steps_from_regret_to_death": 0,
     "is_trash_time_death": false
   }
 }

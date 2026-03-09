@@ -95,7 +95,7 @@
     },
     "failure_analysis": {
       "type": "object",
-      "required": ["death_chain_length", "primary_blame_factor", "regret_nodes", "is_trash_time_death"],
+      "required": ["death_chain_length", "primary_blame_factor", "regret_nodes", "steps_from_regret_to_death", "is_trash_time_death"],
       "properties": {
         "death_chain_length": { "type": "integer", "minimum": 0 },
         "primary_blame_factor": { "type": ["string", "null"] },
@@ -108,11 +108,13 @@
               "node_id": { "type": "string", "minLength": 1 },
               "event_id": { "type": "string", "minLength": 1 },
               "blame_score": { "type": "number", "minimum": 0, "maximum": 1 },
-              "description": { "type": "string", "minLength": 1 }
+              "description": { "type": "string", "minLength": 1 },
+              "steps_to_death": { "type": "integer", "minimum": 0 }
             },
             "additionalProperties": false
           }
         },
+        "steps_from_regret_to_death": { "type": "integer", "minimum": 0 },
         "is_trash_time_death": { "type": "boolean" }
       },
       "additionalProperties": false
