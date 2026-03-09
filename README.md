@@ -34,6 +34,7 @@ AI change boundaries:
 
 Manual playtest protocol:
 - [PLAYTEST_PROTOCOL.md](PLAYTEST_PROTOCOL.md)
+- [schemas/human_playtest_log_schema.json](schemas/human_playtest_log_schema.json)
 
 ## What v0.1 Must Prove
 
@@ -57,6 +58,7 @@ Manual playtest protocol:
 - [PLAN.md](PLAN.md): strategy truth for phases, gates, milestones
 - [tasks/TASKS.md](tasks/TASKS.md): execution truth for sprint/task state
 - [PLAYTEST_PROTOCOL.md](PLAYTEST_PROTOCOL.md): first-round human playtest procedure
+- [specs/human_playtest_analytics.md](specs/human_playtest_analytics.md): machine-vs-human tension comparison rules
 - [specs/](specs): gameplay and system specs
 - [schemas/](schemas): data contracts
 - [src/](src): runtime prototype code
@@ -109,6 +111,7 @@ From `output/analytics/balance_summary.json`:
 - `distinct_outcome_signatures = 15`
 - `resource_divergence.pairwise_average = 11.27`
 - `death_reasons = {starvation: 4, radiation_death: 9, event_or_resource_death: 3}`
+- `failure_analysis` now records weighted regret nodes and `is_trash_time_death`
 
 ## Event Entropy Strategy
 
@@ -147,6 +150,7 @@ Generated artifacts:
 
 - D7: publish v0.1 balancing notes
 - PT-1: run first external playtest round using `PLAYTEST_PROTOCOL.md`
+- PT-2: compare human hesitation/regret logs against machine `failure_analysis`
 - D1/D2: connect run-end rewards and meta progression state transitions
 
 ## Repository Note

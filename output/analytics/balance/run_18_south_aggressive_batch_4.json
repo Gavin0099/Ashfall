@@ -24,8 +24,24 @@
       "node": "node_south_1",
       "event_id": "evt_village",
       "option_index": 1,
+      "warning_signals": [
+        "WARNING: radiation will continue to threaten future travel.",
+        "WARNING: this option adds radiation and increases long-term risk.",
+        "DANGER: this choice carries a high combat risk."
+      ],
+      "pre_choice_state": {
+        "hp": 10,
+        "food": 6,
+        "ammo": 3,
+        "medkits": 1,
+        "radiation": 0
+      },
       "pressure": true,
       "combat_triggered": true,
+      "effects": {
+        "food": 2,
+        "radiation": 1
+      },
       "player_after": {
         "hp": -1,
         "food": 8,
@@ -39,5 +55,18 @@
     "pressure_count": 1,
     "death_cause_attribution": true,
     "resource_signature": "hp:-1|food:8|ammo:0|medkits:0|scrap:0|radiation:1"
+  },
+  "failure_analysis": {
+    "death_chain_length": 1,
+    "primary_blame_factor": "radiation",
+    "regret_nodes": [
+      {
+        "node_id": "node_south_1",
+        "event_id": "evt_village",
+        "blame_score": 1.0,
+        "description": "took +1 radiation, accepted combat risk"
+      }
+    ],
+    "is_trash_time_death": false
   }
 }

@@ -79,6 +79,134 @@ def is_pressure_moment(run: RunState, event_payload: dict, option_index: int, ou
     return bool(outcome.get("combat_triggered") or high_risk_choice or has_negative_effect or has_irreversible_effect or fragile_state)
 
 
+def build_warning_signals(player: PlayerState, event_payload: dict, option_index: int, remaining_steps_after_choice: int) -> List[str]:
+    option = event_payload["options"][option_index]
+    effects = option.get("effects", {})
+    warnings: List[str] = []
+    projected_radiation = player.radiation + int(effects.get("radiation", 0))
+
+    if projected_radiation > 0:
+        warnings.append("WARNING: radiation will continue to threaten future travel.")
+    if int(effects.get("radiation", 0)) > 0:
+        warnings.append("WARNING: this option adds radiation and increases long-term risk.")
+    if projected_radiation > 0 and player.hp <= projected_radiation + 1:
+        warnings.append("CRITICAL: another irradiated move may kill you.")
+    if player.food <= 2:
+        warnings.append("WARNING: food is low and route slack is nearly gone.")
+    if float(option.get("combat_chance", 0.0)) >= 0.5:
+        warnings.append("DANGER: this choice carries a high combat risk.")
+    if projected_radiation > 0 and player.medkits <= 0 and remaining_steps_after_choice >= 2:
+        warnings.append("CRITICAL: no medkits remain to buffer future radiation attrition.")
+    return warnings
+
+
+def analyze_failure(decision_log: List[dict], ended: bool, victory: bool, end_reason: str | None) -> dict:
+    if not ended or victory or not decision_log:
+        return {
+            "death_chain_length": 0,
+            "primary_blame_factor": None,
+            "regret_nodes": [],
+            "is_trash_time_death": False,
+        }
+
+    weighted_nodes: List[dict] = []
+    factor_totals = {"radiation": 0.0, "combat": 0.0, "resource_exhaustion": 0.0}
+    total_score = 0.0
+    total_steps = len(decision_log)
+
+    for index, entry in enumerate(decision_log, start=1):
+        effects = entry.get("effects", {})
+        score = 0.0
+        factors: List[str] = []
+        recency_weight = 1.0 + (index / max(1, total_steps)) * 0.2
+
+        radiation_delta = max(0, int(effects.get("radiation", 0)))
+        if radiation_delta > 0:
+            radiation_score = radiation_delta * (2.2 if end_reason == "radiation_death" else 1.0)
+            score += radiation_score
+            factor_totals["radiation"] += radiation_score
+            factors.append("radiation")
+
+        if entry.get("combat_triggered", False):
+            combat_score = 1.8 if end_reason == "combat_death" else 0.7
+            score += combat_score
+            factor_totals["combat"] += combat_score
+            factors.append("combat")
+
+        hp_loss = max(0, -int(effects.get("hp", 0)))
+        food_loss = max(0, -int(effects.get("food", 0)))
+        if hp_loss > 0 or food_loss > 0:
+            resource_score = hp_loss * 1.0 + food_loss * (1.4 if end_reason == "starvation" else 0.8)
+            score += resource_score
+            factor_totals["resource_exhaustion"] += resource_score
+            factors.append("resource_exhaustion")
+
+        score = round(score * recency_weight, 3)
+        if score <= 0:
+            continue
+
+        description_bits: List[str] = []
+        if radiation_delta > 0:
+            description_bits.append(f"took +{radiation_delta} radiation")
+        if hp_loss > 0:
+            description_bits.append(f"lost {hp_loss} hp")
+        if food_loss > 0:
+            description_bits.append(f"lost {food_loss} food")
+        if entry.get("combat_triggered", False):
+            description_bits.append("accepted combat risk")
+
+        total_score += score
+        weighted_nodes.append(
+            {
+                "node_id": entry["node"],
+                "event_id": entry["event_id"],
+                "score": score,
+                "description": ", ".join(description_bits) if description_bits else "risk accumulated here",
+                "factors": factors,
+            }
+        )
+
+    if total_score <= 0:
+        return {
+            "death_chain_length": 0,
+            "primary_blame_factor": end_reason,
+            "regret_nodes": [],
+            "is_trash_time_death": False,
+        }
+
+    regret_nodes = []
+    for item in sorted(weighted_nodes, key=lambda entry: entry["score"], reverse=True)[:3]:
+        regret_nodes.append(
+            {
+                "node_id": item["node_id"],
+                "event_id": item["event_id"],
+                "blame_score": round(item["score"] / total_score, 2),
+                "description": item["description"],
+            }
+        )
+
+    primary_blame_factor = max(factor_totals, key=factor_totals.get) if any(value > 0 for value in factor_totals.values()) else end_reason
+    is_trash_time_death = False
+    for index, entry in enumerate(decision_log):
+        remaining_steps = len(decision_log) - (index + 1)
+        player_after = entry["player_after"]
+        if (
+            player_after["radiation"] > 0
+            and player_after["medkits"] <= 0
+            and remaining_steps >= 3
+            and player_after["hp"] <= player_after["radiation"] * remaining_steps
+        ):
+            is_trash_time_death = True
+            break
+
+    return {
+        "death_chain_length": len(regret_nodes),
+        "primary_blame_factor": primary_blame_factor,
+        "regret_nodes": regret_nodes,
+        "is_trash_time_death": is_trash_time_death,
+    }
+
+
 def run_plan(plan: RoutePlan, nodes: Dict[str, dict], events: Dict[str, dict], enemies: Dict[str, dict]) -> dict:
     map_state = build_map(nodes, start_node_id="node_start", final_node_id="node_final")
     engine = RunEngine(map_state=map_state, seed=plan.seed, event_catalog=events, enemy_catalog=enemies)
@@ -92,6 +220,15 @@ def run_plan(plan: RoutePlan, nodes: Dict[str, dict], events: Dict[str, dict], e
             break
         node = engine.move_to(run, next_node)
         option_index = plan.options.get(next_node, 0)
+        event_payload = events[node.event_pool[0]]
+        warning_signals = build_warning_signals(run.player, event_payload, option_index, len(plan.route) - len(decision_log) - 1)
+        pre_choice_state = {
+            "hp": run.player.hp,
+            "food": run.player.food,
+            "ammo": run.player.ammo,
+            "medkits": run.player.medkits,
+            "radiation": run.player.radiation,
+        }
         outcome = engine.resolve_node_event(node, run, option_index=option_index)
         pressure = is_pressure_moment(run, events[outcome["event_id"]], option_index, outcome)
         if pressure:
@@ -101,6 +238,8 @@ def run_plan(plan: RoutePlan, nodes: Dict[str, dict], events: Dict[str, dict], e
                 "node": next_node,
                 "option_index": option_index,
                 "event_outcome": outcome,
+                "warning_signals": warning_signals,
+                "pre_choice_state": pre_choice_state,
                 "player": {
                     "hp": run.player.hp,
                     "food": run.player.food,
@@ -117,8 +256,11 @@ def run_plan(plan: RoutePlan, nodes: Dict[str, dict], events: Dict[str, dict], e
                 "node": next_node,
                 "event_id": outcome["event_id"],
                 "option_index": option_index,
+                "warning_signals": warning_signals,
+                "pre_choice_state": pre_choice_state,
                 "pressure": pressure,
                 "combat_triggered": bool(outcome.get("combat_triggered", False)),
+                "effects": dict(events[outcome["event_id"]]["options"][option_index].get("effects", {})),
                 "player_after": {
                     "hp": run.player.hp,
                     "food": run.player.food,
@@ -157,6 +299,7 @@ def run_plan(plan: RoutePlan, nodes: Dict[str, dict], events: Dict[str, dict], e
             "death_cause_attribution": (not run.victory and run.end_reason is not None) or run.victory,
             "resource_signature": resource_signature,
         },
+        "failure_analysis": analyze_failure(decision_log, run.ended, run.victory, run.end_reason),
     }
 
     return {

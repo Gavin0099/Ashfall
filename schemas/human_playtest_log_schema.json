@@ -1,0 +1,66 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Human Playtest Log Schema",
+  "type": "object",
+  "required": [
+    "player_id",
+    "session_id",
+    "roguelite_experience",
+    "game_dev_background",
+    "run_id",
+    "events",
+    "post_run"
+  ],
+  "properties": {
+    "player_id": { "type": "string", "minLength": 1 },
+    "session_id": { "type": "string", "minLength": 1 },
+    "roguelite_experience": { "type": "boolean" },
+    "game_dev_background": { "type": "boolean" },
+    "run_id": { "type": "string", "minLength": 1 },
+    "events": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "timestamp",
+          "node_id",
+          "decision_time_ms",
+          "selected_option",
+          "hesitation_flag",
+          "confusion_flag",
+          "what_i_thought_happened",
+          "why_im_salty"
+        ],
+        "properties": {
+          "timestamp": { "type": "string", "minLength": 1 },
+          "node_id": { "type": "string", "minLength": 1 },
+          "decision_time_ms": { "type": "integer", "minimum": 0 },
+          "selected_option": { "type": "integer", "minimum": 0 },
+          "hesitation_flag": { "type": "boolean" },
+          "confusion_flag": { "type": "boolean" },
+          "what_i_thought_happened": { "type": "string" },
+          "why_im_salty": { "type": "string" },
+          "verbal_note": { "type": "string" }
+        },
+        "additionalProperties": false
+      }
+    },
+    "post_run": {
+      "type": "object",
+      "required": [
+        "hardest_choice",
+        "perceived_death_cause",
+        "regret_choice",
+        "replay_intent"
+      ],
+      "properties": {
+        "hardest_choice": { "type": "string" },
+        "perceived_death_cause": { "type": "string" },
+        "regret_choice": { "type": "string" },
+        "replay_intent": { "type": "boolean" }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}

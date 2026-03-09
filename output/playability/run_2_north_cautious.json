@@ -28,6 +28,14 @@
         "option_text": "Bypass and conserve",
         "combat_triggered": false
       },
+      "warning_signals": [],
+      "pre_choice_state": {
+        "hp": 10,
+        "food": 6,
+        "ammo": 3,
+        "medkits": 1,
+        "radiation": 0
+      },
       "player": {
         "hp": 10,
         "food": 5,
@@ -45,6 +53,14 @@
         "option_index": 1,
         "option_text": "Hold position and move at first light",
         "combat_triggered": false
+      },
+      "warning_signals": [],
+      "pre_choice_state": {
+        "hp": 10,
+        "food": 4,
+        "ammo": 3,
+        "medkits": 1,
+        "radiation": 0
       },
       "player": {
         "hp": 10,
@@ -64,6 +80,16 @@
         "option_text": "Sneak around",
         "combat_triggered": false
       },
+      "warning_signals": [
+        "WARNING: food is low and route slack is nearly gone."
+      ],
+      "pre_choice_state": {
+        "hp": 10,
+        "food": 2,
+        "ammo": 3,
+        "medkits": 2,
+        "radiation": 0
+      },
       "player": {
         "hp": 10,
         "food": 1,
@@ -81,6 +107,16 @@
         "option_index": 0,
         "option_text": "Use scarce supplies to make the climb safe",
         "combat_triggered": false
+      },
+      "warning_signals": [
+        "WARNING: food is low and route slack is nearly gone."
+      ],
+      "pre_choice_state": {
+        "hp": 10,
+        "food": 0,
+        "ammo": 3,
+        "medkits": 2,
+        "radiation": 0
       },
       "player": {
         "hp": 10,
@@ -118,8 +154,19 @@
         "node": "node_north_1",
         "event_id": "evt_scrapyard",
         "option_index": 1,
+        "warning_signals": [],
+        "pre_choice_state": {
+          "hp": 10,
+          "food": 6,
+          "ammo": 3,
+          "medkits": 1,
+          "radiation": 0
+        },
         "pressure": true,
         "combat_triggered": false,
+        "effects": {
+          "food": -1
+        },
         "player_after": {
           "hp": 10,
           "food": 5,
@@ -133,8 +180,20 @@
         "node": "node_north_2",
         "event_id": "evt_tunnel",
         "option_index": 1,
+        "warning_signals": [],
+        "pre_choice_state": {
+          "hp": 10,
+          "food": 4,
+          "ammo": 3,
+          "medkits": 1,
+          "radiation": 0
+        },
         "pressure": true,
         "combat_triggered": false,
+        "effects": {
+          "food": -1,
+          "medkits": 1
+        },
         "player_after": {
           "hp": 10,
           "food": 3,
@@ -148,8 +207,21 @@
         "node": "node_mid",
         "event_id": "evt_checkpoint",
         "option_index": 1,
+        "warning_signals": [
+          "WARNING: food is low and route slack is nearly gone."
+        ],
+        "pre_choice_state": {
+          "hp": 10,
+          "food": 2,
+          "ammo": 3,
+          "medkits": 2,
+          "radiation": 0
+        },
         "pressure": true,
         "combat_triggered": false,
+        "effects": {
+          "food": -1
+        },
         "player_after": {
           "hp": 10,
           "food": 1,
@@ -163,8 +235,21 @@
         "node": "node_final",
         "event_id": "evt_final",
         "option_index": 0,
+        "warning_signals": [
+          "WARNING: food is low and route slack is nearly gone."
+        ],
+        "pre_choice_state": {
+          "hp": 10,
+          "food": 0,
+          "ammo": 3,
+          "medkits": 2,
+          "radiation": 0
+        },
         "pressure": true,
         "combat_triggered": false,
+        "effects": {
+          "food": -1
+        },
         "player_after": {
           "hp": 10,
           "food": -1,
@@ -178,6 +263,31 @@
       "pressure_count": 4,
       "death_cause_attribution": true,
       "resource_signature": "hp:10|food:-1|ammo:3|medkits:2|scrap:0|radiation:0"
+    },
+    "failure_analysis": {
+      "death_chain_length": 3,
+      "primary_blame_factor": "resource_exhaustion",
+      "regret_nodes": [
+        {
+          "node_id": "node_final",
+          "event_id": "evt_final",
+          "blame_score": 0.27,
+          "description": "lost 1 food"
+        },
+        {
+          "node_id": "node_mid",
+          "event_id": "evt_checkpoint",
+          "blame_score": 0.26,
+          "description": "lost 1 food"
+        },
+        {
+          "node_id": "node_north_2",
+          "event_id": "evt_tunnel",
+          "blame_score": 0.24,
+          "description": "lost 1 food"
+        }
+      ],
+      "is_trash_time_death": false
     }
   }
 }

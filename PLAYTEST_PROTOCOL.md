@@ -161,6 +161,8 @@ Suggested combined fields:
 - `rerun_signal_runs`
 - `death_causes`
 - `route_family_summary`
+- `failure_analysis.regret_nodes`
+- `failure_analysis.is_trash_time_death`
 
 What to look for:
 
@@ -207,6 +209,8 @@ Use this protocol together with:
 - [PROTOTYPE_SUCCESS_CRITERIA.md](PROTOTYPE_SUCCESS_CRITERIA.md)
 - [PLAN.md](PLAN.md)
 - [tasks/TASKS.md](tasks/TASKS.md)
+- [schemas/human_playtest_log_schema.json](schemas/human_playtest_log_schema.json)
+- [playtests/observation_sheet_template.md](playtests/observation_sheet_template.md)
 - `output/playability/run_*.json`
 - `output/analytics/summary.json`
 - `output/analytics/balance_summary.json`

@@ -11,7 +11,8 @@
     "end_reason",
     "player_final",
     "decision_log",
-    "summary"
+    "summary",
+    "failure_analysis"
   ],
   "properties": {
     "run_id": { "type": "string", "minLength": 1 },
@@ -41,14 +42,31 @@
       "type": "array",
       "items": {
         "type": "object",
-        "required": ["step", "node", "event_id", "option_index", "pressure", "player_after"],
+        "required": ["step", "node", "event_id", "option_index", "warning_signals", "pre_choice_state", "pressure", "player_after"],
         "properties": {
           "step": { "type": "integer", "minimum": 1 },
           "node": { "type": "string" },
           "event_id": { "type": "string" },
           "option_index": { "type": "integer", "minimum": 0 },
+          "warning_signals": {
+            "type": "array",
+            "items": { "type": "string" }
+          },
+          "pre_choice_state": {
+            "type": "object",
+            "required": ["hp", "food", "ammo", "medkits", "radiation"],
+            "properties": {
+              "hp": { "type": "integer" },
+              "food": { "type": "integer" },
+              "ammo": { "type": "integer" },
+              "medkits": { "type": "integer" },
+              "radiation": { "type": "integer" }
+            },
+            "additionalProperties": false
+          },
           "pressure": { "type": "boolean" },
           "combat_triggered": { "type": "boolean" },
+          "effects": { "type": "object" },
           "player_after": {
             "type": "object",
             "required": ["hp", "food", "ammo", "medkits", "radiation"],
@@ -72,6 +90,30 @@
         "pressure_count": { "type": "integer", "minimum": 0 },
         "death_cause_attribution": { "type": "boolean" },
         "resource_signature": { "type": "string", "minLength": 1 }
+      },
+      "additionalProperties": false
+    },
+    "failure_analysis": {
+      "type": "object",
+      "required": ["death_chain_length", "primary_blame_factor", "regret_nodes", "is_trash_time_death"],
+      "properties": {
+        "death_chain_length": { "type": "integer", "minimum": 0 },
+        "primary_blame_factor": { "type": ["string", "null"] },
+        "regret_nodes": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["node_id", "event_id", "blame_score", "description"],
+            "properties": {
+              "node_id": { "type": "string", "minLength": 1 },
+              "event_id": { "type": "string", "minLength": 1 },
+              "blame_score": { "type": "number", "minimum": 0, "maximum": 1 },
+              "description": { "type": "string", "minLength": 1 }
+            },
+            "additionalProperties": false
+          }
+        },
+        "is_trash_time_death": { "type": "boolean" }
       },
       "additionalProperties": false
     }

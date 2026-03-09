@@ -16,6 +16,8 @@ Phase/Gate/Milestone Truth: `PLAN.md`
 - [ ] D1 Add run-end reward and unlock rules
 - [ ] D2 Add meta progression state transitions
 - [ ] PT-1 Run first manual playtest round with 5-8 players using `PLAYTEST_PROTOCOL.md`
+- [ ] PT-2 Compare human playtest logs against machine `failure_analysis`
+- [ ] EXP-1 Prototype explicit irreversible trade (`max_hp` sacrifice for short-term survival)
 
 ### Playability Check
 - [x] PLY-1 Run 5 manual playthroughs with different route choices
@@ -49,6 +51,8 @@ Artifacts: `output/playability/summary.json`, `output/playability/run_*.json`
 - [x] D4 Add event template system (catalog + deterministic generation)
 - [x] D5 Run balancing simulations and collect metrics
 - [x] D6 Add irreversible-state prototype signal (`radiation`) and analytics coverage
+- [x] Add weighted regret/blame analysis to `run_analytics`
+- [x] Add human playtest log schema and observation template
 
 ---
 

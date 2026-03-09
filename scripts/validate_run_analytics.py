@@ -38,8 +38,14 @@ def validate_decision_log(entries: list[dict[str, Any]], src: Path) -> None:
         ensure(isinstance(entry.get("node"), str) and entry["node"], f"{src}: node missing")
         ensure(isinstance(entry.get("event_id"), str) and entry["event_id"], f"{src}: event_id missing")
         ensure(isinstance(entry.get("option_index"), int) and entry["option_index"] >= 0, f"{src}: option_index invalid")
+        ensure(isinstance(entry.get("warning_signals"), list), f"{src}: warning_signals must be array")
+        pre_choice_state = entry.get("pre_choice_state")
+        ensure(isinstance(pre_choice_state, dict), f"{src}: pre_choice_state missing")
+        for key in ("hp", "food", "ammo", "medkits", "radiation"):
+            ensure(isinstance(pre_choice_state.get(key), int), f"{src}: pre_choice_state.{key} must be integer")
         ensure(isinstance(entry.get("pressure"), bool), f"{src}: pressure must be boolean")
         ensure(isinstance(entry.get("combat_triggered"), bool), f"{src}: combat_triggered must be boolean")
+        ensure(isinstance(entry.get("effects", {}), dict), f"{src}: effects must be object")
         player_after = entry.get("player_after")
         ensure(isinstance(player_after, dict), f"{src}: player_after missing")
         for key in ("hp", "food", "ammo", "medkits", "radiation"):
@@ -52,9 +58,23 @@ def validate_summary(data: dict[str, Any], src: Path) -> None:
     ensure(isinstance(data.get("resource_signature"), str) and data["resource_signature"], f"{src}: resource_signature invalid")
 
 
+def validate_failure_analysis(data: dict[str, Any], src: Path) -> None:
+    ensure(isinstance(data.get("death_chain_length"), int) and data["death_chain_length"] >= 0, f"{src}: death_chain_length invalid")
+    ensure(isinstance(data.get("primary_blame_factor"), (str, type(None))), f"{src}: primary_blame_factor invalid")
+    regret_nodes = data.get("regret_nodes")
+    ensure(isinstance(regret_nodes, list), f"{src}: regret_nodes must be array")
+    for entry in regret_nodes:
+        ensure(isinstance(entry.get("node_id"), str) and entry["node_id"], f"{src}: regret node_id invalid")
+        ensure(isinstance(entry.get("event_id"), str) and entry["event_id"], f"{src}: regret event_id invalid")
+        ensure(isinstance(entry.get("blame_score"), (int, float)), f"{src}: regret blame_score invalid")
+        ensure(0 <= float(entry["blame_score"]) <= 1, f"{src}: regret blame_score out of range")
+        ensure(isinstance(entry.get("description"), str) and entry["description"], f"{src}: regret description invalid")
+    ensure(isinstance(data.get("is_trash_time_death"), bool), f"{src}: is_trash_time_death invalid")
+
+
 def validate_run_file(path: Path) -> None:
     data = load_json(path)
-    for key in ("run_id", "seed", "route", "ended", "victory", "end_reason", "player_final", "decision_log", "summary"):
+    for key in ("run_id", "seed", "route", "ended", "victory", "end_reason", "player_final", "decision_log", "summary", "failure_analysis"):
         ensure(key in data, f"{path}: missing {key}")
     ensure(isinstance(data["run_id"], str) and data["run_id"], f"{path}: run_id invalid")
     ensure(isinstance(data["seed"], int), f"{path}: seed invalid")
@@ -65,6 +85,7 @@ def validate_run_file(path: Path) -> None:
     validate_player_final(data["player_final"], path)
     validate_decision_log(data["decision_log"], path)
     validate_summary(data["summary"], path)
+    validate_failure_analysis(data["failure_analysis"], path)
 
 
 def main() -> int:

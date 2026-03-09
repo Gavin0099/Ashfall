@@ -43,6 +43,16 @@
           ]
         }
       },
+      "warning_signals": [
+        "DANGER: this choice carries a high combat risk."
+      ],
+      "pre_choice_state": {
+        "hp": 10,
+        "food": 6,
+        "ammo": 3,
+        "medkits": 1,
+        "radiation": 0
+      },
       "player": {
         "hp": 4,
         "food": 7,
@@ -60,6 +70,14 @@
         "option_index": 1,
         "option_text": "Hold position and move at first light",
         "combat_triggered": false
+      },
+      "warning_signals": [],
+      "pre_choice_state": {
+        "hp": 4,
+        "food": 6,
+        "ammo": 2,
+        "medkits": 1,
+        "radiation": 0
       },
       "player": {
         "hp": 4,
@@ -94,6 +112,16 @@
           ]
         }
       },
+      "warning_signals": [
+        "DANGER: this choice carries a high combat risk."
+      ],
+      "pre_choice_state": {
+        "hp": 4,
+        "food": 4,
+        "ammo": 2,
+        "medkits": 2,
+        "radiation": 0
+      },
       "player": {
         "hp": 1,
         "food": 4,
@@ -111,6 +139,18 @@
         "option_index": 1,
         "option_text": "Sprint the ridge and trust momentum",
         "combat_triggered": false
+      },
+      "warning_signals": [
+        "WARNING: radiation will continue to threaten future travel.",
+        "WARNING: this option adds radiation and increases long-term risk.",
+        "CRITICAL: another irradiated move may kill you."
+      ],
+      "pre_choice_state": {
+        "hp": 1,
+        "food": 3,
+        "ammo": 0,
+        "medkits": 2,
+        "radiation": 0
       },
       "player": {
         "hp": 0,
@@ -148,8 +188,22 @@
         "node": "node_north_1",
         "event_id": "evt_scrapyard",
         "option_index": 0,
+        "warning_signals": [
+          "DANGER: this choice carries a high combat risk."
+        ],
+        "pre_choice_state": {
+          "hp": 10,
+          "food": 6,
+          "ammo": 3,
+          "medkits": 1,
+          "radiation": 0
+        },
         "pressure": true,
         "combat_triggered": true,
+        "effects": {
+          "food": 1,
+          "ammo": 2
+        },
         "player_after": {
           "hp": 4,
           "food": 7,
@@ -163,8 +217,20 @@
         "node": "node_north_2",
         "event_id": "evt_tunnel",
         "option_index": 1,
+        "warning_signals": [],
+        "pre_choice_state": {
+          "hp": 4,
+          "food": 6,
+          "ammo": 2,
+          "medkits": 1,
+          "radiation": 0
+        },
         "pressure": true,
         "combat_triggered": false,
+        "effects": {
+          "food": -1,
+          "medkits": 1
+        },
         "player_after": {
           "hp": 4,
           "food": 5,
@@ -178,8 +244,21 @@
         "node": "node_mid",
         "event_id": "evt_checkpoint",
         "option_index": 0,
+        "warning_signals": [
+          "DANGER: this choice carries a high combat risk."
+        ],
+        "pre_choice_state": {
+          "hp": 4,
+          "food": 4,
+          "ammo": 2,
+          "medkits": 2,
+          "radiation": 0
+        },
         "pressure": true,
         "combat_triggered": true,
+        "effects": {
+          "ammo": 1
+        },
         "player_after": {
           "hp": 1,
           "food": 4,
@@ -193,8 +272,24 @@
         "node": "node_final",
         "event_id": "evt_final",
         "option_index": 1,
+        "warning_signals": [
+          "WARNING: radiation will continue to threaten future travel.",
+          "WARNING: this option adds radiation and increases long-term risk.",
+          "CRITICAL: another irradiated move may kill you."
+        ],
+        "pre_choice_state": {
+          "hp": 1,
+          "food": 3,
+          "ammo": 0,
+          "medkits": 2,
+          "radiation": 0
+        },
         "pressure": true,
         "combat_triggered": false,
+        "effects": {
+          "hp": -1,
+          "radiation": 1
+        },
         "player_after": {
           "hp": 0,
           "food": 3,
@@ -208,6 +303,31 @@
       "pressure_count": 4,
       "death_cause_attribution": true,
       "resource_signature": "hp:0|food:3|ammo:0|medkits:2|scrap:0|radiation:1"
+    },
+    "failure_analysis": {
+      "death_chain_length": 3,
+      "primary_blame_factor": "radiation",
+      "regret_nodes": [
+        {
+          "node_id": "node_final",
+          "event_id": "evt_final",
+          "blame_score": 0.61,
+          "description": "took +1 radiation, lost 1 hp"
+        },
+        {
+          "node_id": "node_north_2",
+          "event_id": "evt_tunnel",
+          "blame_score": 0.14,
+          "description": "lost 1 food"
+        },
+        {
+          "node_id": "node_mid",
+          "event_id": "evt_checkpoint",
+          "blame_score": 0.13,
+          "description": "accepted combat risk"
+        }
+      ],
+      "is_trash_time_death": false
     }
   }
 }

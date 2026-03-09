@@ -24,8 +24,22 @@
       "node": "node_north_1",
       "event_id": "evt_scrapyard",
       "option_index": 0,
+      "warning_signals": [
+        "DANGER: this choice carries a high combat risk."
+      ],
+      "pre_choice_state": {
+        "hp": 10,
+        "food": 6,
+        "ammo": 3,
+        "medkits": 1,
+        "radiation": 0
+      },
       "pressure": true,
       "combat_triggered": true,
+      "effects": {
+        "food": 1,
+        "ammo": 2
+      },
       "player_after": {
         "hp": 8,
         "food": 7,
@@ -39,8 +53,20 @@
       "node": "node_north_2",
       "event_id": "evt_tunnel",
       "option_index": 1,
+      "warning_signals": [],
+      "pre_choice_state": {
+        "hp": 8,
+        "food": 6,
+        "ammo": 3,
+        "medkits": 1,
+        "radiation": 0
+      },
       "pressure": true,
       "combat_triggered": false,
+      "effects": {
+        "food": -1,
+        "medkits": 1
+      },
       "player_after": {
         "hp": 8,
         "food": 5,
@@ -54,8 +80,21 @@
       "node": "node_mid",
       "event_id": "evt_checkpoint",
       "option_index": 0,
+      "warning_signals": [
+        "DANGER: this choice carries a high combat risk."
+      ],
+      "pre_choice_state": {
+        "hp": 8,
+        "food": 4,
+        "ammo": 3,
+        "medkits": 2,
+        "radiation": 0
+      },
       "pressure": true,
       "combat_triggered": true,
+      "effects": {
+        "ammo": 1
+      },
       "player_after": {
         "hp": 0,
         "food": 4,
@@ -69,5 +108,30 @@
     "pressure_count": 3,
     "death_cause_attribution": true,
     "resource_signature": "hp:0|food:4|ammo:0|medkits:0|scrap:0|radiation:0"
+  },
+  "failure_analysis": {
+    "death_chain_length": 3,
+    "primary_blame_factor": "combat",
+    "regret_nodes": [
+      {
+        "node_id": "node_north_2",
+        "event_id": "evt_tunnel",
+        "blame_score": 0.36,
+        "description": "lost 1 food"
+      },
+      {
+        "node_id": "node_mid",
+        "event_id": "evt_checkpoint",
+        "blame_score": 0.34,
+        "description": "accepted combat risk"
+      },
+      {
+        "node_id": "node_north_1",
+        "event_id": "evt_scrapyard",
+        "blame_score": 0.3,
+        "description": "accepted combat risk"
+      }
+    ],
+    "is_trash_time_death": false
   }
 }

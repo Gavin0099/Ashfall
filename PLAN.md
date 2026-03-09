@@ -150,8 +150,10 @@ Meta 與平衡:
 
 **下一步**:
 1. 根據 radiation 後的 20 局 metrics 撰寫 v0.1 balancing notes
-2. 依 `PLAYTEST_PROTOCOL.md` 執行第一輪人工 playtest
-3. 規劃 run-end reward 與 meta progression state transition
+2. 依 `PLAYTEST_PROTOCOL.md` 與 human playtest log schema 執行第一輪人工 playtest
+3. 對比 human regret / hesitation 與 machine `failure_analysis`
+4. 規劃 run-end reward 與 meta progression state transition
+5. 以受控實驗方式評估 explicit irreversible trade（例如 `max_hp` 交換生存）
 
 **當前阻礙**:
 - 無
@@ -314,3 +316,4 @@ Meta 與平衡:
 | 2026/03/09 | 完成 D5：20 局 analytics balance sampling 與 route-family metrics 摘要 | 把「可玩」進一步轉成可量化平衡資料，並定位下一步壓力調整方向 |
 | 2026/03/09 | 新增 `PLAYTEST_PROTOCOL.md`，定義 v0.1 第一輪人工測試流程與成功標準 | 補上 machine gate 之外的人類玩法驗證流程，避免只看系統數據 |
 | 2026/03/09 | 完成 D6：導入 `radiation` 不可逆狀態、travel attrition、analytics 欄位與死亡歸因 | 將「短期資源壓力」升級為「長期代價壓力」，強化 route gamble 感 |
+| 2026/03/09 | 新增 weighted regret/blame analysis 與 human playtest log 契約 | 避免單點虛假歸因，並讓 Blind CLI test 能與 machine analytics 直接對照 |

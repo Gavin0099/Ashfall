@@ -24,8 +24,22 @@
       "node": "node_north_1",
       "event_id": "evt_scrapyard",
       "option_index": 0,
+      "warning_signals": [
+        "DANGER: this choice carries a high combat risk."
+      ],
+      "pre_choice_state": {
+        "hp": 10,
+        "food": 6,
+        "ammo": 3,
+        "medkits": 1,
+        "radiation": 0
+      },
       "pressure": true,
       "combat_triggered": true,
+      "effects": {
+        "food": 1,
+        "ammo": 2
+      },
       "player_after": {
         "hp": 4,
         "food": 7,
@@ -39,8 +53,20 @@
       "node": "node_north_2",
       "event_id": "evt_tunnel",
       "option_index": 1,
+      "warning_signals": [],
+      "pre_choice_state": {
+        "hp": 4,
+        "food": 6,
+        "ammo": 2,
+        "medkits": 1,
+        "radiation": 0
+      },
       "pressure": true,
       "combat_triggered": false,
+      "effects": {
+        "food": -1,
+        "medkits": 1
+      },
       "player_after": {
         "hp": 4,
         "food": 5,
@@ -54,8 +80,21 @@
       "node": "node_mid",
       "event_id": "evt_checkpoint",
       "option_index": 0,
+      "warning_signals": [
+        "DANGER: this choice carries a high combat risk."
+      ],
+      "pre_choice_state": {
+        "hp": 4,
+        "food": 4,
+        "ammo": 2,
+        "medkits": 2,
+        "radiation": 0
+      },
       "pressure": true,
       "combat_triggered": false,
+      "effects": {
+        "ammo": 1
+      },
       "player_after": {
         "hp": 4,
         "food": 4,
@@ -69,8 +108,23 @@
       "node": "node_final",
       "event_id": "evt_final",
       "option_index": 1,
+      "warning_signals": [
+        "WARNING: radiation will continue to threaten future travel.",
+        "WARNING: this option adds radiation and increases long-term risk."
+      ],
+      "pre_choice_state": {
+        "hp": 4,
+        "food": 3,
+        "ammo": 3,
+        "medkits": 2,
+        "radiation": 0
+      },
       "pressure": true,
       "combat_triggered": true,
+      "effects": {
+        "hp": -1,
+        "radiation": 1
+      },
       "player_after": {
         "hp": -1,
         "food": 3,
@@ -84,5 +138,30 @@
     "pressure_count": 4,
     "death_cause_attribution": true,
     "resource_signature": "hp:-1|food:3|ammo:1|medkits:2|scrap:0|radiation:1"
+  },
+  "failure_analysis": {
+    "death_chain_length": 3,
+    "primary_blame_factor": "radiation",
+    "regret_nodes": [
+      {
+        "node_id": "node_final",
+        "event_id": "evt_final",
+        "blame_score": 0.74,
+        "description": "took +1 radiation, lost 1 hp, accepted combat risk"
+      },
+      {
+        "node_id": "node_north_2",
+        "event_id": "evt_tunnel",
+        "blame_score": 0.14,
+        "description": "lost 1 food"
+      },
+      {
+        "node_id": "node_north_1",
+        "event_id": "evt_scrapyard",
+        "blame_score": 0.12,
+        "description": "accepted combat risk"
+      }
+    ],
+    "is_trash_time_death": false
   }
 }
