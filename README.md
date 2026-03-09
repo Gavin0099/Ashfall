@@ -79,6 +79,8 @@ python scripts/run_playability_check.py
 python scripts/run_balance_metrics.py
 python scripts/validate_run_analytics.py
 python scripts/validate_event_templates.py
+python scripts/validate_human_playtest_logs.py
+python scripts/compare_playtest_vs_machine.py
 ```
 
 What they cover:
@@ -90,6 +92,8 @@ What they cover:
 - `run_balance_metrics.py`: 50-run balancing sample with route-family summaries
 - `validate_run_analytics.py`: validates analytics output contract
 - `validate_event_templates.py`: validates deterministic event template generation
+- `validate_human_playtest_logs.py`: validates human playtest session logs
+- `compare_playtest_vs_machine.py`: compares human hesitation/regret against machine analytics
 
 ## Current Prototype Metrics
 

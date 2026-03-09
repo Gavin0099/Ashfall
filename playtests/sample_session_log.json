@@ -1,0 +1,48 @@
+{
+  "player_id": "P1",
+  "session_id": "PT1-001",
+  "roguelite_experience": true,
+  "game_dev_background": false,
+  "run_id": "south_aggressive",
+  "events": [
+    {
+      "timestamp": "2026-03-09T20:00:10+08:00",
+      "node_id": "node_south_1",
+      "decision_time_ms": 6200,
+      "selected_option": 1,
+      "hesitation_flag": true,
+      "confusion_flag": false,
+      "what_i_thought_happened": "I can grab food now but I might get punished later.",
+      "why_im_salty": "I knew this was greedy but I wanted the supplies.",
+      "verbal_note": "This looks risky."
+    },
+    {
+      "timestamp": "2026-03-09T20:01:25+08:00",
+      "node_id": "node_south_2",
+      "decision_time_ms": 4100,
+      "selected_option": 0,
+      "hesitation_flag": false,
+      "confusion_flag": false,
+      "what_i_thought_happened": "I thought I could tank a little more risk.",
+      "why_im_salty": "I kept doubling down on the same route.",
+      "verbal_note": ""
+    },
+    {
+      "timestamp": "2026-03-09T20:03:05+08:00",
+      "node_id": "node_final",
+      "decision_time_ms": 8300,
+      "selected_option": 1,
+      "hesitation_flag": true,
+      "confusion_flag": false,
+      "what_i_thought_happened": "I thought the fast finish might beat the damage clock.",
+      "why_im_salty": "This was the last bad call that finished me.",
+      "verbal_note": "If I survive this, I get out."
+    }
+  ],
+  "post_run": {
+    "hardest_choice": "node_final",
+    "perceived_death_cause": "I stacked too much radiation on the south route.",
+    "regret_choice": "node_south_1",
+    "replay_intent": true
+  }
+}

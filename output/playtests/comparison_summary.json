@@ -1,0 +1,40 @@
+{
+  "log_count": 1,
+  "hesitation_match_rate": 1.0,
+  "regret_match_rate": 1.0,
+  "replay_intent_rate": 1.0,
+  "avg_decision_time_ms": 6200.0,
+  "comparisons": [
+    {
+      "player_id": "P1",
+      "session_id": "PT1-001",
+      "run_id": "south_aggressive",
+      "human_hesitation_nodes": [
+        "node_final",
+        "node_south_1"
+      ],
+      "machine_pressure_nodes": [
+        "node_final",
+        "node_mid",
+        "node_south_1",
+        "node_south_2"
+      ],
+      "hesitation_overlap": [
+        "node_final",
+        "node_south_1"
+      ],
+      "hesitation_match": true,
+      "human_regret_choice": "node_south_1",
+      "machine_regret_nodes": [
+        "node_final",
+        "node_south_1",
+        "node_south_2"
+      ],
+      "regret_match": true,
+      "machine_primary_blame_factor": "radiation",
+      "machine_steps_from_regret_to_death": 0,
+      "replay_intent": true,
+      "avg_decision_time_ms": 6200.0
+    }
+  ]
+}

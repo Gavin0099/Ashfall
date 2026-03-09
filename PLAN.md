@@ -154,6 +154,7 @@ Meta 與平衡:
 2. 對比 human regret / hesitation 與 machine `failure_analysis`
 3. 規劃 run-end reward 與 meta progression state transition
 4. 以受控實驗方式評估 explicit irreversible trade（例如 `max_hp` 交換生存）
+5. 以 `compare_playtest_vs_machine.py` 產出 PT-1 對照摘要
 
 **當前阻礙**:
 - 無
