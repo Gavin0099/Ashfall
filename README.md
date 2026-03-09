@@ -109,6 +109,7 @@ python scripts/validate_run_analytics.py
 python scripts/validate_event_templates.py
 python scripts/validate_human_playtest_logs.py
 python scripts/compare_playtest_vs_machine.py
+python scripts/generate_pt1_summary.py
 ```
 
 What they cover:
@@ -123,6 +124,9 @@ What they cover:
 - `validate_event_templates.py`: validates deterministic event template generation
 - `validate_human_playtest_logs.py`: validates human playtest session logs
 - `compare_playtest_vs_machine.py`: compares human hesitation/regret against machine analytics
+- `generate_pt1_summary.py`: produces a PT-1 markdown summary from completed session logs and machine comparison output
+
+Placeholder PT-1 files are scaffold only. Human comparison and summary scripts ignore sessions still marked `TBD`.
 
 ## Current Prototype Metrics
 

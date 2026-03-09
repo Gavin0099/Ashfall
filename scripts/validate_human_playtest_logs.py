@@ -8,6 +8,7 @@ from typing import Any
 
 ROOT = Path(__file__).resolve().parents[1]
 PLAYTEST_DIR = ROOT / "playtests"
+PLACEHOLDER = "TBD"
 
 
 class ValidationError(Exception):
@@ -21,6 +22,19 @@ def ensure(condition: bool, message: str) -> None:
 
 def load_json(path: Path) -> Any:
     return json.loads(path.read_text(encoding="utf-8-sig"))
+
+
+def is_placeholder_string(value: Any) -> bool:
+    return isinstance(value, str) and value.strip().upper() == PLACEHOLDER
+
+
+def is_completed_log(data: dict[str, Any]) -> bool:
+    if is_placeholder_string(data.get("run_id")):
+        return False
+    events = data.get("events", [])
+    if not events:
+        return False
+    return all(not is_placeholder_string(entry.get("node_id")) for entry in events)
 
 
 def validate_log(path: Path) -> None:
@@ -85,9 +99,19 @@ def main() -> int:
         if sample.exists():
             log_files = [sample] + log_files
         ensure(log_files, "No human playtest logs found")
+        completed_logs = 0
+        placeholder_logs = 0
         for log_file in log_files:
             validate_log(log_file)
-        print(f"Human playtest log validation passed ({len(log_files)} files)")
+            payload = load_json(log_file)
+            if is_completed_log(payload):
+                completed_logs += 1
+            else:
+                placeholder_logs += 1
+        print(
+            "Human playtest log validation passed "
+            f"({len(log_files)} files, completed={completed_logs}, placeholders={placeholder_logs})"
+        )
         return 0
     except ValidationError as exc:
         print(f"Human playtest log validation failed: {exc}")

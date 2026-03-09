@@ -32,4 +32,7 @@ Recommended pattern:
 ```bash
 python scripts/validate_human_playtest_logs.py
 python scripts/compare_playtest_vs_machine.py
+python scripts/generate_pt1_summary.py
 ```
+
+Placeholder session files with `TBD` values are scaffold only. Comparison and summary scripts ignore them until a session is actually filled.

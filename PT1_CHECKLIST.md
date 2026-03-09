@@ -136,9 +136,16 @@ Generate comparison summary:
 python scripts/compare_playtest_vs_machine.py
 ```
 
+Generate PT-1 summary draft:
+
+```bash
+python scripts/generate_pt1_summary.py
+```
+
 Expected artifact:
 
 - [comparison_summary.json](e:\BackUp\Git_EE\Ashfall\output\playtests\comparison_summary.json)
+- [PT1_summary.md](e:\BackUp\Git_EE\Ashfall\output\playtests\PT1_summary.md)
 - Fill [PT1_SUMMARY_TEMPLATE.md](e:\BackUp\Git_EE\Ashfall\PT1_SUMMARY_TEMPLATE.md)
 
 ## Success Readout

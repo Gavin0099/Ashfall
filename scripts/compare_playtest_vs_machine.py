@@ -10,6 +10,7 @@ ROOT = Path(__file__).resolve().parents[1]
 PLAYTEST_DIR = ROOT / "playtests"
 ANALYTICS_DIR = ROOT / "output" / "analytics"
 OUTPUT_PATH = ROOT / "output" / "playtests" / "comparison_summary.json"
+PLACEHOLDER = "TBD"
 
 
 def load_json(path: Path) -> Any:
@@ -22,6 +23,19 @@ def average(values: list[float]) -> float:
     return round(sum(values) / len(values), 2)
 
 
+def is_placeholder_string(value: Any) -> bool:
+    return isinstance(value, str) and value.strip().upper() == PLACEHOLDER
+
+
+def is_completed_log(data: dict[str, Any]) -> bool:
+    if is_placeholder_string(data.get("run_id")):
+        return False
+    events = data.get("events", [])
+    if not events:
+        return False
+    return all(not is_placeholder_string(entry.get("node_id")) for entry in events)
+
+
 def find_machine_run(run_id: str) -> dict[str, Any]:
     for path in ANALYTICS_DIR.glob("run_*.json"):
         payload = load_json(path)
@@ -32,9 +46,16 @@ def find_machine_run(run_id: str) -> dict[str, Any]:
 
 def main() -> int:
     OUTPUT_PATH.parent.mkdir(parents=True, exist_ok=True)
-    logs = [path for path in sorted(PLAYTEST_DIR.glob("*_session_log.json")) if path.name != "sample_session_log.json"]
+    logs: list[tuple[Path, dict[str, Any]]] = []
+    for path in sorted(PLAYTEST_DIR.glob("*_session_log.json")):
+        if path.name == "sample_session_log.json":
+            continue
+        payload = load_json(path)
+        if is_completed_log(payload):
+            logs.append((path, payload))
     if not logs:
         logs = [PLAYTEST_DIR / "sample_session_log.json"] if (PLAYTEST_DIR / "sample_session_log.json").exists() else []
+        logs = [(logs[0], load_json(logs[0]))] if logs else []
     if not logs:
         print("No human playtest logs found")
         return 1
@@ -44,8 +65,7 @@ def main() -> int:
     regret_match_count = 0
     replay_true_count = 0
 
-    for log_path in logs:
-        human = load_json(log_path)
+    for log_path, human in logs:
         machine = find_machine_run(human["run_id"])
 
         human_hesitation_nodes = {entry["node_id"] for entry in human["events"] if entry["hesitation_flag"]}
