@@ -57,6 +57,7 @@ Artifacts: `output/playability/summary.json`, `output/playability/run_*.json`
 - [x] Enforce runtime state invariants (`apply_effects`, `create_run`, `resource_cost`)
 - [x] Add gameplay validation scripts to phase gate verification
 - [x] Add human playtest log validator and comparison script
+- [x] Add `PT1_CHECKLIST.md` for live session execution
 
 ---
 

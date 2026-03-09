@@ -34,6 +34,7 @@ AI change boundaries:
 
 Manual playtest protocol:
 - [PLAYTEST_PROTOCOL.md](PLAYTEST_PROTOCOL.md)
+- [PT1_CHECKLIST.md](PT1_CHECKLIST.md)
 - [schemas/human_playtest_log_schema.json](schemas/human_playtest_log_schema.json)
 - [BALANCING_NOTES_v0_1.md](BALANCING_NOTES_v0_1.md)
 
@@ -59,6 +60,7 @@ Manual playtest protocol:
 - [PLAN.md](PLAN.md): strategy truth for phases, gates, milestones
 - [tasks/TASKS.md](tasks/TASKS.md): execution truth for sprint/task state
 - [PLAYTEST_PROTOCOL.md](PLAYTEST_PROTOCOL.md): first-round human playtest procedure
+- [PT1_CHECKLIST.md](PT1_CHECKLIST.md): operator checklist for Blind CLI testing
 - [specs/human_playtest_analytics.md](specs/human_playtest_analytics.md): machine-vs-human tension comparison rules
 - [BALANCING_NOTES_v0_1.md](BALANCING_NOTES_v0_1.md): current balance conclusions and next controlled experiments
 - [specs/](specs): gameplay and system specs

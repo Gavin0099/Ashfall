@@ -320,3 +320,4 @@ Meta 與平衡:
 | 2026/03/09 | 新增 weighted regret/blame analysis 與 human playtest log 契約 | 避免單點虛假歸因，並讓 Blind CLI test 能與 machine analytics 直接對照 |
 | 2026/03/09 | 完成 D7：發布 `BALANCING_NOTES_v0_1.md`，總結 radiation 後的平衡結論與下一步實驗順序 | 將 machine metrics 轉成明確設計決策，避免在 UI 或新系統前失去焦點 |
 | 2026/03/09 | 補 interactive CLI warning、50-run balance sample、runtime invariant 與 gameplay gate CI | 優先修復 repo 信任層與 state correctness，而不是堆疊新功能 |
+| 2026/03/09 | 新增 `PT1_CHECKLIST.md`，把 Blind CLI test 轉成可執行現場流程 | 降低第一輪真人測試的操作摩擦，確保 playtest 後可直接產出對照資料 |
