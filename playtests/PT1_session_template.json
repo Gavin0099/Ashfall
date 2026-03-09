@@ -3,27 +3,27 @@
   "session_id": "PT1-001",
   "roguelite_experience": false,
   "game_dev_background": false,
-  "run_id": "south_aggressive",
+  "run_id": "TBD",
   "events": [
     {
-      "timestamp": "",
-      "node_id": "",
+      "timestamp": "TBD",
+      "node_id": "TBD",
       "decision_time_ms": 0,
       "selected_option": 0,
       "hesitation_flag": false,
       "confusion_flag": false,
-      "what_i_thought_happened": "",
-      "why_im_salty": "",
+      "what_i_thought_happened": "TBD",
+      "why_im_salty": "TBD",
       "verbal_note": ""
     }
   ],
   "post_run": {
-    "hardest_choice": "",
-    "perceived_death_cause": "",
-    "regret_choice": "",
+    "hardest_choice": "TBD",
+    "perceived_death_cause": "TBD",
+    "regret_choice": "TBD",
     "replay_intent": false,
-    "judgment_regret_note": "",
-    "frustration_regret_note": "",
-    "immediate_replay_reason": ""
+    "judgment_regret_note": "TBD",
+    "frustration_regret_note": "TBD",
+    "immediate_replay_reason": "TBD"
   }
 }

@@ -23,10 +23,11 @@ Recommended pattern:
 
 ## Workflow
 
-1. Copy `PT1_session_template.json`
-2. Rename it to `PX_session_log.json`
-3. Fill it during or immediately after the session
-4. Run:
+1. Optional: run `python scripts/bootstrap_pt1_sessions.py`
+2. Or copy `PT1_session_template.json`
+3. Rename it to `PX_session_log.json`
+4. Fill it during or immediately after the session
+5. Run:
 
 ```bash
 python scripts/validate_human_playtest_logs.py

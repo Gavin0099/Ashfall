@@ -12,11 +12,18 @@ Use this for the first Blind CLI playtest round.
 - [ ] Confirm these files exist:
   - [PLAYTEST_PROTOCOL.md](e:\BackUp\Git_EE\Ashfall\PLAYTEST_PROTOCOL.md)
   - [play_cli_run.py](e:\BackUp\Git_EE\Ashfall\scripts\play_cli_run.py)
+  - [bootstrap_pt1_sessions.py](e:\BackUp\Git_EE\Ashfall\scripts\bootstrap_pt1_sessions.py)
   - [human_playtest_log_schema.json](e:\BackUp\Git_EE\Ashfall\schemas\human_playtest_log_schema.json)
   - [observation_sheet_template.md](e:\BackUp\Git_EE\Ashfall\playtests\observation_sheet_template.md)
   - [PT1_session_template.json](e:\BackUp\Git_EE\Ashfall\playtests\PT1_session_template.json)
 - [ ] Prepare one blank observation sheet per player
 - [ ] Prepare one JSON log file per player using `playtests/PT1_session_template.json` as the template
+
+Optional bootstrap:
+
+```bash
+python scripts/bootstrap_pt1_sessions.py
+```
 - [ ] Review [PT1_SEED_ASSIGNMENT.md](e:\BackUp\Git_EE\Ashfall\PT1_SEED_ASSIGNMENT.md)
 
 Recommended naming:
