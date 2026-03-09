@@ -13,14 +13,14 @@ Phase/Gate/Milestone Truth: `PLAN.md`
 - [ ] PT-1 Run first manual playtest round with 5-8 players using `PLAYTEST_PROTOCOL.md`
 
 ### Ready
-- [ ] D1 Add run-end reward and unlock rules
-- [ ] D2 Add meta progression state transitions
 - [ ] PT-2 Compare human playtest logs against machine `failure_analysis`
 - [ ] OBS-1 Run first-node dominance test from `SEED_101_OBSERVATION.md`
 - [ ] OBS-2 Test conservative survivability across multiple seeds
 - [ ] OBS-3 Compare high-risk vs low-risk event payoff across >=100 runs
 - [ ] EXP-1 Prototype explicit irreversible trade (`max_hp` sacrifice for short-term survival)
 - [ ] EXP-2 Evaluate `travel mode` as a controlled decision-depth experiment
+- [ ] EXP-3 Prototype character background as a run-identity layer
+- [ ] EXP-4 Prototype minimal equipment slots (weapon / armor / tool)
 
 ### Playability Check
 - [x] PLY-1 Run 5 manual playthroughs with different route choices
@@ -105,8 +105,6 @@ Gate:
 - [x] Invalid input and boundary tests exist for core modules
 
 ### Phase D — Meta and Balancing
-- [ ] D1 Add run-end reward and unlock rules
-- [ ] D2 Add meta progression state transitions
 - [x] D3 Implement run analytics log output + schema validation
 - [x] D4 Add event template system (catalog + deterministic generation)
 - [x] D5 Run balancing simulations and collect metrics
@@ -117,7 +115,7 @@ Gate:
 
 Gate:
 - [x] 50 analytics logs captured and summarized
-- [ ] Meta progression rules are documented and tested
+- [ ] Human playtest evidence captured and summarized
 
 ---
 
@@ -138,6 +136,7 @@ Gate:
 - [ ] Enemy archetypes and special abilities
 - [ ] Run summary template and telemetry fields
 - [ ] Travel-mode prototype branch if PT-1 confirms low consequence depth
+- [ ] Background/equipment prototype branch if PT-1 and EXP-2 justify more identity depth
 
 ---
 

@@ -36,10 +36,10 @@ Prototype validation contract: `PROTOTYPE_SUCCESS_CRITERIA.md`
 ├─ [✓] Phase A: 規格收斂與資料契約       (2026/03/09 完成)
 ├─ [✓] Phase B: 核心模擬引擎              (2026/03/09 完成)
 ├─ [✓] Phase C: 戰鬥與資源整合            (2026/03/09 完成)
-└─ [🔄] Phase D: Meta 與平衡迭代           (進行中，預計 2026/05/01)
+└─ [🔄] Phase D: Playtest 與平衡迭代       (進行中，預計 2026/05/01)
 ```
 
-**當前 Phase**: **Phase D - Meta 與平衡迭代**
+**當前 Phase**: **Phase D - Playtest 與平衡迭代**
 
 ---
 
@@ -100,26 +100,26 @@ Prototype validation contract: `PROTOTYPE_SUCCESS_CRITERIA.md`
 - [x] Combat 在 enemy_hp<=0 或 player_hp<=0 時必定結束
 - [x] 每個核心模組至少含 1 invalid input + 1 boundary + 1 failure path 測試
 
-### Phase D: Meta 與平衡迭代 (進行中 🔄)
+### Phase D: Playtest 與平衡迭代 (進行中 🔄)
 
-**目標**: 導入 run 外成長與基本平衡迴圈，形成可迭代原型。
+**目標**: 用人工測試與受控實驗確認 tension 是否成立，並收斂 v0.2 的最小 decision-depth 方向。
 
 **任務清單**:
 ```
-Meta 與平衡:
-├─ [⏳] 1. 定義 meta progression 資源與解鎖條件
-├─ [⏳] 2. run 結束獎勵結算
-├─ [✓] 3. run analytics log schema 與輸出驗證
-├─ [✓] 4. event template system（catalog + deterministic generation）
-├─ [✓] 5. 節點/敵人/事件機率調參
-└─ [🔄] 6. balancing notes 完成，首輪 playtest protocol 進行中      ← 當前進行中
+Playtest 與平衡:
+├─ [✓] 1. run analytics log schema 與輸出驗證
+├─ [✓] 2. event template system（catalog + deterministic generation）
+├─ [✓] 3. 節點/敵人/事件機率調參
+├─ [🔄] 4. balancing notes 完成，首輪 playtest protocol 進行中      ← 當前進行中
+├─ [⏳] 5. PT-1 / PT-2 人類驗證
+└─ [⏳] 6. v0.2 controlled experiments（Travel Mode / Background / Equipment）
 ```
 
 **Gate 條件**:
-- [ ] meta progression 規則寫入 spec，並有對應資料欄位
 - [ ] 同 seed 可重現同地圖，平衡調整不破壞可重現性
 - [x] 至少完成 50 局 analytics log 紀錄（勝率、平均回合、死亡原因、decision trace）
 - [x] 至少 1 個不可逆狀態信號已接入主循環，且死亡原因可歸因
+- [ ] 至少完成 1 輪 human playtest summary，並能對照 machine failure analysis
 
 ---
 
@@ -153,10 +153,10 @@ Meta 與平衡:
 1. 依 `PLAYTEST_PROTOCOL.md` 與 human playtest log schema 執行第一輪人工 playtest
 2. 對比 human regret / hesitation 與 machine `failure_analysis`
 3. 執行 `SEED_101_OBSERVATION.md` 的 first-node dominance / conservative survivability / risk-payoff 驗證
-4. 規劃 run-end reward 與 meta progression state transition
-5. 以受控實驗方式評估 explicit irreversible trade（例如 `max_hp` 交換生存）
-6. 以 `compare_playtest_vs_machine.py` 產出 PT-1 對照摘要
-7. 若 PT-1 顯示選項影響過短，評估 `specs/travel_mode_experiment.md` 的 `EXP-2 Travel Mode`
+4. 以 `compare_playtest_vs_machine.py` 產出 PT-1 對照摘要
+5. 若 PT-1 顯示選項影響過短，評估 `specs/travel_mode_experiment.md` 的 `EXP-2 Travel Mode`
+6. 若 PT-1 顯示 route identity 偏弱，評估 `specs/v0_2_progression_layers.md` 的 background / equipment 最小版本
+7. 以受控實驗方式評估 explicit irreversible trade（例如 `max_hp` 交換生存）
 
 **當前阻礙**:
 - 無
@@ -192,6 +192,7 @@ Meta 與平衡:
 - 不要提前啟動 Steamworks / store page / achievements（理由：屬於派生目標）
 - 不要先做精美 UI 或大量世界觀文本（理由：不直接驗證 v0.1 核心）
 - 不要引入網路或多人功能（理由：超出本階段 Bounded Context）
+- 不要先做 meta progression / level / skill tree（理由：會讓 power scaling 掩蓋 route tension 驗證）
 
 ---
 
@@ -286,7 +287,7 @@ Meta 與平衡:
 | M1: 規格與 schema 凍結 | 2026/03/15 | 🔄 | 完整 specs + schemas + sample data |
 | M2: 可跑通單局主循環 | 2026/03/29 | ⏳ | CLI run loop 原型 |
 | M3: 戰鬥與資源整合完成 | 2026/04/12 | ⏳ | 可測試 combat/resource 模組 |
-| M4: Meta 與首輪平衡 | 2026/05/01 | ⏳ | 可迭代遊玩原型 v0.1 |
+| M4: 首輪 human validation 與 v0.2 方向收斂 | 2026/05/01 | ⏳ | 可迭代遊玩原型 v0.1 + v0.2 最小系統方向 |
 | M5: Steam 上架準備完成 | 2026/06/01 | ⏳ | Steamworks 設定、商店頁素材、首版可發布 build |
 
 ---
@@ -326,3 +327,4 @@ Meta 與平衡:
 | 2026/03/09 | 新增 `PT1_CHECKLIST.md`，把 Blind CLI test 轉成可執行現場流程 | 降低第一輪真人測試的操作摩擦，確保 playtest 後可直接產出對照資料 |
 | 2026/03/09 | 新增 `SEED_101_OBSERVATION.md`，將 deterministic 手動觀察轉成可驗證的平衡假設 | 把平衡判斷從直覺提升為 gameplay research artifact |
 | 2026/03/09 | 新增 `specs/travel_mode_experiment.md`，將 Travel Mode 限定為 PT-1 後的受控實驗 | 提升 decision depth 討論的可執行性，同時避免過早污染主線假設 |
+| 2026/03/09 | 新增 `specs/v0_2_progression_layers.md`，將 background / travel mode / equipment 收斂為 v0.2 最小 identity layer | 避免 prototype 過早膨脹，同時把 v0.2 方向固定為 route-centric |

@@ -61,6 +61,7 @@ Manual playtest protocol:
 - [PT1_SUMMARY_TEMPLATE.md](PT1_SUMMARY_TEMPLATE.md)
 - [SEED_101_OBSERVATION.md](SEED_101_OBSERVATION.md)
 - [specs/travel_mode_experiment.md](specs/travel_mode_experiment.md)
+- [specs/v0_2_progression_layers.md](specs/v0_2_progression_layers.md)
 - [schemas/human_playtest_log_schema.json](schemas/human_playtest_log_schema.json)
 - [playtests/README.md](playtests/README.md)
 - [BALANCING_NOTES_v0_1.md](BALANCING_NOTES_v0_1.md)
@@ -206,7 +207,8 @@ Generated artifacts:
 - OBS-2: test conservative survivability across multiple seeds
 - OBS-3: sample high-risk vs low-risk event payoff across >=100 runs
 - EXP-2: only if PT-1 confirms low consequence depth, evaluate `travel mode` as a controlled experiment
-- D1/D2: connect run-end rewards and meta progression state transitions
+- EXP-3: evaluate character background as a route-identity layer
+- EXP-4: evaluate minimal equipment slots as run-shaping modifiers
 - EXP-1: evaluate explicit irreversible trade only after Blind CLI results
 
 ## Repository Note
