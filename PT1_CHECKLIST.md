@@ -17,6 +17,7 @@ Use this for the first Blind CLI playtest round.
   - [PT1_session_template.json](e:\BackUp\Git_EE\Ashfall\playtests\PT1_session_template.json)
 - [ ] Prepare one blank observation sheet per player
 - [ ] Prepare one JSON log file per player using `playtests/PT1_session_template.json` as the template
+- [ ] Review [PT1_SEED_ASSIGNMENT.md](e:\BackUp\Git_EE\Ashfall\PT1_SEED_ASSIGNMENT.md)
 
 Recommended naming:
 
@@ -131,6 +132,7 @@ python scripts/compare_playtest_vs_machine.py
 Expected artifact:
 
 - [comparison_summary.json](e:\BackUp\Git_EE\Ashfall\output\playtests\comparison_summary.json)
+- Fill [PT1_SUMMARY_TEMPLATE.md](e:\BackUp\Git_EE\Ashfall\PT1_SUMMARY_TEMPLATE.md)
 
 ## Success Readout
 

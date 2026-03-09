@@ -57,6 +57,8 @@ AI change boundaries:
 Manual playtest protocol:
 - [PLAYTEST_PROTOCOL.md](PLAYTEST_PROTOCOL.md)
 - [PT1_CHECKLIST.md](PT1_CHECKLIST.md)
+- [PT1_SEED_ASSIGNMENT.md](PT1_SEED_ASSIGNMENT.md)
+- [PT1_SUMMARY_TEMPLATE.md](PT1_SUMMARY_TEMPLATE.md)
 - [schemas/human_playtest_log_schema.json](schemas/human_playtest_log_schema.json)
 - [playtests/README.md](playtests/README.md)
 - [BALANCING_NOTES_v0_1.md](BALANCING_NOTES_v0_1.md)

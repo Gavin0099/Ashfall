@@ -8,6 +8,7 @@ This directory stores human playtest observation material for PT-1 and later rou
 
 - `observation_sheet_template.md`: paper/markdown observer sheet
 - `PT1_session_template.json`: blank JSON log template for a real player session
+- `P1_session_log.json`: ready-to-edit first player session file
 - `sample_session_log.json`: filled example log for validator and comparison smoke tests
 
 ## Naming
