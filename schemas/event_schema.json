@@ -1,23 +1,67 @@
 {
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Event Schema",
+  "description": "Ashfall v0.1 contract. Defines a resolved event instance (after template instantiation). Effects are restricted to the approved v0.1 resource key whitelist.",
+  "x-ashfall-version": "0.1",
   "type": "object",
   "required": ["id", "description", "options"],
   "properties": {
     "id": {
-      "type": "string"
+      "type": "string",
+      "minLength": 1
     },
     "description": {
-      "type": "string"
+      "type": "string",
+      "minLength": 1
     },
     "options": {
       "type": "array",
+      "minItems": 1,
       "items": {
         "type": "object",
+        "required": ["text", "effects"],
         "properties": {
-          "text": {"type": "string"},
-          "effects": {"type": "object"},
-          "combat_chance": {"type": "number"}
-        }
+          "text": {
+            "type": "string",
+            "minLength": 1
+          },
+          "effects": {
+            "type": "object",
+            "description": "Resource deltas applied to the player. Only approved v0.1 resource keys are allowed.",
+            "properties": {
+              "hp":        { "type": "integer" },
+              "food":      { "type": "integer" },
+              "ammo":      { "type": "integer" },
+              "medkits":   { "type": "integer" },
+              "scrap":     { "type": "integer" },
+              "radiation": { "type": "integer" }
+            },
+            "additionalProperties": false
+          },
+          "combat_chance": {
+            "type": "number",
+            "minimum": 0.0,
+            "maximum": 1.0
+          },
+          "equipment_reward": {
+            "type": "object",
+            "required": ["slot", "item"],
+            "properties": {
+              "slot": {
+                "type": "string",
+                "enum": ["weapon", "armor", "tool"]
+              },
+              "item": {
+                "type": "string",
+                "enum": ["makeshift_blade", "rust_rifle", "gas_mask", "scavenger_kit", "field_pack"]
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "additionalProperties": false
       }
     }
-  }
+  },
+  "additionalProperties": false
 }

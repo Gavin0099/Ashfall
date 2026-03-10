@@ -24,13 +24,14 @@ def instantiate_event(template: Dict[str, Any], rng: random.Random) -> dict:
     description = _pick_variant(template.get("description_variants", []), rng)
     options = []
     for option in template.get("options", []):
-        options.append(
-            {
-                "text": _pick_variant(option.get("text_variants", []), rng),
-                "effects": dict(option.get("effects", {})),
-                "combat_chance": float(option.get("combat_chance", 0.0)),
-            }
-        )
+        resolved_option = {
+            "text": _pick_variant(option.get("text_variants", []), rng),
+            "effects": dict(option.get("effects", {})),
+            "combat_chance": float(option.get("combat_chance", 0.0)),
+        }
+        if "equipment_reward" in option:
+            resolved_option["equipment_reward"] = dict(option["equipment_reward"])
+        options.append(resolved_option)
     return {
         "id": template["event_id"],
         "description": description,

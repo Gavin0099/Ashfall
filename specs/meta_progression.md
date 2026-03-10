@@ -117,3 +117,35 @@ At upgrade purchase:
 - No prestige/reset loop.
 - No branching tech tree dependencies.
 - No live-ops balancing pipeline.
+
+---
+
+## v0.1 Contract Status
+
+**Current status**: Spec-complete, implementation deferred.
+
+Meta progression is out-of-scope for the v0.1 prototype. The v0.1 run loop does not award persistent scrap or apply unlock effects. This spec defines the intended contract so implementation can begin after prototype validation.
+
+### Freeze Criteria
+
+This spec is considered frozen (ready for implementation) when ALL of the following are true:
+
+- [ ] PT-1 human playtest is complete and replay intent rate >= 0.5
+- [ ] Route tension hypothesis is confirmed (distinct outcome signatures >= 2 across 50+ runs)
+- [ ] At least one irreversible-state signal is live in the run loop (e.g. `radiation`) — **already met**
+- [ ] `run_analytics_schema.json` includes `enemies_defeated` and `ending_hp` fields needed for reward formula
+- [ ] A `meta_profile_schema.json` has been drafted and validated against the Save Data Structure above
+
+### What Is Explicitly Deferred to v0.2
+
+- All unlock implementation (caravan / combat / scouting upgrades)
+- Persistent scrap earning and spending
+- Profile save/load integration
+- Any UI for upgrade purchasing
+
+### Change Control
+
+Any modification to the reward formula, unlock categories, or save data structure fields must:
+1. Update this spec with a dated change note
+2. Verify backward compatibility with any existing sample save data
+3. Be marked in `tasks/TASKS.md` before implementation begins

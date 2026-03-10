@@ -8,15 +8,18 @@
     "node_final"
   ],
   "ended": true,
-  "victory": false,
-  "end_reason": "radiation_death",
+  "victory": true,
+  "end_reason": "reached_final_node",
   "player_final": {
-    "hp": 0,
+    "hp": 2,
     "food": 3,
-    "ammo": 0,
+    "ammo": 1,
     "medkits": 2,
     "scrap": 0,
-    "radiation": 1
+    "radiation": 1,
+    "weapon_slot": "rust_rifle",
+    "armor_slot": null,
+    "tool_slot": null
   },
   "decision_log": [
     {
@@ -32,7 +35,11 @@
         "food": 6,
         "ammo": 3,
         "medkits": 1,
-        "radiation": 0
+        "scrap": 0,
+        "radiation": 0,
+        "weapon_slot": null,
+        "armor_slot": null,
+        "tool_slot": null
       },
       "pressure": true,
       "combat_triggered": true,
@@ -40,12 +47,23 @@
         "food": 1,
         "ammo": 2
       },
+      "equipment_change": {
+        "slot": "weapon",
+        "item": "makeshift_blade",
+        "replaced": null,
+        "changed": true
+      },
+      "equipment_summary": "weapon -> makeshift_blade (replaced empty)",
       "player_after": {
         "hp": 4,
         "food": 7,
         "ammo": 2,
         "medkits": 1,
-        "radiation": 0
+        "scrap": 0,
+        "radiation": 0,
+        "weapon_slot": "makeshift_blade",
+        "armor_slot": null,
+        "tool_slot": null
       }
     },
     {
@@ -59,7 +77,11 @@
         "food": 6,
         "ammo": 2,
         "medkits": 1,
-        "radiation": 0
+        "scrap": 0,
+        "radiation": 0,
+        "weapon_slot": "makeshift_blade",
+        "armor_slot": null,
+        "tool_slot": null
       },
       "pressure": true,
       "combat_triggered": false,
@@ -67,12 +89,18 @@
         "food": -1,
         "medkits": 1
       },
+      "equipment_change": null,
+      "equipment_summary": null,
       "player_after": {
         "hp": 4,
         "food": 5,
         "ammo": 2,
         "medkits": 2,
-        "radiation": 0
+        "scrap": 0,
+        "radiation": 0,
+        "weapon_slot": "makeshift_blade",
+        "armor_slot": null,
+        "tool_slot": null
       }
     },
     {
@@ -88,19 +116,34 @@
         "food": 4,
         "ammo": 2,
         "medkits": 2,
-        "radiation": 0
+        "scrap": 0,
+        "radiation": 0,
+        "weapon_slot": "makeshift_blade",
+        "armor_slot": null,
+        "tool_slot": null
       },
       "pressure": true,
       "combat_triggered": true,
       "effects": {
         "ammo": 1
       },
+      "equipment_change": {
+        "slot": "weapon",
+        "item": "rust_rifle",
+        "replaced": "makeshift_blade",
+        "changed": true
+      },
+      "equipment_summary": "weapon -> rust_rifle (replaced makeshift_blade)",
       "player_after": {
-        "hp": 1,
+        "hp": 3,
         "food": 4,
-        "ammo": 0,
+        "ammo": 1,
         "medkits": 2,
-        "radiation": 0
+        "scrap": 0,
+        "radiation": 0,
+        "weapon_slot": "rust_rifle",
+        "armor_slot": null,
+        "tool_slot": null
       }
     },
     {
@@ -110,15 +153,18 @@
       "option_index": 1,
       "warning_signals": [
         "WARNING: radiation will continue to threaten future travel.",
-        "WARNING: this option adds radiation and increases long-term risk.",
-        "CRITICAL: another irradiated move may kill you."
+        "WARNING: this option adds radiation and increases long-term risk."
       ],
       "pre_choice_state": {
-        "hp": 1,
+        "hp": 3,
         "food": 3,
-        "ammo": 0,
+        "ammo": 1,
         "medkits": 2,
-        "radiation": 0
+        "scrap": 0,
+        "radiation": 0,
+        "weapon_slot": "rust_rifle",
+        "armor_slot": null,
+        "tool_slot": null
       },
       "pressure": true,
       "combat_triggered": false,
@@ -126,46 +172,30 @@
         "hp": -1,
         "radiation": 1
       },
+      "equipment_change": null,
+      "equipment_summary": null,
       "player_after": {
-        "hp": 0,
+        "hp": 2,
         "food": 3,
-        "ammo": 0,
+        "ammo": 1,
         "medkits": 2,
-        "radiation": 1
+        "scrap": 0,
+        "radiation": 1,
+        "weapon_slot": "rust_rifle",
+        "armor_slot": null,
+        "tool_slot": null
       }
     }
   ],
   "summary": {
     "pressure_count": 4,
     "death_cause_attribution": true,
-    "resource_signature": "hp:0|food:3|ammo:0|medkits:2|scrap:0|radiation:1"
+    "resource_signature": "hp:2|food:3|ammo:1|medkits:2|scrap:0|radiation:1|weapon:rust_rifle|armor:None|tool:None"
   },
   "failure_analysis": {
-    "death_chain_length": 3,
-    "primary_blame_factor": "radiation",
-    "regret_nodes": [
-      {
-        "node_id": "node_final",
-        "event_id": "evt_final",
-        "blame_score": 0.61,
-        "description": "took +1 radiation, lost 1 hp",
-        "steps_to_death": 0
-      },
-      {
-        "node_id": "node_north_2",
-        "event_id": "evt_tunnel",
-        "blame_score": 0.14,
-        "description": "lost 1 food",
-        "steps_to_death": 2
-      },
-      {
-        "node_id": "node_mid",
-        "event_id": "evt_checkpoint",
-        "blame_score": 0.13,
-        "description": "accepted combat risk",
-        "steps_to_death": 1
-      }
-    ],
+    "death_chain_length": 0,
+    "primary_blame_factor": null,
+    "regret_nodes": [],
     "steps_from_regret_to_death": 0,
     "is_trash_time_death": false
   }

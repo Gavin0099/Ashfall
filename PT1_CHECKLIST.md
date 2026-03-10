@@ -23,8 +23,10 @@ Optional bootstrap:
 
 ```bash
 python scripts/bootstrap_pt1_sessions.py
+python scripts/generate_pt1_operator_packet.py
 ```
 - [ ] Review [PT1_SEED_ASSIGNMENT.md](e:\BackUp\Git_EE\Ashfall\PT1_SEED_ASSIGNMENT.md)
+- [ ] Review [PT1_operator_packet.md](e:\BackUp\Git_EE\Ashfall\output\playtests\PT1_operator_packet.md)
 
 Recommended naming:
 

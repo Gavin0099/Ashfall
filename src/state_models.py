@@ -4,6 +4,15 @@ from dataclasses import dataclass, field
 from typing import Dict, List, Literal, Optional
 
 NodeType = Literal["resource", "combat", "trade", "story"]
+EquipmentSlot = Literal["weapon", "armor", "tool"]
+
+ITEM_SLOT_BY_ID: Dict[str, EquipmentSlot] = {
+    "makeshift_blade": "weapon",
+    "rust_rifle": "weapon",
+    "gas_mask": "armor",
+    "scavenger_kit": "tool",
+    "field_pack": "tool",
+}
 
 
 @dataclass
@@ -14,6 +23,9 @@ class PlayerState:
     medkits: int
     scrap: int = 0
     radiation: int = 0
+    weapon_slot: Optional[str] = None
+    armor_slot: Optional[str] = None
+    tool_slot: Optional[str] = None
 
     def is_dead(self) -> bool:
         return self.hp <= 0 or self.food <= 0
@@ -73,6 +85,28 @@ class RunState:
         self.ended = True
         self.victory = victory
         self.end_reason = reason
+
+
+def equip_item(player: PlayerState, slot: EquipmentSlot, item: str) -> Dict[str, Optional[str] | bool]:
+    expected_slot = ITEM_SLOT_BY_ID.get(item)
+    if expected_slot is None:
+        raise ValueError(f"Unknown equipment item: {item}")
+    if expected_slot != slot:
+        raise ValueError(f"Equipment slot mismatch: item {item} cannot be equipped to {slot}")
+
+    slot_attr = f"{slot}_slot"
+    previous = getattr(player, slot_attr)
+    if previous == item:
+        return {"slot": slot, "item": item, "replaced": previous, "changed": False}
+
+    setattr(player, slot_attr, item)
+
+    # Field Pack uses a temporary +2 food proxy until a true capacity system exists.
+    if item == "field_pack":
+        player.food += 2
+
+    player.food = max(0, player.food)
+    return {"slot": slot, "item": item, "replaced": previous, "changed": True}
 
 
 def apply_effects(player: PlayerState, effects: Dict[str, int]) -> None:

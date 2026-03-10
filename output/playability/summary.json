@@ -18,7 +18,11 @@
         "food": 4,
         "ammo": 3,
         "medkits": 1,
-        "radiation": 2
+        "scrap": 0,
+        "radiation": 2,
+        "weapon_slot": "rust_rifle",
+        "armor_slot": null,
+        "tool_slot": null
       },
       "moments": [
         {
@@ -27,8 +31,19 @@
           "event_outcome": {
             "event_id": "evt_scrapyard",
             "option_index": 0,
-            "option_text": "Rush the best wrecks before anyone reacts",
-            "combat_triggered": false
+            "option_text": "\u8d81\u6c92\u4eba\u53cd\u61c9\u904e\u4f86\u5148\u885d\u6700\u597d\u7684\u6b98\u9ab8",
+            "combat_triggered": false,
+            "equipment_reward": {
+              "slot": "weapon",
+              "item": "makeshift_blade"
+            },
+            "equipment_change": {
+              "slot": "weapon",
+              "item": "makeshift_blade",
+              "replaced": null,
+              "changed": true
+            },
+            "scavenger_bonus": {}
           },
           "warning_signals": [
             "DANGER: this choice carries a high combat risk."
@@ -38,14 +53,23 @@
             "food": 6,
             "ammo": 3,
             "medkits": 1,
-            "radiation": 0
+            "scrap": 0,
+            "radiation": 0,
+            "weapon_slot": null,
+            "armor_slot": null,
+            "tool_slot": null
           },
+          "equipment_summary": "weapon -> makeshift_blade (replaced empty)",
           "player": {
             "hp": 10,
             "food": 7,
             "ammo": 5,
             "medkits": 1,
-            "radiation": 0
+            "scrap": 0,
+            "radiation": 0,
+            "weapon_slot": "makeshift_blade",
+            "armor_slot": null,
+            "tool_slot": null
           },
           "pressure": true
         },
@@ -55,8 +79,11 @@
           "event_outcome": {
             "event_id": "evt_tunnel",
             "option_index": 0,
-            "option_text": "Rush through debris",
+            "option_text": "\u786c\u95d6\u788e\u77f3\u5806",
             "combat_triggered": true,
+            "equipment_reward": null,
+            "equipment_change": null,
+            "scavenger_bonus": {},
             "combat": {
               "skipped": false,
               "enemy_id": "enemy_mutant_brute",
@@ -65,13 +92,13 @@
               "player_hp": 5,
               "enemy_hp": 0,
               "log": [
-                "R1: player attacks for 1",
-                "R1: enemy attacks for 1",
-                "R2: player attacks for 3",
-                "R2: enemy attacks for 1",
-                "R3: player attacks for 2",
-                "R3: enemy attacks for 2",
-                "R4: player attacks for 1"
+                "\u7b2c 1 \u56de\u5408\uff1a\u4f60\u653b\u64ca\u4e26\u9020\u6210 1 \u9ede\u50b7\u5bb3",
+                "\u7b2c 1 \u56de\u5408\uff1a\u6575\u4eba\u653b\u64ca\uff0c\u9020\u6210 1 \u9ede\u50b7\u5bb3",
+                "\u7b2c 2 \u56de\u5408\uff1a\u4f60\u653b\u64ca\u4e26\u9020\u6210 3 \u9ede\u50b7\u5bb3",
+                "\u7b2c 2 \u56de\u5408\uff1a\u6575\u4eba\u653b\u64ca\uff0c\u9020\u6210 1 \u9ede\u50b7\u5bb3",
+                "\u7b2c 3 \u56de\u5408\uff1a\u4f60\u653b\u64ca\u4e26\u9020\u6210 2 \u9ede\u50b7\u5bb3",
+                "\u7b2c 3 \u56de\u5408\uff1a\u6575\u4eba\u653b\u64ca\uff0c\u9020\u6210 2 \u9ede\u50b7\u5bb3",
+                "\u7b2c 4 \u56de\u5408\uff1a\u4f60\u653b\u64ca\u4e26\u9020\u6210 1 \u9ede\u50b7\u5bb3"
               ]
             }
           },
@@ -85,14 +112,23 @@
             "food": 6,
             "ammo": 5,
             "medkits": 1,
-            "radiation": 0
+            "scrap": 0,
+            "radiation": 0,
+            "weapon_slot": "makeshift_blade",
+            "armor_slot": null,
+            "tool_slot": null
           },
+          "equipment_summary": null,
           "player": {
             "hp": 5,
             "food": 6,
             "ammo": 2,
             "medkits": 1,
-            "radiation": 1
+            "scrap": 0,
+            "radiation": 1,
+            "weapon_slot": "makeshift_blade",
+            "armor_slot": null,
+            "tool_slot": null
           },
           "pressure": true
         },
@@ -102,8 +138,19 @@
           "event_outcome": {
             "event_id": "evt_checkpoint",
             "option_index": 0,
-            "option_text": "Hit the checkpoint before it hits back",
-            "combat_triggered": false
+            "option_text": "\u5728\u5c0d\u65b9\u958b\u706b\u524d\u5148\u6253\u7a7f\u6574\u689d\u9632\u7dda",
+            "combat_triggered": false,
+            "equipment_reward": {
+              "slot": "weapon",
+              "item": "rust_rifle"
+            },
+            "equipment_change": {
+              "slot": "weapon",
+              "item": "rust_rifle",
+              "replaced": "makeshift_blade",
+              "changed": true
+            },
+            "scavenger_bonus": {}
           },
           "warning_signals": [
             "WARNING: radiation will continue to threaten future travel.",
@@ -114,14 +161,23 @@
             "food": 5,
             "ammo": 2,
             "medkits": 1,
-            "radiation": 1
+            "scrap": 0,
+            "radiation": 1,
+            "weapon_slot": "makeshift_blade",
+            "armor_slot": null,
+            "tool_slot": null
           },
+          "equipment_summary": "weapon -> rust_rifle (replaced makeshift_blade)",
           "player": {
             "hp": 4,
             "food": 5,
             "ammo": 3,
             "medkits": 1,
-            "radiation": 1
+            "scrap": 0,
+            "radiation": 1,
+            "weapon_slot": "rust_rifle",
+            "armor_slot": null,
+            "tool_slot": null
           },
           "pressure": true
         },
@@ -131,8 +187,11 @@
           "event_outcome": {
             "event_id": "evt_final",
             "option_index": 1,
-            "option_text": "Sprint the ridge and trust momentum",
-            "combat_triggered": false
+            "option_text": "\u6cbf\u8457\u5c71\u810a\u786c\u885d\uff0c\u8ced\u81ea\u5df1\u6490\u5f97\u4f4f",
+            "combat_triggered": false,
+            "equipment_reward": null,
+            "equipment_change": null,
+            "scavenger_bonus": {}
           },
           "warning_signals": [
             "WARNING: radiation will continue to threaten future travel.",
@@ -144,14 +203,23 @@
             "food": 4,
             "ammo": 3,
             "medkits": 1,
-            "radiation": 1
+            "scrap": 0,
+            "radiation": 1,
+            "weapon_slot": "rust_rifle",
+            "armor_slot": null,
+            "tool_slot": null
           },
+          "equipment_summary": null,
           "player": {
             "hp": 2,
             "food": 4,
             "ammo": 3,
             "medkits": 1,
-            "radiation": 2
+            "scrap": 0,
+            "radiation": 2,
+            "weapon_slot": "rust_rifle",
+            "armor_slot": null,
+            "tool_slot": null
           },
           "pressure": true
         }
@@ -174,7 +242,10 @@
           "ammo": 3,
           "medkits": 1,
           "scrap": 0,
-          "radiation": 2
+          "radiation": 2,
+          "weapon_slot": "rust_rifle",
+          "armor_slot": null,
+          "tool_slot": null
         },
         "decision_log": [
           {
@@ -190,7 +261,11 @@
               "food": 6,
               "ammo": 3,
               "medkits": 1,
-              "radiation": 0
+              "scrap": 0,
+              "radiation": 0,
+              "weapon_slot": null,
+              "armor_slot": null,
+              "tool_slot": null
             },
             "pressure": true,
             "combat_triggered": false,
@@ -198,12 +273,23 @@
               "food": 1,
               "ammo": 2
             },
+            "equipment_change": {
+              "slot": "weapon",
+              "item": "makeshift_blade",
+              "replaced": null,
+              "changed": true
+            },
+            "equipment_summary": "weapon -> makeshift_blade (replaced empty)",
             "player_after": {
               "hp": 10,
               "food": 7,
               "ammo": 5,
               "medkits": 1,
-              "radiation": 0
+              "scrap": 0,
+              "radiation": 0,
+              "weapon_slot": "makeshift_blade",
+              "armor_slot": null,
+              "tool_slot": null
             }
           },
           {
@@ -221,7 +307,11 @@
               "food": 6,
               "ammo": 5,
               "medkits": 1,
-              "radiation": 0
+              "scrap": 0,
+              "radiation": 0,
+              "weapon_slot": "makeshift_blade",
+              "armor_slot": null,
+              "tool_slot": null
             },
             "pressure": true,
             "combat_triggered": true,
@@ -230,12 +320,18 @@
               "ammo": 1,
               "radiation": 1
             },
+            "equipment_change": null,
+            "equipment_summary": null,
             "player_after": {
               "hp": 5,
               "food": 6,
               "ammo": 2,
               "medkits": 1,
-              "radiation": 1
+              "scrap": 0,
+              "radiation": 1,
+              "weapon_slot": "makeshift_blade",
+              "armor_slot": null,
+              "tool_slot": null
             }
           },
           {
@@ -252,19 +348,34 @@
               "food": 5,
               "ammo": 2,
               "medkits": 1,
-              "radiation": 1
+              "scrap": 0,
+              "radiation": 1,
+              "weapon_slot": "makeshift_blade",
+              "armor_slot": null,
+              "tool_slot": null
             },
             "pressure": true,
             "combat_triggered": false,
             "effects": {
               "ammo": 1
             },
+            "equipment_change": {
+              "slot": "weapon",
+              "item": "rust_rifle",
+              "replaced": "makeshift_blade",
+              "changed": true
+            },
+            "equipment_summary": "weapon -> rust_rifle (replaced makeshift_blade)",
             "player_after": {
               "hp": 4,
               "food": 5,
               "ammo": 3,
               "medkits": 1,
-              "radiation": 1
+              "scrap": 0,
+              "radiation": 1,
+              "weapon_slot": "rust_rifle",
+              "armor_slot": null,
+              "tool_slot": null
             }
           },
           {
@@ -282,7 +393,11 @@
               "food": 4,
               "ammo": 3,
               "medkits": 1,
-              "radiation": 1
+              "scrap": 0,
+              "radiation": 1,
+              "weapon_slot": "rust_rifle",
+              "armor_slot": null,
+              "tool_slot": null
             },
             "pressure": true,
             "combat_triggered": false,
@@ -290,19 +405,25 @@
               "hp": -1,
               "radiation": 1
             },
+            "equipment_change": null,
+            "equipment_summary": null,
             "player_after": {
               "hp": 2,
               "food": 4,
               "ammo": 3,
               "medkits": 1,
-              "radiation": 2
+              "scrap": 0,
+              "radiation": 2,
+              "weapon_slot": "rust_rifle",
+              "armor_slot": null,
+              "tool_slot": null
             }
           }
         ],
         "summary": {
           "pressure_count": 4,
           "death_cause_attribution": true,
-          "resource_signature": "hp:2|food:4|ammo:3|medkits:1|scrap:0|radiation:2"
+          "resource_signature": "hp:2|food:4|ammo:3|medkits:1|scrap:0|radiation:2|weapon:rust_rifle|armor:None|tool:None"
         },
         "failure_analysis": {
           "death_chain_length": 0,
@@ -331,7 +452,11 @@
         "food": 0,
         "ammo": 3,
         "medkits": 2,
-        "radiation": 0
+        "scrap": 0,
+        "radiation": 0,
+        "weapon_slot": null,
+        "armor_slot": null,
+        "tool_slot": null
       },
       "moments": [
         {
@@ -340,8 +465,11 @@
           "event_outcome": {
             "event_id": "evt_scrapyard",
             "option_index": 1,
-            "option_text": "Bypass and conserve",
-            "combat_triggered": false
+            "option_text": "\u7e5e\u904e\u53bb\uff0c\u4fdd\u7559\u9ad4\u529b",
+            "combat_triggered": false,
+            "equipment_reward": null,
+            "equipment_change": null,
+            "scavenger_bonus": {}
           },
           "warning_signals": [],
           "pre_choice_state": {
@@ -349,14 +477,23 @@
             "food": 6,
             "ammo": 3,
             "medkits": 1,
-            "radiation": 0
+            "scrap": 0,
+            "radiation": 0,
+            "weapon_slot": null,
+            "armor_slot": null,
+            "tool_slot": null
           },
+          "equipment_summary": null,
           "player": {
             "hp": 10,
             "food": 5,
             "ammo": 3,
             "medkits": 1,
-            "radiation": 0
+            "scrap": 0,
+            "radiation": 0,
+            "weapon_slot": null,
+            "armor_slot": null,
+            "tool_slot": null
           },
           "pressure": true
         },
@@ -366,8 +503,11 @@
           "event_outcome": {
             "event_id": "evt_tunnel",
             "option_index": 1,
-            "option_text": "Hold position and move at first light",
-            "combat_triggered": false
+            "option_text": "\u5148\u7a69\u4f4f\u4f4d\u7f6e\uff0c\u7b49\u8996\u7dda\u597d\u4e00\u9ede\u518d\u52d5",
+            "combat_triggered": false,
+            "equipment_reward": null,
+            "equipment_change": null,
+            "scavenger_bonus": {}
           },
           "warning_signals": [],
           "pre_choice_state": {
@@ -375,14 +515,23 @@
             "food": 4,
             "ammo": 3,
             "medkits": 1,
-            "radiation": 0
+            "scrap": 0,
+            "radiation": 0,
+            "weapon_slot": null,
+            "armor_slot": null,
+            "tool_slot": null
           },
+          "equipment_summary": null,
           "player": {
             "hp": 10,
             "food": 3,
             "ammo": 3,
             "medkits": 2,
-            "radiation": 0
+            "scrap": 0,
+            "radiation": 0,
+            "weapon_slot": null,
+            "armor_slot": null,
+            "tool_slot": null
           },
           "pressure": true
         },
@@ -392,8 +541,11 @@
           "event_outcome": {
             "event_id": "evt_checkpoint",
             "option_index": 1,
-            "option_text": "Sneak around",
-            "combat_triggered": false
+            "option_text": "\u5077\u5077\u7e5e\u904e\u53bb",
+            "combat_triggered": false,
+            "equipment_reward": null,
+            "equipment_change": null,
+            "scavenger_bonus": {}
           },
           "warning_signals": [
             "WARNING: food is low and route slack is nearly gone."
@@ -403,14 +555,23 @@
             "food": 2,
             "ammo": 3,
             "medkits": 2,
-            "radiation": 0
+            "scrap": 0,
+            "radiation": 0,
+            "weapon_slot": null,
+            "armor_slot": null,
+            "tool_slot": null
           },
+          "equipment_summary": null,
           "player": {
             "hp": 10,
             "food": 1,
             "ammo": 3,
             "medkits": 2,
-            "radiation": 0
+            "scrap": 0,
+            "radiation": 0,
+            "weapon_slot": null,
+            "armor_slot": null,
+            "tool_slot": null
           },
           "pressure": true
         },
@@ -420,8 +581,11 @@
           "event_outcome": {
             "event_id": "evt_final",
             "option_index": 0,
-            "option_text": "Use scarce supplies to make the climb safe",
-            "combat_triggered": false
+            "option_text": "\u7528\u7a00\u7f3a\u7269\u8cc7\u63db\u4e00\u6bb5\u66f4\u7a69\u7684\u767b\u5761",
+            "combat_triggered": false,
+            "equipment_reward": null,
+            "equipment_change": null,
+            "scavenger_bonus": {}
           },
           "warning_signals": [
             "WARNING: food is low and route slack is nearly gone."
@@ -431,14 +595,23 @@
             "food": 0,
             "ammo": 3,
             "medkits": 2,
-            "radiation": 0
+            "scrap": 0,
+            "radiation": 0,
+            "weapon_slot": null,
+            "armor_slot": null,
+            "tool_slot": null
           },
+          "equipment_summary": null,
           "player": {
             "hp": 10,
             "food": 0,
             "ammo": 3,
             "medkits": 2,
-            "radiation": 0
+            "scrap": 0,
+            "radiation": 0,
+            "weapon_slot": null,
+            "armor_slot": null,
+            "tool_slot": null
           },
           "pressure": true
         }
@@ -461,7 +634,10 @@
           "ammo": 3,
           "medkits": 2,
           "scrap": 0,
-          "radiation": 0
+          "radiation": 0,
+          "weapon_slot": null,
+          "armor_slot": null,
+          "tool_slot": null
         },
         "decision_log": [
           {
@@ -475,19 +651,29 @@
               "food": 6,
               "ammo": 3,
               "medkits": 1,
-              "radiation": 0
+              "scrap": 0,
+              "radiation": 0,
+              "weapon_slot": null,
+              "armor_slot": null,
+              "tool_slot": null
             },
             "pressure": true,
             "combat_triggered": false,
             "effects": {
               "food": -1
             },
+            "equipment_change": null,
+            "equipment_summary": null,
             "player_after": {
               "hp": 10,
               "food": 5,
               "ammo": 3,
               "medkits": 1,
-              "radiation": 0
+              "scrap": 0,
+              "radiation": 0,
+              "weapon_slot": null,
+              "armor_slot": null,
+              "tool_slot": null
             }
           },
           {
@@ -501,7 +687,11 @@
               "food": 4,
               "ammo": 3,
               "medkits": 1,
-              "radiation": 0
+              "scrap": 0,
+              "radiation": 0,
+              "weapon_slot": null,
+              "armor_slot": null,
+              "tool_slot": null
             },
             "pressure": true,
             "combat_triggered": false,
@@ -509,12 +699,18 @@
               "food": -1,
               "medkits": 1
             },
+            "equipment_change": null,
+            "equipment_summary": null,
             "player_after": {
               "hp": 10,
               "food": 3,
               "ammo": 3,
               "medkits": 2,
-              "radiation": 0
+              "scrap": 0,
+              "radiation": 0,
+              "weapon_slot": null,
+              "armor_slot": null,
+              "tool_slot": null
             }
           },
           {
@@ -530,19 +726,29 @@
               "food": 2,
               "ammo": 3,
               "medkits": 2,
-              "radiation": 0
+              "scrap": 0,
+              "radiation": 0,
+              "weapon_slot": null,
+              "armor_slot": null,
+              "tool_slot": null
             },
             "pressure": true,
             "combat_triggered": false,
             "effects": {
               "food": -1
             },
+            "equipment_change": null,
+            "equipment_summary": null,
             "player_after": {
               "hp": 10,
               "food": 1,
               "ammo": 3,
               "medkits": 2,
-              "radiation": 0
+              "scrap": 0,
+              "radiation": 0,
+              "weapon_slot": null,
+              "armor_slot": null,
+              "tool_slot": null
             }
           },
           {
@@ -558,26 +764,36 @@
               "food": 0,
               "ammo": 3,
               "medkits": 2,
-              "radiation": 0
+              "scrap": 0,
+              "radiation": 0,
+              "weapon_slot": null,
+              "armor_slot": null,
+              "tool_slot": null
             },
             "pressure": true,
             "combat_triggered": false,
             "effects": {
               "food": -1
             },
+            "equipment_change": null,
+            "equipment_summary": null,
             "player_after": {
               "hp": 10,
               "food": 0,
               "ammo": 3,
               "medkits": 2,
-              "radiation": 0
+              "scrap": 0,
+              "radiation": 0,
+              "weapon_slot": null,
+              "armor_slot": null,
+              "tool_slot": null
             }
           }
         ],
         "summary": {
           "pressure_count": 4,
           "death_cause_attribution": true,
-          "resource_signature": "hp:10|food:0|ammo:3|medkits:2|scrap:0|radiation:0"
+          "resource_signature": "hp:10|food:0|ammo:3|medkits:2|scrap:0|radiation:0|weapon:None|armor:None|tool:None"
         },
         "failure_analysis": {
           "death_chain_length": 3,
@@ -621,14 +837,18 @@
       ],
       "pressure_count": 4,
       "ended": true,
-      "victory": false,
-      "end_reason": "radiation_death",
+      "victory": true,
+      "end_reason": "reached_final_node",
       "player_final": {
-        "hp": 0,
-        "food": 4,
-        "ammo": 0,
+        "hp": 4,
+        "food": 6,
+        "ammo": 2,
         "medkits": 1,
-        "radiation": 3
+        "scrap": 0,
+        "radiation": 3,
+        "weapon_slot": "rust_rifle",
+        "armor_slot": null,
+        "tool_slot": "field_pack"
       },
       "moments": [
         {
@@ -637,8 +857,11 @@
           "event_outcome": {
             "event_id": "evt_village",
             "option_index": 1,
-            "option_text": "Strip the stalls before the owners return",
-            "combat_triggered": false
+            "option_text": "\u8d81\u4e3b\u4eba\u56de\u4f86\u524d\u628a\u6524\u4f4d\u7ffb\u500b\u4e7e\u6de8",
+            "combat_triggered": false,
+            "equipment_reward": null,
+            "equipment_change": null,
+            "scavenger_bonus": {}
           },
           "warning_signals": [
             "WARNING: radiation will continue to threaten future travel.",
@@ -650,14 +873,23 @@
             "food": 6,
             "ammo": 3,
             "medkits": 1,
-            "radiation": 0
+            "scrap": 0,
+            "radiation": 0,
+            "weapon_slot": null,
+            "armor_slot": null,
+            "tool_slot": null
           },
+          "equipment_summary": null,
           "player": {
             "hp": 10,
             "food": 8,
             "ammo": 3,
             "medkits": 1,
-            "radiation": 1
+            "scrap": 0,
+            "radiation": 1,
+            "weapon_slot": null,
+            "armor_slot": null,
+            "tool_slot": null
           },
           "pressure": true
         },
@@ -667,8 +899,19 @@
           "event_outcome": {
             "event_id": "evt_floodplain",
             "option_index": 0,
-            "option_text": "Cross quickly",
-            "combat_triggered": false
+            "option_text": "\u5feb\u901f\u786c\u7a7f\u904e\u53bb",
+            "combat_triggered": false,
+            "equipment_reward": {
+              "slot": "tool",
+              "item": "field_pack"
+            },
+            "equipment_change": {
+              "slot": "tool",
+              "item": "field_pack",
+              "replaced": null,
+              "changed": true
+            },
+            "scavenger_bonus": {}
           },
           "warning_signals": [
             "WARNING: radiation will continue to threaten future travel.",
@@ -679,14 +922,23 @@
             "food": 7,
             "ammo": 3,
             "medkits": 1,
-            "radiation": 1
+            "scrap": 0,
+            "radiation": 1,
+            "weapon_slot": null,
+            "armor_slot": null,
+            "tool_slot": null
           },
+          "equipment_summary": "tool -> field_pack (replaced empty)",
           "player": {
             "hp": 9,
-            "food": 6,
+            "food": 8,
             "ammo": 3,
             "medkits": 1,
-            "radiation": 2
+            "scrap": 0,
+            "radiation": 2,
+            "weapon_slot": null,
+            "armor_slot": null,
+            "tool_slot": "field_pack"
           },
           "pressure": true
         },
@@ -696,23 +948,30 @@
           "event_outcome": {
             "event_id": "evt_checkpoint",
             "option_index": 0,
-            "option_text": "Assault the line",
+            "option_text": "\u6b63\u9762\u5f37\u653b",
             "combat_triggered": true,
+            "equipment_reward": {
+              "slot": "weapon",
+              "item": "rust_rifle"
+            },
+            "equipment_change": {
+              "slot": "weapon",
+              "item": "rust_rifle",
+              "replaced": null,
+              "changed": true
+            },
+            "scavenger_bonus": {},
             "combat": {
               "skipped": false,
               "enemy_id": "enemy_raider_scout",
               "victory": true,
-              "rounds": 4,
-              "player_hp": 2,
-              "enemy_hp": -2,
+              "rounds": 2,
+              "player_hp": 6,
+              "enemy_hp": 0,
               "log": [
-                "R1: player attacks for 1",
-                "R1: enemy attacks for 2",
-                "R2: player attacks for 2",
-                "R2: enemy attacks for 2",
-                "R3: player attacks for 1",
-                "R3: enemy attacks for 2",
-                "R4: player attacks for 3"
+                "\u7b2c 1 \u56de\u5408\uff1a\u4f60\u653b\u64ca\u4e26\u9020\u6210 2 \u9ede\u50b7\u5bb3",
+                "\u7b2c 1 \u56de\u5408\uff1a\u6575\u4eba\u653b\u64ca\uff0c\u9020\u6210 2 \u9ede\u50b7\u5bb3",
+                "\u7b2c 2 \u56de\u5408\uff1a\u4f60\u653b\u64ca\u4e26\u9020\u6210 3 \u9ede\u50b7\u5bb3"
               ]
             }
           },
@@ -722,17 +981,26 @@
           ],
           "pre_choice_state": {
             "hp": 8,
-            "food": 5,
+            "food": 7,
             "ammo": 3,
             "medkits": 1,
-            "radiation": 2
+            "scrap": 0,
+            "radiation": 2,
+            "weapon_slot": null,
+            "armor_slot": null,
+            "tool_slot": "field_pack"
           },
+          "equipment_summary": "weapon -> rust_rifle (replaced empty)",
           "player": {
-            "hp": 2,
-            "food": 5,
-            "ammo": 0,
+            "hp": 6,
+            "food": 7,
+            "ammo": 2,
             "medkits": 1,
-            "radiation": 2
+            "scrap": 0,
+            "radiation": 2,
+            "weapon_slot": "rust_rifle",
+            "armor_slot": null,
+            "tool_slot": "field_pack"
           },
           "pressure": true
         },
@@ -742,27 +1010,38 @@
           "event_outcome": {
             "event_id": "evt_final",
             "option_index": 1,
-            "option_text": "Sprint the ridge and trust momentum",
-            "combat_triggered": false
+            "option_text": "\u6cbf\u8457\u5c71\u810a\u786c\u885d\uff0c\u8ced\u81ea\u5df1\u6490\u5f97\u4f4f",
+            "combat_triggered": false,
+            "equipment_reward": null,
+            "equipment_change": null,
+            "scavenger_bonus": {}
           },
           "warning_signals": [
             "WARNING: radiation will continue to threaten future travel.",
-            "WARNING: this option adds radiation and increases long-term risk.",
-            "CRITICAL: another irradiated move may kill you."
+            "WARNING: this option adds radiation and increases long-term risk."
           ],
           "pre_choice_state": {
-            "hp": 1,
-            "food": 4,
-            "ammo": 0,
+            "hp": 5,
+            "food": 6,
+            "ammo": 2,
             "medkits": 1,
-            "radiation": 2
+            "scrap": 0,
+            "radiation": 2,
+            "weapon_slot": "rust_rifle",
+            "armor_slot": null,
+            "tool_slot": "field_pack"
           },
+          "equipment_summary": null,
           "player": {
-            "hp": 0,
-            "food": 4,
-            "ammo": 0,
+            "hp": 4,
+            "food": 6,
+            "ammo": 2,
             "medkits": 1,
-            "radiation": 3
+            "scrap": 0,
+            "radiation": 3,
+            "weapon_slot": "rust_rifle",
+            "armor_slot": null,
+            "tool_slot": "field_pack"
           },
           "pressure": true
         }
@@ -777,15 +1056,18 @@
           "node_final"
         ],
         "ended": true,
-        "victory": false,
-        "end_reason": "radiation_death",
+        "victory": true,
+        "end_reason": "reached_final_node",
         "player_final": {
-          "hp": 0,
-          "food": 4,
-          "ammo": 0,
+          "hp": 4,
+          "food": 6,
+          "ammo": 2,
           "medkits": 1,
           "scrap": 0,
-          "radiation": 3
+          "radiation": 3,
+          "weapon_slot": "rust_rifle",
+          "armor_slot": null,
+          "tool_slot": "field_pack"
         },
         "decision_log": [
           {
@@ -803,7 +1085,11 @@
               "food": 6,
               "ammo": 3,
               "medkits": 1,
-              "radiation": 0
+              "scrap": 0,
+              "radiation": 0,
+              "weapon_slot": null,
+              "armor_slot": null,
+              "tool_slot": null
             },
             "pressure": true,
             "combat_triggered": false,
@@ -811,12 +1097,18 @@
               "food": 2,
               "radiation": 1
             },
+            "equipment_change": null,
+            "equipment_summary": null,
             "player_after": {
               "hp": 10,
               "food": 8,
               "ammo": 3,
               "medkits": 1,
-              "radiation": 1
+              "scrap": 0,
+              "radiation": 1,
+              "weapon_slot": null,
+              "armor_slot": null,
+              "tool_slot": null
             }
           },
           {
@@ -833,7 +1125,11 @@
               "food": 7,
               "ammo": 3,
               "medkits": 1,
-              "radiation": 1
+              "scrap": 0,
+              "radiation": 1,
+              "weapon_slot": null,
+              "armor_slot": null,
+              "tool_slot": null
             },
             "pressure": true,
             "combat_triggered": false,
@@ -841,12 +1137,23 @@
               "food": -1,
               "radiation": 1
             },
+            "equipment_change": {
+              "slot": "tool",
+              "item": "field_pack",
+              "replaced": null,
+              "changed": true
+            },
+            "equipment_summary": "tool -> field_pack (replaced empty)",
             "player_after": {
               "hp": 9,
-              "food": 6,
+              "food": 8,
               "ammo": 3,
               "medkits": 1,
-              "radiation": 2
+              "scrap": 0,
+              "radiation": 2,
+              "weapon_slot": null,
+              "armor_slot": null,
+              "tool_slot": "field_pack"
             }
           },
           {
@@ -860,22 +1167,37 @@
             ],
             "pre_choice_state": {
               "hp": 8,
-              "food": 5,
+              "food": 7,
               "ammo": 3,
               "medkits": 1,
-              "radiation": 2
+              "scrap": 0,
+              "radiation": 2,
+              "weapon_slot": null,
+              "armor_slot": null,
+              "tool_slot": "field_pack"
             },
             "pressure": true,
             "combat_triggered": true,
             "effects": {
               "ammo": 1
             },
+            "equipment_change": {
+              "slot": "weapon",
+              "item": "rust_rifle",
+              "replaced": null,
+              "changed": true
+            },
+            "equipment_summary": "weapon -> rust_rifle (replaced empty)",
             "player_after": {
-              "hp": 2,
-              "food": 5,
-              "ammo": 0,
+              "hp": 6,
+              "food": 7,
+              "ammo": 2,
               "medkits": 1,
-              "radiation": 2
+              "scrap": 0,
+              "radiation": 2,
+              "weapon_slot": "rust_rifle",
+              "armor_slot": null,
+              "tool_slot": "field_pack"
             }
           },
           {
@@ -885,15 +1207,18 @@
             "option_index": 1,
             "warning_signals": [
               "WARNING: radiation will continue to threaten future travel.",
-              "WARNING: this option adds radiation and increases long-term risk.",
-              "CRITICAL: another irradiated move may kill you."
+              "WARNING: this option adds radiation and increases long-term risk."
             ],
             "pre_choice_state": {
-              "hp": 1,
-              "food": 4,
-              "ammo": 0,
+              "hp": 5,
+              "food": 6,
+              "ammo": 2,
               "medkits": 1,
-              "radiation": 2
+              "scrap": 0,
+              "radiation": 2,
+              "weapon_slot": "rust_rifle",
+              "armor_slot": null,
+              "tool_slot": "field_pack"
             },
             "pressure": true,
             "combat_triggered": false,
@@ -901,46 +1226,30 @@
               "hp": -1,
               "radiation": 1
             },
+            "equipment_change": null,
+            "equipment_summary": null,
             "player_after": {
-              "hp": 0,
-              "food": 4,
-              "ammo": 0,
+              "hp": 4,
+              "food": 6,
+              "ammo": 2,
               "medkits": 1,
-              "radiation": 3
+              "scrap": 0,
+              "radiation": 3,
+              "weapon_slot": "rust_rifle",
+              "armor_slot": null,
+              "tool_slot": "field_pack"
             }
           }
         ],
         "summary": {
           "pressure_count": 4,
           "death_cause_attribution": true,
-          "resource_signature": "hp:0|food:4|ammo:0|medkits:1|scrap:0|radiation:3"
+          "resource_signature": "hp:4|food:6|ammo:2|medkits:1|scrap:0|radiation:3|weapon:rust_rifle|armor:None|tool:field_pack"
         },
         "failure_analysis": {
-          "death_chain_length": 3,
-          "primary_blame_factor": "radiation",
-          "regret_nodes": [
-            {
-              "node_id": "node_final",
-              "event_id": "evt_final",
-              "blame_score": 0.37,
-              "description": "took +1 radiation, lost 1 hp",
-              "steps_to_death": 0
-            },
-            {
-              "node_id": "node_south_2",
-              "event_id": "evt_floodplain",
-              "blame_score": 0.32,
-              "description": "took +1 radiation, lost 1 food",
-              "steps_to_death": 2
-            },
-            {
-              "node_id": "node_south_1",
-              "event_id": "evt_village",
-              "blame_score": 0.23,
-              "description": "took +1 radiation",
-              "steps_to_death": 3
-            }
-          ],
+          "death_chain_length": 0,
+          "primary_blame_factor": null,
+          "regret_nodes": [],
           "steps_from_regret_to_death": 0,
           "is_trash_time_death": false
         }
@@ -961,10 +1270,14 @@
       "end_reason": "reached_final_node",
       "player_final": {
         "hp": 10,
-        "food": 2,
+        "food": 3,
         "ammo": 1,
         "medkits": 2,
-        "radiation": 0
+        "scrap": 0,
+        "radiation": 0,
+        "weapon_slot": null,
+        "armor_slot": null,
+        "tool_slot": "scavenger_kit"
       },
       "moments": [
         {
@@ -973,8 +1286,19 @@
           "event_outcome": {
             "event_id": "evt_village",
             "option_index": 0,
-            "option_text": "Barter ammo for medkit",
-            "combat_triggered": false
+            "option_text": "\u62ff\u5f48\u85e5\u63db\u91ab\u7642\u5305",
+            "combat_triggered": false,
+            "equipment_reward": {
+              "slot": "tool",
+              "item": "scavenger_kit"
+            },
+            "equipment_change": {
+              "slot": "tool",
+              "item": "scavenger_kit",
+              "replaced": null,
+              "changed": true
+            },
+            "scavenger_bonus": {}
           },
           "warning_signals": [],
           "pre_choice_state": {
@@ -982,14 +1306,23 @@
             "food": 6,
             "ammo": 3,
             "medkits": 1,
-            "radiation": 0
+            "scrap": 0,
+            "radiation": 0,
+            "weapon_slot": null,
+            "armor_slot": null,
+            "tool_slot": null
           },
+          "equipment_summary": "tool -> scavenger_kit (replaced empty)",
           "player": {
             "hp": 10,
             "food": 6,
             "ammo": 2,
             "medkits": 2,
-            "radiation": 0
+            "scrap": 0,
+            "radiation": 0,
+            "weapon_slot": null,
+            "armor_slot": null,
+            "tool_slot": "scavenger_kit"
           },
           "pressure": true
         },
@@ -999,8 +1332,13 @@
           "event_outcome": {
             "event_id": "evt_floodplain",
             "option_index": 1,
-            "option_text": "Take a slower line and search for dry ground",
-            "combat_triggered": false
+            "option_text": "\u8d70\u6162\u4e00\u9ede\uff0c\u9806\u4fbf\u627e\u4e7e\u71e5\u5730\u5e36",
+            "combat_triggered": false,
+            "equipment_reward": null,
+            "equipment_change": null,
+            "scavenger_bonus": {
+              "food": 1
+            }
           },
           "warning_signals": [],
           "pre_choice_state": {
@@ -1008,14 +1346,23 @@
             "food": 5,
             "ammo": 2,
             "medkits": 2,
-            "radiation": 0
+            "scrap": 0,
+            "radiation": 0,
+            "weapon_slot": null,
+            "armor_slot": null,
+            "tool_slot": "scavenger_kit"
           },
+          "equipment_summary": null,
           "player": {
             "hp": 10,
-            "food": 6,
+            "food": 7,
             "ammo": 1,
             "medkits": 2,
-            "radiation": 0
+            "scrap": 0,
+            "radiation": 0,
+            "weapon_slot": null,
+            "armor_slot": null,
+            "tool_slot": "scavenger_kit"
           },
           "pressure": true
         },
@@ -1025,23 +1372,35 @@
           "event_outcome": {
             "event_id": "evt_checkpoint",
             "option_index": 1,
-            "option_text": "Sneak around",
-            "combat_triggered": false
+            "option_text": "\u5077\u5077\u7e5e\u904e\u53bb",
+            "combat_triggered": false,
+            "equipment_reward": null,
+            "equipment_change": null,
+            "scavenger_bonus": {}
           },
           "warning_signals": [],
           "pre_choice_state": {
             "hp": 10,
+            "food": 6,
+            "ammo": 1,
+            "medkits": 2,
+            "scrap": 0,
+            "radiation": 0,
+            "weapon_slot": null,
+            "armor_slot": null,
+            "tool_slot": "scavenger_kit"
+          },
+          "equipment_summary": null,
+          "player": {
+            "hp": 10,
             "food": 5,
             "ammo": 1,
             "medkits": 2,
-            "radiation": 0
-          },
-          "player": {
-            "hp": 10,
-            "food": 4,
-            "ammo": 1,
-            "medkits": 2,
-            "radiation": 0
+            "scrap": 0,
+            "radiation": 0,
+            "weapon_slot": null,
+            "armor_slot": null,
+            "tool_slot": "scavenger_kit"
           },
           "pressure": true
         },
@@ -1051,23 +1410,35 @@
           "event_outcome": {
             "event_id": "evt_final",
             "option_index": 0,
-            "option_text": "Use scarce supplies to make the climb safe",
-            "combat_triggered": false
+            "option_text": "\u7528\u7a00\u7f3a\u7269\u8cc7\u63db\u4e00\u6bb5\u66f4\u7a69\u7684\u767b\u5761",
+            "combat_triggered": false,
+            "equipment_reward": null,
+            "equipment_change": null,
+            "scavenger_bonus": {}
           },
           "warning_signals": [],
           "pre_choice_state": {
             "hp": 10,
+            "food": 4,
+            "ammo": 1,
+            "medkits": 2,
+            "scrap": 0,
+            "radiation": 0,
+            "weapon_slot": null,
+            "armor_slot": null,
+            "tool_slot": "scavenger_kit"
+          },
+          "equipment_summary": null,
+          "player": {
+            "hp": 10,
             "food": 3,
             "ammo": 1,
             "medkits": 2,
-            "radiation": 0
-          },
-          "player": {
-            "hp": 10,
-            "food": 2,
-            "ammo": 1,
-            "medkits": 2,
-            "radiation": 0
+            "scrap": 0,
+            "radiation": 0,
+            "weapon_slot": null,
+            "armor_slot": null,
+            "tool_slot": "scavenger_kit"
           },
           "pressure": true
         }
@@ -1086,11 +1457,14 @@
         "end_reason": "reached_final_node",
         "player_final": {
           "hp": 10,
-          "food": 2,
+          "food": 3,
           "ammo": 1,
           "medkits": 2,
           "scrap": 0,
-          "radiation": 0
+          "radiation": 0,
+          "weapon_slot": null,
+          "armor_slot": null,
+          "tool_slot": "scavenger_kit"
         },
         "decision_log": [
           {
@@ -1104,7 +1478,11 @@
               "food": 6,
               "ammo": 3,
               "medkits": 1,
-              "radiation": 0
+              "scrap": 0,
+              "radiation": 0,
+              "weapon_slot": null,
+              "armor_slot": null,
+              "tool_slot": null
             },
             "pressure": true,
             "combat_triggered": false,
@@ -1112,12 +1490,23 @@
               "ammo": -1,
               "medkits": 1
             },
+            "equipment_change": {
+              "slot": "tool",
+              "item": "scavenger_kit",
+              "replaced": null,
+              "changed": true
+            },
+            "equipment_summary": "tool -> scavenger_kit (replaced empty)",
             "player_after": {
               "hp": 10,
               "food": 6,
               "ammo": 2,
               "medkits": 2,
-              "radiation": 0
+              "scrap": 0,
+              "radiation": 0,
+              "weapon_slot": null,
+              "armor_slot": null,
+              "tool_slot": "scavenger_kit"
             }
           },
           {
@@ -1131,7 +1520,11 @@
               "food": 5,
               "ammo": 2,
               "medkits": 2,
-              "radiation": 0
+              "scrap": 0,
+              "radiation": 0,
+              "weapon_slot": null,
+              "armor_slot": null,
+              "tool_slot": "scavenger_kit"
             },
             "pressure": true,
             "combat_triggered": false,
@@ -1139,12 +1532,18 @@
               "food": 1,
               "ammo": -1
             },
+            "equipment_change": null,
+            "equipment_summary": null,
             "player_after": {
               "hp": 10,
-              "food": 6,
+              "food": 7,
               "ammo": 1,
               "medkits": 2,
-              "radiation": 0
+              "scrap": 0,
+              "radiation": 0,
+              "weapon_slot": null,
+              "armor_slot": null,
+              "tool_slot": "scavenger_kit"
             }
           },
           {
@@ -1155,22 +1554,32 @@
             "warning_signals": [],
             "pre_choice_state": {
               "hp": 10,
-              "food": 5,
+              "food": 6,
               "ammo": 1,
               "medkits": 2,
-              "radiation": 0
+              "scrap": 0,
+              "radiation": 0,
+              "weapon_slot": null,
+              "armor_slot": null,
+              "tool_slot": "scavenger_kit"
             },
             "pressure": true,
             "combat_triggered": false,
             "effects": {
               "food": -1
             },
+            "equipment_change": null,
+            "equipment_summary": null,
             "player_after": {
               "hp": 10,
-              "food": 4,
+              "food": 5,
               "ammo": 1,
               "medkits": 2,
-              "radiation": 0
+              "scrap": 0,
+              "radiation": 0,
+              "weapon_slot": null,
+              "armor_slot": null,
+              "tool_slot": "scavenger_kit"
             }
           },
           {
@@ -1181,29 +1590,39 @@
             "warning_signals": [],
             "pre_choice_state": {
               "hp": 10,
-              "food": 3,
+              "food": 4,
               "ammo": 1,
               "medkits": 2,
-              "radiation": 0
+              "scrap": 0,
+              "radiation": 0,
+              "weapon_slot": null,
+              "armor_slot": null,
+              "tool_slot": "scavenger_kit"
             },
             "pressure": true,
             "combat_triggered": false,
             "effects": {
               "food": -1
             },
+            "equipment_change": null,
+            "equipment_summary": null,
             "player_after": {
               "hp": 10,
-              "food": 2,
+              "food": 3,
               "ammo": 1,
               "medkits": 2,
-              "radiation": 0
+              "scrap": 0,
+              "radiation": 0,
+              "weapon_slot": null,
+              "armor_slot": null,
+              "tool_slot": "scavenger_kit"
             }
           }
         ],
         "summary": {
           "pressure_count": 4,
           "death_cause_attribution": true,
-          "resource_signature": "hp:10|food:2|ammo:1|medkits:2|scrap:0|radiation:0"
+          "resource_signature": "hp:10|food:3|ammo:1|medkits:2|scrap:0|radiation:0|weapon:None|armor:None|tool:scavenger_kit"
         },
         "failure_analysis": {
           "death_chain_length": 0,
@@ -1225,14 +1644,18 @@
       ],
       "pressure_count": 4,
       "ended": true,
-      "victory": false,
-      "end_reason": "radiation_death",
+      "victory": true,
+      "end_reason": "reached_final_node",
       "player_final": {
-        "hp": 0,
+        "hp": 2,
         "food": 3,
-        "ammo": 0,
+        "ammo": 1,
         "medkits": 2,
-        "radiation": 1
+        "scrap": 0,
+        "radiation": 1,
+        "weapon_slot": "rust_rifle",
+        "armor_slot": null,
+        "tool_slot": null
       },
       "moments": [
         {
@@ -1241,8 +1664,19 @@
           "event_outcome": {
             "event_id": "evt_scrapyard",
             "option_index": 0,
-            "option_text": "Rush the best wrecks before anyone reacts",
+            "option_text": "\u8d81\u6c92\u4eba\u53cd\u61c9\u904e\u4f86\u5148\u885d\u6700\u597d\u7684\u6b98\u9ab8",
             "combat_triggered": true,
+            "equipment_reward": {
+              "slot": "weapon",
+              "item": "makeshift_blade"
+            },
+            "equipment_change": {
+              "slot": "weapon",
+              "item": "makeshift_blade",
+              "replaced": null,
+              "changed": true
+            },
+            "scavenger_bonus": {},
             "combat": {
               "skipped": false,
               "enemy_id": "enemy_mutant_brute",
@@ -1251,11 +1685,11 @@
               "player_hp": 4,
               "enemy_hp": 0,
               "log": [
-                "R1: player attacks for 1",
-                "R1: enemy attacks for 3",
-                "R2: player attacks for 3",
-                "R2: enemy attacks for 3",
-                "R3: player attacks for 3"
+                "\u7b2c 1 \u56de\u5408\uff1a\u4f60\u653b\u64ca\u4e26\u9020\u6210 1 \u9ede\u50b7\u5bb3",
+                "\u7b2c 1 \u56de\u5408\uff1a\u6575\u4eba\u653b\u64ca\uff0c\u9020\u6210 3 \u9ede\u50b7\u5bb3",
+                "\u7b2c 2 \u56de\u5408\uff1a\u4f60\u653b\u64ca\u4e26\u9020\u6210 3 \u9ede\u50b7\u5bb3",
+                "\u7b2c 2 \u56de\u5408\uff1a\u6575\u4eba\u653b\u64ca\uff0c\u9020\u6210 3 \u9ede\u50b7\u5bb3",
+                "\u7b2c 3 \u56de\u5408\uff1a\u4f60\u653b\u64ca\u4e26\u9020\u6210 3 \u9ede\u50b7\u5bb3"
               ]
             }
           },
@@ -1267,14 +1701,23 @@
             "food": 6,
             "ammo": 3,
             "medkits": 1,
-            "radiation": 0
+            "scrap": 0,
+            "radiation": 0,
+            "weapon_slot": null,
+            "armor_slot": null,
+            "tool_slot": null
           },
+          "equipment_summary": "weapon -> makeshift_blade (replaced empty)",
           "player": {
             "hp": 4,
             "food": 7,
             "ammo": 2,
             "medkits": 1,
-            "radiation": 0
+            "scrap": 0,
+            "radiation": 0,
+            "weapon_slot": "makeshift_blade",
+            "armor_slot": null,
+            "tool_slot": null
           },
           "pressure": true
         },
@@ -1284,8 +1727,11 @@
           "event_outcome": {
             "event_id": "evt_tunnel",
             "option_index": 1,
-            "option_text": "Hold position and move at first light",
-            "combat_triggered": false
+            "option_text": "\u5148\u7a69\u4f4f\u4f4d\u7f6e\uff0c\u7b49\u8996\u7dda\u597d\u4e00\u9ede\u518d\u52d5",
+            "combat_triggered": false,
+            "equipment_reward": null,
+            "equipment_change": null,
+            "scavenger_bonus": {}
           },
           "warning_signals": [],
           "pre_choice_state": {
@@ -1293,14 +1739,23 @@
             "food": 6,
             "ammo": 2,
             "medkits": 1,
-            "radiation": 0
+            "scrap": 0,
+            "radiation": 0,
+            "weapon_slot": "makeshift_blade",
+            "armor_slot": null,
+            "tool_slot": null
           },
+          "equipment_summary": null,
           "player": {
             "hp": 4,
             "food": 5,
             "ammo": 2,
             "medkits": 2,
-            "radiation": 0
+            "scrap": 0,
+            "radiation": 0,
+            "weapon_slot": "makeshift_blade",
+            "armor_slot": null,
+            "tool_slot": null
           },
           "pressure": true
         },
@@ -1310,21 +1765,30 @@
           "event_outcome": {
             "event_id": "evt_checkpoint",
             "option_index": 0,
-            "option_text": "Hit the checkpoint before it hits back",
+            "option_text": "\u5728\u5c0d\u65b9\u958b\u706b\u524d\u5148\u6253\u7a7f\u6574\u689d\u9632\u7dda",
             "combat_triggered": true,
+            "equipment_reward": {
+              "slot": "weapon",
+              "item": "rust_rifle"
+            },
+            "equipment_change": {
+              "slot": "weapon",
+              "item": "rust_rifle",
+              "replaced": "makeshift_blade",
+              "changed": true
+            },
+            "scavenger_bonus": {},
             "combat": {
               "skipped": false,
               "enemy_id": "enemy_raider_scout",
               "victory": true,
-              "rounds": 3,
-              "player_hp": 1,
-              "enemy_hp": -2,
+              "rounds": 2,
+              "player_hp": 3,
+              "enemy_hp": -1,
               "log": [
-                "R1: player attacks for 2",
-                "R1: enemy attacks for 1",
-                "R2: player attacks for 2",
-                "R2: enemy attacks for 2",
-                "R3: player attacks for 3"
+                "\u7b2c 1 \u56de\u5408\uff1a\u4f60\u653b\u64ca\u4e26\u9020\u6210 3 \u9ede\u50b7\u5bb3",
+                "\u7b2c 1 \u56de\u5408\uff1a\u6575\u4eba\u653b\u64ca\uff0c\u9020\u6210 1 \u9ede\u50b7\u5bb3",
+                "\u7b2c 2 \u56de\u5408\uff1a\u4f60\u653b\u64ca\u4e26\u9020\u6210 3 \u9ede\u50b7\u5bb3"
               ]
             }
           },
@@ -1336,14 +1800,23 @@
             "food": 4,
             "ammo": 2,
             "medkits": 2,
-            "radiation": 0
+            "scrap": 0,
+            "radiation": 0,
+            "weapon_slot": "makeshift_blade",
+            "armor_slot": null,
+            "tool_slot": null
           },
+          "equipment_summary": "weapon -> rust_rifle (replaced makeshift_blade)",
           "player": {
-            "hp": 1,
+            "hp": 3,
             "food": 4,
-            "ammo": 0,
+            "ammo": 1,
             "medkits": 2,
-            "radiation": 0
+            "scrap": 0,
+            "radiation": 0,
+            "weapon_slot": "rust_rifle",
+            "armor_slot": null,
+            "tool_slot": null
           },
           "pressure": true
         },
@@ -1353,27 +1826,38 @@
           "event_outcome": {
             "event_id": "evt_final",
             "option_index": 1,
-            "option_text": "Sprint the ridge and trust momentum",
-            "combat_triggered": false
+            "option_text": "\u6cbf\u8457\u5c71\u810a\u786c\u885d\uff0c\u8ced\u81ea\u5df1\u6490\u5f97\u4f4f",
+            "combat_triggered": false,
+            "equipment_reward": null,
+            "equipment_change": null,
+            "scavenger_bonus": {}
           },
           "warning_signals": [
             "WARNING: radiation will continue to threaten future travel.",
-            "WARNING: this option adds radiation and increases long-term risk.",
-            "CRITICAL: another irradiated move may kill you."
+            "WARNING: this option adds radiation and increases long-term risk."
           ],
           "pre_choice_state": {
-            "hp": 1,
+            "hp": 3,
             "food": 3,
-            "ammo": 0,
+            "ammo": 1,
             "medkits": 2,
-            "radiation": 0
+            "scrap": 0,
+            "radiation": 0,
+            "weapon_slot": "rust_rifle",
+            "armor_slot": null,
+            "tool_slot": null
           },
+          "equipment_summary": null,
           "player": {
-            "hp": 0,
+            "hp": 2,
             "food": 3,
-            "ammo": 0,
+            "ammo": 1,
             "medkits": 2,
-            "radiation": 1
+            "scrap": 0,
+            "radiation": 1,
+            "weapon_slot": "rust_rifle",
+            "armor_slot": null,
+            "tool_slot": null
           },
           "pressure": true
         }
@@ -1388,15 +1872,18 @@
           "node_final"
         ],
         "ended": true,
-        "victory": false,
-        "end_reason": "radiation_death",
+        "victory": true,
+        "end_reason": "reached_final_node",
         "player_final": {
-          "hp": 0,
+          "hp": 2,
           "food": 3,
-          "ammo": 0,
+          "ammo": 1,
           "medkits": 2,
           "scrap": 0,
-          "radiation": 1
+          "radiation": 1,
+          "weapon_slot": "rust_rifle",
+          "armor_slot": null,
+          "tool_slot": null
         },
         "decision_log": [
           {
@@ -1412,7 +1899,11 @@
               "food": 6,
               "ammo": 3,
               "medkits": 1,
-              "radiation": 0
+              "scrap": 0,
+              "radiation": 0,
+              "weapon_slot": null,
+              "armor_slot": null,
+              "tool_slot": null
             },
             "pressure": true,
             "combat_triggered": true,
@@ -1420,12 +1911,23 @@
               "food": 1,
               "ammo": 2
             },
+            "equipment_change": {
+              "slot": "weapon",
+              "item": "makeshift_blade",
+              "replaced": null,
+              "changed": true
+            },
+            "equipment_summary": "weapon -> makeshift_blade (replaced empty)",
             "player_after": {
               "hp": 4,
               "food": 7,
               "ammo": 2,
               "medkits": 1,
-              "radiation": 0
+              "scrap": 0,
+              "radiation": 0,
+              "weapon_slot": "makeshift_blade",
+              "armor_slot": null,
+              "tool_slot": null
             }
           },
           {
@@ -1439,7 +1941,11 @@
               "food": 6,
               "ammo": 2,
               "medkits": 1,
-              "radiation": 0
+              "scrap": 0,
+              "radiation": 0,
+              "weapon_slot": "makeshift_blade",
+              "armor_slot": null,
+              "tool_slot": null
             },
             "pressure": true,
             "combat_triggered": false,
@@ -1447,12 +1953,18 @@
               "food": -1,
               "medkits": 1
             },
+            "equipment_change": null,
+            "equipment_summary": null,
             "player_after": {
               "hp": 4,
               "food": 5,
               "ammo": 2,
               "medkits": 2,
-              "radiation": 0
+              "scrap": 0,
+              "radiation": 0,
+              "weapon_slot": "makeshift_blade",
+              "armor_slot": null,
+              "tool_slot": null
             }
           },
           {
@@ -1468,19 +1980,34 @@
               "food": 4,
               "ammo": 2,
               "medkits": 2,
-              "radiation": 0
+              "scrap": 0,
+              "radiation": 0,
+              "weapon_slot": "makeshift_blade",
+              "armor_slot": null,
+              "tool_slot": null
             },
             "pressure": true,
             "combat_triggered": true,
             "effects": {
               "ammo": 1
             },
+            "equipment_change": {
+              "slot": "weapon",
+              "item": "rust_rifle",
+              "replaced": "makeshift_blade",
+              "changed": true
+            },
+            "equipment_summary": "weapon -> rust_rifle (replaced makeshift_blade)",
             "player_after": {
-              "hp": 1,
+              "hp": 3,
               "food": 4,
-              "ammo": 0,
+              "ammo": 1,
               "medkits": 2,
-              "radiation": 0
+              "scrap": 0,
+              "radiation": 0,
+              "weapon_slot": "rust_rifle",
+              "armor_slot": null,
+              "tool_slot": null
             }
           },
           {
@@ -1490,15 +2017,18 @@
             "option_index": 1,
             "warning_signals": [
               "WARNING: radiation will continue to threaten future travel.",
-              "WARNING: this option adds radiation and increases long-term risk.",
-              "CRITICAL: another irradiated move may kill you."
+              "WARNING: this option adds radiation and increases long-term risk."
             ],
             "pre_choice_state": {
-              "hp": 1,
+              "hp": 3,
               "food": 3,
-              "ammo": 0,
+              "ammo": 1,
               "medkits": 2,
-              "radiation": 0
+              "scrap": 0,
+              "radiation": 0,
+              "weapon_slot": "rust_rifle",
+              "armor_slot": null,
+              "tool_slot": null
             },
             "pressure": true,
             "combat_triggered": false,
@@ -1506,46 +2036,30 @@
               "hp": -1,
               "radiation": 1
             },
+            "equipment_change": null,
+            "equipment_summary": null,
             "player_after": {
-              "hp": 0,
+              "hp": 2,
               "food": 3,
-              "ammo": 0,
+              "ammo": 1,
               "medkits": 2,
-              "radiation": 1
+              "scrap": 0,
+              "radiation": 1,
+              "weapon_slot": "rust_rifle",
+              "armor_slot": null,
+              "tool_slot": null
             }
           }
         ],
         "summary": {
           "pressure_count": 4,
           "death_cause_attribution": true,
-          "resource_signature": "hp:0|food:3|ammo:0|medkits:2|scrap:0|radiation:1"
+          "resource_signature": "hp:2|food:3|ammo:1|medkits:2|scrap:0|radiation:1|weapon:rust_rifle|armor:None|tool:None"
         },
         "failure_analysis": {
-          "death_chain_length": 3,
-          "primary_blame_factor": "radiation",
-          "regret_nodes": [
-            {
-              "node_id": "node_final",
-              "event_id": "evt_final",
-              "blame_score": 0.61,
-              "description": "took +1 radiation, lost 1 hp",
-              "steps_to_death": 0
-            },
-            {
-              "node_id": "node_north_2",
-              "event_id": "evt_tunnel",
-              "blame_score": 0.14,
-              "description": "lost 1 food",
-              "steps_to_death": 2
-            },
-            {
-              "node_id": "node_mid",
-              "event_id": "evt_checkpoint",
-              "blame_score": 0.13,
-              "description": "accepted combat risk",
-              "steps_to_death": 1
-            }
-          ],
+          "death_chain_length": 0,
+          "primary_blame_factor": null,
+          "regret_nodes": [],
           "steps_from_regret_to_death": 0,
           "is_trash_time_death": false
         }
@@ -1561,8 +2075,8 @@
     },
     "metrics": {
       "distinct_outcome_signatures": 5,
-      "death_runs": 3,
-      "rerun_signal_runs": 5
+      "death_runs": 1,
+      "rerun_signal_runs": 3
     }
   }
 }

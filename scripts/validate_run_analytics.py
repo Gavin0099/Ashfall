@@ -28,6 +28,8 @@ def validate_player_final(data: dict[str, Any], src: Path) -> None:
     ensure(required.issubset(data.keys()), f"{src}: player_final missing keys")
     for key in required:
         ensure(isinstance(data[key], int), f"{src}: player_final.{key} must be integer")
+    for key in ("weapon_slot", "armor_slot", "tool_slot"):
+        ensure(isinstance(data.get(key), (str, type(None))), f"{src}: player_final.{key} must be string|null")
 
 
 def validate_decision_log(entries: list[dict[str, Any]], src: Path) -> None:
@@ -43,13 +45,19 @@ def validate_decision_log(entries: list[dict[str, Any]], src: Path) -> None:
         ensure(isinstance(pre_choice_state, dict), f"{src}: pre_choice_state missing")
         for key in ("hp", "food", "ammo", "medkits", "radiation"):
             ensure(isinstance(pre_choice_state.get(key), int), f"{src}: pre_choice_state.{key} must be integer")
+        for key in ("weapon_slot", "armor_slot", "tool_slot"):
+            ensure(isinstance(pre_choice_state.get(key), (str, type(None))), f"{src}: pre_choice_state.{key} must be string|null")
         ensure(isinstance(entry.get("pressure"), bool), f"{src}: pressure must be boolean")
         ensure(isinstance(entry.get("combat_triggered"), bool), f"{src}: combat_triggered must be boolean")
         ensure(isinstance(entry.get("effects", {}), dict), f"{src}: effects must be object")
+        ensure(isinstance(entry.get("equipment_change"), (dict, type(None))), f"{src}: equipment_change must be object|null")
+        ensure(isinstance(entry.get("equipment_summary"), (str, type(None))), f"{src}: equipment_summary must be string|null")
         player_after = entry.get("player_after")
         ensure(isinstance(player_after, dict), f"{src}: player_after missing")
         for key in ("hp", "food", "ammo", "medkits", "radiation"):
             ensure(isinstance(player_after.get(key), int), f"{src}: player_after.{key} must be integer")
+        for key in ("weapon_slot", "armor_slot", "tool_slot"):
+            ensure(isinstance(player_after.get(key), (str, type(None))), f"{src}: player_after.{key} must be string|null")
 
 
 def validate_summary(data: dict[str, Any], src: Path) -> None:

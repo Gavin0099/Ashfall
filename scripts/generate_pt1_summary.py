@@ -61,6 +61,27 @@ def first_n_bullets(items: list[str], limit: int = 3) -> str:
     return "\n".join(f"- {item}" for item in values[:limit])
 
 
+def pass_fail(flag: bool) -> str:
+    return "PASS" if flag else "FAIL"
+
+
+def derive_verdict(hesitation_match_rate: float, regret_match_rate: float, replay_intent_rate: float,
+                   avg_hesitation_nodes: float, avg_hesitation_time_ms: float) -> tuple[str, list[str]]:
+    checks = {
+        "hesitation_match": hesitation_match_rate >= 0.7,
+        "regret_match": regret_match_rate >= 0.7,
+        "replay_intent": replay_intent_rate >= 0.5,
+        "hesitation_density": avg_hesitation_nodes >= 3.0,
+        "hesitation_time": avg_hesitation_time_ms >= 5000.0,
+    }
+    failed = [name for name, passed in checks.items() if not passed]
+    if not failed:
+        return "PASS", failed
+    if len(failed) <= 2 and checks["hesitation_match"] and checks["regret_match"]:
+        return "MIXED", failed
+    return "FAIL", failed
+
+
 def main() -> int:
     if not COMPARISON_PATH.exists():
         print("Missing comparison summary. Run compare_playtest_vs_machine.py first.")
@@ -77,6 +98,14 @@ def main() -> int:
     confusion_sessions = sum(
         1 for log in logs if any(bool(event.get("confusion_flag")) for event in log.get("events", []))
     )
+    avg_hesitation_time_ms = average(
+        [
+            float(event["decision_time_ms"])
+            for log in logs
+            for event in log["events"]
+            if bool(event.get("hesitation_flag"))
+        ]
+    )
     avg_hesitation_nodes = average(
         [sum(1 for event in log["events"] if bool(event.get("hesitation_flag"))) for log in logs]
     )
@@ -85,12 +114,40 @@ def main() -> int:
     replay_reasons = [str(log["post_run"].get("immediate_replay_reason", "")).strip() for log in logs]
     perceived_death_causes = [str(log["post_run"].get("perceived_death_cause", "")).strip() for log in logs]
     run_ids = sorted(str(log.get("run_id", "")).strip() for log in logs if str(log.get("run_id", "")).strip())
+    verdict, failed_checks = derive_verdict(
+        hesitation_match_rate=float(comparison["hesitation_match_rate"]),
+        regret_match_rate=float(comparison["regret_match_rate"]),
+        replay_intent_rate=float(comparison["replay_intent_rate"]),
+        avg_hesitation_nodes=avg_hesitation_nodes,
+        avg_hesitation_time_ms=avg_hesitation_time_ms,
+    )
+
+    next_actions: list[str] = []
+    if "hesitation_density" in failed_checks or "hesitation_time" in failed_checks:
+        next_actions.append("Increase visible route pressure earlier; current hesitation density is below PT-1 target.")
+    if "regret_match" in failed_checks:
+        next_actions.append("Review warning clarity and regret distance; human regret is not aligning with machine blame.")
+    if "replay_intent" in failed_checks:
+        next_actions.append("Strengthen route identity and replay promise before adding content breadth.")
+    if not next_actions:
+        next_actions.append("Keep current route-pressure shape and proceed to PT-2 comparison work.")
+    if confusion_sessions > 0:
+        next_actions.append("Review confusion-flagged sessions before making balance changes.")
 
     output = f"""# PT-1 Summary
 
 Date: TBD
 Operator: TBD
 Sessions completed: {len(logs)}
+
+## Verdict
+
+- PT-1 verdict: {verdict}
+- gate hesitation match (>= 0.7): {comparison["hesitation_match_rate"]} [{pass_fail(float(comparison["hesitation_match_rate"]) >= 0.7)}]
+- gate regret match (>= 0.7): {comparison["regret_match_rate"]} [{pass_fail(float(comparison["regret_match_rate"]) >= 0.7)}]
+- gate replay intent (>= 0.5): {comparison["replay_intent_rate"]} [{pass_fail(float(comparison["replay_intent_rate"]) >= 0.5)}]
+- gate hesitation nodes/player (>= 3): {avg_hesitation_nodes} [{pass_fail(avg_hesitation_nodes >= 3.0)}]
+- gate hesitation time ms (>= 5000): {avg_hesitation_time_ms} [{pass_fail(avg_hesitation_time_ms >= 5000.0)}]
 
 ## Sample
 
@@ -108,6 +165,7 @@ From `output/playtests/comparison_summary.json`:
 - replay intent rate: {comparison["replay_intent_rate"]}
 - avg decision time ms: {comparison["avg_decision_time_ms"]}
 - avg hesitation nodes per player: {avg_hesitation_nodes}
+- avg hesitation time ms: {avg_hesitation_time_ms}
 - sessions with confusion flagged: {confusion_sessions}
 
 ## Qualitative Readout
@@ -139,18 +197,13 @@ From `output/playtests/comparison_summary.json`:
 
 ## Decision
 
-Choose one:
-
-- Keep current route-pressure shape for next round
-- Adjust south-route pressure
-- Reduce radiation dominance
-- Improve warning clarity before any balance change
+- Recommended call: {"proceed to PT-2" if verdict == "PASS" else "run another PT-1 iteration"}
 
 ## Next Action
 
-1. TBD
-2. TBD
-3. TBD
+1. {next_actions[0]}
+2. {next_actions[1] if len(next_actions) > 1 else "Validate logs again after the next completed PT-1 session batch."}
+3. {next_actions[2] if len(next_actions) > 2 else "Update tasks/TASKS.md with the PT-1 verdict once operator fields are filled."}
 """
     OUTPUT_PATH.parent.mkdir(parents=True, exist_ok=True)
     OUTPUT_PATH.write_text(output, encoding="utf-8")

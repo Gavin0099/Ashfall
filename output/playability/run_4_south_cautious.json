@@ -13,10 +13,14 @@
   "end_reason": "reached_final_node",
   "player_final": {
     "hp": 10,
-    "food": 2,
+    "food": 3,
     "ammo": 1,
     "medkits": 2,
-    "radiation": 0
+    "scrap": 0,
+    "radiation": 0,
+    "weapon_slot": null,
+    "armor_slot": null,
+    "tool_slot": "scavenger_kit"
   },
   "moments": [
     {
@@ -25,8 +29,19 @@
       "event_outcome": {
         "event_id": "evt_village",
         "option_index": 0,
-        "option_text": "Barter ammo for medkit",
-        "combat_triggered": false
+        "option_text": "\u62ff\u5f48\u85e5\u63db\u91ab\u7642\u5305",
+        "combat_triggered": false,
+        "equipment_reward": {
+          "slot": "tool",
+          "item": "scavenger_kit"
+        },
+        "equipment_change": {
+          "slot": "tool",
+          "item": "scavenger_kit",
+          "replaced": null,
+          "changed": true
+        },
+        "scavenger_bonus": {}
       },
       "warning_signals": [],
       "pre_choice_state": {
@@ -34,14 +49,23 @@
         "food": 6,
         "ammo": 3,
         "medkits": 1,
-        "radiation": 0
+        "scrap": 0,
+        "radiation": 0,
+        "weapon_slot": null,
+        "armor_slot": null,
+        "tool_slot": null
       },
+      "equipment_summary": "tool -> scavenger_kit (replaced empty)",
       "player": {
         "hp": 10,
         "food": 6,
         "ammo": 2,
         "medkits": 2,
-        "radiation": 0
+        "scrap": 0,
+        "radiation": 0,
+        "weapon_slot": null,
+        "armor_slot": null,
+        "tool_slot": "scavenger_kit"
       },
       "pressure": true
     },
@@ -51,8 +75,13 @@
       "event_outcome": {
         "event_id": "evt_floodplain",
         "option_index": 1,
-        "option_text": "Take a slower line and search for dry ground",
-        "combat_triggered": false
+        "option_text": "\u8d70\u6162\u4e00\u9ede\uff0c\u9806\u4fbf\u627e\u4e7e\u71e5\u5730\u5e36",
+        "combat_triggered": false,
+        "equipment_reward": null,
+        "equipment_change": null,
+        "scavenger_bonus": {
+          "food": 1
+        }
       },
       "warning_signals": [],
       "pre_choice_state": {
@@ -60,14 +89,23 @@
         "food": 5,
         "ammo": 2,
         "medkits": 2,
-        "radiation": 0
+        "scrap": 0,
+        "radiation": 0,
+        "weapon_slot": null,
+        "armor_slot": null,
+        "tool_slot": "scavenger_kit"
       },
+      "equipment_summary": null,
       "player": {
         "hp": 10,
-        "food": 6,
+        "food": 7,
         "ammo": 1,
         "medkits": 2,
-        "radiation": 0
+        "scrap": 0,
+        "radiation": 0,
+        "weapon_slot": null,
+        "armor_slot": null,
+        "tool_slot": "scavenger_kit"
       },
       "pressure": true
     },
@@ -77,23 +115,35 @@
       "event_outcome": {
         "event_id": "evt_checkpoint",
         "option_index": 1,
-        "option_text": "Sneak around",
-        "combat_triggered": false
+        "option_text": "\u5077\u5077\u7e5e\u904e\u53bb",
+        "combat_triggered": false,
+        "equipment_reward": null,
+        "equipment_change": null,
+        "scavenger_bonus": {}
       },
       "warning_signals": [],
       "pre_choice_state": {
         "hp": 10,
+        "food": 6,
+        "ammo": 1,
+        "medkits": 2,
+        "scrap": 0,
+        "radiation": 0,
+        "weapon_slot": null,
+        "armor_slot": null,
+        "tool_slot": "scavenger_kit"
+      },
+      "equipment_summary": null,
+      "player": {
+        "hp": 10,
         "food": 5,
         "ammo": 1,
         "medkits": 2,
-        "radiation": 0
-      },
-      "player": {
-        "hp": 10,
-        "food": 4,
-        "ammo": 1,
-        "medkits": 2,
-        "radiation": 0
+        "scrap": 0,
+        "radiation": 0,
+        "weapon_slot": null,
+        "armor_slot": null,
+        "tool_slot": "scavenger_kit"
       },
       "pressure": true
     },
@@ -103,23 +153,35 @@
       "event_outcome": {
         "event_id": "evt_final",
         "option_index": 0,
-        "option_text": "Use scarce supplies to make the climb safe",
-        "combat_triggered": false
+        "option_text": "\u7528\u7a00\u7f3a\u7269\u8cc7\u63db\u4e00\u6bb5\u66f4\u7a69\u7684\u767b\u5761",
+        "combat_triggered": false,
+        "equipment_reward": null,
+        "equipment_change": null,
+        "scavenger_bonus": {}
       },
       "warning_signals": [],
       "pre_choice_state": {
         "hp": 10,
+        "food": 4,
+        "ammo": 1,
+        "medkits": 2,
+        "scrap": 0,
+        "radiation": 0,
+        "weapon_slot": null,
+        "armor_slot": null,
+        "tool_slot": "scavenger_kit"
+      },
+      "equipment_summary": null,
+      "player": {
+        "hp": 10,
         "food": 3,
         "ammo": 1,
         "medkits": 2,
-        "radiation": 0
-      },
-      "player": {
-        "hp": 10,
-        "food": 2,
-        "ammo": 1,
-        "medkits": 2,
-        "radiation": 0
+        "scrap": 0,
+        "radiation": 0,
+        "weapon_slot": null,
+        "armor_slot": null,
+        "tool_slot": "scavenger_kit"
       },
       "pressure": true
     }
@@ -138,11 +200,14 @@
     "end_reason": "reached_final_node",
     "player_final": {
       "hp": 10,
-      "food": 2,
+      "food": 3,
       "ammo": 1,
       "medkits": 2,
       "scrap": 0,
-      "radiation": 0
+      "radiation": 0,
+      "weapon_slot": null,
+      "armor_slot": null,
+      "tool_slot": "scavenger_kit"
     },
     "decision_log": [
       {
@@ -156,7 +221,11 @@
           "food": 6,
           "ammo": 3,
           "medkits": 1,
-          "radiation": 0
+          "scrap": 0,
+          "radiation": 0,
+          "weapon_slot": null,
+          "armor_slot": null,
+          "tool_slot": null
         },
         "pressure": true,
         "combat_triggered": false,
@@ -164,12 +233,23 @@
           "ammo": -1,
           "medkits": 1
         },
+        "equipment_change": {
+          "slot": "tool",
+          "item": "scavenger_kit",
+          "replaced": null,
+          "changed": true
+        },
+        "equipment_summary": "tool -> scavenger_kit (replaced empty)",
         "player_after": {
           "hp": 10,
           "food": 6,
           "ammo": 2,
           "medkits": 2,
-          "radiation": 0
+          "scrap": 0,
+          "radiation": 0,
+          "weapon_slot": null,
+          "armor_slot": null,
+          "tool_slot": "scavenger_kit"
         }
       },
       {
@@ -183,7 +263,11 @@
           "food": 5,
           "ammo": 2,
           "medkits": 2,
-          "radiation": 0
+          "scrap": 0,
+          "radiation": 0,
+          "weapon_slot": null,
+          "armor_slot": null,
+          "tool_slot": "scavenger_kit"
         },
         "pressure": true,
         "combat_triggered": false,
@@ -191,12 +275,18 @@
           "food": 1,
           "ammo": -1
         },
+        "equipment_change": null,
+        "equipment_summary": null,
         "player_after": {
           "hp": 10,
-          "food": 6,
+          "food": 7,
           "ammo": 1,
           "medkits": 2,
-          "radiation": 0
+          "scrap": 0,
+          "radiation": 0,
+          "weapon_slot": null,
+          "armor_slot": null,
+          "tool_slot": "scavenger_kit"
         }
       },
       {
@@ -207,22 +297,32 @@
         "warning_signals": [],
         "pre_choice_state": {
           "hp": 10,
-          "food": 5,
+          "food": 6,
           "ammo": 1,
           "medkits": 2,
-          "radiation": 0
+          "scrap": 0,
+          "radiation": 0,
+          "weapon_slot": null,
+          "armor_slot": null,
+          "tool_slot": "scavenger_kit"
         },
         "pressure": true,
         "combat_triggered": false,
         "effects": {
           "food": -1
         },
+        "equipment_change": null,
+        "equipment_summary": null,
         "player_after": {
           "hp": 10,
-          "food": 4,
+          "food": 5,
           "ammo": 1,
           "medkits": 2,
-          "radiation": 0
+          "scrap": 0,
+          "radiation": 0,
+          "weapon_slot": null,
+          "armor_slot": null,
+          "tool_slot": "scavenger_kit"
         }
       },
       {
@@ -233,29 +333,39 @@
         "warning_signals": [],
         "pre_choice_state": {
           "hp": 10,
-          "food": 3,
+          "food": 4,
           "ammo": 1,
           "medkits": 2,
-          "radiation": 0
+          "scrap": 0,
+          "radiation": 0,
+          "weapon_slot": null,
+          "armor_slot": null,
+          "tool_slot": "scavenger_kit"
         },
         "pressure": true,
         "combat_triggered": false,
         "effects": {
           "food": -1
         },
+        "equipment_change": null,
+        "equipment_summary": null,
         "player_after": {
           "hp": 10,
-          "food": 2,
+          "food": 3,
           "ammo": 1,
           "medkits": 2,
-          "radiation": 0
+          "scrap": 0,
+          "radiation": 0,
+          "weapon_slot": null,
+          "armor_slot": null,
+          "tool_slot": "scavenger_kit"
         }
       }
     ],
     "summary": {
       "pressure_count": 4,
       "death_cause_attribution": true,
-      "resource_signature": "hp:10|food:2|ammo:1|medkits:2|scrap:0|radiation:0"
+      "resource_signature": "hp:10|food:3|ammo:1|medkits:2|scrap:0|radiation:0|weapon:None|armor:None|tool:scavenger_kit"
     },
     "failure_analysis": {
       "death_chain_length": 0,

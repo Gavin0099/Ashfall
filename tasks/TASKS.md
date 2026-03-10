@@ -1,6 +1,6 @@
 ﻿# TASKS.md — Ashfall Execution Board
 
-Last Updated: 2026-03-09
+Last Updated: 2026-03-10
 Owner: GavinWu
 Execution Truth (Sprint/Task): `tasks/TASKS.md`
 Phase/Gate/Milestone Truth: `PLAN.md`
@@ -14,13 +14,21 @@ Phase/Gate/Milestone Truth: `PLAN.md`
 
 ### Ready
 - [ ] PT-2 Compare human playtest logs against machine `failure_analysis`
-- [ ] OBS-1 Run first-node dominance test from `SEED_101_OBSERVATION.md`
-- [ ] OBS-2 Test conservative survivability across multiple seeds
-- [ ] OBS-3 Compare high-risk vs low-risk event payoff across >=100 runs
-- [ ] EXP-1 Prototype explicit irreversible trade (`max_hp` sacrifice for short-term survival)
-- [ ] EXP-2 Evaluate `travel mode` as a controlled decision-depth experiment
-- [ ] EXP-3 Prototype character background as a run-identity layer
-- [ ] EXP-4 Prototype minimal equipment slots (weapon / armor / tool)
+- [x] OBS-1 Run first-node dominance test from `SEED_101_OBSERVATION.md`
+- [x] OBS-2 Test conservative survivability across multiple seeds
+- [x] OBS-3 Compare high-risk vs low-risk event payoff across >=100 runs
+Artifacts: `output/analytics/obs/obs_combined_summary.json`, `scripts/run_obs_experiments.py`
+- [x] EXP-1 Prototype explicit irreversible trade (`max_hp` sacrifice for short-term survival)
+Artifacts: `output/analytics/exp/exp1_max_hp_trade.json`, `scripts/run_exp1_max_hp_trade.py`
+- [x] EXP-2 Evaluate `travel mode` as a controlled decision-depth experiment
+  Artifact: `scripts/run_exp2_travel_mode.py`, `output/analytics/exp/exp2_travel_mode.json`
+  Verdict: REJECTED — travel mode shifts death vector but does not extend consequence arc (map too short, consequence_len=0 across all groups)
+- [x] EXP-3 Prototype character background as a run-identity layer
+  Artifact: `scripts/run_exp3_character_background.py`, `output/analytics/exp/exp3_character_background.json`
+  Verdict: SUPPORTED — `soldier` strengthens north-route survivability (+18% win vs baseline), `pathfinder` flips south from 0% to 62% win by removing starvation; `scavenger` and `medic` are too weak to matter
+- [x] EXP-4 Prototype minimal equipment slots (weapon / armor / tool)
+  Artifact: `scripts/run_exp4_equipment_slots.py`, `output/analytics/exp/exp4_equipment_slots.json`
+  Verdict: SUPPORTED — under real event acquisition/replacement, enabling equipment raises north win rate from 28% to 40% (`makeshift_blade` -> `rust_rifle`) and south from 0% to 66% (`scavenger_kit` -> `field_pack`); the strongest effect is still food slack, not combat scaling
 
 ### Playability Check
 - [x] PLY-1 Run 5 manual playthroughs with different route choices
@@ -110,6 +118,7 @@ Gate:
 - [x] D5 Run balancing simulations and collect metrics
 - [x] D6 Add irreversible-state prototype signal (radiation/injury minimal variant)
 - [x] D7 Publish v0.1 balancing notes
+- [x] OBS-1/2/3 Run machine observation experiments (first-node dominance, conservative survivability, risk payoff)
 - [ ] PT-1 Run first manual playtest round and capture observation sheets
 - [ ] PT-2 Merge observation findings with analytics summaries
 
@@ -122,14 +131,18 @@ Gate:
 ## Backlog
 
 ### P0
-- [ ] Formalize `meta_progression` contract freeze criteria (v0.1 gate)
-- [ ] Version `enemy` and `node` schemas as v0.1 frozen contracts
-- [ ] Define save/load format for run state
+- [x] Formalize `meta_progression` contract freeze criteria (v0.1 gate)
+- [x] Version `enemy` and `node` schemas as v0.1 frozen contracts
+- [x] Define save/load format for run state
+Artifacts: `specs/meta_progression.md` (freeze criteria added), `schemas/enemy_schema.json`, `schemas/node_schema.json` (v0.1 frozen), `schemas/run_state_schema.json` (new)
 
 ### P1
-- [ ] Restrict event effect keys by whitelist
-- [ ] Add map generation constraints for guaranteed reachability
-- [ ] Build initial event content set (30 records)
+- [x] Restrict event effect keys by whitelist
+  Artifact: `schemas/event_schema.json` (additionalProperties: false, approved key whitelist)
+- [x] Add map generation constraints for guaranteed reachability
+  Artifact: `scripts/validate_map_constraints.py` (INV-1 through INV-8, 7/7 nodes pass)
+- [x] Build initial event content set (30 records)
+  Artifact: `schemas/event_template_catalog.json` (30 events, 5 template_types, all validated)
 
 ### P2
 - [ ] Difficulty presets

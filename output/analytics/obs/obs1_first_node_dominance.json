@@ -1,0 +1,40 @@
+{
+  "experiment": "OBS-1 First-node dominance",
+  "description": "Same route and same subsequent choices; only the first-node option varies. Measures how much a single early decision shifts the win rate.",
+  "group_a_label": "first node aggressive (option 0)",
+  "group_b_label": "first node cautious (option 1)",
+  "seeds_used": [
+    101,
+    201,
+    301,
+    401,
+    501,
+    601,
+    701,
+    801,
+    901,
+    1001
+  ],
+  "runs_per_group": 10,
+  "group_a": {
+    "win_rate": 0.6,
+    "avg_net_resource_score": -15.4,
+    "death_reasons": {
+      "reached_final_node": 6,
+      "radiation_death": 3,
+      "event_or_resource_death": 1
+    }
+  },
+  "group_b": {
+    "win_rate": 0.0,
+    "avg_net_resource_score": -14.0,
+    "death_reasons": {
+      "starvation": 10
+    }
+  },
+  "win_rate_divergence": 0.6,
+  "hypothesis": "early-node resource swing disproportionately influences run survivability",
+  "hypothesis_threshold": "win_rate_divergence >= 0.3",
+  "hypothesis_confirmed": true,
+  "interpretation": "First node creates strong win-rate divergence \u2014 early choice dominates."
+}

@@ -1,0 +1,39 @@
+{
+  "experiment": "OBS-2 Conservative survivability",
+  "description": "All choices set to option 1 (cautious/safe) across 20 seeds on the north route. Tests whether pure risk-avoidance is a viable strategy.",
+  "seeds_used": [
+    101,
+    102,
+    103,
+    104,
+    105,
+    106,
+    107,
+    108,
+    109,
+    110,
+    111,
+    112,
+    113,
+    114,
+    115,
+    116,
+    117,
+    118,
+    119,
+    120
+  ],
+  "run_count": 20,
+  "win_rate": 0.0,
+  "avg_final_food": 0.15,
+  "avg_final_hp": 6.65,
+  "avg_pressure_count": 3.9,
+  "death_reasons": {
+    "starvation": 19,
+    "event_or_resource_death": 1
+  },
+  "hypothesis": "risk avoidance != guaranteed survivability",
+  "hypothesis_threshold": "conservative win_rate < 0.8",
+  "hypothesis_confirmed": true,
+  "interpretation": "Conservative play is not a safe default \u2014 players must engage with risk."
+}

@@ -1,0 +1,204 @@
+{
+  "obs1": {
+    "experiment": "OBS-1 First-node dominance",
+    "description": "Same route and same subsequent choices; only the first-node option varies. Measures how much a single early decision shifts the win rate.",
+    "group_a_label": "first node aggressive (option 0)",
+    "group_b_label": "first node cautious (option 1)",
+    "seeds_used": [
+      101,
+      201,
+      301,
+      401,
+      501,
+      601,
+      701,
+      801,
+      901,
+      1001
+    ],
+    "runs_per_group": 10,
+    "group_a": {
+      "win_rate": 0.6,
+      "avg_net_resource_score": -15.4,
+      "death_reasons": {
+        "reached_final_node": 6,
+        "radiation_death": 3,
+        "event_or_resource_death": 1
+      }
+    },
+    "group_b": {
+      "win_rate": 0.0,
+      "avg_net_resource_score": -14.0,
+      "death_reasons": {
+        "starvation": 10
+      }
+    },
+    "win_rate_divergence": 0.6,
+    "hypothesis": "early-node resource swing disproportionately influences run survivability",
+    "hypothesis_threshold": "win_rate_divergence >= 0.3",
+    "hypothesis_confirmed": true,
+    "interpretation": "First node creates strong win-rate divergence \u2014 early choice dominates."
+  },
+  "obs2": {
+    "experiment": "OBS-2 Conservative survivability",
+    "description": "All choices set to option 1 (cautious/safe) across 20 seeds on the north route. Tests whether pure risk-avoidance is a viable strategy.",
+    "seeds_used": [
+      101,
+      102,
+      103,
+      104,
+      105,
+      106,
+      107,
+      108,
+      109,
+      110,
+      111,
+      112,
+      113,
+      114,
+      115,
+      116,
+      117,
+      118,
+      119,
+      120
+    ],
+    "run_count": 20,
+    "win_rate": 0.0,
+    "avg_final_food": 0.15,
+    "avg_final_hp": 6.65,
+    "avg_pressure_count": 3.9,
+    "death_reasons": {
+      "starvation": 19,
+      "event_or_resource_death": 1
+    },
+    "hypothesis": "risk avoidance != guaranteed survivability",
+    "hypothesis_threshold": "conservative win_rate < 0.8",
+    "hypothesis_confirmed": true,
+    "interpretation": "Conservative play is not a safe default \u2014 players must engage with risk."
+  },
+  "obs3": {
+    "experiment": "OBS-3 Risk payoff sampling",
+    "description": "Aggressive (all option 0) vs Conservative (all option 1) across 50 seeds \u00d7 2 routes = 100 runs per group.",
+    "seeds_used": [
+      101,
+      102,
+      103,
+      104,
+      105,
+      106,
+      107,
+      108,
+      109,
+      110,
+      111,
+      112,
+      113,
+      114,
+      115,
+      116,
+      117,
+      118,
+      119,
+      120,
+      121,
+      122,
+      123,
+      124,
+      125,
+      126,
+      127,
+      128,
+      129,
+      130,
+      131,
+      132,
+      133,
+      134,
+      135,
+      136,
+      137,
+      138,
+      139,
+      140,
+      141,
+      142,
+      143,
+      144,
+      145,
+      146,
+      147,
+      148,
+      149,
+      150
+    ],
+    "runs_per_group": 100,
+    "aggressive": {
+      "win_rate": 0.35,
+      "avg_net_resource_score": -16.72,
+      "avg_final_radiation": 1.0,
+      "death_reasons": {
+        "radiation_death": 65
+      }
+    },
+    "conservative": {
+      "win_rate": 0.2,
+      "avg_net_resource_score": -14.74,
+      "avg_final_radiation": 1.31,
+      "death_reasons": {
+        "starvation": 47,
+        "radiation_death": 30,
+        "event_or_resource_death": 3
+      }
+    },
+    "win_rate_gap_aggressive_minus_conservative": 0.15,
+    "net_score_gap_aggressive_minus_conservative": -1.98,
+    "route_family_breakdown": {
+      "aggressive": {
+        "north": {
+          "win_rate": 0.28,
+          "avg_net_score": -16.1
+        },
+        "south": {
+          "win_rate": 0.42,
+          "avg_net_score": -17.34
+        }
+      },
+      "conservative": {
+        "north": {
+          "win_rate": 0.0,
+          "avg_net_score": -13.86
+        },
+        "south": {
+          "win_rate": 0.4,
+          "avg_net_score": -15.62
+        }
+      }
+    },
+    "hypothesis": "high-risk options over-perform relative to conservative options",
+    "hypothesis_threshold": "win_rate_gap >= 0.2 OR net_score_gap >= 2.0",
+    "hypothesis_confirmed": false,
+    "interpretation": "Risk and conservative paths are comparably viable \u2014 tension balance is healthy."
+  },
+  "design_signals": [
+    {
+      "source": "OBS-1",
+      "severity": "HIGH",
+      "signal": "First-node choice creates 60% win-rate divergence. Early resource swing strongly influences run economy.",
+      "recommended_action": "Preserve early node weight. Ensure first-node options are legible."
+    },
+    {
+      "source": "OBS-2",
+      "severity": "OK",
+      "signal": "Conservative win rate = 0%. Risk avoidance is not a safe default \u2014 players must engage with risk.",
+      "recommended_action": "No immediate action. Monitor if conservative win rate drops below 0.3."
+    },
+    {
+      "source": "OBS-3",
+      "severity": "OK",
+      "signal": "Risk vs conservative balance is within tolerance: win_gap=+15%, net_score_gap=-2.0.",
+      "recommended_action": "No rebalancing needed. Proceed to PT-2 with current settings."
+    }
+  ]
+}

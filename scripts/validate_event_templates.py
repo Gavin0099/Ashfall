@@ -38,9 +38,14 @@ def validate_event(event_id: str, payload: dict[str, Any]) -> None:
         ensure(isinstance(effects, dict), f"{event_id}: option {index} effects must be object")
         chance = option.get("combat_chance", 0.0)
         ensure(isinstance(chance, (int, float)) and 0 <= float(chance) <= 1, f"{event_id}: option {index} combat_chance invalid")
+        equipment_reward = option.get("equipment_reward")
+        if equipment_reward is not None:
+            ensure(isinstance(equipment_reward, dict), f"{event_id}: option {index} equipment_reward must be object")
+            ensure(equipment_reward.get("slot") in {"weapon", "armor", "tool"}, f"{event_id}: option {index} equipment slot invalid")
+            ensure(isinstance(equipment_reward.get("item"), str) and equipment_reward["item"], f"{event_id}: option {index} equipment item invalid")
         has_positive = any(value > 0 for value in effects.values())
         has_negative = any(value < 0 for value in effects.values())
-        if has_positive or has_negative or float(chance) > 0:
+        if has_positive or has_negative or float(chance) > 0 or equipment_reward is not None:
             tradeoff_found = True
     ensure(tradeoff_found, f"{event_id}: no measurable tradeoff in options")
 

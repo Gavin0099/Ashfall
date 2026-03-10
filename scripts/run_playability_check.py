@@ -63,6 +63,27 @@ def route_plans() -> List[RoutePlan]:
     ]
 
 
+def snapshot_player(player: PlayerState) -> dict:
+    return {
+        "hp": player.hp,
+        "food": player.food,
+        "ammo": player.ammo,
+        "medkits": player.medkits,
+        "scrap": player.scrap,
+        "radiation": player.radiation,
+        "weapon_slot": player.weapon_slot,
+        "armor_slot": player.armor_slot,
+        "tool_slot": player.tool_slot,
+    }
+
+
+def summarize_equipment_change(equipment_change: dict | None) -> str | None:
+    if not equipment_change or not equipment_change.get("changed"):
+        return None
+    replaced = equipment_change.get("replaced") or "empty"
+    return f"{equipment_change['slot']} -> {equipment_change['item']} (replaced {replaced})"
+
+
 def is_pressure_moment(run: RunState, event_payload: dict, option_index: int, outcome: dict) -> bool:
     option = event_payload["options"][option_index]
     effects = option.get("effects", {})
@@ -227,17 +248,12 @@ def run_plan(plan: RoutePlan, nodes: Dict[str, dict], events: Dict[str, dict], e
         option_index = plan.options.get(next_node, 0)
         event_payload = events[node.event_pool[0]]
         warning_signals = build_warning_signals(run.player, event_payload, option_index, len(plan.route) - len(decision_log) - 1)
-        pre_choice_state = {
-            "hp": run.player.hp,
-            "food": run.player.food,
-            "ammo": run.player.ammo,
-            "medkits": run.player.medkits,
-            "radiation": run.player.radiation,
-        }
+        pre_choice_state = snapshot_player(run.player)
         outcome = engine.resolve_node_event(node, run, option_index=option_index)
         pressure = is_pressure_moment(run, events[outcome["event_id"]], option_index, outcome)
         if pressure:
             pressure_count += 1
+        equipment_summary = summarize_equipment_change(outcome.get("equipment_change"))
         moments.append(
             {
                 "node": next_node,
@@ -245,13 +261,8 @@ def run_plan(plan: RoutePlan, nodes: Dict[str, dict], events: Dict[str, dict], e
                 "event_outcome": outcome,
                 "warning_signals": warning_signals,
                 "pre_choice_state": pre_choice_state,
-                "player": {
-                    "hp": run.player.hp,
-                    "food": run.player.food,
-                    "ammo": run.player.ammo,
-                    "medkits": run.player.medkits,
-                    "radiation": run.player.radiation,
-                },
+                "equipment_summary": equipment_summary,
+                "player": snapshot_player(run.player),
                 "pressure": pressure,
             }
         )
@@ -266,13 +277,9 @@ def run_plan(plan: RoutePlan, nodes: Dict[str, dict], events: Dict[str, dict], e
                 "pressure": pressure,
                 "combat_triggered": bool(outcome.get("combat_triggered", False)),
                 "effects": dict(events[outcome["event_id"]]["options"][option_index].get("effects", {})),
-                "player_after": {
-                    "hp": run.player.hp,
-                    "food": run.player.food,
-                    "ammo": run.player.ammo,
-                    "medkits": run.player.medkits,
-                    "radiation": run.player.radiation,
-                },
+                "equipment_change": outcome.get("equipment_change"),
+                "equipment_summary": equipment_summary,
+                "player_after": snapshot_player(run.player),
             }
         )
 
@@ -281,7 +288,8 @@ def run_plan(plan: RoutePlan, nodes: Dict[str, dict], events: Dict[str, dict], e
 
     resource_signature = (
         f"hp:{run.player.hp}|food:{run.player.food}|ammo:{run.player.ammo}|"
-        f"medkits:{run.player.medkits}|scrap:{run.player.scrap}|radiation:{run.player.radiation}"
+        f"medkits:{run.player.medkits}|scrap:{run.player.scrap}|radiation:{run.player.radiation}|"
+        f"weapon:{run.player.weapon_slot}|armor:{run.player.armor_slot}|tool:{run.player.tool_slot}"
     )
     analytics = {
         "run_id": plan.name,
@@ -290,14 +298,7 @@ def run_plan(plan: RoutePlan, nodes: Dict[str, dict], events: Dict[str, dict], e
         "ended": run.ended,
         "victory": run.victory,
         "end_reason": run.end_reason,
-        "player_final": {
-            "hp": run.player.hp,
-            "food": run.player.food,
-            "ammo": run.player.ammo,
-            "medkits": run.player.medkits,
-            "scrap": run.player.scrap,
-            "radiation": run.player.radiation,
-        },
+        "player_final": snapshot_player(run.player),
         "decision_log": decision_log,
         "summary": {
             "pressure_count": pressure_count,
@@ -315,13 +316,7 @@ def run_plan(plan: RoutePlan, nodes: Dict[str, dict], events: Dict[str, dict], e
         "ended": run.ended,
         "victory": run.victory,
         "end_reason": run.end_reason,
-        "player_final": {
-            "hp": run.player.hp,
-            "food": run.player.food,
-            "ammo": run.player.ammo,
-            "medkits": run.player.medkits,
-            "radiation": run.player.radiation,
-        },
+        "player_final": snapshot_player(run.player),
         "moments": moments,
         "analytics": analytics,
     }

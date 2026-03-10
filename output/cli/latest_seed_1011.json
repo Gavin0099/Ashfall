@@ -1,0 +1,111 @@
+{
+  "seed": 1011,
+  "ended": true,
+  "victory": true,
+  "end_reason": "reached_final_node",
+  "player_final": {
+    "hp": 5,
+    "food": 5,
+    "ammo": 0,
+    "medkits": 1,
+    "scrap": 0,
+    "radiation": 1
+  },
+  "decision_log": [
+    {
+      "step": 1,
+      "node": "node_south_1",
+      "event_id": "evt_village",
+      "option_index": 1,
+      "warning_signals": [
+        "WARNING: radiation will continue to threaten future travel.",
+        "WARNING: this option adds radiation and increases long-term risk.",
+        "DANGER: this choice carries a high combat risk."
+      ],
+      "pre_choice_state": {
+        "hp": 10,
+        "food": 6,
+        "ammo": 3,
+        "medkits": 1,
+        "radiation": 0
+      },
+      "pressure": true,
+      "combat_triggered": true,
+      "effects": {
+        "food": 2,
+        "radiation": 1
+      },
+      "player_after": {
+        "hp": 8,
+        "food": 8,
+        "ammo": 1,
+        "medkits": 1,
+        "radiation": 1
+      }
+    },
+    {
+      "step": 2,
+      "node": "node_south_2",
+      "event_id": "evt_floodplain",
+      "option_index": 1,
+      "warning_signals": [
+        "WARNING: radiation will continue to threaten future travel."
+      ],
+      "pre_choice_state": {
+        "hp": 7,
+        "food": 7,
+        "ammo": 1,
+        "medkits": 1,
+        "radiation": 1
+      },
+      "pressure": true,
+      "combat_triggered": false,
+      "effects": {
+        "food": 1,
+        "ammo": -1
+      },
+      "player_after": {
+        "hp": 7,
+        "food": 8,
+        "ammo": 0,
+        "medkits": 1,
+        "radiation": 1
+      }
+    },
+    {
+      "step": 3,
+      "node": "node_mid",
+      "event_id": "evt_checkpoint",
+      "option_index": 1,
+      "warning_signals": [
+        "WARNING: radiation will continue to threaten future travel."
+      ],
+      "pre_choice_state": {
+        "hp": 6,
+        "food": 7,
+        "ammo": 0,
+        "medkits": 1,
+        "radiation": 1
+      },
+      "pressure": true,
+      "combat_triggered": false,
+      "effects": {
+        "food": -1
+      },
+      "player_after": {
+        "hp": 6,
+        "food": 6,
+        "ammo": 0,
+        "medkits": 1,
+        "radiation": 1
+      }
+    }
+  ],
+  "failure_analysis": {
+    "death_chain_length": 0,
+    "primary_blame_factor": null,
+    "regret_nodes": [],
+    "steps_from_regret_to_death": 0,
+    "is_trash_time_death": false
+  }
+}

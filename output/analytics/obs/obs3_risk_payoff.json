@@ -1,0 +1,103 @@
+{
+  "experiment": "OBS-3 Risk payoff sampling",
+  "description": "Aggressive (all option 0) vs Conservative (all option 1) across 50 seeds \u00d7 2 routes = 100 runs per group.",
+  "seeds_used": [
+    101,
+    102,
+    103,
+    104,
+    105,
+    106,
+    107,
+    108,
+    109,
+    110,
+    111,
+    112,
+    113,
+    114,
+    115,
+    116,
+    117,
+    118,
+    119,
+    120,
+    121,
+    122,
+    123,
+    124,
+    125,
+    126,
+    127,
+    128,
+    129,
+    130,
+    131,
+    132,
+    133,
+    134,
+    135,
+    136,
+    137,
+    138,
+    139,
+    140,
+    141,
+    142,
+    143,
+    144,
+    145,
+    146,
+    147,
+    148,
+    149,
+    150
+  ],
+  "runs_per_group": 100,
+  "aggressive": {
+    "win_rate": 0.35,
+    "avg_net_resource_score": -16.72,
+    "avg_final_radiation": 1.0,
+    "death_reasons": {
+      "radiation_death": 65
+    }
+  },
+  "conservative": {
+    "win_rate": 0.2,
+    "avg_net_resource_score": -14.74,
+    "avg_final_radiation": 1.31,
+    "death_reasons": {
+      "starvation": 47,
+      "radiation_death": 30,
+      "event_or_resource_death": 3
+    }
+  },
+  "win_rate_gap_aggressive_minus_conservative": 0.15,
+  "net_score_gap_aggressive_minus_conservative": -1.98,
+  "route_family_breakdown": {
+    "aggressive": {
+      "north": {
+        "win_rate": 0.28,
+        "avg_net_score": -16.1
+      },
+      "south": {
+        "win_rate": 0.42,
+        "avg_net_score": -17.34
+      }
+    },
+    "conservative": {
+      "north": {
+        "win_rate": 0.0,
+        "avg_net_score": -13.86
+      },
+      "south": {
+        "win_rate": 0.4,
+        "avg_net_score": -15.62
+      }
+    }
+  },
+  "hypothesis": "high-risk options over-perform relative to conservative options",
+  "hypothesis_threshold": "win_rate_gap >= 0.2 OR net_score_gap >= 2.0",
+  "hypothesis_confirmed": false,
+  "interpretation": "Risk and conservative paths are comparably viable \u2014 tension balance is healthy."
+}

@@ -1,0 +1,187 @@
+{
+  "experiment": "EXP-3",
+  "description": "Character Background: none / scavenger / soldier / pathfinder / medic",
+  "seeds": "101..150",
+  "n_per_group": 50,
+  "backgrounds": {
+    "none": {
+      "north": {
+        "n": 50,
+        "win_rate": 0.28,
+        "radiation_death_rate": 0.7,
+        "starvation_death_rate": 0.0,
+        "combat_death_rate": 0.0,
+        "avg_final_hp": 0.16,
+        "avg_final_food": 2.82,
+        "avg_final_ammo": 1.92,
+        "avg_bg_activations": 0.0
+      },
+      "south": {
+        "n": 50,
+        "win_rate": 0.0,
+        "radiation_death_rate": 0.38,
+        "starvation_death_rate": 0.62,
+        "combat_death_rate": 0.0,
+        "avg_final_hp": 2.92,
+        "avg_final_food": 0.48,
+        "avg_final_ammo": 0.9,
+        "avg_bg_activations": 0.0
+      }
+    },
+    "scavenger": {
+      "north": {
+        "n": 50,
+        "win_rate": 0.28,
+        "radiation_death_rate": 0.7,
+        "starvation_death_rate": 0.0,
+        "combat_death_rate": 0.0,
+        "avg_final_hp": 0.16,
+        "avg_final_food": 2.82,
+        "avg_final_ammo": 1.92,
+        "avg_bg_activations": 0.0
+      },
+      "south": {
+        "n": 50,
+        "win_rate": 0.0,
+        "radiation_death_rate": 0.38,
+        "starvation_death_rate": 0.62,
+        "combat_death_rate": 0.0,
+        "avg_final_hp": 2.92,
+        "avg_final_food": 0.48,
+        "avg_final_ammo": 0.9,
+        "avg_bg_activations": 0.0
+      }
+    },
+    "soldier": {
+      "north": {
+        "n": 50,
+        "win_rate": 0.46,
+        "radiation_death_rate": 0.52,
+        "starvation_death_rate": 0.0,
+        "combat_death_rate": 0.0,
+        "avg_final_hp": 1.0,
+        "avg_final_food": 2.7,
+        "avg_final_ammo": 1.56,
+        "avg_bg_activations": 1.62
+      },
+      "south": {
+        "n": 50,
+        "win_rate": 0.0,
+        "radiation_death_rate": 0.38,
+        "starvation_death_rate": 0.62,
+        "combat_death_rate": 0.0,
+        "avg_final_hp": 3.56,
+        "avg_final_food": 0.48,
+        "avg_final_ammo": 0.9,
+        "avg_bg_activations": 0.78
+      }
+    },
+    "pathfinder": {
+      "north": {
+        "n": 50,
+        "win_rate": 0.28,
+        "radiation_death_rate": 0.7,
+        "starvation_death_rate": 0.0,
+        "combat_death_rate": 0.0,
+        "avg_final_hp": 0.16,
+        "avg_final_food": 3.82,
+        "avg_final_ammo": 1.92,
+        "avg_bg_activations": 1.0
+      },
+      "south": {
+        "n": 50,
+        "win_rate": 0.62,
+        "radiation_death_rate": 0.38,
+        "starvation_death_rate": 0.0,
+        "combat_death_rate": 0.0,
+        "avg_final_hp": 2.92,
+        "avg_final_food": 1.48,
+        "avg_final_ammo": 0.9,
+        "avg_bg_activations": 1.0
+      }
+    },
+    "medic": {
+      "north": {
+        "n": 50,
+        "win_rate": 0.28,
+        "radiation_death_rate": 0.7,
+        "starvation_death_rate": 0.0,
+        "combat_death_rate": 0.0,
+        "avg_final_hp": 0.16,
+        "avg_final_food": 2.82,
+        "avg_final_ammo": 1.92,
+        "avg_bg_activations": 0.04
+      },
+      "south": {
+        "n": 50,
+        "win_rate": 0.0,
+        "radiation_death_rate": 0.38,
+        "starvation_death_rate": 0.62,
+        "combat_death_rate": 0.0,
+        "avg_final_hp": 3.02,
+        "avg_final_food": 0.48,
+        "avg_final_ammo": 0.9,
+        "avg_bg_activations": 1.14
+      }
+    }
+  },
+  "route_affinity": {
+    "none": {
+      "north_win_rate": 0.28,
+      "south_win_rate": 0.0,
+      "preferred_route": "north",
+      "win_delta_north_minus_south": 0.28
+    },
+    "scavenger": {
+      "north_win_rate": 0.28,
+      "south_win_rate": 0.0,
+      "preferred_route": "north",
+      "win_delta_north_minus_south": 0.28
+    },
+    "soldier": {
+      "north_win_rate": 0.46,
+      "south_win_rate": 0.0,
+      "preferred_route": "north",
+      "win_delta_north_minus_south": 0.46
+    },
+    "pathfinder": {
+      "north_win_rate": 0.28,
+      "south_win_rate": 0.62,
+      "preferred_route": "south",
+      "win_delta_north_minus_south": -0.34
+    },
+    "medic": {
+      "north_win_rate": 0.28,
+      "south_win_rate": 0.0,
+      "preferred_route": "north",
+      "win_delta_north_minus_south": 0.28
+    }
+  },
+  "deltas_vs_none": {
+    "scavenger": {
+      "delta_win_north": 0.0,
+      "delta_win_south": 0.0
+    },
+    "soldier": {
+      "delta_win_north": 0.18,
+      "delta_win_south": 0.0
+    },
+    "pathfinder": {
+      "delta_win_north": 0.0,
+      "delta_win_south": 0.62
+    },
+    "medic": {
+      "delta_win_north": 0.0,
+      "delta_win_south": 0.0
+    }
+  },
+  "hypothesis": "Each background should show route affinity: a background that amplifies a route's strength should win more on that route. Scavenger->north (ammo/food), Soldier->north (combat), Pathfinder->south (food-safe), Medic->neutral or combat-heavy.",
+  "verdict": {
+    "status": "SUPPORTED",
+    "impactful_backgrounds": [
+      "soldier",
+      "pathfinder"
+    ],
+    "summary": "Character backgrounds create meaningful route-specific impact in at least one case."
+  }
+}

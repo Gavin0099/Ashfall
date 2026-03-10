@@ -74,8 +74,12 @@ class RunEngine:
 
     def apply_travel_attrition(self, run: RunState) -> None:
         if run.player.radiation > 0:
-            run.player.hp -= 1
-            run.player.hp = max(0, run.player.hp)
+            damage = 1
+            if run.player.armor_slot == "gas_mask":
+                damage = max(0, damage - 1)
+            if damage > 0:
+                run.player.hp -= damage
+                run.player.hp = max(0, run.player.hp)
 
     def apply_node_cost(self, run: RunState, node: NodeState) -> None:
         cost = dict(node.resource_cost) if node.resource_cost else {"food": 1}

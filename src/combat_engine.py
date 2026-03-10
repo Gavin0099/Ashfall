@@ -17,6 +17,8 @@ class CombatEngine:
             raise ValueError("Cannot attack without ammo")
         player.ammo -= 1
         damage = self.rng.randint(1, 3)
+        if player.weapon_slot == "rust_rifle":
+            damage += 1
         enemy.hp -= damage
         return damage
 

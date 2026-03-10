@@ -34,7 +34,10 @@
         "ammo": { "type": "integer" },
         "medkits": { "type": "integer" },
         "scrap": { "type": "integer" },
-        "radiation": { "type": "integer" }
+        "radiation": { "type": "integer" },
+        "weapon_slot": { "type": ["string", "null"] },
+        "armor_slot": { "type": ["string", "null"] },
+        "tool_slot": { "type": ["string", "null"] }
       },
       "additionalProperties": false
     },
@@ -60,13 +63,18 @@
               "food": { "type": "integer" },
               "ammo": { "type": "integer" },
               "medkits": { "type": "integer" },
-              "radiation": { "type": "integer" }
+              "radiation": { "type": "integer" },
+              "weapon_slot": { "type": ["string", "null"] },
+              "armor_slot": { "type": ["string", "null"] },
+              "tool_slot": { "type": ["string", "null"] }
             },
             "additionalProperties": false
           },
           "pressure": { "type": "boolean" },
           "combat_triggered": { "type": "boolean" },
           "effects": { "type": "object" },
+          "equipment_change": { "type": ["object", "null"] },
+          "equipment_summary": { "type": ["string", "null"] },
           "player_after": {
             "type": "object",
             "required": ["hp", "food", "ammo", "medkits", "radiation"],
@@ -75,7 +83,10 @@
               "food": { "type": "integer" },
               "ammo": { "type": "integer" },
               "medkits": { "type": "integer" },
-              "radiation": { "type": "integer" }
+              "radiation": { "type": "integer" },
+              "weapon_slot": { "type": ["string", "null"] },
+              "armor_slot": { "type": ["string", "null"] },
+              "tool_slot": { "type": ["string", "null"] }
             },
             "additionalProperties": false
           }

@@ -1,4 +1,9 @@
 ﻿{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Node Schema",
+  "description": "Ashfall v0.1 frozen contract. Defines a single map node including its type, connections, and event pool.",
+  "x-ashfall-version": "0.1",
+  "x-ashfall-status": "frozen",
   "type": "object",
   "required": ["id", "node_type", "connections", "event_pool"],
   "properties": {
@@ -14,7 +19,8 @@
       "type": "array",
       "items": { "type": "string", "minLength": 1 },
       "minItems": 0,
-      "uniqueItems": true
+      "uniqueItems": true,
+      "description": "Outgoing connections to adjacent node IDs. Final nodes must have 0 connections. All other nodes must have >= 1 connection (enforced at graph level, not per-node schema)."
     },
     "event_pool": {
       "type": "array",

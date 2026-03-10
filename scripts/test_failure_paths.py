@@ -217,9 +217,94 @@ def test_combat_boundaries() -> None:
         raise AssertionError("enemy damage boundary min=max failed")
 
 
+def test_equipment_rewards_and_replacement() -> None:
+    player = PlayerState(hp=10, food=5, ammo=3, medkits=1)
+    blade_event = {
+        "id": "blade",
+        "description": "gear",
+        "options": [
+            {
+                "text": "equip blade",
+                "effects": {"ammo": 1},
+                "equipment_reward": {"slot": "weapon", "item": "makeshift_blade"},
+                "combat_chance": 0.0,
+            }
+        ],
+    }
+    rifle_event = {
+        "id": "rifle",
+        "description": "gear",
+        "options": [
+            {
+                "text": "equip rifle",
+                "effects": {"ammo": 1},
+                "equipment_reward": {"slot": "weapon", "item": "rust_rifle"},
+                "combat_chance": 0.0,
+            }
+        ],
+    }
+    tool_event = {
+        "id": "tool",
+        "description": "gear",
+        "options": [
+            {
+                "text": "equip tool",
+                "effects": {"food": 0},
+                "equipment_reward": {"slot": "tool", "item": "scavenger_kit"},
+                "combat_chance": 0.0,
+            }
+        ],
+    }
+    pack_event = {
+        "id": "pack",
+        "description": "gear",
+        "options": [
+            {
+                "text": "equip pack",
+                "effects": {"food": -1},
+                "equipment_reward": {"slot": "tool", "item": "field_pack"},
+                "combat_chance": 0.0,
+            }
+        ],
+    }
+
+    out_blade = resolve_event_choice(player, blade_event, 0, __import__("random").Random(1))
+    if player.weapon_slot != "makeshift_blade":
+        raise AssertionError("weapon reward should equip initial weapon")
+    if not out_blade["equipment_change"]["changed"]:
+        raise AssertionError("first equipment reward should report change")
+
+    out_rifle = resolve_event_choice(player, rifle_event, 0, __import__("random").Random(1))
+    if player.weapon_slot != "rust_rifle":
+        raise AssertionError("weapon reward should replace existing weapon")
+    if out_rifle["equipment_change"]["replaced"] != "makeshift_blade":
+        raise AssertionError("weapon replacement should report previous item")
+
+    enemy = EnemyState(id="e3", name="raider", hp=10, damage_min=1, damage_max=1)
+    damage = CombatEngine(seed=3).player_attack(player, enemy)
+    if damage < 2 or damage > 4:
+        raise AssertionError("rust_rifle should add +1 damage to attack roll")
+
+    out_tool = resolve_event_choice(player, tool_event, 0, __import__("random").Random(1))
+    if player.tool_slot != "scavenger_kit":
+        raise AssertionError("tool reward should equip scavenger kit")
+    if out_tool["equipment_change"]["replaced"] is not None:
+        raise AssertionError("first tool equip should not report replacement")
+
+    food_before_pack = player.food
+    out_pack = resolve_event_choice(player, pack_event, 0, __import__("random").Random(1))
+    if player.tool_slot != "field_pack":
+        raise AssertionError("field_pack should replace current tool")
+    if out_pack["equipment_change"]["replaced"] != "scavenger_kit":
+        raise AssertionError("field_pack should report replaced tool")
+    if player.food != food_before_pack + 1:
+        raise AssertionError("field_pack should grant net +1 food after the event's -1 cost proxy")
+
+
 def main() -> int:
     test_combat_failures()
     test_combat_boundaries()
+    test_equipment_rewards_and_replacement()
     test_event_failures()
     test_run_failures()
     test_radiation_attrition()

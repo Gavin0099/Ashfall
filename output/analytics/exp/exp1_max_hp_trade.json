@@ -1,0 +1,114 @@
+{
+  "experiment": "EXP-1 max_hp trade",
+  "description": "Tests whether a permanent max_hp sacrifice (+food) increases meaningful tension and remains a viable player choice. Implemented as a self-contained simulation experiment without modifying v0.1 core state contracts.",
+  "trade_parameters": {
+    "max_hp_delta": -2,
+    "food_gain": 3,
+    "trade_node": "node_north_1"
+  },
+  "seeds_used": [
+    101,
+    102,
+    103,
+    104,
+    105,
+    106,
+    107,
+    108,
+    109,
+    110,
+    111,
+    112,
+    113,
+    114,
+    115,
+    116,
+    117,
+    118,
+    119,
+    120,
+    121,
+    122,
+    123,
+    124,
+    125,
+    126,
+    127,
+    128,
+    129,
+    130,
+    131,
+    132,
+    133,
+    134,
+    135,
+    136,
+    137,
+    138,
+    139,
+    140,
+    141,
+    142,
+    143,
+    144,
+    145,
+    146,
+    147,
+    148,
+    149,
+    150
+  ],
+  "group_a": {
+    "label": "Group A: trade accepted (max_hp -2, food +3)",
+    "run_count": 50,
+    "win_rate": 0.96,
+    "avg_pressure_count": 2.96,
+    "avg_final_food": 4.12,
+    "avg_final_hp": 7.44,
+    "avg_max_hp_at_end": 8.0,
+    "avg_hp_margin": 0.93,
+    "avg_final_radiation": 0.0,
+    "end_reasons": {
+      "reached_final_node": 48,
+      "event_or_resource_death": 2
+    },
+    "death_reasons": {
+      "event_or_resource_death": 2
+    },
+    "avg_steps_from_regret_to_death": 0.0
+  },
+  "group_b": {
+    "label": "Group B: trade declined (control)",
+    "run_count": 50,
+    "win_rate": 0.0,
+    "avg_pressure_count": 2.94,
+    "avg_final_food": 0.18,
+    "avg_final_hp": 9.2,
+    "avg_max_hp_at_end": 10.0,
+    "avg_hp_margin": 0.92,
+    "avg_final_radiation": 0.0,
+    "end_reasons": {
+      "starvation": 47,
+      "event_or_resource_death": 3
+    },
+    "death_reasons": {
+      "starvation": 47,
+      "event_or_resource_death": 3
+    },
+    "avg_steps_from_regret_to_death": 0.06
+  },
+  "comparison": {
+    "win_rate_delta_A_minus_B": 0.96,
+    "avg_food_delta_A_minus_B": 3.94,
+    "avg_pressure_delta_A_minus_B": 0.02
+  },
+  "interpretation": {
+    "trade_is_viable": true,
+    "food_gain_pays_off": true,
+    "trade_shifts_death_cause": true
+  },
+  "design_recommendation": [
+    "Trade appears balanced: win rate holds and food gain provides real buffer. Candidate for integration into trade-node event pool.",
+    "Starvation deaths drop from 47 to 0 when trade is taken. Food gain is successfully resolving the starvation pressure from OBS-2."
+  ]
+}

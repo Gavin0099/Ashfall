@@ -49,6 +49,10 @@
             "food": 1,
             "ammo": 2
           },
+          "equipment_reward": {
+            "slot": "weapon",
+            "item": "makeshift_blade"
+          },
           "combat_chance": 0.8
         },
         {
@@ -115,6 +119,10 @@
             "ammo": -1,
             "medkits": 1
           },
+          "equipment_reward": {
+            "slot": "tool",
+            "item": "scavenger_kit"
+          },
           "combat_chance": 0.0
         },
         {
@@ -148,6 +156,10 @@
             "food": -1,
             "radiation": 1
           },
+          "equipment_reward": {
+            "slot": "tool",
+            "item": "field_pack"
+          },
           "combat_chance": 0.4
         },
         {
@@ -179,6 +191,10 @@
           ],
           "effects": {
             "ammo": 1
+          },
+          "equipment_reward": {
+            "slot": "weapon",
+            "item": "rust_rifle"
           },
           "combat_chance": 0.9
         },
@@ -223,6 +239,761 @@
             "radiation": 1
           },
           "combat_chance": 0.4
+        }
+      ]
+    },
+    {
+      "event_id": "evt_abandoned_cache",
+      "template_type": "scavenger_encounter",
+      "description_variants": [
+        "一處舊預備倉庫被粗草皮掩著，幾乎看不出來。",
+        "半塌的地下室裡散著戰前補給品殘骸。",
+        "積灰的金屬箱還沒被人翻過，但周圍有新腳印。"
+      ],
+      "options": [
+        {
+          "text_variants": [
+            "搜刮整個倉庫",
+            "把每一個角落都掃乾淨"
+          ],
+          "effects": {
+            "food": 2,
+            "medkits": 1,
+            "radiation": 1
+          },
+          "combat_chance": 0.5
+        },
+        {
+          "text_variants": [
+            "只拿最顯眼的補給就走",
+            "不貪，帶走最值錢的一箱就撤"
+          ],
+          "effects": {
+            "food": 1
+          },
+          "combat_chance": 0.1
+        }
+      ]
+    },
+    {
+      "event_id": "evt_factory_ruins",
+      "template_type": "ruined_infrastructure",
+      "description_variants": [
+        "廠房鋼架扭曲塌陷，空氣裡飄著化學燒焦的嗆味。",
+        "整座工廠被爆炸掀翻了一半，廢料堆積如山。",
+        "熔爐已冷，但廠房深處的光讓人不敢靠近。"
+      ],
+      "options": [
+        {
+          "text_variants": [
+            "深入廠區找廢金屬",
+            "越往裡面越多材料，賭一把"
+          ],
+          "effects": {
+            "scrap": 3,
+            "hp": -1,
+            "radiation": 2
+          },
+          "combat_chance": 0.3
+        },
+        {
+          "text_variants": [
+            "在外圍快速撿拾",
+            "只撿看得到的，不進去冒險"
+          ],
+          "effects": {
+            "scrap": 1
+          },
+          "combat_chance": 0.0
+        }
+      ]
+    },
+    {
+      "event_id": "evt_crashed_vehicle",
+      "template_type": "scavenger_encounter",
+      "description_variants": [
+        "一輛翻覆的軍用車橫在路中央，車門半開。",
+        "裝甲運兵車撞進了護欄，還沒有人動過它。",
+        "車體已經生鏽，但後艙的鎖鏈還是新的。"
+      ],
+      "options": [
+        {
+          "text_variants": [
+            "破開後艙取物資",
+            "用廢鐵槓把鎖砸開"
+          ],
+          "effects": {
+            "ammo": 3,
+            "scrap": 1
+          },
+          "combat_chance": 0.6
+        },
+        {
+          "text_variants": [
+            "只取車頭能用的零件",
+            "快速卸幾個引擎零件就撤"
+          ],
+          "effects": {
+            "scrap": 2
+          },
+          "combat_chance": 0.2
+        }
+      ]
+    },
+    {
+      "event_id": "evt_isolated_farm",
+      "template_type": "survivor_contact",
+      "description_variants": [
+        "孤立農場的煙囪冒著輕煙，看起來還有人住。",
+        "菜園圍欄修得很整齊，門口有人影。",
+        "農場主人持槍站在門口，但沒有馬上開槍。"
+      ],
+      "options": [
+        {
+          "text_variants": [
+            "主動交易，用廢料換食物",
+            "拿零件換幾袋糧食"
+          ],
+          "effects": {
+            "scrap": -2,
+            "food": 3
+          },
+          "combat_chance": 0.0
+        },
+        {
+          "text_variants": [
+            "趁夜偷糧食",
+            "等對方睡著再動手"
+          ],
+          "effects": {
+            "food": 2,
+            "hp": -1
+          },
+          "combat_chance": 0.8
+        }
+      ]
+    },
+    {
+      "event_id": "evt_drainage_tunnel",
+      "template_type": "ruined_infrastructure",
+      "description_variants": [
+        "城市排水道入口就在路旁，惡臭撲鼻而來。",
+        "下水道格柵已被人撬開，黑暗中有微弱的光。",
+        "管線老舊破裂，輻射廢水在地上積了一層。"
+      ],
+      "options": [
+        {
+          "text_variants": [
+            "鑽進去走捷徑",
+            "忍住臭味，走地下繞過封鎖線"
+          ],
+          "effects": {
+            "food": -1,
+            "radiation": 2,
+            "ammo": 1
+          },
+          "combat_chance": 0.4
+        },
+        {
+          "text_variants": [
+            "封住入口繼續走地面",
+            "地下太危險，寧可繞路"
+          ],
+          "effects": {
+            "food": -1
+          },
+          "combat_chance": 0.0
+        }
+      ]
+    },
+    {
+      "event_id": "evt_raider_ambush",
+      "template_type": "checkpoint_conflict",
+      "description_variants": [
+        "路障後突然衝出一群人，槍口對著車隊。",
+        "假投降的幾個人突然翻臉，從兩側包夾。",
+        "廢棄建築上的狙擊手讓隊伍動彈不得。"
+      ],
+      "options": [
+        {
+          "text_variants": [
+            "立刻還擊，打穿包圍圈",
+            "全力反擊，把突破口打出來"
+          ],
+          "effects": {
+            "ammo": -2,
+            "hp": -2
+          },
+          "combat_chance": 1.0
+        },
+        {
+          "text_variants": [
+            "丟出物資分散注意力後逃跑",
+            "拋出一袋補給，趁亂撤離"
+          ],
+          "effects": {
+            "food": -2,
+            "scrap": -1
+          },
+          "combat_chance": 0.3
+        }
+      ]
+    },
+    {
+      "event_id": "evt_mutant_pack",
+      "template_type": "environmental_hazard",
+      "description_variants": [
+        "一群變種生物在廢墟間嗅探，擋住了前進路線。",
+        "低沉的咆哮聲讓隊員都繃緊了神經。",
+        "至少有十幾隻，看起來還沒發現你們。"
+      ],
+      "options": [
+        {
+          "text_variants": [
+            "趁牠們沒注意快速穿越",
+            "保持安靜，從群體邊緣鑽過去"
+          ],
+          "effects": {
+            "food": -1
+          },
+          "combat_chance": 0.5
+        },
+        {
+          "text_variants": [
+            "製造聲響引開大部分，再快速穿越",
+            "用空罐子把一半引走，再衝過去"
+          ],
+          "effects": {
+            "ammo": -1,
+            "food": -1
+          },
+          "combat_chance": 0.2
+        }
+      ]
+    },
+    {
+      "event_id": "evt_tripwire_zone",
+      "template_type": "environmental_hazard",
+      "description_variants": [
+        "前隊的人幾乎踩上了看不見的絆線。",
+        "廢棄建築群裡布滿了自製地雷和警報裝置。",
+        "這一區的地面看起來都被人動過手腳。"
+      ],
+      "options": [
+        {
+          "text_variants": [
+            "小心拆除可見的絆線後通過",
+            "逐一清除視線內的陷阱再推進"
+          ],
+          "effects": {
+            "food": -1,
+            "scrap": 1
+          },
+          "combat_chance": 0.1
+        },
+        {
+          "text_variants": [
+            "高速衝過，賭不會全部觸發",
+            "快跑，不是每個都會炸"
+          ],
+          "effects": {
+            "hp": -2,
+            "ammo": 1
+          },
+          "combat_chance": 0.6
+        }
+      ]
+    },
+    {
+      "event_id": "evt_contested_bridge",
+      "template_type": "checkpoint_conflict",
+      "description_variants": [
+        "橋的兩端各有一群人對峙，你們夾在中間。",
+        "鐵橋上有人在談判，雙方槍口都指著對方。",
+        "唯一的過橋通道被兩個武裝派系鎖死了。"
+      ],
+      "options": [
+        {
+          "text_variants": [
+            "趁雙方分心時快速衝橋",
+            "等他們注意力集中在彼此時衝過去"
+          ],
+          "effects": {
+            "food": -1,
+            "hp": -1
+          },
+          "combat_chance": 0.7
+        },
+        {
+          "text_variants": [
+            "協助其中一方，換取通行",
+            "幫弱的那一側打，讓他們讓路"
+          ],
+          "effects": {
+            "ammo": -2,
+            "food": 1
+          },
+          "combat_chance": 0.8
+        }
+      ]
+    },
+    {
+      "event_id": "evt_armed_patrol",
+      "template_type": "checkpoint_conflict",
+      "description_variants": [
+        "武裝巡邏隊封鎖了街道，態度強硬地攔下車隊。",
+        "四個持槍的人從側巷走出來，要求過路費。",
+        "巡邏隊的臂章不屬於任何已知派系。"
+      ],
+      "options": [
+        {
+          "text_variants": [
+            "付過路費，低調通過",
+            "給他們要的，別惹麻煩"
+          ],
+          "effects": {
+            "food": -1,
+            "ammo": -1
+          },
+          "combat_chance": 0.0
+        },
+        {
+          "text_variants": [
+            "拒絕，強行突破封鎖",
+            "不給，直接衝"
+          ],
+          "effects": {
+            "ammo": 2,
+            "hp": -2
+          },
+          "combat_chance": 1.0
+        }
+      ]
+    },
+    {
+      "event_id": "evt_sniper_nest",
+      "template_type": "checkpoint_conflict",
+      "description_variants": [
+        "高樓上的狙擊手把整條街都封鎖了。",
+        "每隔幾秒就有一槍，準確地打在車隊前方的地上。",
+        "對方還沒打算殺人，只是在警告。"
+      ],
+      "options": [
+        {
+          "text_variants": [
+            "用煙霧彈掩護，強行穿越",
+            "扔出所有的煙霧彈，衝"
+          ],
+          "effects": {
+            "scrap": -1,
+            "food": -1
+          },
+          "combat_chance": 0.5
+        },
+        {
+          "text_variants": [
+            "後撤繞路",
+            "不值得硬拚，找另一條路"
+          ],
+          "effects": {
+            "food": -2
+          },
+          "combat_chance": 0.0
+        }
+      ]
+    },
+    {
+      "event_id": "evt_wandering_trader",
+      "template_type": "survivor_contact",
+      "description_variants": [
+        "一個背著超大行囊的商人獨自走在路邊。",
+        "流動攤商攔下車隊，拍開一個裝滿物品的袋子。",
+        "看起來是個老練的行商，貨色不差但要價不低。"
+      ],
+      "options": [
+        {
+          "text_variants": [
+            "用廢料換醫療包",
+            "廢金屬換救命藥"
+          ],
+          "effects": {
+            "scrap": -2,
+            "medkits": 2
+          },
+          "combat_chance": 0.0
+        },
+        {
+          "text_variants": [
+            "用彈藥換糧食",
+            "子彈換口糧，長遠更划算"
+          ],
+          "effects": {
+            "ammo": -2,
+            "food": 3
+          },
+          "combat_chance": 0.0
+        }
+      ]
+    },
+    {
+      "event_id": "evt_refugee_camp",
+      "template_type": "survivor_contact",
+      "description_variants": [
+        "數十名難民在廢墟邊搭起了臨時營地。",
+        "帳篷群裡有孩子的哭聲和老人的咳嗽聲。",
+        "難民營的守衛用警惕的眼神打量著車隊。"
+      ],
+      "options": [
+        {
+          "text_variants": [
+            "分出一部分糧食給難民",
+            "分一些口糧，換取他們的情報"
+          ],
+          "effects": {
+            "food": -2,
+            "medkits": 1
+          },
+          "combat_chance": 0.0
+        },
+        {
+          "text_variants": [
+            "不停留，直接穿過營地",
+            "假裝沒看到，繼續前進"
+          ],
+          "effects": {
+            "food": -1
+          },
+          "combat_chance": 0.2
+        }
+      ]
+    },
+    {
+      "event_id": "evt_black_market",
+      "template_type": "survivor_contact",
+      "description_variants": [
+        "地下室裡開著一家看起來不太合法的小店。",
+        "貨架上什麼都有，但老闆的手沒離開過槍。",
+        "這裡的東西沒有來源說明，也不需要。"
+      ],
+      "options": [
+        {
+          "text_variants": [
+            "用廢料換一批彈藥",
+            "把廢金屬全換成子彈"
+          ],
+          "effects": {
+            "scrap": -3,
+            "ammo": 4
+          },
+          "combat_chance": 0.1
+        },
+        {
+          "text_variants": [
+            "搶劫店主",
+            "把槍掏出來，讓他把東西全部交出來"
+          ],
+          "effects": {
+            "food": 2,
+            "ammo": 3,
+            "medkits": 1
+          },
+          "combat_chance": 1.0
+        }
+      ]
+    },
+    {
+      "event_id": "evt_mechanic_workshop",
+      "template_type": "scavenger_encounter",
+      "description_variants": [
+        "廢棄修車廠裡還留著沒帶走的工具和零件。",
+        "舉升架上還停著一輛半拆的車，像個寶庫。",
+        "工廠的油漬地板上有人最近來過的痕跡。"
+      ],
+      "options": [
+        {
+          "text_variants": [
+            "徹底搜刮工具和零件",
+            "把所有能用的東西全部搬走"
+          ],
+          "effects": {
+            "scrap": 4,
+            "food": -1
+          },
+          "combat_chance": 0.4
+        },
+        {
+          "text_variants": [
+            "只拿最輕便、最值錢的",
+            "精挑細選，不貪多"
+          ],
+          "effects": {
+            "scrap": 2
+          },
+          "combat_chance": 0.1
+        }
+      ]
+    },
+    {
+      "event_id": "evt_survivor_message",
+      "template_type": "survivor_contact",
+      "description_variants": [
+        "牆上有人用噴漆留下了警告訊息，還沒乾。",
+        "布告板上釘著一封手寫的求救信。",
+        "路牌背面用血跡標記了一個方向。"
+      ],
+      "options": [
+        {
+          "text_variants": [
+            "循著訊息指引的方向前進",
+            "相信這個警告，繞開標記的危險區"
+          ],
+          "effects": {
+            "food": -1,
+            "ammo": 1
+          },
+          "combat_chance": 0.0
+        },
+        {
+          "text_variants": [
+            "無視訊息，走最短路線",
+            "情報不可靠，不改路線"
+          ],
+          "effects": {
+            "hp": -1,
+            "food": 1
+          },
+          "combat_chance": 0.5
+        }
+      ]
+    },
+    {
+      "event_id": "evt_radio_signal",
+      "template_type": "survivor_contact",
+      "description_variants": [
+        "頻道裡傳來斷斷續續的求援廣播。",
+        "無線電突然亮起，有人在重複播送一組座標。",
+        "收音機接收到一段加密訊號，解碼後是求救。"
+      ],
+      "options": [
+        {
+          "text_variants": [
+            "循著訊號方向繞道去確認",
+            "可能是倖存者，去看看"
+          ],
+          "effects": {
+            "food": -2,
+            "medkits": 1,
+            "ammo": 1
+          },
+          "combat_chance": 0.4
+        },
+        {
+          "text_variants": [
+            "關掉收音機，繼續前進",
+            "可能是陷阱，不理它"
+          ],
+          "effects": {
+            "food": -1
+          },
+          "combat_chance": 0.0
+        }
+      ]
+    },
+    {
+      "event_id": "evt_mass_grave",
+      "template_type": "environmental_hazard",
+      "description_variants": [
+        "路邊的土堆後面是一片大規模的淺葬區。",
+        "數百個木樁插在焦土上，附近的輻射值飆高。",
+        "風吹過來的灰燼是白色的，不是塵土。"
+      ],
+      "options": [
+        {
+          "text_variants": [
+            "快速穿越，不停留",
+            "別看，快走"
+          ],
+          "effects": {
+            "radiation": 2,
+            "food": -1
+          },
+          "combat_chance": 0.1
+        },
+        {
+          "text_variants": [
+            "繞路避開整個區域",
+            "多花時間，但避開輻射熱點"
+          ],
+          "effects": {
+            "food": -2
+          },
+          "combat_chance": 0.0
+        }
+      ]
+    },
+    {
+      "event_id": "evt_children_survivors",
+      "template_type": "survivor_contact",
+      "description_variants": [
+        "廢棄教室裡藏著幾個看起來自己求生了很久的孩子。",
+        "三個小孩從瓦礫後面探頭，眼神又餓又警戒。",
+        "孩子們的手上沒有武器，但其中一個腰上綁著什麼東西。"
+      ],
+      "options": [
+        {
+          "text_variants": [
+            "給孩子們一些食物繼續上路",
+            "留下口糧，讓他們撐久一點"
+          ],
+          "effects": {
+            "food": -2,
+            "hp": 1
+          },
+          "combat_chance": 0.0
+        },
+        {
+          "text_variants": [
+            "試圖帶走孩子，但最終還是放棄",
+            "帶不了這麼多人，沉默地離開"
+          ],
+          "effects": {
+            "food": -1
+          },
+          "combat_chance": 0.1
+        }
+      ]
+    },
+    {
+      "event_id": "evt_research_station",
+      "template_type": "ruined_infrastructure",
+      "description_variants": [
+        "廢棄研究站的自動門還在斷電狀態下嗡嗡作響。",
+        "實驗室裡的設備大半完好，像是倉皇逃走的。",
+        "生化危害標誌貼滿了走廊，有些輻射偵測器還在閃紅燈。"
+      ],
+      "options": [
+        {
+          "text_variants": [
+            "深入搜索醫療補給",
+            "冒著輻射風險找醫療物資"
+          ],
+          "effects": {
+            "medkits": 3,
+            "radiation": 3
+          },
+          "combat_chance": 0.2
+        },
+        {
+          "text_variants": [
+            "只取入口處看得到的藥品就離開",
+            "不深入，拿到看得見的就走"
+          ],
+          "effects": {
+            "medkits": 1,
+            "radiation": 1
+          },
+          "combat_chance": 0.0
+        }
+      ]
+    },
+    {
+      "event_id": "evt_old_safehouse",
+      "template_type": "scavenger_encounter",
+      "description_variants": [
+        "舊安全屋的暗語標記還在，門沒有上鎖。",
+        "幾張行軍床和一些罐頭讓這裡看起來沒多久前還有人。",
+        "安全屋的牆壁被人做滿了標記，有路線圖和警告。"
+      ],
+      "options": [
+        {
+          "text_variants": [
+            "在安全屋過夜休息再出發",
+            "利用這裡補充體力，明天繼續"
+          ],
+          "effects": {
+            "hp": 2,
+            "food": -2
+          },
+          "combat_chance": 0.2
+        },
+        {
+          "text_variants": [
+            "快速清點物資後繼續趕路",
+            "不停留，搬走能帶的就走"
+          ],
+          "effects": {
+            "food": 1,
+            "ammo": 1
+          },
+          "combat_chance": 0.3
+        }
+      ]
+    },
+    {
+      "event_id": "evt_poisoned_water",
+      "template_type": "environmental_hazard",
+      "description_variants": [
+        "河流上游有工廠廢料的痕跡，水色異常渾濁。",
+        "水源旁散著幾具動物屍體，應該是喝水死的。",
+        "隊員有人已經渴了很久，但這水看起來有問題。"
+      ],
+      "options": [
+        {
+          "text_variants": [
+            "用醫療包過濾水源",
+            "消耗一個急救包過濾出能喝的水"
+          ],
+          "effects": {
+            "medkits": -1,
+            "food": 2
+          },
+          "combat_chance": 0.0
+        },
+        {
+          "text_variants": [
+            "直接喝，靠身體硬撐",
+            "沒時間等，喝了再說"
+          ],
+          "effects": {
+            "food": 1,
+            "hp": -2,
+            "radiation": 1
+          },
+          "combat_chance": 0.0
+        }
+      ]
+    },
+    {
+      "event_id": "evt_emergency_beacon",
+      "template_type": "survivor_contact",
+      "description_variants": [
+        "一個緊急求援信標在建築頂端閃爍，頻率很規律。",
+        "軍用應急燈塔的電池快沒電了，但訊號還在發射。",
+        "這種信標只有部隊撤退時才會啟動，意味著什麼。"
+      ],
+      "options": [
+        {
+          "text_variants": [
+            "循著信標找到掉隊的倖存士兵",
+            "說不定他還帶著補給"
+          ],
+          "effects": {
+            "ammo": 2,
+            "medkits": 1,
+            "food": -1
+          },
+          "combat_chance": 0.4
+        },
+        {
+          "text_variants": [
+            "拆掉信標取電池和零件",
+            "信標沒人用了，零件更實際"
+          ],
+          "effects": {
+            "scrap": 2,
+            "radiation": 1
+          },
+          "combat_chance": 0.0
         }
       ]
     }
