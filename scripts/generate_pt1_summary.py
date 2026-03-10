@@ -33,7 +33,21 @@ def is_completed_log(data: dict[str, Any]) -> bool:
     events = data.get("events", [])
     if not events:
         return False
-    return all(not is_placeholder_string(entry.get("node_id")) for entry in events)
+    post_run = data.get("post_run", {})
+    required_post_run = (
+        "hardest_choice",
+        "perceived_death_cause",
+        "regret_choice",
+        "judgment_regret_note",
+        "frustration_regret_note",
+        "immediate_replay_reason",
+    )
+    return (
+        all(not is_placeholder_string(entry.get("node_id")) for entry in events)
+        and all(not is_placeholder_string(entry.get("timestamp")) for entry in events)
+        and any(int(entry.get("decision_time_ms", 0) or 0) > 0 for entry in events)
+        and all(not is_placeholder_string(post_run.get(key)) for key in required_post_run)
+    )
 
 
 def collect_completed_logs() -> list[dict[str, Any]]:

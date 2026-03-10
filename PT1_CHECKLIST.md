@@ -24,6 +24,7 @@ Optional bootstrap:
 ```bash
 python scripts/bootstrap_pt1_sessions.py
 python scripts/generate_pt1_operator_packet.py
+python scripts/prefill_pt1_session_log.py playtests/P2_session_log.json 103
 ```
 - [ ] Review [PT1_SEED_ASSIGNMENT.md](e:\BackUp\Git_EE\Ashfall\PT1_SEED_ASSIGNMENT.md)
 - [ ] Review [PT1_operator_packet.md](e:\BackUp\Git_EE\Ashfall\output\playtests\PT1_operator_packet.md)
@@ -113,6 +114,7 @@ Then record:
 ## After Each Session
 
 - [ ] Save the human log as `playtests/PX_session_log.json`
+- [ ] Optional: prefill objective fields from CLI output using `python scripts/prefill_pt1_session_log.py playtests/PX_session_log.json <seed>`
 - [ ] Confirm `output/cli/latest_seed_<seed>.json` exists
 - [ ] Confirm the player log references the correct `run_id`
 

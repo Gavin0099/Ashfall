@@ -24,10 +24,11 @@ Recommended pattern:
 ## Workflow
 
 1. Optional: run `python scripts/bootstrap_pt1_sessions.py`
-2. Or copy `PT1_session_template.json`
-3. Rename it to `PX_session_log.json`
-4. Fill it during or immediately after the session
-5. Run:
+2. Optional: prefill objective fields with `python scripts/prefill_pt1_session_log.py playtests/PX_session_log.json <seed>`
+3. Or copy `PT1_session_template.json`
+4. Rename it to `PX_session_log.json`
+5. Fill the human-only fields during or immediately after the session
+6. Run:
 
 ```bash
 python scripts/validate_human_playtest_logs.py
@@ -36,3 +37,4 @@ python scripts/generate_pt1_summary.py
 ```
 
 Placeholder session files with `TBD` values are scaffold only. Comparison and summary scripts ignore them until a session is actually filled.
+Prefilled session files are also ignored until decision times and post-run interview fields are completed.

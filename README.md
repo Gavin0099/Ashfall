@@ -121,6 +121,7 @@ What they cover:
 - `test_failure_paths.py`: invalid input, boundary, and failure-path checks
 - `play_cli_run.py`: interactive CLI run with pre-choice and travel warnings
 - `bootstrap_pt1_sessions.py`: creates `P1-P5` session log files for PT-1
+- `prefill_pt1_session_log.py`: copies objective node/choice data from `output/cli/latest_seed_<seed>.json` into a PT-1 session log
 - `run_playability_check.py`: 5-run playability evaluation with deterministic routes
 - `run_balance_metrics.py`: 50-run balancing sample with route-family summaries
 - `validate_run_analytics.py`: validates analytics output contract
