@@ -61,6 +61,13 @@ def first_n_bullets(items: list[str], limit: int = 3) -> str:
     return "\n".join(f"- {item}" for item in values[:limit])
 
 
+def top_breakdown_bullets(counts: dict[str, Any], limit: int = 3) -> str:
+    if not counts:
+        return "- none"
+    ordered = sorted(counts.items(), key=lambda item: (-int(item[1]), str(item[0])))
+    return "\n".join(f"- {key}: {value}" for key, value in ordered[:limit])
+
+
 def pass_fail(flag: bool) -> str:
     return "PASS" if flag else "FAIL"
 
@@ -114,6 +121,10 @@ def main() -> int:
     replay_reasons = [str(log["post_run"].get("immediate_replay_reason", "")).strip() for log in logs]
     perceived_death_causes = [str(log["post_run"].get("perceived_death_cause", "")).strip() for log in logs]
     run_ids = sorted(str(log.get("run_id", "")).strip() for log in logs if str(log.get("run_id", "")).strip())
+    hesitation_breakdown = comparison.get("hesitation_alignment_breakdown", {})
+    regret_breakdown = comparison.get("regret_alignment_breakdown", {})
+    blame_breakdown = comparison.get("machine_primary_blame_breakdown", {})
+    equipment_arc_notice_rate = float(comparison.get("equipment_arc_notice_rate", 0.0))
     verdict, failed_checks = derive_verdict(
         hesitation_match_rate=float(comparison["hesitation_match_rate"]),
         regret_match_rate=float(comparison["regret_match_rate"]),
@@ -126,7 +137,10 @@ def main() -> int:
     if "hesitation_density" in failed_checks or "hesitation_time" in failed_checks:
         next_actions.append("Increase visible route pressure earlier; current hesitation density is below PT-1 target.")
     if "regret_match" in failed_checks:
-        next_actions.append("Review warning clarity and regret distance; human regret is not aligning with machine blame.")
+        if regret_breakdown.get("victory_run_has_no_machine_regret_nodes"):
+            next_actions.append("Separate victory-run regret from death-chain regret in PT-2 readouts; the current mismatch is coming from a win with no machine regret nodes.")
+        else:
+            next_actions.append("Review warning clarity and regret distance; human regret is not aligning with machine blame.")
     if "replay_intent" in failed_checks:
         next_actions.append("Strengthen route identity and replay promise before adding content breadth.")
     if not next_actions:
@@ -166,6 +180,7 @@ From `output/playtests/comparison_summary.json`:
 - avg decision time ms: {comparison["avg_decision_time_ms"]}
 - avg hesitation nodes per player: {avg_hesitation_nodes}
 - avg hesitation time ms: {avg_hesitation_time_ms}
+- equipment arc notice rate: {equipment_arc_notice_rate}
 - sessions with confusion flagged: {confusion_sessions}
 
 ## Qualitative Readout
@@ -188,7 +203,18 @@ From `output/playtests/comparison_summary.json`:
 ## Machine vs Human Alignment
 
 - See `output/playtests/comparison_summary.json`
-- Manual callout: review sessions where `hesitation_match` or `regret_match` is false.
+- hesitation breakdown:
+{top_breakdown_bullets(hesitation_breakdown)}
+- regret breakdown:
+{top_breakdown_bullets(regret_breakdown)}
+- machine blame breakdown:
+{top_breakdown_bullets(blame_breakdown)}
+
+## PT-2 Read
+
+- If `victory_run_has_no_machine_regret_nodes` dominates, treat regret mismatch separately from death attribution failure.
+- If `machine_pressure_but_no_human_hesitation` appears, route pressure is not reading strongly enough in the CLI.
+- If `human_hesitation_on_confusion_only` appears, the issue is clarity, not tension.
 
 ## Radiation Read
 

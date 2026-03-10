@@ -4,8 +4,19 @@
   "regret_match_rate": 0.0,
   "replay_intent_rate": 1.0,
   "avg_decision_time_ms": 6200.0,
+  "equipment_arc_notice_rate": 1.0,
+  "hesitation_alignment_breakdown": {
+    "aligned_pressure_hesitation": 1
+  },
+  "regret_alignment_breakdown": {
+    "victory_run_has_no_machine_regret_nodes": 1
+  },
+  "machine_primary_blame_breakdown": {
+    "none": 1
+  },
   "comparisons": [
     {
+      "source_log": "sample_session_log.json",
       "player_id": "P1",
       "session_id": "PT1-001",
       "run_id": "south_aggressive",
@@ -13,6 +24,7 @@
         "node_final",
         "node_south_1"
       ],
+      "human_confusion_nodes": [],
       "machine_pressure_nodes": [
         "node_final",
         "node_mid",
@@ -24,11 +36,21 @@
         "node_south_1"
       ],
       "hesitation_match": true,
+      "hesitation_alignment_reason": "aligned_pressure_hesitation",
       "human_regret_choice": "node_south_1",
       "machine_regret_nodes": [],
       "regret_match": false,
+      "regret_alignment_reason": "victory_run_has_no_machine_regret_nodes",
       "machine_primary_blame_factor": null,
       "machine_steps_from_regret_to_death": 0,
+      "machine_is_victory": true,
+      "machine_is_trash_time_death": false,
+      "machine_pressure_count": 4,
+      "machine_equipment_nodes": [
+        "node_south_2",
+        "node_mid"
+      ],
+      "equipment_arc_noticed": true,
       "replay_intent": true,
       "avg_decision_time_ms": 6200.0
     }

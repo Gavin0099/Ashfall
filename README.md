@@ -126,7 +126,7 @@ What they cover:
 - `validate_run_analytics.py`: validates analytics output contract
 - `validate_event_templates.py`: validates deterministic event template generation
 - `validate_human_playtest_logs.py`: validates human playtest session logs
-- `compare_playtest_vs_machine.py`: compares human hesitation/regret against machine analytics
+- `compare_playtest_vs_machine.py`: compares human hesitation/regret against machine analytics, including mismatch reason breakdowns and equipment-arc notice rate
 - `generate_pt1_summary.py`: produces a PT-1 markdown summary from completed session logs and machine comparison output
 
 Placeholder PT-1 files are scaffold only. Human comparison and summary scripts ignore sessions still marked `TBD`.

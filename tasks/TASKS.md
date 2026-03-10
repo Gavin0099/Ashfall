@@ -14,6 +14,7 @@ Phase/Gate/Milestone Truth: `PLAN.md`
 
 ### Ready
 - [ ] PT-2 Compare human playtest logs against machine `failure_analysis`
+Artifact target: `output/playtests/comparison_summary.json` with hesitation/regret mismatch breakdowns, machine blame breakdown, and equipment-arc notice rate
 - [x] OBS-1 Run first-node dominance test from `SEED_101_OBSERVATION.md`
 - [x] OBS-2 Test conservative survivability across multiple seeds
 - [x] OBS-3 Compare high-risk vs low-risk event payoff across >=100 runs
