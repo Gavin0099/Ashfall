@@ -1,206 +1,206 @@
 {
   "overall": {
     "run_count": 75,
-    "runs_with_loot_rate": 0.56,
-    "avg_encounter_count": 1.333,
-    "avg_loot_drop_count": 1.053,
-    "avg_loot_total_amount": 1.44,
+    "runs_with_loot_rate": 0.693,
+    "avg_encounter_count": 1.587,
+    "avg_loot_drop_count": 1.813,
+    "avg_loot_total_amount": 2.907,
     "resource_totals": {
-      "food": 15,
-      "ammo": 24,
-      "medkits": 11,
-      "scrap": 58
+      "food": 19,
+      "ammo": 86,
+      "medkits": 35,
+      "scrap": 78
     },
     "resource_per_run": {
-      "food": 0.2,
-      "ammo": 0.32,
-      "medkits": 0.147,
-      "scrap": 0.773
+      "food": 0.253,
+      "ammo": 1.147,
+      "medkits": 0.467,
+      "scrap": 1.04
     },
     "archetype_encounters": {
-      "raider": 45,
-      "mutant": 55
+      "raider": 60,
+      "mutant": 59
     },
     "archetype_encounter_rate": {
-      "raider": 0.45,
-      "mutant": 0.55
+      "raider": 0.504,
+      "mutant": 0.496
     },
-    "dominant_archetype": "mutant",
-    "dominant_resource": "scrap"
+    "dominant_archetype": "raider",
+    "dominant_resource": "ammo"
   },
   "by_difficulty": {
     "easy": {
       "run_count": 25,
-      "runs_with_loot_rate": 0.64,
-      "avg_encounter_count": 1.36,
-      "avg_loot_drop_count": 1.24,
-      "avg_loot_total_amount": 1.68,
+      "runs_with_loot_rate": 0.68,
+      "avg_encounter_count": 1.52,
+      "avg_loot_drop_count": 2.04,
+      "avg_loot_total_amount": 3.28,
       "resource_totals": {
         "food": 7,
-        "ammo": 10,
-        "medkits": 3,
-        "scrap": 22
+        "ammo": 34,
+        "medkits": 13,
+        "scrap": 28
       },
       "resource_per_run": {
         "food": 0.28,
-        "ammo": 0.4,
-        "medkits": 0.12,
-        "scrap": 0.88
+        "ammo": 1.36,
+        "medkits": 0.52,
+        "scrap": 1.12
       },
       "archetype_encounters": {
-        "raider": 16,
+        "raider": 20,
         "mutant": 18
       },
       "archetype_encounter_rate": {
-        "raider": 0.471,
-        "mutant": 0.529
+        "raider": 0.526,
+        "mutant": 0.474
       },
-      "dominant_archetype": "mutant",
-      "dominant_resource": "scrap"
+      "dominant_archetype": "raider",
+      "dominant_resource": "ammo"
     },
     "normal": {
       "run_count": 25,
-      "runs_with_loot_rate": 0.56,
-      "avg_encounter_count": 1.32,
-      "avg_loot_drop_count": 1.08,
-      "avg_loot_total_amount": 1.48,
+      "runs_with_loot_rate": 0.68,
+      "avg_encounter_count": 1.56,
+      "avg_loot_drop_count": 1.76,
+      "avg_loot_total_amount": 2.8,
       "resource_totals": {
-        "food": 5,
-        "ammo": 8,
-        "medkits": 4,
-        "scrap": 20
+        "food": 7,
+        "ammo": 26,
+        "medkits": 11,
+        "scrap": 26
       },
       "resource_per_run": {
-        "food": 0.2,
-        "ammo": 0.32,
-        "medkits": 0.16,
-        "scrap": 0.8
+        "food": 0.28,
+        "ammo": 1.04,
+        "medkits": 0.44,
+        "scrap": 1.04
       },
       "archetype_encounters": {
-        "raider": 16,
-        "mutant": 17
-      },
-      "archetype_encounter_rate": {
-        "raider": 0.485,
-        "mutant": 0.515
-      },
-      "dominant_archetype": "mutant",
-      "dominant_resource": "scrap"
-    },
-    "hard": {
-      "run_count": 25,
-      "runs_with_loot_rate": 0.48,
-      "avg_encounter_count": 1.32,
-      "avg_loot_drop_count": 0.84,
-      "avg_loot_total_amount": 1.16,
-      "resource_totals": {
-        "food": 3,
-        "ammo": 6,
-        "medkits": 4,
-        "scrap": 16
-      },
-      "resource_per_run": {
-        "food": 0.12,
-        "ammo": 0.24,
-        "medkits": 0.16,
-        "scrap": 0.64
-      },
-      "archetype_encounters": {
-        "raider": 13,
+        "raider": 19,
         "mutant": 20
       },
       "archetype_encounter_rate": {
-        "raider": 0.394,
-        "mutant": 0.606
+        "raider": 0.487,
+        "mutant": 0.513
       },
       "dominant_archetype": "mutant",
-      "dominant_resource": "scrap"
+      "dominant_resource": "ammo"
+    },
+    "hard": {
+      "run_count": 25,
+      "runs_with_loot_rate": 0.72,
+      "avg_encounter_count": 1.68,
+      "avg_loot_drop_count": 1.64,
+      "avg_loot_total_amount": 2.64,
+      "resource_totals": {
+        "food": 5,
+        "ammo": 26,
+        "medkits": 11,
+        "scrap": 24
+      },
+      "resource_per_run": {
+        "food": 0.2,
+        "ammo": 1.04,
+        "medkits": 0.44,
+        "scrap": 0.96
+      },
+      "archetype_encounters": {
+        "raider": 21,
+        "mutant": 21
+      },
+      "archetype_encounter_rate": {
+        "raider": 0.5,
+        "mutant": 0.5
+      },
+      "dominant_archetype": "raider",
+      "dominant_resource": "ammo"
     }
   },
   "by_route_family": {
     "north": {
       "run_count": 30,
-      "runs_with_loot_rate": 0.5,
-      "avg_encounter_count": 1.167,
-      "avg_loot_drop_count": 1.067,
-      "avg_loot_total_amount": 1.4,
+      "runs_with_loot_rate": 0.7,
+      "avg_encounter_count": 1.633,
+      "avg_loot_drop_count": 1.633,
+      "avg_loot_total_amount": 2.7,
       "resource_totals": {
-        "food": 4,
-        "ammo": 10,
-        "medkits": 8,
+        "food": 8,
+        "ammo": 44,
+        "medkits": 9,
         "scrap": 20
       },
       "resource_per_run": {
-        "food": 0.133,
-        "ammo": 0.333,
-        "medkits": 0.267,
+        "food": 0.267,
+        "ammo": 1.467,
+        "medkits": 0.3,
         "scrap": 0.667
       },
       "archetype_encounters": {
-        "raider": 14,
-        "mutant": 21
+        "raider": 26,
+        "mutant": 23
       },
       "archetype_encounter_rate": {
-        "raider": 0.4,
-        "mutant": 0.6
+        "raider": 0.531,
+        "mutant": 0.469
       },
-      "dominant_archetype": "mutant",
-      "dominant_resource": "scrap"
+      "dominant_archetype": "raider",
+      "dominant_resource": "ammo"
     },
     "south": {
       "run_count": 30,
-      "runs_with_loot_rate": 0.467,
-      "avg_encounter_count": 1.233,
-      "avg_loot_drop_count": 0.833,
-      "avg_loot_total_amount": 1.033,
+      "runs_with_loot_rate": 0.533,
+      "avg_encounter_count": 1.2,
+      "avg_loot_drop_count": 1.4,
+      "avg_loot_total_amount": 2.2,
       "resource_totals": {
-        "food": 8,
-        "ammo": 11,
-        "medkits": 0,
-        "scrap": 12
+        "food": 7,
+        "ammo": 20,
+        "medkits": 11,
+        "scrap": 28
       },
       "resource_per_run": {
-        "food": 0.267,
-        "ammo": 0.367,
-        "medkits": 0.0,
-        "scrap": 0.4
+        "food": 0.233,
+        "ammo": 0.667,
+        "medkits": 0.367,
+        "scrap": 0.933
       },
       "archetype_encounters": {
-        "raider": 21,
-        "mutant": 16
+        "raider": 19,
+        "mutant": 17
       },
       "archetype_encounter_rate": {
-        "raider": 0.568,
-        "mutant": 0.432
+        "raider": 0.528,
+        "mutant": 0.472
       },
       "dominant_archetype": "raider",
       "dominant_resource": "scrap"
     },
     "mixed": {
       "run_count": 15,
-      "runs_with_loot_rate": 0.867,
-      "avg_encounter_count": 1.867,
-      "avg_loot_drop_count": 1.467,
-      "avg_loot_total_amount": 2.333,
+      "runs_with_loot_rate": 1.0,
+      "avg_encounter_count": 2.267,
+      "avg_loot_drop_count": 3.0,
+      "avg_loot_total_amount": 4.733,
       "resource_totals": {
-        "food": 3,
-        "ammo": 3,
-        "medkits": 3,
-        "scrap": 26
+        "food": 4,
+        "ammo": 22,
+        "medkits": 15,
+        "scrap": 30
       },
       "resource_per_run": {
-        "food": 0.2,
-        "ammo": 0.2,
-        "medkits": 0.2,
-        "scrap": 1.733
+        "food": 0.267,
+        "ammo": 1.467,
+        "medkits": 1.0,
+        "scrap": 2.0
       },
       "archetype_encounters": {
-        "raider": 10,
-        "mutant": 18
+        "raider": 15,
+        "mutant": 19
       },
       "archetype_encounter_rate": {
-        "raider": 0.357,
-        "mutant": 0.643
+        "raider": 0.441,
+        "mutant": 0.559
       },
       "dominant_archetype": "mutant",
       "dominant_resource": "scrap"
@@ -210,147 +210,147 @@
     "easy": {
       "north": {
         "run_count": 10,
-        "runs_with_loot_rate": 0.5,
-        "avg_encounter_count": 1.2,
-        "avg_loot_drop_count": 1.2,
-        "avg_loot_total_amount": 1.6,
+        "runs_with_loot_rate": 0.6,
+        "avg_encounter_count": 1.5,
+        "avg_loot_drop_count": 1.7,
+        "avg_loot_total_amount": 2.8,
         "resource_totals": {
           "food": 2,
-          "ammo": 4,
-          "medkits": 2,
+          "ammo": 14,
+          "medkits": 4,
           "scrap": 8
         },
         "resource_per_run": {
           "food": 0.2,
-          "ammo": 0.4,
-          "medkits": 0.2,
+          "ammo": 1.4,
+          "medkits": 0.4,
           "scrap": 0.8
         },
         "archetype_encounters": {
-          "raider": 5,
+          "raider": 8,
           "mutant": 7
         },
         "archetype_encounter_rate": {
-          "raider": 0.417,
-          "mutant": 0.583
-        },
-        "dominant_archetype": "mutant",
-        "dominant_resource": "scrap"
-      },
-      "south": {
-        "run_count": 10,
-        "runs_with_loot_rate": 0.6,
-        "avg_encounter_count": 1.2,
-        "avg_loot_drop_count": 1.1,
-        "avg_loot_total_amount": 1.3,
-        "resource_totals": {
-          "food": 4,
-          "ammo": 5,
-          "medkits": 0,
-          "scrap": 4
-        },
-        "resource_per_run": {
-          "food": 0.4,
-          "ammo": 0.5,
-          "medkits": 0.0,
-          "scrap": 0.4
-        },
-        "archetype_encounters": {
-          "raider": 7,
-          "mutant": 5
-        },
-        "archetype_encounter_rate": {
-          "raider": 0.583,
-          "mutant": 0.417
+          "raider": 0.533,
+          "mutant": 0.467
         },
         "dominant_archetype": "raider",
         "dominant_resource": "ammo"
       },
-      "mixed": {
-        "run_count": 5,
-        "runs_with_loot_rate": 1.0,
-        "avg_encounter_count": 2.0,
+      "south": {
+        "run_count": 10,
+        "runs_with_loot_rate": 0.6,
+        "avg_encounter_count": 1.1,
         "avg_loot_drop_count": 1.6,
-        "avg_loot_total_amount": 2.6,
+        "avg_loot_total_amount": 2.5,
         "resource_totals": {
-          "food": 1,
-          "ammo": 1,
-          "medkits": 1,
+          "food": 3,
+          "ammo": 8,
+          "medkits": 4,
           "scrap": 10
         },
         "resource_per_run": {
-          "food": 0.2,
-          "ammo": 0.2,
-          "medkits": 0.2,
+          "food": 0.3,
+          "ammo": 0.8,
+          "medkits": 0.4,
+          "scrap": 1.0
+        },
+        "archetype_encounters": {
+          "raider": 6,
+          "mutant": 5
+        },
+        "archetype_encounter_rate": {
+          "raider": 0.545,
+          "mutant": 0.455
+        },
+        "dominant_archetype": "raider",
+        "dominant_resource": "scrap"
+      },
+      "mixed": {
+        "run_count": 5,
+        "runs_with_loot_rate": 1.0,
+        "avg_encounter_count": 2.4,
+        "avg_loot_drop_count": 3.6,
+        "avg_loot_total_amount": 5.8,
+        "resource_totals": {
+          "food": 2,
+          "ammo": 12,
+          "medkits": 5,
+          "scrap": 10
+        },
+        "resource_per_run": {
+          "food": 0.4,
+          "ammo": 2.4,
+          "medkits": 1.0,
           "scrap": 2.0
         },
         "archetype_encounters": {
-          "raider": 4,
+          "raider": 6,
           "mutant": 6
         },
         "archetype_encounter_rate": {
-          "raider": 0.4,
-          "mutant": 0.6
+          "raider": 0.5,
+          "mutant": 0.5
         },
-        "dominant_archetype": "mutant",
-        "dominant_resource": "scrap"
+        "dominant_archetype": "raider",
+        "dominant_resource": "ammo"
       }
     },
     "normal": {
       "north": {
         "run_count": 10,
-        "runs_with_loot_rate": 0.5,
-        "avg_encounter_count": 1.1,
-        "avg_loot_drop_count": 1.2,
-        "avg_loot_total_amount": 1.5,
+        "runs_with_loot_rate": 0.7,
+        "avg_encounter_count": 1.7,
+        "avg_loot_drop_count": 1.7,
+        "avg_loot_total_amount": 2.8,
         "resource_totals": {
-          "food": 2,
-          "ammo": 4,
-          "medkits": 3,
+          "food": 4,
+          "ammo": 16,
+          "medkits": 2,
           "scrap": 6
         },
         "resource_per_run": {
-          "food": 0.2,
-          "ammo": 0.4,
-          "medkits": 0.3,
+          "food": 0.4,
+          "ammo": 1.6,
+          "medkits": 0.2,
           "scrap": 0.6
         },
         "archetype_encounters": {
-          "raider": 5,
-          "mutant": 6
+          "raider": 9,
+          "mutant": 8
         },
         "archetype_encounter_rate": {
-          "raider": 0.455,
-          "mutant": 0.545
+          "raider": 0.529,
+          "mutant": 0.471
         },
-        "dominant_archetype": "mutant",
-        "dominant_resource": "scrap"
+        "dominant_archetype": "raider",
+        "dominant_resource": "ammo"
       },
       "south": {
         "run_count": 10,
-        "runs_with_loot_rate": 0.4,
+        "runs_with_loot_rate": 0.5,
         "avg_encounter_count": 1.2,
-        "avg_loot_drop_count": 0.7,
-        "avg_loot_total_amount": 0.9,
+        "avg_loot_drop_count": 1.4,
+        "avg_loot_total_amount": 2.2,
         "resource_totals": {
           "food": 2,
-          "ammo": 3,
-          "medkits": 0,
-          "scrap": 4
+          "ammo": 6,
+          "medkits": 4,
+          "scrap": 10
         },
         "resource_per_run": {
           "food": 0.2,
-          "ammo": 0.3,
-          "medkits": 0.0,
-          "scrap": 0.4
+          "ammo": 0.6,
+          "medkits": 0.4,
+          "scrap": 1.0
         },
         "archetype_encounters": {
-          "raider": 7,
-          "mutant": 5
+          "raider": 6,
+          "mutant": 6
         },
         "archetype_encounter_rate": {
-          "raider": 0.583,
-          "mutant": 0.417
+          "raider": 0.5,
+          "mutant": 0.5
         },
         "dominant_archetype": "raider",
         "dominant_resource": "scrap"
@@ -359,18 +359,18 @@
         "run_count": 5,
         "runs_with_loot_rate": 1.0,
         "avg_encounter_count": 2.0,
-        "avg_loot_drop_count": 1.6,
-        "avg_loot_total_amount": 2.6,
+        "avg_loot_drop_count": 2.6,
+        "avg_loot_total_amount": 4.0,
         "resource_totals": {
           "food": 1,
-          "ammo": 1,
-          "medkits": 1,
+          "ammo": 4,
+          "medkits": 5,
           "scrap": 10
         },
         "resource_per_run": {
           "food": 0.2,
-          "ammo": 0.2,
-          "medkits": 0.2,
+          "ammo": 0.8,
+          "medkits": 1.0,
           "scrap": 2.0
         },
         "archetype_encounters": {
@@ -388,50 +388,50 @@
     "hard": {
       "north": {
         "run_count": 10,
-        "runs_with_loot_rate": 0.5,
-        "avg_encounter_count": 1.2,
-        "avg_loot_drop_count": 0.8,
-        "avg_loot_total_amount": 1.1,
+        "runs_with_loot_rate": 0.8,
+        "avg_encounter_count": 1.7,
+        "avg_loot_drop_count": 1.5,
+        "avg_loot_total_amount": 2.5,
         "resource_totals": {
-          "food": 0,
-          "ammo": 2,
+          "food": 2,
+          "ammo": 14,
           "medkits": 3,
           "scrap": 6
         },
         "resource_per_run": {
-          "food": 0.0,
-          "ammo": 0.2,
+          "food": 0.2,
+          "ammo": 1.4,
           "medkits": 0.3,
           "scrap": 0.6
         },
         "archetype_encounters": {
-          "raider": 4,
+          "raider": 9,
           "mutant": 8
         },
         "archetype_encounter_rate": {
-          "raider": 0.333,
-          "mutant": 0.667
+          "raider": 0.529,
+          "mutant": 0.471
         },
-        "dominant_archetype": "mutant",
-        "dominant_resource": "scrap"
+        "dominant_archetype": "raider",
+        "dominant_resource": "ammo"
       },
       "south": {
         "run_count": 10,
-        "runs_with_loot_rate": 0.4,
+        "runs_with_loot_rate": 0.5,
         "avg_encounter_count": 1.3,
-        "avg_loot_drop_count": 0.7,
-        "avg_loot_total_amount": 0.9,
+        "avg_loot_drop_count": 1.2,
+        "avg_loot_total_amount": 1.9,
         "resource_totals": {
           "food": 2,
-          "ammo": 3,
-          "medkits": 0,
-          "scrap": 4
+          "ammo": 6,
+          "medkits": 3,
+          "scrap": 8
         },
         "resource_per_run": {
           "food": 0.2,
-          "ammo": 0.3,
-          "medkits": 0.0,
-          "scrap": 0.4
+          "ammo": 0.6,
+          "medkits": 0.3,
+          "scrap": 0.8
         },
         "archetype_encounters": {
           "raider": 7,
@@ -446,29 +446,29 @@
       },
       "mixed": {
         "run_count": 5,
-        "runs_with_loot_rate": 0.6,
-        "avg_encounter_count": 1.6,
-        "avg_loot_drop_count": 1.2,
-        "avg_loot_total_amount": 1.8,
+        "runs_with_loot_rate": 1.0,
+        "avg_encounter_count": 2.4,
+        "avg_loot_drop_count": 2.8,
+        "avg_loot_total_amount": 4.4,
         "resource_totals": {
           "food": 1,
-          "ammo": 1,
-          "medkits": 1,
-          "scrap": 6
+          "ammo": 6,
+          "medkits": 5,
+          "scrap": 10
         },
         "resource_per_run": {
           "food": 0.2,
-          "ammo": 0.2,
-          "medkits": 0.2,
-          "scrap": 1.2
+          "ammo": 1.2,
+          "medkits": 1.0,
+          "scrap": 2.0
         },
         "archetype_encounters": {
-          "raider": 2,
-          "mutant": 6
+          "raider": 5,
+          "mutant": 7
         },
         "archetype_encounter_rate": {
-          "raider": 0.25,
-          "mutant": 0.75
+          "raider": 0.417,
+          "mutant": 0.583
         },
         "dominant_archetype": "mutant",
         "dominant_resource": "scrap"

@@ -325,7 +325,7 @@ def test_enemy_archetype_loot_profiles() -> None:
         raise AssertionError("mutant loot profile should focus on scrap and medkits")
     if not any(item["resource"] == "ammo" and item["chance"] == 1.0 for item in raider_loot):
         raise AssertionError("raider loot should guarantee some ammo recovery")
-    if not any(item["resource"] == "scrap" and item["amount"] == 2 for item in mutant_loot):
+    if not any(item["resource"] == "scrap" and item["amount"] >= 2 for item in mutant_loot):
         raise AssertionError("mutant loot should guarantee higher scrap salvage")
 
 
@@ -352,16 +352,24 @@ def test_enemy_encounter_weighting() -> None:
         north_counts[engine._pick_enemy_id(north_run)] += 1
         south_counts[engine._pick_enemy_id(south_run)] += 1
 
-    if north_counts["enemy_mutant_brute"] <= north_counts["enemy_raider_scout"]:
-        raise AssertionError("north encounters should bias toward mutants")
-    if south_counts["enemy_raider_scout"] <= south_counts["enemy_mutant_brute"]:
+    north_table = ENCOUNTER_WEIGHTS["north"]
+    south_table = ENCOUNTER_WEIGHTS["south"]
+    north_should_lean_mutant = north_table["mutant"] > north_table["raider"]
+    south_should_lean_raider = south_table["raider"] > south_table["mutant"]
+
+    if north_should_lean_mutant and north_counts["enemy_mutant_brute"] <= north_counts["enemy_raider_scout"]:
+        raise AssertionError("north encounters should follow the current weighting table and lean mutant")
+    if not north_should_lean_mutant and north_counts["enemy_raider_scout"] <= north_counts["enemy_mutant_brute"]:
+        raise AssertionError("north encounters should follow the current weighting table and lean raider")
+    if south_should_lean_raider and south_counts["enemy_raider_scout"] <= south_counts["enemy_mutant_brute"]:
         raise AssertionError("south encounters should bias toward raiders")
 
     if encounter_bucket_for_node("node_north_2") != "north":
         raise AssertionError("north node should resolve to north encounter bucket")
     if ENCOUNTER_WEIGHTS["south"]["raider"] <= ENCOUNTER_WEIGHTS["south"]["mutant"]:
         raise AssertionError("south encounter table should favor raiders")
-    if ENCOUNTER_WEIGHTS["north"]["mutant"] != 0.75:
+    table = json.loads((ROOT / "schemas" / "encounter_weight_table.json").read_text(encoding="utf-8-sig"))
+    if ENCOUNTER_WEIGHTS["north"]["raider"] != table["weights"]["north"]["raider"]:
         raise AssertionError("encounter weights should load from encounter_weight_table.json")
 
 

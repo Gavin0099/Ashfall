@@ -1,0 +1,48 @@
+{
+  "enemy_raider_scout": {
+    "id": "enemy_raider_scout",
+    "name": "Raider Scout",
+    "archetype": "raider",
+    "special_ability": "opening_shot",
+    "hp": 5,
+    "damage_range": {
+      "min": 1,
+      "max": 2
+    },
+    "loot_table": [
+      {
+        "resource": "ammo",
+        "amount": 2,
+        "chance": 1.0
+      },
+      {
+        "resource": "food",
+        "amount": 1,
+        "chance": 0.4
+      }
+    ]
+  },
+  "enemy_mutant_brute": {
+    "id": "enemy_mutant_brute",
+    "name": "Mutant Brute",
+    "archetype": "mutant",
+    "special_ability": "thick_hide",
+    "hp": 4,
+    "damage_range": {
+      "min": 1,
+      "max": 2
+    },
+    "loot_table": [
+      {
+        "resource": "scrap",
+        "amount": 2,
+        "chance": 1.0
+      },
+      {
+        "resource": "medkits",
+        "amount": 1,
+        "chance": 0.7
+      }
+    ]
+  }
+}

@@ -3,155 +3,155 @@
 ## Overall
 
 - run_count: 75
-- runs_with_loot_rate: 0.56
-- avg_encounter_count: 1.333
-- avg_loot_drop_count: 1.053
-- avg_loot_total_amount: 1.44
-- dominant_resource: scrap
-- dominant_archetype: mutant
+- runs_with_loot_rate: 0.693
+- avg_encounter_count: 1.587
+- avg_loot_drop_count: 1.813
+- avg_loot_total_amount: 2.907
+- dominant_resource: ammo
+- dominant_archetype: raider
 
 ### Overall Totals
 
-- food: 15
-- ammo: 24
-- medkits: 11
-- scrap: 58
+- food: 19
+- ammo: 86
+- medkits: 35
+- scrap: 78
 
 ### Overall Per Run
 
-- food: 0.2
-- ammo: 0.32
-- medkits: 0.147
-- scrap: 0.773
+- food: 0.253
+- ammo: 1.147
+- medkits: 0.467
+- scrap: 1.04
 
 ### Overall Encounter Rate
 
-- raider: 0.45
-- mutant: 0.55
+- raider: 0.504
+- mutant: 0.496
 
 ## By Difficulty
 
 ### easy
 
-- runs_with_loot_rate: 0.64
-- avg_encounter_count: 1.36
-- avg_loot_drop_count: 1.24
-- avg_loot_total_amount: 1.68
-- dominant_resource: scrap
-- dominant_archetype: mutant
+- runs_with_loot_rate: 0.68
+- avg_encounter_count: 1.52
+- avg_loot_drop_count: 2.04
+- avg_loot_total_amount: 3.28
+- dominant_resource: ammo
+- dominant_archetype: raider
 
 - food: 0.28
-- ammo: 0.4
-- medkits: 0.12
-- scrap: 0.88
+- ammo: 1.36
+- medkits: 0.52
+- scrap: 1.12
 
-- raider: 0.471
-- mutant: 0.529
+- raider: 0.526
+- mutant: 0.474
 
 ### normal
 
-- runs_with_loot_rate: 0.56
-- avg_encounter_count: 1.32
-- avg_loot_drop_count: 1.08
-- avg_loot_total_amount: 1.48
-- dominant_resource: scrap
+- runs_with_loot_rate: 0.68
+- avg_encounter_count: 1.56
+- avg_loot_drop_count: 1.76
+- avg_loot_total_amount: 2.8
+- dominant_resource: ammo
 - dominant_archetype: mutant
 
-- food: 0.2
-- ammo: 0.32
-- medkits: 0.16
-- scrap: 0.8
+- food: 0.28
+- ammo: 1.04
+- medkits: 0.44
+- scrap: 1.04
 
-- raider: 0.485
-- mutant: 0.515
+- raider: 0.487
+- mutant: 0.513
 
 ### hard
 
-- runs_with_loot_rate: 0.48
-- avg_encounter_count: 1.32
-- avg_loot_drop_count: 0.84
-- avg_loot_total_amount: 1.16
-- dominant_resource: scrap
-- dominant_archetype: mutant
+- runs_with_loot_rate: 0.72
+- avg_encounter_count: 1.68
+- avg_loot_drop_count: 1.64
+- avg_loot_total_amount: 2.64
+- dominant_resource: ammo
+- dominant_archetype: raider
 
-- food: 0.12
-- ammo: 0.24
-- medkits: 0.16
-- scrap: 0.64
+- food: 0.2
+- ammo: 1.04
+- medkits: 0.44
+- scrap: 0.96
 
-- raider: 0.394
-- mutant: 0.606
+- raider: 0.5
+- mutant: 0.5
 
 ## By Route Family
 
 ### north
 
-- runs_with_loot_rate: 0.5
-- avg_encounter_count: 1.167
-- avg_loot_drop_count: 1.067
-- avg_loot_total_amount: 1.4
-- dominant_resource: scrap
-- dominant_archetype: mutant
-
-- food: 0.133
-- ammo: 0.333
-- medkits: 0.267
-- scrap: 0.667
-
-- raider: 0.4
-- mutant: 0.6
-
-### south
-
-- runs_with_loot_rate: 0.467
-- avg_encounter_count: 1.233
-- avg_loot_drop_count: 0.833
-- avg_loot_total_amount: 1.033
-- dominant_resource: scrap
+- runs_with_loot_rate: 0.7
+- avg_encounter_count: 1.633
+- avg_loot_drop_count: 1.633
+- avg_loot_total_amount: 2.7
+- dominant_resource: ammo
 - dominant_archetype: raider
 
 - food: 0.267
-- ammo: 0.367
-- medkits: 0.0
-- scrap: 0.4
+- ammo: 1.467
+- medkits: 0.3
+- scrap: 0.667
 
-- raider: 0.568
-- mutant: 0.432
+- raider: 0.531
+- mutant: 0.469
+
+### south
+
+- runs_with_loot_rate: 0.533
+- avg_encounter_count: 1.2
+- avg_loot_drop_count: 1.4
+- avg_loot_total_amount: 2.2
+- dominant_resource: scrap
+- dominant_archetype: raider
+
+- food: 0.233
+- ammo: 0.667
+- medkits: 0.367
+- scrap: 0.933
+
+- raider: 0.528
+- mutant: 0.472
 
 ### mixed
 
-- runs_with_loot_rate: 0.867
-- avg_encounter_count: 1.867
-- avg_loot_drop_count: 1.467
-- avg_loot_total_amount: 2.333
+- runs_with_loot_rate: 1.0
+- avg_encounter_count: 2.267
+- avg_loot_drop_count: 3.0
+- avg_loot_total_amount: 4.733
 - dominant_resource: scrap
 - dominant_archetype: mutant
 
-- food: 0.2
-- ammo: 0.2
-- medkits: 0.2
-- scrap: 1.733
+- food: 0.267
+- ammo: 1.467
+- medkits: 1.0
+- scrap: 2.0
 
-- raider: 0.357
-- mutant: 0.643
+- raider: 0.441
+- mutant: 0.559
 
 ## Difficulty x Route
 
 ### easy
 
-- north: dominant=scrap, archetype=mutant, loot/run=1.6, food=0.2, ammo=0.4, medkits=0.2, scrap=0.8, raider_rate=0.417, mutant_rate=0.583
-- south: dominant=ammo, archetype=raider, loot/run=1.3, food=0.4, ammo=0.5, medkits=0.0, scrap=0.4, raider_rate=0.583, mutant_rate=0.417
-- mixed: dominant=scrap, archetype=mutant, loot/run=2.6, food=0.2, ammo=0.2, medkits=0.2, scrap=2.0, raider_rate=0.4, mutant_rate=0.6
+- north: dominant=ammo, archetype=raider, loot/run=2.8, food=0.2, ammo=1.4, medkits=0.4, scrap=0.8, raider_rate=0.533, mutant_rate=0.467
+- south: dominant=scrap, archetype=raider, loot/run=2.5, food=0.3, ammo=0.8, medkits=0.4, scrap=1.0, raider_rate=0.545, mutant_rate=0.455
+- mixed: dominant=ammo, archetype=raider, loot/run=5.8, food=0.4, ammo=2.4, medkits=1.0, scrap=2.0, raider_rate=0.5, mutant_rate=0.5
 
 ### normal
 
-- north: dominant=scrap, archetype=mutant, loot/run=1.5, food=0.2, ammo=0.4, medkits=0.3, scrap=0.6, raider_rate=0.455, mutant_rate=0.545
-- south: dominant=scrap, archetype=raider, loot/run=0.9, food=0.2, ammo=0.3, medkits=0.0, scrap=0.4, raider_rate=0.583, mutant_rate=0.417
-- mixed: dominant=scrap, archetype=mutant, loot/run=2.6, food=0.2, ammo=0.2, medkits=0.2, scrap=2.0, raider_rate=0.4, mutant_rate=0.6
+- north: dominant=ammo, archetype=raider, loot/run=2.8, food=0.4, ammo=1.6, medkits=0.2, scrap=0.6, raider_rate=0.529, mutant_rate=0.471
+- south: dominant=scrap, archetype=raider, loot/run=2.2, food=0.2, ammo=0.6, medkits=0.4, scrap=1.0, raider_rate=0.5, mutant_rate=0.5
+- mixed: dominant=scrap, archetype=mutant, loot/run=4.0, food=0.2, ammo=0.8, medkits=1.0, scrap=2.0, raider_rate=0.4, mutant_rate=0.6
 
 ### hard
 
-- north: dominant=scrap, archetype=mutant, loot/run=1.1, food=0.0, ammo=0.2, medkits=0.3, scrap=0.6, raider_rate=0.333, mutant_rate=0.667
-- south: dominant=scrap, archetype=raider, loot/run=0.9, food=0.2, ammo=0.3, medkits=0.0, scrap=0.4, raider_rate=0.538, mutant_rate=0.462
-- mixed: dominant=scrap, archetype=mutant, loot/run=1.8, food=0.2, ammo=0.2, medkits=0.2, scrap=1.2, raider_rate=0.25, mutant_rate=0.75
+- north: dominant=ammo, archetype=raider, loot/run=2.5, food=0.2, ammo=1.4, medkits=0.3, scrap=0.6, raider_rate=0.529, mutant_rate=0.471
+- south: dominant=scrap, archetype=raider, loot/run=1.9, food=0.2, ammo=0.6, medkits=0.3, scrap=0.8, raider_rate=0.538, mutant_rate=0.462
+- mixed: dominant=scrap, archetype=mutant, loot/run=4.4, food=0.2, ammo=1.2, medkits=1.0, scrap=2.0, raider_rate=0.417, mutant_rate=0.583
 

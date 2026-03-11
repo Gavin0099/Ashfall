@@ -13,6 +13,7 @@ if str(ROOT) not in sys.path:
 
 from src.event_templates import instantiate_event_catalog, load_template_catalog
 from src.difficulty import build_starting_player
+from src.enemy_catalog import load_enemy_catalog
 from src.run_engine import RunEngine, build_map
 from src.run_summary import build_run_summary
 from src.state_models import PlayerState, RunState
@@ -38,7 +39,8 @@ def build_node_payloads() -> Dict[str, dict]:
         "node_north_2": {"id": "node_north_2", "node_type": "combat", "connections": ["node_mid"], "event_pool": ["evt_tunnel"]},
         "node_south_1": {"id": "node_south_1", "node_type": "trade", "connections": ["node_south_2"], "event_pool": ["evt_village"]},
         "node_south_2": {"id": "node_south_2", "node_type": "resource", "connections": ["node_mid"], "event_pool": ["evt_floodplain"]},
-        "node_mid": {"id": "node_mid", "node_type": "combat", "connections": ["node_final"], "event_pool": ["evt_checkpoint"]},
+        "node_mid": {"id": "node_mid", "node_type": "combat", "connections": ["node_approach"], "event_pool": ["evt_checkpoint"]},
+        "node_approach": {"id": "node_approach", "node_type": "story", "connections": ["node_final"], "event_pool": ["evt_waystation"]},
         "node_final": {"id": "node_final", "node_type": "story", "connections": [], "event_pool": ["evt_final"], "is_final": True},
     }
 
@@ -50,41 +52,16 @@ def build_event_catalog(seed: int) -> Dict[str, dict]:
 
 
 def build_enemy_catalog() -> Dict[str, dict]:
-    return {
-        "enemy_raider_scout": {
-            "id": "enemy_raider_scout",
-            "name": "Raider Scout",
-            "archetype": "raider",
-            "special_ability": "opening_shot",
-            "hp": 5,
-            "damage_range": {"min": 1, "max": 2},
-            "loot_table": [
-                {"resource": "ammo", "amount": 1, "chance": 1.0},
-                {"resource": "food", "amount": 1, "chance": 0.5},
-            ],
-        },
-        "enemy_mutant_brute": {
-            "id": "enemy_mutant_brute",
-            "name": "Mutant Brute",
-            "archetype": "mutant",
-            "special_ability": "thick_hide",
-            "hp": 7,
-            "damage_range": {"min": 1, "max": 3},
-            "loot_table": [
-                {"resource": "scrap", "amount": 2, "chance": 1.0},
-                {"resource": "medkits", "amount": 1, "chance": 0.35},
-            ],
-        },
-    }
+    return load_enemy_catalog()
 
 
 def route_plans() -> List[RoutePlan]:
     return [
-        RoutePlan("north_aggressive", 101, ["node_north_1", "node_north_2", "node_mid", "node_final"], {"node_north_1": 0, "node_north_2": 0, "node_mid": 0, "node_final": 1}),
-        RoutePlan("north_cautious", 102, ["node_north_1", "node_north_2", "node_mid", "node_final"], {"node_north_1": 1, "node_north_2": 1, "node_mid": 1, "node_final": 0}),
-        RoutePlan("south_aggressive", 103, ["node_south_1", "node_south_2", "node_mid", "node_final"], {"node_south_1": 1, "node_south_2": 0, "node_mid": 0, "node_final": 1}),
-        RoutePlan("south_cautious", 104, ["node_south_1", "node_south_2", "node_mid", "node_final"], {"node_south_1": 0, "node_south_2": 1, "node_mid": 1, "node_final": 0}),
-        RoutePlan("mixed_pressure", 105, ["node_north_1", "node_north_2", "node_mid", "node_final"], {"node_north_1": 0, "node_north_2": 1, "node_mid": 0, "node_final": 1}),
+        RoutePlan("north_aggressive", 101, ["node_north_1", "node_north_2", "node_mid", "node_approach", "node_final"], {"node_north_1": 0, "node_north_2": 0, "node_mid": 0, "node_approach": 1, "node_final": 1}),
+        RoutePlan("north_cautious", 102, ["node_north_1", "node_north_2", "node_mid", "node_approach", "node_final"], {"node_north_1": 1, "node_north_2": 1, "node_mid": 1, "node_approach": 0, "node_final": 0}),
+        RoutePlan("south_aggressive", 103, ["node_south_1", "node_south_2", "node_mid", "node_approach", "node_final"], {"node_south_1": 1, "node_south_2": 0, "node_mid": 0, "node_approach": 1, "node_final": 1}),
+        RoutePlan("south_cautious", 104, ["node_south_1", "node_south_2", "node_mid", "node_approach", "node_final"], {"node_south_1": 0, "node_south_2": 1, "node_mid": 1, "node_approach": 0, "node_final": 0}),
+        RoutePlan("mixed_pressure", 105, ["node_north_1", "node_north_2", "node_mid", "node_approach", "node_final"], {"node_north_1": 0, "node_north_2": 1, "node_mid": 0, "node_approach": 1, "node_final": 1}),
     ]
 
 
@@ -163,9 +140,11 @@ def analyze_failure(decision_log: List[dict], ended: bool, victory: bool, end_re
 
     for index, entry in enumerate(decision_log, start=1):
         effects = entry.get("effects", {})
+        player_after = entry.get("player_after", {})
         score = 0.0
         factors: List[str] = []
         recency_weight = 1.0 + (index / max(1, total_steps)) * 0.2
+        remaining_steps = total_steps - index
 
         radiation_delta = max(0, int(effects.get("radiation", 0)))
         if radiation_delta > 0:
@@ -188,6 +167,27 @@ def analyze_failure(decision_log: List[dict], ended: bool, victory: bool, end_re
             factor_totals["resource_exhaustion"] += resource_score
             factors.append("resource_exhaustion")
 
+        # Carryover pressure matters even when the current event did not directly deduct resources.
+        # This keeps the regret chain attached to the earlier decision that left the run with no slack.
+        low_food_after = int(player_after.get("food", 0)) <= 2 and remaining_steps >= 1
+        low_hp_after = int(player_after.get("hp", 0)) <= 3 and remaining_steps >= 1
+        radiation_carryover = int(player_after.get("radiation", 0)) > 0 and remaining_steps >= 1
+        if low_food_after:
+            carryover_score = 1.2 if end_reason == "starvation" else 0.5
+            score += carryover_score
+            factor_totals["resource_exhaustion"] += carryover_score
+            factors.append("resource_exhaustion")
+        if low_hp_after:
+            carryover_score = 0.7
+            score += carryover_score
+            factor_totals["resource_exhaustion"] += carryover_score
+            factors.append("resource_exhaustion")
+        if radiation_carryover:
+            carryover_score = 1.4 if end_reason == "radiation_death" else 0.4
+            score += carryover_score
+            factor_totals["radiation"] += carryover_score
+            factors.append("radiation")
+
         score = round(score * recency_weight, 3)
         if score <= 0:
             continue
@@ -201,6 +201,12 @@ def analyze_failure(decision_log: List[dict], ended: bool, victory: bool, end_re
             description_bits.append(f"lost {food_loss} food")
         if entry.get("combat_triggered", False):
             description_bits.append("accepted combat risk")
+        if low_food_after:
+            description_bits.append("left food slack at 2 or less")
+        if low_hp_after:
+            description_bits.append("left hp at 3 or less")
+        if radiation_carryover:
+            description_bits.append("carried radiation into later travel")
 
         total_score += score
         weighted_nodes.append(

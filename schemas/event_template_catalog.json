@@ -46,8 +46,8 @@
             "趁沒人反應過來先衝最好的殘骸"
           ],
           "effects": {
-            "food": 1,
-            "ammo": 2
+            "food": 0,
+            "ammo": 1
           },
           "equipment_reward": {
             "slot": "weapon",
@@ -63,7 +63,7 @@
           "effects": {
             "food": -1
           },
-          "combat_chance": 0.0
+          "combat_chance": 0.2
         }
       ]
     },
@@ -84,7 +84,7 @@
           "effects": {
             "hp": -1,
             "ammo": 1,
-            "radiation": 1
+            "radiation": 0
           },
           "combat_chance": 0.6
         },
@@ -95,9 +95,9 @@
           ],
           "effects": {
             "food": -1,
-            "medkits": 1
+            "hp": -1
           },
-          "combat_chance": 0.1
+          "combat_chance": 0.2
         }
       ]
     },
@@ -123,7 +123,7 @@
             "slot": "tool",
             "item": "scavenger_kit"
           },
-          "combat_chance": 0.0
+          "combat_chance": 0.1
         },
         {
           "text_variants": [
@@ -171,7 +171,7 @@
             "food": 1,
             "ammo": -1
           },
-          "combat_chance": 0.2
+          "combat_chance": 0.0
         }
       ]
     },
@@ -190,13 +190,13 @@
             "在對方開火前先打穿整條防線"
           ],
           "effects": {
-            "ammo": 1
+            "ammo": 0
           },
           "equipment_reward": {
             "slot": "weapon",
             "item": "rust_rifle"
           },
-          "combat_chance": 0.9
+          "combat_chance": 1.0
         },
         {
           "text_variants": [
@@ -204,9 +204,42 @@
             "多花一點時間走遠路"
           ],
           "effects": {
-            "food": -1
+            "food": 1,
+            "medkits": 1
           },
-          "combat_chance": 0.0
+          "combat_chance": 0.2
+        }
+      ]
+    },
+    {
+      "event_id": "evt_waystation",
+      "template_type": "survivor_contact",
+      "description_variants": [
+        "A cracked waystation still offers one last chance to regroup before the ridge.",
+        "A wind-battered shelter marks the last pause before the final climb.",
+        "A half-collapsed rest stop sits between the checkpoint and the ridge."
+      ],
+      "options": [
+        {
+          "text_variants": [
+            "Take a breath and search for preserved rations.",
+            "Slow down and strip the shelter for something edible."
+          ],
+          "effects": {
+            "food": 1
+          },
+          "combat_chance": 0.1
+        },
+        {
+          "text_variants": [
+            "Push through and grab whatever ammo is still usable.",
+            "Move fast, pocket loose rounds, and keep climbing."
+          ],
+          "effects": {
+            "hp": -1,
+            "ammo": 1
+          },
+          "combat_chance": 0.5
         }
       ]
     },
@@ -227,7 +260,7 @@
           "effects": {
             "food": -1
           },
-          "combat_chance": 0.2
+          "combat_chance": 0.0
         },
         {
           "text_variants": [
@@ -235,10 +268,9 @@
             "沿著山脊硬衝，賭自己撐得住"
           ],
           "effects": {
-            "hp": -1,
             "radiation": 1
           },
-          "combat_chance": 0.4
+          "combat_chance": 0.0
         }
       ]
     },

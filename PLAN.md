@@ -102,7 +102,7 @@ Prototype validation contract: `PROTOTYPE_SUCCESS_CRITERIA.md`
 
 ### Phase D: Playtest 與平衡迭代 (進行中 🔄)
 
-**目標**: 用人工測試與受控實驗確認 tension 是否成立，並收斂 v0.2 的最小 decision-depth 方向。
+**目標**: 先以 machine-side balance iteration 收斂路線壓力與死亡向量，再在穩定版本上做人工測試確認 tension 是否成立，並收斂 v0.2 的最小 decision-depth 方向。
 
 **任務清單**:
 ```
@@ -151,20 +151,24 @@ Playtest 與平衡:
 - [x] 補 interactive CLI warning 與 runtime invariant（6h）
 
 **下一步**:
-1. 依 `PLAYTEST_PROTOCOL.md` 與 human playtest log schema 執行第一輪人工 playtest
-2. 對比 human regret / hesitation 與 machine `failure_analysis`
-3. 執行 `SEED_101_OBSERVATION.md` 的 first-node dominance / conservative survivability / risk-payoff 驗證
-4. 以 `compare_playtest_vs_machine.py` 產出 PT-1 對照摘要
-5. 若 PT-1 顯示選項影響過短，評估 `specs/travel_mode_experiment.md` 的 `EXP-2 Travel Mode`
-6. 若 PT-1 顯示 route identity 偏弱，評估 `specs/v0_2_progression_layers.md` 的 background / equipment 最小版本
-7. 以受控實驗方式評估 explicit irreversible trade（例如 `max_hp` 交換生存）
+1. 暫停引用舊 PT-1 結果，先以 machine-side analytics 繼續平衡迭代
+2. 最新 machine-side 快照：`victory_rate=0.46`、`north=0.55`、`south=0.40`、`mixed=0.40`、`avg_pressure_count=3.56`、`avg_steps_from_regret_to_death=0.67`
+3. south route identity 仍穩定偏向 `ammo / raider`；north 目前已偏向 `mutant` 遭遇，但整體 dashboard 仍判定 route identity 尚未完全拉開
+4. regret gate recovery 已完成且目前穩定高於門檻；最新 machine-side focus 改為 route identity 微收斂，而不是再救 consequence distance
+5. 下一輪 machine-side 調整改成 north/south route identity refinement 與 shared-pressure 微調，不再擴大 south 掉落經濟
+6. 只有在 machine-side balance 穩定後，才補新一輪 PT-1 並用 `compare_playtest_vs_machine.py` 做對照
+7. 若 machine-side 後續再次證明 consequence arc 太短，才重開 `specs/travel_mode_experiment.md` 或更長地圖結構調整
 
 **當前阻礙**:
-- `governance_tools/plan_freshness.py` 目前回報 `CRITICAL`：已完成 PT-1 資料早於最近一次 balance 調整，暫時不能拿舊 PT-1 結論支撐新平衡決策。
+- `governance_tools/plan_freshness.py` 目前回報 `CRITICAL`：已完成 PT-1 資料早於最近一次 balance 調整，因此舊 PT-1 已被隔離，不能拿來支撐新平衡決策。
+- regret gate 已恢復到 `avg_steps_from_regret_to_death = 0.67`，但 route identity 仍未完全收斂：south 的 `ammo / raider` 已成立，north 雖已轉向 `mutant` 遭遇但 dashboard 仍視為不夠明確，mixed 仍偏向 `scrap`。
 
 **決策紀錄（本 Sprint）**:
 - `trade` node 在 MVP 採 **event-only variant**（不做完整交易系統 UI/經濟）。
 - 治理鏈正式升級為 hard gate：`contract_validator` 檢查 regret distance，`plan_freshness` 檢查 PT-1 相對於最新 balance 的新鮮度，CI 失敗時自動產生 `FAILURE_CONTEXT.md`。
+- 在 fresh PT-1 補回之前，平衡調整只接受 machine-side evidence；舊 PT-1 僅作歷史參考，不作當前 tuning 依據。
+- machine-side balance 已加入共享 `node_approach` 緩衝節點，並完成一輪 south `ammo / raider` identity pass；當前 regret gate 已恢復，因此後續優先目標改為 route identity 微收斂，而不是再堆疊新系統或重新擴張 south 掉落經濟。
+- `waystation` aggressive 風險已從 `0.6` 回調到 `0.5`，把 `mixed` 從 `0.30` 拉回 `0.40`，且沒有破壞 south `ammo / raider` route identity。
 
 ---
 
@@ -331,5 +335,9 @@ Playtest 與平衡:
 | 2026/03/09 | 新增 `specs/travel_mode_experiment.md`，將 Travel Mode 限定為 PT-1 後的受控實驗 | 提升 decision depth 討論的可執行性，同時避免過早污染主線假設 |
 | 2026/03/09 | 新增 `specs/v0_2_progression_layers.md`，將 background / travel mode / equipment 收斂為 v0.2 最小 identity layer | 避免 prototype 過早膨脹，同時把 v0.2 方向固定為 route-centric |
 | 2026/03/11 | 升級 governance hard gates、記憶體清理工具與 CI phase gate；將 PT-1 freshness 與最新 balance 調整綁定 | 防止用過期的人類證據推動新一輪平衡決策，並讓失敗原因可自動回寫 `FAILURE_CONTEXT.md` |
+| 2026/03/11 | 決定暫停引用舊 PT-1，先只做 machine-side balance iteration | 避免用過期的人類證據污染當前調參，等平衡穩定後再補新一輪 PT-1 |
+| 2026/03/11 | 新增共享 `node_approach` 緩衝節點並完成 south `ammo / raider` identity pass | 先把 consequence distance 拉過一次門檻，再把 south identity 做清楚；最新狀態仍需補回 regret gate |
+| 2026/03/11 | 以 low-resource / radiation carryover scoring 補強 failure analysis，將 regret gate 恢復到 `0.63` | 避免把前置壓力錯判為 0-step death，讓 machine-side 調參重新符合 governance regret threshold |
+| 2026/03/11 | 完成 north route identity 微調並把 `mixed` 從 `0.30` 拉回 `0.40` | 讓 north 轉向 `mutant` 遭遇，同時保留 south `ammo / raider`；後續只需再收斂 route identity，不必再救 regret gate |
 
 

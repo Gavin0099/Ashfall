@@ -1,16 +1,16 @@
 {
   "weights": {
     "north": {
-      "mutant": 0.75,
-      "raider": 0.25
-    },
-    "south": {
-      "raider": 0.75,
-      "mutant": 0.25
-    },
-    "mid": {
       "mutant": 0.6,
       "raider": 0.4
+    },
+    "south": {
+      "raider": 0.8,
+      "mutant": 0.2
+    },
+    "mid": {
+      "mutant": 0.5,
+      "raider": 0.5
     },
     "default": {
       "raider": 0.5,
