@@ -1,6 +1,6 @@
 ﻿# TASKS.md — Ashfall Execution Board
 
-Last Updated: 2026-03-10
+Last Updated: 2026-03-11
 Owner: GavinWu
 Execution Truth (Sprint/Task): `tasks/TASKS.md`
 Phase/Gate/Milestone Truth: `PLAN.md`
@@ -11,8 +11,10 @@ Phase/Gate/Milestone Truth: `PLAN.md`
 
 ### In Progress
 - [ ] PT-1 Run first manual playtest round with 5-8 players using `PLAYTEST_PROTOCOL.md`
+- [ ] GOV-2 Refresh PT-1 evidence or explicitly stop citing stale PT-1 conclusions after the latest balance change
 
 ### Ready
+- [ ] GOV-3 Wire governance CI checks into repository enforcement and keep `FAILURE_CONTEXT.md` in failure artifacts
 - [ ] PT-2 Compare human playtest logs against machine `failure_analysis`
 Artifact target: `output/playtests/comparison_summary.json` with hesitation/regret mismatch breakdowns, machine blame breakdown, and equipment-arc notice rate; `output/playtests/PT2_action_report.md` for direct follow-up recommendations
 - [x] OBS-1 Run first-node dominance test from `SEED_101_OBSERVATION.md`
@@ -39,6 +41,7 @@ Artifacts: `output/analytics/exp/exp1_max_hp_trade.json`, `scripts/run_exp1_max_
 Artifacts: `output/playability/summary.json`, `output/playability/run_*.json`
 
 ### Done
+- [x] GOV-1 Upgrade governance gates (`contract_validator`, `plan_freshness`, `generate_failure_context`, `memory_janitor`, CI workflow)
 - [x] T-A1 Read and align existing `specs/*.md` + `schemas/*.json`
 - [x] T-A2 Draft `specs/meta_progression.md`
 - [x] T-A3 Define `schemas/enemy_schema.json`
@@ -120,12 +123,14 @@ Gate:
 - [x] D6 Add irreversible-state prototype signal (radiation/injury minimal variant)
 - [x] D7 Publish v0.1 balancing notes
 - [x] OBS-1/2/3 Run machine observation experiments (first-node dominance, conservative survivability, risk payoff)
+- [x] GOV-1 Governance gate upgrade and CI integration
 - [ ] PT-1 Run first manual playtest round and capture observation sheets
 - [ ] PT-2 Merge observation findings with analytics summaries
 
 Gate:
 - [x] 50 analytics logs captured and summarized
 - [ ] Human playtest evidence captured and summarized
+- [ ] Governance freshness gate restored to FRESH after latest balance change
 
 ---
 

@@ -1,4 +1,4 @@
-name: Governance Check
+﻿name: Governance Check
 
 on:
   push:
@@ -7,12 +7,6 @@ on:
     branches: [main]
 
 jobs:
-  # ─────────────────────────────────────────────
-  # Job 1: PLAN.md 新鮮度檢查
-  # CRITICAL → pipeline 失敗 (exit 1)
-  # STALE    → warning annotation，但不擋
-  # FRESH    → 通過
-  # ─────────────────────────────────────────────
   plan-freshness:
     name: PLAN.md Freshness
     runs-on: ubuntu-latest
@@ -25,28 +19,23 @@ jobs:
 
       - name: Check PLAN.md freshness
         run: |
-          # 用 $() 捕捉輸出，避免 pipe + heredoc stdin 衝突
           OUTPUT=$(python governance_tools/plan_freshness.py --format json) || true
           echo "$OUTPUT" | python3 -c "
           import json, sys
-          r = json.load(sys.stdin)
-          status = r['status']
-          days   = r.get('days_since_update')
-          limit  = r.get('threshold_days', '?')
+          result = json.load(sys.stdin)
+          status = result['status']
+          days = result.get('days_since_update')
+          limit = result.get('threshold_days', '?')
           print(f'PLAN.md status: {status} ({days}d since last update, threshold: {limit}d)')
-          if status == 'CRITICAL' or status == 'ERROR':
-              print('::error file=PLAN.md::PLAN.md is CRITICAL stale — please update before pushing.')
+          if status in {'CRITICAL', 'ERROR'}:
+              print('::error file=PLAN.md::PLAN.md freshness gate failed.')
               sys.exit(1)
-          elif status == 'STALE':
-              print(f'::warning file=PLAN.md::PLAN.md is STALE ({days}d). Consider updating soon.')
+          if status == 'STALE':
+              print(f'::warning file=PLAN.md::PLAN.md is STALE ({days}d).')
           "
 
-  # ─────────────────────────────────────────────
-  # Job 2: Phase Gate 可驗證條件
-  # tests pass + PLAN.md fresh + tools executable + docs complete
-  # ─────────────────────────────────────────────
-  phase-gates:
-    name: Phase Gate Verification
+  governance-unit-tests:
+    name: Governance Unit Tests
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -58,20 +47,42 @@ jobs:
       - name: Install pytest
         run: pip install pytest
 
-      - name: Verify phase gates
-        run: bash scripts/verify_phase_gates.sh
+      - name: Run governance tests
+        run: pytest tests/test_memory_janitor.py tests/test_contract_validator.py tests/test_plan_freshness.py -p no:cacheprovider
 
-  # ─────────────────────────────────────────────
-  # Job 3: 記憶壓力監控
-  # EMERGENCY → pipeline 失敗
-  # CRITICAL  → warning，不擋
-  # WARNING   → notice，不擋
-  # (continue-on-error: true — 記憶壓力是 advisory)
-  # ─────────────────────────────────────────────
+  phase-gates:
+    name: Phase Gate Verification
+    runs-on: ubuntu-latest
+    needs: [plan-freshness, governance-unit-tests]
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install pytest
+        run: pip install pytest
+
+      - name: Verify phase gates
+        run: python scripts/verify_phase_gates.py
+
+      - name: Generate failure context on gate failure
+        if: failure()
+        run: |
+          python governance_tools/generate_failure_context.py --skip-contract --output FAILURE_CONTEXT.md
+
+      - name: Upload failure context
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: failure-context
+          path: FAILURE_CONTEXT.md
+
   memory-pressure:
     name: Memory Pressure
     runs-on: ubuntu-latest
-    continue-on-error: true   # advisory only
+    continue-on-error: true
     steps:
       - uses: actions/checkout@v4
 
@@ -81,25 +92,46 @@ jobs:
 
       - name: Check memory pressure
         run: |
-          # memory/ 目錄不存在時直接跳過（新 repo 正常現象）
           if [ ! -d "memory" ]; then
-            echo "memory/ not found — skipping pressure check"
+            echo "memory/ not found; skipping pressure check"
             exit 0
           fi
-          OUTPUT=$(python governance_tools/memory_janitor.py \
-            --memory-root ./memory --check --format json) || true
+          OUTPUT=$(python governance_tools/memory_janitor.py --memory-root ./memory --check --format json) || true
           echo "$OUTPUT" | python3 -c "
           import json, sys
-          r = json.load(sys.stdin)
-          status = r['status']
-          lines  = r['line_count']
-          hard   = r.get('hard_limit', 200)
+          result = json.load(sys.stdin)
+          status = result['status']
+          lines = result['line_count']
+          hard = result.get('hard_limit', 200)
           print(f'Memory status: {status} ({lines}/{hard} lines)')
           if status == 'EMERGENCY':
-              print('::error::Memory EMERGENCY — run: python governance_tools/memory_janitor.py --execute')
+              print('::error::Memory EMERGENCY; run governance_tools/memory_janitor.py --plan and --execute.')
               sys.exit(1)
-          elif status == 'CRITICAL':
-              print(f'::warning::Memory CRITICAL ({lines} lines). Run memory_janitor --execute soon.')
+          if status == 'CRITICAL':
+              print(f'::warning::Memory CRITICAL ({lines} lines). Run memory_janitor soon.')
           elif status == 'WARNING':
-              print(f'::notice::Memory WARNING ({lines} lines). Monitor and plan cleanup.')
+              print(f'::notice::Memory WARNING ({lines} lines).')
+          "
+
+  generated-artifact-pressure:
+    name: Generated Artifact Pressure
+    runs-on: ubuntu-latest
+    continue-on-error: true
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Check generated caches
+        run: |
+          OUTPUT=$(python governance_tools/memory_janitor.py --memory-root ./memory --clean-generated --dry-run --format json)
+          echo "$OUTPUT" | python3 -c "
+          import json, sys
+          result = json.load(sys.stdin)
+          skipped = result.get('skipped_paths', [])
+          print(f'Generated artifacts detected: {len(skipped)}')
+          for path in skipped:
+              print(f'::notice::{path}')
           "

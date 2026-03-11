@@ -4,7 +4,7 @@
 > **技術棧**: Markdown Specs + JSON Schema + Python (planned runtime)
 > **複雜度**: L2
 > **預計工期**: 2026/03/09 ~ 2026/05/01
-> **最後更新**: 2026-03-09
+> **最後更新**: 2026-03-11
 > **Owner**: GavinWu
 > **Freshness**: Sprint (7d)
 
@@ -120,6 +120,7 @@ Playtest 與平衡:
 - [x] 至少完成 50 局 analytics log 紀錄（勝率、平均回合、死亡原因、decision trace）
 - [x] 至少 1 個不可逆狀態信號已接入主循環，且死亡原因可歸因
 - [ ] 至少完成 1 輪 human playtest summary，並能對照 machine failure analysis
+- [ ] 人類 playtest 證據必須晚於最近一次 balance 調整，否則不計入平衡判斷
 
 ---
 
@@ -159,10 +160,11 @@ Playtest 與平衡:
 7. 以受控實驗方式評估 explicit irreversible trade（例如 `max_hp` 交換生存）
 
 **當前阻礙**:
-- 無
+- `governance_tools/plan_freshness.py` 目前回報 `CRITICAL`：已完成 PT-1 資料早於最近一次 balance 調整，暫時不能拿舊 PT-1 結論支撐新平衡決策。
 
 **決策紀錄（本 Sprint）**:
 - `trade` node 在 MVP 採 **event-only variant**（不做完整交易系統 UI/經濟）。
+- 治理鏈正式升級為 hard gate：`contract_validator` 檢查 regret distance，`plan_freshness` 檢查 PT-1 相對於最新 balance 的新鮮度，CI 失敗時自動產生 `FAILURE_CONTEXT.md`。
 
 ---
 
@@ -328,3 +330,6 @@ Playtest 與平衡:
 | 2026/03/09 | 新增 `SEED_101_OBSERVATION.md`，將 deterministic 手動觀察轉成可驗證的平衡假設 | 把平衡判斷從直覺提升為 gameplay research artifact |
 | 2026/03/09 | 新增 `specs/travel_mode_experiment.md`，將 Travel Mode 限定為 PT-1 後的受控實驗 | 提升 decision depth 討論的可執行性，同時避免過早污染主線假設 |
 | 2026/03/09 | 新增 `specs/v0_2_progression_layers.md`，將 background / travel mode / equipment 收斂為 v0.2 最小 identity layer | 避免 prototype 過早膨脹，同時把 v0.2 方向固定為 route-centric |
+| 2026/03/11 | 升級 governance hard gates、記憶體清理工具與 CI phase gate；將 PT-1 freshness 與最新 balance 調整綁定 | 防止用過期的人類證據推動新一輪平衡決策，並讓失敗原因可自動回寫 `FAILURE_CONTEXT.md` |
+
+

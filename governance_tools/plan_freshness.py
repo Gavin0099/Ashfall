@@ -1,49 +1,36 @@
-#!/usr/bin/env python3
-"""
-📅 Plan Freshness Checker — PLAN.md 新鮮度檢查工具
-Priority: 8 (Governance Tooling)
+﻿#!/usr/bin/env python3
+from __future__ import annotations
 
-功能:
-  讀取 PLAN.md 的 header 欄位，檢查文件是否在有效期內。
-  (freshness policy 定義於 governance/PLAN.md § 2.1)
-
-用法:
-  python plan_freshness.py                    # 讀取當前目錄的 PLAN.md
-  python plan_freshness.py --file /path/PLAN.md
-  python plan_freshness.py --format json
-  python plan_freshness.py --threshold 14     # override threshold（天）
-
-退出碼:
-  0 = FRESH  (距今 ≤ threshold)
-  1 = STALE  (距今 > threshold)
-  2 = CRITICAL (距今 > 2× threshold) 或找不到 PLAN.md / 欄位缺失
-"""
-
+import argparse
+import json
 import re
 import sys
-import json
-import argparse
-from datetime import date, datetime
 from dataclasses import dataclass, field
+from datetime import date, datetime
 from pathlib import Path
 from typing import Optional
 
+ROOT = Path(__file__).resolve().parents[1]
+if str(ROOT) not in sys.path:
+    sys.path.insert(0, str(ROOT))
 
-# ── 預設 Freshness Policy 閾值（天） ─────────────────────────────────────
+from scripts.validate_human_playtest_logs import is_completed_log, load_json
+
+
 POLICY_DEFAULTS = {
     "sprint": 7,
     "phase": 30,
 }
 
-STATUS_FRESH    = "FRESH"
-STATUS_STALE    = "STALE"
+STATUS_FRESH = "FRESH"
+STATUS_STALE = "STALE"
 STATUS_CRITICAL = "CRITICAL"
-STATUS_ERROR    = "ERROR"
+STATUS_ERROR = "ERROR"
 
 
 @dataclass
 class FreshnessResult:
-    status: str                        # FRESH / STALE / CRITICAL / ERROR
+    status: str
     last_updated: Optional[date]
     owner: Optional[str]
     policy: Optional[str]
@@ -51,60 +38,54 @@ class FreshnessResult:
     days_since_update: Optional[int]
     errors: list[str] = field(default_factory=list)
     warnings: list[str] = field(default_factory=list)
+    latest_balance_mtime: Optional[str] = None
+    pt1_latest_mtime: Optional[str] = None
+    pt1_completed_count: int = 0
 
 
-def parse_header_fields(text: str) -> dict:
-    """
-    從 PLAN.md 解析 header 的 blockquote 欄位。
-
-    支援格式:
-      > **欄位名**: 值
-    """
-    fields = {}
-    pattern = r'>\s*\*\*([^*]+)\*\*\s*:\s*(.+)'
-    for match in re.finditer(pattern, text):
-        key = match.group(1).strip()
-        value = match.group(2).strip()
-        fields[key] = value
+def parse_header_fields(text: str) -> dict[str, str]:
+    fields: dict[str, str] = {}
+    pattern = re.compile(r">\s*\*\*([^*]+)\*\*:\s*(.+)")
+    for match in pattern.finditer(text):
+        fields[match.group(1).strip()] = match.group(2).strip()
     return fields
 
 
-def parse_policy(policy_str: str) -> Optional[int]:
-    """
-    從 Freshness policy 字串解析閾值天數。
-
-    範例:
-      "Sprint (7d)"  → 7
-      "Phase (30d)"  → 30
-      "Custom (14d)" → 14
-    """
+def parse_policy(policy_str: str | None) -> Optional[int]:
     if not policy_str:
         return None
-
-    # 先嘗試從括號內解析天數
-    match = re.search(r'\((\d+)d\)', policy_str, re.IGNORECASE)
-    if match:
-        return int(match.group(1))
-
-    # fallback: 用 policy 名稱對照預設值
-    lower = policy_str.lower()
+    explicit = re.search(r"\((\d+)d\)", policy_str, re.IGNORECASE)
+    if explicit:
+        return int(explicit.group(1))
+    lowered = policy_str.lower()
     for key, days in POLICY_DEFAULTS.items():
-        if key in lower:
+        if key in lowered:
             return days
-
     return None
+
+
+def latest_completed_pt1_mtime(playtest_dir: Path) -> tuple[Optional[datetime], int]:
+    completed_times: list[datetime] = []
+    for path in sorted(playtest_dir.glob("*_session_log.json")):
+        payload = load_json(path)
+        if is_completed_log(payload):
+            completed_times.append(datetime.fromtimestamp(path.stat().st_mtime))
+    if not completed_times:
+        return None, 0
+    return max(completed_times), len(completed_times)
 
 
 def check_freshness(
     plan_path: Path,
     threshold_override: Optional[int] = None,
     today: Optional[date] = None,
+    *,
+    pt1_dir: Path | None = None,
+    balance_summary_path: Path | None = None,
 ) -> FreshnessResult:
-    """主檢查邏輯。"""
     if today is None:
         today = date.today()
 
-    # ── 讀取檔案 ──────────────────────────────────────────────────────────
     if not plan_path.exists():
         return FreshnessResult(
             status=STATUS_ERROR,
@@ -113,197 +94,159 @@ def check_freshness(
             policy=None,
             threshold_days=None,
             days_since_update=None,
-            errors=[f"找不到 PLAN.md: {plan_path}"],
+            errors=[f"missing PLAN file: {plan_path}"],
         )
 
-    text = plan_path.read_text(encoding="utf-8")
-    fields = parse_header_fields(text)
+    fields = parse_header_fields(plan_path.read_text(encoding="utf-8-sig"))
+    errors: list[str] = []
+    warnings: list[str] = []
 
-    errors = []
-    warnings = []
-
-    # ── 解析 最後更新 ──────────────────────────────────────────────────────
-    raw_date = fields.get("最後更新", "").strip()
+    raw_date = fields.get("Last Updated") or fields.get("最後更新")
     last_updated: Optional[date] = None
-
     if not raw_date:
-        errors.append("'最後更新' 欄位缺失（需格式: YYYY-MM-DD）")
+        errors.append("PLAN header missing Last Updated")
     else:
         try:
             last_updated = datetime.strptime(raw_date, "%Y-%m-%d").date()
         except ValueError:
-            errors.append(
-                f"'最後更新' 格式錯誤: '{raw_date}'（正確格式: YYYY-MM-DD）"
-            )
+            errors.append(f"invalid Last Updated format: {raw_date}")
 
-    # ── 解析 Owner ────────────────────────────────────────────────────────
-    owner = fields.get("Owner", "").strip() or None
+    owner = fields.get("Owner")
     if not owner:
-        warnings.append("'Owner' 欄位缺失（建議填寫負責人）")
+        warnings.append("PLAN header missing Owner")
 
-    # ── 解析 Freshness Policy ─────────────────────────────────────────────
-    policy_raw = fields.get("Freshness", "").strip() or None
-    threshold_days: Optional[int] = None
+    policy = fields.get("Freshness")
+    threshold_days = threshold_override if threshold_override is not None else parse_policy(policy)
+    if threshold_days is None:
+        warnings.append("Freshness policy missing or unknown; defaulting to Sprint (7d)")
+        threshold_days = POLICY_DEFAULTS["sprint"]
 
-    if threshold_override is not None:
-        threshold_days = threshold_override
-    elif policy_raw:
-        threshold_days = parse_policy(policy_raw)
-        if threshold_days is None:
-            warnings.append(
-                f"無法解析 Freshness policy: '{policy_raw}'，"
-                f"使用預設值 7d。格式範例: Sprint (7d)"
-            )
-            threshold_days = 7
-    else:
-        warnings.append("'Freshness' 欄位缺失，使用預設值 7d")
-        threshold_days = 7
-
-    # ── 若有解析錯誤，直接回傳 ERROR ──────────────────────────────────────
     if errors:
         return FreshnessResult(
             status=STATUS_ERROR,
             last_updated=last_updated,
             owner=owner,
-            policy=policy_raw,
+            policy=policy,
             threshold_days=threshold_days,
             days_since_update=None,
             errors=errors,
             warnings=warnings,
         )
 
-    # ── 計算新鮮度 ────────────────────────────────────────────────────────
-    days_since = (today - last_updated).days
-
-    if days_since <= threshold_days:
+    assert last_updated is not None
+    days_since_update = (today - last_updated).days
+    if days_since_update <= threshold_days:
         status = STATUS_FRESH
-    elif days_since <= threshold_days * 2:
+    elif days_since_update <= threshold_days * 2:
         status = STATUS_STALE
-        warnings.append(
-            f"PLAN.md 已 {days_since} 天未更新（閾值: {threshold_days}d）"
-            f" — 請更新本週聚焦或變更歷史"
-        )
+        warnings.append(f"PLAN is stale: {days_since_update}d since update > {threshold_days}d threshold")
     else:
         status = STATUS_CRITICAL
-        errors.append(
-            f"PLAN.md 嚴重過期：已 {days_since} 天未更新"
-            f"（臨界值: {threshold_days * 2}d）"
-            f" — 計畫可能已失效，請立即更新"
-        )
+        errors.append(f"PLAN is critically stale: {days_since_update}d since update")
+
+    latest_balance_mtime: Optional[datetime] = None
+    latest_pt1_mtime: Optional[datetime] = None
+    pt1_completed_count = 0
+
+    if balance_summary_path is not None and balance_summary_path.exists():
+        latest_balance_mtime = datetime.fromtimestamp(balance_summary_path.stat().st_mtime)
+
+    if pt1_dir is not None and pt1_dir.exists():
+        latest_pt1_mtime, pt1_completed_count = latest_completed_pt1_mtime(pt1_dir)
+        if latest_balance_mtime and latest_pt1_mtime and latest_pt1_mtime < latest_balance_mtime:
+            status = STATUS_CRITICAL
+            errors.append(
+                "PT-1 data is older than the latest balance change: "
+                f"pt1={latest_pt1_mtime.isoformat()} < balance={latest_balance_mtime.isoformat()}"
+            )
+        elif latest_balance_mtime and pt1_completed_count == 0:
+            warnings.append("No completed PT-1 logs found after latest balance change")
 
     return FreshnessResult(
         status=status,
         last_updated=last_updated,
         owner=owner,
-        policy=policy_raw,
+        policy=policy,
         threshold_days=threshold_days,
-        days_since_update=days_since,
+        days_since_update=days_since_update,
         errors=errors,
         warnings=warnings,
+        latest_balance_mtime=latest_balance_mtime.isoformat() if latest_balance_mtime else None,
+        pt1_latest_mtime=latest_pt1_mtime.isoformat() if latest_pt1_mtime else None,
+        pt1_completed_count=pt1_completed_count,
     )
 
 
 def format_human(result: FreshnessResult, plan_path: Path) -> str:
-    """Human-readable 輸出格式。"""
-    lines = []
-
-    status_icon = {
-        STATUS_FRESH:    "✅",
-        STATUS_STALE:    "⚠️ ",
-        STATUS_CRITICAL: "🔴",
-        STATUS_ERROR:    "🚨",
-    }.get(result.status, "❓")
-
-    lines.append(f"📅 PLAN.md Freshness — {plan_path}")
-    lines.append("")
-    lines.append(f"  {'最後更新':<12} = {result.last_updated or '缺失'}")
-    lines.append(f"  {'Owner':<12} = {result.owner or '缺失'}")
-    lines.append(f"  {'Policy':<12} = {result.policy or '未設定'}")
-    if result.threshold_days is not None:
-        lines.append(f"  {'Threshold':<12} = {result.threshold_days}d")
-    else:
-        lines.append(f"  {'Threshold':<12} = N/A")
-    if result.days_since_update is not None:
-        lines.append(f"  {'距今':<12} = {result.days_since_update}d")
-    else:
-        lines.append(f"  {'距今':<12} = N/A")
-    lines.append("")
-    lines.append(f"{status_icon} {result.status}")
-
+    lines = [
+        "Plan Freshness Report",
+        f"- plan_path: {plan_path}",
+        f"- status: {result.status}",
+        f"- last_updated: {result.last_updated}",
+        f"- owner: {result.owner}",
+        f"- policy: {result.policy}",
+        f"- threshold_days: {result.threshold_days}",
+        f"- days_since_update: {result.days_since_update}",
+        f"- pt1_completed_count: {result.pt1_completed_count}",
+    ]
+    if result.latest_balance_mtime:
+        lines.append(f"- latest_balance_mtime: {result.latest_balance_mtime}")
+    if result.pt1_latest_mtime:
+        lines.append(f"- pt1_latest_mtime: {result.pt1_latest_mtime}")
     if result.errors:
-        lines.append("")
-        lines.append(f"❌ {len(result.errors)} 個錯誤:")
-        for err in result.errors:
-            lines.append(f"   • {err}")
-
+        lines.append("Errors:")
+        lines.extend(f"- {item}" for item in result.errors)
     if result.warnings:
-        lines.append("")
-        lines.append(f"⚠️  {len(result.warnings)} 個警告:")
-        for w in result.warnings:
-            lines.append(f"   • {w}")
-
+        lines.append("Warnings:")
+        lines.extend(f"- {item}" for item in result.warnings)
     return "\n".join(lines)
 
 
 def format_json(result: FreshnessResult, plan_path: Path) -> str:
-    """JSON 輸出格式（供 CI / 自動化使用）。"""
-    output = {
-        "plan_path": str(plan_path),
-        "status": result.status,
-        "last_updated": result.last_updated.isoformat() if result.last_updated else None,
-        "owner": result.owner,
-        "policy": result.policy,
-        "threshold_days": result.threshold_days,
-        "days_since_update": result.days_since_update,
-        "errors": result.errors,
-        "warnings": result.warnings,
-    }
-    return json.dumps(output, ensure_ascii=False, indent=2)
+    return json.dumps(
+        {
+            "plan_path": str(plan_path),
+            "status": result.status,
+            "last_updated": result.last_updated.isoformat() if result.last_updated else None,
+            "owner": result.owner,
+            "policy": result.policy,
+            "threshold_days": result.threshold_days,
+            "days_since_update": result.days_since_update,
+            "errors": result.errors,
+            "warnings": result.warnings,
+            "latest_balance_mtime": result.latest_balance_mtime,
+            "pt1_latest_mtime": result.pt1_latest_mtime,
+            "pt1_completed_count": result.pt1_completed_count,
+        },
+        ensure_ascii=False,
+        indent=2,
+    )
 
 
-def main():
-    # Windows 終端機的 UTF-8 相容性
-    if hasattr(sys.stdout, "reconfigure"):
-        sys.stdout.reconfigure(encoding="utf-8", errors="replace")
-
-    parser = argparse.ArgumentParser(
-        description="Plan Freshness Checker — 檢查 PLAN.md 是否在有效期內"
-    )
-    parser.add_argument(
-        "--file", "-f",
-        default="PLAN.md",
-        help="PLAN.md 路徑（預設: 當前目錄的 PLAN.md）",
-    )
-    parser.add_argument(
-        "--format",
-        choices=["human", "json"],
-        default="human",
-        help="輸出格式 (預設: human)",
-    )
-    parser.add_argument(
-        "--threshold", "-t",
-        type=int,
-        default=None,
-        help="Override freshness threshold（天）。覆蓋 PLAN.md 中的 Freshness policy",
-    )
+def main() -> int:
+    parser = argparse.ArgumentParser(description="Check PLAN freshness and PT-1 staleness against balance changes.")
+    parser.add_argument("--file", "-f", default="PLAN.md")
+    parser.add_argument("--format", choices=("human", "json"), default="human")
+    parser.add_argument("--threshold", "-t", type=int, default=None)
+    parser.add_argument("--pt1-dir", default="playtests")
+    parser.add_argument("--balance-summary", default="output/analytics/balance_summary.json")
     args = parser.parse_args()
 
     plan_path = Path(args.file)
-    result = check_freshness(plan_path, threshold_override=args.threshold)
+    result = check_freshness(
+        plan_path,
+        threshold_override=args.threshold,
+        pt1_dir=Path(args.pt1_dir),
+        balance_summary_path=Path(args.balance_summary),
+    )
+    print(format_json(result, plan_path) if args.format == "json" else format_human(result, plan_path))
 
-    if args.format == "json":
-        print(format_json(result, plan_path))
-    else:
-        print(format_human(result, plan_path))
-
-    # 退出碼
-    if result.status in (STATUS_CRITICAL, STATUS_ERROR):
-        sys.exit(2)
-    elif result.status == STATUS_STALE:
-        sys.exit(1)
-    else:
-        sys.exit(0)
+    if result.status in {STATUS_CRITICAL, STATUS_ERROR}:
+        return 2
+    if result.status == STATUS_STALE:
+        return 1
+    return 0
 
 
 if __name__ == "__main__":
-    main()
+    raise SystemExit(main())

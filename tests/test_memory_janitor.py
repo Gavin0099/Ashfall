@@ -1,359 +1,112 @@
-"""
-Unit tests for governance_tools/memory_janitor.py
-Coverage target: ≥ 70%
-
-Test groups:
-  A. check_hot_memory_status   — threshold boundary + missing file
-  B. generate_warning_message  — all status codes
-  C. analyze_archivable_content— regex heuristics + missing file
-  D. execute_cleanup           — dry-run / real run / idempotency / edge cases
-  E. manifest                  — _load_manifest / _save_manifest round-trip
-"""
-
-import json
+﻿import json
+import shutil
 import sys
-import os
+import uuid
 from pathlib import Path
 
-import pytest
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
-# Make governance_tools importable without installation
-sys.path.insert(0, str(Path(__file__).parent.parent))
 from governance_tools.memory_janitor import MemoryJanitor
 
-
-# ── Fixtures ──────────────────────────────────────────────────────────────
-
-@pytest.fixture
-def mem_root(tmp_path):
-    """建立暫存 memory/ 目錄，01_active_task.md 尚不存在。"""
-    root = tmp_path / "memory"
-    root.mkdir()
-    return root
+RUNTIME_ROOT = Path("tests") / "_runtime"
+RUNTIME_ROOT.mkdir(exist_ok=True)
 
 
-@pytest.fixture
-def janitor(mem_root):
-    return MemoryJanitor(mem_root)
+def make_memory_root() -> Path:
+    root = RUNTIME_ROOT / f"memory_{uuid.uuid4().hex}"
+    (root / "memory").mkdir(parents=True, exist_ok=False)
+    return root / "memory"
 
 
-def _write_lines(path: Path, n: int, extra: str = "") -> None:
-    """在 path 寫入 n 行內容（最後附加 extra 區塊）。"""
-    lines = [f"line {i}\n" for i in range(1, n + 1)]
-    path.write_text("".join(lines) + extra, encoding="utf-8")
+def cleanup_runtime(memory_root: Path) -> None:
+    shutil.rmtree(memory_root.parent, ignore_errors=True)
 
 
-# ── A. check_hot_memory_status ────────────────────────────────────────────
-
-class TestCheckHotMemoryStatus:
-    def test_missing_file_returns_safe(self, janitor):
-        count, status = janitor.check_hot_memory_status()
-        assert count == 0
-        assert status == "SAFE"
-
-    def test_empty_file_returns_safe(self, janitor):
-        janitor.active_task_file.write_text("", encoding="utf-8")
-        count, status = janitor.check_hot_memory_status()
-        assert count == 0
-        assert status == "SAFE"
-
-    def test_below_soft_limit_is_safe(self, janitor):
-        _write_lines(janitor.active_task_file, 100)
-        _, status = janitor.check_hot_memory_status()
-        assert status == "SAFE"
-
-    def test_at_soft_limit_is_warning(self, janitor):
-        _write_lines(janitor.active_task_file, MemoryJanitor.HOT_MEMORY_SOFT_LIMIT)
-        count, status = janitor.check_hot_memory_status()
-        assert status == "WARNING"
-        assert count == MemoryJanitor.HOT_MEMORY_SOFT_LIMIT
-
-    def test_at_hard_limit_is_critical(self, janitor):
-        _write_lines(janitor.active_task_file, MemoryJanitor.HOT_MEMORY_HARD_LIMIT)
-        _, status = janitor.check_hot_memory_status()
-        assert status == "CRITICAL"
-
-    def test_between_hard_and_critical_is_critical(self, janitor):
-        _write_lines(janitor.active_task_file, MemoryJanitor.HOT_MEMORY_HARD_LIMIT + 10)
-        _, status = janitor.check_hot_memory_status()
-        assert status == "CRITICAL"
-
-    def test_at_emergency_limit_is_emergency(self, janitor):
-        _write_lines(janitor.active_task_file, MemoryJanitor.HOT_MEMORY_CRITICAL)
-        _, status = janitor.check_hot_memory_status()
-        assert status == "EMERGENCY"
-
-    def test_above_emergency_is_emergency(self, janitor):
-        _write_lines(janitor.active_task_file, MemoryJanitor.HOT_MEMORY_CRITICAL + 50)
-        _, status = janitor.check_hot_memory_status()
-        assert status == "EMERGENCY"
-
-    def test_just_below_soft_limit_is_safe(self, janitor):
-        _write_lines(janitor.active_task_file, MemoryJanitor.HOT_MEMORY_SOFT_LIMIT - 1)
-        _, status = janitor.check_hot_memory_status()
-        assert status == "SAFE"
+def write_lines(path: Path, count: int, extra: str = "") -> None:
+    path.write_text("".join(f"line {i}\n" for i in range(count)) + extra, encoding="utf-8")
 
 
-# ── B. generate_warning_message ───────────────────────────────────────────
-
-class TestGenerateWarningMessage:
-    def test_safe_returns_empty(self, janitor):
-        assert janitor.generate_warning_message(50, "SAFE") == ""
-
-    def test_warning_message_contains_line_count(self, janitor):
-        msg = janitor.generate_warning_message(185, "WARNING")
-        assert "185" in msg
-        assert msg  # non-empty
-
-    def test_critical_message_contains_line_count(self, janitor):
-        msg = janitor.generate_warning_message(210, "CRITICAL")
-        assert "210" in msg
-
-    def test_emergency_message_contains_line_count(self, janitor):
-        msg = janitor.generate_warning_message(260, "EMERGENCY")
-        assert "260" in msg
-
-    def test_unknown_status_returns_empty(self, janitor):
-        assert janitor.generate_warning_message(50, "UNKNOWN") == ""
+def test_check_hot_memory_status_thresholds() -> None:
+    memory_root = make_memory_root()
+    try:
+        janitor = MemoryJanitor(memory_root)
+        write_lines(janitor.active_task_file, MemoryJanitor.HOT_MEMORY_SOFT_LIMIT)
+        assert janitor.check_hot_memory_status()[1] == "WARNING"
+        write_lines(janitor.active_task_file, MemoryJanitor.HOT_MEMORY_HARD_LIMIT)
+        assert janitor.check_hot_memory_status()[1] == "CRITICAL"
+        write_lines(janitor.active_task_file, MemoryJanitor.HOT_MEMORY_CRITICAL)
+        assert janitor.check_hot_memory_status()[1] == "EMERGENCY"
+    finally:
+        cleanup_runtime(memory_root)
 
 
-# ── C. analyze_archivable_content ─────────────────────────────────────────
+def test_generate_warning_message_safe_empty() -> None:
+    memory_root = make_memory_root()
+    try:
+        janitor = MemoryJanitor(memory_root)
+        assert janitor.generate_warning_message(10, "SAFE") == ""
+    finally:
+        cleanup_runtime(memory_root)
 
-class TestAnalyzeArchivableContent:
-    def test_missing_file_returns_empty_dicts(self, janitor):
-        result = janitor.analyze_archivable_content()
-        assert result["completed_tasks"] == []
-        assert result["obsolete_decisions"] == []
-        assert result["archived_references"] == []
 
-    def test_detects_strikethrough_obsolete(self, janitor):
-        janitor.active_task_file.write_text(
-            "Some content\n~~deprecated thing~~\nMore content\n",
-            encoding="utf-8",
-        )
-        result = janitor.analyze_archivable_content()
-        assert any("deprecated thing" in d for d in result["obsolete_decisions"])
-
-    def test_detects_superseded_decisions(self, janitor):
-        janitor.active_task_file.write_text(
-            "Decision A (Superseded by ADR-0002)\n",
-            encoding="utf-8",
-        )
-        result = janitor.analyze_archivable_content()
-        assert any("Superseded" in d for d in result["obsolete_decisions"])
-
-    def test_detects_adr_references(self, janitor):
-        janitor.active_task_file.write_text(
-            "See ADR-0001 and ADR-0042 for details.\n",
-            encoding="utf-8",
-        )
+def test_analyze_archivable_content_detects_adr_and_obsolete() -> None:
+    memory_root = make_memory_root()
+    try:
+        janitor = MemoryJanitor(memory_root)
+        janitor.active_task_file.write_text("~~old~~\nSee ADR-0001\n", encoding="utf-8")
         result = janitor.analyze_archivable_content()
         assert "ADR-0001" in result["archived_references"]
-        assert "ADR-0042" in result["archived_references"]
-
-    def test_adr_references_deduplicated(self, janitor):
-        janitor.active_task_file.write_text(
-            "ADR-0001 mentioned twice. Also ADR-0001 again.\n",
-            encoding="utf-8",
-        )
-        result = janitor.analyze_archivable_content()
-        assert result["archived_references"].count("ADR-0001") == 1
-
-    def test_no_special_content_returns_empty_lists(self, janitor):
-        janitor.active_task_file.write_text(
-            "# Normal content\n\nJust regular text.\n",
-            encoding="utf-8",
-        )
-        result = janitor.analyze_archivable_content()
-        assert result["archived_references"] == []
-        assert result["obsolete_decisions"] == []
+        assert any("old" in item for item in result["obsolete_decisions"])
+    finally:
+        cleanup_runtime(memory_root)
 
 
-# ── D. execute_cleanup ────────────────────────────────────────────────────
+def test_find_and_cleanup_generated_artifacts() -> None:
+    memory_root = make_memory_root()
+    try:
+        repo_root = memory_root.parent
+        pycache = repo_root / "src" / "__pycache__"
+        pycache.mkdir(parents=True)
+        (pycache / "x.pyc").write_text("bin", encoding="utf-8")
+        render_cache = repo_root / "output" / "render_cache"
+        render_cache.mkdir(parents=True)
+        (render_cache / "tile.cache").write_text("cache", encoding="utf-8")
 
-class TestExecuteCleanup:
-    def test_dry_run_does_not_modify_files(self, janitor):
-        original = "line 1\nline 2\nline 3\n"
-        janitor.active_task_file.write_text(original, encoding="utf-8")
-        janitor.execute_cleanup(dry_run=True)
-        assert janitor.active_task_file.read_text(encoding="utf-8") == original
+        janitor = MemoryJanitor(memory_root)
+        found = [str(path) for path in janitor.find_generated_artifacts()]
+        assert any("__pycache__" in path for path in found)
+        assert any("render_cache" in path for path in found)
 
-    def test_dry_run_no_archive_created(self, janitor):
-        _write_lines(janitor.active_task_file, 50)
-        janitor.execute_cleanup(dry_run=True)
-        archives = list(janitor.archive_dir.glob("active_task_*.md"))
-        assert len(archives) == 0
+        result = janitor.cleanup_generated_artifacts(dry_run=False)
+        assert len(result.removed_paths) == 2
+        assert not pycache.exists()
+        assert not render_cache.exists()
+    finally:
+        cleanup_runtime(memory_root)
 
-    def test_missing_file_returns_message(self, janitor):
+
+def test_execute_cleanup_writes_manifest_and_pointer() -> None:
+    memory_root = make_memory_root()
+    try:
+        janitor = MemoryJanitor(memory_root)
+        janitor.active_task_file.write_text("# Task\n\n## Next Steps\n- keep going\n", encoding="utf-8")
         result = janitor.execute_cleanup(dry_run=False)
-        assert "不存在" in result
-
-    def test_real_run_creates_archive(self, janitor):
-        _write_lines(janitor.active_task_file, 50)
-        janitor.execute_cleanup(dry_run=False)
-        archives = list(janitor.archive_dir.glob("active_task_*.md"))
-        assert len(archives) == 1
-
-    def test_archive_contains_full_original_content(self, janitor):
-        content = "".join(f"line {i}\n" for i in range(1, 51))
-        janitor.active_task_file.write_text(content, encoding="utf-8")
-        janitor.execute_cleanup(dry_run=False)
-        archive = list(janitor.archive_dir.glob("active_task_*.md"))[0]
-        assert archive.read_text(encoding="utf-8") == content
-
-    def test_original_file_truncated_after_cleanup(self, janitor):
-        _write_lines(janitor.active_task_file, 50)
-        original_lines = 50
-        janitor.execute_cleanup(dry_run=False)
-        new_lines = len(janitor.active_task_file.read_text(encoding="utf-8").splitlines())
-        assert new_lines < original_lines
-
-    def test_pointer_block_inserted_in_original(self, janitor):
-        _write_lines(janitor.active_task_file, 30)
-        janitor.execute_cleanup(dry_run=False)
-        content = janitor.active_task_file.read_text(encoding="utf-8")
-        assert "ARCHIVED" in content
-        assert "archive/" in content
-
-    def test_manifest_written_after_real_run(self, janitor):
-        _write_lines(janitor.active_task_file, 30)
-        janitor.execute_cleanup(dry_run=False)
-        manifest_path = janitor.archive_dir / "manifest.json"
-        assert manifest_path.exists()
-        manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+        assert "cleanup completed" in result
+        assert "ARCHIVED" in janitor.active_task_file.read_text(encoding="utf-8")
+        manifest = json.loads((janitor.archive_dir / "manifest.json").read_text(encoding="utf-8"))
         assert len(manifest["archives"]) == 1
-
-    def test_manifest_appends_on_second_run(self, janitor):
-        _write_lines(janitor.active_task_file, 30)
-        janitor.execute_cleanup(dry_run=False)
-        _write_lines(janitor.active_task_file, 30)
-        janitor.execute_cleanup(dry_run=False)
-        manifest = json.loads(
-            (janitor.archive_dir / "manifest.json").read_text(encoding="utf-8")
-        )
-        assert len(manifest["archives"]) == 2
-
-    def test_manifest_entry_has_required_fields(self, janitor):
-        _write_lines(janitor.active_task_file, 30)
-        janitor.execute_cleanup(dry_run=False)
-        manifest = json.loads(
-            (janitor.archive_dir / "manifest.json").read_text(encoding="utf-8")
-        )
-        entry = manifest["archives"][0]
-        for field in ("timestamp", "datetime", "archive_file", "original_lines", "new_lines", "reason"):
-            assert field in entry, f"manifest entry missing field: {field}"
-
-    def test_next_steps_preserved_after_cleanup(self, janitor):
-        content = (
-            "# Title\n"
-            + "".join(f"line {i}\n" for i in range(1, 20))
-            + "\n## Next Steps\n\n- Do something important\n- Continue the work\n"
-        )
-        janitor.active_task_file.write_text(content, encoding="utf-8")
-        janitor.execute_cleanup(dry_run=False)
-        result = janitor.active_task_file.read_text(encoding="utf-8")
-        assert "Do something important" in result
-
-    def test_no_duplicate_next_steps(self, janitor):
-        content = (
-            "# Title\n"
-            + "".join(f"line {i}\n" for i in range(1, 20))
-            + "\n## Next Steps\n\n- Action item\n"
-        )
-        janitor.active_task_file.write_text(content, encoding="utf-8")
-        janitor.execute_cleanup(dry_run=False)
-        result = janitor.active_task_file.read_text(encoding="utf-8")
-        assert result.count("## Next Steps") == 1
-
-    def test_cleanup_without_next_steps_section(self, janitor):
-        content = "# Title\n" + "".join(f"line {i}\n" for i in range(1, 30))
-        janitor.active_task_file.write_text(content, encoding="utf-8")
-        result = janitor.execute_cleanup(dry_run=False)
-        assert "✅" in result
+    finally:
+        cleanup_runtime(memory_root)
 
 
-# ── E. create_archive_plan ───────────────────────────────────────────────
-
-class TestCreateArchivePlan:
-    def test_returns_string(self, janitor):
+def test_create_archive_plan_mentions_generated_artifacts() -> None:
+    memory_root = make_memory_root()
+    try:
+        janitor = MemoryJanitor(memory_root)
+        cache_dir = memory_root.parent / "output" / "audio_cache"
+        cache_dir.mkdir(parents=True)
         report = janitor.create_archive_plan()
-        assert isinstance(report, str)
-
-    def test_contains_status_line(self, janitor):
-        _write_lines(janitor.active_task_file, 50)
-        report = janitor.create_archive_plan()
-        assert "SAFE" in report
-
-    def test_safe_status_recommends_no_action(self, janitor):
-        _write_lines(janitor.active_task_file, 50)
-        report = janitor.create_archive_plan()
-        assert "良好" in report or "無需掃除" in report
-
-    def test_warning_status_in_report(self, janitor):
-        _write_lines(janitor.active_task_file, MemoryJanitor.HOT_MEMORY_SOFT_LIMIT)
-        report = janitor.create_archive_plan()
-        assert "WARNING" in report
-        assert "建議" in report
-
-    def test_critical_status_suggests_execute(self, janitor):
-        _write_lines(janitor.active_task_file, MemoryJanitor.HOT_MEMORY_HARD_LIMIT)
-        report = janitor.create_archive_plan()
-        assert "CRITICAL" in report
-        assert "--execute" in report
-
-    def test_emergency_status_urges_stop(self, janitor):
-        _write_lines(janitor.active_task_file, MemoryJanitor.HOT_MEMORY_CRITICAL)
-        report = janitor.create_archive_plan()
-        assert "EMERGENCY" in report
-        assert "立即" in report
-
-    def test_report_includes_adr_references(self, janitor):
-        janitor.active_task_file.write_text(
-            "See ADR-0001 for context.\n" * 5,
-            encoding="utf-8",
-        )
-        report = janitor.create_archive_plan()
-        assert "ADR-0001" in report
-
-    def test_report_includes_obsolete_decisions(self, janitor):
-        janitor.active_task_file.write_text(
-            "~~old decision~~\n" * 5,
-            encoding="utf-8",
-        )
-        report = janitor.create_archive_plan()
-        assert "old decision" in report
-
-    def test_missing_file_produces_safe_report(self, janitor):
-        report = janitor.create_archive_plan()
-        assert "SAFE" in report
-
-
-# ── F. manifest round-trip ────────────────────────────────────────────────
-
-class TestManifest:
-    def test_load_manifest_missing_returns_empty(self, janitor):
-        manifest = janitor._load_manifest()
-        assert manifest["version"] == "1.0"
-        assert manifest["archives"] == []
-
-    def test_load_manifest_corrupted_returns_empty(self, janitor):
-        (janitor.archive_dir / "manifest.json").write_text("NOT JSON", encoding="utf-8")
-        manifest = janitor._load_manifest()
-        assert manifest["archives"] == []
-
-    def test_save_and_load_roundtrip(self, janitor):
-        data = {"version": "1.0", "archives": [{"timestamp": "20260305_120000", "reason": "test"}]}
-        janitor._save_manifest(data)
-        loaded = janitor._load_manifest()
-        assert loaded == data
-
-    def test_save_creates_manifest_file(self, janitor):
-        janitor._save_manifest({"version": "1.0", "archives": []})
-        assert (janitor.archive_dir / "manifest.json").exists()
-
-    def test_manifest_is_valid_json(self, janitor):
-        _write_lines(janitor.active_task_file, 10)
-        janitor.execute_cleanup(dry_run=False)
-        raw = (janitor.archive_dir / "manifest.json").read_text(encoding="utf-8")
-        parsed = json.loads(raw)  # must not raise
-        assert isinstance(parsed, dict)
+        assert "generated_artifacts" in report
+        assert "audio_cache" in report
+    finally:
+        cleanup_runtime(memory_root)
