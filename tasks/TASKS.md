@@ -14,7 +14,7 @@ Phase/Gate/Milestone Truth: `PLAN.md`
 
 ### Ready
 - [ ] PT-2 Compare human playtest logs against machine `failure_analysis`
-Artifact target: `output/playtests/comparison_summary.json` with hesitation/regret mismatch breakdowns, machine blame breakdown, and equipment-arc notice rate
+Artifact target: `output/playtests/comparison_summary.json` with hesitation/regret mismatch breakdowns, machine blame breakdown, and equipment-arc notice rate; `output/playtests/PT2_action_report.md` for direct follow-up recommendations
 - [x] OBS-1 Run first-node dominance test from `SEED_101_OBSERVATION.md`
 - [x] OBS-2 Test conservative survivability across multiple seeds
 - [x] OBS-3 Compare high-risk vs low-risk event payoff across >=100 runs
@@ -146,9 +146,14 @@ Artifacts: `specs/meta_progression.md` (freeze criteria added), `schemas/enemy_s
   Artifact: `schemas/event_template_catalog.json` (30 events, 5 template_types, all validated)
 
 ### P2
-- [ ] Difficulty presets
-- [ ] Enemy archetypes and special abilities
-- [ ] Run summary template and telemetry fields
+- [x] Difficulty presets
+  Artifacts: `src/difficulty.py`, `scripts/run_difficulty_presets.py`, `output/analytics/difficulty_presets.json`
+- [x] Enemy archetypes and special abilities
+  Artifacts: `schemas/enemy_schema.json`, `src/combat_engine.py`, `scripts/test_failure_paths.py`
+  Notes: `raider` loot now skews `ammo/food`; `mutant` loot now skews `scrap/medkits`; route-biased encounter weights now live in `schemas/encounter_weight_table.json`
+- [x] Run summary template and telemetry fields
+  Artifacts: `src/run_summary.py`, `scripts/generate_run_summary_report.py`, `output/summaries/*_summary.md`
+  Follow-up artifacts: `scripts/run_loot_economy_report.py`, `output/analytics/loot_economy.json`, `output/summaries/loot_economy_report.md`
 - [ ] Travel-mode prototype branch if PT-1 confirms low consequence depth
 - [ ] Background/equipment prototype branch if PT-1 and EXP-2 justify more identity depth
 

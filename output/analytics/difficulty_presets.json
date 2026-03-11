@@ -1,0 +1,60 @@
+{
+  "difficulties": {
+    "easy": {
+      "run_count": 25,
+      "victory_rate": 0.76,
+      "avg_pressure_count": 3.76,
+      "avg_final_hp": 5.2,
+      "avg_final_food": 5.24,
+      "avg_final_radiation": 1.04,
+      "avg_combat_count": 1.2,
+      "death_reasons": {
+        "radiation_death": 6
+      }
+    },
+    "normal": {
+      "run_count": 25,
+      "victory_rate": 0.4,
+      "avg_pressure_count": 3.32,
+      "avg_final_hp": 4.12,
+      "avg_final_food": 3.96,
+      "avg_final_radiation": 0.88,
+      "avg_combat_count": 1.16,
+      "death_reasons": {
+        "starvation": 5,
+        "radiation_death": 8,
+        "event_or_resource_death": 2
+      }
+    },
+    "hard": {
+      "run_count": 25,
+      "victory_rate": 0.24,
+      "avg_pressure_count": 2.96,
+      "avg_final_hp": 2.56,
+      "avg_final_food": 3.36,
+      "avg_final_radiation": 0.8,
+      "avg_combat_count": 1.4,
+      "death_reasons": {
+        "radiation_death": 10,
+        "starvation": 5,
+        "event_or_resource_death": 4
+      }
+    }
+  },
+  "deltas_vs_normal": {
+    "easy_vs_normal": {
+      "delta_victory_rate": 0.36,
+      "delta_avg_final_hp": 1.08,
+      "delta_avg_final_food": 1.28
+    },
+    "hard_vs_normal": {
+      "delta_victory_rate": -0.16,
+      "delta_avg_final_hp": -1.56,
+      "delta_avg_final_food": -0.6
+    }
+  },
+  "verdict": {
+    "status": "SUPPORTED",
+    "summary": "Difficulty presets separate run outcomes in the expected direction."
+  }
+}

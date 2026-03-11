@@ -12,7 +12,8 @@
     "player_final",
     "decision_log",
     "summary",
-    "failure_analysis"
+    "failure_analysis",
+    "run_summary"
   ],
   "properties": {
     "run_id": { "type": "string", "minLength": 1 },
@@ -72,6 +73,18 @@
           },
           "pressure": { "type": "boolean" },
           "combat_triggered": { "type": "boolean" },
+          "combat_loot": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": ["resource", "amount"],
+              "properties": {
+                "resource": { "type": "string", "minLength": 1 },
+                "amount": { "type": "integer", "minimum": 1 }
+              },
+              "additionalProperties": false
+            }
+          },
           "effects": { "type": "object" },
           "equipment_change": { "type": ["object", "null"] },
           "equipment_summary": { "type": ["string", "null"] },
@@ -127,6 +140,70 @@
         },
         "steps_from_regret_to_death": { "type": "integer", "minimum": 0 },
         "is_trash_time_death": { "type": "boolean" }
+      },
+      "additionalProperties": false
+    },
+    "run_summary": {
+      "type": "object",
+      "required": ["headline", "route_family", "outcome", "key_turning_point", "notable_equipment", "telemetry"],
+      "properties": {
+        "headline": { "type": "string", "minLength": 1 },
+        "route_family": { "type": "string", "minLength": 1 },
+        "outcome": { "type": "string", "minLength": 1 },
+        "key_turning_point": { "type": ["string", "null"] },
+        "notable_equipment": {
+          "type": "array",
+          "items": { "type": "string", "minLength": 1 }
+        },
+        "telemetry": {
+          "type": "object",
+          "required": [
+            "total_steps",
+            "pressure_count",
+            "combat_count",
+            "loot_drop_count",
+            "loot_total_amount",
+            "equipment_change_count",
+            "equipment_ids",
+            "loot_resources",
+            "max_radiation",
+            "min_food",
+            "min_hp",
+            "low_resource_flags",
+            "risk_tags"
+          ],
+          "properties": {
+            "total_steps": { "type": "integer", "minimum": 0 },
+            "pressure_count": { "type": "integer", "minimum": 0 },
+            "combat_count": { "type": "integer", "minimum": 0 },
+            "loot_drop_count": { "type": "integer", "minimum": 0 },
+            "loot_total_amount": { "type": "integer", "minimum": 0 },
+            "equipment_change_count": { "type": "integer", "minimum": 0 },
+            "equipment_ids": {
+              "type": "array",
+              "items": { "type": "string", "minLength": 1 }
+            },
+            "loot_resources": {
+              "type": "object",
+              "additionalProperties": {
+                "type": "integer",
+                "minimum": 0
+              }
+            },
+            "max_radiation": { "type": "integer", "minimum": 0 },
+            "min_food": { "type": "integer", "minimum": 0 },
+            "min_hp": { "type": "integer", "minimum": 0 },
+            "low_resource_flags": {
+              "type": "array",
+              "items": { "type": "string", "minLength": 1 }
+            },
+            "risk_tags": {
+              "type": "array",
+              "items": { "type": "string", "minLength": 1 }
+            }
+          },
+          "additionalProperties": false
+        }
       },
       "additionalProperties": false
     }

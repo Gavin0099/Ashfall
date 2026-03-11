@@ -229,6 +229,7 @@
         },
         "pressure": true,
         "combat_triggered": false,
+        "combat_loot": [],
         "effects": {
           "ammo": -1,
           "medkits": 1
@@ -271,6 +272,7 @@
         },
         "pressure": true,
         "combat_triggered": false,
+        "combat_loot": [],
         "effects": {
           "food": 1,
           "ammo": -1
@@ -308,6 +310,7 @@
         },
         "pressure": true,
         "combat_triggered": false,
+        "combat_loot": [],
         "effects": {
           "food": -1
         },
@@ -344,6 +347,7 @@
         },
         "pressure": true,
         "combat_triggered": false,
+        "combat_loot": [],
         "effects": {
           "food": -1
         },
@@ -373,6 +377,37 @@
       "regret_nodes": [],
       "steps_from_regret_to_death": 0,
       "is_trash_time_death": false
+    },
+    "run_summary": {
+      "headline": "south_cautious: victory via reached_final_node after 4 steps",
+      "route_family": "south",
+      "outcome": "victory",
+      "key_turning_point": "node_south_1 (tool -> scavenger_kit (replaced empty))",
+      "notable_equipment": [
+        "scavenger_kit"
+      ],
+      "telemetry": {
+        "total_steps": 4,
+        "pressure_count": 4,
+        "combat_count": 0,
+        "loot_drop_count": 0,
+        "loot_total_amount": 0,
+        "equipment_change_count": 1,
+        "equipment_ids": [
+          "scavenger_kit"
+        ],
+        "loot_resources": {},
+        "max_radiation": 0,
+        "min_food": 3,
+        "min_hp": 10,
+        "low_resource_flags": [
+          "low_ammo"
+        ],
+        "risk_tags": [
+          "equipment_arc",
+          "end_reached_final_node"
+        ]
+      }
     }
   }
 }

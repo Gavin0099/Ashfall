@@ -144,12 +144,14 @@ Generate PT-1 summary draft:
 
 ```bash
 python scripts/generate_pt1_summary.py
+python scripts/generate_pt2_action_report.py
 ```
 
 Expected artifact:
 
 - [comparison_summary.json](e:\BackUp\Git_EE\Ashfall\output\playtests\comparison_summary.json)
 - [PT1_summary.md](e:\BackUp\Git_EE\Ashfall\output\playtests\PT1_summary.md)
+- [PT2_action_report.md](e:\BackUp\Git_EE\Ashfall\output\playtests\PT2_action_report.md)
 - Fill [PT1_SUMMARY_TEMPLATE.md](e:\BackUp\Git_EE\Ashfall\PT1_SUMMARY_TEMPLATE.md)
 
 ## Success Readout

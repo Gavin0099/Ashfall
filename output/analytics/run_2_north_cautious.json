@@ -41,6 +41,7 @@
       },
       "pressure": true,
       "combat_triggered": false,
+      "combat_loot": [],
       "effects": {
         "food": -1
       },
@@ -77,6 +78,7 @@
       },
       "pressure": true,
       "combat_triggered": false,
+      "combat_loot": [],
       "effects": {
         "food": -1,
         "medkits": 1
@@ -116,6 +118,7 @@
       },
       "pressure": true,
       "combat_triggered": false,
+      "combat_loot": [],
       "effects": {
         "food": -1
       },
@@ -154,6 +157,7 @@
       },
       "pressure": true,
       "combat_triggered": false,
+      "combat_loot": [],
       "effects": {
         "food": -1
       },
@@ -205,5 +209,32 @@
     ],
     "steps_from_regret_to_death": 0,
     "is_trash_time_death": false
+  },
+  "run_summary": {
+    "headline": "north_cautious: loss via starvation after 4 steps",
+    "route_family": "north",
+    "outcome": "starvation",
+    "key_turning_point": "node_final (lost 1 food)",
+    "notable_equipment": [],
+    "telemetry": {
+      "total_steps": 4,
+      "pressure_count": 4,
+      "combat_count": 0,
+      "loot_drop_count": 0,
+      "loot_total_amount": 0,
+      "equipment_change_count": 0,
+      "equipment_ids": [],
+      "loot_resources": {},
+      "max_radiation": 0,
+      "min_food": 0,
+      "min_hp": 10,
+      "low_resource_flags": [
+        "low_food"
+      ],
+      "risk_tags": [
+        "food_pressure",
+        "end_starvation"
+      ]
+    }
   }
 }

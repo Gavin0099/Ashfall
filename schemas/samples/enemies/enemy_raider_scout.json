@@ -2,6 +2,7 @@
   "id": "enemy_raider_scout",
   "name": "Raider Scout",
   "archetype": "raider",
+  "special_ability": "opening_shot",
   "hp": 5,
   "damage_range": {
     "min": 1,
@@ -11,12 +12,12 @@
     {
       "resource": "ammo",
       "amount": 1,
-      "chance": 0.7
+      "chance": 1.0
     },
     {
-      "resource": "scrap",
-      "amount": 2,
-      "chance": 0.4
+      "resource": "food",
+      "amount": 1,
+      "chance": 0.5
     }
   ]
 }

@@ -37,6 +37,7 @@ def build_balance_plans() -> list[RoutePlan]:
                     seed=base_plan.seed + seed_offset,
                     route=list(base_plan.route),
                     options=dict(base_plan.options),
+                    difficulty=base_plan.difficulty,
                 )
             )
     return plans
@@ -98,6 +99,71 @@ def summarize_family(results: list[dict]) -> dict:
     return summary
 
 
+def summarize_loot(results: list[dict]) -> dict:
+    grouped: dict[str, dict[str, float]] = defaultdict(lambda: defaultdict(float))
+    archetype_grouped: dict[str, dict[str, float]] = defaultdict(lambda: defaultdict(float))
+    for result in results:
+        telemetry = result["analytics"]["run_summary"]["telemetry"]
+        route_key = route_family(result["plan"])
+        encounter_count = 0.0
+        for moment in result.get("moments", []):
+            enemy_id = moment.get("event_outcome", {}).get("combat", {}).get("enemy_id")
+            if not isinstance(enemy_id, str):
+                continue
+            encounter_count += 1.0
+            if "raider" in enemy_id:
+                archetype_grouped["overall"]["raider"] += 1.0
+                archetype_grouped[route_key]["raider"] += 1.0
+            elif "mutant" in enemy_id:
+                archetype_grouped["overall"]["mutant"] += 1.0
+                archetype_grouped[route_key]["mutant"] += 1.0
+        for resource, amount in telemetry.get("loot_resources", {}).items():
+            grouped["overall"][resource] += float(amount)
+            grouped[route_key][resource] += float(amount)
+        grouped["overall"]["loot_drop_count"] += float(telemetry.get("loot_drop_count", 0))
+        grouped["overall"]["loot_total_amount"] += float(telemetry.get("loot_total_amount", 0))
+        grouped["overall"]["encounter_count"] += encounter_count
+        grouped[route_key]["loot_drop_count"] += float(telemetry.get("loot_drop_count", 0))
+        grouped[route_key]["loot_total_amount"] += float(telemetry.get("loot_total_amount", 0))
+        grouped[route_key]["encounter_count"] += encounter_count
+
+    summary: dict[str, dict] = {}
+    for key in ("overall", "north", "south", "mixed"):
+        bucket = grouped[key]
+        archetype_bucket = archetype_grouped[key]
+        run_total = len(results) if key == "overall" else sum(1 for result in results if route_family(result["plan"]) == key)
+        resource_totals = {
+            "food": round(bucket.get("food", 0.0), 2),
+            "ammo": round(bucket.get("ammo", 0.0), 2),
+            "medkits": round(bucket.get("medkits", 0.0), 2),
+            "scrap": round(bucket.get("scrap", 0.0), 2),
+        }
+        archetype_totals = {
+            "raider": round(archetype_bucket.get("raider", 0.0), 2),
+            "mutant": round(archetype_bucket.get("mutant", 0.0), 2),
+        }
+        total_encounters = sum(archetype_totals.values())
+        dominant_resource = max(resource_totals, key=resource_totals.get) if run_total > 0 else None
+        summary[key] = {
+            "avg_encounter_count": round(bucket.get("encounter_count", 0.0) / run_total, 2) if run_total else 0.0,
+            "avg_loot_drop_count": round(bucket.get("loot_drop_count", 0.0) / run_total, 2) if run_total else 0.0,
+            "avg_loot_total_amount": round(bucket.get("loot_total_amount", 0.0) / run_total, 2) if run_total else 0.0,
+            "resource_totals": resource_totals,
+            "resource_per_run": {
+                resource: round(amount / run_total, 2) if run_total else 0.0
+                for resource, amount in resource_totals.items()
+            },
+            "archetype_encounters": archetype_totals,
+            "archetype_encounter_rate": {
+                archetype: round(amount / total_encounters, 2) if total_encounters else 0.0
+                for archetype, amount in archetype_totals.items()
+            },
+            "dominant_archetype": max(archetype_totals, key=archetype_totals.get) if total_encounters > 0 else None,
+            "dominant_resource": dominant_resource,
+        }
+    return summary
+
+
 def summarize_results(results: list[dict]) -> dict:
     death_reasons = Counter(result["end_reason"] for result in results if not result["victory"])
     outcome_signatures = {
@@ -146,6 +212,7 @@ def summarize_results(results: list[dict]) -> dict:
         "distinct_outcome_signatures": len(outcome_signatures),
         "resource_divergence": pairwise_resource_distance(results),
         "route_family_summary": summarize_family(results),
+        "loot_economy": summarize_loot(results),
     }
     summary["balance_gate"] = {
         "twenty_runs_captured": summary["run_count"] >= 20,
@@ -177,6 +244,9 @@ def main() -> int:
         "summary": summary,
     }
     SUMMARY_PATH.write_text(json.dumps(summary_payload, indent=2), encoding="utf-8")
+
+    if "loot_economy" not in summary:
+        raise ValidationError("Balance metrics summary missing loot_economy")
 
     if not all(summary["balance_gate"].values()):
         failed = [name for name, passed in summary["balance_gate"].items() if not passed]

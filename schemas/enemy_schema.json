@@ -19,6 +19,10 @@
       "type": "string",
       "enum": ["raider", "mutant", "beast", "machine", "boss"]
     },
+    "special_ability": {
+      "type": "string",
+      "enum": ["opening_shot", "thick_hide"]
+    },
     "hp": {
       "type": "integer",
       "minimum": 1

@@ -19,6 +19,9 @@ class CombatEngine:
         damage = self.rng.randint(1, 3)
         if player.weapon_slot == "rust_rifle":
             damage += 1
+        if enemy.special_ability == "thick_hide" and not enemy.special_used:
+            damage = max(1, damage - 1)
+            enemy.special_used = True
         enemy.hp -= damage
         return damage
 
@@ -32,6 +35,9 @@ class CombatEngine:
 
     def enemy_attack(self, player: PlayerState, enemy: EnemyState) -> int:
         damage = self.rng.randint(enemy.damage_min, enemy.damage_max)
+        if enemy.special_ability == "opening_shot" and not enemy.special_used:
+            damage += 1
+            enemy.special_used = True
         player.hp -= damage
         return damage
 
@@ -48,13 +54,16 @@ class CombatEngine:
         while player.hp > 0 and enemy.hp > 0:
             rounds += 1
             if player.ammo > 0:
+                special_before = enemy.special_used
                 dealt = self.player_attack(player, enemy)
                 log.append(f"第 {rounds} 回合：你攻擊並造成 {dealt} 點傷害")
+                if enemy.special_ability == "thick_hide" and not special_before and enemy.special_used:
+                    log.append(f"第 {rounds} 回合：敵人的厚皮減少了 1 點傷害")
             elif player.medkits > 0 and player.hp <= 4:
                 healed = self.player_use_medkit(player)
                 log.append(f"第 {rounds} 回合：你使用醫療包，回復 {healed} 點生命")
             else:
-                log.append(f"第 {rounds} 回合：你沒有有效行動")
+                log.append(f"第 {rounds} 回合：你無法有效反擊")
 
             if enemy.hp <= 0:
                 return {
@@ -65,8 +74,11 @@ class CombatEngine:
                     "log": log,
                 }
 
+            special_before = enemy.special_used
             taken = self.enemy_attack(player, enemy)
             log.append(f"第 {rounds} 回合：敵人攻擊，造成 {taken} 點傷害")
+            if enemy.special_ability == "opening_shot" and not special_before and enemy.special_used:
+                log.append(f"第 {rounds} 回合：敵人的先發攻擊額外造成 1 點傷害")
 
         return {
             "victory": enemy.hp <= 0 and player.hp > 0,

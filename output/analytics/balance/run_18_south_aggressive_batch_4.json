@@ -16,7 +16,10 @@
     "ammo": 0,
     "medkits": 0,
     "scrap": 0,
-    "radiation": 1
+    "radiation": 1,
+    "weapon_slot": null,
+    "armor_slot": null,
+    "tool_slot": null
   },
   "decision_log": [
     {
@@ -34,27 +37,38 @@
         "food": 6,
         "ammo": 3,
         "medkits": 1,
-        "radiation": 0
+        "scrap": 0,
+        "radiation": 0,
+        "weapon_slot": null,
+        "armor_slot": null,
+        "tool_slot": null
       },
       "pressure": true,
       "combat_triggered": true,
+      "combat_loot": [],
       "effects": {
         "food": 2,
         "radiation": 1
       },
+      "equipment_change": null,
+      "equipment_summary": null,
       "player_after": {
         "hp": -1,
         "food": 8,
         "ammo": 0,
         "medkits": 0,
-        "radiation": 1
+        "scrap": 0,
+        "radiation": 1,
+        "weapon_slot": null,
+        "armor_slot": null,
+        "tool_slot": null
       }
     }
   ],
   "summary": {
     "pressure_count": 1,
     "death_cause_attribution": true,
-    "resource_signature": "hp:-1|food:8|ammo:0|medkits:0|scrap:0|radiation:1"
+    "resource_signature": "hp:-1|food:8|ammo:0|medkits:0|scrap:0|radiation:1|weapon:None|armor:None|tool:None"
   },
   "failure_analysis": {
     "death_chain_length": 1,
@@ -70,5 +84,34 @@
     ],
     "steps_from_regret_to_death": 0,
     "is_trash_time_death": false
+  },
+  "run_summary": {
+    "headline": "south_aggressive_batch_4: loss via radiation_death after 1 steps",
+    "route_family": "south",
+    "outcome": "radiation_death",
+    "key_turning_point": "node_south_1 (took +1 radiation, accepted combat risk)",
+    "notable_equipment": [],
+    "telemetry": {
+      "total_steps": 1,
+      "pressure_count": 1,
+      "combat_count": 1,
+      "loot_drop_count": 0,
+      "loot_total_amount": 0,
+      "equipment_change_count": 0,
+      "equipment_ids": [],
+      "loot_resources": {},
+      "max_radiation": 1,
+      "min_food": 8,
+      "min_hp": 0,
+      "low_resource_flags": [
+        "low_hp",
+        "low_ammo"
+      ],
+      "risk_tags": [
+        "combat_seen",
+        "radiation_pressure",
+        "end_radiation_death"
+      ]
+    }
   }
 }

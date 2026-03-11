@@ -10,9 +10,11 @@ if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
 from src.combat_engine import CombatEngine
+from src.encounter_tables import ENCOUNTER_WEIGHTS, encounter_bucket_for_node
 from src.event_engine import resolve_event_choice
 from src.run_engine import RunEngine, build_map
-from src.state_models import EnemyState, PlayerState, apply_effects
+from src.state_models import EnemyState, NodeState, PlayerState, RunState, apply_effects, apply_loot
+from scripts.run_playability_check import build_enemy_catalog
 
 
 def expect_raises(fn, exc_type: type[BaseException], label: str) -> None:
@@ -159,6 +161,16 @@ def test_apply_effects_clamp() -> None:
         raise AssertionError("apply_effects should clamp state to lower bounds")
 
 
+def test_apply_loot() -> None:
+    player = PlayerState(hp=10, food=1, ammo=0, medkits=0, scrap=0, radiation=0)
+    apply_loot(player, "food", 2)
+    apply_loot(player, "ammo", 1)
+    apply_loot(player, "medkits", 1)
+    apply_loot(player, "scrap", 3)
+    if (player.food, player.ammo, player.medkits, player.scrap) != (3, 1, 1, 3):
+        raise AssertionError("apply_loot should add supported resources")
+
+
 def test_create_run_copies_player_state() -> None:
     node_payloads = {
         "node_start": {"id": "node_start", "node_type": "story", "connections": [], "event_pool": [], "is_start": True, "is_final": True}
@@ -215,6 +227,142 @@ def test_combat_boundaries() -> None:
     taken = engine.enemy_attack(player, enemy)
     if taken != 1:
         raise AssertionError("enemy damage boundary min=max failed")
+
+
+def test_enemy_special_abilities() -> None:
+    engine = CombatEngine(seed=3)
+
+    player_vs_mutant = PlayerState(hp=10, food=5, ammo=2, medkits=0)
+    mutant = EnemyState(
+        id="mutant",
+        name="mutant",
+        hp=10,
+        damage_min=1,
+        damage_max=1,
+        archetype="mutant",
+        special_ability="thick_hide",
+    )
+    first_damage = engine.player_attack(player_vs_mutant, mutant)
+    second_damage = engine.player_attack(player_vs_mutant, mutant)
+    if first_damage < 1 or second_damage < 1:
+        raise AssertionError("enemy special abilities should not reduce damage below 1")
+    if first_damage > second_damage:
+        raise AssertionError("thick_hide should reduce the first incoming hit only")
+
+    player_vs_raider = PlayerState(hp=10, food=5, ammo=1, medkits=0)
+    raider = EnemyState(
+        id="raider",
+        name="raider",
+        hp=5,
+        damage_min=1,
+        damage_max=1,
+        archetype="raider",
+        special_ability="opening_shot",
+    )
+    opening_hit = engine.enemy_attack(player_vs_raider, raider)
+    followup_hit = engine.enemy_attack(player_vs_raider, raider)
+    if opening_hit != 2:
+        raise AssertionError("opening_shot should add +1 damage on the first enemy attack")
+    if followup_hit != 1:
+        raise AssertionError("opening_shot should only apply once")
+
+
+def test_combat_loot_rewards() -> None:
+    node_payloads = {
+        "node_start": {
+            "id": "node_start",
+            "node_type": "story",
+            "connections": ["node_a"],
+            "event_pool": ["fight"],
+            "is_start": True,
+        },
+        "node_a": {
+            "id": "node_a",
+            "node_type": "combat",
+            "connections": [],
+            "event_pool": ["fight"],
+            "is_final": True,
+        },
+    }
+    event_catalog = {
+        "fight": {
+            "id": "fight",
+            "description": "fight",
+            "options": [{"text": "fight", "effects": {}, "combat_chance": 1.0}],
+        }
+    }
+    enemy_catalog = {
+        "enemy_raider_scout": {
+            "id": "enemy_raider_scout",
+            "name": "Raider Scout",
+            "hp": 1,
+            "damage_range": {"min": 0, "max": 0},
+            "loot_table": [{"resource": "ammo", "amount": 2, "chance": 1.0}],
+        }
+    }
+    map_state = build_map(node_payloads, start_node_id="node_start", final_node_id="node_a")
+    engine = RunEngine(map_state=map_state, seed=5, event_catalog=event_catalog, enemy_catalog=enemy_catalog)
+    run = engine.create_run(PlayerState(hp=10, food=5, ammo=2, medkits=0), seed=5)
+    outcome = engine.resolve_node_event(map_state.get_node("node_start"), run, option_index=0)
+    combat = outcome.get("combat", {})
+    if combat.get("loot") != [{"resource": "ammo", "amount": 2}]:
+        raise AssertionError("combat victory should award deterministic loot")
+    if run.player.ammo != 3:
+        raise AssertionError("combat loot should be added after ammo spent in combat")
+
+
+def test_enemy_archetype_loot_profiles() -> None:
+    enemies = build_enemy_catalog()
+    raider_loot = enemies["enemy_raider_scout"]["loot_table"]
+    mutant_loot = enemies["enemy_mutant_brute"]["loot_table"]
+
+    raider_resources = {item["resource"] for item in raider_loot}
+    mutant_resources = {item["resource"] for item in mutant_loot}
+
+    if raider_resources != {"ammo", "food"}:
+        raise AssertionError("raider loot profile should focus on ammo and food")
+    if mutant_resources != {"scrap", "medkits"}:
+        raise AssertionError("mutant loot profile should focus on scrap and medkits")
+    if not any(item["resource"] == "ammo" and item["chance"] == 1.0 for item in raider_loot):
+        raise AssertionError("raider loot should guarantee some ammo recovery")
+    if not any(item["resource"] == "scrap" and item["amount"] == 2 for item in mutant_loot):
+        raise AssertionError("mutant loot should guarantee higher scrap salvage")
+
+
+def test_enemy_encounter_weighting() -> None:
+    node_payloads = {
+        "node_start": {"id": "node_start", "node_type": "story", "connections": ["node_north_1", "node_south_1"], "event_pool": ["abandoned_store"], "is_start": True},
+        "node_north_1": {"id": "node_north_1", "node_type": "combat", "connections": [], "event_pool": ["abandoned_store"]},
+        "node_south_1": {"id": "node_south_1", "node_type": "combat", "connections": [], "event_pool": ["abandoned_store"]},
+    }
+    map_state = build_map(node_payloads, start_node_id="node_start", final_node_id="node_north_1")
+    engine = RunEngine(
+        map_state=map_state,
+        seed=11,
+        event_catalog={"abandoned_store": load_json(ROOT / "schemas" / "samples" / "events" / "abandoned_store.json")},
+        enemy_catalog=build_enemy_catalog(),
+    )
+
+    north_run = RunState(player=PlayerState(hp=10, food=5, ammo=3, medkits=0), map_seed=11, current_node="node_north_1")
+    south_run = RunState(player=PlayerState(hp=10, food=5, ammo=3, medkits=0), map_seed=11, current_node="node_south_1")
+
+    north_counts = {"enemy_raider_scout": 0, "enemy_mutant_brute": 0}
+    south_counts = {"enemy_raider_scout": 0, "enemy_mutant_brute": 0}
+    for _ in range(200):
+        north_counts[engine._pick_enemy_id(north_run)] += 1
+        south_counts[engine._pick_enemy_id(south_run)] += 1
+
+    if north_counts["enemy_mutant_brute"] <= north_counts["enemy_raider_scout"]:
+        raise AssertionError("north encounters should bias toward mutants")
+    if south_counts["enemy_raider_scout"] <= south_counts["enemy_mutant_brute"]:
+        raise AssertionError("south encounters should bias toward raiders")
+
+    if encounter_bucket_for_node("node_north_2") != "north":
+        raise AssertionError("north node should resolve to north encounter bucket")
+    if ENCOUNTER_WEIGHTS["south"]["raider"] <= ENCOUNTER_WEIGHTS["south"]["mutant"]:
+        raise AssertionError("south encounter table should favor raiders")
+    if ENCOUNTER_WEIGHTS["north"]["mutant"] != 0.75:
+        raise AssertionError("encounter weights should load from encounter_weight_table.json")
 
 
 def test_equipment_rewards_and_replacement() -> None:
@@ -304,6 +452,11 @@ def test_equipment_rewards_and_replacement() -> None:
 def main() -> int:
     test_combat_failures()
     test_combat_boundaries()
+    test_apply_loot()
+    test_enemy_special_abilities()
+    test_combat_loot_rewards()
+    test_enemy_archetype_loot_profiles()
+    test_enemy_encounter_weighting()
     test_equipment_rewards_and_replacement()
     test_event_failures()
     test_run_failures()

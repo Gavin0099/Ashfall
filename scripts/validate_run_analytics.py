@@ -49,6 +49,7 @@ def validate_decision_log(entries: list[dict[str, Any]], src: Path) -> None:
             ensure(isinstance(pre_choice_state.get(key), (str, type(None))), f"{src}: pre_choice_state.{key} must be string|null")
         ensure(isinstance(entry.get("pressure"), bool), f"{src}: pressure must be boolean")
         ensure(isinstance(entry.get("combat_triggered"), bool), f"{src}: combat_triggered must be boolean")
+        ensure(isinstance(entry.get("combat_loot", []), list), f"{src}: combat_loot must be array")
         ensure(isinstance(entry.get("effects", {}), dict), f"{src}: effects must be object")
         ensure(isinstance(entry.get("equipment_change"), (dict, type(None))), f"{src}: equipment_change must be object|null")
         ensure(isinstance(entry.get("equipment_summary"), (str, type(None))), f"{src}: equipment_summary must be string|null")
@@ -85,9 +86,38 @@ def validate_failure_analysis(data: dict[str, Any], src: Path) -> None:
     ensure(isinstance(data.get("is_trash_time_death"), bool), f"{src}: is_trash_time_death invalid")
 
 
+def validate_run_summary(data: dict[str, Any], src: Path) -> None:
+    ensure(isinstance(data.get("headline"), str) and data["headline"], f"{src}: run_summary.headline invalid")
+    ensure(isinstance(data.get("route_family"), str) and data["route_family"], f"{src}: run_summary.route_family invalid")
+    ensure(isinstance(data.get("outcome"), str) and data["outcome"], f"{src}: run_summary.outcome invalid")
+    ensure(isinstance(data.get("key_turning_point"), (str, type(None))), f"{src}: run_summary.key_turning_point invalid")
+    ensure(isinstance(data.get("notable_equipment"), list), f"{src}: run_summary.notable_equipment invalid")
+    telemetry = data.get("telemetry")
+    ensure(isinstance(telemetry, dict), f"{src}: run_summary.telemetry invalid")
+    for key in (
+        "total_steps",
+        "pressure_count",
+        "combat_count",
+        "loot_drop_count",
+        "loot_total_amount",
+        "equipment_change_count",
+        "max_radiation",
+        "min_food",
+        "min_hp",
+    ):
+        ensure(isinstance(telemetry.get(key), int) and telemetry[key] >= 0, f"{src}: run_summary.telemetry.{key} invalid")
+    for key in ("equipment_ids", "low_resource_flags", "risk_tags"):
+        ensure(isinstance(telemetry.get(key), list), f"{src}: run_summary.telemetry.{key} invalid")
+    loot_resources = telemetry.get("loot_resources")
+    ensure(isinstance(loot_resources, dict), f"{src}: run_summary.telemetry.loot_resources invalid")
+    for key, value in loot_resources.items():
+        ensure(isinstance(key, str) and key, f"{src}: run_summary.telemetry.loot_resources key invalid")
+        ensure(isinstance(value, int) and value >= 0, f"{src}: run_summary.telemetry.loot_resources.{key} invalid")
+
+
 def validate_run_file(path: Path) -> None:
     data = load_json(path)
-    for key in ("run_id", "seed", "route", "ended", "victory", "end_reason", "player_final", "decision_log", "summary", "failure_analysis"):
+    for key in ("run_id", "seed", "route", "ended", "victory", "end_reason", "player_final", "decision_log", "summary", "failure_analysis", "run_summary"):
         ensure(key in data, f"{path}: missing {key}")
     ensure(isinstance(data["run_id"], str) and data["run_id"], f"{path}: run_id invalid")
     ensure(isinstance(data["seed"], int), f"{path}: seed invalid")
@@ -99,6 +129,7 @@ def validate_run_file(path: Path) -> None:
     validate_decision_log(data["decision_log"], path)
     validate_summary(data["summary"], path)
     validate_failure_analysis(data["failure_analysis"], path)
+    validate_run_summary(data["run_summary"], path)
 
 
 def main() -> int:

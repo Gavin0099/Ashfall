@@ -11,6 +11,7 @@ from typing import Any
 
 ROOT = Path(__file__).resolve().parents[1]
 SCHEMAS = {
+    "encounter_weight_table": ROOT / "schemas" / "encounter_weight_table.json",
     "event": ROOT / "schemas" / "event_schema.json",
     "enemy": ROOT / "schemas" / "enemy_schema.json",
     "node": ROOT / "schemas" / "node_schema.json",
@@ -32,6 +33,8 @@ def load_json(path: Path) -> Any:
 
 
 def check_schema_skeleton(name: str, schema: dict[str, Any]) -> None:
+    if name == "encounter_weight_table":
+        return
     if schema.get("type") != "object":
         raise ValidationError(f"{name} schema: top-level type must be object")
     if "required" not in schema or not isinstance(schema["required"], list):
@@ -69,6 +72,10 @@ def validate_enemy(data: dict[str, Any], src: Path) -> None:
     ensure(isinstance(data.get("id"), str) and data["id"], f"{src}: invalid id")
     ensure(isinstance(data.get("name"), str) and data["name"], f"{src}: invalid name")
     ensure(isinstance(data.get("hp"), int) and data["hp"] >= 1, f"{src}: hp must be integer >= 1")
+    if "archetype" in data:
+        ensure(data["archetype"] in {"raider", "mutant", "beast", "machine", "boss"}, f"{src}: archetype invalid")
+    if "special_ability" in data:
+        ensure(data["special_ability"] in {"opening_shot", "thick_hide"}, f"{src}: special_ability invalid")
 
     dr = data.get("damage_range")
     ensure(isinstance(dr, dict), f"{src}: damage_range must be object")
@@ -110,8 +117,24 @@ def validate_node(data: dict[str, Any], src: Path) -> None:
             ensure(isinstance(data[flag], bool), f"{src}: {flag} must be boolean")
 
 
+def validate_encounter_weight_table(data: dict[str, Any], src: Path) -> None:
+    ensure(isinstance(data.get("weights"), dict), f"{src}: weights must be object")
+    weights = data["weights"]
+    for bucket in ("north", "south", "mid", "default"):
+        ensure(bucket in weights, f"{src}: missing bucket {bucket}")
+        ensure(isinstance(weights[bucket], dict), f"{src}: bucket {bucket} must be object")
+        total = 0.0
+        for archetype, weight in weights[bucket].items():
+            ensure(archetype in {"raider", "mutant", "beast", "machine", "boss"}, f"{src}: invalid archetype {archetype}")
+            ensure(isinstance(weight, (int, float)), f"{src}: weight for {bucket}/{archetype} must be number")
+            ensure(float(weight) >= 0, f"{src}: weight for {bucket}/{archetype} must be >= 0")
+            total += float(weight)
+        ensure(total > 0, f"{src}: bucket {bucket} must have positive total weight")
+
+
 def main() -> int:
     validators = {
+        "encounter_weight_table": validate_encounter_weight_table,
         "event": validate_event,
         "enemy": validate_enemy,
         "node": validate_node,
@@ -123,6 +146,8 @@ def main() -> int:
             if not isinstance(schema, dict):
                 raise ValidationError(f"{name} schema: top-level must be object")
             check_schema_skeleton(name, schema)
+
+        validate_encounter_weight_table(load_json(ROOT / "schemas" / "encounter_weight_table.json"), ROOT / "schemas" / "encounter_weight_table.json")
 
         for name, sample_dir in SAMPLES.items():
             files = sorted(sample_dir.glob("*.json"))

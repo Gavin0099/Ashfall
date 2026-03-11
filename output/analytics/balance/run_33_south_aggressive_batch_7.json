@@ -12,11 +12,14 @@
   "end_reason": "radiation_death",
   "player_final": {
     "hp": 0,
-    "food": 5,
+    "food": 9,
     "ammo": 0,
     "medkits": 0,
     "scrap": 0,
-    "radiation": 2
+    "radiation": 2,
+    "weapon_slot": null,
+    "armor_slot": null,
+    "tool_slot": "field_pack"
   },
   "decision_log": [
     {
@@ -34,20 +37,40 @@
         "food": 6,
         "ammo": 3,
         "medkits": 1,
-        "radiation": 0
+        "scrap": 0,
+        "radiation": 0,
+        "weapon_slot": null,
+        "armor_slot": null,
+        "tool_slot": null
       },
       "pressure": true,
       "combat_triggered": true,
+      "combat_loot": [
+        {
+          "resource": "ammo",
+          "amount": 1
+        },
+        {
+          "resource": "food",
+          "amount": 1
+        }
+      ],
       "effects": {
         "food": 2,
         "radiation": 1
       },
+      "equipment_change": null,
+      "equipment_summary": null,
       "player_after": {
-        "hp": 7,
-        "food": 8,
-        "ammo": 0,
+        "hp": 6,
+        "food": 9,
+        "ammo": 1,
         "medkits": 1,
-        "radiation": 1
+        "scrap": 0,
+        "radiation": 1,
+        "weapon_slot": null,
+        "armor_slot": null,
+        "tool_slot": null
       }
     },
     {
@@ -60,88 +83,107 @@
         "WARNING: this option adds radiation and increases long-term risk."
       ],
       "pre_choice_state": {
-        "hp": 6,
-        "food": 7,
-        "ammo": 0,
+        "hp": 5,
+        "food": 8,
+        "ammo": 1,
         "medkits": 1,
-        "radiation": 1
+        "scrap": 0,
+        "radiation": 1,
+        "weapon_slot": null,
+        "armor_slot": null,
+        "tool_slot": null
       },
       "pressure": true,
-      "combat_triggered": false,
+      "combat_triggered": true,
+      "combat_loot": [],
       "effects": {
         "food": -1,
         "radiation": 1
       },
-      "player_after": {
-        "hp": 6,
-        "food": 6,
-        "ammo": 0,
-        "medkits": 1,
-        "radiation": 2
-      }
-    },
-    {
-      "step": 3,
-      "node": "node_mid",
-      "event_id": "evt_checkpoint",
-      "option_index": 0,
-      "warning_signals": [
-        "WARNING: radiation will continue to threaten future travel.",
-        "DANGER: this choice carries a high combat risk."
-      ],
-      "pre_choice_state": {
-        "hp": 5,
-        "food": 5,
-        "ammo": 0,
-        "medkits": 1,
-        "radiation": 2
+      "equipment_change": {
+        "slot": "tool",
+        "item": "field_pack",
+        "replaced": null,
+        "changed": true
       },
-      "pressure": true,
-      "combat_triggered": true,
-      "effects": {
-        "ammo": 1
-      },
+      "equipment_summary": "tool -> field_pack (replaced empty)",
       "player_after": {
         "hp": 0,
-        "food": 5,
+        "food": 9,
         "ammo": 0,
         "medkits": 0,
-        "radiation": 2
+        "scrap": 0,
+        "radiation": 2,
+        "weapon_slot": null,
+        "armor_slot": null,
+        "tool_slot": "field_pack"
       }
     }
   ],
   "summary": {
-    "pressure_count": 3,
+    "pressure_count": 2,
     "death_cause_attribution": true,
-    "resource_signature": "hp:0|food:5|ammo:0|medkits:0|scrap:0|radiation:2"
+    "resource_signature": "hp:0|food:9|ammo:0|medkits:0|scrap:0|radiation:2|weapon:None|armor:None|tool:field_pack"
   },
   "failure_analysis": {
-    "death_chain_length": 3,
+    "death_chain_length": 2,
     "primary_blame_factor": "radiation",
     "regret_nodes": [
       {
         "node_id": "node_south_2",
         "event_id": "evt_floodplain",
-        "blame_score": 0.46,
-        "description": "took +1 radiation, lost 1 food",
-        "steps_to_death": 1
+        "blame_score": 0.58,
+        "description": "took +1 radiation, lost 1 food, accepted combat risk",
+        "steps_to_death": 0
       },
       {
         "node_id": "node_south_1",
         "event_id": "evt_village",
         "blame_score": 0.42,
         "description": "took +1 radiation, accepted combat risk",
-        "steps_to_death": 2
-      },
-      {
-        "node_id": "node_mid",
-        "event_id": "evt_checkpoint",
-        "blame_score": 0.11,
-        "description": "accepted combat risk",
-        "steps_to_death": 0
+        "steps_to_death": 1
       }
     ],
-    "steps_from_regret_to_death": 1,
+    "steps_from_regret_to_death": 0,
     "is_trash_time_death": false
+  },
+  "run_summary": {
+    "headline": "south_aggressive_batch_7: loss via radiation_death after 2 steps",
+    "route_family": "south",
+    "outcome": "radiation_death",
+    "key_turning_point": "node_south_2 (took +1 radiation, lost 1 food, accepted combat risk)",
+    "notable_equipment": [
+      "field_pack"
+    ],
+    "telemetry": {
+      "total_steps": 2,
+      "pressure_count": 2,
+      "combat_count": 2,
+      "loot_drop_count": 2,
+      "loot_total_amount": 2,
+      "equipment_change_count": 1,
+      "equipment_ids": [
+        "field_pack"
+      ],
+      "loot_resources": {
+        "ammo": 1,
+        "food": 1
+      },
+      "max_radiation": 2,
+      "min_food": 9,
+      "min_hp": 0,
+      "low_resource_flags": [
+        "low_hp",
+        "low_ammo",
+        "high_radiation"
+      ],
+      "risk_tags": [
+        "combat_seen",
+        "radiation_pressure",
+        "equipment_arc",
+        "end_radiation_death",
+        "radiation_carryover"
+      ]
+    }
   }
 }

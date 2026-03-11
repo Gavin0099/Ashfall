@@ -16,7 +16,10 @@
     "ammo": 3,
     "medkits": 2,
     "scrap": 0,
-    "radiation": 0
+    "radiation": 0,
+    "weapon_slot": null,
+    "armor_slot": null,
+    "tool_slot": null
   },
   "decision_log": [
     {
@@ -30,19 +33,30 @@
         "food": 6,
         "ammo": 3,
         "medkits": 1,
-        "radiation": 0
+        "scrap": 0,
+        "radiation": 0,
+        "weapon_slot": null,
+        "armor_slot": null,
+        "tool_slot": null
       },
       "pressure": true,
       "combat_triggered": false,
+      "combat_loot": [],
       "effects": {
         "food": -1
       },
+      "equipment_change": null,
+      "equipment_summary": null,
       "player_after": {
         "hp": 10,
         "food": 5,
         "ammo": 3,
         "medkits": 1,
-        "radiation": 0
+        "scrap": 0,
+        "radiation": 0,
+        "weapon_slot": null,
+        "armor_slot": null,
+        "tool_slot": null
       }
     },
     {
@@ -56,20 +70,31 @@
         "food": 4,
         "ammo": 3,
         "medkits": 1,
-        "radiation": 0
+        "scrap": 0,
+        "radiation": 0,
+        "weapon_slot": null,
+        "armor_slot": null,
+        "tool_slot": null
       },
       "pressure": true,
       "combat_triggered": false,
+      "combat_loot": [],
       "effects": {
         "food": -1,
         "medkits": 1
       },
+      "equipment_change": null,
+      "equipment_summary": null,
       "player_after": {
         "hp": 10,
         "food": 3,
         "ammo": 3,
         "medkits": 2,
-        "radiation": 0
+        "scrap": 0,
+        "radiation": 0,
+        "weapon_slot": null,
+        "armor_slot": null,
+        "tool_slot": null
       }
     },
     {
@@ -85,19 +110,30 @@
         "food": 2,
         "ammo": 3,
         "medkits": 2,
-        "radiation": 0
+        "scrap": 0,
+        "radiation": 0,
+        "weapon_slot": null,
+        "armor_slot": null,
+        "tool_slot": null
       },
       "pressure": true,
       "combat_triggered": false,
+      "combat_loot": [],
       "effects": {
         "food": -1
       },
+      "equipment_change": null,
+      "equipment_summary": null,
       "player_after": {
         "hp": 10,
         "food": 1,
         "ammo": 3,
         "medkits": 2,
-        "radiation": 0
+        "scrap": 0,
+        "radiation": 0,
+        "weapon_slot": null,
+        "armor_slot": null,
+        "tool_slot": null
       }
     },
     {
@@ -113,26 +149,37 @@
         "food": 0,
         "ammo": 3,
         "medkits": 2,
-        "radiation": 0
+        "scrap": 0,
+        "radiation": 0,
+        "weapon_slot": null,
+        "armor_slot": null,
+        "tool_slot": null
       },
       "pressure": true,
       "combat_triggered": false,
+      "combat_loot": [],
       "effects": {
         "food": -1
       },
+      "equipment_change": null,
+      "equipment_summary": null,
       "player_after": {
         "hp": 10,
         "food": 0,
         "ammo": 3,
         "medkits": 2,
-        "radiation": 0
+        "scrap": 0,
+        "radiation": 0,
+        "weapon_slot": null,
+        "armor_slot": null,
+        "tool_slot": null
       }
     }
   ],
   "summary": {
     "pressure_count": 4,
     "death_cause_attribution": true,
-    "resource_signature": "hp:10|food:0|ammo:3|medkits:2|scrap:0|radiation:0"
+    "resource_signature": "hp:10|food:0|ammo:3|medkits:2|scrap:0|radiation:0|weapon:None|armor:None|tool:None"
   },
   "failure_analysis": {
     "death_chain_length": 3,
@@ -162,5 +209,32 @@
     ],
     "steps_from_regret_to_death": 0,
     "is_trash_time_death": false
+  },
+  "run_summary": {
+    "headline": "north_cautious_batch_4: loss via starvation after 4 steps",
+    "route_family": "north",
+    "outcome": "starvation",
+    "key_turning_point": "node_final (lost 1 food)",
+    "notable_equipment": [],
+    "telemetry": {
+      "total_steps": 4,
+      "pressure_count": 4,
+      "combat_count": 0,
+      "loot_drop_count": 0,
+      "loot_total_amount": 0,
+      "equipment_change_count": 0,
+      "equipment_ids": [],
+      "loot_resources": {},
+      "max_radiation": 0,
+      "min_food": 0,
+      "min_hp": 10,
+      "low_resource_flags": [
+        "low_food"
+      ],
+      "risk_tags": [
+        "food_pressure",
+        "end_starvation"
+      ]
+    }
   }
 }

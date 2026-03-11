@@ -11,12 +11,15 @@
   "victory": false,
   "end_reason": "event_or_resource_death",
   "player_final": {
-    "hp": 0,
-    "food": 6,
+    "hp": -1,
+    "food": 7,
     "ammo": 0,
     "medkits": 0,
     "scrap": 0,
-    "radiation": 0
+    "radiation": 0,
+    "weapon_slot": null,
+    "armor_slot": null,
+    "tool_slot": "scavenger_kit"
   },
   "decision_log": [
     {
@@ -30,20 +33,36 @@
         "food": 6,
         "ammo": 3,
         "medkits": 1,
-        "radiation": 0
+        "scrap": 0,
+        "radiation": 0,
+        "weapon_slot": null,
+        "armor_slot": null,
+        "tool_slot": null
       },
       "pressure": true,
       "combat_triggered": false,
+      "combat_loot": [],
       "effects": {
         "ammo": -1,
         "medkits": 1
       },
+      "equipment_change": {
+        "slot": "tool",
+        "item": "scavenger_kit",
+        "replaced": null,
+        "changed": true
+      },
+      "equipment_summary": "tool -> scavenger_kit (replaced empty)",
       "player_after": {
         "hp": 10,
         "food": 6,
         "ammo": 2,
         "medkits": 2,
-        "radiation": 0
+        "scrap": 0,
+        "radiation": 0,
+        "weapon_slot": null,
+        "armor_slot": null,
+        "tool_slot": "scavenger_kit"
       }
     },
     {
@@ -57,27 +76,38 @@
         "food": 5,
         "ammo": 2,
         "medkits": 2,
-        "radiation": 0
+        "scrap": 0,
+        "radiation": 0,
+        "weapon_slot": null,
+        "armor_slot": null,
+        "tool_slot": "scavenger_kit"
       },
       "pressure": true,
       "combat_triggered": true,
+      "combat_loot": [],
       "effects": {
         "food": 1,
         "ammo": -1
       },
+      "equipment_change": null,
+      "equipment_summary": null,
       "player_after": {
-        "hp": 0,
-        "food": 6,
+        "hp": -1,
+        "food": 7,
         "ammo": 0,
         "medkits": 0,
-        "radiation": 0
+        "scrap": 0,
+        "radiation": 0,
+        "weapon_slot": null,
+        "armor_slot": null,
+        "tool_slot": "scavenger_kit"
       }
     }
   ],
   "summary": {
     "pressure_count": 2,
     "death_cause_attribution": true,
-    "resource_signature": "hp:0|food:6|ammo:0|medkits:0|scrap:0|radiation:0"
+    "resource_signature": "hp:-1|food:7|ammo:0|medkits:0|scrap:0|radiation:0|weapon:None|armor:None|tool:scavenger_kit"
   },
   "failure_analysis": {
     "death_chain_length": 1,
@@ -93,5 +123,38 @@
     ],
     "steps_from_regret_to_death": 0,
     "is_trash_time_death": false
+  },
+  "run_summary": {
+    "headline": "south_cautious_batch_3: loss via event_or_resource_death after 2 steps",
+    "route_family": "south",
+    "outcome": "event_or_resource_death",
+    "key_turning_point": "node_south_2 (accepted combat risk)",
+    "notable_equipment": [
+      "scavenger_kit"
+    ],
+    "telemetry": {
+      "total_steps": 2,
+      "pressure_count": 2,
+      "combat_count": 1,
+      "loot_drop_count": 0,
+      "loot_total_amount": 0,
+      "equipment_change_count": 1,
+      "equipment_ids": [
+        "scavenger_kit"
+      ],
+      "loot_resources": {},
+      "max_radiation": 0,
+      "min_food": 6,
+      "min_hp": 0,
+      "low_resource_flags": [
+        "low_hp",
+        "low_ammo"
+      ],
+      "risk_tags": [
+        "combat_seen",
+        "equipment_arc",
+        "end_event_or_resource_death"
+      ]
+    }
   }
 }

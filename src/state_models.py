@@ -1,7 +1,7 @@
 ﻿from __future__ import annotations
 
 from dataclasses import dataclass, field
-from typing import Dict, List, Literal, Optional
+from typing import Any, Dict, List, Literal, Optional
 
 NodeType = Literal["resource", "combat", "trade", "story"]
 EquipmentSlot = Literal["weapon", "armor", "tool"]
@@ -49,6 +49,10 @@ class EnemyState:
     hp: int
     damage_min: int
     damage_max: int
+    archetype: Optional[str] = None
+    special_ability: Optional[str] = None
+    special_used: bool = False
+    loot_table: List[Dict[str, Any]] = field(default_factory=list)
 
     def is_dead(self) -> bool:
         return self.hp <= 0
@@ -133,3 +137,18 @@ def apply_effects(player: PlayerState, effects: Dict[str, int]) -> None:
     player.medkits = max(0, player.medkits)
     player.scrap = max(0, player.scrap)
     player.radiation = max(0, player.radiation)
+
+
+def apply_loot(player: PlayerState, resource: str, amount: int) -> None:
+    if amount < 0:
+        raise ValueError("Loot amount must be non-negative")
+    if resource == "food":
+        player.food += amount
+    elif resource == "ammo":
+        player.ammo += amount
+    elif resource == "medkits":
+        player.medkits += amount
+    elif resource == "scrap":
+        player.scrap += amount
+    else:
+        raise ValueError(f"Unsupported loot resource: {resource}")

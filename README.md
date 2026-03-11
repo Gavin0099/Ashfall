@@ -129,6 +129,17 @@ What they cover:
 - `validate_human_playtest_logs.py`: validates human playtest session logs
 - `compare_playtest_vs_machine.py`: compares human hesitation/regret against machine analytics, including mismatch reason breakdowns and equipment-arc notice rate
 - `generate_pt1_summary.py`: produces a PT-1 markdown summary from completed session logs and machine comparison output
+- `generate_pt2_action_report.py`: produces a PT-2 markdown action report from comparison output
+- `generate_run_summary_report.py`: produces a player-readable markdown summary from a single analytics run
+- `run_difficulty_presets.py`: evaluates `easy / normal / hard` against shared route plans
+- `run_loot_economy_report.py`: compares combat loot distribution across route families and difficulties
+- `schemas/encounter_weight_table.json`: encounter weighting table for route-biased enemy archetype selection
+- Enemy combat now supports minimal archetype abilities:
+  - `opening_shot`: first enemy attack deals +1 damage
+  - `thick_hide`: first incoming player hit deals -1 damage, minimum 1
+- Enemy loot profiles are also differentiated by archetype:
+  - `raider`: guaranteed ammo, occasional food
+  - `mutant`: guaranteed scrap salvage, occasional medkit
 
 Placeholder PT-1 files are scaffold only. Human comparison and summary scripts ignore sessions still marked `TBD`.
 

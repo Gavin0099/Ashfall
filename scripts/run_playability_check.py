@@ -12,7 +12,9 @@ if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
 from src.event_templates import instantiate_event_catalog, load_template_catalog
+from src.difficulty import build_starting_player
 from src.run_engine import RunEngine, build_map
+from src.run_summary import build_run_summary
 from src.state_models import PlayerState, RunState
 
 
@@ -26,6 +28,7 @@ class RoutePlan:
     seed: int
     route: List[str]
     options: Dict[str, int]
+    difficulty: str = "normal"
 
 
 def build_node_payloads() -> Dict[str, dict]:
@@ -48,8 +51,30 @@ def build_event_catalog(seed: int) -> Dict[str, dict]:
 
 def build_enemy_catalog() -> Dict[str, dict]:
     return {
-        "enemy_raider_scout": {"id": "enemy_raider_scout", "name": "Raider Scout", "hp": 5, "damage_range": {"min": 1, "max": 2}},
-        "enemy_mutant_brute": {"id": "enemy_mutant_brute", "name": "Mutant Brute", "hp": 7, "damage_range": {"min": 1, "max": 3}},
+        "enemy_raider_scout": {
+            "id": "enemy_raider_scout",
+            "name": "Raider Scout",
+            "archetype": "raider",
+            "special_ability": "opening_shot",
+            "hp": 5,
+            "damage_range": {"min": 1, "max": 2},
+            "loot_table": [
+                {"resource": "ammo", "amount": 1, "chance": 1.0},
+                {"resource": "food", "amount": 1, "chance": 0.5},
+            ],
+        },
+        "enemy_mutant_brute": {
+            "id": "enemy_mutant_brute",
+            "name": "Mutant Brute",
+            "archetype": "mutant",
+            "special_ability": "thick_hide",
+            "hp": 7,
+            "damage_range": {"min": 1, "max": 3},
+            "loot_table": [
+                {"resource": "scrap", "amount": 2, "chance": 1.0},
+                {"resource": "medkits", "amount": 1, "chance": 0.35},
+            ],
+        },
     }
 
 
@@ -235,8 +260,14 @@ def analyze_failure(decision_log: List[dict], ended: bool, victory: bool, end_re
 
 def run_plan(plan: RoutePlan, nodes: Dict[str, dict], events: Dict[str, dict], enemies: Dict[str, dict]) -> dict:
     map_state = build_map(nodes, start_node_id="node_start", final_node_id="node_final")
-    engine = RunEngine(map_state=map_state, seed=plan.seed, event_catalog=events, enemy_catalog=enemies)
-    run = engine.create_run(PlayerState(hp=10, food=7, ammo=3, medkits=1), seed=plan.seed)
+    engine = RunEngine(
+        map_state=map_state,
+        seed=plan.seed,
+        event_catalog=events,
+        enemy_catalog=enemies,
+        difficulty=plan.difficulty,
+    )
+    run = engine.create_run(build_starting_player(plan.difficulty), seed=plan.seed)
 
     pressure_count = 0
     moments = []
@@ -276,6 +307,7 @@ def run_plan(plan: RoutePlan, nodes: Dict[str, dict], events: Dict[str, dict], e
                 "pre_choice_state": pre_choice_state,
                 "pressure": pressure,
                 "combat_triggered": bool(outcome.get("combat_triggered", False)),
+                "combat_loot": list(outcome.get("combat", {}).get("loot", [])) if outcome.get("combat_triggered", False) else [],
                 "effects": dict(events[outcome["event_id"]]["options"][option_index].get("effects", {})),
                 "equipment_change": outcome.get("equipment_change"),
                 "equipment_summary": equipment_summary,
@@ -307,6 +339,17 @@ def run_plan(plan: RoutePlan, nodes: Dict[str, dict], events: Dict[str, dict], e
         },
         "failure_analysis": analyze_failure(decision_log, run.ended, run.victory, run.end_reason),
     }
+    analytics["run_summary"] = build_run_summary(
+        run_id=analytics["run_id"],
+        route=analytics["route"],
+        ended=analytics["ended"],
+        victory=analytics["victory"],
+        end_reason=analytics["end_reason"],
+        player_final=analytics["player_final"],
+        decision_log=analytics["decision_log"],
+        summary=analytics["summary"],
+        failure_analysis=analytics["failure_analysis"],
+    )
 
     return {
         "plan": plan.name,

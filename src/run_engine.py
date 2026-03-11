@@ -5,9 +5,11 @@ from dataclasses import replace
 from typing import Any, Dict, Optional
 
 from .combat_engine import CombatEngine
+from .encounter_tables import ENCOUNTER_WEIGHTS, encounter_bucket_for_node
+from .difficulty import DifficultyProfile, get_difficulty_profile
 from .event_engine import pick_event_id, resolve_event_choice
 
-from .state_models import EnemyState, MapState, NodeState, PlayerState, RunState
+from .state_models import EnemyState, MapState, NodeState, PlayerState, RunState, apply_loot
 
 
 class RunEngine:
@@ -19,11 +21,13 @@ class RunEngine:
         seed: int,
         event_catalog: Optional[Dict[str, Dict[str, Any]]] = None,
         enemy_catalog: Optional[Dict[str, Dict[str, Any]]] = None,
+        difficulty: str = "normal",
     ) -> None:
         self.map_state = map_state
         self.rng = random.Random(seed)
         self.event_catalog = event_catalog or {}
         self.enemy_catalog = enemy_catalog or {}
+        self.difficulty_profile: DifficultyProfile = get_difficulty_profile(difficulty)
 
     def create_run(self, player: PlayerState, seed: int) -> RunState:
         start = self.map_state.start_node_id
@@ -54,7 +58,7 @@ class RunEngine:
         event_id = pick_event_id(node, self.rng)
         if event_id not in self.event_catalog:
             raise KeyError(f"Missing event payload for event_id: {event_id}")
-        event_payload = self.event_catalog[event_id]
+        event_payload = self._event_payload_for_difficulty(self.event_catalog[event_id])
         outcome = resolve_event_choice(run.player, event_payload, option_index, self.rng)
         if outcome["combat_triggered"]:
             outcome["combat"] = self.resolve_combat(run)
@@ -65,12 +69,45 @@ class RunEngine:
     def resolve_combat(self, run: RunState) -> Dict[str, Any]:
         if not self.enemy_catalog:
             return {"skipped": True, "reason": "enemy_catalog_empty"}
-        enemy_id = self.rng.choice(sorted(self.enemy_catalog.keys()))
+        enemy_id = self._pick_enemy_id(run)
         enemy = _enemy_from_payload(self.enemy_catalog[enemy_id])
         result = CombatEngine(seed=run.map_seed + len(run.visited_nodes)).run_auto_combat(run.player, enemy)
+        loot = []
+        if result["victory"]:
+            for item in enemy.loot_table:
+                chance = float(item.get("chance", 1.0))
+                if self.rng.random() <= chance:
+                    resource = str(item["resource"])
+                    amount = int(item["amount"])
+                    apply_loot(run.player, resource, amount)
+                    loot.append({"resource": resource, "amount": amount})
+                    result["log"].append(f"戰利品：{resource} +{amount}")
         if not result["victory"]:
             run.end(victory=False, reason="combat_death")
-        return {"skipped": False, "enemy_id": enemy_id, **result}
+        return {"skipped": False, "enemy_id": enemy_id, "loot": loot, **result}
+
+    def _pick_enemy_id(self, run: RunState) -> str:
+        enemy_ids = sorted(self.enemy_catalog.keys())
+        if len(enemy_ids) == 1:
+            return enemy_ids[0]
+
+        node_id = run.current_node
+        weights = []
+        for enemy_id in enemy_ids:
+            payload = self.enemy_catalog[enemy_id]
+            archetype = str(payload.get("archetype", ""))
+            weight = self._enemy_weight_for_node(node_id, archetype)
+            weights.append(max(0.0, weight))
+
+        if sum(weights) <= 0:
+            return self.rng.choice(enemy_ids)
+        return self.rng.choices(enemy_ids, weights=weights, k=1)[0]
+
+    def _enemy_weight_for_node(self, node_id: str, archetype: str) -> float:
+        bucket = encounter_bucket_for_node(node_id)
+        bucket_weights = ENCOUNTER_WEIGHTS.get(bucket, ENCOUNTER_WEIGHTS["default"])
+        default_weights = ENCOUNTER_WEIGHTS["default"]
+        return bucket_weights.get(archetype, default_weights.get(archetype, 0.1))
 
     def apply_travel_attrition(self, run: RunState) -> None:
         if run.player.radiation > 0:
@@ -107,6 +144,20 @@ class RunEngine:
         if run.player.hp <= 0 and run.player.radiation > 0:
             return "radiation_death"
         return "event_or_resource_death"
+
+    def _event_payload_for_difficulty(self, event_payload: Dict[str, Any]) -> Dict[str, Any]:
+        delta = self.difficulty_profile.event_combat_delta
+        if delta == 0.0:
+            return event_payload
+        patched = dict(event_payload)
+        patched_options = []
+        for option in event_payload.get("options", []):
+            new_option = dict(option)
+            chance = float(new_option.get("combat_chance", 0.0))
+            new_option["combat_chance"] = max(0.0, min(1.0, chance + delta))
+            patched_options.append(new_option)
+        patched["options"] = patched_options
+        return patched
 
 
 def build_map(node_payloads: Dict[str, dict], start_node_id: str, final_node_id: str | None = None) -> MapState:
@@ -172,4 +223,7 @@ def _enemy_from_payload(payload: Dict[str, Any]) -> EnemyState:
         hp=int(payload["hp"]),
         damage_min=int(damage.get("min", 1)),
         damage_max=int(damage.get("max", 2)),
+        archetype=payload.get("archetype"),
+        special_ability=payload.get("special_ability"),
+        loot_table=list(payload.get("loot_table", [])),
     )
