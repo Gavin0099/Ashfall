@@ -2,12 +2,12 @@
 
 ## Snapshot
 
-- victory_rate: 0.46
-- north_win_rate: 0.55
+- victory_rate: 0.48
+- north_win_rate: 0.6
 - south_win_rate: 0.4
 - mixed_win_rate: 0.4
 - overall_dominant_archetype: mutant
-- overall_dominant_resource: scrap
+- overall_dominant_resource: ammo
 
 ## Route Findings
 
@@ -20,8 +20,7 @@
 
 ## Archetype Findings
 
-- north is not clearly mutant-leaning enough to create route identity
-- south is not clearly raider-leaning enough to create route identity
+- none
 
 ## Recommended Actions
 

@@ -52,14 +52,14 @@ def economy_findings(balance: dict[str, Any], loot: dict[str, Any]) -> list[str]
     return findings
 
 
-def archetype_findings(loot: dict[str, Any]) -> list[str]:
+def archetype_findings(balance: dict[str, Any]) -> list[str]:
     findings: list[str] = []
-    by_route = loot["by_route_family"]
+    by_route = balance["summary"]["loot_economy"]
     if by_route["north"]["archetype_encounter_rate"]["mutant"] <= 0.55:
         findings.append("north is not clearly mutant-leaning enough to create route identity")
     if by_route["south"]["archetype_encounter_rate"]["raider"] <= 0.55:
         findings.append("south is not clearly raider-leaning enough to create route identity")
-    if by_route["north"]["dominant_resource"] == "scrap" and by_route["north"]["runs_with_loot_rate"] < 0.6:
+    if by_route["north"]["dominant_resource"] == "scrap" and by_route["north"]["avg_loot_drop_count"] < 1.2:
         findings.append("north loot identity exists, but it is not appearing often enough")
     return findings
 
@@ -87,7 +87,7 @@ def main() -> int:
 
     route_notes = route_findings(balance)
     economy_notes = economy_findings(balance, loot)
-    archetype_notes = archetype_findings(loot)
+    archetype_notes = archetype_findings(balance)
     actions = build_actions(balance, loot)
 
     lines = [
