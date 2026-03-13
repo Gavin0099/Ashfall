@@ -1,29 +1,62 @@
 {
-    "player_id":  "P5",
-    "session_id":  "PT1-005",
-    "roguelite_experience":  false,
-    "game_dev_background":  false,
-    "run_id":  "TBD",
-    "events":  [
-                   {
-                       "timestamp":  "TBD",
-                       "node_id":  "TBD",
-                       "decision_time_ms":  0,
-                       "selected_option":  0,
-                       "hesitation_flag":  false,
-                       "confusion_flag":  false,
-                       "what_i_thought_happened":  "TBD",
-                       "why_im_salty":  "TBD",
-                       "verbal_note":  ""
-                   }
-               ],
-    "post_run":  {
-                     "hardest_choice":  "TBD",
-                     "perceived_death_cause":  "TBD",
-                     "regret_choice":  "TBD",
-                     "replay_intent":  false,
-                     "judgment_regret_note":  "TBD",
-                     "frustration_regret_note":  "TBD",
-                     "immediate_replay_reason":  "TBD"
-                 }
+  "player_id": "P5",
+  "session_id": "PT1-005",
+  "roguelite_experience": false,
+  "game_dev_background": false,
+  "run_id": "north_aggressive",
+  "events": [
+    {
+      "timestamp": "AUTO_STEP_1",
+      "node_id": "node_north_1",
+      "decision_time_ms": 0,
+      "selected_option": 1,
+      "hesitation_flag": false,
+      "confusion_flag": false,
+      "what_i_thought_happened": "",
+      "why_im_salty": "",
+      "verbal_note": ""
+    },
+    {
+      "timestamp": "AUTO_STEP_2",
+      "node_id": "node_north_2",
+      "decision_time_ms": 0,
+      "selected_option": 0,
+      "hesitation_flag": false,
+      "confusion_flag": false,
+      "what_i_thought_happened": "",
+      "why_im_salty": "",
+      "verbal_note": ""
+    },
+    {
+      "timestamp": "AUTO_STEP_3",
+      "node_id": "node_mid",
+      "decision_time_ms": 0,
+      "selected_option": 0,
+      "hesitation_flag": false,
+      "confusion_flag": false,
+      "what_i_thought_happened": "",
+      "why_im_salty": "",
+      "verbal_note": ""
+    },
+    {
+      "timestamp": "AUTO_STEP_4",
+      "node_id": "node_approach",
+      "decision_time_ms": 0,
+      "selected_option": 0,
+      "hesitation_flag": false,
+      "confusion_flag": false,
+      "what_i_thought_happened": "",
+      "why_im_salty": "",
+      "verbal_note": ""
+    }
+  ],
+  "post_run": {
+    "hardest_choice": "TBD",
+    "perceived_death_cause": "TBD",
+    "regret_choice": "TBD",
+    "replay_intent": false,
+    "judgment_regret_note": "TBD",
+    "frustration_regret_note": "TBD",
+    "immediate_replay_reason": "TBD"
+  }
 }

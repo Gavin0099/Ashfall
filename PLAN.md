@@ -152,16 +152,16 @@ Playtest 與平衡:
 
 **下一步**:
 1. 暫停引用舊 PT-1 結果，先以 machine-side analytics 繼續平衡迭代
-2. 最新 machine-side 快照：`victory_rate=0.46`、`north=0.55`、`south=0.40`、`mixed=0.40`、`avg_pressure_count=3.56`、`avg_steps_from_regret_to_death=0.67`
-3. south route identity 仍穩定偏向 `ammo / raider`；north 目前已偏向 `mutant` 遭遇，但整體 dashboard 仍判定 route identity 尚未完全拉開
-4. regret gate recovery 已完成且目前穩定高於門檻；最新 machine-side focus 改為 route identity 微收斂，而不是再救 consequence distance
-5. 下一輪 machine-side 調整改成 north/south route identity refinement 與 shared-pressure 微調，不再擴大 south 掉落經濟
+2. 最新 machine-side 快照：`victory_rate=0.44`、`north=0.50`、`south=0.40`、`mixed=0.40`、`avg_pressure_count=3.52`、`avg_steps_from_regret_to_death=0.64`
+3. south route identity 已穩定偏向 `ammo / raider`；north 現在同時呈現 `mutant / scrap`，`north_archetype_gap=+0.24`、`north_resource_gap=+2.0`，machine-side route identity 已明顯拉開
+4. regret gate recovery 已完成且目前穩定高於門檻；latest machine-side focus 不再是 north archetype refinement，而是等待 fresh PT-1 驗證這個新基線是否真能被玩家感知
+5. 在 fresh PT-1 回來前，只接受 machine-side bugfix、tooling、或非常小幅的 content polish；不再重開大幅平衡調整
 6. 只有在 machine-side balance 穩定後，才補新一輪 PT-1 並用 `compare_playtest_vs_machine.py` 做對照
 7. 若 machine-side 後續再次證明 consequence arc 太短，才重開 `specs/travel_mode_experiment.md` 或更長地圖結構調整
 
 **當前阻礙**:
 - `governance_tools/plan_freshness.py` 目前回報 `CRITICAL`：已完成 PT-1 資料早於最近一次 balance 調整，因此舊 PT-1 已被隔離，不能拿來支撐新平衡決策。
-- regret gate 已恢復到 `avg_steps_from_regret_to_death = 0.67`，但 route identity 仍未完全收斂：south 的 `ammo / raider` 已成立，north 雖已轉向 `mutant` 遭遇但 dashboard 仍視為不夠明確，mixed 仍偏向 `scrap`。
+- regret gate 已恢復到 `avg_steps_from_regret_to_death = 0.64`，且最新 machine-side dashboard 已不再標記 north identity 問題；目前真正阻礙改為缺少 fresh PT-1 證據，無法把這組 machine baseline 升格為 human-validated 結論。
 
 **決策紀錄（本 Sprint）**:
 - `trade` node 在 MVP 採 **event-only variant**（不做完整交易系統 UI/經濟）。

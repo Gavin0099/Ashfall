@@ -365,7 +365,7 @@ def test_enemy_encounter_weighting() -> None:
         raise AssertionError("south encounters should bias toward raiders")
 
     if encounter_bucket_for_node("node_north_2") != "north":
-        raise AssertionError("north node should resolve to north encounter bucket")
+        raise AssertionError("later north node should resolve to north encounter bucket")
     if ENCOUNTER_WEIGHTS["south"]["raider"] <= ENCOUNTER_WEIGHTS["south"]["mutant"]:
         raise AssertionError("south encounter table should favor raiders")
     table = json.loads((ROOT / "schemas" / "encounter_weight_table.json").read_text(encoding="utf-8-sig"))

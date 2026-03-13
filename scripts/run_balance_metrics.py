@@ -94,6 +94,7 @@ def summarize_family(results: list[dict]) -> dict:
             "avg_final_food": average([float(item["player_final"]["food"]) for item in family_results]),
             "avg_final_ammo": average([float(item["player_final"]["ammo"]) for item in family_results]),
             "avg_final_medkits": average([float(item["player_final"]["medkits"]) for item in family_results]),
+            "avg_final_scrap": average([float(item["player_final"]["scrap"]) for item in family_results]),
             "avg_final_radiation": average([float(item["player_final"]["radiation"]) for item in family_results]),
         }
     return summary
@@ -202,6 +203,7 @@ def summarize_results(results: list[dict]) -> dict:
             "food": average([float(result["player_final"]["food"]) for result in results]),
             "ammo": average([float(result["player_final"]["ammo"]) for result in results]),
             "medkits": average([float(result["player_final"]["medkits"]) for result in results]),
+            "scrap": average([float(result["player_final"]["scrap"]) for result in results]),
             "radiation": average([float(result["player_final"]["radiation"]) for result in results]),
         },
         "death_reasons": dict(death_reasons),

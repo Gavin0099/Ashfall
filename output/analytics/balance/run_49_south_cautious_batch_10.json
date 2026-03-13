@@ -5,6 +5,7 @@
     "node_south_1",
     "node_south_2",
     "node_mid",
+    "node_approach",
     "node_final"
   ],
   "ended": true,
@@ -12,9 +13,9 @@
   "end_reason": "reached_final_node",
   "player_final": {
     "hp": 10,
-    "food": 3,
+    "food": 7,
     "ammo": 1,
-    "medkits": 2,
+    "medkits": 3,
     "scrap": 0,
     "radiation": 0,
     "weapon_slot": null,
@@ -124,15 +125,16 @@
       "combat_triggered": false,
       "combat_loot": [],
       "effects": {
-        "food": -1
+        "food": 1,
+        "medkits": 1
       },
       "equipment_change": null,
       "equipment_summary": null,
       "player_after": {
         "hp": 10,
-        "food": 5,
+        "food": 8,
         "ammo": 1,
-        "medkits": 2,
+        "medkits": 3,
         "scrap": 0,
         "radiation": 0,
         "weapon_slot": null,
@@ -142,15 +144,52 @@
     },
     {
       "step": 4,
+      "node": "node_approach",
+      "event_id": "evt_waystation",
+      "option_index": 0,
+      "warning_signals": [],
+      "pre_choice_state": {
+        "hp": 10,
+        "food": 7,
+        "ammo": 1,
+        "medkits": 3,
+        "scrap": 0,
+        "radiation": 0,
+        "weapon_slot": null,
+        "armor_slot": null,
+        "tool_slot": "scavenger_kit"
+      },
+      "pressure": true,
+      "combat_triggered": false,
+      "combat_loot": [],
+      "effects": {
+        "food": 1
+      },
+      "equipment_change": null,
+      "equipment_summary": null,
+      "player_after": {
+        "hp": 10,
+        "food": 9,
+        "ammo": 1,
+        "medkits": 3,
+        "scrap": 0,
+        "radiation": 0,
+        "weapon_slot": null,
+        "armor_slot": null,
+        "tool_slot": "scavenger_kit"
+      }
+    },
+    {
+      "step": 5,
       "node": "node_final",
       "event_id": "evt_final",
       "option_index": 0,
       "warning_signals": [],
       "pre_choice_state": {
         "hp": 10,
-        "food": 4,
+        "food": 8,
         "ammo": 1,
-        "medkits": 2,
+        "medkits": 3,
         "scrap": 0,
         "radiation": 0,
         "weapon_slot": null,
@@ -167,9 +206,9 @@
       "equipment_summary": null,
       "player_after": {
         "hp": 10,
-        "food": 3,
+        "food": 7,
         "ammo": 1,
-        "medkits": 2,
+        "medkits": 3,
         "scrap": 0,
         "radiation": 0,
         "weapon_slot": null,
@@ -179,9 +218,9 @@
     }
   ],
   "summary": {
-    "pressure_count": 4,
+    "pressure_count": 5,
     "death_cause_attribution": true,
-    "resource_signature": "hp:10|food:3|ammo:1|medkits:2|scrap:0|radiation:0|weapon:None|armor:None|tool:scavenger_kit"
+    "resource_signature": "hp:10|food:7|ammo:1|medkits:3|scrap:0|radiation:0|weapon:None|armor:None|tool:scavenger_kit"
   },
   "failure_analysis": {
     "death_chain_length": 0,
@@ -191,7 +230,7 @@
     "is_trash_time_death": false
   },
   "run_summary": {
-    "headline": "south_cautious_batch_10: victory via reached_final_node after 4 steps",
+    "headline": "south_cautious_batch_10: victory via reached_final_node after 5 steps",
     "route_family": "south",
     "outcome": "victory",
     "key_turning_point": "node_south_1 (tool -> scavenger_kit (replaced empty))",
@@ -199,8 +238,8 @@
       "scavenger_kit"
     ],
     "telemetry": {
-      "total_steps": 4,
-      "pressure_count": 4,
+      "total_steps": 5,
+      "pressure_count": 5,
       "combat_count": 0,
       "loot_drop_count": 0,
       "loot_total_amount": 0,
@@ -210,7 +249,7 @@
       ],
       "loot_resources": {},
       "max_radiation": 0,
-      "min_food": 3,
+      "min_food": 6,
       "min_hp": 10,
       "low_resource_flags": [
         "low_ammo"

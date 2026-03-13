@@ -55,21 +55,32 @@ class RunEngine:
         return node
 
     def resolve_node_event(self, node: NodeState, run: RunState, option_index: int = 0) -> Dict[str, Any]:
-        event_id = pick_event_id(node, self.rng)
+        return self.resolve_node_event_with_id(node, run, event_id=None, option_index=option_index)
+
+    def resolve_node_event_with_id(
+        self,
+        node: NodeState,
+        run: RunState,
+        event_id: str | None = None,
+        option_index: int = 0,
+    ) -> Dict[str, Any]:
+        if event_id is None:
+            event_id = pick_event_id(node, self.rng)
         if event_id not in self.event_catalog:
             raise KeyError(f"Missing event payload for event_id: {event_id}")
         event_payload = self._event_payload_for_difficulty(self.event_catalog[event_id])
         outcome = resolve_event_choice(run.player, event_payload, option_index, self.rng)
         if outcome["combat_triggered"]:
-            outcome["combat"] = self.resolve_combat(run)
+            encounter_bias = event_payload.get("options", [])[option_index].get("encounter_bias")
+            outcome["combat"] = self.resolve_combat(run, encounter_bias=encounter_bias)
         if run.player.is_dead():
             run.end(victory=False, reason=self._resolve_noncombat_death_reason(run))
         return outcome
 
-    def resolve_combat(self, run: RunState) -> Dict[str, Any]:
+    def resolve_combat(self, run: RunState, encounter_bias: Dict[str, float] | None = None) -> Dict[str, Any]:
         if not self.enemy_catalog:
             return {"skipped": True, "reason": "enemy_catalog_empty"}
-        enemy_id = self._pick_enemy_id(run)
+        enemy_id = self._pick_enemy_id(run, encounter_bias=encounter_bias)
         enemy = _enemy_from_payload(self.enemy_catalog[enemy_id])
         result = CombatEngine(seed=run.map_seed + len(run.visited_nodes)).run_auto_combat(run.player, enemy)
         loot = []
@@ -86,7 +97,7 @@ class RunEngine:
             run.end(victory=False, reason="combat_death")
         return {"skipped": False, "enemy_id": enemy_id, "loot": loot, **result}
 
-    def _pick_enemy_id(self, run: RunState) -> str:
+    def _pick_enemy_id(self, run: RunState, encounter_bias: Dict[str, float] | None = None) -> str:
         enemy_ids = sorted(self.enemy_catalog.keys())
         if len(enemy_ids) == 1:
             return enemy_ids[0]
@@ -97,6 +108,8 @@ class RunEngine:
             payload = self.enemy_catalog[enemy_id]
             archetype = str(payload.get("archetype", ""))
             weight = self._enemy_weight_for_node(node_id, archetype)
+            if encounter_bias and archetype in encounter_bias:
+                weight *= max(0.0, float(encounter_bias[archetype]))
             weights.append(max(0.0, weight))
 
         if sum(weights) <= 0:

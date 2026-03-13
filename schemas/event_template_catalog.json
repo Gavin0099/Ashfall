@@ -35,19 +35,20 @@
       "event_id": "evt_scrapyard",
       "template_type": "scavenger_encounter",
       "description_variants": [
-        "廢車場殘骸間有掠奪者的影子晃動。",
-        "被拆光的車殼之間還留著新鮮腳印。",
-        "破碎引擎與拾荒者的火堆散落四周。"
+        "廢車場殘骸間卡著被變異生物撕開的車門與半融的骨架。",
+        "被拆光的車殼之間殘留著爪痕、碎肉與可回收的金屬片。",
+        "破碎引擎堆裡混著變異生物巢穴留下的腐蝕黏液與可拆件。"
       ],
       "options": [
         {
           "text_variants": [
-            "強行搶一輪物資",
-            "趁沒人反應過來先衝最好的殘骸"
+            "趁巢穴還沒完全安靜前，硬拆最值錢的殘骸",
+            "頂著變異生物可能回頭的風險，搶先拔走完整零件"
           ],
           "effects": {
             "food": 0,
-            "ammo": 1
+            "ammo": 1,
+            "medkits": 1
           },
           "equipment_reward": {
             "slot": "weapon",
@@ -57,13 +58,15 @@
         },
         {
           "text_variants": [
-            "繞過去，保留體力",
-            "持續前進，把力氣留到後面"
+            "沿著巢穴邊緣慢慢摸，撿能安全帶走的破片",
+            "避開最深的腐蝕坑，只拿表層還能拆的零件"
           ],
           "effects": {
-            "food": -1
+            "food": -1,
+            "hp": -1,
+            "scrap": 1
           },
-          "combat_chance": 0.2
+          "combat_chance": 0.4
         }
       ]
     },
@@ -71,31 +74,74 @@
       "event_id": "evt_tunnel",
       "template_type": "ruined_infrastructure",
       "description_variants": [
-        "崩塌隧道裡瀰漫著汽油與鐵鏽味。",
-        "隧道半埋在碎石下，結構極不穩定。",
-        "混凝土粉塵在隧道裡久久不散。"
+        "崩塌隧道裡瀰漫著金屬鏽味與變異巢穴留下的濕熱腥氣。",
+        "隧道半埋在碎石下，深處傳來拖行殘骸的摩擦聲。",
+        "混凝土粉塵與腐敗黏液一起黏在牆上，像有人剛退回黑暗裡。"
       ],
       "options": [
         {
           "text_variants": [
-            "硬闖碎石堆",
-            "踩著瓦礫賭一把速度"
+            "硬闖碎石堆，在巢穴回來前先搶 salvage",
+            "踩著瓦礫直切過去，賭能先拆下有用的金屬件"
           ],
           "effects": {
             "hp": -1,
-            "ammo": 1,
+            "medkits": 1,
+            "scrap": 1,
             "radiation": 0
           },
-          "combat_chance": 0.6
+          "combat_chance": 0.5
         },
         {
           "text_variants": [
-            "紮營等天亮",
-            "先穩住位置，等視線好一點再動"
+            "先穩住位置，等聲音散掉後再慢慢拆外層殘件",
+            "貼著隧道口觀察動靜，只回收最安全的表層 scrap"
           ],
           "effects": {
             "food": -1,
-            "hp": -1
+            "scrap": 1
+          },
+          "combat_chance": 0.25
+        }
+      ]
+    },
+    {
+      "event_id": "evt_mutant_burrow",
+      "template_type": "environmental_hazard",
+      "description_variants": [
+        "塌陷涵洞深處堆著變異生物拖回來的金屬殘件與半啃過的補給箱。",
+        "牆邊黏著一圈圈乾掉的巢膜，裡面卡著還能拆的 scrap 與醫療包外殼。",
+        "一處變異巢穴把整條側通道塞滿骨頭、破布和可回收的設備零件。"
+      ],
+      "options": [
+        {
+          "text_variants": [
+            "趁巢穴躁動前衝進去，把最完整的 salvage 拔走",
+            "踩過巢膜硬拆可用零件，賭牠們來不及包過來"
+          ],
+          "effects": {
+            "hp": -1,
+            "scrap": 2,
+            "medkits": 1
+          },
+          "encounter_bias": {
+            "mutant": 2.0,
+            "raider": 0.5
+          },
+          "combat_chance": 0.55
+        },
+        {
+          "text_variants": [
+            "留在洞口，只勾走外圍沒那麼危險的 scrap",
+            "沿著巢穴外圈慢慢撤件，能拿多少算多少"
+          ],
+          "effects": {
+            "food": -1,
+            "scrap": 1
+          },
+          "encounter_bias": {
+            "mutant": 1.6,
+            "raider": 0.7
           },
           "combat_chance": 0.2
         }

@@ -26,6 +26,7 @@
       ],
       "human_confusion_nodes": [],
       "machine_pressure_nodes": [
+        "node_approach",
         "node_final",
         "node_mid",
         "node_south_1",
@@ -45,7 +46,7 @@
       "machine_steps_from_regret_to_death": 0,
       "machine_is_victory": true,
       "machine_is_trash_time_death": false,
-      "machine_pressure_count": 4,
+      "machine_pressure_count": 5,
       "machine_equipment_nodes": [
         "node_south_2",
         "node_mid"

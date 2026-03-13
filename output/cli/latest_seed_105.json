@@ -4,20 +4,25 @@
   "victory": true,
   "end_reason": "reached_final_node",
   "player_final": {
-    "hp": 7,
-    "food": 1,
+    "hp": 3,
+    "food": 3,
     "ammo": 1,
     "medkits": 2,
     "scrap": 0,
-    "radiation": 0
+    "radiation": 0,
+    "weapon_slot": "rust_rifle",
+    "armor_slot": null,
+    "tool_slot": null
   },
   "decision_log": [
     {
       "step": 1,
       "node": "node_north_1",
       "event_id": "evt_scrapyard",
-      "option_index": 1,
-      "warning_signals": [],
+      "option_index": 0,
+      "warning_signals": [
+        "DANGER: this choice carries a high combat risk."
+      ],
       "pre_choice_state": {
         "hp": 10,
         "food": 6,
@@ -25,17 +30,28 @@
         "medkits": 1,
         "radiation": 0
       },
-      "pressure": false,
-      "combat_triggered": false,
+      "pressure": true,
+      "combat_triggered": true,
       "effects": {
-        "food": -1
+        "food": 1,
+        "ammo": 2
       },
+      "equipment_change": {
+        "slot": "weapon",
+        "item": "makeshift_blade",
+        "replaced": null,
+        "changed": true
+      },
+      "equipment_summary": "武器 -> 簡陋刀刃（替換 空槽）",
       "player_after": {
-        "hp": 10,
-        "food": 5,
-        "ammo": 3,
+        "hp": 4,
+        "food": 7,
+        "ammo": 2,
         "medkits": 1,
-        "radiation": 0
+        "radiation": 0,
+        "weapon_slot": "makeshift_blade",
+        "armor_slot": null,
+        "tool_slot": null
       }
     },
     {
@@ -45,9 +61,9 @@
       "option_index": 1,
       "warning_signals": [],
       "pre_choice_state": {
-        "hp": 10,
-        "food": 4,
-        "ammo": 3,
+        "hp": 4,
+        "food": 6,
+        "ammo": 2,
         "medkits": 1,
         "radiation": 0
       },
@@ -57,12 +73,17 @@
         "food": -1,
         "medkits": 1
       },
+      "equipment_change": null,
+      "equipment_summary": null,
       "player_after": {
-        "hp": 10,
-        "food": 3,
-        "ammo": 3,
+        "hp": 4,
+        "food": 5,
+        "ammo": 2,
         "medkits": 2,
-        "radiation": 0
+        "radiation": 0,
+        "weapon_slot": "makeshift_blade",
+        "armor_slot": null,
+        "tool_slot": null
       }
     },
     {
@@ -71,13 +92,12 @@
       "event_id": "evt_checkpoint",
       "option_index": 0,
       "warning_signals": [
-        "WARNING: food is low and route slack is nearly gone.",
         "DANGER: this choice carries a high combat risk."
       ],
       "pre_choice_state": {
-        "hp": 10,
-        "food": 2,
-        "ammo": 3,
+        "hp": 4,
+        "food": 4,
+        "ammo": 2,
         "medkits": 2,
         "radiation": 0
       },
@@ -86,12 +106,22 @@
       "effects": {
         "ammo": 1
       },
+      "equipment_change": {
+        "slot": "weapon",
+        "item": "rust_rifle",
+        "replaced": "makeshift_blade",
+        "changed": true
+      },
+      "equipment_summary": "武器 -> 鏽蝕步槍（替換 簡陋刀刃）",
       "player_after": {
-        "hp": 7,
-        "food": 2,
+        "hp": 3,
+        "food": 4,
         "ammo": 1,
         "medkits": 2,
-        "radiation": 0
+        "radiation": 0,
+        "weapon_slot": "rust_rifle",
+        "armor_slot": null,
+        "tool_slot": null
       }
     }
   ],

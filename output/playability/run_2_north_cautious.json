@@ -5,18 +5,19 @@
     "node_north_1",
     "node_north_2",
     "node_mid",
+    "node_approach",
     "node_final"
   ],
-  "pressure_count": 4,
+  "pressure_count": 5,
   "ended": true,
-  "victory": false,
-  "end_reason": "starvation",
+  "victory": true,
+  "end_reason": "reached_final_node",
   "player_final": {
-    "hp": 10,
-    "food": 0,
-    "ammo": 3,
-    "medkits": 2,
-    "scrap": 0,
+    "hp": 7,
+    "food": 1,
+    "ammo": 1,
+    "medkits": 3,
+    "scrap": 4,
     "radiation": 0,
     "weapon_slot": null,
     "armor_slot": null,
@@ -29,7 +30,7 @@
       "event_outcome": {
         "event_id": "evt_scrapyard",
         "option_index": 1,
-        "option_text": "\u7e5e\u904e\u53bb\uff0c\u4fdd\u7559\u9ad4\u529b",
+        "option_text": "\u6cbf\u8457\u5de2\u7a74\u908a\u7de3\u6162\u6162\u6478\uff0c\u64bf\u80fd\u5b89\u5168\u5e36\u8d70\u7684\u7834\u7247",
         "combat_triggered": false,
         "equipment_reward": null,
         "equipment_change": null,
@@ -49,11 +50,11 @@
       },
       "equipment_summary": null,
       "player": {
-        "hp": 10,
+        "hp": 9,
         "food": 5,
         "ammo": 3,
         "medkits": 1,
-        "scrap": 0,
+        "scrap": 1,
         "radiation": 0,
         "weapon_slot": null,
         "armor_slot": null,
@@ -65,21 +66,47 @@
       "node": "node_north_2",
       "option_index": 1,
       "event_outcome": {
-        "event_id": "evt_tunnel",
+        "event_id": "evt_mutant_burrow",
         "option_index": 1,
-        "option_text": "\u5148\u7a69\u4f4f\u4f4d\u7f6e\uff0c\u7b49\u8996\u7dda\u597d\u4e00\u9ede\u518d\u52d5",
-        "combat_triggered": false,
+        "option_text": "\u7559\u5728\u6d1e\u53e3\uff0c\u53ea\u52fe\u8d70\u5916\u570d\u6c92\u90a3\u9ebc\u5371\u96aa\u7684 scrap",
+        "combat_triggered": true,
         "equipment_reward": null,
         "equipment_change": null,
-        "scavenger_bonus": {}
+        "scavenger_bonus": {},
+        "combat": {
+          "skipped": false,
+          "enemy_id": "enemy_mutant_brute",
+          "loot": [
+            {
+              "resource": "scrap",
+              "amount": 2
+            },
+            {
+              "resource": "medkits",
+              "amount": 1
+            }
+          ],
+          "victory": true,
+          "rounds": 2,
+          "player_hp": 7,
+          "enemy_hp": -1,
+          "log": [
+            "\u7b2c 1 \u56de\u5408\uff1a\u4f60\u653b\u64ca\u4e26\u9020\u6210 2 \u9ede\u50b7\u5bb3",
+            "\u7b2c 1 \u56de\u5408\uff1a\u6575\u4eba\u7684\u539a\u76ae\u6e1b\u5c11\u4e86 1 \u9ede\u50b7\u5bb3",
+            "\u7b2c 1 \u56de\u5408\uff1a\u6575\u4eba\u653b\u64ca\uff0c\u9020\u6210 2 \u9ede\u50b7\u5bb3",
+            "\u7b2c 2 \u56de\u5408\uff1a\u4f60\u653b\u64ca\u4e26\u9020\u6210 3 \u9ede\u50b7\u5bb3",
+            "\u6230\u5229\u54c1\uff1ascrap +2",
+            "\u6230\u5229\u54c1\uff1amedkits +1"
+          ]
+        }
       },
       "warning_signals": [],
       "pre_choice_state": {
-        "hp": 10,
+        "hp": 9,
         "food": 4,
         "ammo": 3,
         "medkits": 1,
-        "scrap": 0,
+        "scrap": 1,
         "radiation": 0,
         "weapon_slot": null,
         "armor_slot": null,
@@ -87,11 +114,11 @@
       },
       "equipment_summary": null,
       "player": {
-        "hp": 10,
+        "hp": 7,
         "food": 3,
-        "ammo": 3,
+        "ammo": 1,
         "medkits": 2,
-        "scrap": 0,
+        "scrap": 4,
         "radiation": 0,
         "weapon_slot": null,
         "armor_slot": null,
@@ -105,7 +132,7 @@
       "event_outcome": {
         "event_id": "evt_checkpoint",
         "option_index": 1,
-        "option_text": "\u5077\u5077\u7e5e\u904e\u53bb",
+        "option_text": "\u591a\u82b1\u4e00\u9ede\u6642\u9593\u8d70\u9060\u8def",
         "combat_triggered": false,
         "equipment_reward": null,
         "equipment_change": null,
@@ -115,11 +142,11 @@
         "WARNING: food is low and route slack is nearly gone."
       ],
       "pre_choice_state": {
-        "hp": 10,
+        "hp": 7,
         "food": 2,
-        "ammo": 3,
+        "ammo": 1,
         "medkits": 2,
-        "scrap": 0,
+        "scrap": 4,
         "radiation": 0,
         "weapon_slot": null,
         "armor_slot": null,
@@ -127,11 +154,51 @@
       },
       "equipment_summary": null,
       "player": {
-        "hp": 10,
-        "food": 1,
-        "ammo": 3,
-        "medkits": 2,
-        "scrap": 0,
+        "hp": 7,
+        "food": 3,
+        "ammo": 1,
+        "medkits": 3,
+        "scrap": 4,
+        "radiation": 0,
+        "weapon_slot": null,
+        "armor_slot": null,
+        "tool_slot": null
+      },
+      "pressure": true
+    },
+    {
+      "node": "node_approach",
+      "option_index": 0,
+      "event_outcome": {
+        "event_id": "evt_waystation",
+        "option_index": 0,
+        "option_text": "Slow down and strip the shelter for something edible.",
+        "combat_triggered": false,
+        "equipment_reward": null,
+        "equipment_change": null,
+        "scavenger_bonus": {}
+      },
+      "warning_signals": [
+        "WARNING: food is low and route slack is nearly gone."
+      ],
+      "pre_choice_state": {
+        "hp": 7,
+        "food": 2,
+        "ammo": 1,
+        "medkits": 3,
+        "scrap": 4,
+        "radiation": 0,
+        "weapon_slot": null,
+        "armor_slot": null,
+        "tool_slot": null
+      },
+      "equipment_summary": null,
+      "player": {
+        "hp": 7,
+        "food": 3,
+        "ammo": 1,
+        "medkits": 3,
+        "scrap": 4,
         "radiation": 0,
         "weapon_slot": null,
         "armor_slot": null,
@@ -155,11 +222,11 @@
         "WARNING: food is low and route slack is nearly gone."
       ],
       "pre_choice_state": {
-        "hp": 10,
-        "food": 0,
-        "ammo": 3,
-        "medkits": 2,
-        "scrap": 0,
+        "hp": 7,
+        "food": 2,
+        "ammo": 1,
+        "medkits": 3,
+        "scrap": 4,
         "radiation": 0,
         "weapon_slot": null,
         "armor_slot": null,
@@ -167,11 +234,11 @@
       },
       "equipment_summary": null,
       "player": {
-        "hp": 10,
-        "food": 0,
-        "ammo": 3,
-        "medkits": 2,
-        "scrap": 0,
+        "hp": 7,
+        "food": 1,
+        "ammo": 1,
+        "medkits": 3,
+        "scrap": 4,
         "radiation": 0,
         "weapon_slot": null,
         "armor_slot": null,
@@ -187,17 +254,18 @@
       "node_north_1",
       "node_north_2",
       "node_mid",
+      "node_approach",
       "node_final"
     ],
     "ended": true,
-    "victory": false,
-    "end_reason": "starvation",
+    "victory": true,
+    "end_reason": "reached_final_node",
     "player_final": {
-      "hp": 10,
-      "food": 0,
-      "ammo": 3,
-      "medkits": 2,
-      "scrap": 0,
+      "hp": 7,
+      "food": 1,
+      "ammo": 1,
+      "medkits": 3,
+      "scrap": 4,
       "radiation": 0,
       "weapon_slot": null,
       "armor_slot": null,
@@ -225,16 +293,18 @@
         "combat_triggered": false,
         "combat_loot": [],
         "effects": {
-          "food": -1
+          "food": -1,
+          "hp": -1,
+          "scrap": 1
         },
         "equipment_change": null,
         "equipment_summary": null,
         "player_after": {
-          "hp": 10,
+          "hp": 9,
           "food": 5,
           "ammo": 3,
           "medkits": 1,
-          "scrap": 0,
+          "scrap": 1,
           "radiation": 0,
           "weapon_slot": null,
           "armor_slot": null,
@@ -244,35 +314,44 @@
       {
         "step": 2,
         "node": "node_north_2",
-        "event_id": "evt_tunnel",
+        "event_id": "evt_mutant_burrow",
         "option_index": 1,
         "warning_signals": [],
         "pre_choice_state": {
-          "hp": 10,
+          "hp": 9,
           "food": 4,
           "ammo": 3,
           "medkits": 1,
-          "scrap": 0,
+          "scrap": 1,
           "radiation": 0,
           "weapon_slot": null,
           "armor_slot": null,
           "tool_slot": null
         },
         "pressure": true,
-        "combat_triggered": false,
-        "combat_loot": [],
+        "combat_triggered": true,
+        "combat_loot": [
+          {
+            "resource": "scrap",
+            "amount": 2
+          },
+          {
+            "resource": "medkits",
+            "amount": 1
+          }
+        ],
         "effects": {
           "food": -1,
-          "medkits": 1
+          "scrap": 1
         },
         "equipment_change": null,
         "equipment_summary": null,
         "player_after": {
-          "hp": 10,
+          "hp": 7,
           "food": 3,
-          "ammo": 3,
+          "ammo": 1,
           "medkits": 2,
-          "scrap": 0,
+          "scrap": 4,
           "radiation": 0,
           "weapon_slot": null,
           "armor_slot": null,
@@ -288,11 +367,11 @@
           "WARNING: food is low and route slack is nearly gone."
         ],
         "pre_choice_state": {
-          "hp": 10,
+          "hp": 7,
           "food": 2,
-          "ammo": 3,
+          "ammo": 1,
           "medkits": 2,
-          "scrap": 0,
+          "scrap": 4,
           "radiation": 0,
           "weapon_slot": null,
           "armor_slot": null,
@@ -302,16 +381,17 @@
         "combat_triggered": false,
         "combat_loot": [],
         "effects": {
-          "food": -1
+          "food": 1,
+          "medkits": 1
         },
         "equipment_change": null,
         "equipment_summary": null,
         "player_after": {
-          "hp": 10,
-          "food": 1,
-          "ammo": 3,
-          "medkits": 2,
-          "scrap": 0,
+          "hp": 7,
+          "food": 3,
+          "ammo": 1,
+          "medkits": 3,
+          "scrap": 4,
           "radiation": 0,
           "weapon_slot": null,
           "armor_slot": null,
@@ -320,6 +400,45 @@
       },
       {
         "step": 4,
+        "node": "node_approach",
+        "event_id": "evt_waystation",
+        "option_index": 0,
+        "warning_signals": [
+          "WARNING: food is low and route slack is nearly gone."
+        ],
+        "pre_choice_state": {
+          "hp": 7,
+          "food": 2,
+          "ammo": 1,
+          "medkits": 3,
+          "scrap": 4,
+          "radiation": 0,
+          "weapon_slot": null,
+          "armor_slot": null,
+          "tool_slot": null
+        },
+        "pressure": true,
+        "combat_triggered": false,
+        "combat_loot": [],
+        "effects": {
+          "food": 1
+        },
+        "equipment_change": null,
+        "equipment_summary": null,
+        "player_after": {
+          "hp": 7,
+          "food": 3,
+          "ammo": 1,
+          "medkits": 3,
+          "scrap": 4,
+          "radiation": 0,
+          "weapon_slot": null,
+          "armor_slot": null,
+          "tool_slot": null
+        }
+      },
+      {
+        "step": 5,
         "node": "node_final",
         "event_id": "evt_final",
         "option_index": 0,
@@ -327,11 +446,11 @@
           "WARNING: food is low and route slack is nearly gone."
         ],
         "pre_choice_state": {
-          "hp": 10,
-          "food": 0,
-          "ammo": 3,
-          "medkits": 2,
-          "scrap": 0,
+          "hp": 7,
+          "food": 2,
+          "ammo": 1,
+          "medkits": 3,
+          "scrap": 4,
           "radiation": 0,
           "weapon_slot": null,
           "armor_slot": null,
@@ -346,11 +465,11 @@
         "equipment_change": null,
         "equipment_summary": null,
         "player_after": {
-          "hp": 10,
-          "food": 0,
-          "ammo": 3,
-          "medkits": 2,
-          "scrap": 0,
+          "hp": 7,
+          "food": 1,
+          "ammo": 1,
+          "medkits": 3,
+          "scrap": 4,
           "radiation": 0,
           "weapon_slot": null,
           "armor_slot": null,
@@ -359,63 +478,46 @@
       }
     ],
     "summary": {
-      "pressure_count": 4,
+      "pressure_count": 5,
       "death_cause_attribution": true,
-      "resource_signature": "hp:10|food:0|ammo:3|medkits:2|scrap:0|radiation:0|weapon:None|armor:None|tool:None"
+      "resource_signature": "hp:7|food:1|ammo:1|medkits:3|scrap:4|radiation:0|weapon:None|armor:None|tool:None"
     },
     "failure_analysis": {
-      "death_chain_length": 3,
-      "primary_blame_factor": "resource_exhaustion",
-      "regret_nodes": [
-        {
-          "node_id": "node_final",
-          "event_id": "evt_final",
-          "blame_score": 0.27,
-          "description": "lost 1 food",
-          "steps_to_death": 0
-        },
-        {
-          "node_id": "node_mid",
-          "event_id": "evt_checkpoint",
-          "blame_score": 0.26,
-          "description": "lost 1 food",
-          "steps_to_death": 1
-        },
-        {
-          "node_id": "node_north_2",
-          "event_id": "evt_tunnel",
-          "blame_score": 0.24,
-          "description": "lost 1 food",
-          "steps_to_death": 2
-        }
-      ],
+      "death_chain_length": 0,
+      "primary_blame_factor": null,
+      "regret_nodes": [],
       "steps_from_regret_to_death": 0,
       "is_trash_time_death": false
     },
     "run_summary": {
-      "headline": "north_cautious: loss via starvation after 4 steps",
+      "headline": "north_cautious: victory via reached_final_node after 5 steps",
       "route_family": "north",
-      "outcome": "starvation",
-      "key_turning_point": "node_final (lost 1 food)",
+      "outcome": "victory",
+      "key_turning_point": "node_final",
       "notable_equipment": [],
       "telemetry": {
-        "total_steps": 4,
-        "pressure_count": 4,
-        "combat_count": 0,
-        "loot_drop_count": 0,
-        "loot_total_amount": 0,
+        "total_steps": 5,
+        "pressure_count": 5,
+        "combat_count": 1,
+        "loot_drop_count": 2,
+        "loot_total_amount": 3,
         "equipment_change_count": 0,
         "equipment_ids": [],
-        "loot_resources": {},
+        "loot_resources": {
+          "scrap": 2,
+          "medkits": 1
+        },
         "max_radiation": 0,
-        "min_food": 0,
-        "min_hp": 10,
+        "min_food": 1,
+        "min_hp": 7,
         "low_resource_flags": [
-          "low_food"
+          "low_food",
+          "low_ammo"
         ],
         "risk_tags": [
+          "combat_seen",
           "food_pressure",
-          "end_starvation"
+          "end_reached_final_node"
         ]
       }
     }

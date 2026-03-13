@@ -132,6 +132,14 @@ def validate_encounter_weight_table(data: dict[str, Any], src: Path) -> None:
         ensure(total > 0, f"{src}: bucket {bucket} must have positive total weight")
 
 
+def validate_enemy_catalog(data: dict[str, Any], src: Path) -> None:
+    ensure(isinstance(data, dict) and data, f"{src}: enemy catalog must be non-empty object")
+    for enemy_id, payload in data.items():
+        ensure(isinstance(enemy_id, str) and enemy_id, f"{src}: enemy catalog key invalid")
+        ensure(isinstance(payload, dict), f"{src}: enemy catalog entry {enemy_id} must be object")
+        validate_enemy(payload, src)
+
+
 def main() -> int:
     validators = {
         "encounter_weight_table": validate_encounter_weight_table,
@@ -148,6 +156,7 @@ def main() -> int:
             check_schema_skeleton(name, schema)
 
         validate_encounter_weight_table(load_json(ROOT / "schemas" / "encounter_weight_table.json"), ROOT / "schemas" / "encounter_weight_table.json")
+        validate_enemy_catalog(load_json(ROOT / "schemas" / "enemy_catalog.json"), ROOT / "schemas" / "enemy_catalog.json")
 
         for name, sample_dir in SAMPLES.items():
             files = sorted(sample_dir.glob("*.json"))

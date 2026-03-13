@@ -5,6 +5,7 @@
     "node_south_1",
     "node_south_2",
     "node_mid",
+    "node_approach",
     "node_final"
   ],
   "ended": true,
@@ -12,10 +13,10 @@
   "end_reason": "radiation_death",
   "player_final": {
     "hp": 0,
-    "food": 7,
-    "ammo": 1,
-    "medkits": 1,
-    "scrap": 0,
+    "food": 6,
+    "ammo": 2,
+    "medkits": 2,
+    "scrap": 2,
     "radiation": 2,
     "weapon_slot": "rust_rifle",
     "armor_slot": null,
@@ -48,7 +49,7 @@
       "combat_loot": [
         {
           "resource": "ammo",
-          "amount": 1
+          "amount": 3
         }
       ],
       "effects": {
@@ -60,7 +61,7 @@
       "player_after": {
         "hp": 5,
         "food": 8,
-        "ammo": 1,
+        "ammo": 3,
         "medkits": 1,
         "scrap": 0,
         "radiation": 1,
@@ -81,7 +82,7 @@
       "pre_choice_state": {
         "hp": 4,
         "food": 7,
-        "ammo": 1,
+        "ammo": 3,
         "medkits": 1,
         "scrap": 0,
         "radiation": 1,
@@ -106,7 +107,7 @@
       "player_after": {
         "hp": 4,
         "food": 8,
-        "ammo": 1,
+        "ammo": 3,
         "medkits": 1,
         "scrap": 0,
         "radiation": 2,
@@ -128,7 +129,7 @@
       "pre_choice_state": {
         "hp": 3,
         "food": 7,
-        "ammo": 1,
+        "ammo": 3,
         "medkits": 1,
         "scrap": 0,
         "radiation": 2,
@@ -138,9 +139,18 @@
       },
       "pressure": true,
       "combat_triggered": true,
-      "combat_loot": [],
+      "combat_loot": [
+        {
+          "resource": "scrap",
+          "amount": 2
+        },
+        {
+          "resource": "medkits",
+          "amount": 1
+        }
+      ],
       "effects": {
-        "ammo": 1
+        "ammo": 0
       },
       "equipment_change": {
         "slot": "weapon",
@@ -150,11 +160,53 @@
       },
       "equipment_summary": "weapon -> rust_rifle (replaced empty)",
       "player_after": {
-        "hp": 0,
+        "hp": 1,
         "food": 7,
         "ammo": 1,
-        "medkits": 1,
-        "scrap": 0,
+        "medkits": 2,
+        "scrap": 2,
+        "radiation": 2,
+        "weapon_slot": "rust_rifle",
+        "armor_slot": null,
+        "tool_slot": "field_pack"
+      }
+    },
+    {
+      "step": 4,
+      "node": "node_approach",
+      "event_id": "evt_waystation",
+      "option_index": 1,
+      "warning_signals": [
+        "WARNING: radiation will continue to threaten future travel.",
+        "CRITICAL: another irradiated move may kill you.",
+        "DANGER: this choice carries a high combat risk."
+      ],
+      "pre_choice_state": {
+        "hp": 0,
+        "food": 6,
+        "ammo": 1,
+        "medkits": 2,
+        "scrap": 2,
+        "radiation": 2,
+        "weapon_slot": "rust_rifle",
+        "armor_slot": null,
+        "tool_slot": "field_pack"
+      },
+      "pressure": true,
+      "combat_triggered": false,
+      "combat_loot": [],
+      "effects": {
+        "hp": -1,
+        "ammo": 1
+      },
+      "equipment_change": null,
+      "equipment_summary": null,
+      "player_after": {
+        "hp": 0,
+        "food": 6,
+        "ammo": 2,
+        "medkits": 2,
+        "scrap": 2,
         "radiation": 2,
         "weapon_slot": "rust_rifle",
         "armor_slot": null,
@@ -163,9 +215,9 @@
     }
   ],
   "summary": {
-    "pressure_count": 3,
+    "pressure_count": 4,
     "death_cause_attribution": true,
-    "resource_signature": "hp:0|food:7|ammo:1|medkits:1|scrap:0|radiation:2|weapon:rust_rifle|armor:None|tool:field_pack"
+    "resource_signature": "hp:0|food:6|ammo:2|medkits:2|scrap:2|radiation:2|weapon:rust_rifle|armor:None|tool:field_pack"
   },
   "failure_analysis": {
     "death_chain_length": 3,
@@ -174,53 +226,55 @@
       {
         "node_id": "node_south_2",
         "event_id": "evt_floodplain",
-        "blame_score": 0.46,
-        "description": "took +1 radiation, lost 1 food",
-        "steps_to_death": 1
+        "blame_score": 0.35,
+        "description": "took +1 radiation, lost 1 food, carried radiation into later travel",
+        "steps_to_death": 2
       },
       {
         "node_id": "node_south_1",
         "event_id": "evt_village",
-        "blame_score": 0.42,
-        "description": "took +1 radiation, accepted combat risk",
-        "steps_to_death": 2
+        "blame_score": 0.33,
+        "description": "took +1 radiation, accepted combat risk, carried radiation into later travel",
+        "steps_to_death": 3
       },
       {
         "node_id": "node_mid",
         "event_id": "evt_checkpoint",
-        "blame_score": 0.11,
-        "description": "accepted combat risk",
-        "steps_to_death": 0
+        "blame_score": 0.23,
+        "description": "accepted combat risk, left hp at 3 or less, carried radiation into later travel",
+        "steps_to_death": 1
       }
     ],
-    "steps_from_regret_to_death": 1,
+    "steps_from_regret_to_death": 2,
     "is_trash_time_death": false
   },
   "run_summary": {
-    "headline": "south_aggressive_batch_3: loss via radiation_death after 3 steps",
+    "headline": "south_aggressive_batch_3: loss via radiation_death after 4 steps",
     "route_family": "south",
     "outcome": "radiation_death",
-    "key_turning_point": "node_south_2 (took +1 radiation, lost 1 food)",
+    "key_turning_point": "node_south_2 (took +1 radiation, lost 1 food, carried radiation into later travel)",
     "notable_equipment": [
       "field_pack",
       "rust_rifle"
     ],
     "telemetry": {
-      "total_steps": 3,
-      "pressure_count": 3,
+      "total_steps": 4,
+      "pressure_count": 4,
       "combat_count": 2,
-      "loot_drop_count": 1,
-      "loot_total_amount": 1,
+      "loot_drop_count": 3,
+      "loot_total_amount": 6,
       "equipment_change_count": 2,
       "equipment_ids": [
         "field_pack",
         "rust_rifle"
       ],
       "loot_resources": {
-        "ammo": 1
+        "ammo": 3,
+        "scrap": 2,
+        "medkits": 1
       },
       "max_radiation": 2,
-      "min_food": 7,
+      "min_food": 6,
       "min_hp": 0,
       "low_resource_flags": [
         "low_hp",

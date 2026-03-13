@@ -5,18 +5,19 @@
     "node_north_1",
     "node_north_2",
     "node_mid",
+    "node_approach",
     "node_final"
   ],
   "ended": true,
   "victory": false,
-  "end_reason": "radiation_death",
+  "end_reason": "event_or_resource_death",
   "player_final": {
-    "hp": -1,
-    "food": 6,
+    "hp": 0,
+    "food": 5,
     "ammo": 0,
-    "medkits": 1,
-    "scrap": 2,
-    "radiation": 1,
+    "medkits": 0,
+    "scrap": 4,
+    "radiation": 0,
     "weapon_slot": "makeshift_blade",
     "armor_slot": null,
     "tool_slot": null
@@ -47,11 +48,16 @@
         {
           "resource": "scrap",
           "amount": 2
+        },
+        {
+          "resource": "medkits",
+          "amount": 1
         }
       ],
       "effects": {
-        "food": 1,
-        "ammo": 2
+        "food": 0,
+        "ammo": 1,
+        "medkits": 1
       },
       "equipment_change": {
         "slot": "weapon",
@@ -61,10 +67,10 @@
       },
       "equipment_summary": "weapon -> makeshift_blade (replaced empty)",
       "player_after": {
-        "hp": 4,
-        "food": 7,
+        "hp": 7,
+        "food": 6,
         "ammo": 1,
-        "medkits": 1,
+        "medkits": 3,
         "scrap": 2,
         "radiation": 0,
         "weapon_slot": "makeshift_blade",
@@ -75,18 +81,16 @@
     {
       "step": 2,
       "node": "node_north_2",
-      "event_id": "evt_tunnel",
+      "event_id": "evt_mutant_burrow",
       "option_index": 0,
       "warning_signals": [
-        "WARNING: radiation will continue to threaten future travel.",
-        "WARNING: this option adds radiation and increases long-term risk.",
         "DANGER: this choice carries a high combat risk."
       ],
       "pre_choice_state": {
-        "hp": 4,
-        "food": 6,
+        "hp": 7,
+        "food": 5,
         "ammo": 1,
-        "medkits": 1,
+        "medkits": 3,
         "scrap": 2,
         "radiation": 0,
         "weapon_slot": "makeshift_blade",
@@ -98,18 +102,18 @@
       "combat_loot": [],
       "effects": {
         "hp": -1,
-        "ammo": 1,
-        "radiation": 1
+        "scrap": 2,
+        "medkits": 1
       },
       "equipment_change": null,
       "equipment_summary": null,
       "player_after": {
-        "hp": -1,
-        "food": 6,
+        "hp": 0,
+        "food": 5,
         "ammo": 0,
-        "medkits": 1,
-        "scrap": 2,
-        "radiation": 1,
+        "medkits": 0,
+        "scrap": 4,
+        "radiation": 0,
         "weapon_slot": "makeshift_blade",
         "armor_slot": null,
         "tool_slot": null
@@ -119,23 +123,23 @@
   "summary": {
     "pressure_count": 2,
     "death_cause_attribution": true,
-    "resource_signature": "hp:-1|food:6|ammo:0|medkits:1|scrap:2|radiation:1|weapon:makeshift_blade|armor:None|tool:None"
+    "resource_signature": "hp:0|food:5|ammo:0|medkits:0|scrap:4|radiation:0|weapon:makeshift_blade|armor:None|tool:None"
   },
   "failure_analysis": {
     "death_chain_length": 2,
-    "primary_blame_factor": "radiation",
+    "primary_blame_factor": "combat",
     "regret_nodes": [
       {
         "node_id": "node_north_2",
-        "event_id": "evt_tunnel",
-        "blame_score": 0.86,
-        "description": "took +1 radiation, lost 1 hp, accepted combat risk",
+        "event_id": "evt_mutant_burrow",
+        "blame_score": 0.73,
+        "description": "lost 1 hp, accepted combat risk",
         "steps_to_death": 0
       },
       {
         "node_id": "node_north_1",
         "event_id": "evt_scrapyard",
-        "blame_score": 0.14,
+        "blame_score": 0.27,
         "description": "accepted combat risk",
         "steps_to_death": 1
       }
@@ -144,10 +148,10 @@
     "is_trash_time_death": false
   },
   "run_summary": {
-    "headline": "north_aggressive_batch_6: loss via radiation_death after 2 steps",
+    "headline": "north_aggressive_batch_6: loss via event_or_resource_death after 2 steps",
     "route_family": "north",
-    "outcome": "radiation_death",
-    "key_turning_point": "node_north_2 (took +1 radiation, lost 1 hp, accepted combat risk)",
+    "outcome": "event_or_resource_death",
+    "key_turning_point": "node_north_2 (lost 1 hp, accepted combat risk)",
     "notable_equipment": [
       "makeshift_blade"
     ],
@@ -155,17 +159,18 @@
       "total_steps": 2,
       "pressure_count": 2,
       "combat_count": 2,
-      "loot_drop_count": 1,
-      "loot_total_amount": 2,
+      "loot_drop_count": 2,
+      "loot_total_amount": 3,
       "equipment_change_count": 1,
       "equipment_ids": [
         "makeshift_blade"
       ],
       "loot_resources": {
-        "scrap": 2
+        "scrap": 2,
+        "medkits": 1
       },
-      "max_radiation": 1,
-      "min_food": 6,
+      "max_radiation": 0,
+      "min_food": 5,
       "min_hp": 0,
       "low_resource_flags": [
         "low_hp",
@@ -173,9 +178,8 @@
       ],
       "risk_tags": [
         "combat_seen",
-        "radiation_pressure",
         "equipment_arc",
-        "end_radiation_death"
+        "end_event_or_resource_death"
       ]
     }
   }

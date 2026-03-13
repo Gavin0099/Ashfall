@@ -15,6 +15,7 @@ from src.event_templates import instantiate_event_catalog, load_template_catalog
 from src.difficulty import build_starting_player
 from src.enemy_catalog import load_enemy_catalog
 from src.run_engine import RunEngine, build_map
+from src.event_engine import pick_event_id
 from src.run_summary import build_run_summary
 from src.state_models import PlayerState, RunState
 
@@ -36,7 +37,7 @@ def build_node_payloads() -> Dict[str, dict]:
     return {
         "node_start": {"id": "node_start", "node_type": "story", "connections": ["node_north_1", "node_south_1"], "event_pool": ["evt_departure"], "is_start": True},
         "node_north_1": {"id": "node_north_1", "node_type": "resource", "connections": ["node_north_2"], "event_pool": ["evt_scrapyard"]},
-        "node_north_2": {"id": "node_north_2", "node_type": "combat", "connections": ["node_mid"], "event_pool": ["evt_tunnel"]},
+        "node_north_2": {"id": "node_north_2", "node_type": "combat", "connections": ["node_mid"], "event_pool": ["evt_tunnel", "evt_mutant_burrow"]},
         "node_south_1": {"id": "node_south_1", "node_type": "trade", "connections": ["node_south_2"], "event_pool": ["evt_village"]},
         "node_south_2": {"id": "node_south_2", "node_type": "resource", "connections": ["node_mid"], "event_pool": ["evt_floodplain"]},
         "node_mid": {"id": "node_mid", "node_type": "combat", "connections": ["node_approach"], "event_pool": ["evt_checkpoint"]},
@@ -283,10 +284,11 @@ def run_plan(plan: RoutePlan, nodes: Dict[str, dict], events: Dict[str, dict], e
             break
         node = engine.move_to(run, next_node)
         option_index = plan.options.get(next_node, 0)
-        event_payload = events[node.event_pool[0]]
+        event_id = pick_event_id(node, engine.rng)
+        event_payload = events[event_id]
         warning_signals = build_warning_signals(run.player, event_payload, option_index, len(plan.route) - len(decision_log) - 1)
         pre_choice_state = snapshot_player(run.player)
-        outcome = engine.resolve_node_event(node, run, option_index=option_index)
+        outcome = engine.resolve_node_event_with_id(node, run, event_id=event_id, option_index=option_index)
         pressure = is_pressure_moment(run, events[outcome["event_id"]], option_index, outcome)
         if pressure:
             pressure_count += 1

@@ -1,0 +1,28 @@
+# FAILURE_CONTEXT
+
+- overall_status: FAIL
+- governance_contract: PASS
+- plan_freshness: FAIL
+
+## Immediate Focus
+- Refresh PLAN/PT-1 evidence before trusting downstream playtest conclusions.
+
+## Contract Findings
+- skipped: True
+- reason: no response file supplied for contract validation
+
+## Freshness Findings
+- status: CRITICAL
+- threshold_days: 7
+- days_since_update: 2
+- pt1_completed_count: 1
+- latest_balance_mtime: 2026-03-11T11:14:37.591593
+- pt1_latest_mtime: 2026-03-09T17:59:22.727821
+- errors:
+  - PT-1 data is older than the latest balance change: pt1=2026-03-09T17:59:22.727821 < balance=2026-03-11T11:14:37.591593
+
+## Next Session Prompt
+- Prioritize the failing governance gates before adding new systems.
+- If regret gate failed, rebalance events so avg_steps_from_regret_to_death stays at or above the threshold.
+- If PT-1 freshness failed, collect or refresh completed playtest logs after the latest balance change.
+- Do not treat stale PT-1 results as evidence for new balance decisions.

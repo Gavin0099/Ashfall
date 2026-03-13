@@ -5,6 +5,7 @@
     "node_south_1",
     "node_south_2",
     "node_mid",
+    "node_approach",
     "node_final"
   ],
   "ended": true,

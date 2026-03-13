@@ -29,6 +29,8 @@ def instantiate_event(template: Dict[str, Any], rng: random.Random) -> dict:
             "effects": dict(option.get("effects", {})),
             "combat_chance": float(option.get("combat_chance", 0.0)),
         }
+        if "encounter_bias" in option:
+            resolved_option["encounter_bias"] = dict(option["encounter_bias"])
         if "equipment_reward" in option:
             resolved_option["equipment_reward"] = dict(option["equipment_reward"])
         options.append(resolved_option)

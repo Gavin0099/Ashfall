@@ -2,12 +2,19 @@
 
 ## Snapshot
 
-- victory_rate: 0.48
-- north_win_rate: 0.6
+- victory_rate: 0.44
+- north_win_rate: 0.5
 - south_win_rate: 0.4
 - mixed_win_rate: 0.4
 - overall_dominant_archetype: mutant
-- overall_dominant_resource: ammo
+- overall_dominant_resource: scrap
+
+## Identity Signals
+
+- north_archetype_gap: 0.24
+- north_resource_gap(scrap-ammo): 2.0
+- south_archetype_gap(mutant-raider): -0.24
+- south_resource_gap(scrap-ammo): -0.55
 
 ## Route Findings
 
@@ -15,7 +22,6 @@
 
 ## Economy Findings
 
-- south is not pulling enough extra ammo relative to north
 - hard difficulty suppresses loot economy, which can amplify failure noise
 
 ## Archetype Findings

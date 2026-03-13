@@ -1,16 +1,18 @@
 {
   "seed": 101,
+  "difficulty": "normal",
   "ended": true,
   "victory": true,
   "end_reason": "reached_final_node",
+  "main_archetype": "無",
   "player_final": {
-    "hp": 8,
-    "food": 1,
-    "ammo": 2,
+    "hp": 9,
+    "food": 2,
+    "ammo": 3,
     "medkits": 2,
-    "scrap": 0,
+    "scrap": 2,
     "radiation": 0,
-    "weapon_slot": "rust_rifle",
+    "weapon_slot": null,
     "armor_slot": null,
     "tool_slot": null
   },
@@ -30,13 +32,16 @@
       },
       "pressure": false,
       "combat_triggered": false,
+      "combat_loot": [],
       "effects": {
-        "food": -1
+        "food": -1,
+        "hp": -1,
+        "scrap": 1
       },
       "equipment_change": null,
       "equipment_summary": null,
       "player_after": {
-        "hp": 10,
+        "hp": 9,
         "food": 5,
         "ammo": 3,
         "medkits": 1,
@@ -53,7 +58,7 @@
       "option_index": 1,
       "warning_signals": [],
       "pre_choice_state": {
-        "hp": 10,
+        "hp": 9,
         "food": 4,
         "ammo": 3,
         "medkits": 1,
@@ -61,17 +66,18 @@
       },
       "pressure": false,
       "combat_triggered": false,
+      "combat_loot": [],
       "effects": {
         "food": -1,
-        "medkits": 1
+        "scrap": 1
       },
       "equipment_change": null,
       "equipment_summary": null,
       "player_after": {
-        "hp": 10,
+        "hp": 9,
         "food": 3,
         "ammo": 3,
-        "medkits": 2,
+        "medkits": 1,
         "radiation": 0,
         "weapon_slot": null,
         "armor_slot": null,
@@ -82,37 +88,67 @@
       "step": 3,
       "node": "node_mid",
       "event_id": "evt_checkpoint",
-      "option_index": 0,
+      "option_index": 1,
       "warning_signals": [
-        "WARNING: food is low and route slack is nearly gone.",
-        "DANGER: this choice carries a high combat risk."
+        "WARNING: food is low and route slack is nearly gone."
       ],
       "pre_choice_state": {
-        "hp": 10,
+        "hp": 9,
+        "food": 2,
+        "ammo": 3,
+        "medkits": 1,
+        "radiation": 0
+      },
+      "pressure": true,
+      "combat_triggered": false,
+      "combat_loot": [],
+      "effects": {
+        "food": 1,
+        "medkits": 1
+      },
+      "equipment_change": null,
+      "equipment_summary": null,
+      "player_after": {
+        "hp": 9,
+        "food": 3,
+        "ammo": 3,
+        "medkits": 2,
+        "radiation": 0,
+        "weapon_slot": null,
+        "armor_slot": null,
+        "tool_slot": null
+      }
+    },
+    {
+      "step": 4,
+      "node": "node_approach",
+      "event_id": "evt_waystation",
+      "option_index": 0,
+      "warning_signals": [
+        "WARNING: food is low and route slack is nearly gone."
+      ],
+      "pre_choice_state": {
+        "hp": 9,
         "food": 2,
         "ammo": 3,
         "medkits": 2,
         "radiation": 0
       },
       "pressure": true,
-      "combat_triggered": true,
+      "combat_triggered": false,
+      "combat_loot": [],
       "effects": {
-        "ammo": 1
+        "food": 1
       },
-      "equipment_change": {
-        "slot": "weapon",
-        "item": "rust_rifle",
-        "replaced": null,
-        "changed": true
-      },
-      "equipment_summary": "武器 -> 鏽蝕步槍（替換 空槽）",
+      "equipment_change": null,
+      "equipment_summary": null,
       "player_after": {
-        "hp": 8,
-        "food": 2,
-        "ammo": 2,
+        "hp": 9,
+        "food": 3,
+        "ammo": 3,
         "medkits": 2,
         "radiation": 0,
-        "weapon_slot": "rust_rifle",
+        "weapon_slot": null,
         "armor_slot": null,
         "tool_slot": null
       }

@@ -19,9 +19,9 @@ python scripts/generate_pt1_summary.py
 - expected run family: `north_aggressive`
 - operator note: strong early pressure
 - machine reference: `north_aggressive`
-- pressure nodes: node_north_1, node_north_2, node_mid, node_final
-- primary risk read: survived reference run
-- final state snapshot: hp=2 food=4 ammo=3 rad=2 weapon=rust_rifle tool=None
+- pressure nodes: node_north_1, node_north_2, node_mid, node_approach
+- primary risk read: resource_exhaustion (steps_from_regret=0)
+- final state snapshot: hp=0 food=4 ammo=5 rad=0 weapon=rust_rifle tool=None
 - equipment arc:
 - node_north_1: weapon -> makeshift_blade (replaced empty)
 - node_mid: weapon -> rust_rifle (replaced makeshift_blade)
@@ -31,9 +31,9 @@ python scripts/generate_pt1_summary.py
 - expected run family: `south_aggressive`
 - operator note: food relief + radiation tension
 - machine reference: `south_aggressive`
-- pressure nodes: node_south_1, node_south_2, node_mid, node_final
+- pressure nodes: node_south_1, node_south_2, node_mid, node_approach, node_final
 - primary risk read: survived reference run
-- final state snapshot: hp=4 food=6 ammo=2 rad=3 weapon=rust_rifle tool=field_pack
+- final state snapshot: hp=2 food=5 ammo=0 rad=3 weapon=rust_rifle tool=field_pack
 - equipment arc:
 - node_south_2: tool -> field_pack (replaced empty)
 - node_mid: weapon -> rust_rifle (replaced empty)
@@ -43,9 +43,9 @@ python scripts/generate_pt1_summary.py
 - expected run family: `south_cautious`
 - operator note: lower explicit pressure, good for contrast
 - machine reference: `south_cautious`
-- pressure nodes: node_south_1, node_south_2, node_mid, node_final
+- pressure nodes: node_south_1, node_south_2, node_mid, node_approach, node_final
 - primary risk read: survived reference run
-- final state snapshot: hp=10 food=3 ammo=1 rad=0 weapon=None tool=scavenger_kit
+- final state snapshot: hp=10 food=7 ammo=1 rad=0 weapon=None tool=scavenger_kit
 - equipment arc:
 - node_south_1: tool -> scavenger_kit (replaced empty)
 
@@ -54,9 +54,9 @@ python scripts/generate_pt1_summary.py
 - expected run family: `mixed_pressure`
 - operator note: mixed route pressure
 - machine reference: `mixed_pressure`
-- pressure nodes: node_north_1, node_north_2, node_mid, node_final
-- primary risk read: survived reference run
-- final state snapshot: hp=2 food=3 ammo=1 rad=1 weapon=rust_rifle tool=None
+- pressure nodes: node_north_1, node_north_2, node_mid
+- primary risk read: combat (steps_from_regret=1)
+- final state snapshot: hp=0 food=3 ammo=0 rad=0 weapon=rust_rifle tool=None
 - equipment arc:
 - node_north_1: weapon -> makeshift_blade (replaced empty)
 - node_mid: weapon -> rust_rifle (replaced makeshift_blade)
