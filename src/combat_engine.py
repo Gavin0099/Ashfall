@@ -17,7 +17,7 @@ class CombatEngine:
             raise ValueError("Cannot attack without ammo")
         player.ammo -= 1
         damage = self.rng.randint(1, 3)
-        if player.weapon_slot == "rust_rifle":
+        if player.weapon_slot in ("rust_rifle", "hardened_blade"):
             damage += 1
         if enemy.special_ability == "thick_hide" and not enemy.special_used:
             damage = max(1, damage - 1)
@@ -30,6 +30,8 @@ class CombatEngine:
             raise ValueError("Cannot use medkit without medkits")
         player.medkits -= 1
         heal = 3
+        if player.background == "medic":
+            heal += 1
         player.hp += heal
         return heal
 
@@ -38,6 +40,13 @@ class CombatEngine:
         if enemy.special_ability == "opening_shot" and not enemy.special_used:
             damage += 1
             enemy.special_used = True
+        
+        if player.background == "soldier":
+            damage = max(1, damage - 1)
+        
+        if player.armor_slot == "plate_armor":
+            damage = max(1, damage - 1)
+            
         player.hp -= damage
         return damage
 
