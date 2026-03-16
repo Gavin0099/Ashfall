@@ -59,9 +59,22 @@ END_REASON_LABELS = {
     "event_or_resource_death": "死於事件或資源耗盡",
     "death": "死亡",
 }
+BACKGROUND_LABELS = {
+    "soldier": "士兵 (Soldier)",
+    "medic": "醫護兵 (Medic)",
+    "scavenger": "拾荒者 (Scavenger)",
+    "pathfinder": "開拓者 (Pathfinder)",
+}
+TRAVEL_MODE_LABELS = {
+    "normal": "常規 (Normal)",
+    "rush": "衝刺 (Rush)",
+    "careful": "謹慎 (Careful)",
+}
 ITEM_LABELS = {
     "makeshift_blade": "簡陋刀刃",
     "rust_rifle": "鏽蝕步槍",
+    "hardened_blade": "強化刃",
+    "plate_armor": "板甲",
     "gas_mask": "防毒面具",
     "scavenger_kit": "拾荒工具組",
     "field_pack": "野外背包",
@@ -71,9 +84,11 @@ LOOT_LINE_RE = re.compile(r"^戰利品：([a-z_]+) \+(\d+)$")
 
 
 def format_status(player: PlayerState) -> str:
+    bg = BACKGROUND_LABELS.get(player.background or "", "無")
     return (
-        f"生命={player.hp} 食物={player.food} 彈藥={player.ammo} "
-        f"醫療包={player.medkits} 輻射={player.radiation}"
+        f"背景：{bg}\n"
+        f"狀態：生命={player.hp} 食物={player.food} 彈藥={player.ammo} "
+        f"醫療包={player.medkits} 零件={player.scrap} 輻射={player.radiation}"
     )
 
 
@@ -193,7 +208,14 @@ def main() -> int:
         enemy_catalog=enemies,
         difficulty=difficulty,
     )
-    run = engine.create_run(build_starting_player(difficulty), seed=seed)
+    player = build_starting_player(difficulty)
+    bg_choice = prompt_index(
+        "\n請選擇你的角色背景：",
+        [BACKGROUND_LABELS[bg] for bg in ["soldier", "medic", "scavenger", "pathfinder"]]
+    )
+    player.background = ["soldier", "medic", "scavenger", "pathfinder"][bg_choice]
+    
+    run = engine.create_run(player, seed=seed)
 
     print("Ashfall 文字原型")
     print(f"種子：{seed}")
@@ -214,19 +236,25 @@ def main() -> int:
                 if run.player.hp <= run.player.radiation + 1:
                     print("危急：再走一次帶輻射的路，你可能會直接死亡。")
 
-            route_choice = prompt_index(
+            mode_choice = prompt_index(
                 (
                     f"\n目前節點：{NODE_LABELS.get(run.current_node, run.current_node)}\n"
-                    f"狀態：{format_status(run.player)}\n"
+                    f"{format_status(run.player)}\n"
                     f"裝備：{format_equipment(run.player)}\n"
-                    "請選擇下一條路線："
+                    "請選擇旅行模式："
                 ),
+                [TRAVEL_MODE_LABELS[m] for m in ["normal", "rush", "careful"]]
+            )
+            travel_mode = ["normal", "rush", "careful"][mode_choice]
+
+            route_choice = prompt_index(
+                "請選擇下一條路線：",
                 [NODE_LABELS.get(node_id, node_id) for node_id in current.connections],
             )
             next_node = current.connections[route_choice]
             hp_before_move = run.player.hp
             food_before_move = run.player.food
-            node = engine.move_to(run, next_node)
+            node = engine.move_to(run, next_node, travel_mode=travel_mode)
             if run.player.radiation > 0 and run.player.hp < hp_before_move:
                 print(f"移動時因輻射失去了 {hp_before_move - run.player.hp} 點生命。")
             if run.player.food < food_before_move:
@@ -289,7 +317,7 @@ def main() -> int:
 
         scavenger_bonus = outcome.get("scavenger_bonus", {})
         if scavenger_bonus:
-            print(f"工具加成：{format_effects(scavenger_bonus)}")
+            print(f"背景或工具加成：{format_effects(scavenger_bonus)}")
 
         if run.player.radiation > pre_choice_state["radiation"]:
             print(f"警告：你的輻射升到 {run.player.radiation}。")
