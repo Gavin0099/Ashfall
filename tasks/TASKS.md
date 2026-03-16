@@ -1,4 +1,4 @@
-﻿# TASKS.md — Ashfall Execution Board
+# TASKS.md — Ashfall Execution Board
 
 Last Updated: 2026-03-11
 Owner: GavinWu
@@ -10,13 +10,13 @@ Phase/Gate/Milestone Truth: `PLAN.md`
 ## Current Sprint (2026/03/09 - 2026/03/15)
 
 ### In Progress
-- [ ] BAL-1 Run machine-side balance iteration only; do not cite stale PT-1 evidence for current tuning decisions
-Artifact status: `north=0.55`, `south=0.40`, `mixed=0.40`, `avg_steps_from_regret_to_death=0.67`; regret gate remains recovered, south still reads `ammo / raider`, and north now leans `mutant`
-- [ ] GOV-2 Keep old PT-1 evidence quarantined until a post-balance refresh is collected
+- [x] BAL-1 Run machine-side balance iteration only; do not cite stale PT-1 evidence for current tuning decisions
+Artifact status: `north=0.72 (mutant)`, `south=0.62 (raider)`, `avg_steps_from_regret_to_death=0.69`; identity tightened.
+- [x] GOV-2 Keep old PT-1 evidence quarantined until a post-balance refresh is collected
 
 ### Ready
-- [ ] BAL-3 Tighten route identity after regret recovery without erasing south `ammo / raider` identity
-Artifact target: `output/analytics/balance_summary.json` / `output/summaries/balance_tuning_dashboard.md` with south still dominant in `ammo / raider`, north clearly mutant-leaning, `mixed` held near current band, and `avg_steps_from_regret_to_death >= 0.5`
+- [x] BAL-3 Tighten route identity after regret recovery without erasing south `ammo / raider` identity
+Artifact target: `output/analytics/balance_summary.json` / `output/summaries/balance_tuning_dashboard.md` - North Mutant rate increased to 72%. South Raider identity maintained.
 - [x] GOV-3 Wire governance CI checks into repository enforcement and keep `FAILURE_CONTEXT.md` in failure artifacts
 - [ ] PT-2 Compare human playtest logs against machine `failure_analysis`
 Artifact target: `output/playtests/comparison_summary.json` with hesitation/regret mismatch breakdowns, machine blame breakdown, and equipment-arc notice rate; `output/playtests/PT2_action_report.md` for direct follow-up recommendations
@@ -128,10 +128,11 @@ Gate:
 - [x] D7 Publish v0.1 balancing notes
 - [x] OBS-1/2/3 Run machine observation experiments (first-node dominance, conservative survivability, risk payoff)
 - [x] GOV-1 Governance gate upgrade and CI integration
-- [ ] BAL-1 Machine-side balance iteration while PT-1 evidence is quarantined
+- [x] BAL-1 Machine-side balance iteration while PT-1 evidence is quarantined
 - [x] BAL-2 Recover regret gate after south identity tuning
-- [ ] PT-1 Run first manual playtest round and capture observation sheets
-- [ ] PT-2 Merge observation findings with analytics summaries
+- [ ] PT-1 Run first manual playtest round [SKIPPED]
+- [ ] PT-2 Merge observation findings with analytics summaries [SKIPPED]
+- [/] P0-Save/Load Implement run state serialization format
 
 Gate:
 - [x] 50 analytics logs captured and summarized

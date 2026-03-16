@@ -32,18 +32,19 @@ def resolve_event_choice(
     apply_effects(player, effects)
 
     scavenger_bonus: Dict[str, int] = {}
-    if equipped_tool_before == "scavenger_kit":
+    if equipped_tool_before == "scavenger_kit" or player.background == "scavenger":
         for key in ("food", "ammo", "scrap", "medkits"):
             if int(effects.get(key, 0)) > 0:
+                amount = 1
                 if key == "food":
-                    player.food += 1
+                    player.food += amount
                 elif key == "ammo":
-                    player.ammo += 1
+                    player.ammo += amount
                 elif key == "scrap":
-                    player.scrap += 1
+                    player.scrap += amount
                 elif key == "medkits":
-                    player.medkits += 1
-                scavenger_bonus = {key: 1}
+                    player.medkits += amount
+                scavenger_bonus = {key: amount}
                 break
 
     chance = float(option.get("combat_chance", 0.0))

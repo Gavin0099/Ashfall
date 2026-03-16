@@ -1,6 +1,8 @@
-﻿from __future__ import annotations
+from __future__ import annotations
 
+import json
 import random
+from pathlib import Path
 from dataclasses import replace
 from typing import Any, Dict, Optional
 
@@ -35,7 +37,9 @@ class RunEngine:
         run.visit(start)
         return run
 
-    def move_to(self, run: RunState, next_node_id: str) -> NodeState:
+    def move_to(self, run: RunState, next_node_id: str, travel_mode: str | None = None) -> NodeState:
+        if travel_mode:
+            run.travel_mode = travel_mode
         current = self.map_state.get_node(run.current_node)
         if next_node_id not in current.connections:
             raise ValueError(f"Invalid move: {run.current_node} -> {next_node_id}")
@@ -53,6 +57,18 @@ class RunEngine:
             run.end(victory=True, reason="reached_final_node")
 
         return node
+ 
+    def save_run(self, run: RunState, path: str | Path) -> None:
+        """Serialize and save run state to a JSON file."""
+        data = run.to_dict()
+        with open(path, "w", encoding="utf-8") as f:
+            json.dump(data, f, indent=2, ensure_ascii=False)
+ 
+    def load_run(self, path: str | Path) -> RunState:
+        """Load and reconstruct run state from a JSON file."""
+        with open(path, "r", encoding="utf-8") as f:
+            data = json.load(f)
+        return RunState.from_dict(data)
 
     def resolve_node_event(self, node: NodeState, run: RunState, option_index: int = 0) -> Dict[str, Any]:
         return self.resolve_node_event_with_id(node, run, event_id=None, option_index=option_index)
@@ -64,17 +80,30 @@ class RunEngine:
         event_id: str | None = None,
         option_index: int = 0,
     ) -> Dict[str, Any]:
-        if event_id is None:
-            event_id = pick_event_id(node, self.rng)
         if event_id not in self.event_catalog:
             raise KeyError(f"Missing event payload for event_id: {event_id}")
-        event_payload = self._event_payload_for_difficulty(self.event_catalog[event_id])
+        event_payload = self.event_catalog[event_id]
+        event_payload = self._event_payload_for_difficulty(event_payload)
+        event_payload = self._patch_event_for_travel_mode(event_payload, run.travel_mode)
+        
         outcome = resolve_event_choice(run.player, event_payload, option_index, self.rng)
         if outcome["combat_triggered"]:
             encounter_bias = event_payload.get("options", [])[option_index].get("encounter_bias")
             outcome["combat"] = self.resolve_combat(run, encounter_bias=encounter_bias)
         if run.player.is_dead():
             run.end(victory=False, reason=self._resolve_noncombat_death_reason(run))
+            
+        # Record to decision_log
+        run.decision_log.append({
+            "step": len(run.visited_nodes),
+            "node": node.id,
+            "event_id": event_id,
+            "option_index": option_index,
+            "effects": event_payload["options"][option_index].get("effects", {}),
+            "combat_triggered": outcome["combat_triggered"],
+            "player_after": run.player.to_dict()
+        })
+        
         return outcome
 
     def resolve_combat(self, run: RunState, encounter_bias: Dict[str, float] | None = None) -> Dict[str, Any]:
@@ -136,6 +165,18 @@ class RunEngine:
         for key, amount in cost.items():
             if amount < 0:
                 raise ValueError(f"Node resource_cost must be non-negative: {node.id} {key}={amount}")
+            
+            # Travel Mode Modifier
+            if key == "food":
+                if run.travel_mode == "rush":
+                    amount = max(0, amount - 1)
+                elif run.travel_mode == "careful":
+                    amount += 1
+
+            # Pathfinder Background: ignore food cost
+            if key == "food" and run.player.background == "pathfinder":
+                continue
+
             if key == "food":
                 run.player.food = max(0, run.player.food - amount)
             elif key == "hp":
@@ -162,6 +203,26 @@ class RunEngine:
         delta = self.difficulty_profile.event_combat_delta
         if delta == 0.0:
             return event_payload
+        patched = dict(event_payload)
+        patched_options = []
+        for option in event_payload.get("options", []):
+            new_option = dict(option)
+            chance = float(new_option.get("combat_chance", 0.0))
+            new_option["combat_chance"] = max(0.0, min(1.0, chance + delta))
+            patched_options.append(new_option)
+        patched["options"] = patched_options
+        return patched
+
+    def _patch_event_for_travel_mode(self, event_payload: Dict[str, Any], travel_mode: str) -> Dict[str, Any]:
+        delta = 0.0
+        if travel_mode == "rush":
+            delta = 0.2
+        elif travel_mode == "careful":
+            delta = -0.2
+        
+        if delta == 0.0:
+            return event_payload
+            
         patched = dict(event_payload)
         patched_options = []
         for option in event_payload.get("options", []):
