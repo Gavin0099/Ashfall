@@ -1,0 +1,89 @@
+{
+  "events": [
+    {
+      "event_id": "evt_quest_village_medical_request",
+      "template_type": "story",
+      "description_variants": [
+        "村莊的長老攔住你，提到最近有一批醫療物資在附近的隧道失蹤了。",
+        "一名疲憊的醫護人員請求你幫忙尋找遺失的緊急藥箱。"
+      ],
+      "options": [
+        {
+          "text": "接受委託：前往隧道尋找失蹤的物資",
+          "set_flags": {
+            "quest_medical_supplies_active": true
+          },
+          "effects": {
+            "food": 1
+          },
+          "combat_chance": 0.0
+        },
+        {
+          "text": "拒絕：我還有更要緊的事",
+          "effects": {},
+          "combat_chance": 0.0
+        }
+      ]
+    },
+    {
+      "event_id": "evt_quest_medical_discovery",
+      "template_type": "resource",
+      "description_variants": [
+        "在隧道的陰暗角落，你發現了一個印有十字標誌的密封箱。",
+        "一輛側翻的救護車遺骸中，那個藥箱正靜靜地躺在那裡。"
+      ],
+      "conditions": {
+        "required_flags": {
+          "quest_medical_supplies_active": true
+        }
+      },
+      "options": [
+        {
+          "text": "保護藥箱，準備帶回去",
+          "set_flags": {
+            "quest_medical_supplies_found": true
+          },
+          "effects": {
+            "ammo": -1
+          },
+          "combat_chance": 0.5
+        },
+        {
+          "text": "私吞藥箱裡的物資",
+          "set_flags": {
+            "quest_medical_supplies_active": false
+          },
+          "effects": {
+            "medkits": 3,
+            "scrap": 2
+          },
+          "combat_chance": 0.2
+        }
+      ]
+    },
+    {
+      "event_id": "evt_quest_medical_completion",
+      "template_type": "story",
+      "description_variants": [
+        "你回到了之前的據點，長老看到你帶回來的藥箱露出了欣慰的笑容。",
+        "完成交付後，守衛們對你的態度變得友善了許多。"
+      ],
+      "conditions": {
+        "required_flags": {
+          "quest_medical_supplies_found": true
+        }
+      },
+      "options": [
+        {
+          "text": "交付藥箱並領取報酬",
+          "effects": {
+            "scrap": 10,
+            "ammo": 5,
+            "medkits": 1
+          },
+          "combat_chance": 0.0
+        }
+      ]
+    }
+  ]
+}

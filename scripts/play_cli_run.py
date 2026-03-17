@@ -20,7 +20,7 @@ from scripts.run_playability_check import (
     build_warning_signals,
 )
 from src.difficulty import build_starting_player, get_difficulty_profile
-from src.event_engine import pick_event_id, resolve_event_choice
+from src.event_engine import pick_event_id, resolve_event_choice, get_available_options
 from src.run_engine import RunEngine, build_map
 from src.state_models import PlayerState
 from src.meta_progression import MetaProfile, RewardCalculator, UPGRADE_METADATA, get_upgrade_cost, ARCHETYPE_UNLOCK_METADATA
@@ -308,6 +308,9 @@ def main() -> int:
     print(f"\n{C_DIM}種子：{seed} | 難度：{get_difficulty_profile(difficulty).name}{C_END}\n{C_YELLOW}目標：活到終點山脊。{C_END}\n")
 
     decision_log, encounter_counter, combat_count = [], Counter(), 0
+    current_travel_mode = "normal"
+    TRAVEL_MODE_LABELS = {"normal": "正常 (Normal)", "rush": "衝刺 (Rush)", "careful": "謹慎 (Careful)"}
+
     while not run.ended:
         current = map_state.get_node(run.current_node)
         if current.connections:
@@ -315,11 +318,39 @@ def main() -> int:
                 print(f"警告：每次移動都會受輻射失去 1 HP。目前輻射={run.player.radiation}")
                 if run.player.hp <= run.player.radiation + 1: print("危急：再走一次你可能會直接死亡。")
             draw_map(engine, run.current_node)
-            mode_choice = prompt_index(f"目前：{C_YELLOW}{NODE_LABELS.get(run.current_node, run.current_node)}{C_END}\n{format_status_bar(run.player)}\n{C_DIM}裝備：{format_equipment(run.player)}{C_END}\n請選擇旅行模式：", [m for m in ["normal", "rush", "careful"]])
-            travel_mode = ["normal", "rush", "careful"][mode_choice]
-            route_choice = prompt_index("請選擇下一條路線：", [NODE_LABELS.get(nid, nid) for nid in current.connections])
+            
+            # Persistent Travel Mode UI
+            status_header = (
+                f"目前地帶：{C_YELLOW}{NODE_LABELS.get(run.current_node, run.current_node)}{C_END}\n"
+                f"{format_status_bar(run.player)}\n"
+                f"{C_DIM}裝備：{format_equipment(run.player)}{C_END}｜{C_CYAN}旅行模式：{TRAVEL_MODE_LABELS[current_travel_mode]}{C_END}"
+            )
+            
+            # Combine Route Selection and Mode Change
+            route_opts = [NODE_LABELS.get(nid, nid) for nid in current.connections]
+            route_opts.append(f"{C_BLUE}[修改旅行模式]{C_END}")
+            
+            while True:
+                idx = prompt_index(f"{status_header}\n請選擇行動：", route_opts)
+                if idx == len(current.connections):
+                    # Change mode
+                    new_mode_idx = prompt_index("請選擇新的旅行模式：", list(TRAVEL_MODE_LABELS.values()))
+                    current_travel_mode = list(TRAVEL_MODE_LABELS.keys())[new_mode_idx]
+                    # Update status header and redisplay
+                    status_header = (
+                        f"目前地帶：{C_YELLOW}{NODE_LABELS.get(run.current_node, run.current_node)}{C_END}\n"
+                        f"{format_status_bar(run.player)}\n"
+                        f"{C_DIM}裝備：{format_equipment(run.player)}{C_END}｜{C_CYAN}旅行模式：{TRAVEL_MODE_LABELS[current_travel_mode]}{C_END}"
+                    )
+                    clear_screen()
+                    draw_map(engine, run.current_node)
+                    continue
+                else:
+                    target_node_id = current.connections[idx]
+                    break
+            
             hp_b, food_b = run.player.hp, run.player.food
-            node = engine.move_to(run, current.connections[route_choice], travel_mode=travel_mode)
+            node = engine.move_to(run, target_node_id, travel_mode=current_travel_mode)
             if run.player.radiation > 0 and run.player.hp < hp_b: print(f"因輻射失去 {hp_b - run.player.hp} HP。")
             if run.player.food < food_b: print(f"移動消耗 {food_b - run.player.food} 食物。")
             if run.ended: break
@@ -329,8 +360,34 @@ def main() -> int:
         event_payload = events[event_id]
         print(f"\n{C_CYAN}{'─' * 40}{C_END}\n{C_BOLD}【 事件：{event_payload['description']} 】{C_END}")
         rem = estimate_remaining_steps(map_state, node.id)
-        option_lines = [f"{opt['text']} [{'；'.join([localize_warning(w) for w in build_warning_signals(run.player, event_payload, i, rem)])}]" for i, opt in enumerate(event_payload["options"])]
-        opt_idx = prompt_index("請選擇行動：", option_lines)
+        
+        # v0.9 Archetype Options
+        from src.event_engine import get_available_options
+        avail_opts = get_available_options(run.player, event_payload)
+        
+        option_lines = []
+        for i, info in enumerate(avail_opts):
+            opt = info["option"]
+            warnings = build_warning_signals(run.player, event_payload, i, rem)
+            warn_str = f" [{'；'.join([localize_warning(w) for w in warnings])}]" if warnings else ""
+            
+            prefix = ""
+            if info["requirement"]:
+                arch_name = ARCHETYPE_INFO.get(info["requirement"], {}).get("name", info["requirement"])
+                if info["is_met"]:
+                    prefix = f"{C_GREEN}[{arch_name}專屬]{C_END} "
+                else:
+                    prefix = f"{C_RED}[僅限 {arch_name}]{C_END} "
+            
+            option_lines.append(f"{prefix}{info['text']}{warn_str}")
+
+        while True:
+            opt_idx = prompt_index("請選擇行動：", option_lines)
+            if avail_opts[opt_idx]["is_met"]:
+                break
+            else:
+                print(f"{C_RED}❌ 你不符合該選項的職業要求！{C_END}")
+
         pre_state = {"hp": run.player.hp, "food": run.player.food, "ammo": run.player.ammo, "medkits": run.player.medkits, "radiation": run.player.radiation}
         outcome = resolve_event_choice(run.player, event_payload, opt_idx, engine.rng)
 
@@ -350,6 +407,11 @@ def main() -> int:
         if eff: print(f"效果：{format_effects(eff)}")
         eq = outcome.get("equipment_change")
         if eq and eq.get("changed"): print(f"取得裝備：{SLOT_LABELS.get(str(eq['slot']))} -> {ITEM_LABELS.get(str(eq['item']), str(eq['item']))}")
+        
+        # v0.9 Update Run Flags
+        if outcome.get("set_flags"):
+            run.flags.update(outcome["set_flags"])
+            print(f"{C_CYAN}✨ 任務進度已更新！{C_END}")
         
         decision_log.append({"step": len(decision_log)+1, "node": node.id, "event_id": event_id, "option_index": opt_idx, "pre_choice_state": pre_state, "player_after": run.player.to_dict()})
         if node.is_final and not run.ended: run.end(victory=True, reason="reached_final_node")

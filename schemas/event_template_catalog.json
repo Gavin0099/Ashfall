@@ -181,6 +181,16 @@
             "radiation": 1
           },
           "combat_chance": 0.7
+        },
+        {
+          "text": "利用拾荒者的嗅覺找出隱藏的貨箱",
+          "archetype_requirement": "scavenger",
+          "effects": {
+            "food": 3,
+            "scrap": 3,
+            "radiation": 0
+          },
+          "combat_chance": 0.3
         }
       ]
     },
@@ -448,6 +458,26 @@
             "hp": -1
           },
           "combat_chance": 0.8
+        },
+        {
+          "text": "為生病的農場主人提供醫療輔助",
+          "archetype_requirement": "medic",
+          "effects": {
+            "medkits": -1,
+            "food": 4,
+            "scrap": 2
+          },
+          "combat_chance": 0.0
+        },
+        {
+          "text": "利用高級零件與主人交換稀有物資",
+          "archetype_requirement": "scavenger",
+          "effects": {
+            "scrap": -2,
+            "food": 5,
+            "ammo": 2
+          },
+          "combat_chance": 0.0
         }
       ]
     },

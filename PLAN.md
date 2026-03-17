@@ -41,7 +41,8 @@ Prototype validation contract: `PROTOTYPE_SUCCESS_CRITERIA.md`
 ├─ [✓] Phase v0.5: Character Archetypes 角色職業系統 (2026-03-17 完成)
 ├─ [✓] Phase v0.6: Advanced Mechanics & World Depth 進階機制與世界深度 (2026-03-17 完成)
 ├─ [✓] Phase v0.7: Meta Progression Depth & Polish 系統深度與打磨 (2026-03-17 完成)
-└─ [ ] Phase v0.8: Content Pack & Final Polish 內容擴展與最終打磨 (Planned)
+├─ [✓] Phase v0.8: Content Pack & Final Polish 內容擴展與最終打磨 (2026-03-17 完成)
+└─ [ ] Phase v0.9: Narrative Depth & Quest Chains 劇情深度與任務鏈 (Planned)
 ```
 
-**當前 Phase**: **v0.8 規劃中 — 目標：實作更多元化的 Meta 解鎖、隱藏職業以及整體遊戲平衡性優化。**
+**當前 Phase**: **v0.9 規劃中 — 目標：實作職業專屬事件分支、動態任務系統以及進階數值平衡。**

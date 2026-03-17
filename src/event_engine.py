@@ -32,6 +32,29 @@ def pick_event_id(node: NodeState, rng: random.Random, run_flags: Dict[str, Any]
     return rng.choice(candidates)
 
 
+def get_available_options(player: PlayerState, event_payload: Dict[str, Any]) -> list[Dict[str, Any]]:
+    """回傳玩家目前可選的選項清單（包含標註是否符合職業）。"""
+    options = event_payload.get("options", [])
+    available = []
+    for opt in options:
+        req = opt.get("archetype_requirement")
+        is_met = (req is None or player.archetype == req)
+        
+        # Pick display text
+        display_text = opt.get("text", "")
+        if not display_text and "text_variants" in opt:
+            # We use a stable pick if possible or just random for now
+            # For simplicity in CLI, random is fine as it's called once per event
+            display_text = random.choice(opt["text_variants"])
+
+        available.append({
+            "option": opt,
+            "text": display_text,
+            "is_met": is_met,
+            "requirement": req
+        })
+    return available
+
 def resolve_event_choice(
     player: PlayerState,
     event_payload: Dict[str, Any],
@@ -45,6 +68,12 @@ def resolve_event_choice(
         raise IndexError(f"Option index out of range: {option_index}")
 
     option = options[option_index]
+    
+    # Archetype check
+    req = option.get("archetype_requirement")
+    if req and player.archetype != req:
+        raise ValueError(f"Archetype {player.archetype} does not meet requirement {req}")
+
     effects = option.get("effects", {})
     if not isinstance(effects, dict):
         raise ValueError("Event option effects must be an object")

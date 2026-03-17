@@ -39,18 +39,25 @@ def build_node_payloads() -> Dict[str, dict]:
     return {
         "node_start": {"id": "node_start", "node_type": "story", "connections": ["node_north_1", "node_south_1"], "event_pool": ["evt_departure"], "is_start": True},
         "node_north_1": {"id": "node_north_1", "node_type": "resource", "connections": ["node_north_2"], "event_pool": ["evt_scrapyard", "evt_factory_ruins"]},
-        "node_north_2": {"id": "node_north_2", "node_type": "combat", "connections": ["node_mid"], "event_pool": ["evt_tunnel", "evt_mutant_burrow", "evt_collapsed_overpass"]},
-        "node_south_1": {"id": "node_south_1", "node_type": "trade", "connections": ["node_south_2"], "event_pool": ["evt_village", "evt_raider_toll_bridge"]},
-        "node_south_2": {"id": "node_south_2", "node_type": "resource", "connections": ["node_mid"], "event_pool": ["evt_floodplain", "evt_radioactive_orchard", "evt_abandoned_cache"]},
-        "node_mid": {"id": "node_mid", "node_type": "combat", "connections": ["node_approach"], "event_pool": ["evt_checkpoint", "evt_sniper_nest"]},
-        "node_approach": {"id": "node_approach", "node_type": "story", "connections": ["node_final"], "event_pool": ["evt_waystation", "evt_emergency_beacon"]},
+        "node_north_2": {"id": "node_north_2", "node_type": "combat", "connections": ["node_mid"], "event_pool": ["evt_tunnel", "evt_mutant_burrow", "evt_collapsed_overpass", "evt_quest_medical_discovery"]},
+        "node_south_1": {"id": "node_south_1", "node_type": "trade", "connections": ["node_south_2"], "event_pool": ["evt_village", "evt_raider_toll_bridge", "evt_quest_village_medical_request"]},
+        "node_south_2": {"id": "node_south_2", "node_type": "resource", "connections": ["node_mid"], "event_pool": ["evt_floodplain", "evt_radioactive_orchard", "evt_abandoned_cache", "evt_quest_medical_discovery"]},
+        "node_mid": {"id": "node_mid", "node_type": "combat", "connections": ["node_approach"], "event_pool": ["evt_checkpoint", "evt_sniper_nest", "evt_quest_medical_completion"]},
+        "node_approach": {"id": "node_approach", "node_type": "story", "connections": ["node_final"], "event_pool": ["evt_waystation", "evt_emergency_beacon", "evt_quest_medical_completion"]},
         "node_final": {"id": "node_final", "node_type": "story", "connections": [], "event_pool": ["evt_final"], "is_final": True},
     }
 
 
 def build_event_catalog(seed: int) -> Dict[str, dict]:
     catalog_path = ROOT / "schemas" / "event_template_catalog.json"
+    quest_path = ROOT / "schemas" / "quest_events_v09.json"
+    
     template_catalog = load_template_catalog(catalog_path)
+    if quest_path.exists():
+        quest_catalog = load_template_catalog(quest_path)
+        # Merge events
+        template_catalog["events"].extend(quest_catalog.get("events", []))
+        
     return instantiate_event_catalog(seed, template_catalog)
 
 

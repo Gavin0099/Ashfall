@@ -1,0 +1,12 @@
+{
+  "profile_id": "default",
+  "total_scrap": 19,
+  "lifetime_scrap_earned": 49,
+  "unlock_levels": {},
+  "unlocked_archetypes": [
+    "soldier",
+    "pathfinder",
+    "scavenger"
+  ],
+  "unlocked_at_version": "0.8"
+}
