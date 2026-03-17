@@ -44,7 +44,9 @@ Prototype validation contract: `PROTOTYPE_SUCCESS_CRITERIA.md`
 ├─ [✓] Phase v0.8: Content Pack & Final Polish 內容擴展與最終打磨 (2026-03-17 完成)
 ├─ [✓] Phase v0.9: Narrative Depth & Quest Chains 劇情深度與任務鏈 (2026-03-17 完成)
 ├─ [✓] Phase v1.0: Advanced Character System 進階角色系統 (2026-03-17 完成)
-└─ [✓] Phase v1.1: Character Factory Framework 角色生成工廠 (2026-03-17 完成)
+├─ [✓] Phase v1.1: Character Factory Framework 角色生成工廠 (2026-03-17 完成)
+├─ [✓] Phase v1.2: Perks & Dynamic Progression 成長系統 (2026-03-17 完成)
+└─ [✓] Phase v1.3: Durability & Repair System 耐久度與修復系統 (2026-03-17 完成)
 ```
 
-**當前階段：v1.1 已完成 — 目標：導入約束驅動的角色生成工廠與自動化治理。**
+**當前階段：v1.3 已完成 — 目標：實作裝備耐久度、戰鬥損耗、修復機制與相關 CLI 整合。**

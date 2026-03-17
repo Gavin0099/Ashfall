@@ -21,16 +21,26 @@ ITEM_SLOT_BY_ID: Dict[str, EquipmentSlot] = {
 class EquipmentState:
     id: str
     slot: EquipmentSlot
+    durability: int = 10
+    max_durability: int = 10
     affixes: Dict[str, int] = field(default_factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
-        return {"id": self.id, "slot": self.slot, "affixes": self.affixes}
+        return {
+            "id": self.id,
+            "slot": self.slot,
+            "durability": self.durability,
+            "max_durability": self.max_durability,
+            "affixes": self.affixes
+        }
 
     @staticmethod
     def from_dict(data: Dict[str, Any]) -> EquipmentState:
         return EquipmentState(
             id=data["id"],
             slot=data["slot"],
+            durability=data.get("durability", 10),
+            max_durability=data.get("max_durability", 10),
             affixes=data.get("affixes", {}),
         )
 

@@ -47,7 +47,7 @@ def get_available_options(player: PlayerState, event_payload: Dict[str, Any]) ->
             # Tag check
             req_tags = filters.get("require_any_tag", [])
             if req_tags:
-                player_tags = set(player.character.tags) if player.character else set()
+                player_tags = set(player.character.tags) if (player.character and player.character.tags) else set()
                 if not any(t in player_tags for t in req_tags):
                     is_met = False
             
@@ -101,9 +101,9 @@ def resolve_event_choice(
         # Tag check
         req_tags = filters.get("require_any_tag", [])
         if req_tags:
-            player_tags = set(player.character.tags) if player.character else set()
+            player_tags = set(player.character.tags) if (player.character and player.character.tags) else set()
             if not any(t in player_tags for t in req_tags):
-                raise ValueError(f"Player tags do not meet any of: {req_tags}")
+                raise ValueError(f"Requirement failed: require_any_tag {req_tags}")
         
         # SPECIAL check
         req_special = filters.get("require_special", {})

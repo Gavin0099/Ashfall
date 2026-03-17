@@ -25,6 +25,7 @@ from src.run_engine import RunEngine, build_map
 from src.state_models import PlayerState, CharacterProfile
 from src.meta_progression import MetaProfile, RewardCalculator, UPGRADE_METADATA, get_upgrade_cost, ARCHETYPE_UNLOCK_METADATA
 from src.help_system import get_help_text, list_topics
+from src.repair import calculate_full_repair_cost, repair_equipment
 
 # --- UI CONSTANTS ---
 C_END = "\033[0m"
@@ -100,6 +101,17 @@ def format_status_bar(player: PlayerState) -> str:
         f"{C_CYAN}{SYM_SCRAP} {player.scrap}{C_END}  "
         f"{rad_c}{SYM_RAD} {player.radiation}{C_END}"
     )
+
+def format_equipment_durability(equipment) -> str:
+    if not equipment:
+        return ""
+    color = C_GREEN
+    ratio = equipment.durability / equipment.max_durability
+    if ratio <= 0:
+        color = C_RED
+    elif ratio <= 0.3:
+        color = C_YELLOW
+    return f"{color}[{equipment.durability}/{equipment.max_durability}] {C_END}"
 
 def format_special(player: PlayerState) -> str:
     if not player.character: return "無"
@@ -363,6 +375,42 @@ def show_archetype_unlock_menu(meta_profile: MetaProfile, meta_path: Path):
         else: print(f"\n{C_RED}❌ 招募失敗：廢料不足。{C_END}")
         input(f"\n{C_DIM}按 Enter 繼續...{C_END}")
 
+def show_repair_menu(player: PlayerState):
+    while True:
+        clear_screen()
+        draw_header("🔧 裝備維修站")
+        print(f"  {C_CYAN}可用廢料：{C_END} {C_YELLOW}{SYM_SCRAP} {player.scrap}{C_END}\n")
+        
+        repair_slots = []
+        if player.weapon_slot: repair_slots.append("weapon")
+        if player.armor_slot: repair_slots.append("armor")
+        
+        if not repair_slots:
+            print("你目前沒有任何可維修的裝備。")
+            input(f"\n{C_DIM}按 Enter 返回...{C_END}")
+            break
+            
+        opts = []
+        for slot in repair_slots:
+            eq = getattr(player, f"{slot}_slot")
+            cost = calculate_full_repair_cost(eq)
+            status = format_equipment_durability(eq)
+            name = ITEM_LABELS.get(eq.id, eq.id)
+            opts.append(f"{SLOT_LABELS.get(slot, slot)}: {name} {status} | {C_YELLOW}修復成本: {cost}{C_END}")
+        
+        opts.append("返回 (Back)")
+        choice = prompt_index("請選擇要維修的裝備：", opts)
+        
+        if choice == len(repair_slots):
+            break
+            
+        slot = repair_slots[choice]
+        if repair_equipment(player, slot):
+            print(f"\n{C_GREEN}✅ 維修完成！{SLOT_LABELS.get(slot)} 已恢復至最佳狀態。{C_END}")
+        else:
+            print(f"\n{C_RED}❌ 維修失敗：可能是廢料不足或裝備已滿。{C_END}")
+        input(f"\n{C_DIM}按 Enter 繼續...{C_END}")
+
 def main() -> int:
     OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
     seed = int(sys.argv[1]) if len(sys.argv) > 1 else 101
@@ -395,6 +443,17 @@ def main() -> int:
 
     while not run.ended:
         current = map_state.get_node(run.current_node)
+        
+        # UI: Show Equipment Durability
+        eq_status = []
+        if run.player.weapon_slot:
+            eq_status.append(f"武器: {ITEM_LABELS.get(run.player.weapon_slot.id, run.player.weapon_slot.id)} {format_equipment_durability(run.player.weapon_slot)}")
+        if run.player.armor_slot:
+            eq_status.append(f"護甲: {ITEM_LABELS.get(run.player.armor_slot.id, run.player.armor_slot.id)} {format_equipment_durability(run.player.armor_slot)}")
+        
+        if eq_status:
+            print(f"{C_DIM}裝備狀態：{'｜'.join(eq_status)}{C_END}")
+
         if current.connections:
             if run.player.radiation > 0:
                 print(f"警告：每次移動都會受輻射失去 1 HP。目前輻射={run.player.radiation}")

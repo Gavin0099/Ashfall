@@ -148,6 +148,17 @@ class RunEngine:
                     apply_loot(run.player, resource, amount)
                     loot.append({"resource": resource, "amount": amount})
                     result["log"].append(f"戰利品：{resource} +{amount}")
+        
+        # Durability Loss after combat
+        if run.player.weapon_slot:
+            run.player.weapon_slot.durability = max(0, run.player.weapon_slot.durability - 1)
+            if run.player.weapon_slot.durability == 0:
+                result["log"].append(f"⚠️ 你的武器 {run.player.weapon_slot.id} 已損壞！")
+        if run.player.armor_slot:
+            run.player.armor_slot.durability = max(0, run.player.armor_slot.durability - 1)
+            if run.player.armor_slot.durability == 0:
+                result["log"].append(f"⚠️ 你的護甲 {run.player.armor_slot.id} 已損壞！")
+
         if not result["victory"]:
             run.end(victory=False, reason="combat_death")
         return {"skipped": False, "enemy_id": enemy_id, "loot": loot, **result}
@@ -180,8 +191,14 @@ class RunEngine:
     def apply_travel_attrition(self, run: RunState) -> None:
         if run.player.radiation > 0:
             damage = 1
-            if run.player.armor_slot == "gas_mask":
+            armor = run.player.armor_slot
+            if armor and armor.id == "gas_mask" and armor.durability > 0:
                 damage = max(0, damage - 1)
+                # Gas mask takes durability hit when protecting
+                armor.durability = max(0, armor.durability - 1)
+                if armor.durability == 0:
+                    # We don't have a log here easily available, but we can print for now or just let it be silent until status check
+                    pass 
             if damage > 0:
                 run.player.hp -= damage
                 run.player.hp = max(0, run.player.hp)
