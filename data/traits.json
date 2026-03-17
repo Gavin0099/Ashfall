@@ -34,5 +34,23 @@
     "negative": "路線移動時間 +1 step（停不下來搜刮）",
     "granted_tags": ["scav_trained"],
     "event_filter_bonus": ["ruins", "abandoned_factory"]
+  },
+  {
+    "trait_id": "bloodlust",
+    "display_name": "血性爆發",
+    "description": "戰鬥的喧囂讓你興奮，但在受重傷時你更容易失去理智。",
+    "positive": "生命值低於 5 時，解鎖特定瘋狂選項（強行突圍）",
+    "negative": "醫療包效果降低（熱血沸騰難以止血）",
+    "granted_tags": ["bloodlust"],
+    "event_filter_bonus": ["combat_heavy", "last_stand"]
+  },
+  {
+    "trait_id": "pack_rat",
+    "display_name": "負重達人",
+    "description": "你知道如何最有效地利用背包空間，但這也讓你的每一步都更加沈重。",
+    "positive": "初始物資上限提升（由系統隱性支援）",
+    "negative": "移動時固定額外消耗 1 食物",
+    "granted_tags": ["pack_rat"],
+    "event_filter_bonus": ["supply_cache", "trading_post"]
   }
 ]

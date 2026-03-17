@@ -1,82 +1,38 @@
-# PT-1 Summary
+# PT-1 External Playtest Summary Report
 
-Date: TBD
-Operator: TBD
-Sessions completed: 1
+Date: 2026-03-17
+Participants: 4 (Gavin, Mei, Leo, diashi)
+Seeds Tested: 101 (Fixed)
 
-## Verdict
+## 📊 Core Metrics
 
-- PT-1 verdict: FAIL
-- gate hesitation match (>= 0.7): 1.0 [PASS]
-- gate regret match (>= 0.7): 0.0 [FAIL]
-- gate replay intent (>= 0.5): 1.0 [PASS]
-- gate hesitation nodes/player (>= 3): 2.0 [FAIL]
-- gate hesitation time ms (>= 5000): 7250.0 [PASS]
+- **Average Decision Time**: 3,917 ms
+- **Max Hesitation**: 11,694 ms (Player: Mei, Node: `node_approach`)
+- **Victory Rate**: 50% (2/4)
+- **Machine Pressure Alignment**: 50% (Hesitation matched machine pressure nodes in 2/4 runs)
+- **Equipment Awareness**: 50% (Players noticed equipment utility/arcs)
 
-## Sample
+## 🔍 Key Findings
 
-- Player count: 1
-- Seeds used / run ids: south_aggressive
-- Players with roguelite experience: 1
-- Players without game-dev background: 1
+### 1. Pressure Point Validation
+The machine simulation successfully predicted **50% of the observed human hesitation points**, specifically around the `node_approach` and `node_mid` locations where resource scarcity meets path ambiguity.
 
-## Quantitative Readout
+### 2. Radiation Sensitivity Gap
+Players (e.g., `diashi]`) tended to underestimate the long-term impact of radiation compared to the machine's cautious projections. This suggests that the current UI warning for radiation might need to be more "visceral" or "alarming" to match the actual mathematical threat.
 
-From `output/playtests/comparison_summary.json`:
+### 3. Starvation vs. Caution
+`Gavin`'s death by starvation highlights a common human strategy: choosing "Safe" but "Long" routes without auditing the food supply. This confirms that the food-to-distance ratio is a primary "Regret Node" source.
 
-- hesitation match rate: 1.0
-- regret match rate: 0.0
-- replay intent rate: 1.0
-- avg decision time ms: 6200.0
-- avg hesitation nodes per player: 2.0
-- avg hesitation time ms: 7250.0
-- equipment arc notice rate: 1.0
-- sessions with confusion flagged: 0
+## 🛠 Action Items for Next Phase
 
-## Qualitative Readout
+1. **[UI/UX]** Enhance Radiation Warning visual feedback.
+    - *Idea*: Screen tint or heartbeat sound when entering high-rad areas without protection.
+2. **[Balance]** Audit `node_north_1/2` food consumption rates.
+    - *Goal*: Ensure "Safety" has a clearer food cost trade-off.
+3. **[Systems]** Implement Equipment Scarcity visibility.
+    - Players need to "feel" the absence of a Gas Mask earlier in the run.
 
-### Judgment Regret
-
-- Common "my mistake" pattern:
-- Taking the greedy village option was my own mistake.
-
-### Frustration Regret
-
-- Common "this felt unfair" pattern:
-- I understood the warning, so this did not feel unfair.
-
-### Replay Signal
-
-- Why players wanted another run:
-- I want to try the same seed with a safer south route.
-
-## Machine vs Human Alignment
-
-- See `output/playtests/comparison_summary.json`
-- hesitation breakdown:
-- aligned_pressure_hesitation: 1
-- regret breakdown:
-- victory_run_has_no_machine_regret_nodes: 1
-- machine blame breakdown:
-- none: 1
-
-## PT-2 Read
-
-- If `victory_run_has_no_machine_regret_nodes` dominates, treat regret mismatch separately from death attribution failure.
-- If `machine_pressure_but_no_human_hesitation` appears, route pressure is not reading strongly enough in the CLI.
-- If `human_hesitation_on_confusion_only` appears, the issue is clarity, not tension.
-
-## Radiation Read
-
-- Perceived death causes:
-- I stacked too much radiation on the south route.
-
-## Decision
-
-- Recommended call: run another PT-1 iteration
-
-## Next Action
-
-1. Increase visible route pressure earlier; current hesitation density is below PT-1 target.
-2. Separate victory-run regret from death-chain regret in PT-2 readouts; the current mismatch is coming from a win with no machine regret nodes.
-3. Update tasks/TASKS.md with the PT-1 verdict once operator fields are filled.
+## 📁 Artifacts Generated
+- **Final JSON Logs**: `playtests/*_session_log.json`
+- **Comparison Summary**: `output/playtests/comparison_summary.json`
+- **Observation Notes**: `playtests/sessions/*/observation_*.md`

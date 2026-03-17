@@ -1,62 +1,58 @@
 [
   {
-    "id": "toughness",
-    "name": "堅韌 (Toughness)",
-    "description": "+2 最大生命值。",
-    "requirements": {
-      "special": { "endurance": { "min": 6 } },
-      "level": 2
-    },
-    "effects": {
-      "max_hp_bonus": 2
-    }
+    "id": "pack_rat_perk",
+    "display_name": "負重達人 (Perk)",
+    "description": "你學會了更合理的堆疊物資。最大食物上限 +5。",
+    "requirements": { "level": 2 },
+    "effects": { "max_food_bonus": 5 }
   },
   {
-    "id": "medic_pro",
-    "name": "專業醫療 (Medic)",
-    "description": "使用醫療包回復量 +1。",
-    "requirements": {
-      "special": { "intelligence": { "min": 6 } },
-      "level": 2
-    },
-    "effects": {
-      "medkit_bonus": 1
-    }
+    "id": "eagle_eye_perk",
+    "display_name": "鷹眼",
+    "description": "銳利的目光讓你總能提早發現威脅。隨機遭遇戰機率降低 25%。",
+    "requirements": { "level": 2, "special": { "perception": { "min": 6 } } },
+    "effects": { "encounter_chance_multiplier": 0.75 }
   },
   {
-    "id": "strong_back",
-    "name": "壯碩體格 (Strong Back)",
-    "description": "事件獲得物資時額外獲得 1 廢料。",
-    "requirements": {
-      "special": { "strength": { "min": 6 } },
-      "level": 2
-    },
-    "effects": {
-      "scrap_bonus": 1
-    }
+    "id": "scrappie_perk",
+    "display_name": "零件回收家",
+    "description": "你對機械結構瞭若指掌。維修裝備時所需的廢料成本減半。",
+    "requirements": { "level": 2, "special": { "intelligence": { "min": 6 } } },
+    "effects": { "repair_cost_multiplier": 0.5 }
   },
   {
-    "id": "fortune_finder",
-    "name": "尋寶者 (Fortune Finder)",
-    "description": "探索時有更高機率發現額外彈藥。",
-    "requirements": {
-      "special": { "luck": { "min": 6 } },
-      "level": 3
-    },
-    "effects": {
-      "ammo_bonus": 1
-    }
+    "id": "tough_as_nails",
+    "display_name": "鋼鐵意志",
+    "description": "廢土的磨礪讓你皮糙肉厚。最大生命值 +2。",
+    "requirements": { "level": 2, "special": { "endurance": { "min": 6 } } },
+    "effects": { "max_hp_bonus": 2 }
   },
   {
-    "id": "sniper",
-    "name": "狙擊手 (Sniper)",
-    "description": "戰鬥命中率增加且更精確。",
-    "requirements": {
-      "special": { "perception": { "min": 7 }, "agility": { "min": 6 } },
-      "level": 4
-    },
-    "effects": {
-      "combat_precision": 1
-    }
+    "id": "quick_hands",
+    "display_name": "快手",
+    "description": "裝填與切換武器如同本能。戰鬥中彈藥消耗有 20% 機率不計入。",
+    "requirements": { "level": 4, "special": { "agility": { "min": 7 } } },
+    "effects": { "ammo_save_chance": 0.2 }
+  },
+  {
+    "id": "lead_stomach",
+    "display_name": "鉛之腸胃",
+    "description": "你的身體已適應了微量輻射。從事件效果中獲得的輻射值減少 1 點。",
+    "requirements": { "level": 2, "special": { "endurance": { "min": 5 } } },
+    "effects": { "radiation_reduction": 1 }
+  },
+  {
+    "id": "scavengers_luck",
+    "display_name": "拾荒者之運",
+    "description": "總是能從廢墟中挖出額外的好東西。從事件中獲得的廢料數量額外 +2。",
+    "requirements": { "level": 2, "special": { "luck": { "min": 6 } } },
+    "effects": { "scrap_bonus": 2 }
+  },
+  {
+    "id": "field_medic_perk",
+    "display_name": "戰地醫護",
+    "description": "更專業的包紮技術。使用醫療包時的回復量額外 +2。",
+    "requirements": { "level": 2, "special": { "intelligence": { "min": 6 } } },
+    "effects": { "medkit_heal_bonus": 2 }
   }
 ]

@@ -348,7 +348,8 @@
         "equipment_arc",
         "end_reached_final_node",
         "radiation_carryover"
-      ]
+      ],
+      "character": null
     }
   }
 }

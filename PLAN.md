@@ -46,7 +46,9 @@ Prototype validation contract: `PROTOTYPE_SUCCESS_CRITERIA.md`
 ├─ [✓] Phase v1.0: Advanced Character System 進階角色系統 (2026-03-17 完成)
 ├─ [✓] Phase v1.1: Character Factory Framework 角色生成工廠 (2026-03-17 完成)
 ├─ [✓] Phase v1.2: Perks & Dynamic Progression 成長系統 (2026-03-17 完成)
-└─ [✓] Phase v1.3: Durability & Repair System 耐久度與修復系統 (2026-03-17 完成)
+├─ [✓] Phase v1.3: Durability & Repair System 耐久度與修復系統 (2026-03-17 完成)
+├─ [✓] Phase v1.4: Ruins & Camp Special Nodes 遺蹟與營地系統 (2026-03-17 完成)
+└─ [ ] Phase 7.0: Environment & Resource Tuning 環境威脅調整與資源優化 (進行中)
 ```
 
-**當前階段：v1.3 已完成 — 目標：實作裝備耐久度、戰鬥損耗、修復機制與相關 CLI 整合。**
+**當前階段：Phase 7.0 進行中 — 目標：解決勝率過低問題，最佳化輻射公式與廢料產出。**

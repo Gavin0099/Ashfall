@@ -1,0 +1,20 @@
+{
+  "prefix": {
+    "sharp": { "display": "鋒利的", "bonus": { "atk": 1 }, "weight": 10 },
+    "deadly": { "display": "致命的", "bonus": { "atk": 3 }, "weight": 3 },
+    "sturdy": { "display": "堅固的", "bonus": { "max_durability": 5 }, "weight": 10 },
+    "lightweight": { "display": "輕便的", "requirements_offset": -1, "weight": 8 },
+    "swift": { "display": "迅捷的", "bonus": { "atk": 1, "def": 1 }, "weight": 5 },
+    "reinforced": { "display": "加固的", "bonus": { "def": 2 }, "weight": 8 }
+  },
+  "suffix": {
+    "of_power": { "display": "之力", "bonus": { "atk": 2 }, "weight": 5 },
+    "of_the_guard": { "display": "之衛", "bonus": { "def": 2 }, "weight": 10 },
+    "of_luck": { "display": "之運", "bonus": { "loot_scrap": 1 }, "weight": 5 }
+  },
+  "unique": {
+    "vampiric": { "display": "吸血鬼", "tag": "vampiric", "weight": 1 },
+    "lead_lined": { "display": "鉛封", "tag": "lead_lined", "weight": 1 },
+    "titanium": { "display": "鈦合金", "bonus": { "def": 3, "max_durability": 10 }, "weight": 3 }
+  }
+}

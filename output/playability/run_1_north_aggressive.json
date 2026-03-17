@@ -35,7 +35,7 @@
       "event_outcome": {
         "event_id": "evt_scrapyard",
         "option_index": 0,
-        "option_text": "\u9802\u8457\u8b8a\u7570\u751f\u7269\u53ef\u80fd\u56de\u982d\u7684\u98a8\u96aa\uff0c\u6436\u5148\u62d4\u8d70\u5b8c\u6574\u96f6\u4ef6",
+        "option_text": "\u8d81\u5de2\u7a74\u9084\u6c92\u5b8c\u5168\u5b89\u975c\u524d\uff0c\u786c\u62c6\u6700\u503c\u9322\u7684\u6b98\u9ab8",
         "combat_triggered": false,
         "equipment_reward": {
           "slot": "weapon",
@@ -90,7 +90,7 @@
       "event_outcome": {
         "event_id": "evt_mutant_burrow",
         "option_index": 0,
-        "option_text": "\u8d81\u5de2\u7a74\u8e81\u52d5\u524d\u885d\u9032\u53bb\uff0c\u628a\u6700\u5b8c\u6574\u7684 salvage \u62d4\u8d70",
+        "option_text": "\u8e29\u904e\u5de2\u819c\u786c\u62c6\u53ef\u7528\u96f6\u4ef6\uff0c\u8ced\u7260\u5011\u4f86\u4e0d\u53ca\u5305\u904e\u4f86",
         "combat_triggered": true,
         "equipment_reward": null,
         "equipment_change": null,
@@ -167,7 +167,7 @@
       "event_outcome": {
         "event_id": "evt_sniper_nest",
         "option_index": 0,
-        "option_text": "\u6254\u51fa\u6240\u6709\u7684\u7159\u9727\u5f48\uff0c\u885d",
+        "option_text": "\u7528\u7159\u9727\u5f48\u63a9\u8b77\uff0c\u5f37\u884c\u7a7f\u8d8a",
         "combat_triggered": true,
         "equipment_reward": null,
         "equipment_change": null,
@@ -690,7 +690,8 @@
           "equipment_arc",
           "end_reached_final_node",
           "radiation_carryover"
-        ]
+        ],
+        "character": null
       }
     }
   }

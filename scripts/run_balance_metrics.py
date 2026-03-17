@@ -258,6 +258,30 @@ def summarize_special_stats(results: list[dict]) -> dict:
             }
     return summary
 
+
+def summarize_rarity_and_affixes(results: list[dict]) -> dict:
+    total_atk_gain = 0.0
+    total_def_gain = 0.0
+    overall_rarity = Counter()
+    
+    for result in results:
+        telemetry = result["analytics"]["run_summary"]["telemetry"]
+        total_atk_gain += float(telemetry.get("total_atk_affix_gain", 0))
+        total_def_gain += float(telemetry.get("total_def_affix_gain", 0))
+        dist = telemetry.get("rarity_distribution", {})
+        overall_rarity.update(dist)
+
+    run_count = len(results)
+    return {
+        "avg_atk_affix_gain": round(total_atk_gain / run_count, 2) if run_count else 0.0,
+        "avg_def_affix_gain": round(total_def_gain / run_count, 2) if run_count else 0.0,
+        "overall_rarity_distribution": dict(overall_rarity),
+        "avg_rarity_per_run": {
+            k: round(v / run_count, 2) for k, v in overall_rarity.items()
+        } if run_count else {}
+    }
+
+
 def summarize_results(results: list[dict]) -> dict:
     death_reasons = Counter(result["end_reason"] for result in results if not result["victory"])
     outcome_signatures = {
@@ -310,6 +334,7 @@ def summarize_results(results: list[dict]) -> dict:
         "archetype_summary": summarize_archetypes(results),
         "special_stats_correlation": summarize_special_stats(results),
         "loot_economy": summarize_loot(results),
+        "rarity_and_affix_stats": summarize_rarity_and_affixes(results),
     }
     summary["balance_gate"] = {
         "twenty_runs_captured": summary["run_count"] >= 20,

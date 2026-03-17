@@ -82,9 +82,14 @@ def apply_perk(player: PlayerState, perk_id: str, catalog: List[Dict[str, Any]])
         
     effects = perk.get("effects", {})
     
-    # Static HP bonus
+    # 1. HP bonus (immediate heal + implicit max increase)
     if "max_hp_bonus" in effects:
-        # Note: We need a max_hp concept in PlayerState if we want this to be robust.
-        # Currently PlayerState just has 'hp' (starting at 10).
-        # We can simulate by just adding current HP if we assume 10 is the base.
         player.hp += effects["max_hp_bonus"]
+        
+    # 2. Food bonus
+    if "max_food_bonus" in effects:
+        # We don't have a rigid 'max_food' limit yet, but we add to current.
+        player.food += effects["max_food_bonus"]
+        
+    # Other effects (encounter_chance_multiplier, repair_cost_multiplier) 
+    # are handled in RunEngine by checking player.character.perks tags.

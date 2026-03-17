@@ -1,0 +1,66 @@
+{
+  "player_id": "Leo",
+  "session_id": "session_1773726640",
+  "roguelite_experience": false,
+  "game_dev_background": false,
+  "run_id": "session_1773726640",
+  "seed": 101,
+  "difficulty": "normal",
+  "events": [
+    {
+      "timestamp": "2026-03-17T13:50:54",
+      "node_id": "node_north_1",
+      "event_id": "evt_scrapyard",
+      "decision_time_ms": 2517,
+      "selected_option": 1,
+      "hesitation_flag": false,
+      "confusion_flag": false,
+      "what_i_thought_happened": "TBD",
+      "why_im_salty": "TBD"
+    },
+    {
+      "timestamp": "2026-03-17T13:51:00",
+      "node_id": "node_north_2",
+      "event_id": "evt_collapsed_overpass",
+      "decision_time_ms": 2322,
+      "selected_option": 0,
+      "hesitation_flag": false,
+      "confusion_flag": false,
+      "what_i_thought_happened": "TBD",
+      "why_im_salty": "TBD"
+    },
+    {
+      "timestamp": "2026-03-17T13:51:07",
+      "node_id": "node_mid",
+      "event_id": "evt_sniper_nest",
+      "decision_time_ms": 1516,
+      "selected_option": 1,
+      "hesitation_flag": false,
+      "confusion_flag": false,
+      "what_i_thought_happened": "TBD",
+      "why_im_salty": "TBD"
+    },
+    {
+      "timestamp": "2026-03-17T13:51:10",
+      "node_id": "node_approach",
+      "event_id": "evt_waystation",
+      "decision_time_ms": 2282,
+      "selected_option": 0,
+      "hesitation_flag": false,
+      "confusion_flag": false,
+      "what_i_thought_happened": "TBD",
+      "why_im_salty": "TBD"
+    }
+  ],
+  "post_run": {
+    "hardest_choice": "TBD",
+    "perceived_death_cause": "TBD",
+    "regret_choice": "TBD",
+    "replay_intent": false,
+    "judgment_regret_note": "TBD",
+    "frustration_regret_note": "TBD",
+    "immediate_replay_reason": "TBD"
+  },
+  "victory": true,
+  "end_reason": "reached_final_node"
+}

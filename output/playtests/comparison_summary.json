@@ -1,44 +1,45 @@
 {
-  "log_count": 1,
-  "hesitation_match_rate": 1.0,
+  "log_count": 4,
+  "hesitation_match_rate": 0.5,
   "regret_match_rate": 0.0,
-  "replay_intent_rate": 1.0,
-  "avg_decision_time_ms": 6200.0,
-  "equipment_arc_notice_rate": 1.0,
+  "replay_intent_rate": 0.75,
+  "avg_decision_time_ms": 3917.06,
+  "equipment_arc_notice_rate": 0.5,
   "hesitation_alignment_breakdown": {
-    "aligned_pressure_hesitation": 1
+    "aligned_pressure_hesitation": 2,
+    "machine_pressure_but_no_human_hesitation": 2
   },
   "regret_alignment_breakdown": {
-    "victory_run_has_no_machine_regret_nodes": 1
+    "victory_run_has_no_machine_regret_nodes": 4
   },
   "machine_primary_blame_breakdown": {
-    "none": 1
+    "none": 4
   },
   "comparisons": [
     {
-      "source_log": "sample_session_log.json",
-      "player_id": "P1",
-      "session_id": "PT1-001",
-      "run_id": "south_aggressive",
+      "source_log": "P1_session_log.json",
+      "player_id": "Gavin",
+      "session_id": "session_1773726522",
+      "run_id": "session_1773726522",
       "human_hesitation_nodes": [
-        "node_final",
-        "node_south_1"
+        "node_mid",
+        "node_north_2"
       ],
       "human_confusion_nodes": [],
       "machine_pressure_nodes": [
         "node_approach",
         "node_final",
         "node_mid",
-        "node_south_1",
-        "node_south_2"
+        "node_north_1",
+        "node_north_2"
       ],
       "hesitation_overlap": [
-        "node_final",
-        "node_south_1"
+        "node_mid",
+        "node_north_2"
       ],
       "hesitation_match": true,
       "hesitation_alignment_reason": "aligned_pressure_hesitation",
-      "human_regret_choice": "node_south_1",
+      "human_regret_choice": "\u524d\u671f\u9078\u64c7\u904e\u591a\u7e5e\u8def\u5c0e\u81f4\u98df\u7269\u6d88\u8017\u904e\u5feb\u3002",
       "machine_regret_nodes": [],
       "regret_match": false,
       "regret_alignment_reason": "victory_run_has_no_machine_regret_nodes",
@@ -48,12 +49,115 @@
       "machine_is_trash_time_death": false,
       "machine_pressure_count": 5,
       "machine_equipment_nodes": [
-        "node_south_2",
-        "node_mid"
+        "node_north_1"
       ],
       "equipment_arc_noticed": true,
       "replay_intent": true,
-      "avg_decision_time_ms": 6200.0
+      "avg_decision_time_ms": 5285.67
+    },
+    {
+      "source_log": "P2_session_log.json",
+      "player_id": "Mei",
+      "session_id": "session_1773726589",
+      "run_id": "session_1773726589",
+      "human_hesitation_nodes": [
+        "node_approach",
+        "node_south_1"
+      ],
+      "human_confusion_nodes": [],
+      "machine_pressure_nodes": [
+        "node_approach",
+        "node_final",
+        "node_mid",
+        "node_north_1",
+        "node_north_2"
+      ],
+      "hesitation_overlap": [
+        "node_approach"
+      ],
+      "hesitation_match": true,
+      "hesitation_alignment_reason": "aligned_pressure_hesitation",
+      "human_regret_choice": "\u96d6\u7136\u52dd\u5229\u4e86\uff0c\u4f46\u5f8c\u671f\u8f3b\u5c04\u7d2f\u7a4d\u904e\u591a\u8b93\u751f\u547d\u503c\u6975\u5176\u5371\u6025\u3002",
+      "machine_regret_nodes": [],
+      "regret_match": false,
+      "regret_alignment_reason": "victory_run_has_no_machine_regret_nodes",
+      "machine_primary_blame_factor": null,
+      "machine_steps_from_regret_to_death": 0,
+      "machine_is_victory": true,
+      "machine_is_trash_time_death": false,
+      "machine_pressure_count": 5,
+      "machine_equipment_nodes": [
+        "node_north_1"
+      ],
+      "equipment_arc_noticed": false,
+      "replay_intent": true,
+      "avg_decision_time_ms": 5835.0
+    },
+    {
+      "source_log": "P3_session_log.json",
+      "player_id": "Leo",
+      "session_id": "session_1773726640",
+      "run_id": "session_1773726640",
+      "human_hesitation_nodes": [],
+      "human_confusion_nodes": [],
+      "machine_pressure_nodes": [
+        "node_approach",
+        "node_final",
+        "node_mid",
+        "node_north_1",
+        "node_north_2"
+      ],
+      "hesitation_overlap": [],
+      "hesitation_match": false,
+      "hesitation_alignment_reason": "machine_pressure_but_no_human_hesitation",
+      "human_regret_choice": "\u66ab\u7121\u3002",
+      "machine_regret_nodes": [],
+      "regret_match": false,
+      "regret_alignment_reason": "victory_run_has_no_machine_regret_nodes",
+      "machine_primary_blame_factor": null,
+      "machine_steps_from_regret_to_death": 0,
+      "machine_is_victory": true,
+      "machine_is_trash_time_death": false,
+      "machine_pressure_count": 5,
+      "machine_equipment_nodes": [
+        "node_north_1"
+      ],
+      "equipment_arc_noticed": true,
+      "replay_intent": false,
+      "avg_decision_time_ms": 2159.25
+    },
+    {
+      "source_log": "P4_session_log.json",
+      "player_id": "diashi]",
+      "session_id": "session_1773726681",
+      "run_id": "session_1773726681",
+      "human_hesitation_nodes": [],
+      "human_confusion_nodes": [],
+      "machine_pressure_nodes": [
+        "node_approach",
+        "node_final",
+        "node_mid",
+        "node_north_1",
+        "node_north_2"
+      ],
+      "hesitation_overlap": [],
+      "hesitation_match": false,
+      "hesitation_alignment_reason": "machine_pressure_but_no_human_hesitation",
+      "human_regret_choice": "\u5728 [node_south_2] \u8caa\u5fc3\u641c\u522e\u5c0e\u81f4\u8f3b\u5c04\u904e\u9ad8\uff0c\u6700\u5f8c\u751f\u547d\u503c\u6b78\u96f6\u3002",
+      "machine_regret_nodes": [],
+      "regret_match": false,
+      "regret_alignment_reason": "victory_run_has_no_machine_regret_nodes",
+      "machine_primary_blame_factor": null,
+      "machine_steps_from_regret_to_death": 0,
+      "machine_is_victory": true,
+      "machine_is_trash_time_death": false,
+      "machine_pressure_count": 5,
+      "machine_equipment_nodes": [
+        "node_north_1"
+      ],
+      "equipment_arc_noticed": false,
+      "replay_intent": true,
+      "avg_decision_time_ms": 2388.33
     }
   ]
 }

@@ -303,7 +303,8 @@
         "food_pressure",
         "end_starvation",
         "radiation_carryover"
-      ]
+      ],
+      "character": null
     }
   }
 }

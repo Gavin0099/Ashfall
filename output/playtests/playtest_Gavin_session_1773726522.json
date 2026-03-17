@@ -1,0 +1,55 @@
+{
+  "player_id": "Gavin",
+  "session_id": "session_1773726522",
+  "roguelite_experience": false,
+  "game_dev_background": false,
+  "run_id": "session_1773726522",
+  "seed": 101,
+  "difficulty": "normal",
+  "events": [
+    {
+      "timestamp": "2026-03-17T13:49:11",
+      "node_id": "node_north_1",
+      "event_id": "evt_scrapyard",
+      "decision_time_ms": 3854,
+      "selected_option": 1,
+      "hesitation_flag": false,
+      "confusion_flag": false,
+      "what_i_thought_happened": "TBD",
+      "why_im_salty": "TBD"
+    },
+    {
+      "timestamp": "2026-03-17T13:49:26",
+      "node_id": "node_north_2",
+      "event_id": "evt_collapsed_overpass",
+      "decision_time_ms": 5627,
+      "selected_option": 1,
+      "hesitation_flag": false,
+      "confusion_flag": false,
+      "what_i_thought_happened": "TBD",
+      "why_im_salty": "TBD"
+    },
+    {
+      "timestamp": "2026-03-17T13:49:36",
+      "node_id": "node_mid",
+      "event_id": "evt_sniper_nest",
+      "decision_time_ms": 6376,
+      "selected_option": 1,
+      "hesitation_flag": false,
+      "confusion_flag": false,
+      "what_i_thought_happened": "TBD",
+      "why_im_salty": "TBD"
+    }
+  ],
+  "post_run": {
+    "hardest_choice": "TBD",
+    "perceived_death_cause": "TBD",
+    "regret_choice": "TBD",
+    "replay_intent": false,
+    "judgment_regret_note": "TBD",
+    "frustration_regret_note": "TBD",
+    "immediate_replay_reason": "TBD"
+  },
+  "victory": false,
+  "end_reason": "starvation"
+}

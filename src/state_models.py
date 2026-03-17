@@ -3,7 +3,7 @@ from __future__ import annotations
 from dataclasses import dataclass, field
 from typing import Any, Dict, List, Literal, Optional
 
-NodeType = Literal["resource", "combat", "trade", "story"]
+NodeType = Literal["resource", "combat", "trade", "story", "camp", "ruins"]
 EquipmentSlot = Literal["weapon", "armor", "tool"]
 
 ITEM_SLOT_BY_ID: Dict[str, EquipmentSlot] = {
@@ -23,7 +23,12 @@ class EquipmentState:
     slot: EquipmentSlot
     durability: int = 10
     max_durability: int = 10
+    rarity: str = "common"
+    requirements: Dict[str, int] = field(default_factory=dict)
+    scaling: Dict[str, float] = field(default_factory=dict)
     affixes: Dict[str, int] = field(default_factory=dict)
+    tags: List[str] = field(default_factory=list)
+    refinement_count: int = 0
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -31,8 +36,34 @@ class EquipmentState:
             "slot": self.slot,
             "durability": self.durability,
             "max_durability": self.max_durability,
-            "affixes": self.affixes
+            "rarity": self.rarity,
+            "requirements": self.requirements,
+            "scaling": self.scaling,
+            "affixes": self.affixes,
+            "tags": self.tags,
+            "refinement_count": self.refinement_count
         }
+
+    def get_refine_cost(self) -> int:
+        """Calculate the scrap cost for the next refinement."""
+        base_cost = 5
+        if self.rarity == "common":
+            base_cost = 5 + (self.refinement_count * 2)
+        elif self.rarity == "rare":
+            base_cost = 15 + (self.refinement_count * 5)
+        elif self.rarity == "legendary":
+            base_cost = 40 + (self.refinement_count * 10)
+        return base_cost
+
+    def repair(self, amount: int):
+        self.durability = min(self.max_durability, self.durability + amount)
+
+    def reinforce(self, affix_type: str, value: int):
+        self.affixes[affix_type] = self.affixes.get(affix_type, 0) + value
+
+    def refit(self, tag: str):
+        if tag not in self.tags:
+            self.tags.append(tag)
 
     @staticmethod
     def from_dict(data: Dict[str, Any]) -> EquipmentState:
@@ -41,7 +72,12 @@ class EquipmentState:
             slot=data["slot"],
             durability=data.get("durability", 10),
             max_durability=data.get("max_durability", 10),
+            rarity=data.get("rarity", "common"),
+            requirements=data.get("requirements", {}),
+            scaling=data.get("scaling", {}),
             affixes=data.get("affixes", {}),
+            tags=data.get("tags", []),
+            refinement_count=data.get("refinement_count", 0),
         )
 
 @dataclass
@@ -97,9 +133,21 @@ class PlayerState:
     weapon_slot: Optional[EquipmentState] = None
     armor_slot: Optional[EquipmentState] = None
     tool_slot: Optional[EquipmentState] = None
+    buffs: Dict[str, int] = field(default_factory=dict) # buff_id: duration_steps
 
     def is_dead(self) -> bool:
         return self.hp <= 0 or self.food <= 0
+
+    def equip(self, item: EquipmentState):
+        """Equip an item into the correct slot."""
+        if item.slot == "weapon":
+            self.weapon_slot = item
+        elif item.slot == "armor":
+            self.armor_slot = item
+        elif item.slot == "tool":
+            self.tool_slot = item
+        else:
+            raise ValueError(f"Unknown slot: {item.slot}")
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -114,6 +162,7 @@ class PlayerState:
             "weapon_slot": self.weapon_slot.to_dict() if self.weapon_slot else None,
             "armor_slot": self.armor_slot.to_dict() if self.armor_slot else None,
             "tool_slot": self.tool_slot.to_dict() if self.tool_slot else None,
+            "buffs": self.buffs
         }
 
     @staticmethod
@@ -134,6 +183,7 @@ class PlayerState:
             weapon_slot=EquipmentState.from_dict(w_data) if isinstance(w_data, dict) else None,
             armor_slot=EquipmentState.from_dict(a_data) if isinstance(a_data, dict) else None,
             tool_slot=EquipmentState.from_dict(t_data) if isinstance(t_data, dict) else None,
+            buffs=data.get("buffs", {})
         )
 
 
@@ -146,6 +196,7 @@ class NodeState:
     is_start: bool = False
     is_final: bool = False
     resource_cost: Dict[str, int] = field(default_factory=dict)
+    metadata: Dict[str, Any] = field(default_factory=dict)
 
 
 @dataclass
@@ -186,6 +237,10 @@ class RunState:
     ended: bool = False
     victory: bool = False
     end_reason: Optional[str] = None
+    
+    # Phase 3.0: Ruins exploration state
+    current_ruins_stage: int = 0
+    temporary_loot: Dict[str, int] = field(default_factory=dict)
     decision_log: List[Dict[str, Any]] = field(default_factory=list)
     travel_mode: str = "normal"
     flags: Dict[str, Any] = field(default_factory=dict)
@@ -273,6 +328,10 @@ def apply_effects(player: PlayerState, effects: Dict[str, int]) -> None:
         elif key == "xp":
             if player.character:
                 player.character.xp += delta
+        elif key == "buffs":
+            # delta is expected to be a Dict[buff_id, duration]
+            if isinstance(delta, dict):
+                player.buffs.update(delta)
         else:
             raise ValueError(f"Unsupported effect key: {key}")
 
@@ -282,6 +341,16 @@ def apply_effects(player: PlayerState, effects: Dict[str, int]) -> None:
     player.medkits = max(0, player.medkits)
     player.scrap = max(0, player.scrap)
     player.radiation = max(0, player.radiation)
+
+    # Phase 2.2: Perk-based event effect modifiers
+    if player.character:
+        # Lead Stomach: Reduce radiation gained from events
+        if "lead_stomach" in player.character.perks and effects.get("radiation", 0) > 0:
+            player.radiation = max(0, player.radiation - 1)
+        
+        # Scavenger's Luck: Bonus scrap from events
+        if "scavengers_luck" in player.character.perks and effects.get("scrap", 0) > 0:
+            player.scrap += 2
 
 
 def apply_loot(player: PlayerState, resource: str, amount: int) -> None:
@@ -295,5 +364,8 @@ def apply_loot(player: PlayerState, resource: str, amount: int) -> None:
         player.medkits += amount
     elif resource == "scrap":
         player.scrap += amount
+    elif resource == "xp":
+        if player.character:
+            player.character.xp += amount
     else:
         raise ValueError(f"Unsupported loot resource: {resource}")

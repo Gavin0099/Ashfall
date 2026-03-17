@@ -1,0 +1,416 @@
+{
+  "run_id": "north_cautious_military_deserter_7_batch_1",
+  "seed": 102,
+  "route": [
+    "node_north_1",
+    "node_north_2",
+    "node_mid",
+    "node_approach",
+    "node_final"
+  ],
+  "ended": true,
+  "victory": false,
+  "end_reason": "starvation",
+  "player_final": {
+    "hp": 7,
+    "food": 0,
+    "ammo": 1,
+    "medkits": 2,
+    "scrap": 4,
+    "radiation": 0,
+    "archetype": null,
+    "character": {
+      "background_id": "military_deserter",
+      "display_name": "Sergeant Thorne",
+      "special": {
+        "strength": 8,
+        "perception": 6,
+        "endurance": 8,
+        "charisma": 2,
+        "intelligence": 4,
+        "agility": 6,
+        "luck": 6
+      },
+      "traits": [
+        "heavy_handed",
+        "trigger_discipline"
+      ],
+      "perks": [],
+      "tags": [
+        "tactical_combat",
+        "heavy_weapons",
+        "tag_military_deserter"
+      ],
+      "level": 1,
+      "xp": 0
+    },
+    "weapon_slot": null,
+    "armor_slot": null,
+    "tool_slot": null
+  },
+  "decision_log": [
+    {
+      "step": 1,
+      "node": "node_north_1",
+      "event_id": "evt_scrapyard",
+      "option_index": 1,
+      "warning_signals": [],
+      "pre_choice_state": {
+        "hp": 10,
+        "food": 6,
+        "ammo": 3,
+        "medkits": 1,
+        "scrap": 0,
+        "radiation": 0,
+        "archetype": null,
+        "character": {
+          "background_id": "military_deserter",
+          "display_name": "Sergeant Thorne",
+          "special": {
+            "strength": 8,
+            "perception": 6,
+            "endurance": 8,
+            "charisma": 2,
+            "intelligence": 4,
+            "agility": 6,
+            "luck": 6
+          },
+          "traits": [
+            "heavy_handed",
+            "trigger_discipline"
+          ],
+          "perks": [],
+          "tags": [
+            "tactical_combat",
+            "heavy_weapons",
+            "tag_military_deserter"
+          ],
+          "level": 1,
+          "xp": 0
+        },
+        "weapon_slot": null,
+        "armor_slot": null,
+        "tool_slot": null
+      },
+      "pressure": true,
+      "combat_triggered": false,
+      "combat_loot": [],
+      "effects": {
+        "food": -1,
+        "hp": -1,
+        "scrap": 1
+      },
+      "equipment_change": null,
+      "equipment_summary": null,
+      "player_after": {
+        "hp": 9,
+        "food": 5,
+        "ammo": 3,
+        "medkits": 1,
+        "scrap": 1,
+        "radiation": 0,
+        "archetype": null,
+        "character": {
+          "background_id": "military_deserter",
+          "display_name": "Sergeant Thorne",
+          "special": {
+            "strength": 8,
+            "perception": 6,
+            "endurance": 8,
+            "charisma": 2,
+            "intelligence": 4,
+            "agility": 6,
+            "luck": 6
+          },
+          "traits": [
+            "heavy_handed",
+            "trigger_discipline"
+          ],
+          "perks": [],
+          "tags": [
+            "tactical_combat",
+            "heavy_weapons",
+            "tag_military_deserter"
+          ],
+          "level": 1,
+          "xp": 0
+        },
+        "weapon_slot": null,
+        "armor_slot": null,
+        "tool_slot": null
+      }
+    },
+    {
+      "step": 2,
+      "node": "node_north_2",
+      "event_id": "evt_mutant_burrow",
+      "option_index": 1,
+      "warning_signals": [],
+      "pre_choice_state": {
+        "hp": 9,
+        "food": 4,
+        "ammo": 3,
+        "medkits": 1,
+        "scrap": 1,
+        "radiation": 0,
+        "archetype": null,
+        "character": {
+          "background_id": "military_deserter",
+          "display_name": "Sergeant Thorne",
+          "special": {
+            "strength": 8,
+            "perception": 6,
+            "endurance": 8,
+            "charisma": 2,
+            "intelligence": 4,
+            "agility": 6,
+            "luck": 6
+          },
+          "traits": [
+            "heavy_handed",
+            "trigger_discipline"
+          ],
+          "perks": [],
+          "tags": [
+            "tactical_combat",
+            "heavy_weapons",
+            "tag_military_deserter"
+          ],
+          "level": 1,
+          "xp": 0
+        },
+        "weapon_slot": null,
+        "armor_slot": null,
+        "tool_slot": null
+      },
+      "pressure": true,
+      "combat_triggered": true,
+      "combat_loot": [
+        {
+          "resource": "scrap",
+          "amount": 2
+        },
+        {
+          "resource": "medkits",
+          "amount": 1
+        }
+      ],
+      "effects": {
+        "food": -1,
+        "scrap": 1
+      },
+      "equipment_change": null,
+      "equipment_summary": null,
+      "player_after": {
+        "hp": 7,
+        "food": 3,
+        "ammo": 1,
+        "medkits": 2,
+        "scrap": 4,
+        "radiation": 0,
+        "archetype": null,
+        "character": {
+          "background_id": "military_deserter",
+          "display_name": "Sergeant Thorne",
+          "special": {
+            "strength": 8,
+            "perception": 6,
+            "endurance": 8,
+            "charisma": 2,
+            "intelligence": 4,
+            "agility": 6,
+            "luck": 6
+          },
+          "traits": [
+            "heavy_handed",
+            "trigger_discipline"
+          ],
+          "perks": [],
+          "tags": [
+            "tactical_combat",
+            "heavy_weapons",
+            "tag_military_deserter"
+          ],
+          "level": 1,
+          "xp": 0
+        },
+        "weapon_slot": null,
+        "armor_slot": null,
+        "tool_slot": null
+      }
+    },
+    {
+      "step": 3,
+      "node": "node_mid",
+      "event_id": "evt_sniper_nest",
+      "option_index": 1,
+      "warning_signals": [
+        "WARNING: food is low and route slack is nearly gone."
+      ],
+      "pre_choice_state": {
+        "hp": 7,
+        "food": 2,
+        "ammo": 1,
+        "medkits": 2,
+        "scrap": 4,
+        "radiation": 0,
+        "archetype": null,
+        "character": {
+          "background_id": "military_deserter",
+          "display_name": "Sergeant Thorne",
+          "special": {
+            "strength": 8,
+            "perception": 6,
+            "endurance": 8,
+            "charisma": 2,
+            "intelligence": 4,
+            "agility": 6,
+            "luck": 6
+          },
+          "traits": [
+            "heavy_handed",
+            "trigger_discipline"
+          ],
+          "perks": [],
+          "tags": [
+            "tactical_combat",
+            "heavy_weapons",
+            "tag_military_deserter"
+          ],
+          "level": 1,
+          "xp": 0
+        },
+        "weapon_slot": null,
+        "armor_slot": null,
+        "tool_slot": null
+      },
+      "pressure": true,
+      "combat_triggered": false,
+      "combat_loot": [],
+      "effects": {
+        "food": -2
+      },
+      "equipment_change": null,
+      "equipment_summary": null,
+      "player_after": {
+        "hp": 7,
+        "food": 0,
+        "ammo": 1,
+        "medkits": 2,
+        "scrap": 4,
+        "radiation": 0,
+        "archetype": null,
+        "character": {
+          "background_id": "military_deserter",
+          "display_name": "Sergeant Thorne",
+          "special": {
+            "strength": 8,
+            "perception": 6,
+            "endurance": 8,
+            "charisma": 2,
+            "intelligence": 4,
+            "agility": 6,
+            "luck": 6
+          },
+          "traits": [
+            "heavy_handed",
+            "trigger_discipline"
+          ],
+          "perks": [],
+          "tags": [
+            "tactical_combat",
+            "heavy_weapons",
+            "tag_military_deserter"
+          ],
+          "level": 1,
+          "xp": 0
+        },
+        "weapon_slot": null,
+        "armor_slot": null,
+        "tool_slot": null
+      }
+    }
+  ],
+  "summary": {
+    "pressure_count": 3,
+    "death_cause_attribution": true,
+    "resource_signature": "hp:7|food:0|ammo:1|medkits:2|scrap:4|radiation:0|weapon:None|armor:None|tool:None"
+  },
+  "failure_analysis": {
+    "death_chain_length": 3,
+    "primary_blame_factor": "resource_exhaustion",
+    "regret_nodes": [
+      {
+        "node_id": "node_mid",
+        "event_id": "evt_sniper_nest",
+        "blame_score": 0.4,
+        "description": "lost 2 food",
+        "steps_to_death": 0
+      },
+      {
+        "node_id": "node_north_1",
+        "event_id": "evt_scrapyard",
+        "blame_score": 0.31,
+        "description": "lost 1 hp, lost 1 food",
+        "steps_to_death": 2
+      },
+      {
+        "node_id": "node_north_2",
+        "event_id": "evt_mutant_burrow",
+        "blame_score": 0.29,
+        "description": "lost 1 food, accepted combat risk",
+        "steps_to_death": 1
+      }
+    ],
+    "steps_from_regret_to_death": 0,
+    "is_trash_time_death": false
+  },
+  "run_summary": {
+    "headline": "north_cautious_military_deserter_7_batch_1: loss via starvation after 3 steps",
+    "route_family": "north",
+    "outcome": "starvation",
+    "key_turning_point": "node_mid (lost 2 food)",
+    "notable_equipment": [],
+    "telemetry": {
+      "total_steps": 3,
+      "pressure_count": 3,
+      "combat_count": 1,
+      "loot_drop_count": 2,
+      "loot_total_amount": 3,
+      "equipment_change_count": 0,
+      "equipment_ids": [],
+      "loot_resources": {
+        "scrap": 2,
+        "medkits": 1
+      },
+      "max_radiation": 0,
+      "min_food": 0,
+      "min_hp": 7,
+      "low_resource_flags": [
+        "low_food",
+        "low_ammo"
+      ],
+      "risk_tags": [
+        "combat_seen",
+        "food_pressure",
+        "end_starvation"
+      ],
+      "character": {
+        "background_id": "military_deserter",
+        "traits": [
+          "heavy_handed",
+          "trigger_discipline"
+        ],
+        "special": {
+          "strength": 8,
+          "perception": 6,
+          "endurance": 8,
+          "charisma": 2,
+          "intelligence": 4,
+          "agility": 6,
+          "luck": 6
+        }
+      }
+    }
+  }
+}

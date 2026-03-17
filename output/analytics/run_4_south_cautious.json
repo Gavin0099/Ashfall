@@ -308,7 +308,8 @@
       "risk_tags": [
         "equipment_arc",
         "end_reached_final_node"
-      ]
+      ],
+      "character": null
     }
   }
 }

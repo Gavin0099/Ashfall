@@ -1,0 +1,216 @@
+{
+  "run_id": "north_aggressive_vault_technician_batch_10",
+  "seed": 1001,
+  "route": [
+    "node_north_1",
+    "node_north_2",
+    "node_mid",
+    "node_approach",
+    "node_final"
+  ],
+  "ended": true,
+  "victory": false,
+  "end_reason": "event_or_resource_death",
+  "player_final": {
+    "hp": 0,
+    "food": 6,
+    "ammo": 3,
+    "medkits": 3,
+    "scrap": 1,
+    "radiation": 0,
+    "archetype": null,
+    "weapon_slot": {
+      "id": "makeshift_blade",
+      "slot": "weapon",
+      "affixes": {
+        "atk": 1
+      }
+    },
+    "armor_slot": null,
+    "tool_slot": null
+  },
+  "decision_log": [
+    {
+      "step": 1,
+      "node": "node_north_1",
+      "event_id": "evt_scrapyard",
+      "option_index": 0,
+      "warning_signals": [
+        "DANGER: this choice carries a high combat risk."
+      ],
+      "pre_choice_state": {
+        "hp": 10,
+        "food": 6,
+        "ammo": 3,
+        "medkits": 1,
+        "scrap": 0,
+        "radiation": 0,
+        "archetype": null,
+        "weapon_slot": null,
+        "armor_slot": null,
+        "tool_slot": null
+      },
+      "pressure": true,
+      "combat_triggered": true,
+      "combat_loot": [
+        {
+          "resource": "ammo",
+          "amount": 3
+        },
+        {
+          "resource": "food",
+          "amount": 1
+        }
+      ],
+      "effects": {
+        "food": 0,
+        "ammo": 1,
+        "medkits": 1
+      },
+      "equipment_change": {
+        "slot": "weapon",
+        "item": "makeshift_blade",
+        "replaced": null,
+        "changed": true
+      },
+      "equipment_summary": "weapon -> makeshift_blade (replaced empty)",
+      "player_after": {
+        "hp": 7,
+        "food": 7,
+        "ammo": 5,
+        "medkits": 2,
+        "scrap": 0,
+        "radiation": 0,
+        "archetype": null,
+        "weapon_slot": {
+          "id": "makeshift_blade",
+          "slot": "weapon",
+          "affixes": {
+            "atk": 1
+          }
+        },
+        "armor_slot": null,
+        "tool_slot": null
+      }
+    },
+    {
+      "step": 2,
+      "node": "node_north_2",
+      "event_id": "evt_tunnel",
+      "option_index": 0,
+      "warning_signals": [
+        "DANGER: this choice carries a high combat risk."
+      ],
+      "pre_choice_state": {
+        "hp": 7,
+        "food": 6,
+        "ammo": 5,
+        "medkits": 2,
+        "scrap": 0,
+        "radiation": 0,
+        "archetype": null,
+        "weapon_slot": {
+          "id": "makeshift_blade",
+          "slot": "weapon",
+          "affixes": {
+            "atk": 1
+          }
+        },
+        "armor_slot": null,
+        "tool_slot": null
+      },
+      "pressure": true,
+      "combat_triggered": true,
+      "combat_loot": [],
+      "effects": {
+        "hp": -1,
+        "medkits": 1,
+        "scrap": 1,
+        "radiation": 0
+      },
+      "equipment_change": null,
+      "equipment_summary": null,
+      "player_after": {
+        "hp": 0,
+        "food": 6,
+        "ammo": 3,
+        "medkits": 3,
+        "scrap": 1,
+        "radiation": 0,
+        "archetype": null,
+        "weapon_slot": {
+          "id": "makeshift_blade",
+          "slot": "weapon",
+          "affixes": {
+            "atk": 1
+          }
+        },
+        "armor_slot": null,
+        "tool_slot": null
+      }
+    }
+  ],
+  "summary": {
+    "pressure_count": 2,
+    "death_cause_attribution": true,
+    "resource_signature": "hp:0|food:6|ammo:3|medkits:3|scrap:1|radiation:0|weapon:EquipmentState(id='makeshift_blade', slot='weapon', affixes={'atk': 1})|armor:None|tool:None"
+  },
+  "failure_analysis": {
+    "death_chain_length": 2,
+    "primary_blame_factor": "combat",
+    "regret_nodes": [
+      {
+        "node_id": "node_north_2",
+        "event_id": "evt_tunnel",
+        "blame_score": 0.73,
+        "description": "lost 1 hp, accepted combat risk",
+        "steps_to_death": 0
+      },
+      {
+        "node_id": "node_north_1",
+        "event_id": "evt_scrapyard",
+        "blame_score": 0.27,
+        "description": "accepted combat risk",
+        "steps_to_death": 1
+      }
+    ],
+    "steps_from_regret_to_death": 0,
+    "is_trash_time_death": false
+  },
+  "run_summary": {
+    "headline": "north_aggressive_vault_technician_batch_10: loss via event_or_resource_death after 2 steps",
+    "route_family": "north",
+    "outcome": "event_or_resource_death",
+    "key_turning_point": "node_north_2 (lost 1 hp, accepted combat risk)",
+    "notable_equipment": [
+      "makeshift_blade"
+    ],
+    "telemetry": {
+      "total_steps": 2,
+      "pressure_count": 2,
+      "combat_count": 2,
+      "loot_drop_count": 2,
+      "loot_total_amount": 4,
+      "equipment_change_count": 1,
+      "equipment_ids": [
+        "makeshift_blade"
+      ],
+      "loot_resources": {
+        "ammo": 3,
+        "food": 1
+      },
+      "max_radiation": 0,
+      "min_food": 6,
+      "min_hp": 0,
+      "low_resource_flags": [
+        "low_hp"
+      ],
+      "risk_tags": [
+        "combat_seen",
+        "equipment_arc",
+        "end_event_or_resource_death"
+      ],
+      "character": null
+    }
+  }
+}

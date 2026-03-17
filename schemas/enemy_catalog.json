@@ -16,6 +16,11 @@
         "chance": 1.0
       },
       {
+        "resource": "scrap",
+        "amount": 2,
+        "chance": 0.5
+      },
+      {
         "resource": "food",
         "amount": 1,
         "chance": 0.4
@@ -35,7 +40,7 @@
     "loot_table": [
       {
         "resource": "scrap",
-        "amount": 2,
+        "amount": 4,
         "chance": 1.0
       },
       {
@@ -64,7 +69,7 @@
       },
       {
         "resource": "scrap",
-        "amount": 3,
+        "amount": 7,
         "chance": 1.0
       }
     ]
@@ -88,7 +93,60 @@
       },
       {
         "resource": "scrap",
-        "amount": 5,
+        "amount": 12,
+        "chance": 1.0
+      }
+    ]
+  },
+  "boss_gatekeeper": {
+    "id": "boss_gatekeeper",
+    "name": "區域守門員：鋼鐵哨兵 (Steel Sentinel)",
+    "archetype": "boss",
+    "special_ability": "shockwave",
+    "hp": 30,
+    "is_elite": true,
+    "damage_range": {
+      "min": 3,
+      "max": 5
+    },
+    "loot_table": [
+      {
+        "resource": "xp",
+        "amount": 25,
+        "chance": 1.0
+      },
+      {
+        "resource": "scrap",
+        "amount": 25,
+        "chance": 1.0
+      }
+    ]
+  },
+  "boss_overseer": {
+    "id": "boss_overseer",
+    "name": "最終監察者：影中之眼 (Eye of the Shadows)",
+    "archetype": "boss",
+    "special_ability": "frenzy",
+    "hp": 50,
+    "is_elite": true,
+    "damage_range": {
+      "min": 4,
+      "max": 6
+    },
+    "loot_table": [
+      {
+        "resource": "xp",
+        "amount": 50,
+        "chance": 1.0
+      },
+      {
+        "resource": "scrap",
+        "amount": 50,
+        "chance": 1.0
+      },
+      {
+        "resource": "medkits",
+        "amount": 3,
         "chance": 1.0
       }
     ]

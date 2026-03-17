@@ -1,0 +1,280 @@
+{
+  "run_id": "south_aggressive_wasteland_medic_batch_9",
+  "seed": 903,
+  "route": [
+    "node_south_1",
+    "node_south_2",
+    "node_mid",
+    "node_approach",
+    "node_final"
+  ],
+  "ended": true,
+  "victory": false,
+  "end_reason": "radiation_death",
+  "player_final": {
+    "hp": -3,
+    "food": 7,
+    "ammo": 0,
+    "medkits": 0,
+    "scrap": 2,
+    "radiation": 2,
+    "archetype": null,
+    "weapon_slot": {
+      "id": "rust_rifle",
+      "slot": "weapon",
+      "affixes": {
+        "atk": 1
+      }
+    },
+    "armor_slot": null,
+    "tool_slot": {
+      "id": "field_pack",
+      "slot": "tool",
+      "affixes": {}
+    }
+  },
+  "decision_log": [
+    {
+      "step": 1,
+      "node": "node_south_1",
+      "event_id": "evt_village",
+      "option_index": 1,
+      "warning_signals": [
+        "WARNING: radiation will continue to threaten future travel.",
+        "WARNING: this option adds radiation and increases long-term risk.",
+        "DANGER: this choice carries a high combat risk."
+      ],
+      "pre_choice_state": {
+        "hp": 10,
+        "food": 6,
+        "ammo": 3,
+        "medkits": 1,
+        "scrap": 0,
+        "radiation": 0,
+        "archetype": null,
+        "weapon_slot": null,
+        "armor_slot": null,
+        "tool_slot": null
+      },
+      "pressure": true,
+      "combat_triggered": true,
+      "combat_loot": [
+        {
+          "resource": "scrap",
+          "amount": 2
+        },
+        {
+          "resource": "medkits",
+          "amount": 1
+        }
+      ],
+      "effects": {
+        "food": 2,
+        "radiation": 1
+      },
+      "equipment_change": null,
+      "equipment_summary": null,
+      "player_after": {
+        "hp": 8,
+        "food": 8,
+        "ammo": 1,
+        "medkits": 2,
+        "scrap": 2,
+        "radiation": 1,
+        "archetype": null,
+        "weapon_slot": null,
+        "armor_slot": null,
+        "tool_slot": null
+      }
+    },
+    {
+      "step": 2,
+      "node": "node_south_2",
+      "event_id": "evt_floodplain",
+      "option_index": 0,
+      "warning_signals": [
+        "WARNING: radiation will continue to threaten future travel.",
+        "WARNING: this option adds radiation and increases long-term risk."
+      ],
+      "pre_choice_state": {
+        "hp": 7,
+        "food": 7,
+        "ammo": 1,
+        "medkits": 2,
+        "scrap": 2,
+        "radiation": 1,
+        "archetype": null,
+        "weapon_slot": null,
+        "armor_slot": null,
+        "tool_slot": null
+      },
+      "pressure": true,
+      "combat_triggered": false,
+      "combat_loot": [],
+      "effects": {
+        "food": -1,
+        "radiation": 1
+      },
+      "equipment_change": {
+        "slot": "tool",
+        "item": "field_pack",
+        "replaced": null,
+        "changed": true
+      },
+      "equipment_summary": "tool -> field_pack (replaced empty)",
+      "player_after": {
+        "hp": 7,
+        "food": 8,
+        "ammo": 1,
+        "medkits": 2,
+        "scrap": 2,
+        "radiation": 2,
+        "archetype": null,
+        "weapon_slot": null,
+        "armor_slot": null,
+        "tool_slot": {
+          "id": "field_pack",
+          "slot": "tool",
+          "affixes": {}
+        }
+      }
+    },
+    {
+      "step": 3,
+      "node": "node_mid",
+      "event_id": "evt_checkpoint",
+      "option_index": 0,
+      "warning_signals": [
+        "WARNING: radiation will continue to threaten future travel.",
+        "DANGER: this choice carries a high combat risk."
+      ],
+      "pre_choice_state": {
+        "hp": 6,
+        "food": 7,
+        "ammo": 1,
+        "medkits": 2,
+        "scrap": 2,
+        "radiation": 2,
+        "archetype": null,
+        "weapon_slot": null,
+        "armor_slot": null,
+        "tool_slot": {
+          "id": "field_pack",
+          "slot": "tool",
+          "affixes": {}
+        }
+      },
+      "pressure": true,
+      "combat_triggered": true,
+      "combat_loot": [],
+      "effects": {
+        "ammo": 0
+      },
+      "equipment_change": {
+        "slot": "weapon",
+        "item": "rust_rifle",
+        "replaced": null,
+        "changed": true
+      },
+      "equipment_summary": "weapon -> rust_rifle (replaced empty)",
+      "player_after": {
+        "hp": -3,
+        "food": 7,
+        "ammo": 0,
+        "medkits": 0,
+        "scrap": 2,
+        "radiation": 2,
+        "archetype": null,
+        "weapon_slot": {
+          "id": "rust_rifle",
+          "slot": "weapon",
+          "affixes": {
+            "atk": 1
+          }
+        },
+        "armor_slot": null,
+        "tool_slot": {
+          "id": "field_pack",
+          "slot": "tool",
+          "affixes": {}
+        }
+      }
+    }
+  ],
+  "summary": {
+    "pressure_count": 3,
+    "death_cause_attribution": true,
+    "resource_signature": "hp:-3|food:7|ammo:0|medkits:0|scrap:2|radiation:2|weapon:EquipmentState(id='rust_rifle', slot='weapon', affixes={'atk': 1})|armor:None|tool:EquipmentState(id='field_pack', slot='tool', affixes={})"
+  },
+  "failure_analysis": {
+    "death_chain_length": 3,
+    "primary_blame_factor": "radiation",
+    "regret_nodes": [
+      {
+        "node_id": "node_south_2",
+        "event_id": "evt_floodplain",
+        "blame_score": 0.48,
+        "description": "took +1 radiation, lost 1 food, carried radiation into later travel",
+        "steps_to_death": 1
+      },
+      {
+        "node_id": "node_south_1",
+        "event_id": "evt_village",
+        "blame_score": 0.44,
+        "description": "took +1 radiation, accepted combat risk, carried radiation into later travel",
+        "steps_to_death": 2
+      },
+      {
+        "node_id": "node_mid",
+        "event_id": "evt_checkpoint",
+        "blame_score": 0.08,
+        "description": "accepted combat risk",
+        "steps_to_death": 0
+      }
+    ],
+    "steps_from_regret_to_death": 1,
+    "is_trash_time_death": false
+  },
+  "run_summary": {
+    "headline": "south_aggressive_wasteland_medic_batch_9: loss via radiation_death after 3 steps",
+    "route_family": "south",
+    "outcome": "radiation_death",
+    "key_turning_point": "node_south_2 (took +1 radiation, lost 1 food, carried radiation into later travel)",
+    "notable_equipment": [
+      "field_pack",
+      "rust_rifle"
+    ],
+    "telemetry": {
+      "total_steps": 3,
+      "pressure_count": 3,
+      "combat_count": 2,
+      "loot_drop_count": 2,
+      "loot_total_amount": 3,
+      "equipment_change_count": 2,
+      "equipment_ids": [
+        "field_pack",
+        "rust_rifle"
+      ],
+      "loot_resources": {
+        "scrap": 2,
+        "medkits": 1
+      },
+      "max_radiation": 2,
+      "min_food": 7,
+      "min_hp": 0,
+      "low_resource_flags": [
+        "low_hp",
+        "low_ammo",
+        "high_radiation"
+      ],
+      "risk_tags": [
+        "combat_seen",
+        "radiation_pressure",
+        "equipment_arc",
+        "end_radiation_death",
+        "radiation_carryover"
+      ],
+      "character": null
+    }
+  }
+}

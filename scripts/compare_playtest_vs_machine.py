@@ -54,12 +54,30 @@ def is_completed_log(data: dict[str, Any]) -> bool:
     )
 
 
-def find_machine_run(run_id: str) -> dict[str, Any]:
+def find_machine_run(human_data: dict[str, Any]) -> dict[str, Any]:
+    seed = human_data.get("seed")
+    diff = human_data.get("difficulty")
+    
+    # Try exact run_id first
+    run_id = human_data.get("run_id")
     for path in ANALYTICS_DIR.glob("run_*.json"):
         payload = load_json(path)
-        if payload["run_id"] == run_id:
+        if payload.get("run_id") == run_id:
             return payload
-    raise FileNotFoundError(f"Machine analytics run not found for run_id={run_id}")
+            
+    # Fallback to Seed/Difficulty match
+    for path in ANALYTICS_DIR.glob("run_*.json"):
+        payload = load_json(path)
+        if payload.get("seed") == seed and payload.get("difficulty") == diff:
+            return payload
+            
+    # Second Fallback: Any run with same seed
+    for path in ANALYTICS_DIR.glob("run_*.json"):
+        payload = load_json(path)
+        if payload.get("seed") == seed:
+            return payload
+
+    raise FileNotFoundError(f"Machine analytics run not found for Seed={seed}, Diff={diff}")
 
 
 def classify_hesitation_alignment(
@@ -128,7 +146,7 @@ def main() -> int:
     equipment_arc_notice_count = 0
 
     for log_path, human in logs:
-        machine = find_machine_run(human["run_id"])
+        machine = find_machine_run(human)
 
         human_hesitation_nodes = {entry["node_id"] for entry in human["events"] if entry["hesitation_flag"]}
         confusion_nodes = {entry["node_id"] for entry in human["events"] if entry["confusion_flag"]}

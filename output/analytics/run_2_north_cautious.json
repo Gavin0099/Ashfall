@@ -219,7 +219,8 @@
         "combat_seen",
         "food_pressure",
         "end_starvation"
-      ]
+      ],
+      "character": null
     }
   }
 }

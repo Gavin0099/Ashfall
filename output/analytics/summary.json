@@ -1,20 +1,16 @@
 {
   "run_ids": [
-    "north_aggressive",
-    "north_cautious",
-    "south_aggressive",
-    "south_cautious",
-    "mixed_pressure"
+    "standard_journey"
   ],
   "metrics": {
-    "distinct_outcome_signatures": 5,
-    "death_runs": 3,
-    "rerun_signal_runs": 4
+    "distinct_outcome_signatures": 1,
+    "death_runs": 1,
+    "rerun_signal_runs": 1
   },
   "playability_gate": {
     "pressure_choices_per_run": true,
-    "route_diversity": true,
+    "route_diversity": false,
     "death_explainable_from_logs": true,
-    "rerun_signal_3_of_5": true
+    "rerun_signal_3_of_5": false
   }
 }

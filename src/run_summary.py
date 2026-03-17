@@ -112,6 +112,21 @@ def determine_turning_point(
     return None
 
 
+def collect_equipment_details(decision_log: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    details: list[dict[str, Any]] = []
+    for entry in decision_log:
+        change = entry.get("equipment_change")
+        if not isinstance(change, dict):
+            continue
+        item_data = change.get("item_data")
+        if isinstance(item_data, dict):
+            details.append(item_data)
+        elif isinstance(change.get("item"), str):
+            # Fallback for old logs or simple ID references
+            details.append({"id": change["item"], "rarity": "common", "affixes": {}})
+    return details
+
+
 def build_run_summary(
     *,
     run_id: str,
@@ -124,7 +139,9 @@ def build_run_summary(
     summary: dict[str, Any],
     failure_analysis: dict[str, Any],
 ) -> dict[str, Any]:
-    equipment_items = collect_equipment_items(decision_log)
+    equipment_details = collect_equipment_details(decision_log)
+    equipment_ids = [d["id"] for d in equipment_details]
+    
     combat_loot = collect_combat_loot(decision_log)
     loot_totals = summarize_loot_by_resource(combat_loot)
     low_resource_flags = collect_low_resource_flags(decision_log, player_final)
@@ -137,6 +154,17 @@ def build_run_summary(
     pressure_count = int(summary.get("pressure_count", 0))
     turning_point = determine_turning_point(decision_log, failure_analysis)
 
+    # Rarity and Affix aggregation
+    rarity_counts = {}
+    total_atk_affix = 0
+    total_def_affix = 0
+    for d in equipment_details:
+        r = d.get("rarity", "common")
+        rarity_counts[r] = rarity_counts.get(r, 0) + 1
+        affixes = d.get("affixes", {})
+        total_atk_affix += affixes.get("atk", 0)
+        total_def_affix += affixes.get("def", 0)
+
     headline = (
         f"{run_id}: {'victory' if victory else 'loss'} via "
         f"{end_reason or 'in_progress'} after {len(decision_log)} steps"
@@ -146,15 +174,18 @@ def build_run_summary(
         "route_family": route_family,
         "outcome": "victory" if victory else (end_reason or ("ended" if ended else "in_progress")),
         "key_turning_point": turning_point,
-        "notable_equipment": equipment_items,
+        "notable_equipment": list(set(equipment_ids)),
         "telemetry": {
             "total_steps": len(decision_log),
             "pressure_count": pressure_count,
             "combat_count": combat_count,
             "loot_drop_count": len(combat_loot),
             "loot_total_amount": sum(loot_totals.values()),
-            "equipment_change_count": len(equipment_items),
-            "equipment_ids": equipment_items,
+            "equipment_change_count": len(equipment_details),
+            "rarity_distribution": rarity_counts,
+            "total_atk_affix_gain": total_atk_affix,
+            "total_def_affix_gain": total_def_affix,
+            "equipment_ids": list(set(equipment_ids)),
             "loot_resources": loot_totals,
             "max_radiation": max_radiation,
             "min_food": min_food,

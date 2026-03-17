@@ -1,0 +1,72 @@
+{
+  "makeshift_blade": {
+    "slot": "weapon",
+    "base_dmg": [1, 3],
+    "requirements": {},
+    "scaling": {"strength": 0.5},
+    "tags": ["melee", "makeshift"]
+  },
+  "rust_rifle": {
+    "slot": "weapon",
+    "base_dmg": [2, 4],
+    "requirements": {"agility": 4},
+    "scaling": {"perception": 0.5},
+    "tags": ["ranged", "firearm"]
+  },
+  "hardened_blade": {
+    "slot": "weapon",
+    "base_dmg": [2, 5],
+    "requirements": {"strength": 5},
+    "scaling": {"strength": 0.8},
+    "tags": ["melee", "quality"]
+  },
+  "sledgehammer": {
+    "slot": "weapon",
+    "base_dmg": [4, 7],
+    "requirements": {"strength": 7},
+    "scaling": {"strength": 1.2},
+    "tags": ["melee", "heavy"]
+  },
+  "gas_mask": {
+    "slot": "armor",
+    "requirements": {},
+    "scaling": {},
+    "tags": ["protection", "hazard"],
+    "protection": {"radiation": 1}
+  },
+  "plate_armor": {
+    "slot": "armor",
+    "requirements": {"strength": 6},
+    "scaling": {"endurance": 0.2},
+    "tags": ["protection", "heavy"],
+    "protection": {"physical": 1}
+  },
+  "tactical_visor": {
+    "slot": "tool",
+    "requirements": {"perception": 6},
+    "scaling": {},
+    "tags": ["recon", "tech"],
+    "bonuses": {"atk": 1}
+  },
+  "scavenger_kit": {
+    "slot": "tool",
+    "requirements": {"luck": 4},
+    "scaling": {},
+    "tags": ["scavenging"],
+    "bonuses": {"loot_scrap": 1}
+  },
+  "rust_armor": {
+    "slot": "armor",
+    "requirements": {},
+    "scaling": {"endurance": 0.3},
+    "tags": ["makeshift", "protection"],
+    "protection": {"physical": 1}
+  },
+  "field_pack": {
+    "slot": "tool",
+    "requirements": {"strength": 4},
+    "scaling": {},
+    "tags": ["exploration"],
+    "bonuses": {"max_food": 2}
+  }
+}

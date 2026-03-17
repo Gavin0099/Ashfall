@@ -38,13 +38,20 @@ class RoutePlan:
 
 def build_node_payloads() -> Dict[str, dict]:
     return {
-        "node_start": {"id": "node_start", "node_type": "story", "connections": ["node_north_1", "node_south_1"], "event_pool": ["evt_departure"], "is_start": True},
-        "node_north_1": {"id": "node_north_1", "node_type": "resource", "connections": ["node_north_2"], "event_pool": ["evt_scrapyard", "evt_factory_ruins"]},
-        "node_north_2": {"id": "node_north_2", "node_type": "combat", "connections": ["node_mid"], "event_pool": ["evt_tunnel", "evt_mutant_burrow", "evt_collapsed_overpass", "evt_quest_medical_discovery"]},
-        "node_south_1": {"id": "node_south_1", "node_type": "trade", "connections": ["node_south_2"], "event_pool": ["evt_village", "evt_raider_toll_bridge", "evt_quest_village_medical_request"]},
-        "node_south_2": {"id": "node_south_2", "node_type": "resource", "connections": ["node_mid"], "event_pool": ["evt_floodplain", "evt_radioactive_orchard", "evt_abandoned_cache", "evt_quest_medical_discovery"]},
-        "node_mid": {"id": "node_mid", "node_type": "combat", "connections": ["node_approach"], "event_pool": ["evt_checkpoint", "evt_sniper_nest", "evt_quest_medical_completion"]},
-        "node_approach": {"id": "node_approach", "node_type": "story", "connections": ["node_final"], "event_pool": ["evt_waystation", "evt_emergency_beacon", "evt_quest_medical_completion"]},
+        # Fringe (Depth 0-3)
+        "node_start": {"id": "node_start", "node_type": "story", "connections": ["node_fringe_1"], "event_pool": ["evt_departure"], "is_start": True},
+        "node_fringe_1": {"id": "node_fringe_1", "node_type": "resource", "connections": ["node_fringe_2"], "event_pool": ["evt_scrapyard", "evt_factory_ruins"]},
+        "node_fringe_2": {"id": "node_fringe_2", "node_type": "combat", "connections": ["node_fringe_3"], "event_pool": ["evt_tunnel", "evt_mutant_burrow"]},
+        "node_fringe_3": {"id": "node_fringe_3", "node_type": "camp", "connections": ["node_boss_gatekeeper"], "event_pool": ["evt_tech_vault"], "metadata": {"facilities": {"repair_bench": True}}},
+
+        # Dead Zone (Depth 4-7)
+        "node_boss_gatekeeper": {"id": "node_boss_gatekeeper", "node_type": "combat", "connections": ["node_deadzone_1"], "event_pool": ["evt_boss_gatekeeper"]},
+        "node_deadzone_1": {"id": "node_deadzone_1", "node_type": "resource", "connections": ["node_deadzone_2"], "event_pool": ["evt_floodplain", "evt_radioactive_orchard"]},
+        "node_deadzone_2": {"id": "node_deadzone_2", "node_type": "combat", "connections": ["node_deadzone_3"], "event_pool": ["evt_sniper_nest", "evt_checkpoint"]},
+        "node_deadzone_3": {"id": "node_deadzone_3", "node_type": "camp", "connections": ["node_boss_overseer"], "event_pool": ["evt_tech_vault"]},
+
+        # The Ridge (Depth 8-9)
+        "node_boss_overseer": {"id": "node_boss_overseer", "node_type": "combat", "connections": ["node_final"], "event_pool": ["evt_boss_overseer"]},
         "node_final": {"id": "node_final", "node_type": "story", "connections": [], "event_pool": ["evt_final"], "is_final": True},
     }
 
@@ -68,11 +75,15 @@ def build_enemy_catalog() -> Dict[str, dict]:
 
 def route_plans() -> List[RoutePlan]:
     return [
-        RoutePlan("north_aggressive", 101, ["node_north_1", "node_north_2", "node_mid", "node_approach", "node_final"], {"node_north_1": 0, "node_north_2": 0, "node_mid": 0, "node_approach": 1, "node_final": 1}),
-        RoutePlan("north_cautious", 102, ["node_north_1", "node_north_2", "node_mid", "node_approach", "node_final"], {"node_north_1": 1, "node_north_2": 1, "node_mid": 1, "node_approach": 0, "node_final": 0}),
-        RoutePlan("south_aggressive", 103, ["node_south_1", "node_south_2", "node_mid", "node_approach", "node_final"], {"node_south_1": 1, "node_south_2": 0, "node_mid": 0, "node_approach": 1, "node_final": 1}),
-        RoutePlan("south_cautious", 104, ["node_south_1", "node_south_2", "node_mid", "node_approach", "node_final"], {"node_south_1": 0, "node_south_2": 1, "node_mid": 1, "node_approach": 0, "node_final": 0}),
-        RoutePlan("mixed_pressure", 105, ["node_north_1", "node_north_2", "node_mid", "node_approach", "node_final"], {"node_north_1": 0, "node_north_2": 1, "node_mid": 0, "node_approach": 1, "node_final": 1}),
+        RoutePlan("standard_journey", 101, [
+            "node_fringe_1", "node_fringe_2", "node_fringe_3", 
+            "node_boss_gatekeeper", "node_deadzone_1", "node_deadzone_2", 
+            "node_deadzone_3", "node_boss_overseer", "node_final"
+        ], {
+            "node_fringe_1": 0, "node_fringe_2": 0, "node_fringe_3": 0,
+            "node_boss_gatekeeper": 0, "node_deadzone_1": 0, "node_deadzone_2": 0,
+            "node_deadzone_3": 0, "node_boss_overseer": 0, "node_final": 0
+        }),
     ]
 
 
@@ -320,6 +331,23 @@ def run_plan(plan: RoutePlan, nodes: Dict[str, dict], events: Dict[str, dict], e
                 current_travel_mode = "normal"
         
         node = engine.move_to(run, next_node, travel_mode=current_travel_mode)
+        
+        # v6.0: Automated Workshop Actions at Camp
+        if node.node_type == "camp":
+            for slot in ["weapon", "armor", "tool"]:
+                equipment = getattr(run.player, f"{slot}_slot")
+                if not equipment: continue
+                
+                # Priority 1: Repair if durability is low (< 40%)
+                if equipment.durability <= equipment.max_durability * 0.4:
+                    engine.refine_equipment(run, slot, "repair")
+                
+                # Priority 2: Refine if enough scrap
+                # Simulation AI is aggressive: refine if it has scrap
+                refine_cost = equipment.get_refine_cost()
+                if run.player.scrap >= refine_cost:
+                    engine.refine_equipment(run, slot, "refine")
+
         event_id = pick_event_id(node, engine.rng, run_flags=run.flags, event_catalog=events)
         event_payload = events[event_id]
         

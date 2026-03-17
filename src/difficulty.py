@@ -10,6 +10,38 @@ DifficultyName = str
 
 
 @dataclass(frozen=True)
+class RegionProfile:
+    name: str             # 區域代碼 (e.g. fringe)
+    display_name: str    # UI 顯示名稱
+    min_depth: int       # 起始深度 (inclusive)
+    max_depth: int       # 結束深度 (inclusive)
+    base_radiation: int  # 該區域基礎輻射值
+    stat_multiplier: float  # 敵人數值加成係數
+    elite_chance_multiplier: float # 精英出現率加成
+
+
+REGIONAL_PROFILES = [
+    RegionProfile("fringe", "邊緣地帶 (Fringe)", 0, 3, 0, 1.0, 1.0),
+    RegionProfile("dead_zone", "死亡禁區 (Dead Zone)", 4, 7, 1, 1.2, 1.3),
+    RegionProfile("the_ridge", "山脊之巔 (The Ridge)", 8, 999, 2, 1.5, 2.0),
+]
+
+
+def get_region_at_depth(depth: int) -> RegionProfile:
+    for profile in REGIONAL_PROFILES:
+        if profile.min_depth <= depth <= profile.max_depth:
+            return profile
+    return REGIONAL_PROFILES[0]
+
+
+def scale_enemy_stat(base_val: int, depth: int) -> int:
+    region = get_region_at_depth(depth)
+    # 複合縮放：區域權重 + 深度線性增長 (2%/depth)
+    multiplier = region.stat_multiplier * (1.0 + (depth * 0.02))
+    return max(1, int(base_val * multiplier))
+
+
+@dataclass(frozen=True)
 class DifficultyProfile:
     name: DifficultyName
     starting_hp: int
@@ -22,26 +54,26 @@ class DifficultyProfile:
 DIFFICULTY_PROFILES: dict[str, DifficultyProfile] = {
     "easy": DifficultyProfile(
         name="easy",
-        starting_hp=10,
-        starting_food=9,
+        starting_hp=25,
+        starting_food=12,
         starting_ammo=4,
-        starting_medkits=2,
+        starting_medkits=4,
         event_combat_delta=-0.1,
     ),
     "normal": DifficultyProfile(
         name="normal",
-        starting_hp=10,
-        starting_food=7,
+        starting_hp=20,
+        starting_food=10,
         starting_ammo=3,
-        starting_medkits=1,
+        starting_medkits=2,
         event_combat_delta=0.0,
     ),
     "hard": DifficultyProfile(
         name="hard",
-        starting_hp=9,
-        starting_food=6,
+        starting_hp=15,
+        starting_food=8,
         starting_ammo=3,
-        starting_medkits=0,
+        starting_medkits=1,
         event_combat_delta=0.1,
     ),
 }

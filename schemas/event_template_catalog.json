@@ -14,12 +14,15 @@
           ],
           "character_filters": {
             "require_special": {
-              "intelligence": { "min": 7 }
+              "intelligence": {
+                "min": 7
+              }
             }
           },
           "effects": {
-            "scrap": 10,
-            "medkits": 2
+            "scrap": 25,
+            "medkits": 2,
+            "xp": 10
           },
           "combat_chance": 0.0
         },
@@ -29,12 +32,15 @@
           ],
           "character_filters": {
             "require_special": {
-              "strength": { "min": 8 }
+              "strength": {
+                "min": 8
+              }
             }
           },
           "effects": {
-            "scrap": 5,
-            "hp": -2
+            "scrap": 12,
+            "hp": -2,
+            "xp": 5
           },
           "combat_chance": 0.2
         },
@@ -43,7 +49,7 @@
             "搜查外部遺落物"
           ],
           "effects": {
-            "scrap": 2
+            "scrap": 5
           },
           "combat_chance": 0.1
         }
@@ -64,7 +70,13 @@
             "在風暴加劇前先拉開距離"
           ],
           "effects": {
-            "food": -1
+            "food": 2,
+            "medkits": 1,
+            "xp": 3
+          },
+          "equipment_reward": {
+            "slot": "weapon",
+            "item": "makeshift_blade"
           },
           "combat_chance": 0.0
         },
@@ -74,7 +86,13 @@
             "保持隊形穩定推進"
           ],
           "effects": {
-            "food": 0
+            "food": 3,
+            "medkits": 2,
+            "xp": 1
+          },
+          "equipment_reward": {
+            "slot": "armor",
+            "item": "rust_armor"
           },
           "combat_chance": 0.0
         }
@@ -91,13 +109,14 @@
       "options": [
         {
           "text_variants": [
-            "趁巢穴還沒完全安靜前，硬拆最值錢的殘骸",
-            "頂著變異生物可能回頭的風險，搶先拔走完整零件"
+            "趁巢穴還沒完全安靜前，硬拆最值錢的殘骸 (此舉將消耗體力並可能導致飢餓)",
+            "頂著變異生物可能回頭的風險，搶先拔走完整零件 (警告：此處資源補給匱乏)"
           ],
           "effects": {
-            "food": 0,
-            "ammo": 1,
-            "medkits": 1
+            "food": 2,
+            "ammo": 3,
+            "medkits": 2,
+            "xp": 8
           },
           "equipment_reward": {
             "slot": "weapon",
@@ -111,9 +130,9 @@
             "避開最深的腐蝕坑，只拿表層還能拆的零件"
           ],
           "effects": {
-            "food": -1,
-            "hp": -1,
-            "scrap": 1
+            "food": 1,
+            "hp": 0,
+            "scrap": 5
           },
           "combat_chance": 0.4
         }
@@ -136,7 +155,7 @@
           "effects": {
             "hp": -1,
             "medkits": 1,
-            "scrap": 1,
+            "scrap": 4,
             "radiation": 0
           },
           "combat_chance": 0.5
@@ -148,7 +167,7 @@
           ],
           "effects": {
             "food": -1,
-            "scrap": 1
+            "scrap": 3
           },
           "combat_chance": 0.25
         }
@@ -170,8 +189,9 @@
           ],
           "effects": {
             "hp": -1,
-            "scrap": 2,
-            "medkits": 1
+            "scrap": 6,
+            "medkits": 1,
+            "xp": 5
           },
           "encounter_bias": {
             "mutant": 2.0,
@@ -193,6 +213,25 @@
             "raider": 0.7
           },
           "combat_chance": 0.2
+        },
+        {
+          "text": "進入血性狀態，強行從怪物群中殺出血路 (HP < 5 時可用)",
+          "character_filters": {
+            "require_any_tag": [
+              "bloodlust"
+            ],
+            "require_special": {
+              "hp": {
+                "max": 4
+              }
+            }
+          },
+          "effects": {
+            "hp": -1,
+            "scrap": 5,
+            "xp": 10
+          },
+          "combat_chance": 0.0
         }
       ]
     },
@@ -212,7 +251,8 @@
           ],
           "effects": {
             "ammo": -1,
-            "medkits": 1
+            "medkits": 1,
+            "xp": 3
           },
           "equipment_reward": {
             "slot": "tool",
@@ -254,8 +294,8 @@
       "options": [
         {
           "text_variants": [
-            "快速硬穿過去",
-            "逼車隊直接衝過泥地"
+            "快速硬穿過去 (危險：泥潭將迅速耗盡物資並帶來輻射)",
+            "逼車隊直接衝過泥地 (警告：前進步履艱難，後悔可能太遲)"
           ],
           "effects": {
             "food": -1,
@@ -269,14 +309,28 @@
         },
         {
           "text_variants": [
-            "繞路順便搜糧",
-            "走慢一點，順便找乾燥地帶"
+            "繞路順便搜糧 (耗費資源但更安全)",
+            "走慢一點，順便找乾燥地帶 (預警：物資決定你能走多遠)"
           ],
           "effects": {
-            "food": 1,
-            "ammo": -1
+            "food": 3,
+            "ammo": 0
           },
           "combat_chance": 0.0
+        },
+        {
+          "text": "利用輻射適應性，深潛行過黑水泥潭 (避開損耗並回收醫療器材)",
+          "character_filters": {
+            "require_any_tag": [
+              "rad_resistant"
+            ]
+          },
+          "effects": {
+            "medkits": 1,
+            "radiation": 0,
+            "xp": 8
+          },
+          "combat_chance": 0.1
         }
       ]
     },
@@ -295,7 +349,8 @@
             "在對方開火前先打穿整條防線"
           ],
           "effects": {
-            "ammo": 0
+            "ammo": 0,
+            "xp": 5
           },
           "equipment_reward": {
             "slot": "weapon",
@@ -310,7 +365,8 @@
           ],
           "effects": {
             "food": 1,
-            "medkits": 1
+            "medkits": 1,
+            "xp": 2
           },
           "combat_chance": 0.2
         }
@@ -359,8 +415,8 @@
       "options": [
         {
           "text_variants": [
-            "花補給換安全路線",
-            "用稀缺物資換一段更穩的登坡"
+            "花補給換安全路線 (背水一戰：確保物資足以應對最後的考驗)",
+            "用稀缺物資換一段更穩的登坡 (警告：這是最後的衝刺，別在這裡倒下)"
           ],
           "effects": {
             "food": -1
@@ -369,8 +425,8 @@
         },
         {
           "text_variants": [
-            "賭一把快速衝坡",
-            "沿著山脊硬衝，賭自己撐得住"
+            "賭一把快速衝坡 (高難度：輻射威脅將直接反饋在生死之間)",
+            "沿著山脊硬衝，賭自己撐得住 (警告：這是你最後的體能博弈)"
           ],
           "effects": {
             "radiation": 1
@@ -396,7 +452,8 @@
           "effects": {
             "food": 2,
             "medkits": 1,
-            "radiation": 1
+            "radiation": 1,
+            "xp": 5
           },
           "combat_chance": 0.5
         },
@@ -429,7 +486,7 @@
           "effects": {
             "scrap": 3,
             "hp": -1,
-            "radiation": 2
+            "radiation": 1
           },
           "combat_chance": 0.3
         },
@@ -546,7 +603,7 @@
           ],
           "effects": {
             "food": -1,
-            "radiation": 2,
+            "radiation": 1,
             "ammo": 1
           },
           "combat_chance": 0.4
@@ -625,6 +682,38 @@
             "food": -1
           },
           "combat_chance": 0.2
+        }
+      ]
+    },
+    {
+      "event_id": "evt_adrenaline_discovery",
+      "template_type": "scavenger_encounter",
+      "description_variants": [
+        "你在倒塌的救護車後座發現了一支標示模糊的注射器，裡面的液體閃爍著詭異的藍光。",
+        "醫療箱裡最後的驚喜：一支密封良好的戰前興奮劑，標籤上寫著「緊急用途」。"
+      ],
+      "options": [
+        {
+          "text_variants": [
+            "立刻注射以強化感官",
+            "在腎上腺素的加持下準備之後的戰鬥"
+          ],
+          "effects": {
+            "buffs": {
+              "adrenaline": 3
+            }
+          },
+          "combat_chance": 0.0
+        },
+        {
+          "text_variants": [
+            "小心收起（暫無效果）",
+            "這種來源不明的東西還是別亂打"
+          ],
+          "effects": {
+            "scrap": 1
+          },
+          "combat_chance": 0.0
         }
       ]
     },
@@ -1318,6 +1407,64 @@
           ],
           "effects": {},
           "combat_chance": 0.0
+        }
+      ]
+    },
+    {
+      "event_id": "evt_boss_gatekeeper",
+      "template_type": "boss_encounter",
+      "description_variants": [
+        "前方是一座巨大的鋼鐵閘門，一台鏽跡斑斑但依然威嚴的哨兵機器人正擋在路中，眼中的紅光鎖定了你。",
+        "通往禁區的唯一道路被這台古老的哨兵機器人封鎖了，它的液壓系統發出低沉的嘶吼。"
+      ],
+      "options": [
+        {
+          "text_variants": [
+            "準備戰鬥：正面擊潰它"
+          ],
+          "effects": {
+            "xp": 5
+          },
+          "combat_chance": 1.0,
+          "fixed_enemy_id": "boss_gatekeeper"
+        },
+        {
+          "text_variants": [
+            "嘗試繞過：尋找側翼漏洞 (需要 Agility 7)"
+          ],
+          "character_filters": {
+            "require_special": {
+              "agility": {
+                "min": 7
+              }
+            }
+          },
+          "effects": {
+            "xp": 15,
+            "food": -2
+          },
+          "combat_chance": 0.2,
+          "fixed_enemy_id": "boss_gatekeeper"
+        }
+      ]
+    },
+    {
+      "event_id": "evt_boss_overseer",
+      "template_type": "boss_encounter",
+      "description_variants": [
+        "你終於抵達了山脊的最深處。監察者——那個半人半機器的恐怖存在，正冷冷地注視著你。",
+        "影中之眼已經等候多時。它的機械觸手在空中揮舞，散發著令人窒息的壓迫感。"
+      ],
+      "options": [
+        {
+          "text_variants": [
+            "最終對決：為了生存與真相！"
+          ],
+          "effects": {
+            "xp": 10
+          },
+          "combat_chance": 1.0,
+          "fixed_enemy_id": "boss_overseer"
         }
       ]
     }

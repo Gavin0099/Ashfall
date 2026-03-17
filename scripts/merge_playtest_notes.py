@@ -35,14 +35,28 @@ def parse_markdown_notes(md_path):
     bg_match = re.search(r"Game-dev Background:\s*(yes|no)", content, re.I)
     meta["game_dev_background"] = (bg_match.group(1).lower() == "yes") if bg_match else False
 
-    return meta, interview
+    # Event Table Parsing
+    events_flags = {}
+    # | Timestamp | Node ID | Decision Time (ms) | Selected Option | Hesitation | Confusion | ...
+    # Column mapping: 1=Node ID, 4=Hesitation, 5=Confusion
+    for line in content.splitlines():
+        if "|" in line and "Selected Option" not in line and "---" not in line:
+            parts = [p.strip() for p in line.split("|")]
+            if len(parts) >= 7:
+                node_id = parts[2]
+                hesitation = parts[5].lower() == "yes"
+                confusion = parts[6].lower() == "yes"
+                if node_id:
+                    events_flags[node_id] = {"hesitation": hesitation, "confusion": confusion}
+
+    return meta, interview, events_flags
 
 def merge(json_path, md_path):
     if not json_path.exists() or not md_path.exists():
-        print("Error: Path not found.")
+        print(f"Error: Path not found. JSON: {json_path}, MD: {md_path}")
         return
 
-    meta, interview = parse_markdown_notes(md_path)
+    meta, interview, events_flags = parse_markdown_notes(md_path)
     
     with open(json_path, "r", encoding="utf-8") as f:
         data = json.load(f)
@@ -52,8 +66,12 @@ def merge(json_path, md_path):
     data["game_dev_background"] = meta["game_dev_background"]
     data["post_run"].update(interview)
     
-    # Note: Event flags (hesitation/confusion) still need manual JSON editing or a more complex MD table parser.
-    # For now, this handles the bulk of the interview data.
+    # Update Event Flags
+    for event in data["events"]:
+        node_id = event["node_id"]
+        if node_id in events_flags:
+            event["hesitation_flag"] = events_flags[node_id]["hesitation"]
+            event["confusion_flag"] = events_flags[node_id]["confusion"]
     
     target_path = json_path.parent / f"final_{json_path.name}"
     with open(target_path, "w", encoding="utf-8") as f:

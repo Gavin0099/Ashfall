@@ -1,0 +1,633 @@
+{
+  "run_id": "south_cautious_raider_defector_1_batch_1",
+  "seed": 104,
+  "route": [
+    "node_south_1",
+    "node_south_2",
+    "node_mid",
+    "node_approach",
+    "node_final"
+  ],
+  "ended": true,
+  "victory": true,
+  "end_reason": "reached_final_node",
+  "player_final": {
+    "hp": 10,
+    "food": 7,
+    "ammo": 1,
+    "medkits": 3,
+    "scrap": 0,
+    "radiation": 0,
+    "archetype": null,
+    "character": {
+      "background_id": "raider_defector",
+      "display_name": "Generated Raider defector",
+      "special": {
+        "strength": 5,
+        "perception": 7,
+        "endurance": 5,
+        "charisma": 7,
+        "intelligence": 8,
+        "agility": 6,
+        "luck": 2
+      },
+      "traits": [
+        "pack_rat",
+        "small_frame"
+      ],
+      "perks": [],
+      "tags": [
+        "tag_raider_defector"
+      ],
+      "level": 1,
+      "xp": 0
+    },
+    "weapon_slot": null,
+    "armor_slot": null,
+    "tool_slot": {
+      "id": "scavenger_kit",
+      "slot": "tool",
+      "durability": 10,
+      "max_durability": 10,
+      "requirements": {},
+      "scaling": {},
+      "affixes": {},
+      "tags": []
+    }
+  },
+  "decision_log": [
+    {
+      "step": 1,
+      "node": "node_south_1",
+      "event_id": "evt_village",
+      "option_index": 0,
+      "warning_signals": [],
+      "pre_choice_state": {
+        "hp": 10,
+        "food": 6,
+        "ammo": 3,
+        "medkits": 1,
+        "scrap": 0,
+        "radiation": 0,
+        "archetype": null,
+        "character": {
+          "background_id": "raider_defector",
+          "display_name": "Generated Raider defector",
+          "special": {
+            "strength": 5,
+            "perception": 7,
+            "endurance": 5,
+            "charisma": 7,
+            "intelligence": 8,
+            "agility": 6,
+            "luck": 2
+          },
+          "traits": [
+            "pack_rat",
+            "small_frame"
+          ],
+          "perks": [],
+          "tags": [
+            "tag_raider_defector"
+          ],
+          "level": 1,
+          "xp": 0
+        },
+        "weapon_slot": null,
+        "armor_slot": null,
+        "tool_slot": null
+      },
+      "pressure": true,
+      "combat_triggered": false,
+      "combat_loot": [],
+      "effects": {
+        "ammo": -1,
+        "medkits": 1
+      },
+      "equipment_change": {
+        "slot": "tool",
+        "item": "scavenger_kit",
+        "replaced": null,
+        "changed": true
+      },
+      "equipment_summary": "tool -> scavenger_kit (replaced empty)",
+      "player_after": {
+        "hp": 10,
+        "food": 6,
+        "ammo": 2,
+        "medkits": 2,
+        "scrap": 0,
+        "radiation": 0,
+        "archetype": null,
+        "character": {
+          "background_id": "raider_defector",
+          "display_name": "Generated Raider defector",
+          "special": {
+            "strength": 5,
+            "perception": 7,
+            "endurance": 5,
+            "charisma": 7,
+            "intelligence": 8,
+            "agility": 6,
+            "luck": 2
+          },
+          "traits": [
+            "pack_rat",
+            "small_frame"
+          ],
+          "perks": [],
+          "tags": [
+            "tag_raider_defector"
+          ],
+          "level": 1,
+          "xp": 0
+        },
+        "weapon_slot": null,
+        "armor_slot": null,
+        "tool_slot": {
+          "id": "scavenger_kit",
+          "slot": "tool",
+          "durability": 10,
+          "max_durability": 10,
+          "requirements": {},
+          "scaling": {},
+          "affixes": {},
+          "tags": []
+        }
+      }
+    },
+    {
+      "step": 2,
+      "node": "node_south_2",
+      "event_id": "evt_floodplain",
+      "option_index": 1,
+      "warning_signals": [],
+      "pre_choice_state": {
+        "hp": 10,
+        "food": 5,
+        "ammo": 2,
+        "medkits": 2,
+        "scrap": 0,
+        "radiation": 0,
+        "archetype": null,
+        "character": {
+          "background_id": "raider_defector",
+          "display_name": "Generated Raider defector",
+          "special": {
+            "strength": 5,
+            "perception": 7,
+            "endurance": 5,
+            "charisma": 7,
+            "intelligence": 8,
+            "agility": 6,
+            "luck": 2
+          },
+          "traits": [
+            "pack_rat",
+            "small_frame"
+          ],
+          "perks": [],
+          "tags": [
+            "tag_raider_defector"
+          ],
+          "level": 1,
+          "xp": 0
+        },
+        "weapon_slot": null,
+        "armor_slot": null,
+        "tool_slot": {
+          "id": "scavenger_kit",
+          "slot": "tool",
+          "durability": 10,
+          "max_durability": 10,
+          "requirements": {},
+          "scaling": {},
+          "affixes": {},
+          "tags": []
+        }
+      },
+      "pressure": true,
+      "combat_triggered": false,
+      "combat_loot": [],
+      "effects": {
+        "food": 1,
+        "ammo": -1
+      },
+      "equipment_change": null,
+      "equipment_summary": null,
+      "player_after": {
+        "hp": 10,
+        "food": 7,
+        "ammo": 1,
+        "medkits": 2,
+        "scrap": 0,
+        "radiation": 0,
+        "archetype": null,
+        "character": {
+          "background_id": "raider_defector",
+          "display_name": "Generated Raider defector",
+          "special": {
+            "strength": 5,
+            "perception": 7,
+            "endurance": 5,
+            "charisma": 7,
+            "intelligence": 8,
+            "agility": 6,
+            "luck": 2
+          },
+          "traits": [
+            "pack_rat",
+            "small_frame"
+          ],
+          "perks": [],
+          "tags": [
+            "tag_raider_defector"
+          ],
+          "level": 1,
+          "xp": 0
+        },
+        "weapon_slot": null,
+        "armor_slot": null,
+        "tool_slot": {
+          "id": "scavenger_kit",
+          "slot": "tool",
+          "durability": 10,
+          "max_durability": 10,
+          "requirements": {},
+          "scaling": {},
+          "affixes": {},
+          "tags": []
+        }
+      }
+    },
+    {
+      "step": 3,
+      "node": "node_mid",
+      "event_id": "evt_checkpoint",
+      "option_index": 1,
+      "warning_signals": [],
+      "pre_choice_state": {
+        "hp": 10,
+        "food": 6,
+        "ammo": 1,
+        "medkits": 2,
+        "scrap": 0,
+        "radiation": 0,
+        "archetype": null,
+        "character": {
+          "background_id": "raider_defector",
+          "display_name": "Generated Raider defector",
+          "special": {
+            "strength": 5,
+            "perception": 7,
+            "endurance": 5,
+            "charisma": 7,
+            "intelligence": 8,
+            "agility": 6,
+            "luck": 2
+          },
+          "traits": [
+            "pack_rat",
+            "small_frame"
+          ],
+          "perks": [],
+          "tags": [
+            "tag_raider_defector"
+          ],
+          "level": 1,
+          "xp": 0
+        },
+        "weapon_slot": null,
+        "armor_slot": null,
+        "tool_slot": {
+          "id": "scavenger_kit",
+          "slot": "tool",
+          "durability": 10,
+          "max_durability": 10,
+          "requirements": {},
+          "scaling": {},
+          "affixes": {},
+          "tags": []
+        }
+      },
+      "pressure": true,
+      "combat_triggered": false,
+      "combat_loot": [],
+      "effects": {
+        "food": 1,
+        "medkits": 1
+      },
+      "equipment_change": null,
+      "equipment_summary": null,
+      "player_after": {
+        "hp": 10,
+        "food": 8,
+        "ammo": 1,
+        "medkits": 3,
+        "scrap": 0,
+        "radiation": 0,
+        "archetype": null,
+        "character": {
+          "background_id": "raider_defector",
+          "display_name": "Generated Raider defector",
+          "special": {
+            "strength": 5,
+            "perception": 7,
+            "endurance": 5,
+            "charisma": 7,
+            "intelligence": 8,
+            "agility": 6,
+            "luck": 2
+          },
+          "traits": [
+            "pack_rat",
+            "small_frame"
+          ],
+          "perks": [],
+          "tags": [
+            "tag_raider_defector"
+          ],
+          "level": 1,
+          "xp": 0
+        },
+        "weapon_slot": null,
+        "armor_slot": null,
+        "tool_slot": {
+          "id": "scavenger_kit",
+          "slot": "tool",
+          "durability": 10,
+          "max_durability": 10,
+          "requirements": {},
+          "scaling": {},
+          "affixes": {},
+          "tags": []
+        }
+      }
+    },
+    {
+      "step": 4,
+      "node": "node_approach",
+      "event_id": "evt_waystation",
+      "option_index": 0,
+      "warning_signals": [],
+      "pre_choice_state": {
+        "hp": 10,
+        "food": 7,
+        "ammo": 1,
+        "medkits": 3,
+        "scrap": 0,
+        "radiation": 0,
+        "archetype": null,
+        "character": {
+          "background_id": "raider_defector",
+          "display_name": "Generated Raider defector",
+          "special": {
+            "strength": 5,
+            "perception": 7,
+            "endurance": 5,
+            "charisma": 7,
+            "intelligence": 8,
+            "agility": 6,
+            "luck": 2
+          },
+          "traits": [
+            "pack_rat",
+            "small_frame"
+          ],
+          "perks": [],
+          "tags": [
+            "tag_raider_defector"
+          ],
+          "level": 1,
+          "xp": 0
+        },
+        "weapon_slot": null,
+        "armor_slot": null,
+        "tool_slot": {
+          "id": "scavenger_kit",
+          "slot": "tool",
+          "durability": 10,
+          "max_durability": 10,
+          "requirements": {},
+          "scaling": {},
+          "affixes": {},
+          "tags": []
+        }
+      },
+      "pressure": true,
+      "combat_triggered": false,
+      "combat_loot": [],
+      "effects": {
+        "food": 1
+      },
+      "equipment_change": null,
+      "equipment_summary": null,
+      "player_after": {
+        "hp": 10,
+        "food": 9,
+        "ammo": 1,
+        "medkits": 3,
+        "scrap": 0,
+        "radiation": 0,
+        "archetype": null,
+        "character": {
+          "background_id": "raider_defector",
+          "display_name": "Generated Raider defector",
+          "special": {
+            "strength": 5,
+            "perception": 7,
+            "endurance": 5,
+            "charisma": 7,
+            "intelligence": 8,
+            "agility": 6,
+            "luck": 2
+          },
+          "traits": [
+            "pack_rat",
+            "small_frame"
+          ],
+          "perks": [],
+          "tags": [
+            "tag_raider_defector"
+          ],
+          "level": 1,
+          "xp": 0
+        },
+        "weapon_slot": null,
+        "armor_slot": null,
+        "tool_slot": {
+          "id": "scavenger_kit",
+          "slot": "tool",
+          "durability": 10,
+          "max_durability": 10,
+          "requirements": {},
+          "scaling": {},
+          "affixes": {},
+          "tags": []
+        }
+      }
+    },
+    {
+      "step": 5,
+      "node": "node_final",
+      "event_id": "evt_final",
+      "option_index": 0,
+      "warning_signals": [],
+      "pre_choice_state": {
+        "hp": 10,
+        "food": 8,
+        "ammo": 1,
+        "medkits": 3,
+        "scrap": 0,
+        "radiation": 0,
+        "archetype": null,
+        "character": {
+          "background_id": "raider_defector",
+          "display_name": "Generated Raider defector",
+          "special": {
+            "strength": 5,
+            "perception": 7,
+            "endurance": 5,
+            "charisma": 7,
+            "intelligence": 8,
+            "agility": 6,
+            "luck": 2
+          },
+          "traits": [
+            "pack_rat",
+            "small_frame"
+          ],
+          "perks": [],
+          "tags": [
+            "tag_raider_defector"
+          ],
+          "level": 1,
+          "xp": 0
+        },
+        "weapon_slot": null,
+        "armor_slot": null,
+        "tool_slot": {
+          "id": "scavenger_kit",
+          "slot": "tool",
+          "durability": 10,
+          "max_durability": 10,
+          "requirements": {},
+          "scaling": {},
+          "affixes": {},
+          "tags": []
+        }
+      },
+      "pressure": true,
+      "combat_triggered": false,
+      "combat_loot": [],
+      "effects": {
+        "food": -1
+      },
+      "equipment_change": null,
+      "equipment_summary": null,
+      "player_after": {
+        "hp": 10,
+        "food": 7,
+        "ammo": 1,
+        "medkits": 3,
+        "scrap": 0,
+        "radiation": 0,
+        "archetype": null,
+        "character": {
+          "background_id": "raider_defector",
+          "display_name": "Generated Raider defector",
+          "special": {
+            "strength": 5,
+            "perception": 7,
+            "endurance": 5,
+            "charisma": 7,
+            "intelligence": 8,
+            "agility": 6,
+            "luck": 2
+          },
+          "traits": [
+            "pack_rat",
+            "small_frame"
+          ],
+          "perks": [],
+          "tags": [
+            "tag_raider_defector"
+          ],
+          "level": 1,
+          "xp": 0
+        },
+        "weapon_slot": null,
+        "armor_slot": null,
+        "tool_slot": {
+          "id": "scavenger_kit",
+          "slot": "tool",
+          "durability": 10,
+          "max_durability": 10,
+          "requirements": {},
+          "scaling": {},
+          "affixes": {},
+          "tags": []
+        }
+      }
+    }
+  ],
+  "summary": {
+    "pressure_count": 5,
+    "death_cause_attribution": true,
+    "resource_signature": "hp:10|food:7|ammo:1|medkits:3|scrap:0|radiation:0|weapon:None|armor:None|tool:EquipmentState(id='scavenger_kit', slot='tool', durability=10, max_durability=10, requirements={}, scaling={}, affixes={}, tags=[])"
+  },
+  "failure_analysis": {
+    "death_chain_length": 0,
+    "primary_blame_factor": null,
+    "regret_nodes": [],
+    "steps_from_regret_to_death": 0,
+    "is_trash_time_death": false
+  },
+  "run_summary": {
+    "headline": "south_cautious_raider_defector_1_batch_1: victory via reached_final_node after 5 steps",
+    "route_family": "south",
+    "outcome": "victory",
+    "key_turning_point": "node_south_1 (tool -> scavenger_kit (replaced empty))",
+    "notable_equipment": [
+      "scavenger_kit"
+    ],
+    "telemetry": {
+      "total_steps": 5,
+      "pressure_count": 5,
+      "combat_count": 0,
+      "loot_drop_count": 0,
+      "loot_total_amount": 0,
+      "equipment_change_count": 1,
+      "equipment_ids": [
+        "scavenger_kit"
+      ],
+      "loot_resources": {},
+      "max_radiation": 0,
+      "min_food": 6,
+      "min_hp": 10,
+      "low_resource_flags": [
+        "low_ammo"
+      ],
+      "risk_tags": [
+        "equipment_arc",
+        "end_reached_final_node"
+      ],
+      "character": {
+        "background_id": "raider_defector",
+        "traits": [
+          "pack_rat",
+          "small_frame"
+        ],
+        "special": {
+          "strength": 5,
+          "perception": 7,
+          "endurance": 5,
+          "charisma": 7,
+          "intelligence": 8,
+          "agility": 6,
+          "luck": 2
+        }
+      }
+    }
+  }
+}

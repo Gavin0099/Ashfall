@@ -1,0 +1,124 @@
+{
+  "run_id": "north_aggressive_raider_defector_batch_4",
+  "seed": 401,
+  "route": [
+    "node_north_1",
+    "node_north_2",
+    "node_mid",
+    "node_approach",
+    "node_final"
+  ],
+  "ended": true,
+  "victory": false,
+  "end_reason": "radiation_death",
+  "player_final": {
+    "hp": 0,
+    "food": 6,
+    "ammo": 1,
+    "medkits": 1,
+    "scrap": 3,
+    "radiation": 2,
+    "archetype": null,
+    "weapon_slot": null,
+    "armor_slot": null,
+    "tool_slot": null
+  },
+  "decision_log": [
+    {
+      "step": 1,
+      "node": "node_north_1",
+      "event_id": "evt_factory_ruins",
+      "option_index": 0,
+      "warning_signals": [
+        "WARNING: radiation will continue to threaten future travel.",
+        "WARNING: this option adds radiation and increases long-term risk."
+      ],
+      "pre_choice_state": {
+        "hp": 10,
+        "food": 6,
+        "ammo": 3,
+        "medkits": 1,
+        "scrap": 0,
+        "radiation": 0,
+        "archetype": null,
+        "weapon_slot": null,
+        "armor_slot": null,
+        "tool_slot": null
+      },
+      "pressure": true,
+      "combat_triggered": true,
+      "combat_loot": [],
+      "effects": {
+        "scrap": 3,
+        "hp": -1,
+        "radiation": 2
+      },
+      "equipment_change": null,
+      "equipment_summary": null,
+      "player_after": {
+        "hp": 0,
+        "food": 6,
+        "ammo": 1,
+        "medkits": 1,
+        "scrap": 3,
+        "radiation": 2,
+        "archetype": null,
+        "weapon_slot": null,
+        "armor_slot": null,
+        "tool_slot": null
+      }
+    }
+  ],
+  "summary": {
+    "pressure_count": 1,
+    "death_cause_attribution": true,
+    "resource_signature": "hp:0|food:6|ammo:1|medkits:1|scrap:3|radiation:2|weapon:None|armor:None|tool:None"
+  },
+  "failure_analysis": {
+    "death_chain_length": 1,
+    "primary_blame_factor": "radiation",
+    "regret_nodes": [
+      {
+        "node_id": "node_north_1",
+        "event_id": "evt_factory_ruins",
+        "blame_score": 1.0,
+        "description": "took +2 radiation, lost 1 hp, accepted combat risk",
+        "steps_to_death": 0
+      }
+    ],
+    "steps_from_regret_to_death": 0,
+    "is_trash_time_death": false
+  },
+  "run_summary": {
+    "headline": "north_aggressive_raider_defector_batch_4: loss via radiation_death after 1 steps",
+    "route_family": "north",
+    "outcome": "radiation_death",
+    "key_turning_point": "node_north_1 (took +2 radiation, lost 1 hp, accepted combat risk)",
+    "notable_equipment": [],
+    "telemetry": {
+      "total_steps": 1,
+      "pressure_count": 1,
+      "combat_count": 1,
+      "loot_drop_count": 0,
+      "loot_total_amount": 0,
+      "equipment_change_count": 0,
+      "equipment_ids": [],
+      "loot_resources": {},
+      "max_radiation": 2,
+      "min_food": 6,
+      "min_hp": 0,
+      "low_resource_flags": [
+        "low_hp",
+        "low_ammo",
+        "high_radiation"
+      ],
+      "risk_tags": [
+        "combat_seen",
+        "radiation_pressure",
+        "end_radiation_death",
+        "radiation_carryover"
+      ],
+      "character": null
+    }
+  }
+}

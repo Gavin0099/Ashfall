@@ -1,0 +1,525 @@
+{
+  "run_id": "standard_journey_military_deserter_7_batch_3",
+  "seed": 301,
+  "route": [
+    "node_fringe_1",
+    "node_fringe_2",
+    "node_fringe_3",
+    "node_boss_gatekeeper",
+    "node_deadzone_1",
+    "node_deadzone_2",
+    "node_deadzone_3",
+    "node_boss_overseer",
+    "node_final"
+  ],
+  "ended": true,
+  "victory": false,
+  "end_reason": "radiation_death",
+  "player_final": {
+    "hp": 0,
+    "food": 6,
+    "ammo": 0,
+    "medkits": 4,
+    "scrap": 25,
+    "radiation": 1,
+    "archetype": null,
+    "character": {
+      "background_id": "military_deserter",
+      "display_name": "Sergeant Thorne",
+      "special": {
+        "strength": 8,
+        "perception": 6,
+        "endurance": 8,
+        "charisma": 2,
+        "intelligence": 4,
+        "agility": 6,
+        "luck": 6
+      },
+      "traits": [
+        "heavy_handed",
+        "trigger_discipline"
+      ],
+      "perks": [],
+      "tags": [
+        "tactical_combat",
+        "heavy_weapons",
+        "tag_military_deserter"
+      ],
+      "level": 2,
+      "xp": 5
+    },
+    "weapon_slot": null,
+    "armor_slot": null,
+    "tool_slot": null
+  },
+  "decision_log": [
+    {
+      "step": 1,
+      "node": "node_fringe_1",
+      "event_id": "evt_factory_ruins",
+      "option_index": 0,
+      "warning_signals": [
+        "WARNING: radiation will continue to threaten future travel.",
+        "WARNING: this option adds radiation and increases long-term risk."
+      ],
+      "pre_choice_state": {
+        "hp": 20,
+        "food": 9,
+        "ammo": 3,
+        "medkits": 2,
+        "scrap": 0,
+        "radiation": 0,
+        "archetype": null,
+        "character": {
+          "background_id": "military_deserter",
+          "display_name": "Sergeant Thorne",
+          "special": {
+            "strength": 8,
+            "perception": 6,
+            "endurance": 8,
+            "charisma": 2,
+            "intelligence": 4,
+            "agility": 6,
+            "luck": 6
+          },
+          "traits": [
+            "heavy_handed",
+            "trigger_discipline"
+          ],
+          "perks": [],
+          "tags": [
+            "tactical_combat",
+            "heavy_weapons",
+            "tag_military_deserter"
+          ],
+          "level": 1,
+          "xp": 0
+        },
+        "weapon_slot": null,
+        "armor_slot": null,
+        "tool_slot": null
+      },
+      "pressure": true,
+      "combat_triggered": false,
+      "combat_loot": [],
+      "effects": {
+        "scrap": 3,
+        "hp": -1,
+        "radiation": 1
+      },
+      "equipment_change": null,
+      "equipment_summary": null,
+      "player_after": {
+        "hp": 19,
+        "food": 9,
+        "ammo": 3,
+        "medkits": 2,
+        "scrap": 3,
+        "radiation": 1,
+        "archetype": null,
+        "character": {
+          "background_id": "military_deserter",
+          "display_name": "Sergeant Thorne",
+          "special": {
+            "strength": 8,
+            "perception": 6,
+            "endurance": 8,
+            "charisma": 2,
+            "intelligence": 4,
+            "agility": 6,
+            "luck": 6
+          },
+          "traits": [
+            "heavy_handed",
+            "trigger_discipline"
+          ],
+          "perks": [],
+          "tags": [
+            "tactical_combat",
+            "heavy_weapons",
+            "tag_military_deserter"
+          ],
+          "level": 1,
+          "xp": 0
+        },
+        "weapon_slot": null,
+        "armor_slot": null,
+        "tool_slot": null
+      }
+    },
+    {
+      "step": 2,
+      "node": "node_fringe_2",
+      "event_id": "evt_mutant_burrow",
+      "option_index": 0,
+      "warning_signals": [
+        "WARNING: radiation will continue to threaten future travel.",
+        "DANGER: this choice carries a high combat risk."
+      ],
+      "pre_choice_state": {
+        "hp": 18,
+        "food": 8,
+        "ammo": 3,
+        "medkits": 2,
+        "scrap": 3,
+        "radiation": 1,
+        "archetype": null,
+        "character": {
+          "background_id": "military_deserter",
+          "display_name": "Sergeant Thorne",
+          "special": {
+            "strength": 8,
+            "perception": 6,
+            "endurance": 8,
+            "charisma": 2,
+            "intelligence": 4,
+            "agility": 6,
+            "luck": 6
+          },
+          "traits": [
+            "heavy_handed",
+            "trigger_discipline"
+          ],
+          "perks": [],
+          "tags": [
+            "tactical_combat",
+            "heavy_weapons",
+            "tag_military_deserter"
+          ],
+          "level": 1,
+          "xp": 0
+        },
+        "weapon_slot": null,
+        "armor_slot": null,
+        "tool_slot": null
+      },
+      "pressure": true,
+      "combat_triggered": true,
+      "combat_loot": [
+        {
+          "resource": "scrap",
+          "amount": 4
+        },
+        {
+          "resource": "medkits",
+          "amount": 1
+        }
+      ],
+      "effects": {
+        "hp": -1,
+        "scrap": 6,
+        "medkits": 1,
+        "xp": 5
+      },
+      "equipment_change": null,
+      "equipment_summary": null,
+      "player_after": {
+        "hp": 14,
+        "food": 8,
+        "ammo": 0,
+        "medkits": 4,
+        "scrap": 13,
+        "radiation": 1,
+        "archetype": null,
+        "character": {
+          "background_id": "military_deserter",
+          "display_name": "Sergeant Thorne",
+          "special": {
+            "strength": 8,
+            "perception": 6,
+            "endurance": 8,
+            "charisma": 2,
+            "intelligence": 4,
+            "agility": 6,
+            "luck": 6
+          },
+          "traits": [
+            "heavy_handed",
+            "trigger_discipline"
+          ],
+          "perks": [],
+          "tags": [
+            "tactical_combat",
+            "heavy_weapons",
+            "tag_military_deserter"
+          ],
+          "level": 1,
+          "xp": 5
+        },
+        "weapon_slot": null,
+        "armor_slot": null,
+        "tool_slot": null
+      }
+    },
+    {
+      "step": 3,
+      "node": "node_fringe_3",
+      "event_id": "evt_tech_vault",
+      "option_index": 1,
+      "warning_signals": [
+        "WARNING: radiation will continue to threaten future travel."
+      ],
+      "pre_choice_state": {
+        "hp": 13,
+        "food": 7,
+        "ammo": 0,
+        "medkits": 4,
+        "scrap": 13,
+        "radiation": 1,
+        "archetype": null,
+        "character": {
+          "background_id": "military_deserter",
+          "display_name": "Sergeant Thorne",
+          "special": {
+            "strength": 8,
+            "perception": 6,
+            "endurance": 8,
+            "charisma": 2,
+            "intelligence": 4,
+            "agility": 6,
+            "luck": 6
+          },
+          "traits": [
+            "heavy_handed",
+            "trigger_discipline"
+          ],
+          "perks": [],
+          "tags": [
+            "tactical_combat",
+            "heavy_weapons",
+            "tag_military_deserter"
+          ],
+          "level": 1,
+          "xp": 5
+        },
+        "weapon_slot": null,
+        "armor_slot": null,
+        "tool_slot": null
+      },
+      "pressure": true,
+      "combat_triggered": false,
+      "combat_loot": [],
+      "effects": {
+        "scrap": 12,
+        "hp": -2,
+        "xp": 5
+      },
+      "equipment_change": null,
+      "equipment_summary": null,
+      "player_after": {
+        "hp": 11,
+        "food": 7,
+        "ammo": 0,
+        "medkits": 4,
+        "scrap": 25,
+        "radiation": 1,
+        "archetype": null,
+        "character": {
+          "background_id": "military_deserter",
+          "display_name": "Sergeant Thorne",
+          "special": {
+            "strength": 8,
+            "perception": 6,
+            "endurance": 8,
+            "charisma": 2,
+            "intelligence": 4,
+            "agility": 6,
+            "luck": 6
+          },
+          "traits": [
+            "heavy_handed",
+            "trigger_discipline"
+          ],
+          "perks": [],
+          "tags": [
+            "tactical_combat",
+            "heavy_weapons",
+            "tag_military_deserter"
+          ],
+          "level": 2,
+          "xp": 0
+        },
+        "weapon_slot": null,
+        "armor_slot": null,
+        "tool_slot": null
+      }
+    },
+    {
+      "step": 4,
+      "node": "node_boss_gatekeeper",
+      "event_id": "evt_boss_gatekeeper",
+      "option_index": 0,
+      "warning_signals": [
+        "WARNING: radiation will continue to threaten future travel.",
+        "DANGER: this choice carries a high combat risk."
+      ],
+      "pre_choice_state": {
+        "hp": 10,
+        "food": 6,
+        "ammo": 0,
+        "medkits": 4,
+        "scrap": 25,
+        "radiation": 1,
+        "archetype": null,
+        "character": {
+          "background_id": "military_deserter",
+          "display_name": "Sergeant Thorne",
+          "special": {
+            "strength": 8,
+            "perception": 6,
+            "endurance": 8,
+            "charisma": 2,
+            "intelligence": 4,
+            "agility": 6,
+            "luck": 6
+          },
+          "traits": [
+            "heavy_handed",
+            "trigger_discipline"
+          ],
+          "perks": [],
+          "tags": [
+            "tactical_combat",
+            "heavy_weapons",
+            "tag_military_deserter"
+          ],
+          "level": 2,
+          "xp": 0
+        },
+        "weapon_slot": null,
+        "armor_slot": null,
+        "tool_slot": null
+      },
+      "pressure": true,
+      "combat_triggered": true,
+      "combat_loot": [],
+      "effects": {
+        "xp": 5
+      },
+      "equipment_change": null,
+      "equipment_summary": null,
+      "player_after": {
+        "hp": 0,
+        "food": 6,
+        "ammo": 0,
+        "medkits": 4,
+        "scrap": 25,
+        "radiation": 1,
+        "archetype": null,
+        "character": {
+          "background_id": "military_deserter",
+          "display_name": "Sergeant Thorne",
+          "special": {
+            "strength": 8,
+            "perception": 6,
+            "endurance": 8,
+            "charisma": 2,
+            "intelligence": 4,
+            "agility": 6,
+            "luck": 6
+          },
+          "traits": [
+            "heavy_handed",
+            "trigger_discipline"
+          ],
+          "perks": [],
+          "tags": [
+            "tactical_combat",
+            "heavy_weapons",
+            "tag_military_deserter"
+          ],
+          "level": 2,
+          "xp": 5
+        },
+        "weapon_slot": null,
+        "armor_slot": null,
+        "tool_slot": null
+      }
+    }
+  ],
+  "summary": {
+    "pressure_count": 4,
+    "death_cause_attribution": true,
+    "resource_signature": "hp:0|food:6|ammo:0|medkits:4|scrap:25|radiation:1|weapon:None|armor:None|tool:None"
+  },
+  "failure_analysis": {
+    "death_chain_length": 3,
+    "primary_blame_factor": "radiation",
+    "regret_nodes": [
+      {
+        "node_id": "node_fringe_1",
+        "event_id": "evt_factory_ruins",
+        "blame_score": 0.37,
+        "description": "took +1 radiation, lost 1 hp, carried radiation into later travel",
+        "steps_to_death": 3
+      },
+      {
+        "node_id": "node_fringe_3",
+        "event_id": "evt_tech_vault",
+        "blame_score": 0.3,
+        "description": "lost 2 hp, carried radiation into later travel",
+        "steps_to_death": 1
+      },
+      {
+        "node_id": "node_fringe_2",
+        "event_id": "evt_mutant_burrow",
+        "blame_score": 0.26,
+        "description": "lost 1 hp, accepted combat risk, carried radiation into later travel",
+        "steps_to_death": 2
+      }
+    ],
+    "steps_from_regret_to_death": 3,
+    "is_trash_time_death": false
+  },
+  "run_summary": {
+    "headline": "standard_journey_military_deserter_7_batch_3: loss via radiation_death after 4 steps",
+    "route_family": "unknown",
+    "outcome": "radiation_death",
+    "key_turning_point": "node_fringe_1 (took +1 radiation, lost 1 hp, carried radiation into later travel)",
+    "notable_equipment": [],
+    "telemetry": {
+      "total_steps": 4,
+      "pressure_count": 4,
+      "combat_count": 2,
+      "loot_drop_count": 2,
+      "loot_total_amount": 5,
+      "equipment_change_count": 0,
+      "rarity_distribution": {},
+      "total_atk_affix_gain": 0,
+      "total_def_affix_gain": 0,
+      "equipment_ids": [],
+      "loot_resources": {
+        "scrap": 4,
+        "medkits": 1
+      },
+      "max_radiation": 1,
+      "min_food": 6,
+      "min_hp": 0,
+      "low_resource_flags": [
+        "low_hp",
+        "low_ammo"
+      ],
+      "risk_tags": [
+        "combat_seen",
+        "radiation_pressure",
+        "end_radiation_death"
+      ],
+      "character": {
+        "background_id": "military_deserter",
+        "traits": [
+          "heavy_handed",
+          "trigger_discipline"
+        ],
+        "special": {
+          "strength": 8,
+          "perception": 6,
+          "endurance": 8,
+          "charisma": 2,
+          "intelligence": 4,
+          "agility": 6,
+          "luck": 6
+        }
+      }
+    }
+  }
+}

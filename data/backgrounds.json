@@ -8,7 +8,8 @@
       "charisma": 4, "intelligence": 8, "agility": 5, "luck": 3
     },
     "granted_tags": ["vault_origin", "tech_trained", "radiation_theory"],
-    "starting_resource_bias": { "food": 0, "scrap": 2, "medkits": 1 }
+    "starting_resource_bias": { "food": 0, "scrap": 2, "medkits": 1 },
+    "starting_equipment": { "tool": "scavenger_kit", "armor": "gas_mask" }
   },
   {
     "background_id": "raider_defector",
@@ -19,7 +20,8 @@
       "charisma": 2, "intelligence": 4, "agility": 7, "luck": 3
     },
     "granted_tags": ["raider_origin", "combat_trained", "social_outcast"],
-    "starting_resource_bias": { "ammo": 3, "food": -1, "medkits": 0 }
+    "starting_resource_bias": { "ammo": 3, "food": -1, "medkits": 0 },
+    "starting_equipment": { "weapon": "rust_rifle" }
   },
   {
     "background_id": "wasteland_medic",
@@ -30,6 +32,7 @@
       "charisma": 6, "intelligence": 7, "agility": 4, "luck": 4
     },
     "granted_tags": ["medic_trained", "triage_instinct", "resource_aware"],
-    "starting_resource_bias": { "medkits": 3, "food": 1, "ammo": -2 }
+    "starting_resource_bias": { "medkits": 3, "food": 1, "ammo": -2 },
+    "starting_equipment": { "tool": "tactical_visor" }
   }
 ]
