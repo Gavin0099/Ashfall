@@ -14,14 +14,14 @@
   ],
   "ended": true,
   "victory": false,
-  "end_reason": "event_or_resource_death",
+  "end_reason": "radiation_death",
   "player_final": {
-    "hp": -3,
+    "hp": 0,
     "food": 8,
-    "ammo": 4,
-    "medkits": 8,
-    "scrap": 27,
-    "radiation": 0,
+    "ammo": 0,
+    "medkits": 0,
+    "scrap": 72,
+    "radiation": 3,
     "archetype": null,
     "character": {
       "background_id": "raider_defector",
@@ -43,25 +43,27 @@
       "tags": [
         "tag_raider_defector"
       ],
-      "level": 2,
+      "level": 4,
       "xp": 18
     },
     "weapon_slot": {
-      "id": "makeshift_blade",
+      "id": "rust_rifle",
       "slot": "weapon",
-      "durability": 7,
+      "durability": 8,
       "max_durability": 10,
       "rarity": "rare",
-      "requirements": {},
+      "requirements": {
+        "agility": 4
+      },
       "scaling": {
-        "strength": 0.5
+        "perception": 0.5
       },
       "affixes": {
         "atk": 1
       },
       "tags": [
-        "melee",
-        "makeshift"
+        "ranged",
+        "firearm"
       ],
       "refinement_count": 1
     },
@@ -351,10 +353,10 @@
       "option_index": 0,
       "warning_signals": [],
       "pre_choice_state": {
-        "hp": 10,
+        "hp": 20,
         "food": 9,
         "ammo": 6,
-        "medkits": 6,
+        "medkits": 5,
         "scrap": 2,
         "radiation": 0,
         "archetype": null,
@@ -414,10 +416,10 @@
       "equipment_change": null,
       "equipment_summary": null,
       "player_after": {
-        "hp": 10,
+        "hp": 20,
         "food": 9,
         "ammo": 6,
-        "medkits": 8,
+        "medkits": 7,
         "scrap": 27,
         "radiation": 0,
         "archetype": null,
@@ -476,10 +478,10 @@
         "DANGER: this choice carries a high combat risk."
       ],
       "pre_choice_state": {
-        "hp": 9,
+        "hp": 20,
         "food": 8,
         "ammo": 6,
-        "medkits": 8,
+        "medkits": 7,
         "scrap": 27,
         "radiation": 0,
         "archetype": null,
@@ -530,18 +532,27 @@
       },
       "pressure": true,
       "combat_triggered": true,
-      "combat_loot": [],
+      "combat_loot": [
+        {
+          "resource": "xp",
+          "amount": 25
+        },
+        {
+          "resource": "scrap",
+          "amount": 25
+        }
+      ],
       "effects": {
         "xp": 5
       },
       "equipment_change": null,
       "equipment_summary": null,
       "player_after": {
-        "hp": -3,
+        "hp": 10,
         "food": 8,
-        "ammo": 4,
-        "medkits": 8,
-        "scrap": 27,
+        "ammo": 2,
+        "medkits": 6,
+        "scrap": 52,
         "radiation": 0,
         "archetype": null,
         "character": {
@@ -565,24 +576,575 @@
             "tag_raider_defector"
           ],
           "level": 2,
-          "xp": 18
+          "xp": 43
         },
         "weapon_slot": {
-          "id": "makeshift_blade",
+          "id": "hardened_blade",
           "slot": "weapon",
-          "durability": 7,
+          "durability": 9,
           "max_durability": 10,
-          "rarity": "rare",
-          "requirements": {},
+          "rarity": "legendary",
+          "requirements": {
+            "strength": 5
+          },
           "scaling": {
-            "strength": 0.5
+            "strength": 0.8
+          },
+          "affixes": {
+            "atk": 2
+          },
+          "tags": [
+            "melee",
+            "quality",
+            "vampiric"
+          ],
+          "refinement_count": 0
+        },
+        "armor_slot": null,
+        "tool_slot": null
+      }
+    },
+    {
+      "step": 5,
+      "node": "node_deadzone_1",
+      "event_id": "evt_radioactive_orchard",
+      "option_index": 0,
+      "warning_signals": [
+        "WARNING: radiation will continue to threaten future travel.",
+        "WARNING: this option adds radiation and increases long-term risk."
+      ],
+      "pre_choice_state": {
+        "hp": 20,
+        "food": 7,
+        "ammo": 2,
+        "medkits": 5,
+        "scrap": 52,
+        "radiation": 0,
+        "archetype": null,
+        "character": {
+          "background_id": "raider_defector",
+          "display_name": "Generated Raider defector",
+          "special": {
+            "strength": 5,
+            "perception": 7,
+            "endurance": 5,
+            "charisma": 7,
+            "intelligence": 8,
+            "agility": 6,
+            "luck": 2
+          },
+          "traits": [
+            "pack_rat",
+            "small_frame"
+          ],
+          "perks": [],
+          "tags": [
+            "tag_raider_defector"
+          ],
+          "level": 2,
+          "xp": 43
+        },
+        "weapon_slot": {
+          "id": "hardened_blade",
+          "slot": "weapon",
+          "durability": 9,
+          "max_durability": 10,
+          "rarity": "legendary",
+          "requirements": {
+            "strength": 5
+          },
+          "scaling": {
+            "strength": 0.8
+          },
+          "affixes": {
+            "atk": 2
+          },
+          "tags": [
+            "melee",
+            "quality",
+            "vampiric"
+          ],
+          "refinement_count": 0
+        },
+        "armor_slot": null,
+        "tool_slot": null
+      },
+      "pressure": true,
+      "combat_triggered": false,
+      "combat_loot": [],
+      "effects": {
+        "food": 4,
+        "radiation": 3
+      },
+      "equipment_change": null,
+      "equipment_summary": null,
+      "player_after": {
+        "hp": 20,
+        "food": 11,
+        "ammo": 2,
+        "medkits": 5,
+        "scrap": 52,
+        "radiation": 3,
+        "archetype": null,
+        "character": {
+          "background_id": "raider_defector",
+          "display_name": "Generated Raider defector",
+          "special": {
+            "strength": 5,
+            "perception": 7,
+            "endurance": 5,
+            "charisma": 7,
+            "intelligence": 8,
+            "agility": 6,
+            "luck": 2
+          },
+          "traits": [
+            "pack_rat",
+            "small_frame"
+          ],
+          "perks": [],
+          "tags": [
+            "tag_raider_defector"
+          ],
+          "level": 3,
+          "xp": 23
+        },
+        "weapon_slot": {
+          "id": "hardened_blade",
+          "slot": "weapon",
+          "durability": 9,
+          "max_durability": 10,
+          "rarity": "legendary",
+          "requirements": {
+            "strength": 5
+          },
+          "scaling": {
+            "strength": 0.8
+          },
+          "affixes": {
+            "atk": 2
+          },
+          "tags": [
+            "melee",
+            "quality",
+            "vampiric"
+          ],
+          "refinement_count": 0
+        },
+        "armor_slot": null,
+        "tool_slot": null
+      }
+    },
+    {
+      "step": 6,
+      "node": "node_deadzone_2",
+      "event_id": "evt_checkpoint",
+      "option_index": 0,
+      "warning_signals": [
+        "WARNING: radiation will continue to threaten future travel.",
+        "DANGER: this choice carries a high combat risk."
+      ],
+      "pre_choice_state": {
+        "hp": 18,
+        "food": 10,
+        "ammo": 2,
+        "medkits": 5,
+        "scrap": 52,
+        "radiation": 3,
+        "archetype": null,
+        "character": {
+          "background_id": "raider_defector",
+          "display_name": "Generated Raider defector",
+          "special": {
+            "strength": 5,
+            "perception": 7,
+            "endurance": 5,
+            "charisma": 7,
+            "intelligence": 8,
+            "agility": 6,
+            "luck": 2
+          },
+          "traits": [
+            "pack_rat",
+            "small_frame"
+          ],
+          "perks": [],
+          "tags": [
+            "tag_raider_defector"
+          ],
+          "level": 3,
+          "xp": 23
+        },
+        "weapon_slot": {
+          "id": "hardened_blade",
+          "slot": "weapon",
+          "durability": 9,
+          "max_durability": 10,
+          "rarity": "legendary",
+          "requirements": {
+            "strength": 5
+          },
+          "scaling": {
+            "strength": 0.8
+          },
+          "affixes": {
+            "atk": 2
+          },
+          "tags": [
+            "melee",
+            "quality",
+            "vampiric"
+          ],
+          "refinement_count": 0
+        },
+        "armor_slot": null,
+        "tool_slot": null
+      },
+      "pressure": true,
+      "combat_triggered": true,
+      "combat_loot": [
+        {
+          "resource": "ammo",
+          "amount": 3
+        }
+      ],
+      "effects": {
+        "ammo": 0,
+        "xp": 5
+      },
+      "equipment_change": {
+        "slot": "weapon",
+        "item": "rust_rifle",
+        "item_data": {
+          "id": "rust_rifle",
+          "slot": "weapon",
+          "durability": 10,
+          "max_durability": 10,
+          "rarity": "common",
+          "requirements": {
+            "agility": 4
+          },
+          "scaling": {
+            "perception": 0.5
           },
           "affixes": {
             "atk": 1
           },
           "tags": [
-            "melee",
-            "makeshift"
+            "ranged",
+            "firearm"
+          ],
+          "refinement_count": 0
+        },
+        "changed": true
+      },
+      "equipment_summary": "weapon -> rust_rifle (replaced empty)",
+      "player_after": {
+        "hp": 18,
+        "food": 10,
+        "ammo": 4,
+        "medkits": 5,
+        "scrap": 52,
+        "radiation": 3,
+        "archetype": null,
+        "character": {
+          "background_id": "raider_defector",
+          "display_name": "Generated Raider defector",
+          "special": {
+            "strength": 5,
+            "perception": 7,
+            "endurance": 5,
+            "charisma": 7,
+            "intelligence": 8,
+            "agility": 6,
+            "luck": 2
+          },
+          "traits": [
+            "pack_rat",
+            "small_frame"
+          ],
+          "perks": [],
+          "tags": [
+            "tag_raider_defector"
+          ],
+          "level": 3,
+          "xp": 28
+        },
+        "weapon_slot": {
+          "id": "rust_rifle",
+          "slot": "weapon",
+          "durability": 9,
+          "max_durability": 10,
+          "rarity": "common",
+          "requirements": {
+            "agility": 4
+          },
+          "scaling": {
+            "perception": 0.5
+          },
+          "affixes": {
+            "atk": 1
+          },
+          "tags": [
+            "ranged",
+            "firearm"
+          ],
+          "refinement_count": 0
+        },
+        "armor_slot": null,
+        "tool_slot": null
+      }
+    },
+    {
+      "step": 7,
+      "node": "node_deadzone_3",
+      "event_id": "evt_tech_vault",
+      "option_index": 0,
+      "warning_signals": [
+        "WARNING: radiation will continue to threaten future travel."
+      ],
+      "pre_choice_state": {
+        "hp": 16,
+        "food": 9,
+        "ammo": 4,
+        "medkits": 5,
+        "scrap": 47,
+        "radiation": 3,
+        "archetype": null,
+        "character": {
+          "background_id": "raider_defector",
+          "display_name": "Generated Raider defector",
+          "special": {
+            "strength": 5,
+            "perception": 7,
+            "endurance": 5,
+            "charisma": 7,
+            "intelligence": 8,
+            "agility": 6,
+            "luck": 2
+          },
+          "traits": [
+            "pack_rat",
+            "small_frame"
+          ],
+          "perks": [],
+          "tags": [
+            "tag_raider_defector"
+          ],
+          "level": 3,
+          "xp": 28
+        },
+        "weapon_slot": {
+          "id": "rust_rifle",
+          "slot": "weapon",
+          "durability": 9,
+          "max_durability": 10,
+          "rarity": "rare",
+          "requirements": {
+            "agility": 4
+          },
+          "scaling": {
+            "perception": 0.5
+          },
+          "affixes": {
+            "atk": 1
+          },
+          "tags": [
+            "ranged",
+            "firearm"
+          ],
+          "refinement_count": 1
+        },
+        "armor_slot": null,
+        "tool_slot": null
+      },
+      "pressure": true,
+      "combat_triggered": false,
+      "combat_loot": [],
+      "effects": {
+        "scrap": 25,
+        "medkits": 2,
+        "xp": 10
+      },
+      "equipment_change": null,
+      "equipment_summary": null,
+      "player_after": {
+        "hp": 16,
+        "food": 9,
+        "ammo": 4,
+        "medkits": 7,
+        "scrap": 72,
+        "radiation": 3,
+        "archetype": null,
+        "character": {
+          "background_id": "raider_defector",
+          "display_name": "Generated Raider defector",
+          "special": {
+            "strength": 5,
+            "perception": 7,
+            "endurance": 5,
+            "charisma": 7,
+            "intelligence": 8,
+            "agility": 6,
+            "luck": 2
+          },
+          "traits": [
+            "pack_rat",
+            "small_frame"
+          ],
+          "perks": [],
+          "tags": [
+            "tag_raider_defector"
+          ],
+          "level": 4,
+          "xp": 8
+        },
+        "weapon_slot": {
+          "id": "rust_rifle",
+          "slot": "weapon",
+          "durability": 9,
+          "max_durability": 10,
+          "rarity": "rare",
+          "requirements": {
+            "agility": 4
+          },
+          "scaling": {
+            "perception": 0.5
+          },
+          "affixes": {
+            "atk": 1
+          },
+          "tags": [
+            "ranged",
+            "firearm"
+          ],
+          "refinement_count": 1
+        },
+        "armor_slot": null,
+        "tool_slot": null
+      }
+    },
+    {
+      "step": 8,
+      "node": "node_boss_overseer",
+      "event_id": "evt_boss_overseer",
+      "option_index": 0,
+      "warning_signals": [
+        "WARNING: radiation will continue to threaten future travel.",
+        "DANGER: this choice carries a high combat risk."
+      ],
+      "pre_choice_state": {
+        "hp": 14,
+        "food": 8,
+        "ammo": 4,
+        "medkits": 7,
+        "scrap": 72,
+        "radiation": 3,
+        "archetype": null,
+        "character": {
+          "background_id": "raider_defector",
+          "display_name": "Generated Raider defector",
+          "special": {
+            "strength": 5,
+            "perception": 7,
+            "endurance": 5,
+            "charisma": 7,
+            "intelligence": 8,
+            "agility": 6,
+            "luck": 2
+          },
+          "traits": [
+            "pack_rat",
+            "small_frame"
+          ],
+          "perks": [],
+          "tags": [
+            "tag_raider_defector"
+          ],
+          "level": 4,
+          "xp": 8
+        },
+        "weapon_slot": {
+          "id": "rust_rifle",
+          "slot": "weapon",
+          "durability": 9,
+          "max_durability": 10,
+          "rarity": "rare",
+          "requirements": {
+            "agility": 4
+          },
+          "scaling": {
+            "perception": 0.5
+          },
+          "affixes": {
+            "atk": 1
+          },
+          "tags": [
+            "ranged",
+            "firearm"
+          ],
+          "refinement_count": 1
+        },
+        "armor_slot": null,
+        "tool_slot": null
+      },
+      "pressure": true,
+      "combat_triggered": true,
+      "combat_loot": [],
+      "effects": {
+        "xp": 10
+      },
+      "equipment_change": null,
+      "equipment_summary": null,
+      "player_after": {
+        "hp": 0,
+        "food": 8,
+        "ammo": 0,
+        "medkits": 0,
+        "scrap": 72,
+        "radiation": 3,
+        "archetype": null,
+        "character": {
+          "background_id": "raider_defector",
+          "display_name": "Generated Raider defector",
+          "special": {
+            "strength": 5,
+            "perception": 7,
+            "endurance": 5,
+            "charisma": 7,
+            "intelligence": 8,
+            "agility": 6,
+            "luck": 2
+          },
+          "traits": [
+            "pack_rat",
+            "small_frame"
+          ],
+          "perks": [],
+          "tags": [
+            "tag_raider_defector"
+          ],
+          "level": 4,
+          "xp": 18
+        },
+        "weapon_slot": {
+          "id": "rust_rifle",
+          "slot": "weapon",
+          "durability": 8,
+          "max_durability": 10,
+          "rarity": "rare",
+          "requirements": {
+            "agility": 4
+          },
+          "scaling": {
+            "perception": 0.5
+          },
+          "affixes": {
+            "atk": 1
+          },
+          "tags": [
+            "ranged",
+            "firearm"
           ],
           "refinement_count": 1
         },
@@ -592,77 +1154,85 @@
     }
   ],
   "summary": {
-    "pressure_count": 3,
+    "pressure_count": 7,
     "death_cause_attribution": true,
-    "resource_signature": "hp:-3|food:8|ammo:4|medkits:8|scrap:27|radiation:0|weapon:EquipmentState(id='makeshift_blade', slot='weapon', durability=7, max_durability=10, rarity='rare', requirements={}, scaling={'strength': 0.5}, affixes={'atk': 1}, tags=['melee', 'makeshift'], refinement_count=1)|armor:None|tool:None"
+    "resource_signature": "hp:0|food:8|ammo:0|medkits:0|scrap:72|radiation:3|weapon:EquipmentState(id='rust_rifle', slot='weapon', durability=8, max_durability=10, rarity='rare', requirements={'agility': 4}, scaling={'perception': 0.5}, affixes={'atk': 1}, tags=['ranged', 'firearm'], refinement_count=1)|armor:None|tool:None"
   },
   "failure_analysis": {
     "death_chain_length": 3,
-    "primary_blame_factor": "combat",
+    "primary_blame_factor": "radiation",
     "regret_nodes": [
       {
-        "node_id": "node_fringe_2",
-        "event_id": "evt_mutant_burrow",
-        "blame_score": 0.54,
-        "description": "lost 1 hp, accepted combat risk",
+        "node_id": "node_deadzone_1",
+        "event_id": "evt_radioactive_orchard",
+        "blame_score": 0.52,
+        "description": "took +3 radiation, carried radiation into later travel",
+        "steps_to_death": 3
+      },
+      {
+        "node_id": "node_deadzone_2",
+        "event_id": "evt_checkpoint",
+        "blame_score": 0.14,
+        "description": "accepted combat risk, carried radiation into later travel",
         "steps_to_death": 2
       },
       {
-        "node_id": "node_boss_gatekeeper",
-        "event_id": "evt_boss_gatekeeper",
-        "blame_score": 0.24,
-        "description": "accepted combat risk",
-        "steps_to_death": 0
-      },
-      {
-        "node_id": "node_fringe_1",
-        "event_id": "evt_scrapyard",
-        "blame_score": 0.21,
-        "description": "accepted combat risk",
-        "steps_to_death": 3
+        "node_id": "node_fringe_2",
+        "event_id": "evt_mutant_burrow",
+        "blame_score": 0.1,
+        "description": "lost 1 hp, accepted combat risk",
+        "steps_to_death": 6
       }
     ],
-    "steps_from_regret_to_death": 2,
+    "steps_from_regret_to_death": 3,
     "is_trash_time_death": false
   },
   "run_summary": {
-    "headline": "standard_journey_raider_defector_1_batch_2: loss via event_or_resource_death after 4 steps",
+    "headline": "standard_journey_raider_defector_1_batch_2: loss via radiation_death after 8 steps",
     "route_family": "unknown",
-    "outcome": "event_or_resource_death",
-    "key_turning_point": "node_fringe_2 (lost 1 hp, accepted combat risk)",
+    "outcome": "radiation_death",
+    "key_turning_point": "node_deadzone_1 (took +3 radiation, carried radiation into later travel)",
     "notable_equipment": [
-      "makeshift_blade"
+      "makeshift_blade",
+      "rust_rifle"
     ],
     "telemetry": {
-      "total_steps": 4,
-      "pressure_count": 3,
-      "combat_count": 3,
-      "loot_drop_count": 4,
-      "loot_total_amount": 17,
-      "equipment_change_count": 1,
+      "total_steps": 8,
+      "pressure_count": 7,
+      "combat_count": 5,
+      "loot_drop_count": 7,
+      "loot_total_amount": 70,
+      "equipment_change_count": 2,
       "rarity_distribution": {
-        "rare": 1
+        "rare": 1,
+        "common": 1
       },
-      "total_atk_affix_gain": 1,
+      "total_atk_affix_gain": 2,
       "total_def_affix_gain": 0,
       "equipment_ids": [
-        "makeshift_blade"
+        "makeshift_blade",
+        "rust_rifle"
       ],
       "loot_resources": {
-        "scrap": 11,
+        "scrap": 36,
         "medkits": 1,
-        "ammo": 5
+        "ammo": 8,
+        "xp": 25
       },
-      "max_radiation": 0,
+      "max_radiation": 3,
       "min_food": 8,
       "min_hp": 0,
       "low_resource_flags": [
-        "low_hp"
+        "low_hp",
+        "low_ammo",
+        "high_radiation"
       ],
       "risk_tags": [
         "combat_seen",
+        "radiation_pressure",
         "equipment_arc",
-        "end_event_or_resource_death"
+        "end_radiation_death",
+        "radiation_carryover"
       ],
       "character": {
         "background_id": "raider_defector",

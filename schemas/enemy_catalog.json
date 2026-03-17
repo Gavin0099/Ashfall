@@ -103,11 +103,11 @@
     "name": "區域守門員：鋼鐵哨兵 (Steel Sentinel)",
     "archetype": "boss",
     "special_ability": "shockwave",
-    "hp": 30,
+    "hp": 15,
     "is_elite": true,
     "damage_range": {
-      "min": 3,
-      "max": 5
+      "min": 2,
+      "max": 4
     },
     "loot_table": [
       {

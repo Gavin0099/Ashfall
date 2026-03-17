@@ -72,11 +72,11 @@
           "effects": {
             "food": 2,
             "medkits": 1,
-            "xp": 3
+            "xp": 10
           },
           "equipment_reward": {
             "slot": "weapon",
-            "item": "makeshift_blade"
+            "item": "rust_rifle"
           },
           "combat_chance": 0.0
         },
@@ -88,7 +88,7 @@
           "effects": {
             "food": 3,
             "medkits": 2,
-            "xp": 1
+            "xp": 8
           },
           "equipment_reward": {
             "slot": "armor",
@@ -1464,6 +1464,24 @@
             "xp": 10
           },
           "combat_chance": 1.0,
+          "fixed_enemy_id": "boss_overseer"
+        },
+        {
+          "text_variants": [
+            "分析系統漏洞：尋找致命弱點 (需要 Intelligence 9)"
+          ],
+          "character_filters": {
+            "require_special": {
+              "intelligence": {
+                "min": 9
+              }
+            }
+          },
+          "effects": {
+            "xp": 30,
+            "hp": -5
+          },
+          "combat_chance": 0.5,
           "fixed_enemy_id": "boss_overseer"
         }
       ]

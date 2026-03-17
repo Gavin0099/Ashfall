@@ -60,7 +60,7 @@ class CombatEngine:
         if player.medkits <= 0:
             raise ValueError("Cannot use medkit without medkits")
         player.medkits -= 1
-        heal = 3
+        heal = 8
         if player.archetype == "medic":
             heal += 1
         
@@ -138,15 +138,16 @@ class CombatEngine:
 
         while player.hp > 0 and enemy.hp > 0:
             rounds += 1
-            if player.ammo > 0:
+            # Survival first: use medkit if HP is critical
+            if player.medkits > 0 and player.hp <= 6:
+                healed = self.player_use_medkit(player)
+                log.append(f"第 {rounds} 回合：你使用醫療包，回復 {healed} 點生命")
+            elif player.ammo > 0:
                 special_before = enemy.special_used
                 dealt = self.player_attack(player, enemy)
                 log.append(f"第 {rounds} 回合：你攻擊並造成 {dealt} 點傷害")
                 if enemy.special_ability == "thick_hide" and not special_before and enemy.special_used:
                     log.append(f"第 {rounds} 回合：敵人的厚皮減少了 1 點傷害")
-            elif player.medkits > 0 and player.hp <= 4:
-                healed = self.player_use_medkit(player)
-                log.append(f"第 {rounds} 回合：你使用醫療包，回復 {healed} 點生命")
             else:
                 log.append(f"第 {rounds} 回合：你無法有效反擊")
 

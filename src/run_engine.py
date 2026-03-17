@@ -35,7 +35,9 @@ class RunEngine:
 
     def create_run(self, player: PlayerState, seed: int) -> RunState:
         start = self.map_state.start_node_id
-        run = RunState(player=replace(player), map_seed=seed, current_node=start)
+        player_copy = replace(player)
+        player_copy.max_hp = self.difficulty_profile.starting_hp
+        run = RunState(player=player_copy, map_seed=seed, current_node=start)
         run.visit(start)
         return run
 
@@ -128,13 +130,13 @@ class RunEngine:
             if player.food < 1: return {"success": False, "reason": "insufficient_food"}
             player.food -= 1
             gain = 2
-            player.hp = min(10, player.hp + gain)
+            player.hp = min(player.max_hp, player.hp + gain)
             return {"success": True, "gain_hp": gain, "cost_food": 1}
         elif option == 1:
             if player.food < 2: return {"success": False, "reason": "insufficient_food"}
             player.food -= 2
             gain_hp = 3
-            player.hp = min(10, player.hp + gain_hp)
+            player.hp = min(player.max_hp, player.hp + gain_hp)
             old_rad = player.radiation
             player.radiation = max(0, player.radiation - 1)
             gain_rad = old_rad - player.radiation
@@ -261,18 +263,19 @@ class RunEngine:
         enemy_id = fixed_enemy_id if fixed_enemy_id else self._pick_enemy_id(run, encounter_bias=encounter_bias)
         enemy = _enemy_from_payload(self.enemy_catalog[enemy_id])
         
-        # Phase 4.0: Regional Scaling
-        depth = len(run.visited_nodes)
-        enemy.hp = scale_enemy_stat(enemy.hp, depth)
-        enemy.damage_min = scale_enemy_stat(enemy.damage_min, depth)
-        enemy.damage_max = scale_enemy_stat(enemy.damage_max, depth)
+        # Phase 4.0: Regional Scaling (Exclude bosses for direct control)
+        if enemy.archetype != "boss":
+            depth = len(run.visited_nodes)
+            enemy.hp = scale_enemy_stat(enemy.hp, depth)
+            enemy.damage_min = scale_enemy_stat(enemy.damage_min, depth)
+            enemy.damage_max = scale_enemy_stat(enemy.damage_max, depth)
         
         result = CombatEngine(seed=run.map_seed + len(run.visited_nodes)).run_auto_combat(run.player, enemy)
         loot = []
         if result["victory"]:
             # Soldier Passive: recover 1hp after victory
             if run.player.archetype == "soldier":
-                run.player.hp = min(10, run.player.hp + 1)
+                run.player.hp = min(run.player.max_hp, run.player.hp + 1)
                 result["log"].append("守衛士兵：戰鬥後的磨練讓你恢復了 1 點生命值")
 
             # Phase 5.0: Boss Legendary Drop
@@ -374,9 +377,7 @@ class RunEngine:
             total_rad = run.player.radiation + region.base_radiation
             damage = total_rad // 2 if total_rad > 0 else 0
             
-            # If there's radiation, ensure at least 1 tick of damage to maintain tension
-            if total_rad > 0 and damage == 0:
-                damage = 1
+            # v7.0: Removed mandatory 1-tick to allow low rad survival
 
             armor = run.player.armor_slot
             if armor and armor.id == "gas_mask" and armor.durability > 0:
@@ -428,7 +429,7 @@ class RunEngine:
                 
                 if "lead_lined" in all_tags:
                     amount = max(0, amount - 1)
-                run.player.radiation = max(0, run.player.radiation - amount)
+                run.player.radiation = max(0, run.player.radiation + amount)
             elif key == "ammo":
                 run.player.ammo = max(0, run.player.ammo - amount)
             elif key == "medkits":

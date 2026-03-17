@@ -16,10 +16,10 @@
   "victory": false,
   "end_reason": "event_or_resource_death",
   "player_final": {
-    "hp": -2,
+    "hp": -1,
     "food": 11,
-    "ammo": 1,
-    "medkits": 4,
+    "ammo": 0,
+    "medkits": 0,
     "scrap": 0,
     "radiation": 0,
     "archetype": null,
@@ -99,10 +99,10 @@
       },
       "equipment_summary": "weapon -> makeshift_blade (replaced empty)",
       "player_after": {
-        "hp": -2,
+        "hp": -1,
         "food": 11,
-        "ammo": 1,
-        "medkits": 4,
+        "ammo": 0,
+        "medkits": 0,
         "scrap": 0,
         "radiation": 0,
         "archetype": null,
@@ -132,7 +132,7 @@
   "summary": {
     "pressure_count": 1,
     "death_cause_attribution": true,
-    "resource_signature": "hp:-2|food:11|ammo:1|medkits:4|scrap:0|radiation:0|weapon:EquipmentState(id='makeshift_blade', slot='weapon', durability=9, max_durability=10, rarity='common', requirements={}, scaling={'strength': 0.5}, affixes={}, tags=['melee', 'makeshift'], refinement_count=0)|armor:None|tool:None"
+    "resource_signature": "hp:-1|food:11|ammo:0|medkits:0|scrap:0|radiation:0|weapon:EquipmentState(id='makeshift_blade', slot='weapon', durability=9, max_durability=10, rarity='common', requirements={}, scaling={'strength': 0.5}, affixes={}, tags=['melee', 'makeshift'], refinement_count=0)|armor:None|tool:None"
   },
   "failure_analysis": {
     "death_chain_length": 1,

@@ -16,10 +16,10 @@
   "victory": false,
   "end_reason": "event_or_resource_death",
   "player_final": {
-    "hp": -3,
+    "hp": -1,
     "food": 8,
     "ammo": 0,
-    "medkits": 7,
+    "medkits": 0,
     "scrap": 16,
     "radiation": 0,
     "archetype": null,
@@ -218,10 +218,10 @@
         "DANGER: this choice carries a high combat risk."
       ],
       "pre_choice_state": {
-        "hp": 10,
+        "hp": 20,
         "food": 10,
         "ammo": 2,
-        "medkits": 6,
+        "medkits": 5,
         "scrap": 12,
         "radiation": 0,
         "archetype": null,
@@ -282,10 +282,10 @@
       "equipment_change": null,
       "equipment_summary": null,
       "player_after": {
-        "hp": 9,
+        "hp": 19,
         "food": 10,
         "ammo": 2,
-        "medkits": 7,
+        "medkits": 6,
         "scrap": 16,
         "radiation": 0,
         "archetype": null,
@@ -342,10 +342,10 @@
       "option_index": 2,
       "warning_signals": [],
       "pre_choice_state": {
-        "hp": 8,
+        "hp": 19,
         "food": 9,
         "ammo": 2,
-        "medkits": 7,
+        "medkits": 6,
         "scrap": 11,
         "radiation": 0,
         "archetype": null,
@@ -403,10 +403,10 @@
       "equipment_change": null,
       "equipment_summary": null,
       "player_after": {
-        "hp": 8,
+        "hp": 19,
         "food": 9,
         "ammo": 2,
-        "medkits": 7,
+        "medkits": 6,
         "scrap": 16,
         "radiation": 0,
         "archetype": null,
@@ -465,10 +465,10 @@
         "DANGER: this choice carries a high combat risk."
       ],
       "pre_choice_state": {
-        "hp": 7,
+        "hp": 19,
         "food": 8,
         "ammo": 2,
-        "medkits": 7,
+        "medkits": 6,
         "scrap": 16,
         "radiation": 0,
         "archetype": null,
@@ -526,10 +526,10 @@
       "equipment_change": null,
       "equipment_summary": null,
       "player_after": {
-        "hp": -3,
+        "hp": -1,
         "food": 8,
         "ammo": 0,
-        "medkits": 7,
+        "medkits": 0,
         "scrap": 16,
         "radiation": 0,
         "archetype": null,
@@ -583,7 +583,7 @@
   "summary": {
     "pressure_count": 3,
     "death_cause_attribution": true,
-    "resource_signature": "hp:-3|food:8|ammo:0|medkits:7|scrap:16|radiation:0|weapon:EquipmentState(id='makeshift_blade', slot='weapon', durability=8, max_durability=10, rarity='rare', requirements={}, scaling={'strength': 0.5}, affixes={'def': 2}, tags=['melee', 'makeshift'], refinement_count=1)|armor:None|tool:None"
+    "resource_signature": "hp:-1|food:8|ammo:0|medkits:0|scrap:16|radiation:0|weapon:EquipmentState(id='makeshift_blade', slot='weapon', durability=8, max_durability=10, rarity='rare', requirements={}, scaling={'strength': 0.5}, affixes={'def': 2}, tags=['melee', 'makeshift'], refinement_count=1)|armor:None|tool:None"
   },
   "failure_analysis": {
     "death_chain_length": 3,

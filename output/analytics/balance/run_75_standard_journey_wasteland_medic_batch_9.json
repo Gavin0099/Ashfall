@@ -16,10 +16,10 @@
   "victory": false,
   "end_reason": "radiation_death",
   "player_final": {
-    "hp": 0,
+    "hp": -3,
     "food": 6,
-    "ammo": 1,
-    "medkits": 3,
+    "ammo": 0,
+    "medkits": 0,
     "scrap": 12,
     "radiation": 1,
     "archetype": null,
@@ -136,7 +136,7 @@
         "DANGER: this choice carries a high combat risk."
       ],
       "pre_choice_state": {
-        "hp": 18,
+        "hp": 19,
         "food": 8,
         "ammo": 3,
         "medkits": 2,
@@ -177,7 +177,7 @@
       "equipment_change": null,
       "equipment_summary": null,
       "player_after": {
-        "hp": 17,
+        "hp": 18,
         "food": 8,
         "ammo": 3,
         "medkits": 3,
@@ -216,7 +216,7 @@
         "WARNING: radiation will continue to threaten future travel."
       ],
       "pre_choice_state": {
-        "hp": 16,
+        "hp": 17,
         "food": 7,
         "ammo": 3,
         "medkits": 3,
@@ -254,7 +254,7 @@
       "equipment_change": null,
       "equipment_summary": null,
       "player_after": {
-        "hp": 16,
+        "hp": 17,
         "food": 7,
         "ammo": 3,
         "medkits": 3,
@@ -294,7 +294,7 @@
         "DANGER: this choice carries a high combat risk."
       ],
       "pre_choice_state": {
-        "hp": 15,
+        "hp": 16,
         "food": 6,
         "ammo": 3,
         "medkits": 3,
@@ -332,10 +332,10 @@
       "equipment_change": null,
       "equipment_summary": null,
       "player_after": {
-        "hp": 0,
+        "hp": -3,
         "food": 6,
-        "ammo": 1,
-        "medkits": 3,
+        "ammo": 0,
+        "medkits": 0,
         "scrap": 12,
         "radiation": 1,
         "archetype": null,
@@ -366,7 +366,7 @@
   "summary": {
     "pressure_count": 3,
     "death_cause_attribution": true,
-    "resource_signature": "hp:0|food:6|ammo:1|medkits:3|scrap:12|radiation:1|weapon:None|armor:None|tool:None"
+    "resource_signature": "hp:-3|food:6|ammo:0|medkits:0|scrap:12|radiation:1|weapon:None|armor:None|tool:None"
   },
   "failure_analysis": {
     "death_chain_length": 3,

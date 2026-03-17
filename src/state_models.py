@@ -134,6 +134,7 @@ class PlayerState:
     armor_slot: Optional[EquipmentState] = None
     tool_slot: Optional[EquipmentState] = None
     buffs: Dict[str, int] = field(default_factory=dict) # buff_id: duration_steps
+    max_hp: int = 20
 
     def is_dead(self) -> bool:
         return self.hp <= 0 or self.food <= 0

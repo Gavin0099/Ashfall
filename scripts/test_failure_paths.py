@@ -145,7 +145,7 @@ def test_radiation_attrition() -> None:
     }
     map_state = build_map(node_payloads, start_node_id="node_start", final_node_id="node_final")
     engine = RunEngine(map_state=map_state, seed=9, event_catalog={"abandoned_store": load_json(ROOT / "schemas" / "samples" / "events" / "abandoned_store.json")})
-    run = engine.create_run(PlayerState(hp=2, food=5, ammo=1, medkits=0, radiation=1), seed=9)
+    run = engine.create_run(PlayerState(hp=2, food=5, ammo=1, medkits=0, radiation=2), seed=9)
     engine.move_to(run, "node_a")
     if run.player.hp != 1:
         raise AssertionError("radiation attrition should reduce hp on move")
@@ -319,8 +319,8 @@ def test_enemy_archetype_loot_profiles() -> None:
     raider_resources = {item["resource"] for item in raider_loot}
     mutant_resources = {item["resource"] for item in mutant_loot}
 
-    if raider_resources != {"ammo", "food"}:
-        raise AssertionError("raider loot profile should focus on ammo and food")
+    if raider_resources != {"ammo", "food", "scrap"}:
+        raise AssertionError("raider loot profile should focus on ammo, food and scrap")
     if mutant_resources != {"scrap", "medkits"}:
         raise AssertionError("mutant loot profile should focus on scrap and medkits")
     if not any(item["resource"] == "ammo" and item["chance"] == 1.0 for item in raider_loot):

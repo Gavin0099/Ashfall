@@ -332,8 +332,18 @@ def run_plan(plan: RoutePlan, nodes: Dict[str, dict], events: Dict[str, dict], e
         
         node = engine.move_to(run, next_node, travel_mode=current_travel_mode)
         
+        # Phase 8.0: Proactive Healing at any node
+        while run.player.hp <= (run.player.max_hp // 2) and run.player.medkits > 0:
+            run.player.hp = min(run.player.max_hp, run.player.hp + 10)
+            run.player.medkits -= 1
+
         # v6.0: Automated Workshop Actions at Camp
         if node.node_type == "camp":
+            # Phase 8.0: Heal to full if medkits available
+            while run.player.hp < 15 and run.player.medkits > 0: # Use 15 as a safe threshold
+                run.player.hp = min(20, run.player.hp + 10)
+                run.player.medkits -= 1
+
             for slot in ["weapon", "armor", "tool"]:
                 equipment = getattr(run.player, f"{slot}_slot")
                 if not equipment: continue
