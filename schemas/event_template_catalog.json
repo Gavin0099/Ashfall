@@ -1074,6 +1074,165 @@
           "combat_chance": 0.0
         }
       ]
+    },
+    {
+      "event_id": "evt_radioactive_orchard",
+      "template_type": "environmental_hazard",
+      "description_variants": [
+        "路邊有一片被遺忘的果園，樹上掛滿了異常碩大的果實，但空氣中瀰漫著紫色的霧氣。",
+        "這片果園在輻射塵下竟然長得異常茂盛，成熟的果實散發著誘人的香氣。"
+      ],
+      "options": [
+        {
+          "text_variants": [
+            "採集大量果實充飢",
+            "這可能是這幾天最飽的一餐，多採一點"
+          ],
+          "effects": {
+            "food": 4,
+            "radiation": 3
+          },
+          "combat_chance": 0.1
+        },
+        {
+          "text_variants": [
+            "只挑選邊緣受污染較少的果實",
+            "謹慎採樣，別吃太多"
+          ],
+          "effects": {
+            "food": 2,
+            "radiation": 1
+          },
+          "combat_chance": 0.0
+        }
+      ]
+    },
+    {
+      "event_id": "evt_collapsed_overpass",
+      "template_type": "ruined_infrastructure",
+      "description_variants": [
+        "前方的高架橋發生了嚴重的坍塌，混凝土斷裂處露出了扭曲的鋼筋，這裡是唯一的捷徑。",
+        "斷裂的高架橫在路徑上，下方堆滿了廢棄車輛，空氣中有一股刺鼻的化學味。"
+      ],
+      "options": [
+        {
+          "text_variants": [
+            "從斷裂處攀爬過去（捷徑）",
+            "踩著扭曲的鋼筋強行攀越"
+          ],
+          "effects": {
+            "hp": -2,
+            "food": 0,
+            "scrap": 1
+          },
+          "combat_chance": 0.2
+        },
+        {
+          "text_variants": [
+            "繞遠路從下方的廢車堆穿過",
+            "穩紮穩打，從地面車陣中尋找路徑"
+          ],
+          "effects": {
+            "food": -1,
+            "radiation": 1
+          },
+          "combat_chance": 0.5
+        }
+      ]
+    },
+    {
+      "event_id": "evt_raider_toll_bridge",
+      "template_type": "checkpoint_conflict",
+      "description_variants": [
+        "一座木製吊橋被一群掠奪者佔據，他們在那裡架設了重機槍，要求過路者交出所有彈藥。",
+        "吊橋被路障封死，幾名掠奪者正在驅趕試圖靠近的人。"
+      ],
+      "options": [
+        {
+          "text_variants": [
+            "交出彈藥買通守衛",
+            "息事寧人，把子彈給他們換取通行"
+          ],
+          "effects": {
+            "ammo": -3,
+            "food": 1
+          },
+          "combat_chance": 0.0
+        },
+        {
+          "text_variants": [
+            "強行衝過吊橋",
+            "踩死油門，在他們反應過來前衝過去"
+          ],
+          "effects": {
+            "hp": -2,
+            "ammo": 0
+          },
+          "combat_chance": 1.0
+        }
+      ]
+    },
+    {
+      "event_id": "evt_old_key_quest_start",
+      "template_type": "survivor_contact",
+      "description_variants": [
+        "你在廢墟中發現了一個古老且精巧的黃銅鑰匙。",
+        "一張皺巴巴的地圖夾在一個生鏽的保險箱旁，末端貼著一把鑰匙。"
+      ],
+      "options": [
+        {
+          "text_variants": [
+            "收起鑰匙，這可能有用",
+            "這把鑰匙看起來屬於某個特別的儲藏箱"
+          ],
+          "effects": {
+            "scrap": 1
+          },
+          "set_flags": {
+            "has_old_key": true
+          },
+          "combat_chance": 0.0
+        },
+        {
+          "text_variants": [
+            "忽視它，只是破銅爛鐵",
+            "不感興趣，繼續前進"
+          ],
+          "effects": {},
+          "combat_chance": 0.0
+        }
+      ]
+    },
+    {
+      "event_id": "evt_hidden_cache_quest_end",
+      "template_type": "scavenger_encounter",
+      "conditions": {
+        "required_flags": {
+          "has_old_key": true
+        }
+      },
+      "description_variants": [
+        "你找到了一個貼著蠟封的神祕鐵箱，上面的鎖眼正符合那把鑰匙。",
+        "隱藏在瓦礫後方的是一個巨大的保險箱，你感覺手裡的鑰匙正在發熱。"
+      ],
+      "options": [
+        {
+          "text_variants": [
+            "使用鑰匙開啟",
+            "插入鑰匙，轉動鎖芯"
+          ],
+          "effects": {
+            "ammo": 5,
+            "medkits": 2,
+            "scrap": 10
+          },
+          "equipment_reward": {
+            "slot": "weapon",
+            "item": "hardened_blade"
+          },
+          "combat_chance": 0.0
+        }
+      ]
     }
   ]
 }

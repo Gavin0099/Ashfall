@@ -19,9 +19,9 @@ python scripts/generate_pt1_summary.py
 - expected run family: `north_aggressive`
 - operator note: strong early pressure
 - machine reference: `north_aggressive`
-- pressure nodes: node_north_1, node_north_2, node_mid, node_approach
-- primary risk read: resource_exhaustion (steps_from_regret=0)
-- final state snapshot: hp=0 food=4 ammo=5 rad=0 weapon=rust_rifle tool=None
+- pressure nodes: node_north_1, node_north_2, node_mid, node_approach, node_final
+- primary risk read: survived reference run
+- final state snapshot: hp=2 food=2 ammo=2 rad=1 weapon=rust_rifle tool=None
 - equipment arc:
 - node_north_1: weapon -> makeshift_blade (replaced empty)
 - node_mid: weapon -> rust_rifle (replaced makeshift_blade)

@@ -1,4 +1,4 @@
-﻿{
+{
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "title": "Enemy Schema",
   "description": "Ashfall v0.1 frozen contract. Defines a single enemy record used in combat resolution.",
@@ -35,6 +35,10 @@
         "max": { "type": "integer", "minimum": 0 }
       },
       "additionalProperties": false
+    },
+    "is_elite": {
+      "type": "boolean",
+      "default": false
     },
     "loot_table": {
       "type": "array",

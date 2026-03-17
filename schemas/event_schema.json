@@ -1,14 +1,25 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "title": "Event Schema",
-  "description": "Ashfall v0.1 contract. Defines a resolved event instance (after template instantiation). Effects are restricted to the approved v0.1 resource key whitelist.",
-  "x-ashfall-version": "0.1",
+  "description": "Ashfall v0.6 contract. Supports run flags, conditions, and equipment rewards.",
+  "x-ashfall-version": "0.6",
   "type": "object",
   "required": ["id", "description", "options"],
   "properties": {
     "id": {
       "type": "string",
       "minLength": 1
+    },
+    "conditions": {
+      "type": "object",
+      "description": "Conditions required to trigger this event (e.g., specific run flags).",
+      "properties": {
+        "required_flags": {
+          "type": "object",
+          "additionalProperties": { "type": "boolean" }
+        }
+      },
+      "additionalProperties": false
     },
     "description": {
       "type": "string",
@@ -42,6 +53,11 @@
             "type": "number",
             "minimum": 0.0,
             "maximum": 1.0
+          },
+          "set_flags": {
+            "type": "object",
+            "description": "Flags to set or update in the RunState.",
+            "additionalProperties": { "type": "boolean" }
           },
           "equipment_reward": {
             "type": "object",

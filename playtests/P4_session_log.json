@@ -3,50 +3,17 @@
   "session_id": "PT1-004",
   "roguelite_experience": false,
   "game_dev_background": false,
-  "run_id": "north_cautious",
+  "run_id": "TBD",
   "events": [
     {
-      "timestamp": "AUTO_STEP_1",
-      "node_id": "node_north_1",
-      "decision_time_ms": 0,
-      "selected_option": 1,
-      "hesitation_flag": false,
-      "confusion_flag": false,
-      "what_i_thought_happened": "",
-      "why_im_salty": "",
-      "verbal_note": ""
-    },
-    {
-      "timestamp": "AUTO_STEP_2",
-      "node_id": "node_north_2",
-      "decision_time_ms": 0,
-      "selected_option": 1,
-      "hesitation_flag": false,
-      "confusion_flag": false,
-      "what_i_thought_happened": "",
-      "why_im_salty": "",
-      "verbal_note": ""
-    },
-    {
-      "timestamp": "AUTO_STEP_3",
-      "node_id": "node_mid",
-      "decision_time_ms": 0,
-      "selected_option": 1,
-      "hesitation_flag": false,
-      "confusion_flag": false,
-      "what_i_thought_happened": "",
-      "why_im_salty": "",
-      "verbal_note": ""
-    },
-    {
-      "timestamp": "AUTO_STEP_4",
-      "node_id": "node_approach",
+      "timestamp": "TBD",
+      "node_id": "TBD",
       "decision_time_ms": 0,
       "selected_option": 0,
       "hesitation_flag": false,
       "confusion_flag": false,
-      "what_i_thought_happened": "",
-      "why_im_salty": "",
+      "what_i_thought_happened": "TBD",
+      "why_im_salty": "TBD",
       "verbal_note": ""
     }
   ],

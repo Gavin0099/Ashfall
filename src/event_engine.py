@@ -6,10 +6,30 @@ from typing import Any, Dict
 from .state_models import NodeState, PlayerState, apply_effects, equip_item
 
 
-def pick_event_id(node: NodeState, rng: random.Random) -> str:
+def pick_event_id(node: NodeState, rng: random.Random, run_flags: Dict[str, Any] | None = None, event_catalog: Dict[str, Dict[str, Any]] | None = None) -> str:
     if not node.event_pool:
         raise ValueError(f"Node {node.id} has empty event_pool")
-    return rng.choice(node.event_pool)
+    
+    run_flags = run_flags or {}
+    candidates = node.event_pool
+    
+    if event_catalog:
+        filtered = []
+        for eid in node.event_pool:
+            event_data = event_catalog.get(eid, {})
+            conditions = event_data.get("conditions", {})
+            required_flags = conditions.get("required_flags", {})
+            
+            match = True
+            for f_key, f_val in required_flags.items():
+                if run_flags.get(f_key) != f_val:
+                    match = False
+                    break
+            if match:
+                filtered.append(eid)
+        candidates = filtered if filtered else node.event_pool # Fallback to full pool if none match
+
+    return rng.choice(candidates)
 
 
 def resolve_event_choice(
@@ -28,11 +48,11 @@ def resolve_event_choice(
     effects = option.get("effects", {})
     if not isinstance(effects, dict):
         raise ValueError("Event option effects must be an object")
-    equipped_tool_before = player.tool_slot
+    equipped_tool_before = player.tool_slot.id if player.tool_slot else None
     apply_effects(player, effects)
 
     scavenger_bonus: Dict[str, int] = {}
-    if equipped_tool_before == "scavenger_kit" or player.background == "scavenger":
+    if equipped_tool_before == "scavenger_kit" or player.archetype == "scavenger":
         for key in ("food", "ammo", "scrap", "medkits"):
             if int(effects.get(key, 0)) > 0:
                 amount = 1
@@ -58,10 +78,21 @@ def resolve_event_choice(
         if not isinstance(equipment_reward, dict):
             raise ValueError("equipment_reward must be an object")
         slot = equipment_reward.get("slot")
-        item = equipment_reward.get("item")
-        if not isinstance(slot, str) or not isinstance(item, str):
+        item_id = equipment_reward.get("item")
+        if not isinstance(slot, str) or not isinstance(item_id, str):
             raise ValueError("equipment_reward requires string slot and item")
-        equipment_change = equip_item(player, slot=slot, item=item)
+        
+        # Roll for affixes
+        affixes = {}
+        if rng.random() < 0.5: # 50% chance for a basic affix
+            if slot == "weapon":
+                affixes["atk"] = 1
+            elif slot == "armor":
+                affixes["def"] = 1
+        
+        from .state_models import EquipmentState
+        equipment = EquipmentState(id=item_id, slot=slot, affixes=affixes)
+        equipment_change = equip_item(player, slot=slot, equipment=equipment)
 
     return {
         "event_id": event_payload.get("id"),
@@ -71,4 +102,5 @@ def resolve_event_choice(
         "equipment_reward": equipment_reward,
         "equipment_change": equipment_change,
         "scavenger_bonus": scavenger_bonus,
+        "set_flags": option.get("set_flags", {}),
     }

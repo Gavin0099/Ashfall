@@ -1,4 +1,8 @@
 #!/usr/bin/env python3
+"""
+Validate machine-readable [Governance Contract] blocks.
+"""
+
 from __future__ import annotations
 
 import argparse
@@ -7,196 +11,209 @@ import re
 import sys
 from dataclasses import dataclass, field
 from pathlib import Path
-from typing import Any, Optional
+from typing import Optional
+
+if __package__ in (None, ""):
+    sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+
+from governance_tools.rule_pack_loader import available_rule_packs, parse_rule_list
 
 
-VALID_LANG = {"C++", "C#", "ObjC", "Swift", "JS"}
+VALID_LANG = {"C++", "C#", "ObjC", "Swift", "JS", "Python"}
 VALID_LEVEL = {"L0", "L1", "L2"}
 VALID_SCOPE = {"feature", "refactor", "bugfix", "I/O", "tooling", "review"}
 VALID_PRESSURE_LEVELS = {"SAFE", "WARNING", "CRITICAL", "EMERGENCY"}
+VALID_RISK_LEVELS = {"low", "medium", "high"}
+VALID_OVERSIGHT_LEVELS = {"auto", "review-required", "human-approval"}
+VALID_MEMORY_MODES = {"stateless", "candidate", "durable"}
+
 REQUIRED_LOADED = {"SYSTEM_PROMPT", "HUMAN-OVERSIGHT"}
+DISPLAY_FIELDS = [
+    "LANG",
+    "LEVEL",
+    "SCOPE",
+    "PLAN",
+    "LOADED",
+    "CONTEXT",
+    "PRESSURE",
+    "RULES",
+    "RISK",
+    "OVERSIGHT",
+    "MEMORY_MODE",
+    "AGENT_ID",
+    "SESSION",
+]
 
 
 @dataclass
 class ValidationResult:
     compliant: bool
     contract_found: bool
-    fields: dict[str, str]
+    fields: dict
     errors: list[str] = field(default_factory=list)
     warnings: list[str] = field(default_factory=list)
-    metrics: dict[str, Any] = field(default_factory=dict)
 
 
 def extract_contract_block(text: str) -> Optional[str]:
-    code_block = re.search(r"```[^\n]*\n(\[Governance Contract\]\n.*?)(?:```)", text, re.DOTALL)
-    if code_block:
-        return code_block.group(1).strip()
-    plain = re.search(r"(\[Governance Contract\]\n(?:[A-Z_]+\s*=\s*.+\n?)*)", text)
-    return plain.group(1).strip() if plain else None
+    code_match = re.search(r"```[^\n]*\n\[Governance Contract\]\n(.*?)```", text, re.DOTALL)
+    if code_match:
+        return code_match.group(0)
+
+    plain_match = re.search(r"\[Governance Contract\]\n((?:[A-Z_]+\s*=\s*.*\n?)*)", text)
+    if plain_match and plain_match.group(1).strip():
+        return plain_match.group(0)
+    return None
 
 
-def parse_contract_fields(block: str) -> dict[str, str]:
+def parse_contract_fields(block: str) -> dict:
     fields: dict[str, str] = {}
     for line in block.splitlines():
-        if "=" not in line or line.strip().startswith("["):
+        stripped = line.strip()
+        if "=" not in line or stripped.startswith("[") or stripped.startswith("`"):
             continue
         key, _, value = line.partition("=")
         key = key.strip()
-        value = value.strip()
         if key:
-            fields[key] = value
+            fields[key] = value.strip()
     return fields
 
 
-def load_balance_metrics(balance_summary_path: Path) -> dict[str, Any]:
-    payload = json.loads(balance_summary_path.read_text(encoding="utf-8-sig"))
-    return payload.get("summary", payload)
+def _validate_choice(fields: dict, key: str, valid_values: set[str], errors: list[str]) -> None:
+    value = fields.get(key, "").strip()
+    if not value:
+        errors.append(f"{key} field is required")
+        return
+    if value not in valid_values:
+        errors.append(f"{key} invalid: '{value}'. Allowed: {sorted(valid_values)}")
 
 
-def validate_regret_distance(
-    balance_summary_path: Path,
-    regret_threshold: float = 0.5,
-) -> tuple[list[str], dict[str, Any]]:
-    errors: list[str] = []
-    metrics: dict[str, Any] = {}
-    if not balance_summary_path.exists():
-        errors.append(f"balance summary missing: {balance_summary_path}")
-        return errors, metrics
+def _validate_rules(fields: dict, errors: list[str], available: set[str] | None = None) -> None:
+    rules_raw = fields.get("RULES", "").strip()
+    if not rules_raw:
+        errors.append("RULES field is required")
+        return
 
-    summary = load_balance_metrics(balance_summary_path)
-    avg_regret = float(summary.get("avg_steps_from_regret_to_death", 0.0))
-    metrics["avg_steps_from_regret_to_death"] = avg_regret
-    metrics["regret_threshold"] = regret_threshold
-    if avg_regret < regret_threshold:
+    rule_names = parse_rule_list(rules_raw)
+    if not rule_names:
+        errors.append("RULES must contain at least one rule pack")
+        return
+
+    available = available or available_rule_packs()
+    invalid = [name for name in rule_names if name not in available]
+    if invalid:
         errors.append(
-            "balance gate failed: "
-            f"avg_steps_from_regret_to_death={avg_regret} < {regret_threshold}"
+            f"RULES contains unknown rule pack(s): {invalid}. Available: {sorted(available)}"
         )
-    return errors, metrics
 
 
-def validate_contract(
-    text: str,
-    *,
-    balance_summary_path: Path | None = None,
-    regret_threshold: float = 0.5,
-) -> ValidationResult:
+def validate_contract(text: str, available_rules: set[str] | None = None) -> ValidationResult:
     block = extract_contract_block(text)
     if block is None:
         return ValidationResult(
             compliant=False,
             contract_found=False,
             fields={},
-            errors=["missing [Governance Contract] block"],
+            errors=["[Governance Contract] block not found"],
         )
 
     fields = parse_contract_fields(block)
     errors: list[str] = []
     warnings: list[str] = []
 
-    lang = fields.get("LANG", "")
+    lang = fields.get("LANG", "").strip()
     if not lang:
-        errors.append("LANG is required")
+        errors.append("LANG field is required")
     elif lang not in VALID_LANG:
-        errors.append(f"LANG invalid: {lang}")
+        errors.append(f"LANG invalid: '{lang}'. Allowed: {sorted(VALID_LANG)}")
 
-    level = fields.get("LEVEL", "")
+    level = fields.get("LEVEL", "").strip()
     if not level:
-        errors.append("LEVEL is required")
+        errors.append("LEVEL field is required")
     elif level not in VALID_LEVEL:
-        errors.append(f"LEVEL invalid: {level}")
+        errors.append(f"LEVEL invalid: '{level}'. Allowed: {sorted(VALID_LEVEL)}")
 
-    scope = fields.get("SCOPE", "")
+    scope = fields.get("SCOPE", "").strip()
     if not scope:
-        errors.append("SCOPE is required")
+        errors.append("SCOPE field is required")
     elif scope not in VALID_SCOPE:
-        errors.append(f"SCOPE invalid: {scope}")
+        errors.append(f"SCOPE invalid: '{scope}'. Allowed: {sorted(VALID_SCOPE)}")
 
-    if not fields.get("PLAN", ""):
-        warnings.append("PLAN is missing")
+    if not fields.get("PLAN", "").strip():
+        warnings.append("PLAN missing; recommended to bind responses to PLAN.md")
 
-    loaded_raw = fields.get("LOADED", "")
+    loaded_raw = fields.get("LOADED", "").strip()
     if not loaded_raw:
-        errors.append("LOADED is required")
+        errors.append("LOADED field is required")
     else:
-        loaded = {part.strip() for part in loaded_raw.split(",") if part.strip()}
-        missing = sorted(REQUIRED_LOADED - loaded)
-        if missing:
-            errors.append(f"LOADED missing required docs: {missing}")
+        loaded_docs = {doc.strip() for doc in loaded_raw.split(",") if doc.strip()}
+        missing_required = REQUIRED_LOADED - loaded_docs
+        if missing_required:
+            errors.append(f"LOADED missing required documents: {sorted(missing_required)}")
 
-    context = fields.get("CONTEXT", "")
+    context = fields.get("CONTEXT", "").strip()
     if not context:
-        errors.append("CONTEXT is required")
+        errors.append("CONTEXT field is required")
     else:
+        if "->" not in context and "--" not in context:
+            errors.append("CONTEXT must include active scope using '->' or '--'")
         if "NOT:" not in context:
-            errors.append("CONTEXT must include a NOT: clause")
-        if "->" not in context and "=>" not in context and "vs" not in context.lower() and "??" not in context:
-            warnings.append("CONTEXT should describe allowed vs excluded scope more explicitly")
+            errors.append("CONTEXT must include a 'NOT:' exclusion clause")
 
-    pressure = fields.get("PRESSURE", "")
+    pressure = fields.get("PRESSURE", "").strip()
     if not pressure:
-        errors.append("PRESSURE is required")
+        errors.append("PRESSURE field is required")
     else:
-        level_token = pressure.split("(")[0].strip()
-        if level_token not in VALID_PRESSURE_LEVELS:
-            errors.append(f"PRESSURE invalid: {level_token}")
+        level_name = pressure.split("(")[0].strip()
+        if level_name not in VALID_PRESSURE_LEVELS:
+            errors.append(
+                f"PRESSURE invalid: '{level_name}'. Allowed: {sorted(VALID_PRESSURE_LEVELS)}"
+            )
         if "(" not in pressure or "/" not in pressure:
-            warnings.append("PRESSURE should include capacity notation like SAFE (45/200)")
+            warnings.append("PRESSURE should include line-count context, e.g. SAFE (45/200)")
 
-    agent_id = fields.get("AGENT_ID", "")
-    session = fields.get("SESSION", "")
-    if agent_id and not session:
-        errors.append("SESSION is required when AGENT_ID is present")
-    if session and not re.fullmatch(r"\d{4}-\d{2}-\d{2}-\d+", session):
-        errors.append(f"SESSION invalid: {session}")
-    if session and not agent_id:
+    _validate_rules(fields, errors, available=available_rules)
+    _validate_choice(fields, "RISK", VALID_RISK_LEVELS, errors)
+    _validate_choice(fields, "OVERSIGHT", VALID_OVERSIGHT_LEVELS, errors)
+    _validate_choice(fields, "MEMORY_MODE", VALID_MEMORY_MODES, errors)
+
+    agent_id = fields.get("AGENT_ID", "").strip()
+    session = fields.get("SESSION", "").strip()
+    if agent_id:
+        if not session:
+            errors.append("AGENT_ID requires SESSION in YYYY-MM-DD-NN format")
+        elif not re.fullmatch(r"\d{4}-\d{2}-\d{2}-\d+", session):
+            errors.append(f"SESSION invalid: '{session}'. Expected YYYY-MM-DD-NN format")
+    elif session:
         warnings.append("SESSION provided without AGENT_ID")
 
-    metrics: dict[str, Any] = {}
-    if balance_summary_path is not None:
-        balance_errors, balance_metrics = validate_regret_distance(balance_summary_path, regret_threshold)
-        errors.extend(balance_errors)
-        metrics.update(balance_metrics)
-
     return ValidationResult(
-        compliant=not errors,
+        compliant=len(errors) == 0,
         contract_found=True,
         fields=fields,
         errors=errors,
         warnings=warnings,
-        metrics=metrics,
     )
 
 
 def format_human(result: ValidationResult) -> str:
-    lines = []
     if not result.contract_found:
-        lines.append("FAIL: missing [Governance Contract] block")
-        return "\n".join(lines)
+        return "ERROR: [Governance Contract] block not found"
 
-    lines.append("Governance Contract Validation")
+    lines = ["[Governance Contract] validation", ""]
+    for key in DISPLAY_FIELDS:
+        lines.append(f"{key:<12} = {result.fields.get(key, '<missing>')}")
+
     lines.append("")
-    for key in ("LANG", "LEVEL", "SCOPE", "PLAN", "LOADED", "CONTEXT", "PRESSURE", "AGENT_ID", "SESSION"):
-        if key in result.fields:
-            lines.append(f"- {key}: {result.fields[key]}")
-    if result.metrics:
-        lines.append("")
-        for key, value in result.metrics.items():
-            lines.append(f"- {key}: {value}")
-    if result.errors:
-        lines.append("")
-        lines.append("Errors:")
-        lines.extend(f"- {item}" for item in result.errors)
+    lines.append(f"errors: {len(result.errors)}")
+    for err in result.errors:
+        lines.append(f"- {err}")
+
     if result.warnings:
         lines.append("")
-        lines.append("Warnings:")
-        lines.extend(f"- {item}" for item in result.warnings)
-    if result.compliant:
-        lines.append("")
-        lines.append("Result: COMPLIANT")
-    else:
-        lines.append("")
-        lines.append("Result: FAILED")
+        lines.append(f"warnings: {len(result.warnings)}")
+        for warning in result.warnings:
+            lines.append(f"- {warning}")
+
     return "\n".join(lines)
 
 
@@ -208,48 +225,38 @@ def format_json(result: ValidationResult) -> str:
             "fields": result.fields,
             "errors": result.errors,
             "warnings": result.warnings,
-            "metrics": result.metrics,
         },
         ensure_ascii=False,
         indent=2,
     )
 
 
-def main() -> int:
-    parser = argparse.ArgumentParser(description="Validate governance contract blocks and regret distance gates.")
-    parser.add_argument("--file", "-f", help="Response file to validate. Defaults to stdin.")
-    parser.add_argument("--format", choices=("human", "json"), default="human")
-    parser.add_argument(
-        "--balance-summary",
-        default="output/analytics/balance_summary.json",
-        help="Balance summary used for regret distance gate.",
+def main() -> None:
+    parser = argparse.ArgumentParser(
+        description="Validate a machine-readable [Governance Contract] block."
     )
-    parser.add_argument(
-        "--regret-threshold",
-        type=float,
-        default=0.5,
-        help="Minimum allowed avg_steps_from_regret_to_death.",
-    )
+    parser.add_argument("--file", "-f", help="Text file containing the AI response.")
+    parser.add_argument("--format", choices=["human", "json"], default="human")
     args = parser.parse_args()
 
     if args.file:
-        text = Path(args.file).read_text(encoding="utf-8-sig")
+        try:
+            text = Path(args.file).read_text(encoding="utf-8")
+        except FileNotFoundError:
+            print(f"ERROR: file not found: {args.file}", file=sys.stderr)
+            sys.exit(2)
     else:
         text = sys.stdin.read()
 
-    result = validate_contract(
-        text,
-        balance_summary_path=Path(args.balance_summary),
-        regret_threshold=args.regret_threshold,
-    )
+    result = validate_contract(text)
     print(format_json(result) if args.format == "json" else format_human(result))
 
     if not result.contract_found:
-        return 2
+        sys.exit(2)
     if not result.compliant:
-        return 1
-    return 0
+        sys.exit(1)
+    sys.exit(0)
 
 
 if __name__ == "__main__":
-    raise SystemExit(main())
+    main()

@@ -18,6 +18,24 @@ ITEM_SLOT_BY_ID: Dict[str, EquipmentSlot] = {
 
 
 @dataclass
+class EquipmentState:
+    id: str
+    slot: EquipmentSlot
+    affixes: Dict[str, int] = field(default_factory=dict)
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {"id": self.id, "slot": self.slot, "affixes": self.affixes}
+
+    @staticmethod
+    def from_dict(data: Dict[str, Any]) -> EquipmentState:
+        return EquipmentState(
+            id=data["id"],
+            slot=data["slot"],
+            affixes=data.get("affixes", {}),
+        )
+
+
+@dataclass
 class PlayerState:
     hp: int
     food: int
@@ -25,10 +43,10 @@ class PlayerState:
     medkits: int
     scrap: int = 0
     radiation: int = 0
-    background: Optional[str] = None
-    weapon_slot: Optional[str] = None
-    armor_slot: Optional[str] = None
-    tool_slot: Optional[str] = None
+    archetype: Optional[str] = None
+    weapon_slot: Optional[EquipmentState] = None
+    armor_slot: Optional[EquipmentState] = None
+    tool_slot: Optional[EquipmentState] = None
 
     def is_dead(self) -> bool:
         return self.hp <= 0 or self.food <= 0
@@ -41,14 +59,17 @@ class PlayerState:
             "medkits": self.medkits,
             "scrap": self.scrap,
             "radiation": self.radiation,
-            "background": self.background,
-            "weapon_slot": self.weapon_slot,
-            "armor_slot": self.armor_slot,
-            "tool_slot": self.tool_slot,
+            "archetype": self.archetype,
+            "weapon_slot": self.weapon_slot.to_dict() if self.weapon_slot else None,
+            "armor_slot": self.armor_slot.to_dict() if self.armor_slot else None,
+            "tool_slot": self.tool_slot.to_dict() if self.tool_slot else None,
         }
 
     @staticmethod
     def from_dict(data: Dict[str, Any]) -> PlayerState:
+        w_data = data.get("weapon_slot")
+        a_data = data.get("armor_slot")
+        t_data = data.get("tool_slot")
         return PlayerState(
             hp=data["hp"],
             food=data["food"],
@@ -56,10 +77,10 @@ class PlayerState:
             medkits=data["medkits"],
             scrap=data.get("scrap", 0),
             radiation=data.get("radiation", 0),
-            background=data.get("background"),
-            weapon_slot=data.get("weapon_slot"),
-            armor_slot=data.get("armor_slot"),
-            tool_slot=data.get("tool_slot"),
+            archetype=data.get("archetype") or data.get("background"),
+            weapon_slot=EquipmentState.from_dict(w_data) if isinstance(w_data, dict) else None,
+            armor_slot=EquipmentState.from_dict(a_data) if isinstance(a_data, dict) else None,
+            tool_slot=EquipmentState.from_dict(t_data) if isinstance(t_data, dict) else None,
         )
 
 
@@ -84,6 +105,7 @@ class EnemyState:
     archetype: Optional[str] = None
     special_ability: Optional[str] = None
     special_used: bool = False
+    is_elite: bool = False
     loot_table: List[Dict[str, Any]] = field(default_factory=list)
 
     def is_dead(self) -> bool:
@@ -113,6 +135,7 @@ class RunState:
     end_reason: Optional[str] = None
     decision_log: List[Dict[str, Any]] = field(default_factory=list)
     travel_mode: str = "normal"
+    flags: Dict[str, Any] = field(default_factory=dict)
 
     def visit(self, node_id: str) -> None:
         if node_id not in self.visited_nodes:
@@ -136,8 +159,9 @@ class RunState:
             "ended": self.ended,
             "victory": self.victory,
             "end_reason": self.end_reason,
-            "decision_log": list(self.decision_log),
+            "decision_log": self.decision_log,
             "travel_mode": self.travel_mode,
+            "flags": self.flags,
         }
 
     @staticmethod
@@ -151,31 +175,31 @@ class RunState:
             ended=data["ended"],
             victory=data["victory"],
             end_reason=data["end_reason"],
-            decision_log=list(data.get("decision_log", [])),
+            decision_log=data.get("decision_log", []),
             travel_mode=data.get("travel_mode", "normal"),
+            flags=data.get("flags", {}),
         )
 
 
-def equip_item(player: PlayerState, slot: EquipmentSlot, item: str) -> Dict[str, Optional[str] | bool]:
-    expected_slot = ITEM_SLOT_BY_ID.get(item)
-    if expected_slot is None:
-        raise ValueError(f"Unknown equipment item: {item}")
-    if expected_slot != slot:
-        raise ValueError(f"Equipment slot mismatch: item {item} cannot be equipped to {slot}")
+def equip_item(player: PlayerState, slot: EquipmentSlot, equipment: EquipmentState) -> Dict[str, Any]:
+    if equipment.slot != slot:
+        raise ValueError(f"Equipment slot mismatch: item {equipment.id} cannot be equipped to {slot}")
 
     slot_attr = f"{slot}_slot"
     previous = getattr(player, slot_attr)
-    if previous == item:
-        return {"slot": slot, "item": item, "replaced": previous, "changed": False}
+    previous_id = previous.id if previous else None
+    
+    if previous_id == equipment.id and getattr(previous, "affixes", {}) == equipment.affixes:
+        return {"slot": slot, "item": equipment.id, "replaced": previous_id, "changed": False}
 
-    setattr(player, slot_attr, item)
+    setattr(player, slot_attr, equipment)
 
     # Field Pack uses a temporary +2 food proxy until a true capacity system exists.
-    if item == "field_pack":
+    if equipment.id == "field_pack":
         player.food += 2
 
     player.food = max(0, player.food)
-    return {"slot": slot, "item": item, "replaced": previous, "changed": True}
+    return {"slot": slot, "item": equipment.id, "replaced": previous_id, "changed": True}
 
 
 def apply_effects(player: PlayerState, effects: Dict[str, int]) -> None:

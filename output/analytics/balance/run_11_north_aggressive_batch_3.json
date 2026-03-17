@@ -12,11 +12,11 @@
   "victory": false,
   "end_reason": "event_or_resource_death",
   "player_final": {
-    "hp": -2,
-    "food": 5,
-    "ammo": 2,
-    "medkits": 3,
-    "scrap": 2,
+    "hp": 0,
+    "food": 4,
+    "ammo": 0,
+    "medkits": 4,
+    "scrap": 4,
     "radiation": 0,
     "weapon_slot": "rust_rifle",
     "armor_slot": null,
@@ -97,11 +97,11 @@
       "combat_triggered": true,
       "combat_loot": [
         {
-          "resource": "ammo",
-          "amount": 3
+          "resource": "scrap",
+          "amount": 2
         },
         {
-          "resource": "food",
+          "resource": "medkits",
           "amount": 1
         }
       ],
@@ -113,11 +113,11 @@
       "equipment_change": null,
       "equipment_summary": null,
       "player_after": {
-        "hp": 1,
-        "food": 6,
-        "ammo": 3,
-        "medkits": 3,
-        "scrap": 2,
+        "hp": 3,
+        "food": 5,
+        "ammo": 1,
+        "medkits": 4,
+        "scrap": 4,
         "radiation": 0,
         "weapon_slot": "makeshift_blade",
         "armor_slot": null,
@@ -133,11 +133,11 @@
         "DANGER: this choice carries a high combat risk."
       ],
       "pre_choice_state": {
-        "hp": 1,
-        "food": 5,
-        "ammo": 3,
-        "medkits": 3,
-        "scrap": 2,
+        "hp": 3,
+        "food": 4,
+        "ammo": 1,
+        "medkits": 4,
+        "scrap": 4,
         "radiation": 0,
         "weapon_slot": "makeshift_blade",
         "armor_slot": null,
@@ -157,11 +157,11 @@
       },
       "equipment_summary": "weapon -> rust_rifle (replaced makeshift_blade)",
       "player_after": {
-        "hp": -2,
-        "food": 5,
-        "ammo": 2,
-        "medkits": 3,
-        "scrap": 2,
+        "hp": 0,
+        "food": 4,
+        "ammo": 0,
+        "medkits": 4,
+        "scrap": 4,
         "radiation": 0,
         "weapon_slot": "rust_rifle",
         "armor_slot": null,
@@ -172,7 +172,7 @@
   "summary": {
     "pressure_count": 3,
     "death_cause_attribution": true,
-    "resource_signature": "hp:-2|food:5|ammo:2|medkits:3|scrap:2|radiation:0|weapon:rust_rifle|armor:None|tool:None"
+    "resource_signature": "hp:0|food:4|ammo:0|medkits:4|scrap:4|radiation:0|weapon:rust_rifle|armor:None|tool:None"
   },
   "failure_analysis": {
     "death_chain_length": 3,
@@ -217,21 +217,23 @@
       "pressure_count": 3,
       "combat_count": 3,
       "loot_drop_count": 3,
-      "loot_total_amount": 7,
+      "loot_total_amount": 6,
       "equipment_change_count": 2,
       "equipment_ids": [
         "makeshift_blade",
         "rust_rifle"
       ],
       "loot_resources": {
-        "ammo": 6,
-        "food": 1
+        "ammo": 3,
+        "scrap": 2,
+        "medkits": 1
       },
       "max_radiation": 0,
-      "min_food": 5,
+      "min_food": 4,
       "min_hp": 0,
       "low_resource_flags": [
-        "low_hp"
+        "low_hp",
+        "low_ammo"
       ],
       "risk_tags": [
         "combat_seen",

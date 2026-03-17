@@ -1,4 +1,4 @@
-﻿import json
+import json
 import shutil
 import sys
 import uuid
@@ -26,6 +26,10 @@ def make_contract(**overrides: str) -> str:
         "LOADED": "SYSTEM_PROMPT, HUMAN-OVERSIGHT",
         "CONTEXT": "Ashfall route balance -> governance checks; NOT: renderer work",
         "PRESSURE": "SAFE (45/200)",
+        "RULES": "common, python",
+        "RISK": "low",
+        "OVERSIGHT": "auto",
+        "MEMORY_MODE": "stateless",
     }
     fields.update(overrides)
     body = "\n".join(f"{key} = {value}" for key, value in fields.items())

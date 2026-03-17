@@ -17,8 +17,16 @@ class CombatEngine:
             raise ValueError("Cannot attack without ammo")
         player.ammo -= 1
         damage = self.rng.randint(1, 3)
-        if player.weapon_slot in ("rust_rifle", "hardened_blade"):
+        
+        # Base equipment bonuses (Legacy support)
+        weapon_id = player.weapon_slot.id if player.weapon_slot else None
+        if weapon_id in ("rust_rifle", "hardened_blade"):
             damage += 1
+            
+        # Random affixes: atk
+        if player.weapon_slot:
+            damage += player.weapon_slot.affixes.get("atk", 0)
+
         if enemy.special_ability == "thick_hide" and not enemy.special_used:
             damage = max(1, damage - 1)
             enemy.special_used = True
@@ -30,22 +38,33 @@ class CombatEngine:
             raise ValueError("Cannot use medkit without medkits")
         player.medkits -= 1
         heal = 3
-        if player.background == "medic":
+        if player.archetype == "medic":
             heal += 1
         player.hp += heal
         return heal
 
     def enemy_attack(self, player: PlayerState, enemy: EnemyState) -> int:
         damage = self.rng.randint(enemy.damage_min, enemy.damage_max)
+        
+        # Elite bonus: +1 damage
+        if enemy.is_elite:
+            damage += 1
+
         if enemy.special_ability == "opening_shot" and not enemy.special_used:
             damage += 1
             enemy.special_used = True
         
-        if player.background == "soldier":
+        if player.archetype == "soldier":
             damage = max(1, damage - 1)
         
-        if player.armor_slot == "plate_armor":
+        # Legacy support
+        armor_id = player.armor_slot.id if player.armor_slot else None
+        if armor_id == "plate_armor":
             damage = max(1, damage - 1)
+            
+        # Random affixes: def
+        if player.armor_slot:
+            damage = max(1, damage - player.armor_slot.affixes.get("def", 0))
             
         player.hp -= damage
         return damage
@@ -59,6 +78,9 @@ class CombatEngine:
         """
         log: List[str] = []
         rounds = 0
+        
+        if enemy.is_elite:
+            log.append(f"⚠️ 遭遇精英敵人：{enemy.name}！")
 
         while player.hp > 0 and enemy.hp > 0:
             rounds += 1

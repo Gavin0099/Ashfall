@@ -1,0 +1,282 @@
+{
+  "run_id": "south_cautious_pathfinder_batch_3",
+  "seed": 304,
+  "route": [
+    "node_south_1",
+    "node_south_2",
+    "node_mid",
+    "node_approach",
+    "node_final"
+  ],
+  "ended": true,
+  "victory": true,
+  "end_reason": "reached_final_node",
+  "player_final": {
+    "hp": 4,
+    "food": 2,
+    "ammo": 3,
+    "medkits": 3,
+    "scrap": 0,
+    "radiation": 0,
+    "archetype": "pathfinder",
+    "weapon_slot": null,
+    "armor_slot": null,
+    "tool_slot": "scavenger_kit"
+  },
+  "decision_log": [
+    {
+      "step": 1,
+      "node": "node_south_1",
+      "event_id": "evt_village",
+      "option_index": 0,
+      "warning_signals": [],
+      "pre_choice_state": {
+        "hp": 10,
+        "food": 8,
+        "ammo": 3,
+        "medkits": 1,
+        "scrap": 0,
+        "radiation": 0,
+        "archetype": "pathfinder",
+        "weapon_slot": null,
+        "armor_slot": null,
+        "tool_slot": null
+      },
+      "pressure": true,
+      "combat_triggered": false,
+      "combat_loot": [],
+      "effects": {
+        "ammo": -1,
+        "medkits": 1
+      },
+      "equipment_change": {
+        "slot": "tool",
+        "item": "scavenger_kit",
+        "replaced": null,
+        "changed": true
+      },
+      "equipment_summary": "tool -> scavenger_kit (replaced empty)",
+      "player_after": {
+        "hp": 10,
+        "food": 8,
+        "ammo": 2,
+        "medkits": 2,
+        "scrap": 0,
+        "radiation": 0,
+        "archetype": "pathfinder",
+        "weapon_slot": null,
+        "armor_slot": null,
+        "tool_slot": "scavenger_kit"
+      }
+    },
+    {
+      "step": 2,
+      "node": "node_south_2",
+      "event_id": "evt_abandoned_cache",
+      "option_index": 1,
+      "warning_signals": [],
+      "pre_choice_state": {
+        "hp": 10,
+        "food": 7,
+        "ammo": 2,
+        "medkits": 2,
+        "scrap": 0,
+        "radiation": 0,
+        "archetype": "pathfinder",
+        "weapon_slot": null,
+        "armor_slot": null,
+        "tool_slot": "scavenger_kit"
+      },
+      "pressure": false,
+      "combat_triggered": false,
+      "combat_loot": [],
+      "effects": {
+        "food": 1
+      },
+      "equipment_change": null,
+      "equipment_summary": null,
+      "player_after": {
+        "hp": 10,
+        "food": 9,
+        "ammo": 2,
+        "medkits": 2,
+        "scrap": 0,
+        "radiation": 0,
+        "archetype": "pathfinder",
+        "weapon_slot": null,
+        "armor_slot": null,
+        "tool_slot": "scavenger_kit"
+      }
+    },
+    {
+      "step": 3,
+      "node": "node_mid",
+      "event_id": "evt_sniper_nest",
+      "option_index": 1,
+      "warning_signals": [],
+      "pre_choice_state": {
+        "hp": 10,
+        "food": 8,
+        "ammo": 2,
+        "medkits": 2,
+        "scrap": 0,
+        "radiation": 0,
+        "archetype": "pathfinder",
+        "weapon_slot": null,
+        "armor_slot": null,
+        "tool_slot": "scavenger_kit"
+      },
+      "pressure": true,
+      "combat_triggered": false,
+      "combat_loot": [],
+      "effects": {
+        "food": -2
+      },
+      "equipment_change": null,
+      "equipment_summary": null,
+      "player_after": {
+        "hp": 10,
+        "food": 6,
+        "ammo": 2,
+        "medkits": 2,
+        "scrap": 0,
+        "radiation": 0,
+        "archetype": "pathfinder",
+        "weapon_slot": null,
+        "armor_slot": null,
+        "tool_slot": "scavenger_kit"
+      }
+    },
+    {
+      "step": 4,
+      "node": "node_approach",
+      "event_id": "evt_emergency_beacon",
+      "option_index": 0,
+      "warning_signals": [],
+      "pre_choice_state": {
+        "hp": 10,
+        "food": 5,
+        "ammo": 2,
+        "medkits": 2,
+        "scrap": 0,
+        "radiation": 0,
+        "archetype": "pathfinder",
+        "weapon_slot": null,
+        "armor_slot": null,
+        "tool_slot": "scavenger_kit"
+      },
+      "pressure": true,
+      "combat_triggered": true,
+      "combat_loot": [
+        {
+          "resource": "ammo",
+          "amount": 3
+        }
+      ],
+      "effects": {
+        "ammo": 2,
+        "medkits": 1,
+        "food": -1
+      },
+      "equipment_change": null,
+      "equipment_summary": null,
+      "player_after": {
+        "hp": 4,
+        "food": 4,
+        "ammo": 3,
+        "medkits": 3,
+        "scrap": 0,
+        "radiation": 0,
+        "archetype": "pathfinder",
+        "weapon_slot": null,
+        "armor_slot": null,
+        "tool_slot": "scavenger_kit"
+      }
+    },
+    {
+      "step": 5,
+      "node": "node_final",
+      "event_id": "evt_final",
+      "option_index": 0,
+      "warning_signals": [],
+      "pre_choice_state": {
+        "hp": 4,
+        "food": 3,
+        "ammo": 3,
+        "medkits": 3,
+        "scrap": 0,
+        "radiation": 0,
+        "archetype": "pathfinder",
+        "weapon_slot": null,
+        "armor_slot": null,
+        "tool_slot": "scavenger_kit"
+      },
+      "pressure": true,
+      "combat_triggered": false,
+      "combat_loot": [],
+      "effects": {
+        "food": -1
+      },
+      "equipment_change": null,
+      "equipment_summary": null,
+      "player_after": {
+        "hp": 4,
+        "food": 2,
+        "ammo": 3,
+        "medkits": 3,
+        "scrap": 0,
+        "radiation": 0,
+        "archetype": "pathfinder",
+        "weapon_slot": null,
+        "armor_slot": null,
+        "tool_slot": "scavenger_kit"
+      }
+    }
+  ],
+  "summary": {
+    "pressure_count": 4,
+    "death_cause_attribution": true,
+    "resource_signature": "hp:4|food:2|ammo:3|medkits:3|scrap:0|radiation:0|weapon:None|armor:None|tool:scavenger_kit"
+  },
+  "failure_analysis": {
+    "death_chain_length": 0,
+    "primary_blame_factor": null,
+    "regret_nodes": [],
+    "steps_from_regret_to_death": 0,
+    "is_trash_time_death": false
+  },
+  "run_summary": {
+    "headline": "south_cautious_pathfinder_batch_3: victory via reached_final_node after 5 steps",
+    "route_family": "south",
+    "outcome": "victory",
+    "key_turning_point": "node_south_1 (tool -> scavenger_kit (replaced empty))",
+    "notable_equipment": [
+      "scavenger_kit"
+    ],
+    "telemetry": {
+      "total_steps": 5,
+      "pressure_count": 4,
+      "combat_count": 1,
+      "loot_drop_count": 1,
+      "loot_total_amount": 3,
+      "equipment_change_count": 1,
+      "equipment_ids": [
+        "scavenger_kit"
+      ],
+      "loot_resources": {
+        "ammo": 3
+      },
+      "max_radiation": 0,
+      "min_food": 2,
+      "min_hp": 4,
+      "low_resource_flags": [
+        "low_food"
+      ],
+      "risk_tags": [
+        "combat_seen",
+        "equipment_arc",
+        "end_reached_final_node"
+      ]
+    }
+  }
+}

@@ -5,7 +5,7 @@ import json
 import sys
 from dataclasses import dataclass
 from pathlib import Path
-from typing import Dict, List
+from typing import Dict, List, Optional
 
 ROOT = Path(__file__).resolve().parents[1]
 if str(ROOT) not in sys.path:
@@ -31,17 +31,19 @@ class RoutePlan:
     route: List[str]
     options: Dict[str, int]
     difficulty: str = "normal"
+    archetype: Optional[str] = None
+    travel_mode_strategy: str = "normal"  # normal, rush, careful, dynamic"
 
 
 def build_node_payloads() -> Dict[str, dict]:
     return {
         "node_start": {"id": "node_start", "node_type": "story", "connections": ["node_north_1", "node_south_1"], "event_pool": ["evt_departure"], "is_start": True},
-        "node_north_1": {"id": "node_north_1", "node_type": "resource", "connections": ["node_north_2"], "event_pool": ["evt_scrapyard"]},
-        "node_north_2": {"id": "node_north_2", "node_type": "combat", "connections": ["node_mid"], "event_pool": ["evt_tunnel", "evt_mutant_burrow"]},
-        "node_south_1": {"id": "node_south_1", "node_type": "trade", "connections": ["node_south_2"], "event_pool": ["evt_village"]},
-        "node_south_2": {"id": "node_south_2", "node_type": "resource", "connections": ["node_mid"], "event_pool": ["evt_floodplain"]},
-        "node_mid": {"id": "node_mid", "node_type": "combat", "connections": ["node_approach"], "event_pool": ["evt_checkpoint"]},
-        "node_approach": {"id": "node_approach", "node_type": "story", "connections": ["node_final"], "event_pool": ["evt_waystation"]},
+        "node_north_1": {"id": "node_north_1", "node_type": "resource", "connections": ["node_north_2"], "event_pool": ["evt_scrapyard", "evt_factory_ruins"]},
+        "node_north_2": {"id": "node_north_2", "node_type": "combat", "connections": ["node_mid"], "event_pool": ["evt_tunnel", "evt_mutant_burrow", "evt_collapsed_overpass"]},
+        "node_south_1": {"id": "node_south_1", "node_type": "trade", "connections": ["node_south_2"], "event_pool": ["evt_village", "evt_raider_toll_bridge"]},
+        "node_south_2": {"id": "node_south_2", "node_type": "resource", "connections": ["node_mid"], "event_pool": ["evt_floodplain", "evt_radioactive_orchard", "evt_abandoned_cache"]},
+        "node_mid": {"id": "node_mid", "node_type": "combat", "connections": ["node_approach"], "event_pool": ["evt_checkpoint", "evt_sniper_nest"]},
+        "node_approach": {"id": "node_approach", "node_type": "story", "connections": ["node_final"], "event_pool": ["evt_waystation", "evt_emergency_beacon"]},
         "node_final": {"id": "node_final", "node_type": "story", "connections": [], "event_pool": ["evt_final"], "is_final": True},
     }
 
@@ -74,6 +76,7 @@ def snapshot_player(player: PlayerState) -> dict:
         "medkits": player.medkits,
         "scrap": player.scrap,
         "radiation": player.radiation,
+        "archetype": player.archetype,
         "weapon_slot": player.weapon_slot,
         "armor_slot": player.armor_slot,
         "tool_slot": player.tool_slot,
@@ -274,7 +277,8 @@ def run_plan(plan: RoutePlan, nodes: Dict[str, dict], events: Dict[str, dict], e
         enemy_catalog=enemies,
         difficulty=plan.difficulty,
     )
-    run = engine.create_run(build_starting_player(plan.difficulty), seed=plan.seed)
+    player = build_starting_player(plan.difficulty, archetype=plan.archetype)
+    run = engine.create_run(player, seed=plan.seed)
 
     pressure_count = 0
     moments = []
@@ -282,7 +286,17 @@ def run_plan(plan: RoutePlan, nodes: Dict[str, dict], events: Dict[str, dict], e
     for next_node in plan.route:
         if run.ended:
             break
-        node = engine.move_to(run, next_node)
+        # Strategy-based travel mode
+        current_travel_mode = plan.travel_mode_strategy
+        if plan.travel_mode_strategy == "dynamic":
+            if run.player.food <= 2 and (len(plan.route) - len(decision_log) > 1):
+                current_travel_mode = "rush"
+            elif run.player.hp <= 3:
+                current_travel_mode = "careful"
+            else:
+                current_travel_mode = "normal"
+        
+        node = engine.move_to(run, next_node, travel_mode=current_travel_mode)
         option_index = plan.options.get(next_node, 0)
         event_id = pick_event_id(node, engine.rng)
         event_payload = events[event_id]

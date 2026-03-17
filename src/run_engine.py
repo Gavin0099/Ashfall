@@ -80,6 +80,9 @@ class RunEngine:
         event_id: str | None = None,
         option_index: int = 0,
     ) -> Dict[str, Any]:
+        if event_id is None:
+            event_id = pick_event_id(node, self.rng, run_flags=run.flags, event_catalog=self.event_catalog)
+            
         if event_id not in self.event_catalog:
             raise KeyError(f"Missing event payload for event_id: {event_id}")
         event_payload = self.event_catalog[event_id]
@@ -87,6 +90,24 @@ class RunEngine:
         event_payload = self._patch_event_for_travel_mode(event_payload, run.travel_mode)
         
         outcome = resolve_event_choice(run.player, event_payload, option_index, self.rng)
+        
+        # Scavenger passive: +1 to any positive resource gain from event effects
+        if run.player.archetype == "scavenger" and not run.player.is_dead():
+            effects = outcome.get("effects", {})
+            scavenged = False
+            for res_key in ("food", "ammo", "scrap", "medkits"):
+                if effects.get(res_key, 0) > 0:
+                    setattr(run.player, res_key, getattr(run.player, res_key) + 1)
+                    scavenged = True
+                    break
+            if scavenged:
+                # Add a note to the outcome for the UI (optional display)
+                outcome["scavenger_bonus_active"] = True
+
+        # Apply flag updates from event
+        if outcome.get("set_flags"):
+            run.flags.update(outcome["set_flags"])
+
         if outcome["combat_triggered"]:
             encounter_bias = event_payload.get("options", [])[option_index].get("encounter_bias")
             outcome["combat"] = self.resolve_combat(run, encounter_bias=encounter_bias)
@@ -114,6 +135,11 @@ class RunEngine:
         result = CombatEngine(seed=run.map_seed + len(run.visited_nodes)).run_auto_combat(run.player, enemy)
         loot = []
         if result["victory"]:
+            # Soldier Passive: recover 1hp after victory
+            if run.player.archetype == "soldier":
+                run.player.hp = min(10, run.player.hp + 1)
+                result["log"].append("守衛士兵：戰鬥後的磨練讓你恢復了 1 點生命值")
+
             for item in enemy.loot_table:
                 chance = float(item.get("chance", 1.0))
                 if self.rng.random() <= chance:
@@ -173,8 +199,8 @@ class RunEngine:
                 elif run.travel_mode == "careful":
                     amount += 1
 
-            # Pathfinder Background: ignore food cost
-            if key == "food" and run.player.background == "pathfinder":
+            # Pathfinder Archetype: ignore food cost on first travel
+            if key == "food" and run.player.archetype == "pathfinder" and len(run.visited_nodes) == 1:
                 continue
 
             if key == "food":
@@ -299,5 +325,6 @@ def _enemy_from_payload(payload: Dict[str, Any]) -> EnemyState:
         damage_max=int(damage.get("max", 2)),
         archetype=payload.get("archetype"),
         special_ability=payload.get("special_ability"),
+        is_elite=payload.get("is_elite", False),
         loot_table=list(payload.get("loot_table", [])),
     )

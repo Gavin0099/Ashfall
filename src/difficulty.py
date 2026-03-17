@@ -3,6 +3,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 
 from .state_models import PlayerState
+from .meta_progression import MetaProfile
 
 
 DifficultyName = str
@@ -53,11 +54,35 @@ def get_difficulty_profile(name: str) -> DifficultyProfile:
     return DIFFICULTY_PROFILES[key]
 
 
-def build_starting_player(name: str = "normal") -> PlayerState:
+def build_starting_player(
+    name: str = "normal", 
+    archetype: str | None = None,
+    meta_profile: MetaProfile | None = None
+) -> PlayerState:
     profile = get_difficulty_profile(name)
-    return PlayerState(
+    player = PlayerState(
         hp=profile.starting_hp,
         food=profile.starting_food,
         ammo=profile.starting_ammo,
         medkits=profile.starting_medkits,
+        archetype=archetype,
     )
+    
+    # Meta Upgrades
+    if meta_profile:
+        player.hp += meta_profile.get_level("up_health_boost")
+        player.food += meta_profile.get_level("up_food_ration")
+        player.ammo += meta_profile.get_level("up_ammo_belt")
+        player.medkits += meta_profile.get_level("up_medkit_stash")
+
+    # Archetype Initial Bonuses (Starting resources only)
+    if archetype == "medic":
+        player.medkits += 1  # Professional start
+    elif archetype == "soldier":
+        player.ammo += 3
+    elif archetype == "scavenger":
+        player.scrap += 5
+    elif archetype == "pathfinder":
+        player.food += 1
+        
+    return player

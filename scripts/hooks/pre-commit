@@ -12,8 +12,26 @@
 
 set -euo pipefail
 
-PLAN_FILE="PLAN.md"
-TOOL="governance_tools/plan_freshness.py"
+HOOK_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+TARGET_REPO_ROOT="$(git -C "$HOOK_DIR" rev-parse --show-toplevel 2>/dev/null || pwd)"
+FRAMEWORK_ROOT="${AI_GOVERNANCE_FRAMEWORK_ROOT:-}"
+HOOK_CONFIG="$HOOK_DIR/ai-governance-framework-root"
+if [ -z "$FRAMEWORK_ROOT" ] && [ -f "$HOOK_CONFIG" ]; then
+    FRAMEWORK_ROOT="$(cat "$HOOK_CONFIG")"
+fi
+if [ -z "$FRAMEWORK_ROOT" ]; then
+    FRAMEWORK_ROOT="$TARGET_REPO_ROOT"
+fi
+
+PYTHON_LIB="$FRAMEWORK_ROOT/scripts/lib/python.sh"
+if [ ! -f "$PYTHON_LIB" ]; then
+    echo "⚠️  [governance] 找不到 framework Python helper: $PYTHON_LIB"
+    exit 0
+fi
+. "$PYTHON_LIB"
+
+PLAN_FILE="$TARGET_REPO_ROOT/PLAN.md"
+TOOL="$FRAMEWORK_ROOT/governance_tools/plan_freshness.py"
 
 # ── 跳過條件 ──────────────────────────────────────────────────────────────
 # 沒有 PLAN.md → 跳過（可能是新專案或 examples/ 子目錄）
@@ -28,25 +46,22 @@ fi
 
 # ── 檢查新鮮度 ────────────────────────────────────────────────────────────
 # 嘗試取得 JSON 輸出；若 python 指令不存在則跳過
-if ! command -v python &>/dev/null && ! command -v python3 &>/dev/null; then
-    echo "⚠️  [governance] python 未找到，跳過 PLAN.md freshness 檢查"
+if ! set_python_cmd; then
+    echo "⚠️  [governance] 找不到 Python，跳過 PLAN.md freshness 檢查"
     exit 0
 fi
 
-PYTHON_CMD="python"
-command -v python &>/dev/null || PYTHON_CMD="python3"
-
 # 取得 JSON（exit code 不影響後續 shell 判斷）
-RESULT=$($PYTHON_CMD "$TOOL" --file "$PLAN_FILE" --format json 2>/dev/null) || true
+RESULT=$("${PYTHON_CMD[@]}" "$TOOL" --file "$PLAN_FILE" --format json 2>/dev/null) || true
 
 if [ -z "$RESULT" ]; then
     echo "⚠️  [governance] plan_freshness 回傳空值，跳過檢查"
     exit 0
 fi
 
-STATUS=$(echo "$RESULT" | $PYTHON_CMD -c "import sys,json; d=json.load(sys.stdin); print(d.get('status','ERROR'))" 2>/dev/null || echo "ERROR")
-DAYS=$(echo "$RESULT" | $PYTHON_CMD -c "import sys,json; d=json.load(sys.stdin); print(d.get('days_since_update','?'))" 2>/dev/null || echo "?")
-THRESHOLD=$(echo "$RESULT" | $PYTHON_CMD -c "import sys,json; d=json.load(sys.stdin); print(d.get('threshold_days','?'))" 2>/dev/null || echo "?")
+STATUS=$(echo "$RESULT" | "${PYTHON_CMD[@]}" -c "import sys,json; d=json.load(sys.stdin); print(d.get('status','ERROR'))" 2>/dev/null || echo "ERROR")
+DAYS=$(echo "$RESULT" | "${PYTHON_CMD[@]}" -c "import sys,json; d=json.load(sys.stdin); print(d.get('days_since_update','?'))" 2>/dev/null || echo "?")
+THRESHOLD=$(echo "$RESULT" | "${PYTHON_CMD[@]}" -c "import sys,json; d=json.load(sys.stdin); print(d.get('threshold_days','?'))" 2>/dev/null || echo "?")
 
 case "$STATUS" in
     FRESH)
@@ -76,7 +91,7 @@ case "$STATUS" in
         ;;
     ERROR)
         # 解析失敗（欄位缺失等）→ 警告但不擋
-        ERRORS=$(echo "$RESULT" | $PYTHON_CMD -c "import sys,json; d=json.load(sys.stdin); [print('  •',e) for e in d.get('errors',[])]" 2>/dev/null || true)
+        ERRORS=$(echo "$RESULT" | "${PYTHON_CMD[@]}" -c "import sys,json; d=json.load(sys.stdin); [print('  •',e) for e in d.get('errors',[])]" 2>/dev/null || true)
         echo ""
         echo "🚨 [governance] PLAN.md 解析錯誤，請確認 header 欄位格式："
         echo "$ERRORS"

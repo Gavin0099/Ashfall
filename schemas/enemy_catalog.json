@@ -44,5 +44,53 @@
         "chance": 0.7
       }
     ]
+  },
+  "enemy_raider_leader_elite": {
+    "id": "enemy_raider_leader_elite",
+    "name": "Raider Leader (Elite)",
+    "archetype": "raider",
+    "special_ability": "opening_shot",
+    "hp": 12,
+    "is_elite": true,
+    "damage_range": {
+      "min": 2,
+      "max": 4
+    },
+    "loot_table": [
+      {
+        "resource": "ammo",
+        "amount": 5,
+        "chance": 1.0
+      },
+      {
+        "resource": "scrap",
+        "amount": 3,
+        "chance": 1.0
+      }
+    ]
+  },
+  "enemy_mutant_behemoth_elite": {
+    "id": "enemy_mutant_behemoth_elite",
+    "name": "Mutant Behemoth (Elite)",
+    "archetype": "mutant",
+    "special_ability": "thick_hide",
+    "hp": 15,
+    "is_elite": true,
+    "damage_range": {
+      "min": 2,
+      "max": 3
+    },
+    "loot_table": [
+      {
+        "resource": "medkits",
+        "amount": 2,
+        "chance": 1.0
+      },
+      {
+        "resource": "scrap",
+        "amount": 5,
+        "chance": 1.0
+      }
+    ]
   }
 }

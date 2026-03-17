@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Meta Profile Schema",
+  "type": "object",
+  "required": ["profile_id", "total_scrap", "lifetime_scrap_earned", "unlock_levels", "unlocked_at_version"],
+  "properties": {
+    "profile_id": { "type": "string" },
+    "total_scrap": { "type": "integer", "minimum": 0 },
+    "lifetime_scrap_earned": { "type": "integer", "minimum": 0 },
+    "unlock_levels": {
+      "type": "object",
+      "additionalProperties": { "type": "integer", "minimum": 0 }
+    },
+    "unlocked_at_version": { "type": "string" }
+  },
+  "additionalProperties": false
+}

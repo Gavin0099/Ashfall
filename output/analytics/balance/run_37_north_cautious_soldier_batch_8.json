@@ -1,0 +1,296 @@
+{
+  "run_id": "north_cautious_soldier_batch_8",
+  "seed": 802,
+  "route": [
+    "node_north_1",
+    "node_north_2",
+    "node_mid",
+    "node_approach",
+    "node_final"
+  ],
+  "ended": true,
+  "victory": false,
+  "end_reason": "starvation",
+  "player_final": {
+    "hp": 9,
+    "food": 0,
+    "ammo": 8,
+    "medkits": 3,
+    "scrap": 2,
+    "radiation": 0,
+    "archetype": "soldier",
+    "weapon_slot": null,
+    "armor_slot": null,
+    "tool_slot": null
+  },
+  "decision_log": [
+    {
+      "step": 1,
+      "node": "node_north_1",
+      "event_id": "evt_scrapyard",
+      "option_index": 1,
+      "warning_signals": [],
+      "pre_choice_state": {
+        "hp": 10,
+        "food": 6,
+        "ammo": 6,
+        "medkits": 1,
+        "scrap": 0,
+        "radiation": 0,
+        "archetype": "soldier",
+        "weapon_slot": null,
+        "armor_slot": null,
+        "tool_slot": null
+      },
+      "pressure": true,
+      "combat_triggered": false,
+      "combat_loot": [],
+      "effects": {
+        "food": -1,
+        "hp": -1,
+        "scrap": 1
+      },
+      "equipment_change": null,
+      "equipment_summary": null,
+      "player_after": {
+        "hp": 9,
+        "food": 5,
+        "ammo": 6,
+        "medkits": 1,
+        "scrap": 1,
+        "radiation": 0,
+        "archetype": "soldier",
+        "weapon_slot": null,
+        "armor_slot": null,
+        "tool_slot": null
+      }
+    },
+    {
+      "step": 2,
+      "node": "node_north_2",
+      "event_id": "evt_mutant_burrow",
+      "option_index": 1,
+      "warning_signals": [],
+      "pre_choice_state": {
+        "hp": 9,
+        "food": 4,
+        "ammo": 6,
+        "medkits": 1,
+        "scrap": 1,
+        "radiation": 0,
+        "archetype": "soldier",
+        "weapon_slot": null,
+        "armor_slot": null,
+        "tool_slot": null
+      },
+      "pressure": true,
+      "combat_triggered": false,
+      "combat_loot": [],
+      "effects": {
+        "food": -1,
+        "scrap": 1
+      },
+      "equipment_change": null,
+      "equipment_summary": null,
+      "player_after": {
+        "hp": 9,
+        "food": 3,
+        "ammo": 6,
+        "medkits": 1,
+        "scrap": 2,
+        "radiation": 0,
+        "archetype": "soldier",
+        "weapon_slot": null,
+        "armor_slot": null,
+        "tool_slot": null
+      }
+    },
+    {
+      "step": 3,
+      "node": "node_mid",
+      "event_id": "evt_checkpoint",
+      "option_index": 1,
+      "warning_signals": [
+        "WARNING: food is low and route slack is nearly gone."
+      ],
+      "pre_choice_state": {
+        "hp": 9,
+        "food": 2,
+        "ammo": 6,
+        "medkits": 1,
+        "scrap": 2,
+        "radiation": 0,
+        "archetype": "soldier",
+        "weapon_slot": null,
+        "armor_slot": null,
+        "tool_slot": null
+      },
+      "pressure": false,
+      "combat_triggered": false,
+      "combat_loot": [],
+      "effects": {
+        "food": 1,
+        "medkits": 1
+      },
+      "equipment_change": null,
+      "equipment_summary": null,
+      "player_after": {
+        "hp": 9,
+        "food": 3,
+        "ammo": 6,
+        "medkits": 2,
+        "scrap": 2,
+        "radiation": 0,
+        "archetype": "soldier",
+        "weapon_slot": null,
+        "armor_slot": null,
+        "tool_slot": null
+      }
+    },
+    {
+      "step": 4,
+      "node": "node_approach",
+      "event_id": "evt_emergency_beacon",
+      "option_index": 0,
+      "warning_signals": [
+        "WARNING: food is low and route slack is nearly gone."
+      ],
+      "pre_choice_state": {
+        "hp": 9,
+        "food": 2,
+        "ammo": 6,
+        "medkits": 2,
+        "scrap": 2,
+        "radiation": 0,
+        "archetype": "soldier",
+        "weapon_slot": null,
+        "armor_slot": null,
+        "tool_slot": null
+      },
+      "pressure": true,
+      "combat_triggered": false,
+      "combat_loot": [],
+      "effects": {
+        "ammo": 2,
+        "medkits": 1,
+        "food": -1
+      },
+      "equipment_change": null,
+      "equipment_summary": null,
+      "player_after": {
+        "hp": 9,
+        "food": 1,
+        "ammo": 8,
+        "medkits": 3,
+        "scrap": 2,
+        "radiation": 0,
+        "archetype": "soldier",
+        "weapon_slot": null,
+        "armor_slot": null,
+        "tool_slot": null
+      }
+    },
+    {
+      "step": 5,
+      "node": "node_final",
+      "event_id": "evt_final",
+      "option_index": 0,
+      "warning_signals": [
+        "WARNING: food is low and route slack is nearly gone."
+      ],
+      "pre_choice_state": {
+        "hp": 9,
+        "food": 0,
+        "ammo": 8,
+        "medkits": 3,
+        "scrap": 2,
+        "radiation": 0,
+        "archetype": "soldier",
+        "weapon_slot": null,
+        "armor_slot": null,
+        "tool_slot": null
+      },
+      "pressure": true,
+      "combat_triggered": false,
+      "combat_loot": [],
+      "effects": {
+        "food": -1
+      },
+      "equipment_change": null,
+      "equipment_summary": null,
+      "player_after": {
+        "hp": 9,
+        "food": 0,
+        "ammo": 8,
+        "medkits": 3,
+        "scrap": 2,
+        "radiation": 0,
+        "archetype": "soldier",
+        "weapon_slot": null,
+        "armor_slot": null,
+        "tool_slot": null
+      }
+    }
+  ],
+  "summary": {
+    "pressure_count": 4,
+    "death_cause_attribution": true,
+    "resource_signature": "hp:9|food:0|ammo:8|medkits:3|scrap:2|radiation:0|weapon:None|armor:None|tool:None"
+  },
+  "failure_analysis": {
+    "death_chain_length": 3,
+    "primary_blame_factor": "resource_exhaustion",
+    "regret_nodes": [
+      {
+        "node_id": "node_approach",
+        "event_id": "evt_emergency_beacon",
+        "blame_score": 0.35,
+        "description": "lost 1 food, left food slack at 2 or less",
+        "steps_to_death": 1
+      },
+      {
+        "node_id": "node_north_1",
+        "event_id": "evt_scrapyard",
+        "blame_score": 0.29,
+        "description": "lost 1 hp, lost 1 food",
+        "steps_to_death": 4
+      },
+      {
+        "node_id": "node_final",
+        "event_id": "evt_final",
+        "blame_score": 0.19,
+        "description": "lost 1 food",
+        "steps_to_death": 0
+      }
+    ],
+    "steps_from_regret_to_death": 1,
+    "is_trash_time_death": false
+  },
+  "run_summary": {
+    "headline": "north_cautious_soldier_batch_8: loss via starvation after 5 steps",
+    "route_family": "north",
+    "outcome": "starvation",
+    "key_turning_point": "node_approach (lost 1 food, left food slack at 2 or less)",
+    "notable_equipment": [],
+    "telemetry": {
+      "total_steps": 5,
+      "pressure_count": 4,
+      "combat_count": 0,
+      "loot_drop_count": 0,
+      "loot_total_amount": 0,
+      "equipment_change_count": 0,
+      "equipment_ids": [],
+      "loot_resources": {},
+      "max_radiation": 0,
+      "min_food": 0,
+      "min_hp": 9,
+      "low_resource_flags": [
+        "low_food"
+      ],
+      "risk_tags": [
+        "food_pressure",
+        "end_starvation"
+      ]
+    }
+  }
+}

@@ -1,0 +1,311 @@
+{
+  "run_id": "north_cautious_pathfinder_batch_7",
+  "seed": 702,
+  "route": [
+    "node_north_1",
+    "node_north_2",
+    "node_mid",
+    "node_approach",
+    "node_final"
+  ],
+  "ended": true,
+  "victory": false,
+  "end_reason": "starvation",
+  "player_final": {
+    "hp": 3,
+    "food": 0,
+    "ammo": 6,
+    "medkits": 2,
+    "scrap": 1,
+    "radiation": 1,
+    "archetype": "pathfinder",
+    "weapon_slot": null,
+    "armor_slot": null,
+    "tool_slot": null
+  },
+  "decision_log": [
+    {
+      "step": 1,
+      "node": "node_north_1",
+      "event_id": "evt_scrapyard",
+      "option_index": 1,
+      "warning_signals": [],
+      "pre_choice_state": {
+        "hp": 10,
+        "food": 8,
+        "ammo": 3,
+        "medkits": 1,
+        "scrap": 0,
+        "radiation": 0,
+        "archetype": "pathfinder",
+        "weapon_slot": null,
+        "armor_slot": null,
+        "tool_slot": null
+      },
+      "pressure": true,
+      "combat_triggered": true,
+      "combat_loot": [
+        {
+          "resource": "ammo",
+          "amount": 3
+        }
+      ],
+      "effects": {
+        "food": -1,
+        "hp": -1,
+        "scrap": 1
+      },
+      "equipment_change": null,
+      "equipment_summary": null,
+      "player_after": {
+        "hp": 6,
+        "food": 7,
+        "ammo": 4,
+        "medkits": 1,
+        "scrap": 1,
+        "radiation": 0,
+        "archetype": "pathfinder",
+        "weapon_slot": null,
+        "armor_slot": null,
+        "tool_slot": null
+      }
+    },
+    {
+      "step": 2,
+      "node": "node_north_2",
+      "event_id": "evt_collapsed_overpass",
+      "option_index": 1,
+      "warning_signals": [
+        "WARNING: radiation will continue to threaten future travel.",
+        "WARNING: this option adds radiation and increases long-term risk.",
+        "DANGER: this choice carries a high combat risk."
+      ],
+      "pre_choice_state": {
+        "hp": 6,
+        "food": 6,
+        "ammo": 4,
+        "medkits": 1,
+        "scrap": 1,
+        "radiation": 0,
+        "archetype": "pathfinder",
+        "weapon_slot": null,
+        "armor_slot": null,
+        "tool_slot": null
+      },
+      "pressure": true,
+      "combat_triggered": false,
+      "combat_loot": [],
+      "effects": {
+        "food": -1,
+        "radiation": 1
+      },
+      "equipment_change": null,
+      "equipment_summary": null,
+      "player_after": {
+        "hp": 6,
+        "food": 5,
+        "ammo": 4,
+        "medkits": 1,
+        "scrap": 1,
+        "radiation": 1,
+        "archetype": "pathfinder",
+        "weapon_slot": null,
+        "armor_slot": null,
+        "tool_slot": null
+      }
+    },
+    {
+      "step": 3,
+      "node": "node_mid",
+      "event_id": "evt_sniper_nest",
+      "option_index": 1,
+      "warning_signals": [
+        "WARNING: radiation will continue to threaten future travel."
+      ],
+      "pre_choice_state": {
+        "hp": 5,
+        "food": 4,
+        "ammo": 4,
+        "medkits": 1,
+        "scrap": 1,
+        "radiation": 1,
+        "archetype": "pathfinder",
+        "weapon_slot": null,
+        "armor_slot": null,
+        "tool_slot": null
+      },
+      "pressure": true,
+      "combat_triggered": false,
+      "combat_loot": [],
+      "effects": {
+        "food": -2
+      },
+      "equipment_change": null,
+      "equipment_summary": null,
+      "player_after": {
+        "hp": 5,
+        "food": 2,
+        "ammo": 4,
+        "medkits": 1,
+        "scrap": 1,
+        "radiation": 1,
+        "archetype": "pathfinder",
+        "weapon_slot": null,
+        "armor_slot": null,
+        "tool_slot": null
+      }
+    },
+    {
+      "step": 4,
+      "node": "node_approach",
+      "event_id": "evt_emergency_beacon",
+      "option_index": 0,
+      "warning_signals": [
+        "WARNING: radiation will continue to threaten future travel.",
+        "WARNING: food is low and route slack is nearly gone."
+      ],
+      "pre_choice_state": {
+        "hp": 4,
+        "food": 2,
+        "ammo": 4,
+        "medkits": 1,
+        "scrap": 1,
+        "radiation": 1,
+        "archetype": "pathfinder",
+        "weapon_slot": null,
+        "armor_slot": null,
+        "tool_slot": null
+      },
+      "pressure": true,
+      "combat_triggered": false,
+      "combat_loot": [],
+      "effects": {
+        "ammo": 2,
+        "medkits": 1,
+        "food": -1
+      },
+      "equipment_change": null,
+      "equipment_summary": null,
+      "player_after": {
+        "hp": 4,
+        "food": 1,
+        "ammo": 6,
+        "medkits": 2,
+        "scrap": 1,
+        "radiation": 1,
+        "archetype": "pathfinder",
+        "weapon_slot": null,
+        "armor_slot": null,
+        "tool_slot": null
+      }
+    },
+    {
+      "step": 5,
+      "node": "node_final",
+      "event_id": "evt_final",
+      "option_index": 0,
+      "warning_signals": [
+        "WARNING: radiation will continue to threaten future travel.",
+        "WARNING: food is low and route slack is nearly gone."
+      ],
+      "pre_choice_state": {
+        "hp": 3,
+        "food": 0,
+        "ammo": 6,
+        "medkits": 2,
+        "scrap": 1,
+        "radiation": 1,
+        "archetype": "pathfinder",
+        "weapon_slot": null,
+        "armor_slot": null,
+        "tool_slot": null
+      },
+      "pressure": true,
+      "combat_triggered": false,
+      "combat_loot": [],
+      "effects": {
+        "food": -1
+      },
+      "equipment_change": null,
+      "equipment_summary": null,
+      "player_after": {
+        "hp": 3,
+        "food": 0,
+        "ammo": 6,
+        "medkits": 2,
+        "scrap": 1,
+        "radiation": 1,
+        "archetype": "pathfinder",
+        "weapon_slot": null,
+        "armor_slot": null,
+        "tool_slot": null
+      }
+    }
+  ],
+  "summary": {
+    "pressure_count": 5,
+    "death_cause_attribution": true,
+    "resource_signature": "hp:3|food:0|ammo:6|medkits:2|scrap:1|radiation:1|weapon:None|armor:None|tool:None"
+  },
+  "failure_analysis": {
+    "death_chain_length": 3,
+    "primary_blame_factor": "resource_exhaustion",
+    "regret_nodes": [
+      {
+        "node_id": "node_mid",
+        "event_id": "evt_sniper_nest",
+        "blame_score": 0.3,
+        "description": "lost 2 food, left food slack at 2 or less, carried radiation into later travel",
+        "steps_to_death": 2
+      },
+      {
+        "node_id": "node_approach",
+        "event_id": "evt_emergency_beacon",
+        "blame_score": 0.21,
+        "description": "lost 1 food, left food slack at 2 or less, carried radiation into later travel",
+        "steps_to_death": 1
+      },
+      {
+        "node_id": "node_north_1",
+        "event_id": "evt_scrapyard",
+        "blame_score": 0.2,
+        "description": "lost 1 hp, lost 1 food, accepted combat risk",
+        "steps_to_death": 4
+      }
+    ],
+    "steps_from_regret_to_death": 2,
+    "is_trash_time_death": false
+  },
+  "run_summary": {
+    "headline": "north_cautious_pathfinder_batch_7: loss via starvation after 5 steps",
+    "route_family": "north",
+    "outcome": "starvation",
+    "key_turning_point": "node_mid (lost 2 food, left food slack at 2 or less, carried radiation into later travel)",
+    "notable_equipment": [],
+    "telemetry": {
+      "total_steps": 5,
+      "pressure_count": 5,
+      "combat_count": 1,
+      "loot_drop_count": 1,
+      "loot_total_amount": 3,
+      "equipment_change_count": 0,
+      "equipment_ids": [],
+      "loot_resources": {
+        "ammo": 3
+      },
+      "max_radiation": 1,
+      "min_food": 0,
+      "min_hp": 3,
+      "low_resource_flags": [
+        "low_hp",
+        "low_food"
+      ],
+      "risk_tags": [
+        "combat_seen",
+        "radiation_pressure",
+        "food_pressure",
+        "end_starvation"
+      ]
+    }
+  }
+}

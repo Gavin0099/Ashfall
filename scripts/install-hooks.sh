@@ -19,6 +19,7 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 HOOKS_SRC="$SCRIPT_DIR/hooks"
 TARGET_REPO="$SCRIPT_DIR/.."
 DRY_RUN=false
+VERIFY_AFTER_INSTALL=true
 
 # ── 參數解析 ──────────────────────────────────────────────────────────────
 while [[ $# -gt 0 ]]; do
@@ -31,14 +32,22 @@ while [[ $# -gt 0 ]]; do
             DRY_RUN=true
             shift
             ;;
+        --no-verify)
+            VERIFY_AFTER_INSTALL=false
+            shift
+            ;;
         *)
-            echo "用法: bash scripts/install-hooks.sh [--target /path/to/repo] [--dry-run]"
+            echo "用法: bash scripts/install-hooks.sh [--target /path/to/repo] [--dry-run] [--no-verify]"
             exit 1
             ;;
     esac
 done
 
 TARGET_HOOKS_DIR="$TARGET_REPO/.git/hooks"
+HOOK_CONFIG="$TARGET_HOOKS_DIR/ai-governance-framework-root"
+FRAMEWORK_ROOT="$(realpath "$SCRIPT_DIR/..")"
+PYTHON_LIB="$FRAMEWORK_ROOT/scripts/lib/python.sh"
+HOOK_VALIDATOR="$FRAMEWORK_ROOT/governance_tools/hook_install_validator.py"
 
 # ── 驗證目標 repo ─────────────────────────────────────────────────────────
 if [ ! -d "$TARGET_REPO/.git" ]; then
@@ -49,6 +58,12 @@ fi
 
 echo "📂 目標 repo: $(realpath "$TARGET_REPO")"
 echo "📁 hooks 來源: $HOOKS_SRC"
+echo "🏠 framework root: $FRAMEWORK_ROOT"
+if [ "$VERIFY_AFTER_INSTALL" = true ]; then
+    echo "🔎 安裝後驗證: 啟用"
+else
+    echo "🔎 安裝後驗證: 停用 (--no-verify)"
+fi
 echo ""
 
 # ── 安裝每個 hook ─────────────────────────────────────────────────────────
@@ -90,6 +105,14 @@ install_hook() {
 install_hook "pre-commit"
 install_hook "pre-push"
 
+if [ "$DRY_RUN" = true ]; then
+    echo "  [dry-run] 寫入 framework root 設定 → $HOOK_CONFIG"
+    echo "            內容: $FRAMEWORK_ROOT"
+else
+    printf '%s\n' "$FRAMEWORK_ROOT" > "$HOOK_CONFIG"
+    echo "  ✅ 寫入 framework root 設定"
+fi
+
 echo ""
 if [ "$DRY_RUN" = true ]; then
     echo "[dry-run] 完成（未實際修改）"
@@ -98,12 +121,25 @@ else
     echo "✅ 安裝完成"
     echo "   已安裝: $INSTALLED 個 hooks，跳過: $SKIPPED 個"
     echo ""
+    if [ "$VERIFY_AFTER_INSTALL" = true ] && [ -f "$PYTHON_LIB" ] && [ -f "$HOOK_VALIDATOR" ]; then
+        . "$PYTHON_LIB"
+        if set_python_cmd; then
+            echo "🔎 驗證 hook 安裝狀態："
+            "${PYTHON_CMD[@]}" "$HOOK_VALIDATOR" --repo "$(realpath "$TARGET_REPO")" || true
+            echo ""
+        else
+            echo "⚠️  找不到 Python，略過 hook_install_validator"
+            echo ""
+        fi
+    fi
+    
     echo "📋 驗證："
     echo "   cat $TARGET_HOOKS_DIR/pre-commit"
+    echo "   $FRAMEWORK_ROOT/governance_tools/hook_install_validator.py --repo $(realpath "$TARGET_REPO")"
     echo ""
     echo "🧪 測試："
     echo "   git commit --allow-empty -m 'test hook'"
     echo ""
     echo "🗑️  解除安裝："
-    echo "   rm $TARGET_HOOKS_DIR/pre-commit $TARGET_HOOKS_DIR/pre-push"
+    echo "   rm $TARGET_HOOKS_DIR/pre-commit $TARGET_HOOKS_DIR/pre-push $HOOK_CONFIG"
 fi

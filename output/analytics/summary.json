@@ -8,7 +8,7 @@
   ],
   "metrics": {
     "distinct_outcome_signatures": 5,
-    "death_runs": 1,
+    "death_runs": 3,
     "rerun_signal_runs": 4
   },
   "playability_gate": {

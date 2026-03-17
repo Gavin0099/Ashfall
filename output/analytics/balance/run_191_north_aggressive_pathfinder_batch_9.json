@@ -1,0 +1,286 @@
+{
+  "run_id": "north_aggressive_pathfinder_batch_9",
+  "seed": 901,
+  "route": [
+    "node_north_1",
+    "node_north_2",
+    "node_mid",
+    "node_approach",
+    "node_final"
+  ],
+  "ended": true,
+  "victory": true,
+  "end_reason": "reached_final_node",
+  "player_final": {
+    "hp": 4,
+    "food": 3,
+    "ammo": 3,
+    "medkits": 2,
+    "scrap": 5,
+    "radiation": 4,
+    "archetype": "pathfinder",
+    "weapon_slot": null,
+    "armor_slot": null,
+    "tool_slot": null
+  },
+  "decision_log": [
+    {
+      "step": 1,
+      "node": "node_north_1",
+      "event_id": "evt_factory_ruins",
+      "option_index": 0,
+      "warning_signals": [
+        "WARNING: radiation will continue to threaten future travel.",
+        "WARNING: this option adds radiation and increases long-term risk."
+      ],
+      "pre_choice_state": {
+        "hp": 10,
+        "food": 8,
+        "ammo": 3,
+        "medkits": 1,
+        "scrap": 0,
+        "radiation": 0,
+        "archetype": "pathfinder",
+        "weapon_slot": null,
+        "armor_slot": null,
+        "tool_slot": null
+      },
+      "pressure": true,
+      "combat_triggered": false,
+      "combat_loot": [],
+      "effects": {
+        "scrap": 3,
+        "hp": -1,
+        "radiation": 2
+      },
+      "equipment_change": null,
+      "equipment_summary": null,
+      "player_after": {
+        "hp": 9,
+        "food": 8,
+        "ammo": 3,
+        "medkits": 1,
+        "scrap": 3,
+        "radiation": 2,
+        "archetype": "pathfinder",
+        "weapon_slot": null,
+        "armor_slot": null,
+        "tool_slot": null
+      }
+    },
+    {
+      "step": 2,
+      "node": "node_north_2",
+      "event_id": "evt_tunnel",
+      "option_index": 0,
+      "warning_signals": [
+        "WARNING: radiation will continue to threaten future travel.",
+        "DANGER: this choice carries a high combat risk."
+      ],
+      "pre_choice_state": {
+        "hp": 8,
+        "food": 7,
+        "ammo": 3,
+        "medkits": 1,
+        "scrap": 3,
+        "radiation": 2,
+        "archetype": "pathfinder",
+        "weapon_slot": null,
+        "armor_slot": null,
+        "tool_slot": null
+      },
+      "pressure": true,
+      "combat_triggered": false,
+      "combat_loot": [],
+      "effects": {
+        "hp": -1,
+        "medkits": 1,
+        "scrap": 1,
+        "radiation": 0
+      },
+      "equipment_change": null,
+      "equipment_summary": null,
+      "player_after": {
+        "hp": 7,
+        "food": 7,
+        "ammo": 3,
+        "medkits": 2,
+        "scrap": 4,
+        "radiation": 2,
+        "archetype": "pathfinder",
+        "weapon_slot": null,
+        "armor_slot": null,
+        "tool_slot": null
+      }
+    },
+    {
+      "step": 3,
+      "node": "node_mid",
+      "event_id": "evt_sniper_nest",
+      "option_index": 0,
+      "warning_signals": [
+        "WARNING: radiation will continue to threaten future travel.",
+        "DANGER: this choice carries a high combat risk."
+      ],
+      "pre_choice_state": {
+        "hp": 6,
+        "food": 6,
+        "ammo": 3,
+        "medkits": 2,
+        "scrap": 4,
+        "radiation": 2,
+        "archetype": "pathfinder",
+        "weapon_slot": null,
+        "armor_slot": null,
+        "tool_slot": null
+      },
+      "pressure": true,
+      "combat_triggered": false,
+      "combat_loot": [],
+      "effects": {
+        "scrap": -1,
+        "food": -1
+      },
+      "equipment_change": null,
+      "equipment_summary": null,
+      "player_after": {
+        "hp": 6,
+        "food": 5,
+        "ammo": 3,
+        "medkits": 2,
+        "scrap": 3,
+        "radiation": 2,
+        "archetype": "pathfinder",
+        "weapon_slot": null,
+        "armor_slot": null,
+        "tool_slot": null
+      }
+    },
+    {
+      "step": 4,
+      "node": "node_approach",
+      "event_id": "evt_emergency_beacon",
+      "option_index": 1,
+      "warning_signals": [
+        "WARNING: radiation will continue to threaten future travel.",
+        "WARNING: this option adds radiation and increases long-term risk."
+      ],
+      "pre_choice_state": {
+        "hp": 5,
+        "food": 4,
+        "ammo": 3,
+        "medkits": 2,
+        "scrap": 3,
+        "radiation": 2,
+        "archetype": "pathfinder",
+        "weapon_slot": null,
+        "armor_slot": null,
+        "tool_slot": null
+      },
+      "pressure": true,
+      "combat_triggered": false,
+      "combat_loot": [],
+      "effects": {
+        "scrap": 2,
+        "radiation": 1
+      },
+      "equipment_change": null,
+      "equipment_summary": null,
+      "player_after": {
+        "hp": 5,
+        "food": 4,
+        "ammo": 3,
+        "medkits": 2,
+        "scrap": 5,
+        "radiation": 3,
+        "archetype": "pathfinder",
+        "weapon_slot": null,
+        "armor_slot": null,
+        "tool_slot": null
+      }
+    },
+    {
+      "step": 5,
+      "node": "node_final",
+      "event_id": "evt_final",
+      "option_index": 1,
+      "warning_signals": [
+        "WARNING: radiation will continue to threaten future travel.",
+        "WARNING: this option adds radiation and increases long-term risk.",
+        "CRITICAL: another irradiated move may kill you."
+      ],
+      "pre_choice_state": {
+        "hp": 4,
+        "food": 3,
+        "ammo": 3,
+        "medkits": 2,
+        "scrap": 5,
+        "radiation": 3,
+        "archetype": "pathfinder",
+        "weapon_slot": null,
+        "armor_slot": null,
+        "tool_slot": null
+      },
+      "pressure": true,
+      "combat_triggered": false,
+      "combat_loot": [],
+      "effects": {
+        "radiation": 1
+      },
+      "equipment_change": null,
+      "equipment_summary": null,
+      "player_after": {
+        "hp": 4,
+        "food": 3,
+        "ammo": 3,
+        "medkits": 2,
+        "scrap": 5,
+        "radiation": 4,
+        "archetype": "pathfinder",
+        "weapon_slot": null,
+        "armor_slot": null,
+        "tool_slot": null
+      }
+    }
+  ],
+  "summary": {
+    "pressure_count": 5,
+    "death_cause_attribution": true,
+    "resource_signature": "hp:4|food:3|ammo:3|medkits:2|scrap:5|radiation:4|weapon:None|armor:None|tool:None"
+  },
+  "failure_analysis": {
+    "death_chain_length": 0,
+    "primary_blame_factor": null,
+    "regret_nodes": [],
+    "steps_from_regret_to_death": 0,
+    "is_trash_time_death": false
+  },
+  "run_summary": {
+    "headline": "north_aggressive_pathfinder_batch_9: victory via reached_final_node after 5 steps",
+    "route_family": "north",
+    "outcome": "victory",
+    "key_turning_point": "node_final",
+    "notable_equipment": [],
+    "telemetry": {
+      "total_steps": 5,
+      "pressure_count": 5,
+      "combat_count": 0,
+      "loot_drop_count": 0,
+      "loot_total_amount": 0,
+      "equipment_change_count": 0,
+      "equipment_ids": [],
+      "loot_resources": {},
+      "max_radiation": 4,
+      "min_food": 3,
+      "min_hp": 4,
+      "low_resource_flags": [
+        "high_radiation"
+      ],
+      "risk_tags": [
+        "radiation_pressure",
+        "end_reached_final_node",
+        "radiation_carryover"
+      ]
+    }
+  }
+}

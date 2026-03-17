@@ -3,7 +3,7 @@
   "title": "Run State Schema",
   "description": "Ashfall v0.1 save/load contract. Defines the minimal serializable snapshot of an in-progress or completed run. A saved run can be reconstructed deterministically from this record combined with the event/node catalogs and the original seed.",
   "x-ashfall-version": "0.1",
-  "x-ashfall-status": "draft",
+  "x-ashfall-status": "stable",
   "type": "object",
   "required": [
     "schema_version",
@@ -46,7 +46,10 @@
         "ammo":     { "type": "integer", "minimum": 0 },
         "medkits":  { "type": "integer", "minimum": 0 },
         "scrap":    { "type": "integer", "minimum": 0 },
-        "radiation":{ "type": "integer", "minimum": 0 }
+        "radiation":{ "type": "integer", "minimum": 0 },
+        "weapon_slot": { "type": ["string", "null"] },
+        "armor_slot":  { "type": ["string", "null"] },
+        "tool_slot":   { "type": ["string", "null"] }
       },
       "additionalProperties": false
     },

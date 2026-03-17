@@ -27,20 +27,27 @@ SUMMARY_PATH = ROOT / "output" / "analytics" / "balance_summary.json"
 SEED_OFFSETS = (0, 100, 200, 300, 400, 500, 600, 700, 800, 900)
 
 
+ARCHETYPES = ["soldier", "medic", "scavenger", "pathfinder", None]
+
 def build_balance_plans() -> list[RoutePlan]:
     plans: list[RoutePlan] = []
-    for batch_index, seed_offset in enumerate(SEED_OFFSETS, start=1):
-        for base_plan in route_plans():
-            plans.append(
-                RoutePlan(
-                    name=f"{base_plan.name}_batch_{batch_index}",
-                    seed=base_plan.seed + seed_offset,
-                    route=list(base_plan.route),
-                    options=dict(base_plan.options),
-                    difficulty=base_plan.difficulty,
+    for arch in ARCHETYPES:
+        for batch_index, seed_offset in enumerate(SEED_OFFSETS, start=1):
+            for base_plan in route_plans():
+                arch_label = arch if arch else "none"
+                plans.append(
+                    RoutePlan(
+                        name=f"{base_plan.name}_{arch_label}_batch_{batch_index}",
+                        seed=base_plan.seed + seed_offset,
+                        route=list(base_plan.route),
+                        options=dict(base_plan.options),
+                        difficulty=base_plan.difficulty,
+                        archetype=arch,
+                        travel_mode_strategy="dynamic"
+                    )
                 )
-            )
     return plans
+
 
 
 def average(values: list[float]) -> float:
@@ -165,6 +172,26 @@ def summarize_loot(results: list[dict]) -> dict:
     return summary
 
 
+
+def summarize_archetypes(results: list[dict]) -> dict:
+    summary: dict[str, dict] = {}
+    grouped: dict[str, list[dict]] = defaultdict(list)
+    for result in results:
+        # Use analytics player_final to get the archetype used in sim
+        arch = result["analytics"]["player_final"].get("archetype") or "none"
+        grouped[arch].append(result)
+
+    for arch, arch_results in grouped.items():
+        summary[arch] = {
+            "runs": len(arch_results),
+            "victory_rate": average([1.0 if item["victory"] else 0.0 for item in arch_results]),
+            "avg_pressure_count": average([float(item["pressure_count"]) for item in arch_results]),
+            "avg_final_hp": average([float(item["player_final"]["hp"]) for item in arch_results]),
+            "avg_final_food": average([float(item["player_final"]["food"]) for item in arch_results]),
+            "avg_final_scrap": average([float(item["player_final"]["scrap"]) for item in arch_results]),
+        }
+    return summary
+
 def summarize_results(results: list[dict]) -> dict:
     death_reasons = Counter(result["end_reason"] for result in results if not result["victory"])
     outcome_signatures = {
@@ -214,6 +241,7 @@ def summarize_results(results: list[dict]) -> dict:
         "distinct_outcome_signatures": len(outcome_signatures),
         "resource_divergence": pairwise_resource_distance(results),
         "route_family_summary": summarize_family(results),
+        "archetype_summary": summarize_archetypes(results),
         "loot_economy": summarize_loot(results),
     }
     summary["balance_gate"] = {
