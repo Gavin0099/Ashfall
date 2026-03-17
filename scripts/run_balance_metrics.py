@@ -31,9 +31,19 @@ ARCHETYPES = ["vault_technician", "raider_defector", "wasteland_medic", None]
 
 def build_balance_plans() -> list[RoutePlan]:
     plans: list[RoutePlan] = []
-    for arch in ARCHETYPES:
-        for batch_index, seed_offset in enumerate(SEED_OFFSETS, start=1):
-            for base_plan in route_plans():
+    
+    # Load dynamic characters from data/characters/
+    char_dir = ROOT / "data" / "characters"
+    character_samples: list[dict] = []
+    if char_dir.exists():
+        for f in char_dir.glob("*.json"):
+            character_samples.append(json.loads(f.read_text(encoding="utf-8")))
+
+    # Combined pool of archetypes and custom characters
+    for batch_index, seed_offset in enumerate(SEED_OFFSETS, start=1):
+        for base_plan in route_plans():
+            # Standard Archetypes
+            for arch in ARCHETYPES:
                 arch_label = arch if arch else "none"
                 plans.append(
                     RoutePlan(
@@ -43,6 +53,20 @@ def build_balance_plans() -> list[RoutePlan]:
                         options=dict(base_plan.options),
                         difficulty=base_plan.difficulty,
                         archetype=arch,
+                        travel_mode_strategy="dynamic"
+                    )
+                )
+            # Custom Characters (only use first 5 to avoid exploding run count)
+            for char_data in character_samples[:5]:
+                char_id = char_data["character_id"]
+                plans.append(
+                    RoutePlan(
+                        name=f"{base_plan.name}_{char_id}_batch_{batch_index}",
+                        seed=base_plan.seed + seed_offset,
+                        route=list(base_plan.route),
+                        options=dict(base_plan.options),
+                        difficulty=base_plan.difficulty,
+                        character_id=char_id, # This will need run_plan to handle it
                         travel_mode_strategy="dynamic"
                     )
                 )
@@ -180,15 +204,22 @@ def summarize_archetypes(results: list[dict]) -> dict:
     summary: dict[str, dict] = {}
     grouped: dict[str, list[dict]] = defaultdict(list)
     for result in results:
-        # v1.0 Use character background_id if available
-        char = result["analytics"]["player_final"].get("character")
+        # Use character background_id or archetype
+        player_final = result["analytics"]["player_final"]
+        char = player_final.get("character")
         if char:
             arch = char.get("background_id", "none")
         else:
-            arch = result["analytics"]["player_final"].get("archetype") or "none"
+            arch = player_final.get("archetype") or "none"
         grouped[arch].append(result)
 
     for arch, arch_results in grouped.items():
+        losing_runs = [r for r in arch_results if not r["victory"]]
+        regret_distances = [
+            float(r["analytics"]["failure_analysis"]["steps_from_regret_to_death"])
+            for r in losing_runs
+            if r["analytics"]["failure_analysis"]["steps_from_regret_to_death"] >= 0
+        ]
         summary[arch] = {
             "runs": len(arch_results),
             "victory_rate": average([1.0 if item["victory"] else 0.0 for item in arch_results]),
@@ -196,7 +227,35 @@ def summarize_archetypes(results: list[dict]) -> dict:
             "avg_final_hp": average([float(item["player_final"]["hp"]) for item in arch_results]),
             "avg_final_food": average([float(item["player_final"]["food"]) for item in arch_results]),
             "avg_final_scrap": average([float(item["player_final"]["scrap"]) for item in arch_results]),
+            "avg_steps_from_regret_to_death": average(regret_distances),
+            "death_reasons": dict(Counter(r["end_reason"] for r in losing_runs))
         }
+    return summary
+
+
+def summarize_special_stats(results: list[dict]) -> dict:
+    """Analyze correlation between SPECIAL stats and victory."""
+    stats = defaultdict(lambda: {"victories": 0, "total": 0, "sum_val": 0})
+    
+    for result in results:
+        char = result["analytics"]["player_final"].get("character")
+        if not char or "special" not in char:
+            continue
+        
+        special = char["special"]
+        victory = 1 if result["victory"] else 0
+        for s_name, s_val in special.items():
+            stats[s_name]["total"] += 1
+            stats[s_name]["victories"] += victory
+            stats[s_name]["sum_val"] += s_val
+
+    summary = {}
+    for s_name, data in stats.items():
+        if data["total"] > 0:
+            summary[s_name] = {
+                "avg_value": round(data["sum_val"] / data["total"], 2),
+                "victory_rate_at_avg": round(data["victories"] / data["total"], 2)
+            }
     return summary
 
 def summarize_results(results: list[dict]) -> dict:
@@ -249,6 +308,7 @@ def summarize_results(results: list[dict]) -> dict:
         "resource_divergence": pairwise_resource_distance(results),
         "route_family_summary": summarize_family(results),
         "archetype_summary": summarize_archetypes(results),
+        "special_stats_correlation": summarize_special_stats(results),
         "loot_economy": summarize_loot(results),
     }
     summary["balance_gate"] = {
@@ -261,11 +321,19 @@ def summarize_results(results: list[dict]) -> dict:
 
 
 def main() -> int:
+    import argparse
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--runs", type=int, default=None, help="Limit number of runs")
+    args = parser.parse_args()
+
     BALANCE_DIR.mkdir(parents=True, exist_ok=True)
 
     nodes = build_node_payloads()
     enemies = build_enemy_catalog()
     plans = build_balance_plans()
+    
+    if args.runs:
+        plans = plans[:args.runs]
 
     results: list[dict] = []
     for index, plan in enumerate(plans, start=1):

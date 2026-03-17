@@ -32,6 +32,7 @@ class RoutePlan:
     options: Dict[str, int]
     difficulty: str = "normal"
     archetype: Optional[str] = None
+    character_id: Optional[str] = None
     travel_mode_strategy: str = "normal"  # normal, rush, careful, dynamic"
 
 
@@ -84,6 +85,7 @@ def snapshot_player(player: PlayerState) -> dict:
         "scrap": player.scrap,
         "radiation": player.radiation,
         "archetype": player.archetype,
+        "character": player.character.to_dict() if player.character else None,
         "weapon_slot": player.weapon_slot.to_dict() if player.weapon_slot else None,
         "armor_slot": player.armor_slot.to_dict() if player.armor_slot else None,
         "tool_slot": player.tool_slot.to_dict() if player.tool_slot else None,
@@ -286,7 +288,12 @@ def run_plan(plan: RoutePlan, nodes: Dict[str, dict], events: Dict[str, dict], e
         difficulty=plan.difficulty,
     )
     profile = None
-    if plan.archetype:
+    if plan.character_id:
+        char_path = ROOT / "data" / "characters" / f"{plan.character_id}.json"
+        if char_path.exists():
+            char_data = json.loads(char_path.read_text(encoding="utf-8"))
+            profile = CharacterProfile.from_dict(char_data)
+    elif plan.archetype:
         # Legacy archetype field in RoutePlan is now background_id
         profile = CharacterProfile(
             background_id=plan.archetype,
