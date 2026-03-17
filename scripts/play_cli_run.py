@@ -23,7 +23,7 @@ from src.difficulty import build_starting_player, get_difficulty_profile
 from src.event_engine import pick_event_id, resolve_event_choice
 from src.run_engine import RunEngine, build_map
 from src.state_models import PlayerState
-from src.meta_progression import MetaProfile, RewardCalculator, UPGRADE_METADATA, get_upgrade_cost
+from src.meta_progression import MetaProfile, RewardCalculator, UPGRADE_METADATA, get_upgrade_cost, ARCHETYPE_UNLOCK_METADATA
 from src.help_system import get_help_text, list_topics
 
 # --- UI CONSTANTS ---
@@ -68,7 +68,6 @@ def boxed_text(text: str, color=C_WHITE, width=60):
     lines = text.split("\n")
     print(f"{color}┌{'─' * (width-2)}┐{C_END}")
     for line in lines:
-        # Simple wrap handling would be better, but for now:
         print(f"{color}│ {line:<{width-4}} │{C_END}")
     print(f"{color}└{'─' * (width-2)}┘{C_END}")
 
@@ -89,93 +88,40 @@ def format_status_bar(player: PlayerState) -> str:
         f"{rad_c}{SYM_RAD} {player.radiation}{C_END}"
     )
 
-
 OUTPUT_DIR = ROOT / "output" / "cli"
 NODE_LABELS = {
-    "node_start": "出發點",
-    "node_north_1": "北線廢車場",
-    "node_north_2": "北線隧道",
-    "node_south_1": "南線村落",
-    "node_south_2": "南線氾濫平原",
-    "node_mid": "檢查站",
+    "node_start": "出發點", "node_north_1": "北線廢車場", "node_north_2": "北線隧道",
+    "node_south_1": "南線村落", "node_south_2": "南線氾濫平原", "node_mid": "檢查站",
     "node_final": "終點山脊",
 }
-ENEMY_LABELS = {
-    "enemy_raider_scout": "掠奪者斥候",
-    "enemy_mutant_brute": "變異巨漢",
-}
-ARCHETYPE_LABELS = {
-    "raider": "raider",
-    "mutant": "mutant",
-}
+ENEMY_LABELS = {"enemy_raider_scout": "掠奪者斥候", "enemy_mutant_brute": "變異巨漢"}
 RESOURCE_LABELS = {
-    "hp": "生命",
-    "food": "食物",
-    "ammo": "彈藥",
-    "medkits": "醫療包",
-    "scrap": "零件",
-    "radiation": "輻射",
+    "hp": "生命", "food": "食物", "ammo": "彈藥", "medkits": "醫療包", "scrap": "零件", "radiation": "輻射",
 }
 END_REASON_LABELS = {
-    "reached_final_node": "抵達終點",
-    "starvation": "飢餓而死",
-    "radiation_death": "死於輻射",
-    "combat_death": "戰鬥死亡",
-    "event_or_resource_death": "死於事件或資源耗盡",
-    "death": "死亡",
-}
-BACKGROUND_LABELS = {
-    "soldier": "士兵 (Soldier)",
-    "medic": "醫護兵 (Medic)",
-    "scavenger": "拾荒者 (Scavenger)",
-    "pathfinder": "開拓者 (Pathfinder)",
-}
-TRAVEL_MODE_LABELS = {
-    "normal": "常規 (Normal)",
-    "rush": "衝刺 (Rush)",
-    "careful": "謹慎 (Careful)",
+    "reached_final_node": "抵達終點", "starvation": "飢餓而死", "radiation_death": "死於輻射",
+    "combat_death": "戰鬥死亡", "event_or_resource_death": "死於事件或資源耗盡", "death": "死亡",
 }
 ITEM_LABELS = {
-    "makeshift_blade": "簡陋刀刃",
-    "rust_rifle": "鏽蝕步槍",
-    "hardened_blade": "強化刃",
-    "plate_armor": "板甲",
-    "gas_mask": "防毒面具",
-    "scavenger_kit": "拾荒工具組",
-    "field_pack": "野外背包",
+    "makeshift_blade": "簡陋刀刃", "rust_rifle": "鏽蝕步槍", "hardened_blade": "強化刃",
+    "plate_armor": "板甲", "gas_mask": "防毒面具", "scavenger_kit": "拾荒工具組", "field_pack": "野外背包",
 }
 SLOT_LABELS = {"weapon": "武器", "armor": "護甲", "tool": "工具"}
 LOOT_LINE_RE = re.compile(r"^戰利品：([a-z_]+) \+(\d+)$")
 
-
-def format_status(player: PlayerState) -> str:
-    arch_info = ARCHETYPE_INFO.get(player.archetype, {"name": "生存者", "icon": "👤"})
-    return (
-        f"背景：{arch_info['icon']} {arch_info['name']}\n"
-        f"狀態：生命={player.hp} 食物={player.food} 彈藥={player.ammo} "
-        f"醫療包={player.medkits} 零件={player.scrap} 輻射={player.radiation}"
-    )
-
-
 def format_equipment_item(equipment: Any) -> str:
-    if not equipment:
-        return "-"
-    # Support both old string format and new EquipmentState object
+    if not equipment: return "-"
     item_id = equipment.id if hasattr(equipment, "id") else str(equipment)
     base_name = ITEM_LABELS.get(item_id, item_id)
-    
     affixes = getattr(equipment, "affixes", {})
-    if not affixes:
-        return base_name
+    if not affixes: return base_name
     
     affix_parts = []
-    # Translate common affixes to icons/labels
     affix_map = {"atk": "⚔️", "def": "🛡️", "hp": "❤️"}
     for k, v in affixes.items():
         label = affix_map.get(k, k)
         affix_parts.append(f"{label}+{v}")
     return f"{base_name} {C_CYAN}({', '.join(affix_parts)}){C_END}"
-
 
 def format_equipment(player: PlayerState) -> str:
     return (
@@ -184,37 +130,17 @@ def format_equipment(player: PlayerState) -> str:
         f"工具={format_equipment_item(player.tool_slot)}"
     )
 
-
 def format_effects(effects: dict[str, int]) -> str:
-    parts: list[str] = []
-    for key, value in effects.items():
-        parts.append(f"{RESOURCE_LABELS.get(key, key)} {value:+d}")
+    parts = [f"{RESOURCE_LABELS.get(k, k)} {v:+d}" for k, v in effects.items()]
     return "，".join(parts)
 
-
 def format_loot(loot: list[dict[str, Any]]) -> str:
-    parts: list[str] = []
+    parts = []
     for item in loot:
-        if not isinstance(item, dict):
-            continue
-        resource = item.get("resource")
-        amount = item.get("amount")
-        if isinstance(resource, str) and isinstance(amount, int):
-            parts.append(f"{RESOURCE_LABELS.get(resource, resource)} +{amount}")
+        if isinstance(item, dict):
+            res, amt = item.get("resource"), item.get("amount")
+            if res and amt: parts.append(f"{RESOURCE_LABELS.get(res, res)} +{amt}")
     return "，".join(parts) if parts else "無"
-
-
-def format_equipment_change(equipment_change: dict[str, Any] | None) -> str | None:
-    if not equipment_change or not equipment_change.get("changed"):
-        return None
-    slot = SLOT_LABELS.get(str(equipment_change["slot"]), str(equipment_change["slot"]))
-    item_id = str(equipment_change["item"])
-    item_name = ITEM_LABELS.get(item_id, item_id)
-    
-    # Check for affixes in current player state (since equip_item just happened)
-    # This is a bit of a hack but works for the CLI display
-    return f"{slot} -> {item_name}"
-
 
 def localize_warning(text: str) -> str:
     replacements = {
@@ -227,422 +153,212 @@ def localize_warning(text: str) -> str:
     }
     return replacements.get(text, text)
 
-
 def draw_map(engine: RunEngine, current_node_id: str):
-    """Simple horizontal ASCII map visualization."""
-    # Define layers based on logical progression
-    layers = [
-        ["node_start"],
-        ["node_north_1", "node_south_1"],
-        ["node_north_2", "node_south_2", "node_mid"],
-        ["node_final"]
-    ]
-    
+    layers = [["node_start"], ["node_north_1", "node_south_1"], ["node_north_2", "node_south_2", "node_mid"], ["node_final"]]
     print(f"\n{C_CYAN}【 區域分佈圖 】{C_END}")
     for i, layer in enumerate(layers):
         line = ""
         for node_id in layer:
             label = NODE_LABELS.get(node_id, node_id)
-            is_current = node_id == current_node_id
-            
-            if is_current:
+            if node_id == current_node_id:
                 formatted = f"{BG_RED}{C_WHITE} {label} {C_END}"
             else:
-                # Check if it was visited or reachable
                 formatted = f"{C_CYAN}[ {label} ]{C_END}"
-            
             line += formatted + "   "
-        
         indent = " " * (i * 4)
         print(f"{indent}{line}")
-        if i < len(layers) - 1:
-            print(f"{indent}    │")
-    print()
-
+        if i < len(layers) - 1: print(f"{indent}    │")
 
 def localize_combat_log_line(line: str) -> str:
     match = LOOT_LINE_RE.match(line)
-    if not match:
-        return line
-    resource, amount = match.groups()
-    return f"戰利品：{RESOURCE_LABELS.get(resource, resource)} +{amount}"
-
+    if not match: return line
+    res, amt = match.groups()
+    return f"戰利品：{RESOURCE_LABELS.get(res, res)} +{amt}"
 
 def infer_archetype(enemy_id: str) -> str | None:
-    if "raider" in enemy_id:
-        return "raider"
-    if "mutant" in enemy_id:
-        return "mutant"
+    if "raider" in enemy_id: return "raider"
+    if "mutant" in enemy_id: return "mutant"
     return None
 
-
 def format_main_archetype(counter: Counter[str]) -> str:
-    if not counter:
-        return "無"
-    archetype = counter.most_common(1)[0][0]
-    return ARCHETYPE_LABELS.get(archetype, archetype)
-
+    if not counter: return "無"
+    return counter.most_common(1)[0][0]
 
 def show_help_menu():
     topics = list_topics()
     while True:
         print(f"\n{C_CYAN}=== 廢土生存手冊 ==={C_END}")
-        for i, tid in enumerate(topics):
-            print(f"  [{i}] {tid.capitalize()}")
+        for i, tid in enumerate(topics): print(f"  [{i}] {tid.capitalize()}")
         print(f"  [{len(topics)}] 離開 (Exit)")
-        
         raw = input(f"\n{C_YELLOW}請選擇主題 > {C_END}").strip()
         if raw.isdigit():
             idx = int(raw)
-            if idx == len(topics):
-                break
+            if idx == len(topics): break
             if 0 <= idx < len(topics):
                 text = get_help_text(topics[idx])
-                if text:
-                    print(f"\n{C_GREEN}{'═' * 40}{C_END}")
-                    print(text)
-                    print(f"{C_GREEN}{'═' * 40}{C_END}")
+                if text: print(f"\n{C_GREEN}{'═' * 40}{C_END}\n{text}\n{C_GREEN}{'═' * 40}{C_END}")
         input(f"\n{C_DIM}按 Enter 繼續...{C_END}")
         clear_screen()
-
 
 def prompt_index(label: str, options: list[str]) -> int:
     while True:
         print(f"\n{C_BOLD}{C_CYAN}▶ {label}{C_END}")
-        for index, option in enumerate(options):
-            print(f"  {C_CYAN}[{index}]{C_END} {option}")
+        for idx, opt in enumerate(options): print(f"  {C_CYAN}[{idx}]{C_END} {opt}")
         print(f"  {C_DIM}[H] 幫助/說明 (Help){C_END}")
-        
         raw = input(f"\n{C_YELLOW}指令 > {C_END}").strip().upper()
         if raw == "H":
             show_help_menu()
-            # Redisplay the prompt
-            print(f"\n{C_BOLD}{C_CYAN}▶ {label}{C_END}")
-            for index, option in enumerate(options):
-                print(f"  {C_CYAN}[{index}]{C_END} {option}")
-            print(f"  {C_DIM}[H] 幫助/說明 (Help){C_END}")
             continue
-            
-        if raw.isdigit() and 0 <= int(raw) < len(options):
-            return int(raw)
+        if raw.isdigit() and 0 <= int(raw) < len(options): return int(raw)
         print(f"{C_RED}輸入無效，請重新輸入。{C_END}")
 
-
 def estimate_remaining_steps(map_state: Any, node_id: str) -> int:
-    visited: set[str] = set()
-    queue: list[tuple[str, int]] = [(node_id, 0)]
+    visited, queue = set(), [(node_id, 0)]
     while queue:
-        current, depth = queue.pop(0)
-        if current in visited:
-            continue
-        visited.add(current)
-        node = map_state.get_node(current)
-        if node.is_final:
-            return depth
-        for nxt in node.connections:
-            queue.append((nxt, depth + 1))
+        curr, depth = queue.pop(0)
+        if curr in visited: continue
+        visited.add(curr)
+        node = map_state.get_node(curr)
+        if node.is_final: return depth
+        for nxt in node.connections: queue.append((nxt, depth + 1))
     return 0
 
 def show_meta_upgrade_menu(meta_profile: MetaProfile, meta_path: Path):
     while True:
         clear_screen()
-        draw_header("🛠️ 倖存者基地 - 永久強化")
+        draw_header("🛠️ 基地設施 - 永久強化")
         print(f"  {C_CYAN}當前廢料持用量：{C_END} {C_YELLOW}{SYM_SCRAP} {meta_profile.total_scrap}{C_END}\n")
-        
+        main_options = ["強化基礎屬性 (Base Upgrades)", "招募專業人才 (Recruit Archetypes)", "離開基地 (Exit)"]
+        choice = prompt_index("請選擇設施部門：", main_options)
+        if choice == 0: show_attribute_upgrades(meta_profile, meta_path)
+        elif choice == 1: show_archetype_unlock_menu(meta_profile, meta_path)
+        else: break
+
+def show_attribute_upgrades(meta_profile: MetaProfile, meta_path: Path):
+    while True:
+        clear_screen()
+        draw_header("💉 醫療與訓練中心")
+        print(f"  {C_CYAN}當前廢料持用量：{C_END} {C_YELLOW}{SYM_SCRAP} {meta_profile.total_scrap}{C_END}\n")
         up_ids = list(UPGRADE_METADATA.keys())
-        options = []
+        opts = []
         for uid in up_ids:
             meta = UPGRADE_METADATA[uid]
-            level = meta_profile.get_level(uid)
-            max_lvl = meta["max_level"]
-            
-            if level < max_lvl:
-                cost = get_upgrade_cost(level)
-                options.append(f"{meta['name']} (Lv.{level}/{max_lvl}) - {meta['desc']} | {C_YELLOW}成本: {cost}{C_END}")
-            else:
-                options.append(f"{meta['name']} (Lv.{level}/{max_lvl}) - {C_GREEN}[已達最大等級]{C_END}")
-        
-        options.append("完成升級並離開 (Finish & Exit)")
-        
-        choice = prompt_index("請選擇要購買的強化項目：", options)
-        if choice == len(up_ids):
-            break
-            
+            lvl, max_lvl = meta_profile.get_level(uid), meta["max_level"]
+            if lvl < max_lvl: opts.append(f"{meta['name']} (Lv.{lvl}/{max_lvl}) - {meta['desc']} | {C_YELLOW}成本: {get_upgrade_cost(lvl)}{C_END}")
+            else: opts.append(f"{meta['name']} (Lv.{lvl}/{max_lvl}) - {C_GREEN}[已達最大等級]{C_END}")
+        opts.append("返回上一層 (Back)")
+        choice = prompt_index("請選擇強化項目：", opts)
+        if choice == len(up_ids): break
         uid = up_ids[choice]
         if meta_profile.purchase_upgrade(uid):
             meta_profile.save(meta_path)
-            print(f"\n{C_GREEN}✅ 升級成功！計畫已更新。{C_END}")
-        else:
-            print(f"\n{C_RED}❌ 升級失敗：廢料不足或已達等級上限。{C_END}")
-        
+            print(f"\n{C_GREEN}✅ 強化成功！{C_END}")
+        else: print(f"\n{C_RED}❌ 強化失敗：廢料不足或已達等級上限。{C_END}")
         input(f"\n{C_DIM}按 Enter 繼續...{C_END}")
 
+def show_archetype_unlock_menu(meta_profile: MetaProfile, meta_path: Path):
+    while True:
+        clear_screen()
+        draw_header("🤝 隊友招募中心")
+        print(f"  {C_CYAN}當前廢料持用量：{C_END} {C_YELLOW}{SYM_SCRAP} {meta_profile.total_scrap}{C_END}\n")
+        locked_ids = [uid for uid in ARCHETYPE_UNLOCK_METADATA.keys() if uid not in meta_profile.unlocked_archetypes]
+        if not locked_ids:
+            print(f"{C_GREEN}所有的專業人才都已加入你的基地！{C_END}")
+            input(f"\n{C_DIM}按 Enter 返回...{C_END}")
+            break
+        opts = [f"{ARCHETYPE_UNLOCK_METADATA[uid]['name']} - {ARCHETYPE_UNLOCK_METADATA[uid]['desc']} | {C_YELLOW}成本: {ARCHETYPE_UNLOCK_METADATA[uid]['cost']}{C_END}" for uid in locked_ids]
+        opts.append("返回上一層 (Back)")
+        choice = prompt_index("請選擇要解鎖的職業：", opts)
+        if choice == len(locked_ids): break
+        uid = locked_ids[choice]
+        if meta_profile.unlock_archetype(uid):
+            meta_profile.save(meta_path)
+            print(f"\n{C_GREEN}✅ 招募成功！{uid.capitalize()} 已加入你的隊伍。{C_END}")
+        else: print(f"\n{C_RED}❌ 招募失敗：廢料不足。{C_END}")
+        input(f"\n{C_DIM}按 Enter 繼續...{C_END}")
 
 def main() -> int:
     OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
-
     seed = int(sys.argv[1]) if len(sys.argv) > 1 else 101
     difficulty = sys.argv[2] if len(sys.argv) > 2 else "normal"
-    difficulty_profile = get_difficulty_profile(difficulty)
-    nodes = build_node_payloads()
+    nodes, enemies = build_node_payloads(), build_enemy_catalog()
     events = build_event_catalog(seed)
-    enemies = build_enemy_catalog()
     map_state = build_map(nodes, start_node_id="node_start", final_node_id="node_final")
-    # Meta Progression Load
     meta_path = ROOT / "output" / "meta_profile.json"
     meta_profile = MetaProfile.load(meta_path)
 
-    clear_screen()
-    
-    # Main Menu Loop
     while True:
         clear_screen()
         draw_header("ASHFALL — 荒廢世界冒險")
-        main_choice = prompt_index(
-            "首頁選單：", 
-            ["進入荒野 (Start Run)", "升級基地 (Upgrade Base)", f"查看手冊 (Help)"]
-        )
-        if main_choice == 0:
-            break
-        elif main_choice == 1:
-            show_meta_upgrade_menu(meta_profile, meta_path)
-        elif main_choice == 2:
-            show_help_menu()
+        mc = prompt_index("首頁選單：", ["進入荒野 (Start Run)", "升級基地 (Upgrade Base)", "查看手冊 (Help)"])
+        if mc == 0: break
+        elif mc == 1: show_meta_upgrade_menu(meta_profile, meta_path)
+        elif mc == 2: show_help_menu()
 
     clear_screen()
     draw_header("背景與職業選擇")
-    
-    # Archetype Selection
     available_archs = meta_profile.unlocked_archetypes
     arch_options = [f"{ARCHETYPE_INFO[a]['icon']} {ARCHETYPE_INFO[a]['name']} - {ARCHETYPE_INFO[a]['desc']}" for a in available_archs]
     arch_idx = prompt_index("請選擇你的背景職業：", arch_options)
     selected_archetype = available_archs[arch_idx]
 
-    player = build_starting_player(
-        name=difficulty, 
-        archetype=selected_archetype,
-        meta_profile=meta_profile
-    )
-    
-    engine = RunEngine(
-        map_state=map_state,
-        seed=seed,
-        event_catalog=events,
-        enemy_catalog=enemies,
-        difficulty=difficulty,
-    )
-    
+    player = build_starting_player(name=difficulty, archetype=selected_archetype, meta_profile=meta_profile)
+    engine = RunEngine(map_state=map_state, seed=seed, event_catalog=events, enemy_catalog=enemies, difficulty=difficulty)
     run = engine.create_run(player, seed=seed)
+    print(f"\n{C_DIM}種子：{seed} | 難度：{get_difficulty_profile(difficulty).name}{C_END}\n{C_YELLOW}目標：活到終點山脊。{C_END}\n")
 
-    print(f"\n{C_DIM}種子：{seed} | 難度：{difficulty_profile.name}{C_END}")
-    print(f"{C_YELLOW}目標：活到終點山脊。{C_END}\n")
-
-    decision_log: list[dict[str, Any]] = []
-    encounter_counter: Counter[str] = Counter()
-    combat_count = 0
-
+    decision_log, encounter_counter, combat_count = [], Counter(), 0
     while not run.ended:
         current = map_state.get_node(run.current_node)
         if current.connections:
             if run.player.radiation > 0:
-                print(
-                    "警告：每次移動都會因輻射額外失去 1 點生命。"
-                    f" 目前輻射={run.player.radiation}"
-                )
-                if run.player.hp <= run.player.radiation + 1:
-                    print("危急：再走一次帶輻射的路，你可能會直接死亡。")
-
+                print(f"警告：每次移動都會受輻射失去 1 HP。目前輻射={run.player.radiation}")
+                if run.player.hp <= run.player.radiation + 1: print("危急：再走一次你可能會直接死亡。")
             draw_map(engine, run.current_node)
-            
-            mode_choice = prompt_index(
-                (
-                    f"目前位置：{C_YELLOW}{NODE_LABELS.get(run.current_node, run.current_node)}{C_END}\n"
-                    f"{format_status_bar(run.player)}\n"
-                    f"{C_DIM}裝備：{format_equipment(run.player)}{C_END}\n"
-                    "請選擇旅行模式："
-                ),
-                [TRAVEL_MODE_LABELS[m] for m in ["normal", "rush", "careful"]]
-            )
+            mode_choice = prompt_index(f"目前：{C_YELLOW}{NODE_LABELS.get(run.current_node, run.current_node)}{C_END}\n{format_status_bar(run.player)}\n{C_DIM}裝備：{format_equipment(run.player)}{C_END}\n請選擇旅行模式：", [m for m in ["normal", "rush", "careful"]])
             travel_mode = ["normal", "rush", "careful"][mode_choice]
-
-            route_choice = prompt_index(
-                "請選擇下一條路線：",
-                [NODE_LABELS.get(node_id, node_id) for node_id in current.connections],
-            )
-            next_node = current.connections[route_choice]
-            hp_before_move = run.player.hp
-            food_before_move = run.player.food
-            node = engine.move_to(run, next_node, travel_mode=travel_mode)
-            if run.player.radiation > 0 and run.player.hp < hp_before_move:
-                print(f"移動時因輻射失去了 {hp_before_move - run.player.hp} 點生命。")
-            if run.player.food < food_before_move:
-                print(f"移動消耗了 {food_before_move - run.player.food} 點食物。")
-            if run.ended:
-                break
-        else:
-            node = current
+            route_choice = prompt_index("請選擇下一條路線：", [NODE_LABELS.get(nid, nid) for nid in current.connections])
+            hp_b, food_b = run.player.hp, run.player.food
+            node = engine.move_to(run, current.connections[route_choice], travel_mode=travel_mode)
+            if run.player.radiation > 0 and run.player.hp < hp_b: print(f"因輻射失去 {hp_b - run.player.hp} HP。")
+            if run.player.food < food_b: print(f"移動消耗 {food_b - run.player.food} 食物。")
+            if run.ended: break
+        else: node = current
 
         event_id = pick_event_id(node, engine.rng, run_flags=run.flags, event_catalog=events)
         event_payload = events[event_id]
-        remaining_steps = estimate_remaining_steps(map_state, node.id)
-        
-        # Event Presentation
-        print(f"\n{C_CYAN}{'─' * 40}{C_END}")
-        print(f"{C_BOLD}【 事件：{event_payload['description']} 】{C_END}")
-
-        option_lines: list[str] = []
-        warning_cache: list[list[str]] = []
-        for index, option in enumerate(event_payload["options"]):
-            warnings = build_warning_signals(run.player, event_payload, index, remaining_steps)
-            warning_cache.append(warnings)
-            localized_warnings = [localize_warning(warning) for warning in warnings]
-            warning_label = f" [{'；'.join(localized_warnings)}]" if localized_warnings else ""
-            option_lines.append(f"{option['text']}{warning_label}")
-
-        option_index = prompt_index("請選擇一個行動：", option_lines)
-        pre_choice_state = {
-            "hp": run.player.hp,
-            "food": run.player.food,
-            "ammo": run.player.ammo,
-            "medkits": run.player.medkits,
-            "radiation": run.player.radiation,
-        }
-        outcome = resolve_event_choice(run.player, event_payload, option_index, engine.rng)
+        print(f"\n{C_CYAN}{'─' * 40}{C_END}\n{C_BOLD}【 事件：{event_payload['description']} 】{C_END}")
+        rem = estimate_remaining_steps(map_state, node.id)
+        option_lines = [f"{opt['text']} [{'；'.join([localize_warning(w) for w in build_warning_signals(run.player, event_payload, i, rem)])}]" for i, opt in enumerate(event_payload["options"])]
+        opt_idx = prompt_index("請選擇行動：", option_lines)
+        pre_state = {"hp": run.player.hp, "food": run.player.food, "ammo": run.player.ammo, "medkits": run.player.medkits, "radiation": run.player.radiation}
+        outcome = resolve_event_choice(run.player, event_payload, opt_idx, engine.rng)
 
         if outcome["combat_triggered"]:
             combat = engine.resolve_combat(run)
             combat_count += 1
-            outcome["combat"] = combat
             enemy_id = str(combat["enemy_id"])
-            enemy_label = ENEMY_LABELS.get(enemy_id, enemy_id)
             is_elite = combat.get("log", []) and "⚠️" in str(combat["log"][0])
-            
-            archetype = infer_archetype(enemy_id)
-            if archetype:
-                encounter_counter[archetype] += 1
-                
-            display_label = f"{BG_RED}{C_WHITE} [精英] {C_END} {C_BOLD}{enemy_label}{C_END}" if is_elite else f"{C_BOLD}{enemy_label}{C_END}"
-            
-            print(f"觸發戰鬥：{display_label}")
-            for line in combat["log"]:
-                l_str = str(line)
-                if "⚠️" in l_str:
-                    print(f"  {C_RED}{C_BOLD}{l_str}{C_END}")
-                else:
-                    print(f"  {localize_combat_log_line(l_str)}")
-            loot = list(combat.get("loot", []))
-            if loot:
-                print(f"戰利品摘要：{C_GREEN}{format_loot(loot)}{C_END}")
+            arch = infer_archetype(enemy_id)
+            if arch: encounter_counter[arch] += 1
+            print(f"觸發戰鬥：{f'{BG_RED}{C_WHITE} [精英] {C_END} ' if is_elite else ''}{C_BOLD}{ENEMY_LABELS.get(enemy_id, enemy_id)}{C_END}")
+            for l in combat["log"]: print(f"  {C_RED}{C_BOLD}{l}{C_END}" if "⚠️" in str(l) else f"  {localize_combat_log_line(str(l))}")
+            if combat.get("loot"): print(f"戰利品：{C_GREEN}{format_loot(combat['loot'])}{C_END}")
 
-        if run.player.is_dead():
-            run.end(victory=False, reason=engine._resolve_noncombat_death_reason(run))
+        if run.player.is_dead(): run.end(victory=False, reason=engine._resolve_noncombat_death_reason(run))
+        eff = event_payload["options"][opt_idx].get("effects")
+        if eff: print(f"效果：{format_effects(eff)}")
+        eq = outcome.get("equipment_change")
+        if eq and eq.get("changed"): print(f"取得裝備：{SLOT_LABELS.get(str(eq['slot']))} -> {ITEM_LABELS.get(str(eq['item']), str(eq['item']))}")
+        
+        decision_log.append({"step": len(decision_log)+1, "node": node.id, "event_id": event_id, "option_index": opt_idx, "pre_choice_state": pre_state, "player_after": run.player.to_dict()})
+        if node.is_final and not run.ended: run.end(victory=True, reason="reached_final_node")
 
-        effects = dict(event_payload["options"][option_index].get("effects", {}))
-        if effects:
-            print(f"效果：{format_effects(effects)}")
-
-        equipment_change = outcome.get("equipment_change")
-        equipment_summary = format_equipment_change(equipment_change)
-        if equipment_summary:
-            print(f"取得裝備：{equipment_summary}")
-
-        scavenger_bonus = outcome.get("scavenger_bonus", {})
-        if scavenger_bonus:
-            print(f"背景或工具加成：{format_effects(scavenger_bonus)}")
-
-        if run.player.radiation > pre_choice_state["radiation"]:
-            print(f"警告：你的輻射升到 {run.player.radiation}。")
-        if run.player.hp <= 3 and run.player.radiation > 0:
-            print("危急：你的生命已經很低，現在很難承受後續輻射消耗。")
-
-        decision_log.append(
-            {
-                "step": len(decision_log) + 1,
-                "node": node.id,
-                "event_id": event_id,
-                "option_index": option_index,
-                "warning_signals": warning_cache[option_index],
-                "pre_choice_state": pre_choice_state,
-                "pressure": bool(warning_cache[option_index]),
-                "combat_triggered": bool(outcome.get("combat_triggered", False)),
-                "combat_loot": list(outcome.get("combat", {}).get("loot", [])) if outcome.get("combat_triggered", False) else [],
-                "effects": effects,
-                "equipment_change": equipment_change,
-                "equipment_summary": equipment_summary,
-                "player_after": {
-                    "hp": run.player.hp,
-                    "food": run.player.food,
-                    "ammo": run.player.ammo,
-                    "medkits": run.player.medkits,
-                    "radiation": run.player.radiation,
-                    "weapon_slot": run.player.weapon_slot,
-                    "armor_slot": run.player.armor_slot,
-                    "tool_slot": run.player.tool_slot,
-                },
-            }
-        )
-
-        if node.is_final and not run.ended:
-            run.end(victory=True, reason="reached_final_node")
-
-    failure_analysis = analyze_failure(decision_log, run.ended, run.victory, run.end_reason)
-    result = {
-        "seed": seed,
-        "difficulty": difficulty_profile.name,
-        "ended": run.ended,
-        "victory": run.victory,
-        "end_reason": run.end_reason,
-        "main_archetype": format_main_archetype(encounter_counter),
-        "player_final": {
-            "hp": run.player.hp,
-            "food": run.player.food,
-            "ammo": run.player.ammo,
-            "medkits": run.player.medkits,
-            "scrap": run.player.scrap,
-            "radiation": run.player.radiation,
-            "weapon_slot": run.player.weapon_slot,
-            "armor_slot": run.player.armor_slot,
-            "tool_slot": run.player.tool_slot,
-        },
-        "decision_log": decision_log,
-        "failure_analysis": failure_analysis,
-    }
-    output_path = OUTPUT_DIR / f"latest_seed_{seed}.json"
-    output_path.write_text(json.dumps(result, indent=2, ensure_ascii=False), encoding="utf-8")
-
-    # Meta Progression Reward
-    nodes_visited = len(run.visited_nodes)
-    enemies_defeated = combat_count
-    earned_scrap = RewardCalculator.calculate_scrap_reward(
-        nodes_visited=nodes_visited,
-        reached_final_node=run.victory,
-        enemies_defeated=enemies_defeated,
-        ending_hp=run.player.hp
-    )
-    
+    earned_scrap = RewardCalculator.calculate_scrap_reward(len(run.visited_nodes), run.victory, combat_count, run.player.hp)
     meta_profile.total_scrap += earned_scrap
     meta_profile.lifetime_scrap_earned += earned_scrap
     meta_profile.save(meta_path)
-
-    print("\n本局結束")
-    print(
-        json.dumps(
-            {
-                "勝利": run.victory,
-                "結束原因": END_REASON_LABELS.get(run.end_reason or "", run.end_reason),
-                "獲得廢料 (Meta Scrap)": earned_scrap,
-                "累積廢料": meta_profile.total_scrap,
-                "失敗分析": failure_analysis,
-                "主要遭遇": format_main_archetype(encounter_counter),
-                "最終裝備": format_equipment(run.player),
-            },
-            indent=2,
-            ensure_ascii=False,
-        )
-    )
-    print(f"結果已寫入：{output_path}")
+    print(f"\n本局結束\n{json.dumps({'勝利': run.victory, '原因': END_REASON_LABELS.get(run.end_reason or '', run.end_reason), '獲得廢料': earned_scrap, '累積廢料': meta_profile.total_scrap}, indent=2, ensure_ascii=False)}")
     return 0
 
-
-if __name__ == "__main__":
-    raise SystemExit(main())
+if __name__ == "__main__": raise SystemExit(main())

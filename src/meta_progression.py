@@ -16,6 +16,11 @@ def get_upgrade_cost(level: int) -> int:
     # 5, 15, 30, 50, 80...
     return 5 * (level + 1) + (level * 5)
 
+ARCHETYPE_UNLOCK_METADATA = {
+    "medic": {"name": "醫護兵", "cost": 30, "desc": "初始附帶醫療包，且醫療包回復量 +1。"},
+    "scavenger": {"name": "拾荒者", "cost": 30, "desc": "初始附帶廢料，且事件資源收益 +1。"},
+}
+
 @dataclass
 class MetaProfile:
     profile_id: str = "default"
@@ -23,13 +28,27 @@ class MetaProfile:
     lifetime_scrap_earned: int = 0
     unlock_levels: Dict[str, int] = field(default_factory=dict)
     unlocked_archetypes: List[str] = field(default_factory=lambda: ["soldier", "pathfinder"])
-    unlocked_at_version: str = "0.7"
+    unlocked_at_version: str = "0.8"
 
     def get_level(self, upgrade_id: str) -> int:
         return self.unlock_levels.get(upgrade_id, 0)
 
     def is_archetype_unlocked(self, archetype_id: str) -> bool:
         return archetype_id in self.unlocked_archetypes
+
+    def unlock_archetype(self, archetype_id: str) -> bool:
+        """嘗試解鎖新職業。回傳是否成功。"""
+        if archetype_id not in ARCHETYPE_UNLOCK_METADATA:
+            return False
+        if archetype_id in self.unlocked_archetypes:
+            return False
+        
+        cost = ARCHETYPE_UNLOCK_METADATA[archetype_id]["cost"]
+        if self.total_scrap >= cost:
+            self.total_scrap -= cost
+            self.unlocked_archetypes.append(archetype_id)
+            return True
+        return False
 
     def purchase_upgrade(self, upgrade_id: str) -> bool:
         """嘗試購買升級。回傳是否成功。"""
