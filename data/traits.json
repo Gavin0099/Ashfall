@@ -1,0 +1,38 @@
+[
+  {
+    "trait_id": "radiation_adapted",
+    "display_name": "輻射適應",
+    "description": "長期低劑量暴露使身體產生部分適應——但這不代表你是無敵的。",
+    "positive": "輻射累積速率 -30%",
+    "negative": "食物消耗速率 +20%（代謝加快）",
+    "granted_tags": ["rad_resistant"],
+    "event_filter_bonus": ["nuclear_zone", "contaminated_water"]
+  },
+  {
+    "trait_id": "trigger_discipline",
+    "display_name": "扳機紀律",
+    "description": "你從不浪費子彈，但這也讓你在混亂中慢半拍。",
+    "positive": "戰鬥消耗彈藥 -1",
+    "negative": "戰鬥事件中「逃跑」選項的成功率 -15%",
+    "granted_tags": ["ammo_efficient"],
+    "event_filter_bonus": ["ambush", "fortified_position"]
+  },
+  {
+    "trait_id": "lone_wolf",
+    "display_name": "獨行者",
+    "description": "你不需要任何人，任何人也不需要你。這樣反而更安全。",
+    "positive": "進入聚落事件時，不觸發負面社交結果",
+    "negative": "需要合作的事件選項對你永久隱藏",
+    "granted_tags": ["solitary"],
+    "event_filter_bonus": ["abandoned_site", "solo_cache"]
+  },
+  {
+    "trait_id": "scavenger_sense",
+    "display_name": "廢土直覺",
+    "description": "你能從廢墟裡找到別人看不見的東西，代價是你很難不去翻找每一個角落。",
+    "positive": "廢墟類事件額外獲得 1 scrap",
+    "negative": "路線移動時間 +1 step（停不下來搜刮）",
+    "granted_tags": ["scav_trained"],
+    "event_filter_bonus": ["ruins", "abandoned_factory"]
+  }
+]

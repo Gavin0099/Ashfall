@@ -1,4 +1,4 @@
-﻿{
+{
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "title": "Run Analytics Schema",
   "type": "object",
@@ -38,7 +38,8 @@
         "radiation": { "type": "integer" },
         "weapon_slot": { "type": ["string", "null"] },
         "armor_slot": { "type": ["string", "null"] },
-        "tool_slot": { "type": ["string", "null"] }
+        "tool_slot": { "type": ["string", "null"] },
+        "character": { "type": ["object", "null"] }
       },
       "additionalProperties": false
     },
@@ -99,7 +100,8 @@
               "radiation": { "type": "integer" },
               "weapon_slot": { "type": ["string", "null"] },
               "armor_slot": { "type": ["string", "null"] },
-              "tool_slot": { "type": ["string", "null"] }
+              "tool_slot": { "type": ["string", "null"] },
+              "character": { "type": ["object", "null"] }
             },
             "additionalProperties": false
           }
@@ -200,7 +202,8 @@
             "risk_tags": {
               "type": "array",
               "items": { "type": "string", "minLength": 1 }
-            }
+            },
+            "character": { "type": ["object", "null"] }
           },
           "additionalProperties": false
         }

@@ -1,0 +1,23 @@
+{
+  "character_id": "military_deserter_7",
+  "background_id": "military_deserter",
+  "display_name": "Sergeant Thorne",
+  "description": "Left his post at Checkpoint Zulu after seeing the command waste lives for 'strategic scrap'. He keeps his uniform hidden but his posture gives him away.",
+  "special": {
+    "strength": 8,
+    "perception": 6,
+    "endurance": 8,
+    "charisma": 2,
+    "intelligence": 4,
+    "agility": 6,
+    "luck": 6
+  },
+  "traits": ["heavy_handed", "trigger_discipline"],
+  "perks": [],
+  "tags": ["tactical_combat", "heavy_weapons", "tag_military_deserter"],
+  "starting_resource_bias": {
+    "ammo": 10,
+    "food": -5
+  },
+  "structural_weakness": "High profile target; frequently ambushed by patrol units looking for turncoats."
+}

@@ -42,7 +42,9 @@ Prototype validation contract: `PROTOTYPE_SUCCESS_CRITERIA.md`
 ├─ [✓] Phase v0.6: Advanced Mechanics & World Depth 進階機制與世界深度 (2026-03-17 完成)
 ├─ [✓] Phase v0.7: Meta Progression Depth & Polish 系統深度與打磨 (2026-03-17 完成)
 ├─ [✓] Phase v0.8: Content Pack & Final Polish 內容擴展與最終打磨 (2026-03-17 完成)
-└─ [ ] Phase v0.9: Narrative Depth & Quest Chains 劇情深度與任務鏈 (Planned)
+├─ [✓] Phase v0.9: Narrative Depth & Quest Chains 劇情深度與任務鏈 (2026-03-17 完成)
+├─ [✓] Phase v1.0: Advanced Character System 進階角色系統 (2026-03-17 完成)
+└─ [✓] Phase v1.1: Character Factory Framework 角色生成工廠 (2026-03-17 完成)
 ```
 
-**當前 Phase**: **v0.9 規劃中 — 目標：實作職業專屬事件分支、動態任務系統以及進階數值平衡。**
+**當前階段：v1.1 已完成 — 目標：導入約束驅動的角色生成工廠與自動化治理。**

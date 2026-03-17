@@ -15,9 +15,9 @@ from src.event_templates import instantiate_event_catalog, load_template_catalog
 from src.difficulty import build_starting_player
 from src.enemy_catalog import load_enemy_catalog
 from src.run_engine import RunEngine, build_map
-from src.event_engine import pick_event_id
+from src.event_engine import pick_event_id, get_available_options
 from src.run_summary import build_run_summary
-from src.state_models import PlayerState, RunState
+from src.state_models import PlayerState, RunState, CharacterProfile
 
 
 OUTPUT_DIR = ROOT / "output" / "playability"
@@ -285,7 +285,15 @@ def run_plan(plan: RoutePlan, nodes: Dict[str, dict], events: Dict[str, dict], e
         enemy_catalog=enemies,
         difficulty=plan.difficulty,
     )
-    player = build_starting_player(plan.difficulty, archetype=plan.archetype)
+    profile = None
+    if plan.archetype:
+        # Legacy archetype field in RoutePlan is now background_id
+        profile = CharacterProfile(
+            background_id=plan.archetype,
+            display_name=plan.archetype,
+            special={"strength": 5, "perception": 5, "endurance": 5, "charisma": 5, "intelligence": 5, "agility": 5, "luck": 5}
+        )
+    player = build_starting_player(plan.difficulty, character=profile)
     run = engine.create_run(player, seed=plan.seed)
 
     pressure_count = 0
@@ -305,9 +313,22 @@ def run_plan(plan: RoutePlan, nodes: Dict[str, dict], events: Dict[str, dict], e
                 current_travel_mode = "normal"
         
         node = engine.move_to(run, next_node, travel_mode=current_travel_mode)
-        option_index = plan.options.get(next_node, 0)
-        event_id = pick_event_id(node, engine.rng)
+        event_id = pick_event_id(node, engine.rng, run_flags=run.flags, event_catalog=events)
         event_payload = events[event_id]
+        
+        # v1.0 Filter available options
+        avail = get_available_options(run.player, event_payload)
+        met_indices = [i for i, o in enumerate(avail) if o["is_met"]]
+        
+        # Try to use plan's preferred option, fallback to first met or 0
+        preferred_idx = plan.options.get(next_node, 0)
+        if preferred_idx in met_indices:
+            option_index = preferred_idx
+        elif met_indices:
+            option_index = met_indices[0]
+        else:
+            option_index = 0 # This will still likely cause ValueError but is the last resort
+        
         warning_signals = build_warning_signals(run.player, event_payload, option_index, len(plan.route) - len(decision_log) - 1)
         pre_choice_state = snapshot_player(run.player)
         outcome = engine.resolve_node_event_with_id(node, run, event_id=event_id, option_index=option_index)

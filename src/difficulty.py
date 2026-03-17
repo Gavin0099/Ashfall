@@ -56,8 +56,9 @@ def get_difficulty_profile(name: str) -> DifficultyProfile:
 
 def build_starting_player(
     name: str = "normal", 
-    archetype: str | None = None,
-    meta_profile: MetaProfile | None = None
+    character: CharacterProfile | None = None,
+    meta_profile: MetaProfile | None = None,
+    resource_bias: Dict[str, int] | None = None
 ) -> PlayerState:
     profile = get_difficulty_profile(name)
     player = PlayerState(
@@ -65,7 +66,7 @@ def build_starting_player(
         food=profile.starting_food,
         ammo=profile.starting_ammo,
         medkits=profile.starting_medkits,
-        archetype=archetype,
+        character=character,
     )
     
     # Meta Upgrades
@@ -75,14 +76,16 @@ def build_starting_player(
         player.ammo += meta_profile.get_level("up_ammo_belt")
         player.medkits += meta_profile.get_level("up_medkit_stash")
 
-    # Archetype Initial Bonuses (Starting resources only)
-    if archetype == "medic":
-        player.medkits += 1  # Professional start
-    elif archetype == "soldier":
-        player.ammo += 3
-    elif archetype == "scavenger":
-        player.scrap += 5
-    elif archetype == "pathfinder":
-        player.food += 1
-        
+    # Character Background / Archetype Initial Bonuses
+    if resource_bias:
+        player.hp += resource_bias.get("hp", 0)
+        player.food += resource_bias.get("food", 0)
+        player.ammo += resource_bias.get("ammo", 0)
+        player.medkits += resource_bias.get("medkits", 0)
+        player.scrap += resource_bias.get("scrap", 0)
+
+    # Compatibility for old archetype system if character is None but we logic it
+    # For now, let's assume v1.0 uses character. 
+    # If character has granted_tags, they are already in the object.
+    
     return player

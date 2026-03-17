@@ -1,0 +1,23 @@
+{
+  "character_id": "raider_defector_9",
+  "background_id": "raider_defector",
+  "display_name": "'Rat' Vane",
+  "description": "He was the one who opened the gates for the last caravan. Now he wanders, looking for a way to scrub the blood from his rusty armor bits.",
+  "special": {
+    "strength": 5,
+    "perception": 9,
+    "endurance": 5,
+    "charisma": 4,
+    "intelligence": 5,
+    "agility": 7,
+    "luck": 5
+  },
+  "traits": ["lone_wolf", "paranoid_reflex"],
+  "perks": [],
+  "tags": ["intimidation", "lockpicking", "tag_raider_defector"],
+  "starting_resource_bias": {
+    "scrap": 8,
+    "medkits": -3
+  },
+  "structural_weakness": "Notorious reputation; traders charge 50% more for supplies due to his recognizable face."
+}

@@ -1,6 +1,55 @@
 {
   "events": [
     {
+      "event_id": "evt_tech_vault",
+      "template_type": "ruined_infrastructure",
+      "description_variants": [
+        "你發現了一處密封的戰前科技地窖，終端機仍在微弱閃爍。",
+        "這處地窖的電子鎖尚未損壞，需要極高的計算能力才能破解。"
+      ],
+      "options": [
+        {
+          "text_variants": [
+            "嘗試遠端破解安全協議 (需要 Intelligence 7)"
+          ],
+          "character_filters": {
+            "require_special": {
+              "intelligence": { "min": 7 }
+            }
+          },
+          "effects": {
+            "scrap": 10,
+            "medkits": 2
+          },
+          "combat_chance": 0.0
+        },
+        {
+          "text_variants": [
+            "強行撬開機門 (需要 Strength 8)"
+          ],
+          "character_filters": {
+            "require_special": {
+              "strength": { "min": 8 }
+            }
+          },
+          "effects": {
+            "scrap": 5,
+            "hp": -2
+          },
+          "combat_chance": 0.2
+        },
+        {
+          "text_variants": [
+            "搜查外部遺落物"
+          ],
+          "effects": {
+            "scrap": 2
+          },
+          "combat_chance": 0.1
+        }
+      ]
+    },
+    {
       "event_id": "evt_departure",
       "template_type": "survivor_contact",
       "description_variants": [

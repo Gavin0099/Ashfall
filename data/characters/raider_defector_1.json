@@ -1,0 +1,28 @@
+{
+  "character_id": "raider_defector_1",
+  "background_id": "raider_defector",
+  "display_name": "Generated Raider defector",
+  "description": "Mocked description for testing.",
+  "special": {
+    "strength": 5,
+    "perception": 7,
+    "endurance": 5,
+    "charisma": 7,
+    "intelligence": 8,
+    "agility": 6,
+    "luck": 2
+  },
+  "traits": [
+    "pack_rat",
+    "small_frame"
+  ],
+  "perks": [],
+  "tags": [
+    "tag_raider_defector"
+  ],
+  "starting_resource_bias": {
+    "food": 2,
+    "ammo": -2
+  },
+  "structural_weakness": "Mocked weakness."
+}

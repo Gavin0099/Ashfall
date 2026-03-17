@@ -161,5 +161,10 @@ def build_run_summary(
             "min_hp": min_hp,
             "low_resource_flags": low_resource_flags,
             "risk_tags": risk_tags,
+            "character": {
+                "background_id": player_final.get("character", {}).get("background_id"),
+                "traits": player_final.get("character", {}).get("traits", []),
+                "special": player_final.get("character", {}).get("special", {})
+            } if player_final.get("character") else None
         },
     }

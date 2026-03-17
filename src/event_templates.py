@@ -30,7 +30,7 @@ def instantiate_event(template: Dict[str, Any], rng: random.Random) -> dict:
             "combat_chance": float(option.get("combat_chance", 0.0)),
         }
         # Copy optional keys
-        for key in ("encounter_bias", "equipment_reward", "archetype_requirement", "set_flags"):
+        for key in ("encounter_bias", "equipment_reward", "archetype_requirement", "set_flags", "character_filters"):
             if key in option:
                 resolved_option[key] = option[key]
         options.append(resolved_option)

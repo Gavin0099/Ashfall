@@ -1,0 +1,28 @@
+{
+  "character_id": "caravan_guard_3",
+  "background_id": "caravan_guard",
+  "display_name": "Generated Caravan guard",
+  "description": "Mocked description for testing.",
+  "special": {
+    "strength": 12,
+    "perception": 7,
+    "endurance": 4,
+    "charisma": 2,
+    "intelligence": 3,
+    "agility": 5,
+    "luck": 7
+  },
+  "traits": [
+    "paranoid_reflex",
+    "lone_wolf"
+  ],
+  "perks": [],
+  "tags": [
+    "tag_caravan_guard"
+  ],
+  "starting_resource_bias": {
+    "food": 2,
+    "ammo": -2
+  },
+  "structural_weakness": "Mocked weakness."
+}

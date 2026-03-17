@@ -1,0 +1,23 @@
+{
+  "character_id": "vault_technician_10",
+  "background_id": "vault_technician",
+  "display_name": "Elara 402",
+  "description": "She knows the rhythm of the air filters better than the beat of her own heart. Stepped out because the 'perfect system' started to suffocate her mind.",
+  "special": {
+    "strength": 4,
+    "perception": 5,
+    "endurance": 4,
+    "charisma": 5,
+    "intelligence": 10,
+    "agility": 4,
+    "luck": 8
+  },
+  "traits": ["pack_rat", "small_frame"],
+  "perks": [],
+  "tags": ["electronic_repair", "hacking", "tag_vault_technician"],
+  "starting_resource_bias": {
+    "scrap": 15,
+    "ammo": -10
+  },
+  "structural_weakness": "Environmentally sensitive; takes extra radiation damage when outside for extended periods."
+}

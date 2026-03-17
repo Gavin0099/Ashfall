@@ -1,0 +1,35 @@
+[
+  {
+    "background_id": "vault_technician",
+    "display_name": "避難所技師",
+    "description": "在地下避難所維護設備十年，對輻射的理論認知遠超實戰經驗。",
+    "special_preset": {
+      "strength": 4, "perception": 6, "endurance": 5,
+      "charisma": 4, "intelligence": 8, "agility": 5, "luck": 3
+    },
+    "granted_tags": ["vault_origin", "tech_trained", "radiation_theory"],
+    "starting_resource_bias": { "food": 0, "scrap": 2, "medkits": 1 }
+  },
+  {
+    "background_id": "raider_defector",
+    "display_name": "叛離劫匪",
+    "description": "曾是劫匪頭目的手下，因目睹屠村而出走。槍法精準，但在正常聚落裡永遠是外人。",
+    "special_preset": {
+      "strength": 6, "perception": 7, "endurance": 6,
+      "charisma": 2, "intelligence": 4, "agility": 7, "luck": 3
+    },
+    "granted_tags": ["raider_origin", "combat_trained", "social_outcast"],
+    "starting_resource_bias": { "ammo": 3, "food": -1, "medkits": 0 }
+  },
+  {
+    "background_id": "wasteland_medic",
+    "display_name": "荒野醫療兵",
+    "description": "在流動醫療隊工作，見過各種死法。救人本能讓他在高壓下仍保持判斷力，但物資永遠不夠用。",
+    "special_preset": {
+      "strength": 3, "perception": 6, "endurance": 5,
+      "charisma": 6, "intelligence": 7, "agility": 4, "luck": 4
+    },
+    "granted_tags": ["medic_trained", "triage_instinct", "resource_aware"],
+    "starting_resource_bias": { "medkits": 3, "food": 1, "ammo": -2 }
+  }
+]

@@ -22,7 +22,7 @@ from scripts.run_playability_check import (
 from src.difficulty import build_starting_player, get_difficulty_profile
 from src.event_engine import pick_event_id, resolve_event_choice, get_available_options
 from src.run_engine import RunEngine, build_map
-from src.state_models import PlayerState
+from src.state_models import PlayerState, CharacterProfile
 from src.meta_progression import MetaProfile, RewardCalculator, UPGRADE_METADATA, get_upgrade_cost, ARCHETYPE_UNLOCK_METADATA
 from src.help_system import get_help_text, list_topics
 
@@ -76,10 +76,23 @@ def format_status_bar(player: PlayerState) -> str:
     food_c = C_GREEN if player.food > 2 else C_YELLOW
     rad_c = C_RED if player.radiation > 0 else C_CYAN
     
-    arch_info = ARCHETYPE_INFO.get(player.archetype, {"name": "生存者", "icon": "👤"})
+    name = "生存者"
+    icon = "👤"
+    if player.character:
+        name = player.character.display_name
+        # Simple icon mapping based on background
+        bg_icons = {"vault_technician": "🔧", "raider_defector": "💀", "wasteland_medic": "⚕️"}
+        icon = bg_icons.get(player.character.background_id, "👤")
+    elif player.archetype:
+        arch_info = ARCHETYPE_INFO.get(player.archetype, {"name": "生存者", "icon": "👤"})
+        name, icon = arch_info["name"], arch_info["icon"]
     
+    level_str = ""
+    if player.character:
+        level_str = f"｜{C_YELLOW}LV.{player.character.level}{C_END} {C_DIM}({player.character.xp}/{player.character.level*10}){C_END}"
+
     return (
-        f"{C_BOLD}{arch_info['icon']} {arch_info['name']}｜{C_END} "
+        f"{C_BOLD}{icon} {name}{level_str}｜{C_END} "
         f"{hp_c}{SYM_HP} {player.hp}{C_END}  "
         f"{food_c}{SYM_FOOD} {player.food}{C_END}  "
         f"{C_YELLOW}{SYM_AMMO} {player.ammo}{C_END}  "
@@ -87,6 +100,33 @@ def format_status_bar(player: PlayerState) -> str:
         f"{C_CYAN}{SYM_SCRAP} {player.scrap}{C_END}  "
         f"{rad_c}{SYM_RAD} {player.radiation}{C_END}"
     )
+
+def format_special(player: PlayerState) -> str:
+    if not player.character: return "無"
+    s = player.character.special
+    return f"{C_RED}S{s['strength']}{C_END} {C_GREEN}P{s['perception']}{C_END} {C_YELLOW}E{s['endurance']}{C_END} {C_MAGENTA}C{s['charisma']}{C_END} {C_CYAN}I{s['intelligence']}{C_END} {C_BLUE}A{s['agility']}{C_END} {C_WHITE}L{s['luck']}{C_END}"
+
+def handle_level_up(player: PlayerState):
+    from src.progression import load_perk_catalog, get_eligible_perks, apply_perk
+    
+    catalog = load_perk_catalog()
+    eligible = get_eligible_perks(player, catalog)
+    
+    print(f"\n{BG_YELLOW}{C_BLACK} 🌟 等級提升！ 🌟 {C_END}")
+    print(f"{C_BOLD}你已達到等級 {player.character.level}。{C_END}")
+    
+    if not eligible:
+        print(f"{C_DIM}目前沒有可解鎖的 Perk。{C_END}")
+        input(f"\n{C_DIM}按 Enter 繼續...{C_END}")
+        return
+
+    perk_options = [f"{p['name']} - {p['description']}" for p in eligible]
+    choice = prompt_index("請選擇一個新 Perk：", perk_options)
+    selected = eligible[choice]
+    
+    apply_perk(player, selected["id"], catalog)
+    print(f"\n{C_GREEN}✅ 已獲得 Perk：{C_BOLD}{selected['name']}{C_END}")
+    input(f"\n{C_DIM}按 Enter 繼續...{C_END}")
 
 OUTPUT_DIR = ROOT / "output" / "cli"
 NODE_LABELS = {
@@ -256,6 +296,52 @@ def show_attribute_upgrades(meta_profile: MetaProfile, meta_path: Path):
         else: print(f"\n{C_RED}❌ 強化失敗：廢料不足或已達等級上限。{C_END}")
         input(f"\n{C_DIM}按 Enter 繼續...{C_END}")
 
+def show_character_creation() -> tuple[CharacterProfile, dict]:
+    bg_path = ROOT / "data" / "backgrounds.json"
+    tr_path = ROOT / "data" / "traits.json"
+    
+    backgrounds = json.loads(bg_path.read_text(encoding="utf-8"))
+    traits = json.loads(tr_path.read_text(encoding="utf-8"))
+    
+    clear_screen()
+    draw_header("👤 角色創建：選擇出身背景")
+    bg_opts = [f"{bg['display_name']} - {bg['description']}" for bg in backgrounds]
+    bg_idx = prompt_index("請選擇你的出身：", bg_opts)
+    selected_bg = backgrounds[bg_idx]
+    
+    clear_screen()
+    draw_header(f"👤 角色創建：選擇特質 (最多 2 個)")
+    print(f"當前背景：{C_BOLD}{selected_bg['display_name']}{C_END}\n")
+    
+    selected_traits = []
+    while len(selected_traits) < 2:
+        tr_opts = [f"{tr['display_name']} - {tr['description']}" for tr in traits if tr['trait_id'] not in [t['trait_id'] for t in selected_traits]]
+        tr_opts.append(f"{C_GREEN}[完成選擇]{C_END}" if selected_traits else "不選擇特質並開始計畫")
+        
+        t_idx = prompt_index(f"選擇特質 ({len(selected_traits)}/2)：", tr_opts)
+        if t_idx == len(tr_opts) - 1:
+            break
+        
+        # Mapping back to the original traits list
+        available_traits = [tr for tr in traits if tr['trait_id'] not in [t['trait_id'] for t in selected_traits]]
+        selected_traits.append(available_traits[t_idx])
+        print(f"已加入特質：{C_CYAN}{selected_traits[-1]['display_name']}{C_END}")
+
+    # Build Tags
+    final_tags = list(selected_bg["granted_tags"])
+    for tr in selected_traits:
+        final_tags.extend(tr.get("granted_tags", []))
+    
+    profile = CharacterProfile(
+        background_id=selected_bg["background_id"],
+        display_name=selected_bg["display_name"],
+        special=selected_bg["special_preset"],
+        traits=[tr["trait_id"] for tr in selected_traits],
+        tags=final_tags
+    )
+    
+    return profile, selected_bg.get("starting_resource_bias", {})
+
 def show_archetype_unlock_menu(meta_profile: MetaProfile, meta_path: Path):
     while True:
         clear_screen()
@@ -296,13 +382,9 @@ def main() -> int:
         elif mc == 2: show_help_menu()
 
     clear_screen()
-    draw_header("背景與職業選擇")
-    available_archs = meta_profile.unlocked_archetypes
-    arch_options = [f"{ARCHETYPE_INFO[a]['icon']} {ARCHETYPE_INFO[a]['name']} - {ARCHETYPE_INFO[a]['desc']}" for a in available_archs]
-    arch_idx = prompt_index("請選擇你的背景職業：", arch_options)
-    selected_archetype = available_archs[arch_idx]
+    character, res_bias = show_character_creation()
 
-    player = build_starting_player(name=difficulty, archetype=selected_archetype, meta_profile=meta_profile)
+    player = build_starting_player(name=difficulty, character=character, meta_profile=meta_profile, resource_bias=res_bias)
     engine = RunEngine(map_state=map_state, seed=seed, event_catalog=events, enemy_catalog=enemies, difficulty=difficulty)
     run = engine.create_run(player, seed=seed)
     print(f"\n{C_DIM}種子：{seed} | 難度：{get_difficulty_profile(difficulty).name}{C_END}\n{C_YELLOW}目標：活到終點山脊。{C_END}\n")
@@ -413,6 +495,9 @@ def main() -> int:
             run.flags.update(outcome["set_flags"])
             print(f"{C_CYAN}✨ 任務進度已更新！{C_END}")
         
+        if outcome.get("leveled_up"):
+            handle_level_up(run.player)
+
         decision_log.append({"step": len(decision_log)+1, "node": node.id, "event_id": event_id, "option_index": opt_idx, "pre_choice_state": pre_state, "player_after": run.player.to_dict()})
         if node.is_final and not run.ended: run.end(victory=True, reason="reached_final_node")
 

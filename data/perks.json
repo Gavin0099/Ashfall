@@ -1,0 +1,62 @@
+[
+  {
+    "id": "toughness",
+    "name": "堅韌 (Toughness)",
+    "description": "+2 最大生命值。",
+    "requirements": {
+      "special": { "endurance": { "min": 6 } },
+      "level": 2
+    },
+    "effects": {
+      "max_hp_bonus": 2
+    }
+  },
+  {
+    "id": "medic_pro",
+    "name": "專業醫療 (Medic)",
+    "description": "使用醫療包回復量 +1。",
+    "requirements": {
+      "special": { "intelligence": { "min": 6 } },
+      "level": 2
+    },
+    "effects": {
+      "medkit_bonus": 1
+    }
+  },
+  {
+    "id": "strong_back",
+    "name": "壯碩體格 (Strong Back)",
+    "description": "事件獲得物資時額外獲得 1 廢料。",
+    "requirements": {
+      "special": { "strength": { "min": 6 } },
+      "level": 2
+    },
+    "effects": {
+      "scrap_bonus": 1
+    }
+  },
+  {
+    "id": "fortune_finder",
+    "name": "尋寶者 (Fortune Finder)",
+    "description": "探索時有更高機率發現額外彈藥。",
+    "requirements": {
+      "special": { "luck": { "min": 6 } },
+      "level": 3
+    },
+    "effects": {
+      "ammo_bonus": 1
+    }
+  },
+  {
+    "id": "sniper",
+    "name": "狙擊手 (Sniper)",
+    "description": "戰鬥命中率增加且更精確。",
+    "requirements": {
+      "special": { "perception": { "min": 7 }, "agility": { "min": 6 } },
+      "level": 4
+    },
+    "effects": {
+      "combat_precision": 1
+    }
+  }
+]

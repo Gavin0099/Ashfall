@@ -1,0 +1,28 @@
+{
+  "character_id": "wasteland_medic_2",
+  "background_id": "wasteland_medic",
+  "display_name": "Generated Wasteland medic",
+  "description": "Mocked description for testing.",
+  "special": {
+    "strength": 8,
+    "perception": 3,
+    "endurance": 6,
+    "charisma": 4,
+    "intelligence": 4,
+    "agility": 5,
+    "luck": 10
+  },
+  "traits": [
+    "scavenger_sense",
+    "radiation_adapted"
+  ],
+  "perks": [],
+  "tags": [
+    "tag_wasteland_medic"
+  ],
+  "starting_resource_bias": {
+    "food": 2,
+    "ammo": -2
+  },
+  "structural_weakness": "Mocked weakness."
+}

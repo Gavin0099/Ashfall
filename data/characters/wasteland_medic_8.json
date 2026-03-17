@@ -1,0 +1,23 @@
+{
+  "character_id": "wasteland_medic_8",
+  "background_id": "wasteland_medic",
+  "display_name": "Dr. Aris",
+  "description": "Carrying a stained leather bag full of scavenged surgical tools. Aris believes that even in the gray dust, life deserves a chance to restart.",
+  "special": {
+    "strength": 3,
+    "perception": 7,
+    "endurance": 4,
+    "charisma": 6,
+    "intelligence": 9,
+    "agility": 6,
+    "luck": 5
+  },
+  "traits": ["small_frame", "scavenger_sense"],
+  "perks": [],
+  "tags": ["field_medicine", "chemistry", "tag_wasteland_medic"],
+  "starting_resource_bias": {
+    "medkits": 5,
+    "scrap": -2
+  },
+  "structural_weakness": "Physically frail; takes double damage from heavy impact attacks."
+}

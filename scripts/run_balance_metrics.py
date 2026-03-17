@@ -27,7 +27,7 @@ SUMMARY_PATH = ROOT / "output" / "analytics" / "balance_summary.json"
 SEED_OFFSETS = (0, 100, 200, 300, 400, 500, 600, 700, 800, 900)
 
 
-ARCHETYPES = ["soldier", "medic", "scavenger", "pathfinder", None]
+ARCHETYPES = ["vault_technician", "raider_defector", "wasteland_medic", None]
 
 def build_balance_plans() -> list[RoutePlan]:
     plans: list[RoutePlan] = []
@@ -180,8 +180,12 @@ def summarize_archetypes(results: list[dict]) -> dict:
     summary: dict[str, dict] = {}
     grouped: dict[str, list[dict]] = defaultdict(list)
     for result in results:
-        # Use analytics player_final to get the archetype used in sim
-        arch = result["analytics"]["player_final"].get("archetype") or "none"
+        # v1.0 Use character background_id if available
+        char = result["analytics"]["player_final"].get("character")
+        if char:
+            arch = char.get("background_id", "none")
+        else:
+            arch = result["analytics"]["player_final"].get("archetype") or "none"
         grouped[arch].append(result)
 
     for arch, arch_results in grouped.items():

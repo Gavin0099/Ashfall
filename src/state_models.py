@@ -34,6 +34,45 @@ class EquipmentState:
             affixes=data.get("affixes", {}),
         )
 
+@dataclass
+class CharacterProfile:
+    background_id: str
+    display_name: str
+    special: Dict[str, int] = field(default_factory=lambda: {
+        "strength": 5, "perception": 5, "endurance": 5,
+        "charisma": 5, "intelligence": 5, "agility": 5, "luck": 5
+    })
+    traits: List[str] = field(default_factory=list)
+    perks: List[str] = field(default_factory=list)
+    tags: List[str] = field(default_factory=list)
+    level: int = 1
+    xp: int = 0
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "background_id": self.background_id,
+            "display_name": self.display_name,
+            "special": self.special,
+            "traits": self.traits,
+            "perks": self.perks,
+            "tags": self.tags,
+            "level": self.level,
+            "xp": self.xp
+        }
+
+    @staticmethod
+    def from_dict(data: Dict[str, Any]) -> CharacterProfile:
+        if not data: return None
+        return CharacterProfile(
+            background_id=data["background_id"],
+            display_name=data.get("display_name", data["background_id"]),
+            special=data.get("special", {}),
+            traits=data.get("traits", []),
+            perks=data.get("perks", []),
+            tags=data.get("tags", []),
+            level=data.get("level", 1),
+            xp=data.get("xp", 0)
+        )
 
 @dataclass
 class PlayerState:
@@ -44,6 +83,7 @@ class PlayerState:
     scrap: int = 0
     radiation: int = 0
     archetype: Optional[str] = None
+    character: Optional[CharacterProfile] = None
     weapon_slot: Optional[EquipmentState] = None
     armor_slot: Optional[EquipmentState] = None
     tool_slot: Optional[EquipmentState] = None
@@ -60,6 +100,7 @@ class PlayerState:
             "scrap": self.scrap,
             "radiation": self.radiation,
             "archetype": self.archetype,
+            "character": self.character.to_dict() if self.character else None,
             "weapon_slot": self.weapon_slot.to_dict() if self.weapon_slot else None,
             "armor_slot": self.armor_slot.to_dict() if self.armor_slot else None,
             "tool_slot": self.tool_slot.to_dict() if self.tool_slot else None,
@@ -70,6 +111,7 @@ class PlayerState:
         w_data = data.get("weapon_slot")
         a_data = data.get("armor_slot")
         t_data = data.get("tool_slot")
+        c_data = data.get("character")
         return PlayerState(
             hp=data["hp"],
             food=data["food"],
@@ -78,6 +120,7 @@ class PlayerState:
             scrap=data.get("scrap", 0),
             radiation=data.get("radiation", 0),
             archetype=data.get("archetype") or data.get("background"),
+            character=CharacterProfile.from_dict(c_data) if isinstance(c_data, dict) else None,
             weapon_slot=EquipmentState.from_dict(w_data) if isinstance(w_data, dict) else None,
             armor_slot=EquipmentState.from_dict(a_data) if isinstance(a_data, dict) else None,
             tool_slot=EquipmentState.from_dict(t_data) if isinstance(t_data, dict) else None,
@@ -217,6 +260,9 @@ def apply_effects(player: PlayerState, effects: Dict[str, int]) -> None:
             player.scrap += delta
         elif key == "radiation":
             player.radiation += delta
+        elif key == "xp":
+            if player.character:
+                player.character.xp += delta
         else:
             raise ValueError(f"Unsupported effect key: {key}")
 

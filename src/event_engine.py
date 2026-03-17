@@ -4,6 +4,7 @@ import random
 from typing import Any, Dict
 
 from .state_models import NodeState, PlayerState, apply_effects, equip_item
+from .progression import gain_xp
 
 
 def pick_event_id(node: NodeState, rng: random.Random, run_flags: Dict[str, Any] | None = None, event_catalog: Dict[str, Dict[str, Any]] | None = None) -> str:
@@ -39,6 +40,26 @@ def get_available_options(player: PlayerState, event_payload: Dict[str, Any]) ->
     for opt in options:
         req = opt.get("archetype_requirement")
         is_met = (req is None or player.archetype == req)
+
+        # v1.0 Character Filters
+        filters = opt.get("character_filters")
+        if filters:
+            # Tag check
+            req_tags = filters.get("require_any_tag", [])
+            if req_tags:
+                player_tags = set(player.character.tags) if player.character else set()
+                if not any(t in player_tags for t in req_tags):
+                    is_met = False
+            
+            # SPECIAL check
+            req_special = filters.get("require_special", {})
+            if req_special and player.character:
+                for attr, limits in req_special.items():
+                    val = player.character.special.get(attr, 5)
+                    if "min" in limits and val < limits["min"]:
+                        is_met = False
+                    if "max" in limits and val > limits["max"]:
+                        is_met = False
         
         # Pick display text
         display_text = opt.get("text", "")
@@ -73,6 +94,24 @@ def resolve_event_choice(
     req = option.get("archetype_requirement")
     if req and player.archetype != req:
         raise ValueError(f"Archetype {player.archetype} does not meet requirement {req}")
+
+    # v1.0 Character Filters
+    filters = option.get("character_filters")
+    if filters:
+        # Tag check
+        req_tags = filters.get("require_any_tag", [])
+        if req_tags:
+            player_tags = set(player.character.tags) if player.character else set()
+            if not any(t in player_tags for t in req_tags):
+                raise ValueError(f"Player tags do not meet any of: {req_tags}")
+        
+        # SPECIAL check
+        req_special = filters.get("require_special", {})
+        if req_special and player.character:
+            for attr, limits in req_special.items():
+                val = player.character.special.get(attr, 5)
+                if ("min" in limits and val < limits["min"]) or ("max" in limits and val > limits["max"]):
+                    raise ValueError(f"SPECIAL property {attr} value {val} outside required range {limits}")
 
     effects = option.get("effects", {})
     if not isinstance(effects, dict):
@@ -123,6 +162,12 @@ def resolve_event_choice(
         equipment = EquipmentState(id=item_id, slot=slot, affixes=affixes)
         equipment_change = equip_item(player, slot=slot, equipment=equipment)
 
+    # v1.1 Progression: Check for level up if XP was added
+    leveled_up = False
+    if player.character:
+        # Pass 0 to just trigger the rollover logic if apply_effects already added XP
+        leveled_up = gain_xp(player, 0)
+
     return {
         "event_id": event_payload.get("id"),
         "option_index": option_index,
@@ -131,5 +176,6 @@ def resolve_event_choice(
         "equipment_reward": equipment_reward,
         "equipment_change": equipment_change,
         "scavenger_bonus": scavenger_bonus,
+        "leveled_up": leveled_up,
         "set_flags": option.get("set_flags", {}),
     }

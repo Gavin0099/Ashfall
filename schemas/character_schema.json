@@ -1,0 +1,47 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "CharacterProfile",
+  "type": "object",
+  "required": ["character_id", "background_id", "special", "traits", "perks"],
+  "properties": {
+    "character_id": { "type": "string" },
+    "background_id": { "type": "string" },
+    "display_name": { "type": "string" },
+    "description": { "type": "string" },
+    "special": {
+      "type": "object",
+      "properties": {
+        "strength":     { "type": "integer", "minimum": 1, "maximum": 10 },
+        "perception":   { "type": "integer", "minimum": 1, "maximum": 10 },
+        "endurance":    { "type": "integer", "minimum": 1, "maximum": 10 },
+        "charisma":     { "type": "integer", "minimum": 1, "maximum": 10 },
+        "intelligence": { "type": "integer", "minimum": 1, "maximum": 10 },
+        "agility":      { "type": "integer", "minimum": 1, "maximum": 10 },
+        "luck":         { "type": "integer", "minimum": 1, "maximum": 10 }
+      },
+      "required": ["strength","perception","endurance","charisma","intelligence","agility","luck"]
+    },
+    "traits": {
+      "type": "array",
+      "maxItems": 2,
+      "items": { "type": "string" }
+    },
+    "perks": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "tags": {
+      "type": "array",
+      "description": "扁平化 tag 集合，供 event filter 使用",
+      "items": { "type": "string" }
+    },
+    "starting_resource_bias": {
+      "type": "object",
+      "additionalProperties": { "type": "integer" }
+    },
+    "structural_weakness": {
+      "type": "string",
+      "description": "具體的遊戲機制弱點描述"
+    }
+  }
+}

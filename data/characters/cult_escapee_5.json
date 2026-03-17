@@ -1,0 +1,28 @@
+{
+  "character_id": "cult_escapee_5",
+  "background_id": "cult_escapee",
+  "display_name": "Generated Cult escapee",
+  "description": "Mocked description for testing.",
+  "special": {
+    "strength": 5,
+    "perception": 9,
+    "endurance": 5,
+    "charisma": 5,
+    "intelligence": 5,
+    "agility": 7,
+    "luck": 4
+  },
+  "traits": [
+    "lone_wolf",
+    "heavy_handed"
+  ],
+  "perks": [],
+  "tags": [
+    "tag_cult_escapee"
+  ],
+  "starting_resource_bias": {
+    "food": 2,
+    "ammo": -2
+  },
+  "structural_weakness": "Mocked weakness."
+}

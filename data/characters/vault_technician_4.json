@@ -1,0 +1,28 @@
+{
+  "character_id": "vault_technician_4",
+  "background_id": "vault_technician",
+  "display_name": "Generated Vault technician",
+  "description": "Mocked description for testing.",
+  "special": {
+    "strength": 7,
+    "perception": 7,
+    "endurance": 6,
+    "charisma": 4,
+    "intelligence": 4,
+    "agility": 4,
+    "luck": 8
+  },
+  "traits": [
+    "small_frame",
+    "lone_wolf"
+  ],
+  "perks": [],
+  "tags": [
+    "tag_vault_technician"
+  ],
+  "starting_resource_bias": {
+    "food": 2,
+    "ammo": -2
+  },
+  "structural_weakness": "Mocked weakness."
+}

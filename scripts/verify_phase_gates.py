@@ -18,6 +18,7 @@ GAMEPLAY_COMMANDS = [
     [sys.executable, "scripts/validate_run_analytics.py"],
     [sys.executable, "scripts/validate_event_templates.py"],
     [sys.executable, "scripts/verify_deterministic_run.py"],
+    [sys.executable, "src/character_factory/validator.py"],
 ]
 
 TOOLS = [

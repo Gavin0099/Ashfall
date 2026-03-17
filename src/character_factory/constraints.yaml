@@ -1,0 +1,37 @@
+generation:
+  count: 5
+  seed: 42
+
+diversity_rules:
+  max_per_background: 2
+  special_total: 40
+  min_distinct_dominant_stats: 3
+  forbidden_trait_combos:
+    - ["radiation_adapted", "vault_origin"]
+  max_per_trait: 2
+
+content_constraints:
+  require_structural_weakness: true
+  forbidden_words:
+    - "survivor"
+    - "wasteland"
+    - "trained"
+    - "former"
+    - "skilled"
+  require_resource_tradeoff: true
+  background_pool:
+    - "vault_technician"
+    - "raider_defector"
+    - "wasteland_medic"
+    - "caravan_guard"
+    - "cult_escapee"
+    - "military_deserter"
+  trait_pool:
+    - "radiation_adapted"
+    - "trigger_discipline"
+    - "lone_wolf"
+    - "scavenger_sense"
+    - "paranoid_reflex"
+    - "pack_rat"
+    - "small_frame"
+    - "heavy_handed"
