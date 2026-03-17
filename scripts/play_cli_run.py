@@ -4,6 +4,7 @@ from __future__ import annotations
 import json
 import re
 import sys
+import time
 from collections import Counter
 from pathlib import Path
 from typing import Any
@@ -412,9 +413,43 @@ def show_repair_menu(player: PlayerState):
         input(f"\n{C_DIM}按 Enter 繼續...{C_END}")
 
 def main() -> int:
+    import argparse
+    parser = argparse.ArgumentParser()
+    parser.add_argument("seed", type=int, nargs="?", default=101)
+    parser.add_argument("--difficulty", type=str, default="normal")
+    parser.add_argument("--playtest", action="store_true")
+    args = parser.parse_args()
+
+    seed = args.seed
+    difficulty = args.difficulty
+    is_playtest = args.playtest
+
     OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
-    seed = int(sys.argv[1]) if len(sys.argv) > 1 else 101
-    difficulty = sys.argv[2] if len(sys.argv) > 2 else "normal"
+    
+    playtest_session = None
+    if is_playtest:
+        player_id = input("請輸入測試者 ID (Player ID): ").strip() or "anonymous"
+        session_id = f"session_{int(time.time())}"
+        playtest_session = {
+            "player_id": player_id,
+            "session_id": session_id,
+            "roguelite_experience": False, # TBD by observer
+            "game_dev_background": False,  # TBD by observer
+            "run_id": session_id,
+            "seed": seed,
+            "difficulty": difficulty,
+            "events": [],
+            "post_run": {
+                "hardest_choice": "TBD",
+                "perceived_death_cause": "TBD",
+                "regret_choice": "TBD",
+                "replay_intent": False,
+                "judgment_regret_note": "TBD",
+                "frustration_regret_note": "TBD",
+                "immediate_replay_reason": "TBD"
+            }
+        }
+
     nodes, enemies = build_node_payloads(), build_enemy_catalog()
     events = build_event_catalog(seed)
     map_state = build_map(nodes, start_node_id="node_start", final_node_id="node_final")
@@ -472,7 +507,10 @@ def main() -> int:
             route_opts.append(f"{C_BLUE}[修改旅行模式]{C_END}")
             
             while True:
+                start_time = time.time()
                 idx = prompt_index(f"{status_header}\n請選擇行動：", route_opts)
+                decision_time_ms = int((time.time() - start_time) * 1000)
+
                 if idx == len(current.connections):
                     # Change mode
                     new_mode_idx = prompt_index("請選擇新的旅行模式：", list(TRAVEL_MODE_LABELS.values()))
@@ -523,7 +561,10 @@ def main() -> int:
             option_lines.append(f"{prefix}{info['text']}{warn_str}")
 
         while True:
+            start_time = time.time()
             opt_idx = prompt_index("請選擇行動：", option_lines)
+            decision_time_ms = int((time.time() - start_time) * 1000)
+            
             if avail_opts[opt_idx]["is_met"]:
                 break
             else:
@@ -558,6 +599,20 @@ def main() -> int:
             handle_level_up(run.player)
 
         decision_log.append({"step": len(decision_log)+1, "node": node.id, "event_id": event_id, "option_index": opt_idx, "pre_choice_state": pre_state, "player_after": run.player.to_dict()})
+        
+        if is_playtest and playtest_session is not None:
+            playtest_session["events"].append({
+                "timestamp": time.strftime("%Y-%m-%dT%H:%M:%S"),
+                "node_id": node.id,
+                "event_id": event_id,
+                "decision_time_ms": decision_time_ms,
+                "selected_option": opt_idx,
+                "hesitation_flag": False,  # TBD by observer
+                "confusion_flag": False,    # TBD by observer
+                "what_i_thought_happened": "TBD",
+                "why_im_salty": "TBD"
+            })
+
         if node.is_final and not run.ended: run.end(victory=True, reason="reached_final_node")
 
     earned_scrap = RewardCalculator.calculate_scrap_reward(len(run.visited_nodes), run.victory, combat_count, run.player.hp)
@@ -565,6 +620,16 @@ def main() -> int:
     meta_profile.lifetime_scrap_earned += earned_scrap
     meta_profile.save(meta_path)
     print(f"\n本局結束\n{json.dumps({'勝利': run.victory, '原因': END_REASON_LABELS.get(run.end_reason or '', run.end_reason), '獲得廢料': earned_scrap, '累積廢料': meta_profile.total_scrap}, indent=2, ensure_ascii=False)}")
+    
+    if is_playtest and playtest_session is not None:
+        playtest_session["victory"] = run.victory
+        playtest_session["end_reason"] = run.end_reason
+        log_path = ROOT / "output" / "playtests" / f"playtest_{playtest_session['player_id']}_{playtest_session['session_id']}.json"
+        log_path.parent.mkdir(parents=True, exist_ok=True)
+        with open(log_path, "w", encoding="utf-8") as f:
+            json.dump(playtest_session, f, indent=2, ensure_ascii=False)
+        print(f"\n{C_GREEN}測試數據已儲存至：{log_path}{C_END}")
+
     return 0
 
 if __name__ == "__main__": raise SystemExit(main())
