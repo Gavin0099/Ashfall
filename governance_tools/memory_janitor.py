@@ -344,6 +344,7 @@ def main():
     parser.add_argument('--check', action='store_true', help='僅檢查狀態')
     parser.add_argument('--plan', action='store_true', help='產出掃除計畫')
     parser.add_argument('--execute', action='store_true', help='執行實際掃除（copy+pointer+manifest）')
+    parser.add_argument('--clean-generated', action='store_true', help='清理生成產物 (__pycache__ 等)')
     parser.add_argument('--dry-run', action='store_true', help='模擬執行 (不實際修改檔案)')
     parser.add_argument('--manifest', action='store_true', help='顯示 archive/manifest.json 內容')
     parser.add_argument('--format', choices=['human', 'json'], default='human', help='輸出格式 (預設: human)')
@@ -398,6 +399,22 @@ def main():
     elif args.execute:
         result = janitor.execute_cleanup(dry_run=args.dry_run)
         print(result)
+
+    elif args.clean_generated:
+        result = janitor.cleanup_generated_artifacts(dry_run=args.dry_run)
+        if args.format == 'json':
+            print(json.dumps({
+                "removed_paths": result.removed_paths,
+                "errors": result.errors
+            }, ensure_ascii=False))
+        else:
+            print(f"🧹 清理生成產物 (清理模式: {'模擬' if args.dry_run else '正式'})")
+            for p in result.removed_paths:
+                print(f"  [-] {p}")
+            if result.errors:
+                print("\n❌ 錯誤:")
+                for e in result.errors:
+                    print(f"  [!] {e}")
 
     elif args.manifest:
         manifest = janitor._load_manifest()
