@@ -1231,6 +1231,14 @@
             "item": "hardened_blade"
           },
           "combat_chance": 0.0
+        },
+        {
+          "text_variants": [
+            "現在還不是時候，稍後再來",
+            "這把鑰匙可能還有其他用處"
+          ],
+          "effects": {},
+          "combat_chance": 0.0
         }
       ]
     }

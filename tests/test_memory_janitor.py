@@ -1,4 +1,4 @@
-﻿import json
+import json
 import shutil
 import sys
 import uuid
@@ -73,9 +73,9 @@ def test_find_and_cleanup_generated_artifacts() -> None:
         (render_cache / "tile.cache").write_text("cache", encoding="utf-8")
 
         janitor = MemoryJanitor(memory_root)
-        found = [str(path) for path in janitor.find_generated_artifacts()]
-        assert any("__pycache__" in path for path in found)
-        assert any("render_cache" in path for path in found)
+        found_paths = list(janitor.find_generated_artifacts())
+        assert any("__pycache__" in str(p) for p in found_paths)
+        assert any("render_cache" in str(p) for p in found_paths)
 
         result = janitor.cleanup_generated_artifacts(dry_run=False)
         assert len(result.removed_paths) == 2

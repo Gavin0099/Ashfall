@@ -14,12 +14,16 @@
   "player_final": {
     "hp": 1,
     "food": 7,
-    "ammo": 8,
-    "medkits": 2,
-    "scrap": 0,
+    "ammo": 5,
+    "medkits": 3,
+    "scrap": 2,
     "radiation": 3,
     "archetype": "soldier",
-    "weapon_slot": "rust_rifle",
+    "weapon_slot": {
+      "id": "rust_rifle",
+      "slot": "weapon",
+      "affixes": {}
+    },
     "armor_slot": null,
     "tool_slot": null
   },
@@ -156,8 +160,12 @@
       "combat_triggered": true,
       "combat_loot": [
         {
-          "resource": "ammo",
-          "amount": 3
+          "resource": "scrap",
+          "amount": 2
+        },
+        {
+          "resource": "medkits",
+          "amount": 1
         }
       ],
       "effects": {
@@ -173,12 +181,16 @@
       "player_after": {
         "hp": 4,
         "food": 10,
-        "ammo": 7,
-        "medkits": 2,
-        "scrap": 0,
+        "ammo": 4,
+        "medkits": 3,
+        "scrap": 2,
         "radiation": 2,
         "archetype": "soldier",
-        "weapon_slot": "rust_rifle",
+        "weapon_slot": {
+          "id": "rust_rifle",
+          "slot": "weapon",
+          "affixes": {}
+        },
         "armor_slot": null,
         "tool_slot": null
       }
@@ -196,12 +208,16 @@
       "pre_choice_state": {
         "hp": 3,
         "food": 9,
-        "ammo": 7,
-        "medkits": 2,
-        "scrap": 0,
+        "ammo": 4,
+        "medkits": 3,
+        "scrap": 2,
         "radiation": 2,
         "archetype": "soldier",
-        "weapon_slot": "rust_rifle",
+        "weapon_slot": {
+          "id": "rust_rifle",
+          "slot": "weapon",
+          "affixes": {}
+        },
         "armor_slot": null,
         "tool_slot": null
       },
@@ -217,12 +233,16 @@
       "player_after": {
         "hp": 2,
         "food": 9,
-        "ammo": 8,
-        "medkits": 2,
-        "scrap": 0,
+        "ammo": 5,
+        "medkits": 3,
+        "scrap": 2,
         "radiation": 2,
         "archetype": "soldier",
-        "weapon_slot": "rust_rifle",
+        "weapon_slot": {
+          "id": "rust_rifle",
+          "slot": "weapon",
+          "affixes": {}
+        },
         "armor_slot": null,
         "tool_slot": null
       }
@@ -240,12 +260,16 @@
       "pre_choice_state": {
         "hp": 1,
         "food": 7,
-        "ammo": 8,
-        "medkits": 2,
-        "scrap": 0,
+        "ammo": 5,
+        "medkits": 3,
+        "scrap": 2,
         "radiation": 2,
         "archetype": "soldier",
-        "weapon_slot": "rust_rifle",
+        "weapon_slot": {
+          "id": "rust_rifle",
+          "slot": "weapon",
+          "affixes": {}
+        },
         "armor_slot": null,
         "tool_slot": null
       },
@@ -260,12 +284,16 @@
       "player_after": {
         "hp": 1,
         "food": 7,
-        "ammo": 8,
-        "medkits": 2,
-        "scrap": 0,
+        "ammo": 5,
+        "medkits": 3,
+        "scrap": 2,
         "radiation": 3,
         "archetype": "soldier",
-        "weapon_slot": "rust_rifle",
+        "weapon_slot": {
+          "id": "rust_rifle",
+          "slot": "weapon",
+          "affixes": {}
+        },
         "armor_slot": null,
         "tool_slot": null
       }
@@ -274,7 +302,7 @@
   "summary": {
     "pressure_count": 5,
     "death_cause_attribution": true,
-    "resource_signature": "hp:1|food:7|ammo:8|medkits:2|scrap:0|radiation:3|weapon:rust_rifle|armor:None|tool:None"
+    "resource_signature": "hp:1|food:7|ammo:5|medkits:3|scrap:2|radiation:3|weapon:EquipmentState(id='rust_rifle', slot='weapon', affixes={})|armor:None|tool:None"
   },
   "failure_analysis": {
     "death_chain_length": 0,
@@ -295,15 +323,17 @@
       "total_steps": 5,
       "pressure_count": 5,
       "combat_count": 3,
-      "loot_drop_count": 5,
+      "loot_drop_count": 6,
       "loot_total_amount": 11,
       "equipment_change_count": 1,
       "equipment_ids": [
         "rust_rifle"
       ],
       "loot_resources": {
-        "ammo": 9,
-        "food": 2
+        "ammo": 6,
+        "food": 2,
+        "scrap": 2,
+        "medkits": 1
       },
       "max_radiation": 3,
       "min_food": 7,

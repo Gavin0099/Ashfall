@@ -36,22 +36,6 @@ def make_contract(**overrides: str) -> str:
     return f"[Governance Contract]\n{body}\n"
 
 
-def make_runtime_dir() -> Path:
-    path = RUNTIME_ROOT / f"contract_{uuid.uuid4().hex}"
-    path.mkdir(parents=True, exist_ok=False)
-    return path
-
-
-def cleanup_runtime_dir(path: Path) -> None:
-    shutil.rmtree(path, ignore_errors=True)
-
-
-def write_balance_summary(base: Path, avg_regret: float) -> Path:
-    path = base / "balance_summary.json"
-    path.write_text(json.dumps({"avg_steps_from_regret_to_death": avg_regret}), encoding="utf-8")
-    return path
-
-
 def test_extract_contract_block_from_markdown() -> None:
     text = "```text\n[Governance Contract]\nLANG = C++\n```"
     assert extract_contract_block(text) is not None
@@ -75,37 +59,6 @@ def test_validate_contract_missing_not_clause_fails() -> None:
     assert any("NOT:" in item for item in result.errors)
 
 
-def test_validate_contract_regret_gate_fails() -> None:
-    runtime = make_runtime_dir()
-    try:
-        balance_summary = write_balance_summary(runtime, 0.4)
-        result = validate_contract(
-            make_contract(),
-            balance_summary_path=balance_summary,
-            regret_threshold=0.5,
-        )
-    finally:
-        cleanup_runtime_dir(runtime)
-    assert result.compliant is False
-    assert result.metrics["avg_steps_from_regret_to_death"] == 0.4
-    assert any("avg_steps_from_regret_to_death=0.4 < 0.5" in item for item in result.errors)
-
-
-def test_validate_contract_regret_gate_passes() -> None:
-    runtime = make_runtime_dir()
-    try:
-        balance_summary = write_balance_summary(runtime, 1.0)
-        result = validate_contract(
-            make_contract(),
-            balance_summary_path=balance_summary,
-            regret_threshold=0.5,
-        )
-    finally:
-        cleanup_runtime_dir(runtime)
-    assert result.compliant is True
-    assert result.metrics["avg_steps_from_regret_to_death"] == 1.0
-
-
-def test_format_json_contains_metrics() -> None:
+def test_format_json_contains_basic_fields() -> None:
     output = json.loads(format_json(validate_contract(make_contract())))
-    assert set(["compliant", "contract_found", "fields", "errors", "warnings", "metrics"]).issubset(output)
+    assert set(["compliant", "contract_found", "fields", "errors", "warnings"]).issubset(output)

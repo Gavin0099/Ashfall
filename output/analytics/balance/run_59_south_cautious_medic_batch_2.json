@@ -15,7 +15,7 @@
     "hp": 0,
     "food": 2,
     "ammo": 0,
-    "medkits": 0,
+    "medkits": 2,
     "scrap": 0,
     "radiation": 0,
     "archetype": "medic",
@@ -174,7 +174,7 @@
         "hp": 0,
         "food": 2,
         "ammo": 0,
-        "medkits": 0,
+        "medkits": 2,
         "scrap": 0,
         "radiation": 0,
         "archetype": "medic",
@@ -187,7 +187,7 @@
   "summary": {
     "pressure_count": 4,
     "death_cause_attribution": true,
-    "resource_signature": "hp:0|food:2|ammo:0|medkits:0|scrap:0|radiation:0|weapon:None|armor:None|tool:None"
+    "resource_signature": "hp:0|food:2|ammo:0|medkits:2|scrap:0|radiation:0|weapon:None|armor:None|tool:None"
   },
   "failure_analysis": {
     "death_chain_length": 2,

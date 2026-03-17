@@ -12,9 +12,9 @@
   "victory": false,
   "end_reason": "radiation_death",
   "player_final": {
-    "hp": -1,
+    "hp": -2,
     "food": 2,
-    "ammo": 4,
+    "ammo": 1,
     "medkits": 1,
     "scrap": 10,
     "radiation": 2,
@@ -133,12 +133,7 @@
       },
       "pressure": true,
       "combat_triggered": true,
-      "combat_loot": [
-        {
-          "resource": "ammo",
-          "amount": 3
-        }
-      ],
+      "combat_loot": [],
       "effects": {
         "scrap": -1,
         "food": -1
@@ -146,54 +141,9 @@
       "equipment_change": null,
       "equipment_summary": null,
       "player_after": {
-        "hp": 3,
+        "hp": -2,
         "food": 2,
-        "ammo": 3,
-        "medkits": 1,
-        "scrap": 10,
-        "radiation": 2,
-        "archetype": "scavenger",
-        "weapon_slot": null,
-        "armor_slot": null,
-        "tool_slot": null
-      }
-    },
-    {
-      "step": 4,
-      "node": "node_approach",
-      "event_id": "evt_waystation",
-      "option_index": 1,
-      "warning_signals": [
-        "WARNING: radiation will continue to threaten future travel.",
-        "CRITICAL: another irradiated move may kill you.",
-        "WARNING: food is low and route slack is nearly gone.",
-        "DANGER: this choice carries a high combat risk."
-      ],
-      "pre_choice_state": {
-        "hp": 2,
-        "food": 2,
-        "ammo": 3,
-        "medkits": 1,
-        "scrap": 10,
-        "radiation": 2,
-        "archetype": "scavenger",
-        "weapon_slot": null,
-        "armor_slot": null,
-        "tool_slot": null
-      },
-      "pressure": true,
-      "combat_triggered": true,
-      "combat_loot": [],
-      "effects": {
-        "hp": -1,
-        "ammo": 1
-      },
-      "equipment_change": null,
-      "equipment_summary": null,
-      "player_after": {
-        "hp": -1,
-        "food": 2,
-        "ammo": 4,
+        "ammo": 1,
         "medkits": 1,
         "scrap": 10,
         "radiation": 2,
@@ -205,9 +155,9 @@
     }
   ],
   "summary": {
-    "pressure_count": 4,
+    "pressure_count": 3,
     "death_cause_attribution": true,
-    "resource_signature": "hp:-1|food:2|ammo:4|medkits:1|scrap:10|radiation:2|weapon:None|armor:None|tool:None"
+    "resource_signature": "hp:-2|food:2|ammo:1|medkits:1|scrap:10|radiation:2|weapon:None|armor:None|tool:None"
   },
   "failure_analysis": {
     "death_chain_length": 3,
@@ -216,57 +166,55 @@
       {
         "node_id": "node_north_1",
         "event_id": "evt_factory_ruins",
-        "blame_score": 0.44,
+        "blame_score": 0.63,
         "description": "took +2 radiation, lost 1 hp, carried radiation into later travel",
-        "steps_to_death": 3
-      },
-      {
-        "node_id": "node_mid",
-        "event_id": "evt_sniper_nest",
-        "blame_score": 0.29,
-        "description": "lost 1 food, accepted combat risk, left food slack at 2 or less, left hp at 3 or less, carried radiation into later travel",
-        "steps_to_death": 1
+        "steps_to_death": 2
       },
       {
         "node_id": "node_north_2",
         "event_id": "evt_tunnel",
-        "blame_score": 0.15,
+        "blame_score": 0.22,
         "description": "lost 1 food, carried radiation into later travel",
-        "steps_to_death": 2
+        "steps_to_death": 1
+      },
+      {
+        "node_id": "node_mid",
+        "event_id": "evt_sniper_nest",
+        "blame_score": 0.16,
+        "description": "lost 1 food, accepted combat risk",
+        "steps_to_death": 0
       }
     ],
-    "steps_from_regret_to_death": 3,
+    "steps_from_regret_to_death": 2,
     "is_trash_time_death": false
   },
   "run_summary": {
-    "headline": "mixed_pressure_scavenger_batch_2: loss via radiation_death after 4 steps",
+    "headline": "mixed_pressure_scavenger_batch_2: loss via radiation_death after 3 steps",
     "route_family": "north",
     "outcome": "radiation_death",
     "key_turning_point": "node_north_1 (took +2 radiation, lost 1 hp, carried radiation into later travel)",
     "notable_equipment": [],
     "telemetry": {
-      "total_steps": 4,
-      "pressure_count": 4,
-      "combat_count": 2,
-      "loot_drop_count": 1,
-      "loot_total_amount": 3,
+      "total_steps": 3,
+      "pressure_count": 3,
+      "combat_count": 1,
+      "loot_drop_count": 0,
+      "loot_total_amount": 0,
       "equipment_change_count": 0,
       "equipment_ids": [],
-      "loot_resources": {
-        "ammo": 3
-      },
+      "loot_resources": {},
       "max_radiation": 2,
       "min_food": 2,
       "min_hp": 0,
       "low_resource_flags": [
         "low_hp",
         "low_food",
+        "low_ammo",
         "high_radiation"
       ],
       "risk_tags": [
         "combat_seen",
         "radiation_pressure",
-        "food_pressure",
         "end_radiation_death",
         "radiation_carryover"
       ]

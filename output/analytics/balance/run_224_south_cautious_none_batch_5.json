@@ -12,7 +12,7 @@
   "victory": false,
   "end_reason": "radiation_death",
   "player_final": {
-    "hp": 0,
+    "hp": -3,
     "food": 8,
     "ammo": 0,
     "medkits": 0,
@@ -137,7 +137,7 @@
       "equipment_change": null,
       "equipment_summary": null,
       "player_after": {
-        "hp": 0,
+        "hp": -3,
         "food": 8,
         "ammo": 0,
         "medkits": 0,
@@ -153,7 +153,7 @@
   "summary": {
     "pressure_count": 3,
     "death_cause_attribution": true,
-    "resource_signature": "hp:0|food:8|ammo:0|medkits:0|scrap:0|radiation:1|weapon:None|armor:None|tool:None"
+    "resource_signature": "hp:-3|food:8|ammo:0|medkits:0|scrap:0|radiation:1|weapon:None|armor:None|tool:None"
   },
   "failure_analysis": {
     "death_chain_length": 2,

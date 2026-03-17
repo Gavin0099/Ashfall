@@ -157,11 +157,28 @@ def format_status(player: PlayerState) -> str:
     )
 
 
+def format_equipment_item(equipment: Any) -> str:
+    if not equipment:
+        return "-"
+    # Support both old string format and new EquipmentState object
+    item_id = equipment.id if hasattr(equipment, "id") else str(equipment)
+    base_name = ITEM_LABELS.get(item_id, item_id)
+    
+    affixes = getattr(equipment, "affixes", {})
+    if not affixes:
+        return base_name
+    
+    affix_parts = []
+    for k, v in affixes.items():
+        affix_parts.append(f"{k}+{v}")
+    return f"{base_name}({', '.join(affix_parts)})"
+
+
 def format_equipment(player: PlayerState) -> str:
     return (
-        f"武器={ITEM_LABELS.get(player.weapon_slot or '', player.weapon_slot or '-')} "
-        f"護甲={ITEM_LABELS.get(player.armor_slot or '', player.armor_slot or '-')} "
-        f"工具={ITEM_LABELS.get(player.tool_slot or '', player.tool_slot or '-')}"
+        f"武器={format_equipment_item(player.weapon_slot)} "
+        f"護甲={format_equipment_item(player.armor_slot)} "
+        f"工具={format_equipment_item(player.tool_slot)}"
     )
 
 
@@ -188,10 +205,12 @@ def format_equipment_change(equipment_change: dict[str, Any] | None) -> str | No
     if not equipment_change or not equipment_change.get("changed"):
         return None
     slot = SLOT_LABELS.get(str(equipment_change["slot"]), str(equipment_change["slot"]))
-    item = ITEM_LABELS.get(str(equipment_change["item"]), str(equipment_change["item"]))
-    replaced_raw = equipment_change.get("replaced")
-    replaced = ITEM_LABELS.get(str(replaced_raw), str(replaced_raw)) if replaced_raw else "空槽"
-    return f"{slot} -> {item}（替換 {replaced}）"
+    item_id = str(equipment_change["item"])
+    item_name = ITEM_LABELS.get(item_id, item_id)
+    
+    # Check for affixes in current player state (since equip_item just happened)
+    # This is a bit of a hack but works for the CLI display
+    return f"{slot} -> {item_name}"
 
 
 def localize_warning(text: str) -> str:
@@ -409,7 +428,7 @@ def main() -> int:
         else:
             node = current
 
-        event_id = pick_event_id(node, engine.rng)
+        event_id = pick_event_id(node, engine.rng, run_flags=run.flags, event_catalog=events)
         event_payload = events[event_id]
         remaining_steps = estimate_remaining_steps(map_state, node.id)
         

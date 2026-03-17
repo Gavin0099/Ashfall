@@ -12,14 +12,20 @@
   "victory": true,
   "end_reason": "reached_final_node",
   "player_final": {
-    "hp": 5,
-    "food": 3,
-    "ammo": 1,
+    "hp": 3,
+    "food": 4,
+    "ammo": 3,
     "medkits": 3,
     "scrap": 4,
     "radiation": 2,
     "archetype": "pathfinder",
-    "weapon_slot": "makeshift_blade",
+    "weapon_slot": {
+      "id": "makeshift_blade",
+      "slot": "weapon",
+      "affixes": {
+        "atk": 1
+      }
+    },
     "armor_slot": null,
     "tool_slot": null
   },
@@ -69,14 +75,20 @@
       },
       "equipment_summary": "weapon -> makeshift_blade (replaced empty)",
       "player_after": {
-        "hp": 8,
+        "hp": 9,
         "food": 8,
-        "ammo": 1,
+        "ammo": 2,
         "medkits": 3,
         "scrap": 2,
         "radiation": 0,
         "archetype": "pathfinder",
-        "weapon_slot": "makeshift_blade",
+        "weapon_slot": {
+          "id": "makeshift_blade",
+          "slot": "weapon",
+          "affixes": {
+            "atk": 1
+          }
+        },
         "armor_slot": null,
         "tool_slot": null
       }
@@ -88,14 +100,20 @@
       "option_index": 0,
       "warning_signals": [],
       "pre_choice_state": {
-        "hp": 8,
+        "hp": 9,
         "food": 7,
-        "ammo": 1,
+        "ammo": 2,
         "medkits": 3,
         "scrap": 2,
         "radiation": 0,
         "archetype": "pathfinder",
-        "weapon_slot": "makeshift_blade",
+        "weapon_slot": {
+          "id": "makeshift_blade",
+          "slot": "weapon",
+          "affixes": {
+            "atk": 1
+          }
+        },
         "armor_slot": null,
         "tool_slot": null
       },
@@ -110,14 +128,20 @@
       "equipment_change": null,
       "equipment_summary": null,
       "player_after": {
-        "hp": 6,
+        "hp": 7,
         "food": 7,
-        "ammo": 1,
+        "ammo": 2,
         "medkits": 3,
         "scrap": 3,
         "radiation": 0,
         "archetype": "pathfinder",
-        "weapon_slot": "makeshift_blade",
+        "weapon_slot": {
+          "id": "makeshift_blade",
+          "slot": "weapon",
+          "affixes": {
+            "atk": 1
+          }
+        },
         "armor_slot": null,
         "tool_slot": null
       }
@@ -131,20 +155,35 @@
         "DANGER: this choice carries a high combat risk."
       ],
       "pre_choice_state": {
-        "hp": 6,
+        "hp": 7,
         "food": 6,
-        "ammo": 1,
+        "ammo": 2,
         "medkits": 3,
         "scrap": 3,
         "radiation": 0,
         "archetype": "pathfinder",
-        "weapon_slot": "makeshift_blade",
+        "weapon_slot": {
+          "id": "makeshift_blade",
+          "slot": "weapon",
+          "affixes": {
+            "atk": 1
+          }
+        },
         "armor_slot": null,
         "tool_slot": null
       },
       "pressure": true,
-      "combat_triggered": false,
-      "combat_loot": [],
+      "combat_triggered": true,
+      "combat_loot": [
+        {
+          "resource": "ammo",
+          "amount": 3
+        },
+        {
+          "resource": "food",
+          "amount": 1
+        }
+      ],
       "effects": {
         "scrap": -1,
         "food": -1
@@ -152,14 +191,20 @@
       "equipment_change": null,
       "equipment_summary": null,
       "player_after": {
-        "hp": 6,
-        "food": 5,
-        "ammo": 1,
+        "hp": 4,
+        "food": 6,
+        "ammo": 3,
         "medkits": 3,
         "scrap": 2,
         "radiation": 0,
         "archetype": "pathfinder",
-        "weapon_slot": "makeshift_blade",
+        "weapon_slot": {
+          "id": "makeshift_blade",
+          "slot": "weapon",
+          "affixes": {
+            "atk": 1
+          }
+        },
         "armor_slot": null,
         "tool_slot": null
       }
@@ -174,14 +219,20 @@
         "WARNING: this option adds radiation and increases long-term risk."
       ],
       "pre_choice_state": {
-        "hp": 6,
-        "food": 4,
-        "ammo": 1,
+        "hp": 4,
+        "food": 5,
+        "ammo": 3,
         "medkits": 3,
         "scrap": 2,
         "radiation": 0,
         "archetype": "pathfinder",
-        "weapon_slot": "makeshift_blade",
+        "weapon_slot": {
+          "id": "makeshift_blade",
+          "slot": "weapon",
+          "affixes": {
+            "atk": 1
+          }
+        },
         "armor_slot": null,
         "tool_slot": null
       },
@@ -195,14 +246,20 @@
       "equipment_change": null,
       "equipment_summary": null,
       "player_after": {
-        "hp": 6,
-        "food": 4,
-        "ammo": 1,
+        "hp": 4,
+        "food": 5,
+        "ammo": 3,
         "medkits": 3,
         "scrap": 4,
         "radiation": 1,
         "archetype": "pathfinder",
-        "weapon_slot": "makeshift_blade",
+        "weapon_slot": {
+          "id": "makeshift_blade",
+          "slot": "weapon",
+          "affixes": {
+            "atk": 1
+          }
+        },
         "armor_slot": null,
         "tool_slot": null
       }
@@ -214,17 +271,24 @@
       "option_index": 1,
       "warning_signals": [
         "WARNING: radiation will continue to threaten future travel.",
-        "WARNING: this option adds radiation and increases long-term risk."
+        "WARNING: this option adds radiation and increases long-term risk.",
+        "CRITICAL: another irradiated move may kill you."
       ],
       "pre_choice_state": {
-        "hp": 5,
-        "food": 3,
-        "ammo": 1,
+        "hp": 3,
+        "food": 4,
+        "ammo": 3,
         "medkits": 3,
         "scrap": 4,
         "radiation": 1,
         "archetype": "pathfinder",
-        "weapon_slot": "makeshift_blade",
+        "weapon_slot": {
+          "id": "makeshift_blade",
+          "slot": "weapon",
+          "affixes": {
+            "atk": 1
+          }
+        },
         "armor_slot": null,
         "tool_slot": null
       },
@@ -237,14 +301,20 @@
       "equipment_change": null,
       "equipment_summary": null,
       "player_after": {
-        "hp": 5,
-        "food": 3,
-        "ammo": 1,
+        "hp": 3,
+        "food": 4,
+        "ammo": 3,
         "medkits": 3,
         "scrap": 4,
         "radiation": 2,
         "archetype": "pathfinder",
-        "weapon_slot": "makeshift_blade",
+        "weapon_slot": {
+          "id": "makeshift_blade",
+          "slot": "weapon",
+          "affixes": {
+            "atk": 1
+          }
+        },
         "armor_slot": null,
         "tool_slot": null
       }
@@ -253,7 +323,7 @@
   "summary": {
     "pressure_count": 5,
     "death_cause_attribution": true,
-    "resource_signature": "hp:5|food:3|ammo:1|medkits:3|scrap:4|radiation:2|weapon:makeshift_blade|armor:None|tool:None"
+    "resource_signature": "hp:3|food:4|ammo:3|medkits:3|scrap:4|radiation:2|weapon:EquipmentState(id='makeshift_blade', slot='weapon', affixes={'atk': 1})|armor:None|tool:None"
   },
   "failure_analysis": {
     "death_chain_length": 0,
@@ -273,22 +343,24 @@
     "telemetry": {
       "total_steps": 5,
       "pressure_count": 5,
-      "combat_count": 1,
-      "loot_drop_count": 2,
-      "loot_total_amount": 3,
+      "combat_count": 2,
+      "loot_drop_count": 4,
+      "loot_total_amount": 7,
       "equipment_change_count": 1,
       "equipment_ids": [
         "makeshift_blade"
       ],
       "loot_resources": {
         "scrap": 2,
-        "medkits": 1
+        "medkits": 1,
+        "ammo": 3,
+        "food": 1
       },
       "max_radiation": 2,
-      "min_food": 3,
-      "min_hp": 5,
+      "min_food": 4,
+      "min_hp": 3,
       "low_resource_flags": [
-        "low_ammo",
+        "low_hp",
         "high_radiation"
       ],
       "risk_tags": [

@@ -346,8 +346,9 @@ def test_enemy_encounter_weighting() -> None:
     north_run = RunState(player=PlayerState(hp=10, food=5, ammo=3, medkits=0), map_seed=11, current_node="node_north_1")
     south_run = RunState(player=PlayerState(hp=10, food=5, ammo=3, medkits=0), map_seed=11, current_node="node_south_1")
 
-    north_counts = {"enemy_raider_scout": 0, "enemy_mutant_brute": 0}
-    south_counts = {"enemy_raider_scout": 0, "enemy_mutant_brute": 0}
+    from collections import defaultdict
+    north_counts = defaultdict(int)
+    south_counts = defaultdict(int)
     for _ in range(200):
         north_counts[engine._pick_enemy_id(north_run)] += 1
         south_counts[engine._pick_enemy_id(south_run)] += 1
@@ -425,13 +426,14 @@ def test_equipment_rewards_and_replacement() -> None:
     }
 
     out_blade = resolve_event_choice(player, blade_event, 0, __import__("random").Random(1))
-    if player.weapon_slot != "makeshift_blade":
+    # In v0.6, equipment is EquipmentState object
+    if player.weapon_slot.id != "makeshift_blade":
         raise AssertionError("weapon reward should equip initial weapon")
     if not out_blade["equipment_change"]["changed"]:
         raise AssertionError("first equipment reward should report change")
 
     out_rifle = resolve_event_choice(player, rifle_event, 0, __import__("random").Random(1))
-    if player.weapon_slot != "rust_rifle":
+    if player.weapon_slot.id != "rust_rifle":
         raise AssertionError("weapon reward should replace existing weapon")
     if out_rifle["equipment_change"]["replaced"] != "makeshift_blade":
         raise AssertionError("weapon replacement should report previous item")
@@ -442,14 +444,14 @@ def test_equipment_rewards_and_replacement() -> None:
         raise AssertionError("rust_rifle should add +1 damage to attack roll")
 
     out_tool = resolve_event_choice(player, tool_event, 0, __import__("random").Random(1))
-    if player.tool_slot != "scavenger_kit":
+    if player.tool_slot.id != "scavenger_kit":
         raise AssertionError("tool reward should equip scavenger kit")
     if out_tool["equipment_change"]["replaced"] is not None:
         raise AssertionError("first tool equip should not report replacement")
 
     food_before_pack = player.food
     out_pack = resolve_event_choice(player, pack_event, 0, __import__("random").Random(1))
-    if player.tool_slot != "field_pack":
+    if player.tool_slot.id != "field_pack":
         raise AssertionError("field_pack should replace current tool")
     if out_pack["equipment_change"]["replaced"] != "scavenger_kit":
         raise AssertionError("field_pack should report replaced tool")

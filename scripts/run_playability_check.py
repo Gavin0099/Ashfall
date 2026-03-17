@@ -77,9 +77,9 @@ def snapshot_player(player: PlayerState) -> dict:
         "scrap": player.scrap,
         "radiation": player.radiation,
         "archetype": player.archetype,
-        "weapon_slot": player.weapon_slot,
-        "armor_slot": player.armor_slot,
-        "tool_slot": player.tool_slot,
+        "weapon_slot": player.weapon_slot.to_dict() if player.weapon_slot else None,
+        "armor_slot": player.armor_slot.to_dict() if player.armor_slot else None,
+        "tool_slot": player.tool_slot.to_dict() if player.tool_slot else None,
     }
 
 
@@ -87,7 +87,8 @@ def summarize_equipment_change(equipment_change: dict | None) -> str | None:
     if not equipment_change or not equipment_change.get("changed"):
         return None
     replaced = equipment_change.get("replaced") or "empty"
-    return f"{equipment_change['slot']} -> {equipment_change['item']} (replaced {replaced})"
+    item_id = equipment_change.get("item")
+    return f"{equipment_change['slot']} -> {item_id} (replaced {replaced})"
 
 
 def is_pressure_moment(run: RunState, event_payload: dict, option_index: int, outcome: dict) -> bool:

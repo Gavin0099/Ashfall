@@ -72,11 +72,14 @@ def pairwise_resource_distance(results: list[dict]) -> dict:
             result["player_final"]["ammo"],
             result["player_final"]["medkits"],
             result["player_final"]["radiation"],
+            result["player_final"]["weapon_slot"]["id"] if result["player_final"]["weapon_slot"] else None,
+            result["player_final"]["armor_slot"]["id"] if result["player_final"]["armor_slot"] else None,
+            result["player_final"]["tool_slot"]["id"] if result["player_final"]["tool_slot"] else None,
         )
         for result in results
     ]
     distances = [
-        sum(abs(left[i] - right[i]) for i in range(len(left)))
+        sum(1 if left[i] != right[i] else 0 for i in range(len(left)))
         for left, right in combinations(resource_vectors, 2)
     ]
     return {

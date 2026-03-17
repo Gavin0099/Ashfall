@@ -14,12 +14,16 @@
   "player_final": {
     "hp": 4,
     "food": 1,
-    "ammo": 5,
-    "medkits": 2,
-    "scrap": 2,
+    "ammo": 3,
+    "medkits": 4,
+    "scrap": 5,
     "radiation": 2,
     "archetype": null,
-    "weapon_slot": "makeshift_blade",
+    "weapon_slot": {
+      "id": "makeshift_blade",
+      "slot": "weapon",
+      "affixes": {}
+    },
     "armor_slot": null,
     "tool_slot": null
   },
@@ -67,7 +71,11 @@
         "scrap": 0,
         "radiation": 0,
         "archetype": null,
-        "weapon_slot": "makeshift_blade",
+        "weapon_slot": {
+          "id": "makeshift_blade",
+          "slot": "weapon",
+          "affixes": {}
+        },
         "armor_slot": null,
         "tool_slot": null
       }
@@ -75,9 +83,11 @@
     {
       "step": 2,
       "node": "node_north_2",
-      "event_id": "evt_collapsed_overpass",
+      "event_id": "evt_mutant_burrow",
       "option_index": 0,
-      "warning_signals": [],
+      "warning_signals": [
+        "DANGER: this choice carries a high combat risk."
+      ],
       "pre_choice_state": {
         "hp": 10,
         "food": 5,
@@ -86,29 +96,46 @@
         "scrap": 0,
         "radiation": 0,
         "archetype": null,
-        "weapon_slot": "makeshift_blade",
+        "weapon_slot": {
+          "id": "makeshift_blade",
+          "slot": "weapon",
+          "affixes": {}
+        },
         "armor_slot": null,
         "tool_slot": null
       },
       "pressure": true,
-      "combat_triggered": false,
-      "combat_loot": [],
+      "combat_triggered": true,
+      "combat_loot": [
+        {
+          "resource": "scrap",
+          "amount": 2
+        },
+        {
+          "resource": "medkits",
+          "amount": 1
+        }
+      ],
       "effects": {
-        "hp": -2,
-        "food": 0,
-        "scrap": 1
+        "hp": -1,
+        "scrap": 2,
+        "medkits": 1
       },
       "equipment_change": null,
       "equipment_summary": null,
       "player_after": {
         "hp": 8,
         "food": 5,
-        "ammo": 4,
-        "medkits": 2,
-        "scrap": 1,
+        "ammo": 2,
+        "medkits": 4,
+        "scrap": 4,
         "radiation": 0,
         "archetype": null,
-        "weapon_slot": "makeshift_blade",
+        "weapon_slot": {
+          "id": "makeshift_blade",
+          "slot": "weapon",
+          "affixes": {}
+        },
         "armor_slot": null,
         "tool_slot": null
       }
@@ -124,12 +151,16 @@
       "pre_choice_state": {
         "hp": 8,
         "food": 4,
-        "ammo": 4,
-        "medkits": 2,
-        "scrap": 1,
+        "ammo": 2,
+        "medkits": 4,
+        "scrap": 4,
         "radiation": 0,
         "archetype": null,
-        "weapon_slot": "makeshift_blade",
+        "weapon_slot": {
+          "id": "makeshift_blade",
+          "slot": "weapon",
+          "affixes": {}
+        },
         "armor_slot": null,
         "tool_slot": null
       },
@@ -150,12 +181,16 @@
       "player_after": {
         "hp": 5,
         "food": 3,
-        "ammo": 5,
-        "medkits": 2,
-        "scrap": 0,
+        "ammo": 3,
+        "medkits": 4,
+        "scrap": 3,
         "radiation": 0,
         "archetype": null,
-        "weapon_slot": "makeshift_blade",
+        "weapon_slot": {
+          "id": "makeshift_blade",
+          "slot": "weapon",
+          "affixes": {}
+        },
         "armor_slot": null,
         "tool_slot": null
       }
@@ -173,12 +208,16 @@
       "pre_choice_state": {
         "hp": 5,
         "food": 2,
-        "ammo": 5,
-        "medkits": 2,
-        "scrap": 0,
+        "ammo": 3,
+        "medkits": 4,
+        "scrap": 3,
         "radiation": 0,
         "archetype": null,
-        "weapon_slot": "makeshift_blade",
+        "weapon_slot": {
+          "id": "makeshift_blade",
+          "slot": "weapon",
+          "affixes": {}
+        },
         "armor_slot": null,
         "tool_slot": null
       },
@@ -194,12 +233,16 @@
       "player_after": {
         "hp": 5,
         "food": 2,
-        "ammo": 5,
-        "medkits": 2,
-        "scrap": 2,
+        "ammo": 3,
+        "medkits": 4,
+        "scrap": 5,
         "radiation": 1,
         "archetype": null,
-        "weapon_slot": "makeshift_blade",
+        "weapon_slot": {
+          "id": "makeshift_blade",
+          "slot": "weapon",
+          "affixes": {}
+        },
         "armor_slot": null,
         "tool_slot": null
       }
@@ -217,12 +260,16 @@
       "pre_choice_state": {
         "hp": 4,
         "food": 1,
-        "ammo": 5,
-        "medkits": 2,
-        "scrap": 2,
+        "ammo": 3,
+        "medkits": 4,
+        "scrap": 5,
         "radiation": 1,
         "archetype": null,
-        "weapon_slot": "makeshift_blade",
+        "weapon_slot": {
+          "id": "makeshift_blade",
+          "slot": "weapon",
+          "affixes": {}
+        },
         "armor_slot": null,
         "tool_slot": null
       },
@@ -237,12 +284,16 @@
       "player_after": {
         "hp": 4,
         "food": 1,
-        "ammo": 5,
-        "medkits": 2,
-        "scrap": 2,
+        "ammo": 3,
+        "medkits": 4,
+        "scrap": 5,
         "radiation": 2,
         "archetype": null,
-        "weapon_slot": "makeshift_blade",
+        "weapon_slot": {
+          "id": "makeshift_blade",
+          "slot": "weapon",
+          "affixes": {}
+        },
         "armor_slot": null,
         "tool_slot": null
       }
@@ -251,7 +302,7 @@
   "summary": {
     "pressure_count": 5,
     "death_cause_attribution": true,
-    "resource_signature": "hp:4|food:1|ammo:5|medkits:2|scrap:2|radiation:2|weapon:makeshift_blade|armor:None|tool:None"
+    "resource_signature": "hp:4|food:1|ammo:3|medkits:4|scrap:5|radiation:2|weapon:EquipmentState(id='makeshift_blade', slot='weapon', affixes={})|armor:None|tool:None"
   },
   "failure_analysis": {
     "death_chain_length": 0,
@@ -271,14 +322,16 @@
     "telemetry": {
       "total_steps": 5,
       "pressure_count": 5,
-      "combat_count": 1,
-      "loot_drop_count": 1,
-      "loot_total_amount": 3,
+      "combat_count": 2,
+      "loot_drop_count": 3,
+      "loot_total_amount": 6,
       "equipment_change_count": 1,
       "equipment_ids": [
         "makeshift_blade"
       ],
       "loot_resources": {
+        "scrap": 2,
+        "medkits": 1,
         "ammo": 3
       },
       "max_radiation": 2,

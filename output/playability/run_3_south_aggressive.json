@@ -36,6 +36,7 @@
         "equipment_reward": null,
         "equipment_change": null,
         "scavenger_bonus": {},
+        "set_flags": {},
         "combat": {
           "skipped": false,
           "enemy_id": "enemy_raider_scout",
@@ -98,7 +99,8 @@
         "combat_triggered": false,
         "equipment_reward": null,
         "equipment_change": null,
-        "scavenger_bonus": {}
+        "scavenger_bonus": {},
+        "set_flags": {}
       },
       "warning_signals": [
         "WARNING: radiation will continue to threaten future travel.",
@@ -143,6 +145,7 @@
         "equipment_reward": null,
         "equipment_change": null,
         "scavenger_bonus": {},
+        "set_flags": {},
         "combat": {
           "skipped": false,
           "enemy_id": "enemy_mutant_brute",

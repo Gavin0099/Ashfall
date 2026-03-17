@@ -35,7 +35,8 @@
         "combat_triggered": false,
         "equipment_reward": null,
         "equipment_change": null,
-        "scavenger_bonus": {}
+        "scavenger_bonus": {},
+        "set_flags": {}
       },
       "warning_signals": [
         "WARNING: radiation will continue to threaten future travel.",
@@ -78,7 +79,8 @@
         "combat_triggered": false,
         "equipment_reward": null,
         "equipment_change": null,
-        "scavenger_bonus": {}
+        "scavenger_bonus": {},
+        "set_flags": {}
       },
       "warning_signals": [
         "WARNING: radiation will continue to threaten future travel."
@@ -120,7 +122,8 @@
         "combat_triggered": false,
         "equipment_reward": null,
         "equipment_change": null,
-        "scavenger_bonus": {}
+        "scavenger_bonus": {},
+        "set_flags": {}
       },
       "warning_signals": [
         "WARNING: radiation will continue to threaten future travel.",
@@ -163,7 +166,8 @@
         "combat_triggered": false,
         "equipment_reward": null,
         "equipment_change": null,
-        "scavenger_bonus": {}
+        "scavenger_bonus": {},
+        "set_flags": {}
       },
       "warning_signals": [
         "WARNING: radiation will continue to threaten future travel.",
@@ -207,7 +211,8 @@
         "combat_triggered": false,
         "equipment_reward": null,
         "equipment_change": null,
-        "scavenger_bonus": {}
+        "scavenger_bonus": {},
+        "set_flags": {}
       },
       "warning_signals": [
         "WARNING: radiation will continue to threaten future travel.",

@@ -29,7 +29,10 @@ def validate_player_final(data: dict[str, Any], src: Path) -> None:
     for key in required:
         ensure(isinstance(data[key], int), f"{src}: player_final.{key} must be integer")
     for key in ("weapon_slot", "armor_slot", "tool_slot"):
-        ensure(isinstance(data.get(key), (str, type(None))), f"{src}: player_final.{key} must be string|null")
+        val = data.get(key)
+        ensure(isinstance(val, (str, type(None), dict)), f"{src}: player_final.{key} must be string|null|dict")
+        if isinstance(val, dict):
+            ensure("id" in val and "affixes" in val, f"{src}: player_final.{key} dict must have id and affixes")
 
 
 def validate_decision_log(entries: list[dict[str, Any]], src: Path) -> None:
@@ -46,7 +49,10 @@ def validate_decision_log(entries: list[dict[str, Any]], src: Path) -> None:
         for key in ("hp", "food", "ammo", "medkits", "radiation"):
             ensure(isinstance(pre_choice_state.get(key), int), f"{src}: pre_choice_state.{key} must be integer")
         for key in ("weapon_slot", "armor_slot", "tool_slot"):
-            ensure(isinstance(pre_choice_state.get(key), (str, type(None))), f"{src}: pre_choice_state.{key} must be string|null")
+            val = pre_choice_state.get(key)
+            ensure(isinstance(val, (str, type(None), dict)), f"{src}: pre_choice_state.{key} must be string|null|dict")
+            if isinstance(val, dict):
+                ensure("id" in val and "affixes" in val, f"{src}: pre_choice_state.{key} dict must have id and affixes")
         ensure(isinstance(entry.get("pressure"), bool), f"{src}: pressure must be boolean")
         ensure(isinstance(entry.get("combat_triggered"), bool), f"{src}: combat_triggered must be boolean")
         ensure(isinstance(entry.get("combat_loot", []), list), f"{src}: combat_loot must be array")
@@ -58,7 +64,10 @@ def validate_decision_log(entries: list[dict[str, Any]], src: Path) -> None:
         for key in ("hp", "food", "ammo", "medkits", "radiation"):
             ensure(isinstance(player_after.get(key), int), f"{src}: player_after.{key} must be integer")
         for key in ("weapon_slot", "armor_slot", "tool_slot"):
-            ensure(isinstance(player_after.get(key), (str, type(None))), f"{src}: player_after.{key} must be string|null")
+            val = player_after.get(key)
+            ensure(isinstance(val, (str, type(None), dict)), f"{src}: player_after.{key} must be string|null|dict")
+            if isinstance(val, dict):
+                ensure("id" in val and "affixes" in val, f"{src}: player_after.{key} dict must have id and affixes")
 
 
 def validate_summary(data: dict[str, Any], src: Path) -> None:

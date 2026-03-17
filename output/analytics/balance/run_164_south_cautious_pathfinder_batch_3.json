@@ -12,16 +12,20 @@
   "victory": true,
   "end_reason": "reached_final_node",
   "player_final": {
-    "hp": 4,
-    "food": 2,
-    "ammo": 3,
-    "medkits": 3,
+    "hp": 7,
+    "food": 6,
+    "ammo": 2,
+    "medkits": 2,
     "scrap": 0,
-    "radiation": 0,
+    "radiation": 1,
     "archetype": "pathfinder",
     "weapon_slot": null,
     "armor_slot": null,
-    "tool_slot": "scavenger_kit"
+    "tool_slot": {
+      "id": "scavenger_kit",
+      "slot": "tool",
+      "affixes": {}
+    }
   },
   "decision_log": [
     {
@@ -66,15 +70,22 @@
         "archetype": "pathfinder",
         "weapon_slot": null,
         "armor_slot": null,
-        "tool_slot": "scavenger_kit"
+        "tool_slot": {
+          "id": "scavenger_kit",
+          "slot": "tool",
+          "affixes": {}
+        }
       }
     },
     {
       "step": 2,
       "node": "node_south_2",
-      "event_id": "evt_abandoned_cache",
+      "event_id": "evt_radioactive_orchard",
       "option_index": 1,
-      "warning_signals": [],
+      "warning_signals": [
+        "WARNING: radiation will continue to threaten future travel.",
+        "WARNING: this option adds radiation and increases long-term risk."
+      ],
       "pre_choice_state": {
         "hp": 10,
         "food": 7,
@@ -85,27 +96,36 @@
         "archetype": "pathfinder",
         "weapon_slot": null,
         "armor_slot": null,
-        "tool_slot": "scavenger_kit"
+        "tool_slot": {
+          "id": "scavenger_kit",
+          "slot": "tool",
+          "affixes": {}
+        }
       },
-      "pressure": false,
+      "pressure": true,
       "combat_triggered": false,
       "combat_loot": [],
       "effects": {
-        "food": 1
+        "food": 2,
+        "radiation": 1
       },
       "equipment_change": null,
       "equipment_summary": null,
       "player_after": {
         "hp": 10,
-        "food": 9,
+        "food": 10,
         "ammo": 2,
         "medkits": 2,
         "scrap": 0,
-        "radiation": 0,
+        "radiation": 1,
         "archetype": "pathfinder",
         "weapon_slot": null,
         "armor_slot": null,
-        "tool_slot": "scavenger_kit"
+        "tool_slot": {
+          "id": "scavenger_kit",
+          "slot": "tool",
+          "affixes": {}
+        }
       }
     },
     {
@@ -113,18 +133,24 @@
       "node": "node_mid",
       "event_id": "evt_sniper_nest",
       "option_index": 1,
-      "warning_signals": [],
+      "warning_signals": [
+        "WARNING: radiation will continue to threaten future travel."
+      ],
       "pre_choice_state": {
-        "hp": 10,
-        "food": 8,
+        "hp": 9,
+        "food": 9,
         "ammo": 2,
         "medkits": 2,
         "scrap": 0,
-        "radiation": 0,
+        "radiation": 1,
         "archetype": "pathfinder",
         "weapon_slot": null,
         "armor_slot": null,
-        "tool_slot": "scavenger_kit"
+        "tool_slot": {
+          "id": "scavenger_kit",
+          "slot": "tool",
+          "affixes": {}
+        }
       },
       "pressure": true,
       "combat_triggered": false,
@@ -135,62 +161,69 @@
       "equipment_change": null,
       "equipment_summary": null,
       "player_after": {
-        "hp": 10,
-        "food": 6,
+        "hp": 9,
+        "food": 7,
         "ammo": 2,
         "medkits": 2,
         "scrap": 0,
-        "radiation": 0,
+        "radiation": 1,
         "archetype": "pathfinder",
         "weapon_slot": null,
         "armor_slot": null,
-        "tool_slot": "scavenger_kit"
+        "tool_slot": {
+          "id": "scavenger_kit",
+          "slot": "tool",
+          "affixes": {}
+        }
       }
     },
     {
       "step": 4,
       "node": "node_approach",
-      "event_id": "evt_emergency_beacon",
+      "event_id": "evt_waystation",
       "option_index": 0,
-      "warning_signals": [],
+      "warning_signals": [
+        "WARNING: radiation will continue to threaten future travel."
+      ],
       "pre_choice_state": {
-        "hp": 10,
-        "food": 5,
+        "hp": 8,
+        "food": 6,
         "ammo": 2,
         "medkits": 2,
         "scrap": 0,
-        "radiation": 0,
+        "radiation": 1,
         "archetype": "pathfinder",
         "weapon_slot": null,
         "armor_slot": null,
-        "tool_slot": "scavenger_kit"
-      },
-      "pressure": true,
-      "combat_triggered": true,
-      "combat_loot": [
-        {
-          "resource": "ammo",
-          "amount": 3
+        "tool_slot": {
+          "id": "scavenger_kit",
+          "slot": "tool",
+          "affixes": {}
         }
-      ],
+      },
+      "pressure": false,
+      "combat_triggered": false,
+      "combat_loot": [],
       "effects": {
-        "ammo": 2,
-        "medkits": 1,
-        "food": -1
+        "food": 1
       },
       "equipment_change": null,
       "equipment_summary": null,
       "player_after": {
-        "hp": 4,
-        "food": 4,
-        "ammo": 3,
-        "medkits": 3,
+        "hp": 8,
+        "food": 8,
+        "ammo": 2,
+        "medkits": 2,
         "scrap": 0,
-        "radiation": 0,
+        "radiation": 1,
         "archetype": "pathfinder",
         "weapon_slot": null,
         "armor_slot": null,
-        "tool_slot": "scavenger_kit"
+        "tool_slot": {
+          "id": "scavenger_kit",
+          "slot": "tool",
+          "affixes": {}
+        }
       }
     },
     {
@@ -198,18 +231,24 @@
       "node": "node_final",
       "event_id": "evt_final",
       "option_index": 0,
-      "warning_signals": [],
+      "warning_signals": [
+        "WARNING: radiation will continue to threaten future travel."
+      ],
       "pre_choice_state": {
-        "hp": 4,
-        "food": 3,
-        "ammo": 3,
-        "medkits": 3,
+        "hp": 7,
+        "food": 7,
+        "ammo": 2,
+        "medkits": 2,
         "scrap": 0,
-        "radiation": 0,
+        "radiation": 1,
         "archetype": "pathfinder",
         "weapon_slot": null,
         "armor_slot": null,
-        "tool_slot": "scavenger_kit"
+        "tool_slot": {
+          "id": "scavenger_kit",
+          "slot": "tool",
+          "affixes": {}
+        }
       },
       "pressure": true,
       "combat_triggered": false,
@@ -220,23 +259,27 @@
       "equipment_change": null,
       "equipment_summary": null,
       "player_after": {
-        "hp": 4,
-        "food": 2,
-        "ammo": 3,
-        "medkits": 3,
+        "hp": 7,
+        "food": 6,
+        "ammo": 2,
+        "medkits": 2,
         "scrap": 0,
-        "radiation": 0,
+        "radiation": 1,
         "archetype": "pathfinder",
         "weapon_slot": null,
         "armor_slot": null,
-        "tool_slot": "scavenger_kit"
+        "tool_slot": {
+          "id": "scavenger_kit",
+          "slot": "tool",
+          "affixes": {}
+        }
       }
     }
   ],
   "summary": {
     "pressure_count": 4,
     "death_cause_attribution": true,
-    "resource_signature": "hp:4|food:2|ammo:3|medkits:3|scrap:0|radiation:0|weapon:None|armor:None|tool:scavenger_kit"
+    "resource_signature": "hp:7|food:6|ammo:2|medkits:2|scrap:0|radiation:1|weapon:None|armor:None|tool:EquipmentState(id='scavenger_kit', slot='tool', affixes={})"
   },
   "failure_analysis": {
     "death_chain_length": 0,
@@ -256,24 +299,20 @@
     "telemetry": {
       "total_steps": 5,
       "pressure_count": 4,
-      "combat_count": 1,
-      "loot_drop_count": 1,
-      "loot_total_amount": 3,
+      "combat_count": 0,
+      "loot_drop_count": 0,
+      "loot_total_amount": 0,
       "equipment_change_count": 1,
       "equipment_ids": [
         "scavenger_kit"
       ],
-      "loot_resources": {
-        "ammo": 3
-      },
-      "max_radiation": 0,
-      "min_food": 2,
-      "min_hp": 4,
-      "low_resource_flags": [
-        "low_food"
-      ],
+      "loot_resources": {},
+      "max_radiation": 1,
+      "min_food": 6,
+      "min_hp": 7,
+      "low_resource_flags": [],
       "risk_tags": [
-        "combat_seen",
+        "radiation_pressure",
         "equipment_arc",
         "end_reached_final_node"
       ]

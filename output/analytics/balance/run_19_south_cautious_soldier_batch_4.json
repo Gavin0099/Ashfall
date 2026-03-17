@@ -9,19 +9,23 @@
     "node_final"
   ],
   "ended": true,
-  "victory": true,
-  "end_reason": "reached_final_node",
+  "victory": false,
+  "end_reason": "event_or_resource_death",
   "player_final": {
-    "hp": 10,
-    "food": 4,
-    "ammo": 7,
-    "medkits": 4,
+    "hp": -2,
+    "food": 9,
+    "ammo": 3,
+    "medkits": 3,
     "scrap": 0,
     "radiation": 0,
     "archetype": "soldier",
     "weapon_slot": null,
     "armor_slot": null,
-    "tool_slot": "scavenger_kit"
+    "tool_slot": {
+      "id": "scavenger_kit",
+      "slot": "tool",
+      "affixes": {}
+    }
   },
   "decision_log": [
     {
@@ -66,13 +70,17 @@
         "archetype": "soldier",
         "weapon_slot": null,
         "armor_slot": null,
-        "tool_slot": "scavenger_kit"
+        "tool_slot": {
+          "id": "scavenger_kit",
+          "slot": "tool",
+          "affixes": {}
+        }
       }
     },
     {
       "step": 2,
       "node": "node_south_2",
-      "event_id": "evt_floodplain",
+      "event_id": "evt_abandoned_cache",
       "option_index": 1,
       "warning_signals": [],
       "pre_choice_state": {
@@ -85,28 +93,44 @@
         "archetype": "soldier",
         "weapon_slot": null,
         "armor_slot": null,
-        "tool_slot": "scavenger_kit"
+        "tool_slot": {
+          "id": "scavenger_kit",
+          "slot": "tool",
+          "affixes": {}
+        }
       },
       "pressure": true,
-      "combat_triggered": false,
-      "combat_loot": [],
+      "combat_triggered": true,
+      "combat_loot": [
+        {
+          "resource": "ammo",
+          "amount": 3
+        },
+        {
+          "resource": "food",
+          "amount": 1
+        }
+      ],
       "effects": {
-        "food": 1,
-        "ammo": -1
+        "food": 1
       },
       "equipment_change": null,
       "equipment_summary": null,
       "player_after": {
         "hp": 10,
-        "food": 7,
-        "ammo": 4,
+        "food": 8,
+        "ammo": 6,
         "medkits": 2,
         "scrap": 0,
         "radiation": 0,
         "archetype": "soldier",
         "weapon_slot": null,
         "armor_slot": null,
-        "tool_slot": "scavenger_kit"
+        "tool_slot": {
+          "id": "scavenger_kit",
+          "slot": "tool",
+          "affixes": {}
+        }
       }
     },
     {
@@ -117,18 +141,22 @@
       "warning_signals": [],
       "pre_choice_state": {
         "hp": 10,
-        "food": 6,
-        "ammo": 4,
+        "food": 7,
+        "ammo": 6,
         "medkits": 2,
         "scrap": 0,
         "radiation": 0,
         "archetype": "soldier",
         "weapon_slot": null,
         "armor_slot": null,
-        "tool_slot": "scavenger_kit"
+        "tool_slot": {
+          "id": "scavenger_kit",
+          "slot": "tool",
+          "affixes": {}
+        }
       },
-      "pressure": false,
-      "combat_triggered": false,
+      "pressure": true,
+      "combat_triggered": true,
       "combat_loot": [],
       "effects": {
         "food": 1,
@@ -137,137 +165,82 @@
       "equipment_change": null,
       "equipment_summary": null,
       "player_after": {
-        "hp": 10,
-        "food": 8,
-        "ammo": 4,
+        "hp": -2,
+        "food": 9,
+        "ammo": 3,
         "medkits": 3,
         "scrap": 0,
         "radiation": 0,
         "archetype": "soldier",
         "weapon_slot": null,
         "armor_slot": null,
-        "tool_slot": "scavenger_kit"
-      }
-    },
-    {
-      "step": 4,
-      "node": "node_approach",
-      "event_id": "evt_emergency_beacon",
-      "option_index": 0,
-      "warning_signals": [],
-      "pre_choice_state": {
-        "hp": 10,
-        "food": 7,
-        "ammo": 4,
-        "medkits": 3,
-        "scrap": 0,
-        "radiation": 0,
-        "archetype": "soldier",
-        "weapon_slot": null,
-        "armor_slot": null,
-        "tool_slot": "scavenger_kit"
-      },
-      "pressure": true,
-      "combat_triggered": false,
-      "combat_loot": [],
-      "effects": {
-        "ammo": 2,
-        "medkits": 1,
-        "food": -1
-      },
-      "equipment_change": null,
-      "equipment_summary": null,
-      "player_after": {
-        "hp": 10,
-        "food": 6,
-        "ammo": 7,
-        "medkits": 4,
-        "scrap": 0,
-        "radiation": 0,
-        "archetype": "soldier",
-        "weapon_slot": null,
-        "armor_slot": null,
-        "tool_slot": "scavenger_kit"
-      }
-    },
-    {
-      "step": 5,
-      "node": "node_final",
-      "event_id": "evt_final",
-      "option_index": 0,
-      "warning_signals": [],
-      "pre_choice_state": {
-        "hp": 10,
-        "food": 5,
-        "ammo": 7,
-        "medkits": 4,
-        "scrap": 0,
-        "radiation": 0,
-        "archetype": "soldier",
-        "weapon_slot": null,
-        "armor_slot": null,
-        "tool_slot": "scavenger_kit"
-      },
-      "pressure": true,
-      "combat_triggered": false,
-      "combat_loot": [],
-      "effects": {
-        "food": -1
-      },
-      "equipment_change": null,
-      "equipment_summary": null,
-      "player_after": {
-        "hp": 10,
-        "food": 4,
-        "ammo": 7,
-        "medkits": 4,
-        "scrap": 0,
-        "radiation": 0,
-        "archetype": "soldier",
-        "weapon_slot": null,
-        "armor_slot": null,
-        "tool_slot": "scavenger_kit"
+        "tool_slot": {
+          "id": "scavenger_kit",
+          "slot": "tool",
+          "affixes": {}
+        }
       }
     }
   ],
   "summary": {
-    "pressure_count": 4,
+    "pressure_count": 3,
     "death_cause_attribution": true,
-    "resource_signature": "hp:10|food:4|ammo:7|medkits:4|scrap:0|radiation:0|weapon:None|armor:None|tool:scavenger_kit"
+    "resource_signature": "hp:-2|food:9|ammo:3|medkits:3|scrap:0|radiation:0|weapon:None|armor:None|tool:EquipmentState(id='scavenger_kit', slot='tool', affixes={})"
   },
   "failure_analysis": {
-    "death_chain_length": 0,
-    "primary_blame_factor": null,
-    "regret_nodes": [],
+    "death_chain_length": 2,
+    "primary_blame_factor": "combat",
+    "regret_nodes": [
+      {
+        "node_id": "node_mid",
+        "event_id": "evt_checkpoint",
+        "blame_score": 0.51,
+        "description": "accepted combat risk",
+        "steps_to_death": 0
+      },
+      {
+        "node_id": "node_south_2",
+        "event_id": "evt_abandoned_cache",
+        "blame_score": 0.49,
+        "description": "accepted combat risk",
+        "steps_to_death": 1
+      }
+    ],
     "steps_from_regret_to_death": 0,
     "is_trash_time_death": false
   },
   "run_summary": {
-    "headline": "south_cautious_soldier_batch_4: victory via reached_final_node after 5 steps",
+    "headline": "south_cautious_soldier_batch_4: loss via event_or_resource_death after 3 steps",
     "route_family": "south",
-    "outcome": "victory",
-    "key_turning_point": "node_south_1 (tool -> scavenger_kit (replaced empty))",
+    "outcome": "event_or_resource_death",
+    "key_turning_point": "node_mid (accepted combat risk)",
     "notable_equipment": [
       "scavenger_kit"
     ],
     "telemetry": {
-      "total_steps": 5,
-      "pressure_count": 4,
-      "combat_count": 0,
-      "loot_drop_count": 0,
-      "loot_total_amount": 0,
+      "total_steps": 3,
+      "pressure_count": 3,
+      "combat_count": 2,
+      "loot_drop_count": 2,
+      "loot_total_amount": 4,
       "equipment_change_count": 1,
       "equipment_ids": [
         "scavenger_kit"
       ],
-      "loot_resources": {},
+      "loot_resources": {
+        "ammo": 3,
+        "food": 1
+      },
       "max_radiation": 0,
-      "min_food": 4,
-      "min_hp": 10,
-      "low_resource_flags": [],
+      "min_food": 6,
+      "min_hp": 0,
+      "low_resource_flags": [
+        "low_hp"
+      ],
       "risk_tags": [
+        "combat_seen",
         "equipment_arc",
-        "end_reached_final_node"
+        "end_event_or_resource_death"
       ]
     }
   }

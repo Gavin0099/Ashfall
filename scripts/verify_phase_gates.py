@@ -1,4 +1,4 @@
-﻿#!/usr/bin/env python3
+#!/usr/bin/env python3
 from __future__ import annotations
 
 import subprocess
@@ -24,7 +24,7 @@ TOOLS = [
     "contract_validator.py",
     "plan_freshness.py",
     "memory_janitor.py",
-    "generate_failure_context.py",
+    "failure_completeness_validator.py",
     "state_generator.py",
 ]
 

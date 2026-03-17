@@ -12,16 +12,26 @@
   "victory": true,
   "end_reason": "reached_final_node",
   "player_final": {
-    "hp": 4,
-    "food": 5,
-    "ammo": 7,
+    "hp": 1,
+    "food": 3,
+    "ammo": 6,
     "medkits": 2,
-    "scrap": 2,
-    "radiation": 3,
+    "scrap": 7,
+    "radiation": 4,
     "archetype": "soldier",
-    "weapon_slot": "rust_rifle",
+    "weapon_slot": {
+      "id": "rust_rifle",
+      "slot": "weapon",
+      "affixes": {
+        "atk": 1
+      }
+    },
     "armor_slot": null,
-    "tool_slot": "field_pack"
+    "tool_slot": {
+      "id": "field_pack",
+      "slot": "tool",
+      "affixes": {}
+    }
   },
   "decision_log": [
     {
@@ -122,7 +132,11 @@
         "archetype": "soldier",
         "weapon_slot": null,
         "armor_slot": null,
-        "tool_slot": "field_pack"
+        "tool_slot": {
+          "id": "field_pack",
+          "slot": "tool",
+          "affixes": {}
+        }
       }
     },
     {
@@ -144,13 +158,21 @@
         "archetype": "soldier",
         "weapon_slot": null,
         "armor_slot": null,
-        "tool_slot": "field_pack"
+        "tool_slot": {
+          "id": "field_pack",
+          "slot": "tool",
+          "affixes": {}
+        }
       },
       "pressure": true,
       "combat_triggered": true,
       "combat_loot": [
         {
           "resource": "ammo",
+          "amount": 5
+        },
+        {
+          "resource": "scrap",
           "amount": 3
         }
       ],
@@ -165,64 +187,90 @@
       },
       "equipment_summary": "weapon -> rust_rifle (replaced empty)",
       "player_after": {
-        "hp": 7,
+        "hp": 3,
         "food": 7,
-        "ammo": 5,
+        "ammo": 6,
         "medkits": 2,
-        "scrap": 2,
+        "scrap": 5,
         "radiation": 2,
         "archetype": "soldier",
-        "weapon_slot": "rust_rifle",
+        "weapon_slot": {
+          "id": "rust_rifle",
+          "slot": "weapon",
+          "affixes": {
+            "atk": 1
+          }
+        },
         "armor_slot": null,
-        "tool_slot": "field_pack"
+        "tool_slot": {
+          "id": "field_pack",
+          "slot": "tool",
+          "affixes": {}
+        }
       }
     },
     {
       "step": 4,
       "node": "node_approach",
-      "event_id": "evt_waystation",
+      "event_id": "evt_emergency_beacon",
       "option_index": 1,
       "warning_signals": [
         "WARNING: radiation will continue to threaten future travel.",
-        "DANGER: this choice carries a high combat risk."
+        "WARNING: this option adds radiation and increases long-term risk.",
+        "CRITICAL: another irradiated move may kill you."
       ],
       "pre_choice_state": {
-        "hp": 6,
-        "food": 6,
-        "ammo": 5,
+        "hp": 2,
+        "food": 5,
+        "ammo": 6,
         "medkits": 2,
-        "scrap": 2,
+        "scrap": 5,
         "radiation": 2,
         "archetype": "soldier",
-        "weapon_slot": "rust_rifle",
+        "weapon_slot": {
+          "id": "rust_rifle",
+          "slot": "weapon",
+          "affixes": {
+            "atk": 1
+          }
+        },
         "armor_slot": null,
-        "tool_slot": "field_pack"
+        "tool_slot": {
+          "id": "field_pack",
+          "slot": "tool",
+          "affixes": {}
+        }
       },
       "pressure": true,
-      "combat_triggered": true,
-      "combat_loot": [
-        {
-          "resource": "ammo",
-          "amount": 3
-        }
-      ],
+      "combat_triggered": false,
+      "combat_loot": [],
       "effects": {
-        "hp": -1,
-        "ammo": 1
+        "scrap": 2,
+        "radiation": 1
       },
       "equipment_change": null,
       "equipment_summary": null,
       "player_after": {
-        "hp": 5,
-        "food": 6,
-        "ammo": 7,
+        "hp": 2,
+        "food": 5,
+        "ammo": 6,
         "medkits": 2,
-        "scrap": 2,
-        "radiation": 2,
+        "scrap": 7,
+        "radiation": 3,
         "archetype": "soldier",
-        "weapon_slot": "rust_rifle",
+        "weapon_slot": {
+          "id": "rust_rifle",
+          "slot": "weapon",
+          "affixes": {
+            "atk": 1
+          }
+        },
         "armor_slot": null,
-        "tool_slot": "field_pack"
+        "tool_slot": {
+          "id": "field_pack",
+          "slot": "tool",
+          "affixes": {}
+        }
       }
     },
     {
@@ -236,16 +284,26 @@
         "CRITICAL: another irradiated move may kill you."
       ],
       "pre_choice_state": {
-        "hp": 4,
-        "food": 5,
-        "ammo": 7,
+        "hp": 1,
+        "food": 3,
+        "ammo": 6,
         "medkits": 2,
-        "scrap": 2,
-        "radiation": 2,
+        "scrap": 7,
+        "radiation": 3,
         "archetype": "soldier",
-        "weapon_slot": "rust_rifle",
+        "weapon_slot": {
+          "id": "rust_rifle",
+          "slot": "weapon",
+          "affixes": {
+            "atk": 1
+          }
+        },
         "armor_slot": null,
-        "tool_slot": "field_pack"
+        "tool_slot": {
+          "id": "field_pack",
+          "slot": "tool",
+          "affixes": {}
+        }
       },
       "pressure": true,
       "combat_triggered": false,
@@ -256,23 +314,33 @@
       "equipment_change": null,
       "equipment_summary": null,
       "player_after": {
-        "hp": 4,
-        "food": 5,
-        "ammo": 7,
+        "hp": 1,
+        "food": 3,
+        "ammo": 6,
         "medkits": 2,
-        "scrap": 2,
-        "radiation": 3,
+        "scrap": 7,
+        "radiation": 4,
         "archetype": "soldier",
-        "weapon_slot": "rust_rifle",
+        "weapon_slot": {
+          "id": "rust_rifle",
+          "slot": "weapon",
+          "affixes": {
+            "atk": 1
+          }
+        },
         "armor_slot": null,
-        "tool_slot": "field_pack"
+        "tool_slot": {
+          "id": "field_pack",
+          "slot": "tool",
+          "affixes": {}
+        }
       }
     }
   ],
   "summary": {
     "pressure_count": 5,
     "death_cause_attribution": true,
-    "resource_signature": "hp:4|food:5|ammo:7|medkits:2|scrap:2|radiation:3|weapon:rust_rifle|armor:None|tool:field_pack"
+    "resource_signature": "hp:1|food:3|ammo:6|medkits:2|scrap:7|radiation:4|weapon:EquipmentState(id='rust_rifle', slot='weapon', affixes={'atk': 1})|armor:None|tool:EquipmentState(id='field_pack', slot='tool', affixes={})"
   },
   "failure_analysis": {
     "death_chain_length": 0,
@@ -293,23 +361,24 @@
     "telemetry": {
       "total_steps": 5,
       "pressure_count": 5,
-      "combat_count": 3,
+      "combat_count": 2,
       "loot_drop_count": 4,
-      "loot_total_amount": 9,
+      "loot_total_amount": 11,
       "equipment_change_count": 2,
       "equipment_ids": [
         "field_pack",
         "rust_rifle"
       ],
       "loot_resources": {
-        "scrap": 2,
+        "scrap": 5,
         "medkits": 1,
-        "ammo": 6
+        "ammo": 5
       },
-      "max_radiation": 3,
-      "min_food": 5,
-      "min_hp": 4,
+      "max_radiation": 4,
+      "min_food": 3,
+      "min_hp": 1,
       "low_resource_flags": [
+        "low_hp",
         "high_radiation"
       ],
       "risk_tags": [

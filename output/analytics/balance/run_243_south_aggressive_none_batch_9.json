@@ -12,16 +12,26 @@
   "victory": false,
   "end_reason": "radiation_death",
   "player_final": {
-    "hp": 0,
+    "hp": -3,
     "food": 7,
     "ammo": 0,
     "medkits": 0,
     "scrap": 2,
     "radiation": 2,
     "archetype": null,
-    "weapon_slot": "rust_rifle",
+    "weapon_slot": {
+      "id": "rust_rifle",
+      "slot": "weapon",
+      "affixes": {
+        "atk": 1
+      }
+    },
     "armor_slot": null,
-    "tool_slot": "field_pack"
+    "tool_slot": {
+      "id": "field_pack",
+      "slot": "tool",
+      "affixes": {}
+    }
   },
   "decision_log": [
     {
@@ -122,7 +132,11 @@
         "archetype": null,
         "weapon_slot": null,
         "armor_slot": null,
-        "tool_slot": "field_pack"
+        "tool_slot": {
+          "id": "field_pack",
+          "slot": "tool",
+          "affixes": {}
+        }
       }
     },
     {
@@ -144,7 +158,11 @@
         "archetype": null,
         "weapon_slot": null,
         "armor_slot": null,
-        "tool_slot": "field_pack"
+        "tool_slot": {
+          "id": "field_pack",
+          "slot": "tool",
+          "affixes": {}
+        }
       },
       "pressure": true,
       "combat_triggered": true,
@@ -160,23 +178,33 @@
       },
       "equipment_summary": "weapon -> rust_rifle (replaced empty)",
       "player_after": {
-        "hp": 0,
+        "hp": -3,
         "food": 7,
         "ammo": 0,
         "medkits": 0,
         "scrap": 2,
         "radiation": 2,
         "archetype": null,
-        "weapon_slot": "rust_rifle",
+        "weapon_slot": {
+          "id": "rust_rifle",
+          "slot": "weapon",
+          "affixes": {
+            "atk": 1
+          }
+        },
         "armor_slot": null,
-        "tool_slot": "field_pack"
+        "tool_slot": {
+          "id": "field_pack",
+          "slot": "tool",
+          "affixes": {}
+        }
       }
     }
   ],
   "summary": {
     "pressure_count": 3,
     "death_cause_attribution": true,
-    "resource_signature": "hp:0|food:7|ammo:0|medkits:0|scrap:2|radiation:2|weapon:rust_rifle|armor:None|tool:field_pack"
+    "resource_signature": "hp:-3|food:7|ammo:0|medkits:0|scrap:2|radiation:2|weapon:EquipmentState(id='rust_rifle', slot='weapon', affixes={'atk': 1})|armor:None|tool:EquipmentState(id='field_pack', slot='tool', affixes={})"
   },
   "failure_analysis": {
     "death_chain_length": 3,

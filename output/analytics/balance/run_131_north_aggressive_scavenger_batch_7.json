@@ -12,14 +12,20 @@
   "victory": true,
   "end_reason": "reached_final_node",
   "player_final": {
-    "hp": 3,
-    "food": 2,
-    "ammo": 1,
-    "medkits": 3,
-    "scrap": 16,
-    "radiation": 4,
+    "hp": 2,
+    "food": 1,
+    "ammo": 2,
+    "medkits": 4,
+    "scrap": 15,
+    "radiation": 3,
     "archetype": "scavenger",
-    "weapon_slot": "rust_rifle",
+    "weapon_slot": {
+      "id": "rust_rifle",
+      "slot": "weapon",
+      "affixes": {
+        "atk": 1
+      }
+    },
     "armor_slot": null,
     "tool_slot": null
   },
@@ -164,7 +170,13 @@
         "scrap": 13,
         "radiation": 2,
         "archetype": "scavenger",
-        "weapon_slot": "rust_rifle",
+        "weapon_slot": {
+          "id": "rust_rifle",
+          "slot": "weapon",
+          "affixes": {
+            "atk": 1
+          }
+        },
         "armor_slot": null,
         "tool_slot": null
       }
@@ -172,12 +184,11 @@
     {
       "step": 4,
       "node": "node_approach",
-      "event_id": "evt_emergency_beacon",
+      "event_id": "evt_waystation",
       "option_index": 1,
       "warning_signals": [
         "WARNING: radiation will continue to threaten future travel.",
-        "WARNING: this option adds radiation and increases long-term risk.",
-        "CRITICAL: another irradiated move may kill you."
+        "DANGER: this choice carries a high combat risk."
       ],
       "pre_choice_state": {
         "hp": 4,
@@ -187,28 +198,49 @@
         "scrap": 13,
         "radiation": 2,
         "archetype": "scavenger",
-        "weapon_slot": "rust_rifle",
+        "weapon_slot": {
+          "id": "rust_rifle",
+          "slot": "weapon",
+          "affixes": {
+            "atk": 1
+          }
+        },
         "armor_slot": null,
         "tool_slot": null
       },
       "pressure": true,
-      "combat_triggered": false,
-      "combat_loot": [],
+      "combat_triggered": true,
+      "combat_loot": [
+        {
+          "resource": "scrap",
+          "amount": 2
+        },
+        {
+          "resource": "medkits",
+          "amount": 1
+        }
+      ],
       "effects": {
-        "scrap": 2,
-        "radiation": 1
+        "hp": -1,
+        "ammo": 1
       },
       "equipment_change": null,
       "equipment_summary": null,
       "player_after": {
-        "hp": 4,
+        "hp": 3,
         "food": 3,
-        "ammo": 1,
-        "medkits": 3,
-        "scrap": 16,
-        "radiation": 3,
+        "ammo": 2,
+        "medkits": 4,
+        "scrap": 15,
+        "radiation": 2,
         "archetype": "scavenger",
-        "weapon_slot": "rust_rifle",
+        "weapon_slot": {
+          "id": "rust_rifle",
+          "slot": "weapon",
+          "affixes": {
+            "atk": 1
+          }
+        },
         "armor_slot": null,
         "tool_slot": null
       }
@@ -225,14 +257,20 @@
         "WARNING: food is low and route slack is nearly gone."
       ],
       "pre_choice_state": {
-        "hp": 3,
-        "food": 2,
-        "ammo": 1,
-        "medkits": 3,
-        "scrap": 16,
-        "radiation": 3,
+        "hp": 2,
+        "food": 1,
+        "ammo": 2,
+        "medkits": 4,
+        "scrap": 15,
+        "radiation": 2,
         "archetype": "scavenger",
-        "weapon_slot": "rust_rifle",
+        "weapon_slot": {
+          "id": "rust_rifle",
+          "slot": "weapon",
+          "affixes": {
+            "atk": 1
+          }
+        },
         "armor_slot": null,
         "tool_slot": null
       },
@@ -245,14 +283,20 @@
       "equipment_change": null,
       "equipment_summary": null,
       "player_after": {
-        "hp": 3,
-        "food": 2,
-        "ammo": 1,
-        "medkits": 3,
-        "scrap": 16,
-        "radiation": 4,
+        "hp": 2,
+        "food": 1,
+        "ammo": 2,
+        "medkits": 4,
+        "scrap": 15,
+        "radiation": 3,
         "archetype": "scavenger",
-        "weapon_slot": "rust_rifle",
+        "weapon_slot": {
+          "id": "rust_rifle",
+          "slot": "weapon",
+          "affixes": {
+            "atk": 1
+          }
+        },
         "armor_slot": null,
         "tool_slot": null
       }
@@ -261,7 +305,7 @@
   "summary": {
     "pressure_count": 5,
     "death_cause_attribution": true,
-    "resource_signature": "hp:3|food:2|ammo:1|medkits:3|scrap:16|radiation:4|weapon:rust_rifle|armor:None|tool:None"
+    "resource_signature": "hp:2|food:1|ammo:2|medkits:4|scrap:15|radiation:3|weapon:EquipmentState(id='rust_rifle', slot='weapon', affixes={'atk': 1})|armor:None|tool:None"
   },
   "failure_analysis": {
     "death_chain_length": 0,
@@ -281,20 +325,20 @@
     "telemetry": {
       "total_steps": 5,
       "pressure_count": 5,
-      "combat_count": 1,
-      "loot_drop_count": 2,
-      "loot_total_amount": 3,
+      "combat_count": 2,
+      "loot_drop_count": 4,
+      "loot_total_amount": 6,
       "equipment_change_count": 1,
       "equipment_ids": [
         "rust_rifle"
       ],
       "loot_resources": {
-        "scrap": 2,
-        "medkits": 1
+        "scrap": 4,
+        "medkits": 2
       },
-      "max_radiation": 4,
-      "min_food": 2,
-      "min_hp": 3,
+      "max_radiation": 3,
+      "min_food": 1,
+      "min_hp": 2,
       "low_resource_flags": [
         "low_hp",
         "low_food",

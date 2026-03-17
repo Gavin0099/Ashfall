@@ -10,14 +10,14 @@
   ],
   "ended": true,
   "victory": false,
-  "end_reason": "starvation",
+  "end_reason": "event_or_resource_death",
   "player_final": {
-    "hp": 5,
-    "food": 0,
-    "ammo": 4,
+    "hp": -1,
+    "food": 5,
+    "ammo": 1,
     "medkits": 1,
     "scrap": 1,
-    "radiation": 1,
+    "radiation": 0,
     "archetype": null,
     "weapon_slot": null,
     "armor_slot": null,
@@ -44,12 +44,7 @@
       },
       "pressure": true,
       "combat_triggered": true,
-      "combat_loot": [
-        {
-          "resource": "ammo",
-          "amount": 3
-        }
-      ],
+      "combat_loot": [],
       "effects": {
         "food": -1,
         "hp": -1,
@@ -58,98 +53,12 @@
       "equipment_change": null,
       "equipment_summary": null,
       "player_after": {
-        "hp": 6,
+        "hp": -1,
         "food": 5,
-        "ammo": 4,
+        "ammo": 1,
         "medkits": 1,
         "scrap": 1,
         "radiation": 0,
-        "archetype": null,
-        "weapon_slot": null,
-        "armor_slot": null,
-        "tool_slot": null
-      }
-    },
-    {
-      "step": 2,
-      "node": "node_north_2",
-      "event_id": "evt_collapsed_overpass",
-      "option_index": 1,
-      "warning_signals": [
-        "WARNING: radiation will continue to threaten future travel.",
-        "WARNING: this option adds radiation and increases long-term risk.",
-        "DANGER: this choice carries a high combat risk."
-      ],
-      "pre_choice_state": {
-        "hp": 6,
-        "food": 4,
-        "ammo": 4,
-        "medkits": 1,
-        "scrap": 1,
-        "radiation": 0,
-        "archetype": null,
-        "weapon_slot": null,
-        "armor_slot": null,
-        "tool_slot": null
-      },
-      "pressure": true,
-      "combat_triggered": false,
-      "combat_loot": [],
-      "effects": {
-        "food": -1,
-        "radiation": 1
-      },
-      "equipment_change": null,
-      "equipment_summary": null,
-      "player_after": {
-        "hp": 6,
-        "food": 3,
-        "ammo": 4,
-        "medkits": 1,
-        "scrap": 1,
-        "radiation": 1,
-        "archetype": null,
-        "weapon_slot": null,
-        "armor_slot": null,
-        "tool_slot": null
-      }
-    },
-    {
-      "step": 3,
-      "node": "node_mid",
-      "event_id": "evt_sniper_nest",
-      "option_index": 1,
-      "warning_signals": [
-        "WARNING: radiation will continue to threaten future travel.",
-        "WARNING: food is low and route slack is nearly gone."
-      ],
-      "pre_choice_state": {
-        "hp": 5,
-        "food": 2,
-        "ammo": 4,
-        "medkits": 1,
-        "scrap": 1,
-        "radiation": 1,
-        "archetype": null,
-        "weapon_slot": null,
-        "armor_slot": null,
-        "tool_slot": null
-      },
-      "pressure": true,
-      "combat_triggered": false,
-      "combat_loot": [],
-      "effects": {
-        "food": -2
-      },
-      "equipment_change": null,
-      "equipment_summary": null,
-      "player_after": {
-        "hp": 5,
-        "food": 0,
-        "ammo": 4,
-        "medkits": 1,
-        "scrap": 1,
-        "radiation": 1,
         "archetype": null,
         "weapon_slot": null,
         "armor_slot": null,
@@ -158,67 +67,50 @@
     }
   ],
   "summary": {
-    "pressure_count": 3,
+    "pressure_count": 1,
     "death_cause_attribution": true,
-    "resource_signature": "hp:5|food:0|ammo:4|medkits:1|scrap:1|radiation:1|weapon:None|armor:None|tool:None"
+    "resource_signature": "hp:-1|food:5|ammo:1|medkits:1|scrap:1|radiation:0|weapon:None|armor:None|tool:None"
   },
   "failure_analysis": {
-    "death_chain_length": 3,
+    "death_chain_length": 1,
     "primary_blame_factor": "resource_exhaustion",
     "regret_nodes": [
       {
-        "node_id": "node_mid",
-        "event_id": "evt_sniper_nest",
-        "blame_score": 0.34,
-        "description": "lost 2 food",
-        "steps_to_death": 0
-      },
-      {
         "node_id": "node_north_1",
         "event_id": "evt_scrapyard",
-        "blame_score": 0.34,
+        "blame_score": 1.0,
         "description": "lost 1 hp, lost 1 food, accepted combat risk",
-        "steps_to_death": 2
-      },
-      {
-        "node_id": "node_north_2",
-        "event_id": "evt_collapsed_overpass",
-        "blame_score": 0.32,
-        "description": "took +1 radiation, lost 1 food, carried radiation into later travel",
-        "steps_to_death": 1
+        "steps_to_death": 0
       }
     ],
     "steps_from_regret_to_death": 0,
     "is_trash_time_death": false
   },
   "run_summary": {
-    "headline": "north_cautious_none_batch_7: loss via starvation after 3 steps",
+    "headline": "north_cautious_none_batch_7: loss via event_or_resource_death after 1 steps",
     "route_family": "north",
-    "outcome": "starvation",
-    "key_turning_point": "node_mid (lost 2 food)",
+    "outcome": "event_or_resource_death",
+    "key_turning_point": "node_north_1 (lost 1 hp, lost 1 food, accepted combat risk)",
     "notable_equipment": [],
     "telemetry": {
-      "total_steps": 3,
-      "pressure_count": 3,
+      "total_steps": 1,
+      "pressure_count": 1,
       "combat_count": 1,
-      "loot_drop_count": 1,
-      "loot_total_amount": 3,
+      "loot_drop_count": 0,
+      "loot_total_amount": 0,
       "equipment_change_count": 0,
       "equipment_ids": [],
-      "loot_resources": {
-        "ammo": 3
-      },
-      "max_radiation": 1,
-      "min_food": 0,
-      "min_hp": 5,
+      "loot_resources": {},
+      "max_radiation": 0,
+      "min_food": 5,
+      "min_hp": 0,
       "low_resource_flags": [
-        "low_food"
+        "low_hp",
+        "low_ammo"
       ],
       "risk_tags": [
         "combat_seen",
-        "radiation_pressure",
-        "food_pressure",
-        "end_starvation"
+        "end_event_or_resource_death"
       ]
     }
   }
