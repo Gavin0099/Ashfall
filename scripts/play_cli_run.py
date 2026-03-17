@@ -23,7 +23,7 @@ from src.difficulty import build_starting_player, get_difficulty_profile
 from src.event_engine import pick_event_id, resolve_event_choice
 from src.run_engine import RunEngine, build_map
 from src.state_models import PlayerState
-from src.meta_progression import MetaProfile, RewardCalculator
+from src.meta_progression import MetaProfile, RewardCalculator, UPGRADE_METADATA, get_upgrade_cost
 from src.help_system import get_help_text, list_topics
 
 # --- UI CONSTANTS ---
@@ -169,9 +169,12 @@ def format_equipment_item(equipment: Any) -> str:
         return base_name
     
     affix_parts = []
+    # Translate common affixes to icons/labels
+    affix_map = {"atk": "⚔️", "def": "🛡️", "hp": "❤️"}
     for k, v in affixes.items():
-        affix_parts.append(f"{k}+{v}")
-    return f"{base_name}({', '.join(affix_parts)})"
+        label = affix_map.get(k, k)
+        affix_parts.append(f"{label}+{v}")
+    return f"{base_name} {C_CYAN}({', '.join(affix_parts)}){C_END}"
 
 
 def format_equipment(player: PlayerState) -> str:
@@ -340,6 +343,40 @@ def estimate_remaining_steps(map_state: Any, node_id: str) -> int:
             queue.append((nxt, depth + 1))
     return 0
 
+def show_meta_upgrade_menu(meta_profile: MetaProfile, meta_path: Path):
+    while True:
+        clear_screen()
+        draw_header("🛠️ 倖存者基地 - 永久強化")
+        print(f"  {C_CYAN}當前廢料持用量：{C_END} {C_YELLOW}{SYM_SCRAP} {meta_profile.total_scrap}{C_END}\n")
+        
+        up_ids = list(UPGRADE_METADATA.keys())
+        options = []
+        for uid in up_ids:
+            meta = UPGRADE_METADATA[uid]
+            level = meta_profile.get_level(uid)
+            max_lvl = meta["max_level"]
+            
+            if level < max_lvl:
+                cost = get_upgrade_cost(level)
+                options.append(f"{meta['name']} (Lv.{level}/{max_lvl}) - {meta['desc']} | {C_YELLOW}成本: {cost}{C_END}")
+            else:
+                options.append(f"{meta['name']} (Lv.{level}/{max_lvl}) - {C_GREEN}[已達最大等級]{C_END}")
+        
+        options.append("完成升級並離開 (Finish & Exit)")
+        
+        choice = prompt_index("請選擇要購買的強化項目：", options)
+        if choice == len(up_ids):
+            break
+            
+        uid = up_ids[choice]
+        if meta_profile.purchase_upgrade(uid):
+            meta_profile.save(meta_path)
+            print(f"\n{C_GREEN}✅ 升級成功！計畫已更新。{C_END}")
+        else:
+            print(f"\n{C_RED}❌ 升級失敗：廢料不足或已達等級上限。{C_END}")
+        
+        input(f"\n{C_DIM}按 Enter 繼續...{C_END}")
+
 
 def main() -> int:
     OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
@@ -356,7 +393,24 @@ def main() -> int:
     meta_profile = MetaProfile.load(meta_path)
 
     clear_screen()
-    draw_header("ASHFALL — 荒廢世界冒險")
+    
+    # Main Menu Loop
+    while True:
+        clear_screen()
+        draw_header("ASHFALL — 荒廢世界冒險")
+        main_choice = prompt_index(
+            "首頁選單：", 
+            ["進入荒野 (Start Run)", "升級基地 (Upgrade Base)", f"查看手冊 (Help)"]
+        )
+        if main_choice == 0:
+            break
+        elif main_choice == 1:
+            show_meta_upgrade_menu(meta_profile, meta_path)
+        elif main_choice == 2:
+            show_help_menu()
+
+    clear_screen()
+    draw_header("背景與職業選擇")
     
     # Archetype Selection
     available_archs = meta_profile.unlocked_archetypes
@@ -461,15 +515,24 @@ def main() -> int:
             outcome["combat"] = combat
             enemy_id = str(combat["enemy_id"])
             enemy_label = ENEMY_LABELS.get(enemy_id, enemy_id)
+            is_elite = combat.get("log", []) and "⚠️" in str(combat["log"][0])
+            
             archetype = infer_archetype(enemy_id)
             if archetype:
                 encounter_counter[archetype] += 1
-            print(f"觸發戰鬥：{enemy_label}")
+                
+            display_label = f"{BG_RED}{C_WHITE} [精英] {C_END} {C_BOLD}{enemy_label}{C_END}" if is_elite else f"{C_BOLD}{enemy_label}{C_END}"
+            
+            print(f"觸發戰鬥：{display_label}")
             for line in combat["log"]:
-                print(f"  {localize_combat_log_line(str(line))}")
+                l_str = str(line)
+                if "⚠️" in l_str:
+                    print(f"  {C_RED}{C_BOLD}{l_str}{C_END}")
+                else:
+                    print(f"  {localize_combat_log_line(l_str)}")
             loot = list(combat.get("loot", []))
             if loot:
-                print(f"戰利品摘要：{format_loot(loot)}")
+                print(f"戰利品摘要：{C_GREEN}{format_loot(loot)}{C_END}")
 
         if run.player.is_dead():
             run.end(victory=False, reason=engine._resolve_noncombat_death_reason(run))

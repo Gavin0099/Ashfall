@@ -4,7 +4,7 @@
 > **技術棧**: Markdown Specs + JSON Schema + Python (planned runtime)
 > **複雜度**: L2
 > **預計工期**: 2026/03/09 ~ 2026/05/01
-> **最後更新**: 2026-03-16
+> **最後更新**: 2026-03-17
 > **Owner**: GavinWu
 > **Freshness**: Sprint (7d)
 
@@ -39,7 +39,9 @@ Prototype validation contract: `PROTOTYPE_SUCCESS_CRITERIA.md`
 ├─ [✓] Phase v0.3: Meta Progression 擴展階段 (2026-03-17 完成)
 ├─ [✓] Phase v0.4: Product Specialization 產品特化 (2026-03-17 完成)
 ├─ [✓] Phase v0.5: Character Archetypes 角色職業系統 (2026-03-17 完成)
-└─ [ ] Phase v0.6: Advanced Mechanics & World Depth 進階機制與世界深度 (In Progress)
+├─ [✓] Phase v0.6: Advanced Mechanics & World Depth 進階機制與世界深度 (2026-03-17 完成)
+├─ [✓] Phase v0.7: Meta Progression Depth & Polish 系統深度與打磨 (2026-03-17 完成)
+└─ [ ] Phase v0.8: Content Pack & Final Polish 內容擴展與最終打磨 (Planned)
 ```
 
-**當前 Phase**: **v0.6 進行中 — 目標：實作裝備隨機屬性、多階段任務鏈與精英敵人。**
+**當前 Phase**: **v0.8 規劃中 — 目標：實作更多元化的 Meta 解鎖、隱藏職業以及整體遊戲平衡性優化。**
