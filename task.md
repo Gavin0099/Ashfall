@@ -1,0 +1,37 @@
+# Task: Fixing Governance Gates
+
+- [x] Fix `UnboundLocalError` in `governance_tools/plan_freshness.py`
+- [x] Run `scripts/verify_phase_gates.py` and ensure it passes basic execution
+- [x] Resolve "STALE" playtest data issue (verified FRESH: 1d)
+- [x] Update `FAILURE_CONTEXT.md` to reflect the fixed status
+- [x] Transition to Phase 7.0 (Environment & Resource Tuning)
+    - [x] Analyze current win rate metrics from `output/analytics/balance_summary.json`
+    - [x] Review radiation formula and adjust in `src/run_engine.py` (Grace point added)
+    - [x] Add radiation removal and food buffs to `schemas/event_template_catalog.json`
+    - [x] Fix simulation logic in `scripts/run_playability_check.py` (Start node event added)
+    - [x] Tune Boss Overseer and combat engine (Heal threshold, medkit power)
+    - [x] Verify final win rate >= 40% (Actual: 43%)
+- [x] Phase 8.0: AI Governance Framework Integration
+    - [x] Backup `governance/` and `governance_tools/` (to `governance_backup_20260319`)
+    - [x] Sync core MD files to root (AGENTS.md, IDENTITY.md, SOUL.md, etc.)
+    - [x] Sync `governance/` core docs from framework
+    - [x] Sync `governance_tools/` scripts from framework (51 tools synced)
+    - [x] Sync `tests/` and fix `test_failure_paths.py` (Regression fixed)
+    - [x] Run `contract_validator.py` and `verify_phase_gates.py` (Passed: 5/5)
+- [x] Phase 9.0: World Depth & Quest Evolution
+    - [x] Implement Quest Flag system in `src/event_engine.py` (Required flags & Set flags)
+    - [x] Add pre-condition checks to event resolution (`resource_requirement`)
+    - [x] Implement Merchant node and Barter logic (`evt_merchant_caravan`)
+    - [x] Add Elite Enemy mechanics (Passives: `shielded`, `thorns`)
+    - [x] Verify content expansion with balance simulations
+- [x] Phase 10.0: Interactive UI (Ashfall Dashboard)
+    - [x] Setup FastAPI Bridge (`api_server.py`)
+    - [x] Initialize Vite + React Frontend project
+    - [x] Implement Core Design System (CSS Variables & Glassmorphism)
+    - [x] Build Main Dashboard (Resource Panels & Story Viewport)
+    - [x] Implement Map & Action Console
+    - [x] Verify Gameplay Flow in Browser
+- [x] Memory Janitor Argument Fix
+    - [x] Restore `--clean-generated` argument to `memory_janitor.py`
+    - [x] Restore cleanup methods and dataclass
+    - [x] Verify fix with dry-run

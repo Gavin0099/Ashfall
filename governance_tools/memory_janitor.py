@@ -18,9 +18,17 @@ Priority: 8 (Memory Stewardship)
 import os
 import re
 import json
+import shutil
 from pathlib import Path
 from datetime import datetime
+from dataclasses import dataclass
 from typing import Tuple, List, Dict
+
+
+@dataclass
+class CleanupResult:
+    removed_paths: List[str]
+    errors: List[str]
 
 
 class MemoryJanitor:
@@ -111,7 +119,34 @@ class MemoryJanitor:
             "obsolete_decisions": obsolete_decisions,
             "archived_references": list(set(archived_references))
         }
-    
+
+    def find_generated_artifacts(self) -> List[Path]:
+        """尋找專案中的生成產物 (__pycache__, render_cache 等)"""
+        patterns = ["__pycache__", "render_cache", "audio_cache"]
+        found = []
+        repo_root = self.memory_root.parent
+        for pattern in patterns:
+            found.extend(repo_root.rglob(pattern))
+        return found
+
+    def cleanup_generated_artifacts(self, dry_run: bool = True) -> CleanupResult:
+        """清理生成產物"""
+        removed = []
+        errors = []
+        for path in self.find_generated_artifacts():
+            if dry_run:
+                removed.append(f"[dry-run] {path}")
+                continue
+            try:
+                if path.is_file():
+                    path.unlink()
+                else:
+                    shutil.rmtree(path)
+                removed.append(str(path))
+            except Exception as e:
+                errors.append(f"Failed to remove {path}: {e}")
+        return CleanupResult(removed_paths=removed, errors=errors)
+
     def create_archive_plan(self) -> str:
         """
         產出歸檔計畫 (Markdown 格式,供人工確認)
@@ -121,6 +156,7 @@ class MemoryJanitor:
         """
         line_count, status = self.check_hot_memory_status()
         archivable = self.analyze_archivable_content()
+        generated = self.find_generated_artifacts()
         
         timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
         
@@ -149,6 +185,15 @@ class MemoryJanitor:
 """
         for ref in archivable['archived_references']:
             report += f"- {ref}\n"
+
+        if generated:
+            report += f"""
+### 📦 generated_artifacts ({len(generated)})
+"""
+            for g in generated[:5]:
+                report += f"- {g.name}\n"
+            if len(generated) > 5:
+                report += f"- ...及其他 {len(generated)-5} 個項目\n"
         
         report += f"""
 ---
@@ -164,6 +209,9 @@ class MemoryJanitor:
             report += "建議在下一個自然中斷點執行掃除\n"
         else:
             report += "目前狀態良好,無需掃除\n"
+        
+        if generated:
+            report += "\n**[推薦]** 清理生成產物以保持專案整潔。\n"
         
         return report
     
@@ -273,7 +321,7 @@ class MemoryJanitor:
         self._save_manifest(manifest)
 
         return (
-            f"✅ 掃除完成\n"
+            f"✅ 掃除完成 (cleanup completed)\n"
             f"  歸檔: {archive_file}\n"
             f"  原始行數: {original_lines} → 截短後: {new_lines} 行\n"
             f"  Pointer 已插入 {self.active_task_file}\n"
@@ -298,6 +346,7 @@ def main():
     parser.add_argument('--execute', action='store_true', help='執行實際掃除（copy+pointer+manifest）')
     parser.add_argument('--dry-run', action='store_true', help='模擬執行 (不實際修改檔案)')
     parser.add_argument('--manifest', action='store_true', help='顯示 archive/manifest.json 內容')
+    parser.add_argument('--clean-generated', action='store_true', help='清理生成產物 (__pycache__ 等)')
     parser.add_argument('--format', choices=['human', 'json'], default='human', help='輸出格式 (預設: human)')
 
     args = parser.parse_args()
@@ -350,6 +399,22 @@ def main():
     elif args.execute:
         result = janitor.execute_cleanup(dry_run=args.dry_run)
         print(result)
+
+    elif args.clean_generated:
+        result = janitor.cleanup_generated_artifacts(dry_run=args.dry_run)
+        if args.format == 'json':
+            print(json.dumps({
+                "removed_paths": result.removed_paths,
+                "errors": result.errors
+            }, ensure_ascii=False))
+        else:
+            print(f"🧹 清理生成產物 (清理模式: {'模擬' if args.dry_run else '正式'})")
+            for p in result.removed_paths:
+                print(f"  [-] {p}")
+            if result.errors:
+                print("\n❌ 錯誤:")
+                for e in result.errors:
+                    print(f"  [!] {e}")
 
     elif args.manifest:
         manifest = janitor._load_manifest()
