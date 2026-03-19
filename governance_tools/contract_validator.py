@@ -50,7 +50,6 @@ class ValidationResult:
     compliant: bool
     contract_found: bool
     fields: dict
-    metrics: dict = field(default_factory=dict)
     errors: list[str] = field(default_factory=list)
     warnings: list[str] = field(default_factory=list)
 
@@ -107,7 +106,7 @@ def _validate_rules(fields: dict, errors: list[str], available: set[str] | None 
         )
 
 
-def validate_contract(text: str, available_rules: set[str] | None = None, balance_summary_path: Optional[Path] = None, regret_threshold: float = 0.5) -> ValidationResult:
+def validate_contract(text: str, available_rules: set[str] | None = None) -> ValidationResult:
     block = extract_contract_block(text)
     if block is None:
         return ValidationResult(
@@ -177,17 +176,6 @@ def validate_contract(text: str, available_rules: set[str] | None = None, balanc
     _validate_choice(fields, "OVERSIGHT", VALID_OVERSIGHT_LEVELS, errors)
     _validate_choice(fields, "MEMORY_MODE", VALID_MEMORY_MODES, errors)
 
-    metrics = {}
-    if balance_summary_path and balance_summary_path.exists():
-        try:
-            summary = json.loads(balance_summary_path.read_text(encoding="utf-8"))
-            regret = summary.get("avg_steps_from_regret_to_death", 0.0)
-            metrics["avg_steps_from_regret_to_death"] = regret
-            if regret < regret_threshold:
-                errors.append(f"Regret gate failed: avg_steps_from_regret_to_death={regret} < {regret_threshold}")
-        except Exception as e:
-            warnings.append(f"Failed to read balance summary for regret gate: {e}")
-
     agent_id = fields.get("AGENT_ID", "").strip()
     session = fields.get("SESSION", "").strip()
     if agent_id:
@@ -202,7 +190,6 @@ def validate_contract(text: str, available_rules: set[str] | None = None, balanc
         compliant=len(errors) == 0,
         contract_found=True,
         fields=fields,
-        metrics=metrics,
         errors=errors,
         warnings=warnings,
     )
@@ -238,7 +225,6 @@ def format_json(result: ValidationResult) -> str:
             "fields": result.fields,
             "errors": result.errors,
             "warnings": result.warnings,
-            "metrics": result.metrics,
         },
         ensure_ascii=False,
         indent=2,

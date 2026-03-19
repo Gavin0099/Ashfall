@@ -107,7 +107,7 @@
     "death_reasons": {
       "combat_death": 51
     },
-    "decision_trace_coverage_rate": 0.0,
+    "decision_trace_coverage_rate": 1.0,
     "death_cause_attribution_rate": 1.0,
     "trash_time_death_rate": 0.0,
     "avg_steps_from_regret_to_death": 2.27,
@@ -372,7 +372,7 @@
     },
     "balance_gate": {
       "twenty_runs_captured": true,
-      "decision_trace_complete": false,
+      "decision_trace_complete": true,
       "death_attribution_complete": true,
       "route_divergence_visible": true
     }

@@ -322,6 +322,19 @@ def run_plan(plan: RoutePlan, nodes: Dict[str, dict], events: Dict[str, dict], e
     start_node = engine.map_state.get_node(run.current_node)
     start_event_id = pick_event_id(start_node, engine.rng, run_flags=run.flags, event_catalog=events)
     start_outcome = engine.resolve_node_event_with_id(start_node, run, event_id=start_event_id, option_index=0)
+    
+    # Track the start node moment
+    moments.append({
+        "node": run.current_node,
+        "option_index": 0,
+        "event_outcome": start_outcome,
+        "warning_signals": [],
+        "pre_choice_state": snapshot_player(player),
+        "equipment_summary": summarize_equipment_change(start_outcome.get("equipment_change")),
+        "player": snapshot_player(run.player),
+        "pressure": False,
+    })
+    
     decision_log.append({
         "step": 1,
         "node": run.current_node,
