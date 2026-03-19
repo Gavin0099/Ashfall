@@ -21,7 +21,7 @@
     },
     "special_ability": {
       "type": "string",
-      "enum": ["opening_shot", "thick_hide"]
+      "enum": ["opening_shot", "thick_hide", "shockwave", "frenzy"]
     },
     "hp": {
       "type": "integer",
@@ -48,7 +48,7 @@
         "properties": {
           "resource": {
             "type": "string",
-            "enum": ["food", "ammo", "medkits", "scrap"]
+            "enum": ["food", "ammo", "medkits", "scrap", "xp"]
           },
           "amount": { "type": "integer", "minimum": 1 },
           "chance": { "type": "number", "minimum": 0, "maximum": 1 }

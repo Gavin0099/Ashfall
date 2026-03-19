@@ -1,4 +1,4 @@
-﻿#!/usr/bin/env python3
+#!/usr/bin/env python3
 """Validate Phase A schema files and sample payloads without external dependencies."""
 
 from __future__ import annotations
@@ -75,7 +75,7 @@ def validate_enemy(data: dict[str, Any], src: Path) -> None:
     if "archetype" in data:
         ensure(data["archetype"] in {"raider", "mutant", "beast", "machine", "boss"}, f"{src}: archetype invalid")
     if "special_ability" in data:
-        ensure(data["special_ability"] in {"opening_shot", "thick_hide"}, f"{src}: special_ability invalid")
+        ensure(data["special_ability"] in {"opening_shot", "thick_hide", "shockwave", "frenzy"}, f"{src}: special_ability invalid")
 
     dr = data.get("damage_range")
     ensure(isinstance(dr, dict), f"{src}: damage_range must be object")
@@ -88,7 +88,7 @@ def validate_enemy(data: dict[str, Any], src: Path) -> None:
         ensure(isinstance(lt, list), f"{src}: loot_table must be array")
         for i, item in enumerate(lt):
             ensure(isinstance(item, dict), f"{src}: loot_table[{i}] must be object")
-            ensure(item.get("resource") in {"food", "ammo", "medkits", "scrap"}, f"{src}: loot resource invalid")
+            ensure(item.get("resource") in {"food", "ammo", "medkits", "scrap", "xp"}, f"{src}: loot resource invalid")
             ensure(isinstance(item.get("amount"), int) and item["amount"] >= 1, f"{src}: loot amount invalid")
             if "chance" in item:
                 chance = item["chance"]
