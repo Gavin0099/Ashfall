@@ -23,7 +23,7 @@ class RegionProfile:
 REGIONAL_PROFILES = [
     RegionProfile("fringe", "邊緣地帶 (Fringe)", 0, 3, 0, 1.0, 1.0),
     RegionProfile("dead_zone", "死亡禁區 (Dead Zone)", 4, 7, 1, 1.2, 1.3),
-    RegionProfile("the_ridge", "山脊之巔 (The Ridge)", 8, 999, 2, 1.5, 2.0),
+    RegionProfile("the_ridge", "山脊之巔 (The Ridge)", 8, 999, 1, 1.5, 2.0),
 ]
 
 
@@ -64,8 +64,8 @@ DIFFICULTY_PROFILES: dict[str, DifficultyProfile] = {
         name="normal",
         starting_hp=20,
         starting_food=10,
-        starting_ammo=3,
-        starting_medkits=2,
+        starting_ammo=7,
+        starting_medkits=5,
         event_combat_delta=0.0,
     ),
     "hard": DifficultyProfile(

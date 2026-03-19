@@ -60,7 +60,7 @@ class CombatEngine:
         if player.medkits <= 0:
             raise ValueError("Cannot use medkit without medkits")
         player.medkits -= 1
-        heal = 8
+        heal = 10
         if player.archetype == "medic":
             heal += 1
         
@@ -136,10 +136,10 @@ class CombatEngine:
         if enemy.is_elite:
             log.append(f"⚠️ 遭遇精英敵人：{enemy.name}！")
 
-        while player.hp > 0 and enemy.hp > 0:
+        while player.hp > 0 and enemy.hp > 0 and rounds < 100:
             rounds += 1
             # Survival first: use medkit if HP is critical
-            if player.medkits > 0 and player.hp <= 6:
+            if player.medkits > 0 and player.hp <= 8:
                 healed = self.player_use_medkit(player)
                 log.append(f"第 {rounds} 回合：你使用醫療包，回復 {healed} 點生命")
             elif player.ammo > 0:

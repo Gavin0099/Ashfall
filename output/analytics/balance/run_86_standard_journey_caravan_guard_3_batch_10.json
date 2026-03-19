@@ -16,12 +16,12 @@
   "victory": true,
   "end_reason": "reached_final_node",
   "player_final": {
-    "hp": 17,
-    "food": 2,
+    "hp": 18,
+    "food": 6,
     "ammo": 2,
-    "medkits": 2,
-    "scrap": 66,
-    "radiation": 1,
+    "medkits": 7,
+    "scrap": 62,
+    "radiation": 4,
     "archetype": null,
     "character": {
       "background_id": "caravan_guard",
@@ -44,7 +44,7 @@
         "tag_caravan_guard"
       ],
       "level": 5,
-      "xp": 13
+      "xp": 15
     },
     "weapon_slot": {
       "id": "sledgehammer",
@@ -59,7 +59,8 @@
         "strength": 1.2
       },
       "affixes": {
-        "atk": 3
+        "atk": 1,
+        "def": 1
       },
       "tags": [
         "melee",
@@ -69,37 +70,20 @@
       "refinement_count": 0
     },
     "armor_slot": null,
-    "tool_slot": {
-      "id": "field_pack",
-      "slot": "tool",
-      "durability": 10,
-      "max_durability": 10,
-      "rarity": "common",
-      "requirements": {
-        "strength": 4
-      },
-      "scaling": {},
-      "affixes": {},
-      "tags": [
-        "exploration"
-      ],
-      "refinement_count": 0
-    }
+    "tool_slot": null
   },
   "decision_log": [
     {
       "step": 1,
-      "node": "node_fringe_1",
-      "event_id": "evt_scrapyard",
+      "node": "node_start",
+      "event_id": "evt_departure",
       "option_index": 0,
-      "warning_signals": [
-        "DANGER: this choice carries a high combat risk."
-      ],
+      "warning_signals": [],
       "pre_choice_state": {
         "hp": 20,
-        "food": 9,
-        "ammo": 3,
-        "medkits": 2,
+        "food": 10,
+        "ammo": 7,
+        "medkits": 5,
         "scrap": 0,
         "radiation": 0,
         "archetype": null,
@@ -123,62 +107,26 @@
           "tags": [
             "tag_caravan_guard"
           ],
-          "level": 1,
+          "level": 2,
           "xp": 0
         },
         "weapon_slot": null,
         "armor_slot": null,
         "tool_slot": null
       },
-      "pressure": true,
-      "combat_triggered": true,
-      "combat_loot": [
-        {
-          "resource": "ammo",
-          "amount": 5
-        },
-        {
-          "resource": "scrap",
-          "amount": 7
-        }
-      ],
+      "pressure": false,
+      "combat_triggered": false,
       "effects": {
-        "food": 2,
-        "ammo": 3,
-        "medkits": 2,
-        "xp": 8
+        "food": 3,
+        "medkits": 1,
+        "xp": 10
       },
-      "equipment_change": {
-        "slot": "weapon",
-        "item": "makeshift_blade",
-        "item_data": {
-          "id": "makeshift_blade",
-          "slot": "weapon",
-          "durability": 10,
-          "max_durability": 10,
-          "rarity": "common",
-          "requirements": {},
-          "scaling": {
-            "strength": 0.5
-          },
-          "affixes": {
-            "atk": 3
-          },
-          "tags": [
-            "melee",
-            "makeshift"
-          ],
-          "refinement_count": 0
-        },
-        "changed": true
-      },
-      "equipment_summary": "weapon -> makeshift_blade (replaced empty)",
       "player_after": {
-        "hp": 14,
-        "food": 11,
-        "ammo": 9,
-        "medkits": 4,
-        "scrap": 7,
+        "hp": 20,
+        "food": 13,
+        "ammo": 7,
+        "medkits": 6,
+        "scrap": 0,
         "radiation": 0,
         "archetype": null,
         "character": {
@@ -201,25 +149,27 @@
           "tags": [
             "tag_caravan_guard"
           ],
-          "level": 1,
-          "xp": 8
+          "level": 2,
+          "xp": 0
         },
         "weapon_slot": {
-          "id": "makeshift_blade",
+          "id": "rust_rifle",
           "slot": "weapon",
-          "durability": 9,
+          "durability": 10,
           "max_durability": 10,
           "rarity": "common",
-          "requirements": {},
+          "requirements": {
+            "agility": 4
+          },
           "scaling": {
-            "strength": 0.5
+            "perception": 0.5
           },
           "affixes": {
-            "atk": 3
+            "loot_scrap": 1
           },
           "tags": [
-            "melee",
-            "makeshift"
+            "ranged",
+            "firearm"
           ],
           "refinement_count": 0
         },
@@ -229,18 +179,19 @@
     },
     {
       "step": 2,
-      "node": "node_fringe_2",
-      "event_id": "evt_mutant_burrow",
+      "node": "node_fringe_1",
+      "event_id": "evt_factory_ruins",
       "option_index": 0,
       "warning_signals": [
-        "DANGER: this choice carries a high combat risk."
+        "WARNING: radiation will continue to threaten future travel.",
+        "WARNING: this option adds radiation and increases long-term risk."
       ],
       "pre_choice_state": {
-        "hp": 14,
-        "food": 10,
-        "ammo": 9,
-        "medkits": 4,
-        "scrap": 7,
+        "hp": 20,
+        "food": 12,
+        "ammo": 7,
+        "medkits": 6,
+        "scrap": 0,
         "radiation": 0,
         "archetype": null,
         "character": {
@@ -263,25 +214,157 @@
           "tags": [
             "tag_caravan_guard"
           ],
-          "level": 1,
-          "xp": 8
+          "level": 2,
+          "xp": 0
         },
         "weapon_slot": {
-          "id": "makeshift_blade",
+          "id": "rust_rifle",
           "slot": "weapon",
-          "durability": 9,
+          "durability": 10,
           "max_durability": 10,
           "rarity": "common",
-          "requirements": {},
+          "requirements": {
+            "agility": 4
+          },
           "scaling": {
-            "strength": 0.5
+            "perception": 0.5
           },
           "affixes": {
-            "atk": 3
+            "loot_scrap": 1
           },
           "tags": [
-            "melee",
-            "makeshift"
+            "ranged",
+            "firearm"
+          ],
+          "refinement_count": 0
+        },
+        "armor_slot": null,
+        "tool_slot": null
+      },
+      "pressure": true,
+      "combat_triggered": false,
+      "combat_loot": [],
+      "effects": {
+        "scrap": 3,
+        "hp": -1,
+        "radiation": 1
+      },
+      "equipment_change": null,
+      "equipment_summary": null,
+      "player_after": {
+        "hp": 19,
+        "food": 12,
+        "ammo": 7,
+        "medkits": 6,
+        "scrap": 3,
+        "radiation": 1,
+        "archetype": null,
+        "character": {
+          "background_id": "caravan_guard",
+          "display_name": "Generated Caravan guard",
+          "special": {
+            "strength": 12,
+            "perception": 7,
+            "endurance": 4,
+            "charisma": 2,
+            "intelligence": 3,
+            "agility": 5,
+            "luck": 7
+          },
+          "traits": [
+            "paranoid_reflex",
+            "lone_wolf"
+          ],
+          "perks": [],
+          "tags": [
+            "tag_caravan_guard"
+          ],
+          "level": 2,
+          "xp": 0
+        },
+        "weapon_slot": {
+          "id": "rust_rifle",
+          "slot": "weapon",
+          "durability": 10,
+          "max_durability": 10,
+          "rarity": "common",
+          "requirements": {
+            "agility": 4
+          },
+          "scaling": {
+            "perception": 0.5
+          },
+          "affixes": {
+            "loot_scrap": 1
+          },
+          "tags": [
+            "ranged",
+            "firearm"
+          ],
+          "refinement_count": 0
+        },
+        "armor_slot": null,
+        "tool_slot": null
+      }
+    },
+    {
+      "step": 3,
+      "node": "node_fringe_2",
+      "event_id": "evt_mutant_burrow",
+      "option_index": 0,
+      "warning_signals": [
+        "WARNING: radiation will continue to threaten future travel.",
+        "DANGER: this choice carries a high combat risk."
+      ],
+      "pre_choice_state": {
+        "hp": 19,
+        "food": 11,
+        "ammo": 7,
+        "medkits": 6,
+        "scrap": 3,
+        "radiation": 1,
+        "archetype": null,
+        "character": {
+          "background_id": "caravan_guard",
+          "display_name": "Generated Caravan guard",
+          "special": {
+            "strength": 12,
+            "perception": 7,
+            "endurance": 4,
+            "charisma": 2,
+            "intelligence": 3,
+            "agility": 5,
+            "luck": 7
+          },
+          "traits": [
+            "paranoid_reflex",
+            "lone_wolf"
+          ],
+          "perks": [],
+          "tags": [
+            "tag_caravan_guard"
+          ],
+          "level": 2,
+          "xp": 0
+        },
+        "weapon_slot": {
+          "id": "rust_rifle",
+          "slot": "weapon",
+          "durability": 10,
+          "max_durability": 10,
+          "rarity": "common",
+          "requirements": {
+            "agility": 4
+          },
+          "scaling": {
+            "perception": 0.5
+          },
+          "affixes": {
+            "loot_scrap": 1
+          },
+          "tags": [
+            "ranged",
+            "firearm"
           ],
           "refinement_count": 0
         },
@@ -300,12 +383,12 @@
       "equipment_change": null,
       "equipment_summary": null,
       "player_after": {
-        "hp": 13,
-        "food": 10,
-        "ammo": 9,
-        "medkits": 5,
-        "scrap": 13,
-        "radiation": 0,
+        "hp": 18,
+        "food": 11,
+        "ammo": 7,
+        "medkits": 7,
+        "scrap": 9,
+        "radiation": 1,
         "archetype": null,
         "character": {
           "background_id": "caravan_guard",
@@ -328,149 +411,28 @@
             "tag_caravan_guard"
           ],
           "level": 2,
-          "xp": 3
+          "xp": 5
         },
         "weapon_slot": {
-          "id": "makeshift_blade",
+          "id": "rust_rifle",
           "slot": "weapon",
-          "durability": 9,
+          "durability": 10,
           "max_durability": 10,
           "rarity": "common",
-          "requirements": {},
+          "requirements": {
+            "agility": 4
+          },
           "scaling": {
-            "strength": 0.5
+            "perception": 0.5
           },
           "affixes": {
-            "atk": 3
+            "loot_scrap": 1
           },
           "tags": [
-            "melee",
-            "makeshift"
+            "ranged",
+            "firearm"
           ],
           "refinement_count": 0
-        },
-        "armor_slot": null,
-        "tool_slot": null
-      }
-    },
-    {
-      "step": 3,
-      "node": "node_fringe_3",
-      "event_id": "evt_tech_vault",
-      "option_index": 1,
-      "warning_signals": [],
-      "pre_choice_state": {
-        "hp": 20,
-        "food": 9,
-        "ammo": 9,
-        "medkits": 4,
-        "scrap": 8,
-        "radiation": 0,
-        "archetype": null,
-        "character": {
-          "background_id": "caravan_guard",
-          "display_name": "Generated Caravan guard",
-          "special": {
-            "strength": 12,
-            "perception": 7,
-            "endurance": 4,
-            "charisma": 2,
-            "intelligence": 3,
-            "agility": 5,
-            "luck": 7
-          },
-          "traits": [
-            "paranoid_reflex",
-            "lone_wolf"
-          ],
-          "perks": [],
-          "tags": [
-            "tag_caravan_guard"
-          ],
-          "level": 2,
-          "xp": 3
-        },
-        "weapon_slot": {
-          "id": "makeshift_blade",
-          "slot": "weapon",
-          "durability": 9,
-          "max_durability": 10,
-          "rarity": "rare",
-          "requirements": {},
-          "scaling": {
-            "strength": 0.5
-          },
-          "affixes": {
-            "atk": 3
-          },
-          "tags": [
-            "melee",
-            "makeshift"
-          ],
-          "refinement_count": 1
-        },
-        "armor_slot": null,
-        "tool_slot": null
-      },
-      "pressure": true,
-      "combat_triggered": false,
-      "combat_loot": [],
-      "effects": {
-        "scrap": 12,
-        "hp": -2,
-        "xp": 5
-      },
-      "equipment_change": null,
-      "equipment_summary": null,
-      "player_after": {
-        "hp": 18,
-        "food": 9,
-        "ammo": 9,
-        "medkits": 4,
-        "scrap": 20,
-        "radiation": 0,
-        "archetype": null,
-        "character": {
-          "background_id": "caravan_guard",
-          "display_name": "Generated Caravan guard",
-          "special": {
-            "strength": 12,
-            "perception": 7,
-            "endurance": 4,
-            "charisma": 2,
-            "intelligence": 3,
-            "agility": 5,
-            "luck": 7
-          },
-          "traits": [
-            "paranoid_reflex",
-            "lone_wolf"
-          ],
-          "perks": [],
-          "tags": [
-            "tag_caravan_guard"
-          ],
-          "level": 2,
-          "xp": 8
-        },
-        "weapon_slot": {
-          "id": "makeshift_blade",
-          "slot": "weapon",
-          "durability": 9,
-          "max_durability": 10,
-          "rarity": "rare",
-          "requirements": {},
-          "scaling": {
-            "strength": 0.5
-          },
-          "affixes": {
-            "atk": 3
-          },
-          "tags": [
-            "melee",
-            "makeshift"
-          ],
-          "refinement_count": 1
         },
         "armor_slot": null,
         "tool_slot": null
@@ -478,479 +440,17 @@
     },
     {
       "step": 4,
-      "node": "node_boss_gatekeeper",
-      "event_id": "evt_boss_gatekeeper",
-      "option_index": 0,
-      "warning_signals": [
-        "DANGER: this choice carries a high combat risk."
-      ],
-      "pre_choice_state": {
-        "hp": 18,
-        "food": 8,
-        "ammo": 9,
-        "medkits": 4,
-        "scrap": 20,
-        "radiation": 0,
-        "archetype": null,
-        "character": {
-          "background_id": "caravan_guard",
-          "display_name": "Generated Caravan guard",
-          "special": {
-            "strength": 12,
-            "perception": 7,
-            "endurance": 4,
-            "charisma": 2,
-            "intelligence": 3,
-            "agility": 5,
-            "luck": 7
-          },
-          "traits": [
-            "paranoid_reflex",
-            "lone_wolf"
-          ],
-          "perks": [],
-          "tags": [
-            "tag_caravan_guard"
-          ],
-          "level": 2,
-          "xp": 8
-        },
-        "weapon_slot": {
-          "id": "makeshift_blade",
-          "slot": "weapon",
-          "durability": 9,
-          "max_durability": 10,
-          "rarity": "rare",
-          "requirements": {},
-          "scaling": {
-            "strength": 0.5
-          },
-          "affixes": {
-            "atk": 3
-          },
-          "tags": [
-            "melee",
-            "makeshift"
-          ],
-          "refinement_count": 1
-        },
-        "armor_slot": null,
-        "tool_slot": null
-      },
-      "pressure": true,
-      "combat_triggered": true,
-      "combat_loot": [
-        {
-          "resource": "xp",
-          "amount": 25
-        },
-        {
-          "resource": "scrap",
-          "amount": 25
-        }
-      ],
-      "effects": {
-        "xp": 5
-      },
-      "equipment_change": null,
-      "equipment_summary": null,
-      "player_after": {
-        "hp": 12,
-        "food": 8,
-        "ammo": 7,
-        "medkits": 4,
-        "scrap": 45,
-        "radiation": 0,
-        "archetype": null,
-        "character": {
-          "background_id": "caravan_guard",
-          "display_name": "Generated Caravan guard",
-          "special": {
-            "strength": 12,
-            "perception": 7,
-            "endurance": 4,
-            "charisma": 2,
-            "intelligence": 3,
-            "agility": 5,
-            "luck": 7
-          },
-          "traits": [
-            "paranoid_reflex",
-            "lone_wolf"
-          ],
-          "perks": [],
-          "tags": [
-            "tag_caravan_guard"
-          ],
-          "level": 2,
-          "xp": 38
-        },
-        "weapon_slot": {
-          "id": "hardened_blade",
-          "slot": "weapon",
-          "durability": 9,
-          "max_durability": 10,
-          "rarity": "legendary",
-          "requirements": {
-            "strength": 5
-          },
-          "scaling": {
-            "strength": 0.8
-          },
-          "affixes": {
-            "def": 2
-          },
-          "tags": [
-            "melee",
-            "quality",
-            "lead_lined"
-          ],
-          "refinement_count": 0
-        },
-        "armor_slot": null,
-        "tool_slot": null
-      }
-    },
-    {
-      "step": 5,
-      "node": "node_deadzone_1",
-      "event_id": "evt_floodplain",
-      "option_index": 0,
-      "warning_signals": [
-        "WARNING: radiation will continue to threaten future travel.",
-        "WARNING: this option adds radiation and increases long-term risk."
-      ],
-      "pre_choice_state": {
-        "hp": 12,
-        "food": 7,
-        "ammo": 7,
-        "medkits": 4,
-        "scrap": 45,
-        "radiation": 0,
-        "archetype": null,
-        "character": {
-          "background_id": "caravan_guard",
-          "display_name": "Generated Caravan guard",
-          "special": {
-            "strength": 12,
-            "perception": 7,
-            "endurance": 4,
-            "charisma": 2,
-            "intelligence": 3,
-            "agility": 5,
-            "luck": 7
-          },
-          "traits": [
-            "paranoid_reflex",
-            "lone_wolf"
-          ],
-          "perks": [],
-          "tags": [
-            "tag_caravan_guard"
-          ],
-          "level": 2,
-          "xp": 38
-        },
-        "weapon_slot": {
-          "id": "hardened_blade",
-          "slot": "weapon",
-          "durability": 9,
-          "max_durability": 10,
-          "rarity": "legendary",
-          "requirements": {
-            "strength": 5
-          },
-          "scaling": {
-            "strength": 0.8
-          },
-          "affixes": {
-            "def": 2
-          },
-          "tags": [
-            "melee",
-            "quality",
-            "lead_lined"
-          ],
-          "refinement_count": 0
-        },
-        "armor_slot": null,
-        "tool_slot": null
-      },
-      "pressure": true,
-      "combat_triggered": false,
-      "combat_loot": [],
-      "effects": {
-        "food": -1,
-        "radiation": 1
-      },
-      "equipment_change": {
-        "slot": "tool",
-        "item": "field_pack",
-        "item_data": {
-          "id": "field_pack",
-          "slot": "tool",
-          "durability": 10,
-          "max_durability": 10,
-          "rarity": "common",
-          "requirements": {
-            "strength": 4
-          },
-          "scaling": {},
-          "affixes": {},
-          "tags": [
-            "exploration"
-          ],
-          "refinement_count": 0
-        },
-        "changed": true
-      },
-      "equipment_summary": "tool -> field_pack (replaced empty)",
-      "player_after": {
-        "hp": 12,
-        "food": 8,
-        "ammo": 7,
-        "medkits": 4,
-        "scrap": 45,
-        "radiation": 1,
-        "archetype": null,
-        "character": {
-          "background_id": "caravan_guard",
-          "display_name": "Generated Caravan guard",
-          "special": {
-            "strength": 12,
-            "perception": 7,
-            "endurance": 4,
-            "charisma": 2,
-            "intelligence": 3,
-            "agility": 5,
-            "luck": 7
-          },
-          "traits": [
-            "paranoid_reflex",
-            "lone_wolf"
-          ],
-          "perks": [],
-          "tags": [
-            "tag_caravan_guard"
-          ],
-          "level": 3,
-          "xp": 18
-        },
-        "weapon_slot": {
-          "id": "hardened_blade",
-          "slot": "weapon",
-          "durability": 9,
-          "max_durability": 10,
-          "rarity": "legendary",
-          "requirements": {
-            "strength": 5
-          },
-          "scaling": {
-            "strength": 0.8
-          },
-          "affixes": {
-            "def": 2
-          },
-          "tags": [
-            "melee",
-            "quality",
-            "lead_lined"
-          ],
-          "refinement_count": 0
-        },
-        "armor_slot": null,
-        "tool_slot": {
-          "id": "field_pack",
-          "slot": "tool",
-          "durability": 10,
-          "max_durability": 10,
-          "rarity": "common",
-          "requirements": {
-            "strength": 4
-          },
-          "scaling": {},
-          "affixes": {},
-          "tags": [
-            "exploration"
-          ],
-          "refinement_count": 0
-        }
-      }
-    },
-    {
-      "step": 6,
-      "node": "node_deadzone_2",
-      "event_id": "evt_sniper_nest",
-      "option_index": 0,
-      "warning_signals": [
-        "WARNING: radiation will continue to threaten future travel.",
-        "DANGER: this choice carries a high combat risk."
-      ],
-      "pre_choice_state": {
-        "hp": 11,
-        "food": 7,
-        "ammo": 7,
-        "medkits": 4,
-        "scrap": 45,
-        "radiation": 1,
-        "archetype": null,
-        "character": {
-          "background_id": "caravan_guard",
-          "display_name": "Generated Caravan guard",
-          "special": {
-            "strength": 12,
-            "perception": 7,
-            "endurance": 4,
-            "charisma": 2,
-            "intelligence": 3,
-            "agility": 5,
-            "luck": 7
-          },
-          "traits": [
-            "paranoid_reflex",
-            "lone_wolf"
-          ],
-          "perks": [],
-          "tags": [
-            "tag_caravan_guard"
-          ],
-          "level": 3,
-          "xp": 18
-        },
-        "weapon_slot": {
-          "id": "hardened_blade",
-          "slot": "weapon",
-          "durability": 9,
-          "max_durability": 10,
-          "rarity": "legendary",
-          "requirements": {
-            "strength": 5
-          },
-          "scaling": {
-            "strength": 0.8
-          },
-          "affixes": {
-            "def": 2
-          },
-          "tags": [
-            "melee",
-            "quality",
-            "lead_lined"
-          ],
-          "refinement_count": 0
-        },
-        "armor_slot": null,
-        "tool_slot": {
-          "id": "field_pack",
-          "slot": "tool",
-          "durability": 10,
-          "max_durability": 10,
-          "rarity": "common",
-          "requirements": {
-            "strength": 4
-          },
-          "scaling": {},
-          "affixes": {},
-          "tags": [
-            "exploration"
-          ],
-          "refinement_count": 0
-        }
-      },
-      "pressure": true,
-      "combat_triggered": false,
-      "combat_loot": [],
-      "effects": {
-        "scrap": -1,
-        "food": -1
-      },
-      "equipment_change": null,
-      "equipment_summary": null,
-      "player_after": {
-        "hp": 11,
-        "food": 6,
-        "ammo": 7,
-        "medkits": 4,
-        "scrap": 44,
-        "radiation": 1,
-        "archetype": null,
-        "character": {
-          "background_id": "caravan_guard",
-          "display_name": "Generated Caravan guard",
-          "special": {
-            "strength": 12,
-            "perception": 7,
-            "endurance": 4,
-            "charisma": 2,
-            "intelligence": 3,
-            "agility": 5,
-            "luck": 7
-          },
-          "traits": [
-            "paranoid_reflex",
-            "lone_wolf"
-          ],
-          "perks": [],
-          "tags": [
-            "tag_caravan_guard"
-          ],
-          "level": 3,
-          "xp": 18
-        },
-        "weapon_slot": {
-          "id": "hardened_blade",
-          "slot": "weapon",
-          "durability": 9,
-          "max_durability": 10,
-          "rarity": "legendary",
-          "requirements": {
-            "strength": 5
-          },
-          "scaling": {
-            "strength": 0.8
-          },
-          "affixes": {
-            "def": 2
-          },
-          "tags": [
-            "melee",
-            "quality",
-            "lead_lined"
-          ],
-          "refinement_count": 0
-        },
-        "armor_slot": null,
-        "tool_slot": {
-          "id": "field_pack",
-          "slot": "tool",
-          "durability": 10,
-          "max_durability": 10,
-          "rarity": "common",
-          "requirements": {
-            "strength": 4
-          },
-          "scaling": {},
-          "affixes": {},
-          "tags": [
-            "exploration"
-          ],
-          "refinement_count": 0
-        }
-      }
-    },
-    {
-      "step": 7,
-      "node": "node_deadzone_3",
+      "node": "node_fringe_3",
       "event_id": "evt_tech_vault",
       "option_index": 1,
       "warning_signals": [
         "WARNING: radiation will continue to threaten future travel."
       ],
       "pre_choice_state": {
-        "hp": 20,
-        "food": 5,
+        "hp": 18,
+        "food": 10,
         "ammo": 7,
-        "medkits": 3,
+        "medkits": 7,
         "scrap": 4,
         "radiation": 1,
         "archetype": null,
@@ -974,48 +474,32 @@
           "tags": [
             "tag_caravan_guard"
           ],
-          "level": 3,
-          "xp": 18
+          "level": 2,
+          "xp": 5
         },
         "weapon_slot": {
-          "id": "hardened_blade",
+          "id": "rust_rifle",
           "slot": "weapon",
-          "durability": 9,
+          "durability": 10,
           "max_durability": 10,
-          "rarity": "legendary",
+          "rarity": "rare",
           "requirements": {
-            "strength": 5
+            "agility": 4
           },
           "scaling": {
-            "strength": 0.8
+            "perception": 0.5
           },
           "affixes": {
-            "def": 2
+            "loot_scrap": 1
           },
           "tags": [
-            "melee",
-            "quality",
-            "lead_lined"
+            "ranged",
+            "firearm"
           ],
           "refinement_count": 1
         },
         "armor_slot": null,
-        "tool_slot": {
-          "id": "field_pack",
-          "slot": "tool",
-          "durability": 10,
-          "max_durability": 10,
-          "rarity": "common",
-          "requirements": {
-            "strength": 4
-          },
-          "scaling": {},
-          "affixes": {},
-          "tags": [
-            "exploration"
-          ],
-          "refinement_count": 0
-        }
+        "tool_slot": null
       },
       "pressure": true,
       "combat_triggered": false,
@@ -1028,10 +512,10 @@
       "equipment_change": null,
       "equipment_summary": null,
       "player_after": {
-        "hp": 18,
-        "food": 5,
+        "hp": 16,
+        "food": 10,
         "ammo": 7,
-        "medkits": 3,
+        "medkits": 7,
         "scrap": 16,
         "radiation": 1,
         "archetype": null,
@@ -1055,8 +539,145 @@
           "tags": [
             "tag_caravan_guard"
           ],
-          "level": 3,
-          "xp": 23
+          "level": 2,
+          "xp": 10
+        },
+        "weapon_slot": {
+          "id": "rust_rifle",
+          "slot": "weapon",
+          "durability": 10,
+          "max_durability": 10,
+          "rarity": "rare",
+          "requirements": {
+            "agility": 4
+          },
+          "scaling": {
+            "perception": 0.5
+          },
+          "affixes": {
+            "loot_scrap": 1
+          },
+          "tags": [
+            "ranged",
+            "firearm"
+          ],
+          "refinement_count": 1
+        },
+        "armor_slot": null,
+        "tool_slot": null
+      }
+    },
+    {
+      "step": 5,
+      "node": "node_boss_gatekeeper",
+      "event_id": "evt_boss_gatekeeper",
+      "option_index": 0,
+      "warning_signals": [
+        "WARNING: radiation will continue to threaten future travel.",
+        "DANGER: this choice carries a high combat risk."
+      ],
+      "pre_choice_state": {
+        "hp": 16,
+        "food": 9,
+        "ammo": 7,
+        "medkits": 7,
+        "scrap": 16,
+        "radiation": 1,
+        "archetype": null,
+        "character": {
+          "background_id": "caravan_guard",
+          "display_name": "Generated Caravan guard",
+          "special": {
+            "strength": 12,
+            "perception": 7,
+            "endurance": 4,
+            "charisma": 2,
+            "intelligence": 3,
+            "agility": 5,
+            "luck": 7
+          },
+          "traits": [
+            "paranoid_reflex",
+            "lone_wolf"
+          ],
+          "perks": [],
+          "tags": [
+            "tag_caravan_guard"
+          ],
+          "level": 2,
+          "xp": 10
+        },
+        "weapon_slot": {
+          "id": "rust_rifle",
+          "slot": "weapon",
+          "durability": 10,
+          "max_durability": 10,
+          "rarity": "rare",
+          "requirements": {
+            "agility": 4
+          },
+          "scaling": {
+            "perception": 0.5
+          },
+          "affixes": {
+            "loot_scrap": 1
+          },
+          "tags": [
+            "ranged",
+            "firearm"
+          ],
+          "refinement_count": 1
+        },
+        "armor_slot": null,
+        "tool_slot": null
+      },
+      "pressure": true,
+      "combat_triggered": true,
+      "combat_loot": [
+        {
+          "resource": "xp",
+          "amount": 25
+        },
+        {
+          "resource": "scrap",
+          "amount": 25
+        }
+      ],
+      "effects": {
+        "xp": 5
+      },
+      "equipment_change": null,
+      "equipment_summary": null,
+      "player_after": {
+        "hp": 13,
+        "food": 9,
+        "ammo": 4,
+        "medkits": 6,
+        "scrap": 41,
+        "radiation": 1,
+        "archetype": null,
+        "character": {
+          "background_id": "caravan_guard",
+          "display_name": "Generated Caravan guard",
+          "special": {
+            "strength": 12,
+            "perception": 7,
+            "endurance": 4,
+            "charisma": 2,
+            "intelligence": 3,
+            "agility": 5,
+            "luck": 7
+          },
+          "traits": [
+            "paranoid_reflex",
+            "lone_wolf"
+          ],
+          "perks": [],
+          "tags": [
+            "tag_caravan_guard"
+          ],
+          "level": 2,
+          "xp": 40
         },
         "weapon_slot": {
           "id": "hardened_blade",
@@ -1071,36 +692,414 @@
             "strength": 0.8
           },
           "affixes": {
+            "max_durability": 5,
             "def": 2
           },
           "tags": [
             "melee",
-            "quality",
-            "lead_lined"
-          ],
-          "refinement_count": 1
-        },
-        "armor_slot": null,
-        "tool_slot": {
-          "id": "field_pack",
-          "slot": "tool",
-          "durability": 10,
-          "max_durability": 10,
-          "rarity": "common",
-          "requirements": {
-            "strength": 4
-          },
-          "scaling": {},
-          "affixes": {},
-          "tags": [
-            "exploration"
+            "quality"
           ],
           "refinement_count": 0
-        }
+        },
+        "armor_slot": null,
+        "tool_slot": null
+      }
+    },
+    {
+      "step": 6,
+      "node": "node_deadzone_1",
+      "event_id": "evt_radioactive_orchard",
+      "option_index": 0,
+      "warning_signals": [
+        "WARNING: radiation will continue to threaten future travel.",
+        "WARNING: this option adds radiation and increases long-term risk."
+      ],
+      "pre_choice_state": {
+        "hp": 13,
+        "food": 8,
+        "ammo": 4,
+        "medkits": 6,
+        "scrap": 41,
+        "radiation": 1,
+        "archetype": null,
+        "character": {
+          "background_id": "caravan_guard",
+          "display_name": "Generated Caravan guard",
+          "special": {
+            "strength": 12,
+            "perception": 7,
+            "endurance": 4,
+            "charisma": 2,
+            "intelligence": 3,
+            "agility": 5,
+            "luck": 7
+          },
+          "traits": [
+            "paranoid_reflex",
+            "lone_wolf"
+          ],
+          "perks": [],
+          "tags": [
+            "tag_caravan_guard"
+          ],
+          "level": 2,
+          "xp": 40
+        },
+        "weapon_slot": {
+          "id": "hardened_blade",
+          "slot": "weapon",
+          "durability": 9,
+          "max_durability": 10,
+          "rarity": "legendary",
+          "requirements": {
+            "strength": 5
+          },
+          "scaling": {
+            "strength": 0.8
+          },
+          "affixes": {
+            "max_durability": 5,
+            "def": 2
+          },
+          "tags": [
+            "melee",
+            "quality"
+          ],
+          "refinement_count": 0
+        },
+        "armor_slot": null,
+        "tool_slot": null
+      },
+      "pressure": true,
+      "combat_triggered": false,
+      "combat_loot": [],
+      "effects": {
+        "food": 4,
+        "radiation": 3
+      },
+      "equipment_change": null,
+      "equipment_summary": null,
+      "player_after": {
+        "hp": 13,
+        "food": 12,
+        "ammo": 4,
+        "medkits": 6,
+        "scrap": 41,
+        "radiation": 4,
+        "archetype": null,
+        "character": {
+          "background_id": "caravan_guard",
+          "display_name": "Generated Caravan guard",
+          "special": {
+            "strength": 12,
+            "perception": 7,
+            "endurance": 4,
+            "charisma": 2,
+            "intelligence": 3,
+            "agility": 5,
+            "luck": 7
+          },
+          "traits": [
+            "paranoid_reflex",
+            "lone_wolf"
+          ],
+          "perks": [],
+          "tags": [
+            "tag_caravan_guard"
+          ],
+          "level": 3,
+          "xp": 20
+        },
+        "weapon_slot": {
+          "id": "hardened_blade",
+          "slot": "weapon",
+          "durability": 9,
+          "max_durability": 10,
+          "rarity": "legendary",
+          "requirements": {
+            "strength": 5
+          },
+          "scaling": {
+            "strength": 0.8
+          },
+          "affixes": {
+            "max_durability": 5,
+            "def": 2
+          },
+          "tags": [
+            "melee",
+            "quality"
+          ],
+          "refinement_count": 0
+        },
+        "armor_slot": null,
+        "tool_slot": null
+      }
+    },
+    {
+      "step": 7,
+      "node": "node_deadzone_2",
+      "event_id": "evt_sniper_nest",
+      "option_index": 0,
+      "warning_signals": [
+        "WARNING: radiation will continue to threaten future travel.",
+        "DANGER: this choice carries a high combat risk."
+      ],
+      "pre_choice_state": {
+        "hp": 11,
+        "food": 11,
+        "ammo": 4,
+        "medkits": 6,
+        "scrap": 41,
+        "radiation": 4,
+        "archetype": null,
+        "character": {
+          "background_id": "caravan_guard",
+          "display_name": "Generated Caravan guard",
+          "special": {
+            "strength": 12,
+            "perception": 7,
+            "endurance": 4,
+            "charisma": 2,
+            "intelligence": 3,
+            "agility": 5,
+            "luck": 7
+          },
+          "traits": [
+            "paranoid_reflex",
+            "lone_wolf"
+          ],
+          "perks": [],
+          "tags": [
+            "tag_caravan_guard"
+          ],
+          "level": 3,
+          "xp": 20
+        },
+        "weapon_slot": {
+          "id": "hardened_blade",
+          "slot": "weapon",
+          "durability": 9,
+          "max_durability": 10,
+          "rarity": "legendary",
+          "requirements": {
+            "strength": 5
+          },
+          "scaling": {
+            "strength": 0.8
+          },
+          "affixes": {
+            "max_durability": 5,
+            "def": 2
+          },
+          "tags": [
+            "melee",
+            "quality"
+          ],
+          "refinement_count": 0
+        },
+        "armor_slot": null,
+        "tool_slot": null
+      },
+      "pressure": true,
+      "combat_triggered": false,
+      "combat_loot": [],
+      "effects": {
+        "scrap": -1,
+        "food": -1
+      },
+      "equipment_change": null,
+      "equipment_summary": null,
+      "player_after": {
+        "hp": 11,
+        "food": 10,
+        "ammo": 4,
+        "medkits": 6,
+        "scrap": 40,
+        "radiation": 4,
+        "archetype": null,
+        "character": {
+          "background_id": "caravan_guard",
+          "display_name": "Generated Caravan guard",
+          "special": {
+            "strength": 12,
+            "perception": 7,
+            "endurance": 4,
+            "charisma": 2,
+            "intelligence": 3,
+            "agility": 5,
+            "luck": 7
+          },
+          "traits": [
+            "paranoid_reflex",
+            "lone_wolf"
+          ],
+          "perks": [],
+          "tags": [
+            "tag_caravan_guard"
+          ],
+          "level": 3,
+          "xp": 20
+        },
+        "weapon_slot": {
+          "id": "hardened_blade",
+          "slot": "weapon",
+          "durability": 9,
+          "max_durability": 10,
+          "rarity": "legendary",
+          "requirements": {
+            "strength": 5
+          },
+          "scaling": {
+            "strength": 0.8
+          },
+          "affixes": {
+            "max_durability": 5,
+            "def": 2
+          },
+          "tags": [
+            "melee",
+            "quality"
+          ],
+          "refinement_count": 0
+        },
+        "armor_slot": null,
+        "tool_slot": null
       }
     },
     {
       "step": 8,
+      "node": "node_deadzone_3",
+      "event_id": "evt_tech_vault",
+      "option_index": 1,
+      "warning_signals": [
+        "WARNING: radiation will continue to threaten future travel."
+      ],
+      "pre_choice_state": {
+        "hp": 19,
+        "food": 9,
+        "ammo": 4,
+        "medkits": 5,
+        "scrap": 0,
+        "radiation": 4,
+        "archetype": null,
+        "character": {
+          "background_id": "caravan_guard",
+          "display_name": "Generated Caravan guard",
+          "special": {
+            "strength": 12,
+            "perception": 7,
+            "endurance": 4,
+            "charisma": 2,
+            "intelligence": 3,
+            "agility": 5,
+            "luck": 7
+          },
+          "traits": [
+            "paranoid_reflex",
+            "lone_wolf"
+          ],
+          "perks": [],
+          "tags": [
+            "tag_caravan_guard"
+          ],
+          "level": 3,
+          "xp": 20
+        },
+        "weapon_slot": {
+          "id": "hardened_blade",
+          "slot": "weapon",
+          "durability": 9,
+          "max_durability": 10,
+          "rarity": "legendary",
+          "requirements": {
+            "strength": 5
+          },
+          "scaling": {
+            "strength": 0.8
+          },
+          "affixes": {
+            "max_durability": 5,
+            "def": 2
+          },
+          "tags": [
+            "melee",
+            "quality"
+          ],
+          "refinement_count": 1
+        },
+        "armor_slot": null,
+        "tool_slot": null
+      },
+      "pressure": true,
+      "combat_triggered": false,
+      "combat_loot": [],
+      "effects": {
+        "scrap": 12,
+        "hp": -2,
+        "xp": 5
+      },
+      "equipment_change": null,
+      "equipment_summary": null,
+      "player_after": {
+        "hp": 17,
+        "food": 9,
+        "ammo": 4,
+        "medkits": 5,
+        "scrap": 12,
+        "radiation": 4,
+        "archetype": null,
+        "character": {
+          "background_id": "caravan_guard",
+          "display_name": "Generated Caravan guard",
+          "special": {
+            "strength": 12,
+            "perception": 7,
+            "endurance": 4,
+            "charisma": 2,
+            "intelligence": 3,
+            "agility": 5,
+            "luck": 7
+          },
+          "traits": [
+            "paranoid_reflex",
+            "lone_wolf"
+          ],
+          "perks": [],
+          "tags": [
+            "tag_caravan_guard"
+          ],
+          "level": 3,
+          "xp": 25
+        },
+        "weapon_slot": {
+          "id": "hardened_blade",
+          "slot": "weapon",
+          "durability": 9,
+          "max_durability": 10,
+          "rarity": "legendary",
+          "requirements": {
+            "strength": 5
+          },
+          "scaling": {
+            "strength": 0.8
+          },
+          "affixes": {
+            "max_durability": 5,
+            "def": 2
+          },
+          "tags": [
+            "melee",
+            "quality"
+          ],
+          "refinement_count": 1
+        },
+        "armor_slot": null,
+        "tool_slot": null
+      }
+    },
+    {
+      "step": 9,
       "node": "node_boss_overseer",
       "event_id": "evt_boss_overseer",
       "option_index": 0,
@@ -1109,12 +1108,12 @@
         "DANGER: this choice carries a high combat risk."
       ],
       "pre_choice_state": {
-        "hp": 17,
-        "food": 4,
-        "ammo": 7,
-        "medkits": 3,
-        "scrap": 16,
-        "radiation": 1,
+        "hp": 15,
+        "food": 8,
+        "ammo": 4,
+        "medkits": 5,
+        "scrap": 12,
+        "radiation": 4,
         "archetype": null,
         "character": {
           "background_id": "caravan_guard",
@@ -1137,7 +1136,7 @@
             "tag_caravan_guard"
           ],
           "level": 3,
-          "xp": 23
+          "xp": 25
         },
         "weapon_slot": {
           "id": "hardened_blade",
@@ -1152,32 +1151,17 @@
             "strength": 0.8
           },
           "affixes": {
+            "max_durability": 5,
             "def": 2
           },
           "tags": [
             "melee",
-            "quality",
-            "lead_lined"
+            "quality"
           ],
           "refinement_count": 1
         },
         "armor_slot": null,
-        "tool_slot": {
-          "id": "field_pack",
-          "slot": "tool",
-          "durability": 10,
-          "max_durability": 10,
-          "rarity": "common",
-          "requirements": {
-            "strength": 4
-          },
-          "scaling": {},
-          "affixes": {},
-          "tags": [
-            "exploration"
-          ],
-          "refinement_count": 0
-        }
+        "tool_slot": null
       },
       "pressure": true,
       "combat_triggered": true,
@@ -1201,12 +1185,12 @@
       "equipment_change": null,
       "equipment_summary": null,
       "player_after": {
-        "hp": 8,
-        "food": 4,
+        "hp": 10,
+        "food": 8,
         "ammo": 2,
-        "medkits": 3,
-        "scrap": 66,
-        "radiation": 1,
+        "medkits": 8,
+        "scrap": 62,
+        "radiation": 4,
         "archetype": null,
         "character": {
           "background_id": "caravan_guard",
@@ -1229,7 +1213,7 @@
             "tag_caravan_guard"
           ],
           "level": 4,
-          "xp": 53
+          "xp": 55
         },
         "weapon_slot": {
           "id": "sledgehammer",
@@ -1244,7 +1228,8 @@
             "strength": 1.2
           },
           "affixes": {
-            "atk": 3
+            "atk": 1,
+            "def": 1
           },
           "tags": [
             "melee",
@@ -1254,26 +1239,11 @@
           "refinement_count": 0
         },
         "armor_slot": null,
-        "tool_slot": {
-          "id": "field_pack",
-          "slot": "tool",
-          "durability": 10,
-          "max_durability": 10,
-          "rarity": "common",
-          "requirements": {
-            "strength": 4
-          },
-          "scaling": {},
-          "affixes": {},
-          "tags": [
-            "exploration"
-          ],
-          "refinement_count": 0
-        }
+        "tool_slot": null
       }
     },
     {
-      "step": 9,
+      "step": 10,
       "node": "node_final",
       "event_id": "evt_final",
       "option_index": 0,
@@ -1281,12 +1251,12 @@
         "WARNING: radiation will continue to threaten future travel."
       ],
       "pre_choice_state": {
-        "hp": 17,
-        "food": 3,
+        "hp": 18,
+        "food": 7,
         "ammo": 2,
-        "medkits": 2,
-        "scrap": 66,
-        "radiation": 1,
+        "medkits": 7,
+        "scrap": 62,
+        "radiation": 4,
         "archetype": null,
         "character": {
           "background_id": "caravan_guard",
@@ -1309,7 +1279,7 @@
             "tag_caravan_guard"
           ],
           "level": 4,
-          "xp": 53
+          "xp": 55
         },
         "weapon_slot": {
           "id": "sledgehammer",
@@ -1324,7 +1294,8 @@
             "strength": 1.2
           },
           "affixes": {
-            "atk": 3
+            "atk": 1,
+            "def": 1
           },
           "tags": [
             "melee",
@@ -1334,22 +1305,7 @@
           "refinement_count": 0
         },
         "armor_slot": null,
-        "tool_slot": {
-          "id": "field_pack",
-          "slot": "tool",
-          "durability": 10,
-          "max_durability": 10,
-          "rarity": "common",
-          "requirements": {
-            "strength": 4
-          },
-          "scaling": {},
-          "affixes": {},
-          "tags": [
-            "exploration"
-          ],
-          "refinement_count": 0
-        }
+        "tool_slot": null
       },
       "pressure": true,
       "combat_triggered": false,
@@ -1360,12 +1316,12 @@
       "equipment_change": null,
       "equipment_summary": null,
       "player_after": {
-        "hp": 17,
-        "food": 2,
+        "hp": 18,
+        "food": 6,
         "ammo": 2,
-        "medkits": 2,
-        "scrap": 66,
-        "radiation": 1,
+        "medkits": 7,
+        "scrap": 62,
+        "radiation": 4,
         "archetype": null,
         "character": {
           "background_id": "caravan_guard",
@@ -1388,7 +1344,7 @@
             "tag_caravan_guard"
           ],
           "level": 5,
-          "xp": 13
+          "xp": 15
         },
         "weapon_slot": {
           "id": "sledgehammer",
@@ -1403,7 +1359,8 @@
             "strength": 1.2
           },
           "affixes": {
-            "atk": 3
+            "atk": 1,
+            "def": 1
           },
           "tags": [
             "melee",
@@ -1413,29 +1370,14 @@
           "refinement_count": 0
         },
         "armor_slot": null,
-        "tool_slot": {
-          "id": "field_pack",
-          "slot": "tool",
-          "durability": 10,
-          "max_durability": 10,
-          "rarity": "common",
-          "requirements": {
-            "strength": 4
-          },
-          "scaling": {},
-          "affixes": {},
-          "tags": [
-            "exploration"
-          ],
-          "refinement_count": 0
-        }
+        "tool_slot": null
       }
     }
   ],
   "summary": {
     "pressure_count": 9,
     "death_cause_attribution": true,
-    "resource_signature": "hp:17|food:2|ammo:2|medkits:2|scrap:66|radiation:1|weapon:EquipmentState(id='sledgehammer', slot='weapon', durability=9, max_durability=10, rarity='legendary', requirements={'strength': 7}, scaling={'strength': 1.2}, affixes={'atk': 3}, tags=['melee', 'heavy', 'vampiric'], refinement_count=0)|armor:None|tool:EquipmentState(id='field_pack', slot='tool', durability=10, max_durability=10, rarity='common', requirements={'strength': 4}, scaling={}, affixes={}, tags=['exploration'], refinement_count=0)"
+    "resource_signature": "hp:18|food:6|ammo:2|medkits:7|scrap:62|radiation:4|weapon:EquipmentState(id='sledgehammer', slot='weapon', durability=9, max_durability=10, rarity='legendary', requirements={'strength': 7}, scaling={'strength': 1.2}, affixes={'atk': 1, 'def': 1}, tags=['melee', 'heavy', 'vampiric'], refinement_count=0)|armor:None|tool:None"
   },
   "failure_analysis": {
     "death_chain_length": 0,
@@ -1445,47 +1387,38 @@
     "is_trash_time_death": false
   },
   "run_summary": {
-    "headline": "standard_journey_caravan_guard_3_batch_10: victory via reached_final_node after 9 steps",
+    "headline": "standard_journey_caravan_guard_3_batch_10: victory via reached_final_node after 10 steps",
     "route_family": "unknown",
     "outcome": "victory",
-    "key_turning_point": "node_fringe_1 (weapon -> makeshift_blade (replaced empty))",
-    "notable_equipment": [
-      "makeshift_blade",
-      "field_pack"
-    ],
+    "key_turning_point": "node_final",
+    "notable_equipment": [],
     "telemetry": {
-      "total_steps": 9,
+      "total_steps": 10,
       "pressure_count": 9,
-      "combat_count": 3,
-      "loot_drop_count": 7,
-      "loot_total_amount": 165,
-      "equipment_change_count": 2,
-      "rarity_distribution": {
-        "common": 2
-      },
-      "total_atk_affix_gain": 3,
+      "combat_count": 2,
+      "loot_drop_count": 5,
+      "loot_total_amount": 153,
+      "equipment_change_count": 0,
+      "rarity_distribution": {},
+      "total_atk_affix_gain": 0,
       "total_def_affix_gain": 0,
-      "equipment_ids": [
-        "makeshift_blade",
-        "field_pack"
-      ],
+      "equipment_ids": [],
       "loot_resources": {
-        "ammo": 5,
-        "scrap": 82,
         "xp": 75,
+        "scrap": 75,
         "medkits": 3
       },
-      "max_radiation": 1,
-      "min_food": 2,
-      "min_hp": 8,
+      "max_radiation": 4,
+      "min_food": 6,
+      "min_hp": 10,
       "low_resource_flags": [
-        "low_food"
+        "high_radiation"
       ],
       "risk_tags": [
         "combat_seen",
         "radiation_pressure",
-        "equipment_arc",
-        "end_reached_final_node"
+        "end_reached_final_node",
+        "radiation_carryover"
       ],
       "character": {
         "background_id": "caravan_guard",

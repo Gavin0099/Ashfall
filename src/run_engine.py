@@ -235,7 +235,10 @@ class RunEngine:
             fixed_enemy_id = option.get("fixed_enemy_id")
             outcome["combat"] = self.resolve_combat(run, encounter_bias=encounter_bias, fixed_enemy_id=fixed_enemy_id)
         if run.player.is_dead():
-            run.end(victory=False, reason=self._resolve_noncombat_death_reason(run))
+            reason = self._resolve_noncombat_death_reason(run)
+            if outcome.get("combat_triggered") and not outcome.get("combat", {}).get("victory"):
+                reason = "combat_death"
+            run.end(victory=False, reason=reason)
             
         # Record to decision_log
         log_entry = {
@@ -373,17 +376,16 @@ class RunEngine:
             # Total radiation effects = regional base + player's accumulated radiation
             # But the core logic is: every move costs -1 HP per radiation level.
             # Regional base radiation acts as a floor or addition?
-            # v7.0: Reduced radiation attrition from (rad) to (rad // 2)
+            # v7.1: Added 1-point grace to allow low rad survival
             total_rad = run.player.radiation + region.base_radiation
-            damage = total_rad // 2 if total_rad > 0 else 0
-            
-            # v7.0: Removed mandatory 1-tick to allow low rad survival
+            damage = (total_rad - 1) // 2 if total_rad > 1 else 0
 
             armor = run.player.armor_slot
             if armor and armor.id == "gas_mask" and armor.durability > 0:
                 damage = max(0, damage - 1)
-                # Gas mask takes durability hit when protecting
-                armor.durability = max(0, armor.durability - 1)
+                # v7.1: 50% chance to take health durability hit when protecting
+                if random.random() < 0.5:
+                    armor.durability = max(0, armor.durability - 1)
             
             if damage > 0:
                 run.player.hp -= damage

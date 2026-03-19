@@ -22,6 +22,7 @@
           "effects": {
             "scrap": 25,
             "medkits": 2,
+            "radiation": -1,
             "xp": 10
           },
           "combat_chance": 0.0
@@ -70,7 +71,7 @@
             "在風暴加劇前先拉開距離"
           ],
           "effects": {
-            "food": 2,
+            "food": 3,
             "medkits": 1,
             "xp": 10
           },
@@ -86,7 +87,7 @@
             "保持隊形穩定推進"
           ],
           "effects": {
-            "food": 3,
+            "food": 4,
             "medkits": 2,
             "xp": 8
           },
@@ -113,7 +114,7 @@
             "頂著變異生物可能回頭的風險，搶先拔走完整零件 (警告：此處資源補給匱乏)"
           ],
           "effects": {
-            "food": 2,
+            "food": 3,
             "ammo": 3,
             "medkits": 2,
             "xp": 8
@@ -326,8 +327,8 @@
             ]
           },
           "effects": {
-            "medkits": 1,
-            "radiation": 0,
+            "medkits": 2,
+            "radiation": -2,
             "xp": 8
           },
           "combat_chance": 0.1
@@ -580,7 +581,7 @@
           "archetype_requirement": "scavenger",
           "effects": {
             "scrap": -2,
-            "food": 5,
+            "food": 6,
             "ammo": 2
           },
           "combat_chance": 0.0
@@ -1124,8 +1125,8 @@
             "冒著輻射風險找醫療物資"
           ],
           "effects": {
-            "medkits": 3,
-            "radiation": 3
+            "medkits": 4,
+            "radiation": 2
           },
           "combat_chance": 0.2
         },
@@ -1136,7 +1137,7 @@
           ],
           "effects": {
             "medkits": 1,
-            "radiation": 1
+            "radiation": -1
           },
           "combat_chance": 0.0
         }

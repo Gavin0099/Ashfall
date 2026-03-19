@@ -317,6 +317,24 @@ def run_plan(plan: RoutePlan, nodes: Dict[str, dict], events: Dict[str, dict], e
     pressure_count = 0
     moments = []
     decision_log = []
+
+    # Phase 7.0: Ensure Start Node Event is resolved (don't skip starting gear!)
+    start_node = engine.map_state.get_node(run.current_node)
+    start_event_id = pick_event_id(start_node, engine.rng, run_flags=run.flags, event_catalog=events)
+    start_outcome = engine.resolve_node_event_with_id(start_node, run, event_id=start_event_id, option_index=0)
+    decision_log.append({
+        "step": 1,
+        "node": run.current_node,
+        "event_id": start_outcome["event_id"],
+        "option_index": 0,
+        "warning_signals": [],
+        "pre_choice_state": snapshot_player(player),
+        "pressure": False,
+        "combat_triggered": False,
+        "effects": dict(events[start_outcome["event_id"]]["options"][0].get("effects", {})),
+        "player_after": snapshot_player(run.player),
+    })
+
     for next_node in plan.route:
         if run.ended:
             break

@@ -93,191 +93,185 @@
   ],
   "summary": {
     "run_count": 90,
-    "victory_rate": 0.02,
-    "avg_pressure_count": 4.1,
-    "avg_decision_count": 4.64,
+    "victory_rate": 0.43,
+    "avg_pressure_count": 7.2,
+    "avg_decision_count": 8.6,
     "avg_final_resources": {
-      "hp": -1.38,
-      "food": 6.82,
-      "ammo": 0.03,
-      "medkits": 0.1,
-      "scrap": 25.33,
-      "radiation": 1.02
+      "hp": 5.96,
+      "food": 7.98,
+      "ammo": 2.6,
+      "medkits": 2.7,
+      "scrap": 69.14,
+      "radiation": 2.26
     },
     "death_reasons": {
-      "radiation_death": 68,
-      "event_or_resource_death": 20
+      "combat_death": 51
     },
-    "decision_trace_coverage_rate": 1.0,
+    "decision_trace_coverage_rate": 0.0,
     "death_cause_attribution_rate": 1.0,
     "trash_time_death_rate": 0.0,
-    "avg_steps_from_regret_to_death": 2.31,
-    "distinct_outcome_signatures": 30,
+    "avg_steps_from_regret_to_death": 2.27,
+    "distinct_outcome_signatures": 58,
     "resource_divergence": {
-      "pairwise_average": 3.23,
+      "pairwise_average": 5.09,
       "pairwise_max": 7,
       "pairwise_min": 0
     },
     "route_family_summary": {
       "mixed": {
         "runs": 90,
-        "victory_rate": 0.02,
-        "avg_pressure_count": 4.1,
-        "avg_final_hp": -1.38,
-        "avg_final_food": 6.82,
-        "avg_final_ammo": 0.03,
-        "avg_final_medkits": 0.1,
-        "avg_final_scrap": 25.33,
-        "avg_final_radiation": 1.02
+        "victory_rate": 0.43,
+        "avg_pressure_count": 7.2,
+        "avg_final_hp": 5.96,
+        "avg_final_food": 7.98,
+        "avg_final_ammo": 2.6,
+        "avg_final_medkits": 2.7,
+        "avg_final_scrap": 69.14,
+        "avg_final_radiation": 2.26
       }
     },
     "archetype_summary": {
       "vault_technician": {
         "runs": 10,
-        "victory_rate": 0.0,
-        "avg_pressure_count": 3.6,
-        "avg_final_hp": -2.5,
-        "avg_final_food": 6.8,
-        "avg_final_scrap": 18.6,
-        "avg_steps_from_regret_to_death": 2.2,
+        "victory_rate": 0.4,
+        "avg_pressure_count": 6.4,
+        "avg_final_hp": 5.1,
+        "avg_final_food": 8.4,
+        "avg_final_scrap": 59.3,
+        "avg_steps_from_regret_to_death": 1.67,
         "death_reasons": {
-          "radiation_death": 7,
-          "event_or_resource_death": 3
+          "combat_death": 6
         }
       },
       "raider_defector": {
         "runs": 20,
-        "victory_rate": 0.0,
-        "avg_pressure_count": 3.75,
-        "avg_final_hp": -2.0,
-        "avg_final_food": 6.8,
-        "avg_final_scrap": 28.25,
-        "avg_steps_from_regret_to_death": 2.25,
+        "victory_rate": 0.45,
+        "avg_pressure_count": 7.15,
+        "avg_final_hp": 6.4,
+        "avg_final_food": 7.95,
+        "avg_final_scrap": 72.85,
+        "avg_steps_from_regret_to_death": 2.0,
         "death_reasons": {
-          "radiation_death": 15,
-          "event_or_resource_death": 5
+          "combat_death": 11
         }
       },
       "wasteland_medic": {
         "runs": 10,
-        "victory_rate": 0.0,
-        "avg_pressure_count": 3.6,
-        "avg_final_hp": -2.5,
-        "avg_final_food": 6.8,
-        "avg_final_scrap": 18.6,
-        "avg_steps_from_regret_to_death": 2.2,
+        "victory_rate": 0.4,
+        "avg_pressure_count": 6.4,
+        "avg_final_hp": 5.1,
+        "avg_final_food": 8.4,
+        "avg_final_scrap": 59.3,
+        "avg_steps_from_regret_to_death": 1.67,
         "death_reasons": {
-          "radiation_death": 7,
-          "event_or_resource_death": 3
+          "combat_death": 6
         }
       },
       "none": {
         "runs": 10,
-        "victory_rate": 0.0,
-        "avg_pressure_count": 2.5,
-        "avg_final_hp": -1.0,
-        "avg_final_food": 8.1,
-        "avg_final_scrap": 22.4,
-        "avg_steps_from_regret_to_death": 1.5,
+        "victory_rate": 0.2,
+        "avg_pressure_count": 6.6,
+        "avg_final_hp": 1.5,
+        "avg_final_food": 9.0,
+        "avg_final_scrap": 63.5,
+        "avg_steps_from_regret_to_death": 2.12,
         "death_reasons": {
-          "radiation_death": 6,
-          "event_or_resource_death": 4
+          "combat_death": 8
         }
       },
       "caravan_guard": {
         "runs": 10,
-        "victory_rate": 0.1,
-        "avg_pressure_count": 5.8,
-        "avg_final_hp": 0.6,
-        "avg_final_food": 6.1,
-        "avg_final_scrap": 27.2,
-        "avg_steps_from_regret_to_death": 2.67,
+        "victory_rate": 0.7,
+        "avg_pressure_count": 8.3,
+        "avg_final_hp": 10.8,
+        "avg_final_food": 7.0,
+        "avg_final_scrap": 80.7,
+        "avg_steps_from_regret_to_death": 3.0,
         "death_reasons": {
-          "radiation_death": 9
+          "combat_death": 3
         }
       },
       "cult_escapee": {
         "runs": 20,
-        "victory_rate": 0.0,
-        "avg_pressure_count": 4.05,
-        "avg_final_hp": -1.5,
-        "avg_final_food": 6.95,
-        "avg_final_scrap": 28.75,
-        "avg_steps_from_regret_to_death": 2.55,
+        "victory_rate": 0.35,
+        "avg_pressure_count": 7.3,
+        "avg_final_hp": 4.8,
+        "avg_final_food": 7.95,
+        "avg_final_scrap": 69.05,
+        "avg_steps_from_regret_to_death": 2.77,
         "death_reasons": {
-          "radiation_death": 15,
-          "event_or_resource_death": 5
+          "combat_death": 13
         }
       },
       "military_deserter": {
         "runs": 10,
-        "victory_rate": 0.1,
-        "avg_pressure_count": 5.8,
-        "avg_final_hp": 0.0,
-        "avg_final_food": 6.1,
-        "avg_final_scrap": 27.2,
-        "avg_steps_from_regret_to_death": 2.67,
+        "victory_rate": 0.6,
+        "avg_pressure_count": 8.2,
+        "avg_final_hp": 8.7,
+        "avg_final_food": 7.2,
+        "avg_final_scrap": 75.7,
+        "avg_steps_from_regret_to_death": 3.0,
         "death_reasons": {
-          "radiation_death": 9
+          "combat_death": 4
         }
       }
     },
     "special_stats_correlation": {
       "strength": {
         "avg_value": 6.12,
-        "victory_rate_at_avg": 0.03
+        "victory_rate_at_avg": 0.46
       },
       "perception": {
         "avg_value": 6.5,
-        "victory_rate_at_avg": 0.03
+        "victory_rate_at_avg": 0.46
       },
       "endurance": {
         "avg_value": 5.25,
-        "victory_rate_at_avg": 0.03
+        "victory_rate_at_avg": 0.46
       },
       "charisma": {
         "avg_value": 4.75,
-        "victory_rate_at_avg": 0.03
+        "victory_rate_at_avg": 0.46
       },
       "intelligence": {
         "avg_value": 5.25,
-        "victory_rate_at_avg": 0.03
+        "victory_rate_at_avg": 0.46
       },
       "agility": {
         "avg_value": 5.5,
-        "victory_rate_at_avg": 0.03
+        "victory_rate_at_avg": 0.46
       },
       "luck": {
         "avg_value": 4.75,
-        "victory_rate_at_avg": 0.03
+        "victory_rate_at_avg": 0.46
       }
     },
     "loot_economy": {
       "overall": {
-        "avg_encounter_count": 2.13,
-        "avg_loot_drop_count": 2.22,
-        "avg_loot_total_amount": 23.69,
+        "avg_encounter_count": 3.4,
+        "avg_loot_drop_count": 5.99,
+        "avg_loot_total_amount": 112.39,
         "resource_totals": {
-          "food": 1.0,
-          "ammo": 90.0,
-          "medkits": 76.0,
-          "scrap": 1240.0
+          "food": 4.0,
+          "ammo": 320.0,
+          "medkits": 188.0,
+          "scrap": 5103.0
         },
         "resource_per_run": {
-          "food": 0.01,
-          "ammo": 1.0,
-          "medkits": 0.84,
-          "scrap": 13.78
+          "food": 0.04,
+          "ammo": 3.56,
+          "medkits": 2.09,
+          "scrap": 56.7
         },
         "archetype_encounters": {
-          "raider": 30.0,
-          "mutant": 66.0
+          "raider": 75.0,
+          "mutant": 67.0
         },
         "archetype_encounter_rate": {
-          "raider": 0.31,
-          "mutant": 0.69
+          "raider": 0.53,
+          "mutant": 0.47
         },
-        "dominant_archetype": "mutant",
+        "dominant_archetype": "raider",
         "dominant_resource": "scrap"
       },
       "north": {
@@ -335,48 +329,50 @@
         "dominant_resource": null
       },
       "mixed": {
-        "avg_encounter_count": 2.13,
-        "avg_loot_drop_count": 2.22,
-        "avg_loot_total_amount": 23.69,
+        "avg_encounter_count": 3.4,
+        "avg_loot_drop_count": 5.99,
+        "avg_loot_total_amount": 112.39,
         "resource_totals": {
-          "food": 1.0,
-          "ammo": 90.0,
-          "medkits": 76.0,
-          "scrap": 1240.0
+          "food": 4.0,
+          "ammo": 320.0,
+          "medkits": 188.0,
+          "scrap": 5103.0
         },
         "resource_per_run": {
-          "food": 0.01,
-          "ammo": 1.0,
-          "medkits": 0.84,
-          "scrap": 13.78
+          "food": 0.04,
+          "ammo": 3.56,
+          "medkits": 2.09,
+          "scrap": 56.7
         },
         "archetype_encounters": {
-          "raider": 30.0,
-          "mutant": 66.0
+          "raider": 75.0,
+          "mutant": 67.0
         },
         "archetype_encounter_rate": {
-          "raider": 0.31,
-          "mutant": 0.69
+          "raider": 0.53,
+          "mutant": 0.47
         },
-        "dominant_archetype": "mutant",
+        "dominant_archetype": "raider",
         "dominant_resource": "scrap"
       }
     },
     "rarity_and_affix_stats": {
-      "avg_atk_affix_gain": 0.79,
-      "avg_def_affix_gain": 0.26,
+      "avg_atk_affix_gain": 0.89,
+      "avg_def_affix_gain": 0.47,
       "overall_rarity_distribution": {
-        "rare": 18,
-        "common": 55
+        "common": 84,
+        "rare": 28,
+        "legendary": 4
       },
       "avg_rarity_per_run": {
-        "rare": 0.2,
-        "common": 0.61
+        "common": 0.93,
+        "rare": 0.31,
+        "legendary": 0.04
       }
     },
     "balance_gate": {
       "twenty_runs_captured": true,
-      "decision_trace_complete": true,
+      "decision_trace_complete": false,
       "death_attribution_complete": true,
       "route_divergence_visible": true
     }

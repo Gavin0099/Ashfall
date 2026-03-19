@@ -12,7 +12,7 @@
     "loot_table": [
       {
         "resource": "ammo",
-        "amount": 3,
+        "amount": 5,
         "chance": 1.0
       },
       {
@@ -46,7 +46,7 @@
       {
         "resource": "medkits",
         "amount": 1,
-        "chance": 0.7
+        "chance": 0.9
       }
     ]
   },
@@ -127,10 +127,10 @@
     "name": "最終監察者：影中之眼 (Eye of the Shadows)",
     "archetype": "boss",
     "special_ability": "frenzy",
-    "hp": 50,
+    "hp": 25,
     "is_elite": true,
     "damage_range": {
-      "min": 4,
+      "min": 3,
       "max": 6
     },
     "loot_table": [

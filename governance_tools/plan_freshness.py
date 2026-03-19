@@ -201,6 +201,7 @@ def check_freshness(
     # ── PT-1 新鮮度檢查 (與最近一次 balance 調整對比) ────────────────────────
     latest_balance_mtime = None
     latest_pt1_mtime = None
+    pt1_count = 0
 
     if pt1_dir and pt1_dir.exists() and balance_summary_path and balance_summary_path.exists():
         latest_balance_mtime = balance_summary_path.stat().st_mtime

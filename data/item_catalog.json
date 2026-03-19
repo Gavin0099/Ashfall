@@ -39,7 +39,7 @@
     "requirements": {"strength": 6},
     "scaling": {"endurance": 0.2},
     "tags": ["protection", "heavy"],
-    "protection": {"physical": 1}
+    "protection": {"physical": 2}
   },
   "tactical_visor": {
     "slot": "tool",

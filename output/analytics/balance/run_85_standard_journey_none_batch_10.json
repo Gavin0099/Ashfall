@@ -14,32 +14,37 @@
   ],
   "ended": true,
   "victory": false,
-  "end_reason": "event_or_resource_death",
+  "end_reason": "combat_death",
   "player_final": {
     "hp": -1,
-    "food": 11,
+    "food": 8,
     "ammo": 0,
     "medkits": 0,
-    "scrap": 0,
-    "radiation": 0,
+    "scrap": 38,
+    "radiation": 2,
     "archetype": null,
     "character": null,
     "weapon_slot": {
-      "id": "makeshift_blade",
+      "id": "hardened_blade",
       "slot": "weapon",
-      "durability": 9,
+      "durability": 8,
       "max_durability": 10,
-      "rarity": "common",
-      "requirements": {},
-      "scaling": {
-        "strength": 0.5
+      "rarity": "legendary",
+      "requirements": {
+        "strength": 5
       },
-      "affixes": {},
+      "scaling": {
+        "strength": 0.8
+      },
+      "affixes": {
+        "max_durability": 5,
+        "def": 2
+      },
       "tags": [
         "melee",
-        "makeshift"
+        "quality"
       ],
-      "refinement_count": 0
+      "refinement_count": 1
     },
     "armor_slot": null,
     "tool_slot": null
@@ -47,17 +52,15 @@
   "decision_log": [
     {
       "step": 1,
-      "node": "node_fringe_1",
-      "event_id": "evt_scrapyard",
+      "node": "node_start",
+      "event_id": "evt_departure",
       "option_index": 0,
-      "warning_signals": [
-        "DANGER: this choice carries a high combat risk."
-      ],
+      "warning_signals": [],
       "pre_choice_state": {
         "hp": 20,
-        "food": 9,
-        "ammo": 3,
-        "medkits": 2,
+        "food": 10,
+        "ammo": 7,
+        "medkits": 5,
         "scrap": 0,
         "radiation": 0,
         "archetype": null,
@@ -66,63 +69,740 @@
         "armor_slot": null,
         "tool_slot": null
       },
-      "pressure": true,
-      "combat_triggered": true,
-      "combat_loot": [],
+      "pressure": false,
+      "combat_triggered": false,
       "effects": {
-        "food": 2,
-        "ammo": 3,
-        "medkits": 2,
-        "xp": 8
+        "food": 3,
+        "medkits": 1,
+        "xp": 10
       },
-      "equipment_change": {
-        "slot": "weapon",
-        "item": "makeshift_blade",
-        "item_data": {
-          "id": "makeshift_blade",
-          "slot": "weapon",
-          "durability": 10,
-          "max_durability": 10,
-          "rarity": "common",
-          "requirements": {},
-          "scaling": {
-            "strength": 0.5
-          },
-          "affixes": {},
-          "tags": [
-            "melee",
-            "makeshift"
-          ],
-          "refinement_count": 0
-        },
-        "changed": true
-      },
-      "equipment_summary": "weapon -> makeshift_blade (replaced empty)",
       "player_after": {
-        "hp": -1,
-        "food": 11,
-        "ammo": 0,
-        "medkits": 0,
+        "hp": 20,
+        "food": 13,
+        "ammo": 7,
+        "medkits": 6,
         "scrap": 0,
         "radiation": 0,
         "archetype": null,
         "character": null,
         "weapon_slot": {
-          "id": "makeshift_blade",
+          "id": "rust_rifle",
+          "slot": "weapon",
+          "durability": 10,
+          "max_durability": 10,
+          "rarity": "common",
+          "requirements": {
+            "agility": 4
+          },
+          "scaling": {
+            "perception": 0.5
+          },
+          "affixes": {
+            "loot_scrap": 1
+          },
+          "tags": [
+            "ranged",
+            "firearm"
+          ],
+          "refinement_count": 0
+        },
+        "armor_slot": null,
+        "tool_slot": null
+      }
+    },
+    {
+      "step": 2,
+      "node": "node_fringe_1",
+      "event_id": "evt_factory_ruins",
+      "option_index": 0,
+      "warning_signals": [
+        "WARNING: radiation will continue to threaten future travel.",
+        "WARNING: this option adds radiation and increases long-term risk."
+      ],
+      "pre_choice_state": {
+        "hp": 20,
+        "food": 12,
+        "ammo": 7,
+        "medkits": 6,
+        "scrap": 0,
+        "radiation": 0,
+        "archetype": null,
+        "character": null,
+        "weapon_slot": {
+          "id": "rust_rifle",
+          "slot": "weapon",
+          "durability": 10,
+          "max_durability": 10,
+          "rarity": "common",
+          "requirements": {
+            "agility": 4
+          },
+          "scaling": {
+            "perception": 0.5
+          },
+          "affixes": {
+            "loot_scrap": 1
+          },
+          "tags": [
+            "ranged",
+            "firearm"
+          ],
+          "refinement_count": 0
+        },
+        "armor_slot": null,
+        "tool_slot": null
+      },
+      "pressure": true,
+      "combat_triggered": false,
+      "combat_loot": [],
+      "effects": {
+        "scrap": 3,
+        "hp": -1,
+        "radiation": 1
+      },
+      "equipment_change": null,
+      "equipment_summary": null,
+      "player_after": {
+        "hp": 19,
+        "food": 12,
+        "ammo": 7,
+        "medkits": 6,
+        "scrap": 3,
+        "radiation": 1,
+        "archetype": null,
+        "character": null,
+        "weapon_slot": {
+          "id": "rust_rifle",
+          "slot": "weapon",
+          "durability": 10,
+          "max_durability": 10,
+          "rarity": "common",
+          "requirements": {
+            "agility": 4
+          },
+          "scaling": {
+            "perception": 0.5
+          },
+          "affixes": {
+            "loot_scrap": 1
+          },
+          "tags": [
+            "ranged",
+            "firearm"
+          ],
+          "refinement_count": 0
+        },
+        "armor_slot": null,
+        "tool_slot": null
+      }
+    },
+    {
+      "step": 3,
+      "node": "node_fringe_2",
+      "event_id": "evt_mutant_burrow",
+      "option_index": 0,
+      "warning_signals": [
+        "WARNING: radiation will continue to threaten future travel.",
+        "DANGER: this choice carries a high combat risk."
+      ],
+      "pre_choice_state": {
+        "hp": 19,
+        "food": 11,
+        "ammo": 7,
+        "medkits": 6,
+        "scrap": 3,
+        "radiation": 1,
+        "archetype": null,
+        "character": null,
+        "weapon_slot": {
+          "id": "rust_rifle",
+          "slot": "weapon",
+          "durability": 10,
+          "max_durability": 10,
+          "rarity": "common",
+          "requirements": {
+            "agility": 4
+          },
+          "scaling": {
+            "perception": 0.5
+          },
+          "affixes": {
+            "loot_scrap": 1
+          },
+          "tags": [
+            "ranged",
+            "firearm"
+          ],
+          "refinement_count": 0
+        },
+        "armor_slot": null,
+        "tool_slot": null
+      },
+      "pressure": true,
+      "combat_triggered": false,
+      "combat_loot": [],
+      "effects": {
+        "hp": -1,
+        "scrap": 6,
+        "medkits": 1,
+        "xp": 5
+      },
+      "equipment_change": null,
+      "equipment_summary": null,
+      "player_after": {
+        "hp": 18,
+        "food": 11,
+        "ammo": 7,
+        "medkits": 7,
+        "scrap": 9,
+        "radiation": 1,
+        "archetype": null,
+        "character": null,
+        "weapon_slot": {
+          "id": "rust_rifle",
+          "slot": "weapon",
+          "durability": 10,
+          "max_durability": 10,
+          "rarity": "common",
+          "requirements": {
+            "agility": 4
+          },
+          "scaling": {
+            "perception": 0.5
+          },
+          "affixes": {
+            "loot_scrap": 1
+          },
+          "tags": [
+            "ranged",
+            "firearm"
+          ],
+          "refinement_count": 0
+        },
+        "armor_slot": null,
+        "tool_slot": null
+      }
+    },
+    {
+      "step": 4,
+      "node": "node_fringe_3",
+      "event_id": "evt_tech_vault",
+      "option_index": 0,
+      "warning_signals": [],
+      "pre_choice_state": {
+        "hp": 18,
+        "food": 10,
+        "ammo": 7,
+        "medkits": 7,
+        "scrap": 4,
+        "radiation": 1,
+        "archetype": null,
+        "character": null,
+        "weapon_slot": {
+          "id": "rust_rifle",
+          "slot": "weapon",
+          "durability": 10,
+          "max_durability": 10,
+          "rarity": "rare",
+          "requirements": {
+            "agility": 4
+          },
+          "scaling": {
+            "perception": 0.5
+          },
+          "affixes": {
+            "loot_scrap": 1
+          },
+          "tags": [
+            "ranged",
+            "firearm"
+          ],
+          "refinement_count": 1
+        },
+        "armor_slot": null,
+        "tool_slot": null
+      },
+      "pressure": true,
+      "combat_triggered": false,
+      "combat_loot": [],
+      "effects": {
+        "scrap": 25,
+        "medkits": 2,
+        "radiation": -1,
+        "xp": 10
+      },
+      "equipment_change": null,
+      "equipment_summary": null,
+      "player_after": {
+        "hp": 18,
+        "food": 10,
+        "ammo": 7,
+        "medkits": 9,
+        "scrap": 29,
+        "radiation": 0,
+        "archetype": null,
+        "character": null,
+        "weapon_slot": {
+          "id": "rust_rifle",
+          "slot": "weapon",
+          "durability": 10,
+          "max_durability": 10,
+          "rarity": "rare",
+          "requirements": {
+            "agility": 4
+          },
+          "scaling": {
+            "perception": 0.5
+          },
+          "affixes": {
+            "loot_scrap": 1
+          },
+          "tags": [
+            "ranged",
+            "firearm"
+          ],
+          "refinement_count": 1
+        },
+        "armor_slot": null,
+        "tool_slot": null
+      }
+    },
+    {
+      "step": 5,
+      "node": "node_boss_gatekeeper",
+      "event_id": "evt_boss_gatekeeper",
+      "option_index": 0,
+      "warning_signals": [
+        "DANGER: this choice carries a high combat risk."
+      ],
+      "pre_choice_state": {
+        "hp": 18,
+        "food": 9,
+        "ammo": 7,
+        "medkits": 9,
+        "scrap": 29,
+        "radiation": 0,
+        "archetype": null,
+        "character": null,
+        "weapon_slot": {
+          "id": "rust_rifle",
+          "slot": "weapon",
+          "durability": 10,
+          "max_durability": 10,
+          "rarity": "rare",
+          "requirements": {
+            "agility": 4
+          },
+          "scaling": {
+            "perception": 0.5
+          },
+          "affixes": {
+            "loot_scrap": 1
+          },
+          "tags": [
+            "ranged",
+            "firearm"
+          ],
+          "refinement_count": 1
+        },
+        "armor_slot": null,
+        "tool_slot": null
+      },
+      "pressure": true,
+      "combat_triggered": true,
+      "combat_loot": [
+        {
+          "resource": "xp",
+          "amount": 25
+        },
+        {
+          "resource": "scrap",
+          "amount": 25
+        }
+      ],
+      "effects": {
+        "xp": 5
+      },
+      "equipment_change": null,
+      "equipment_summary": null,
+      "player_after": {
+        "hp": 13,
+        "food": 9,
+        "ammo": 1,
+        "medkits": 6,
+        "scrap": 54,
+        "radiation": 0,
+        "archetype": null,
+        "character": null,
+        "weapon_slot": {
+          "id": "hardened_blade",
           "slot": "weapon",
           "durability": 9,
           "max_durability": 10,
-          "rarity": "common",
-          "requirements": {},
-          "scaling": {
-            "strength": 0.5
+          "rarity": "legendary",
+          "requirements": {
+            "strength": 5
           },
-          "affixes": {},
+          "scaling": {
+            "strength": 0.8
+          },
+          "affixes": {
+            "max_durability": 5,
+            "def": 2
+          },
           "tags": [
             "melee",
-            "makeshift"
+            "quality"
           ],
           "refinement_count": 0
+        },
+        "armor_slot": null,
+        "tool_slot": null
+      }
+    },
+    {
+      "step": 6,
+      "node": "node_deadzone_1",
+      "event_id": "evt_radioactive_orchard",
+      "option_index": 0,
+      "warning_signals": [
+        "WARNING: radiation will continue to threaten future travel.",
+        "WARNING: this option adds radiation and increases long-term risk."
+      ],
+      "pre_choice_state": {
+        "hp": 13,
+        "food": 8,
+        "ammo": 1,
+        "medkits": 6,
+        "scrap": 54,
+        "radiation": 0,
+        "archetype": null,
+        "character": null,
+        "weapon_slot": {
+          "id": "hardened_blade",
+          "slot": "weapon",
+          "durability": 9,
+          "max_durability": 10,
+          "rarity": "legendary",
+          "requirements": {
+            "strength": 5
+          },
+          "scaling": {
+            "strength": 0.8
+          },
+          "affixes": {
+            "max_durability": 5,
+            "def": 2
+          },
+          "tags": [
+            "melee",
+            "quality"
+          ],
+          "refinement_count": 0
+        },
+        "armor_slot": null,
+        "tool_slot": null
+      },
+      "pressure": true,
+      "combat_triggered": false,
+      "combat_loot": [],
+      "effects": {
+        "food": 4,
+        "radiation": 3
+      },
+      "equipment_change": null,
+      "equipment_summary": null,
+      "player_after": {
+        "hp": 13,
+        "food": 12,
+        "ammo": 1,
+        "medkits": 6,
+        "scrap": 54,
+        "radiation": 3,
+        "archetype": null,
+        "character": null,
+        "weapon_slot": {
+          "id": "hardened_blade",
+          "slot": "weapon",
+          "durability": 9,
+          "max_durability": 10,
+          "rarity": "legendary",
+          "requirements": {
+            "strength": 5
+          },
+          "scaling": {
+            "strength": 0.8
+          },
+          "affixes": {
+            "max_durability": 5,
+            "def": 2
+          },
+          "tags": [
+            "melee",
+            "quality"
+          ],
+          "refinement_count": 0
+        },
+        "armor_slot": null,
+        "tool_slot": null
+      }
+    },
+    {
+      "step": 7,
+      "node": "node_deadzone_2",
+      "event_id": "evt_sniper_nest",
+      "option_index": 0,
+      "warning_signals": [
+        "WARNING: radiation will continue to threaten future travel.",
+        "DANGER: this choice carries a high combat risk."
+      ],
+      "pre_choice_state": {
+        "hp": 12,
+        "food": 11,
+        "ammo": 1,
+        "medkits": 6,
+        "scrap": 54,
+        "radiation": 3,
+        "archetype": null,
+        "character": null,
+        "weapon_slot": {
+          "id": "hardened_blade",
+          "slot": "weapon",
+          "durability": 9,
+          "max_durability": 10,
+          "rarity": "legendary",
+          "requirements": {
+            "strength": 5
+          },
+          "scaling": {
+            "strength": 0.8
+          },
+          "affixes": {
+            "max_durability": 5,
+            "def": 2
+          },
+          "tags": [
+            "melee",
+            "quality"
+          ],
+          "refinement_count": 0
+        },
+        "armor_slot": null,
+        "tool_slot": null
+      },
+      "pressure": true,
+      "combat_triggered": false,
+      "combat_loot": [],
+      "effects": {
+        "scrap": -1,
+        "food": -1
+      },
+      "equipment_change": null,
+      "equipment_summary": null,
+      "player_after": {
+        "hp": 12,
+        "food": 10,
+        "ammo": 1,
+        "medkits": 6,
+        "scrap": 53,
+        "radiation": 3,
+        "archetype": null,
+        "character": null,
+        "weapon_slot": {
+          "id": "hardened_blade",
+          "slot": "weapon",
+          "durability": 9,
+          "max_durability": 10,
+          "rarity": "legendary",
+          "requirements": {
+            "strength": 5
+          },
+          "scaling": {
+            "strength": 0.8
+          },
+          "affixes": {
+            "max_durability": 5,
+            "def": 2
+          },
+          "tags": [
+            "melee",
+            "quality"
+          ],
+          "refinement_count": 0
+        },
+        "armor_slot": null,
+        "tool_slot": null
+      }
+    },
+    {
+      "step": 8,
+      "node": "node_deadzone_3",
+      "event_id": "evt_tech_vault",
+      "option_index": 0,
+      "warning_signals": [
+        "WARNING: radiation will continue to threaten future travel."
+      ],
+      "pre_choice_state": {
+        "hp": 20,
+        "food": 9,
+        "ammo": 1,
+        "medkits": 5,
+        "scrap": 13,
+        "radiation": 3,
+        "archetype": null,
+        "character": null,
+        "weapon_slot": {
+          "id": "hardened_blade",
+          "slot": "weapon",
+          "durability": 9,
+          "max_durability": 10,
+          "rarity": "legendary",
+          "requirements": {
+            "strength": 5
+          },
+          "scaling": {
+            "strength": 0.8
+          },
+          "affixes": {
+            "max_durability": 5,
+            "def": 2
+          },
+          "tags": [
+            "melee",
+            "quality"
+          ],
+          "refinement_count": 1
+        },
+        "armor_slot": null,
+        "tool_slot": null
+      },
+      "pressure": true,
+      "combat_triggered": false,
+      "combat_loot": [],
+      "effects": {
+        "scrap": 25,
+        "medkits": 2,
+        "radiation": -1,
+        "xp": 10
+      },
+      "equipment_change": null,
+      "equipment_summary": null,
+      "player_after": {
+        "hp": 20,
+        "food": 9,
+        "ammo": 1,
+        "medkits": 7,
+        "scrap": 38,
+        "radiation": 2,
+        "archetype": null,
+        "character": null,
+        "weapon_slot": {
+          "id": "hardened_blade",
+          "slot": "weapon",
+          "durability": 9,
+          "max_durability": 10,
+          "rarity": "legendary",
+          "requirements": {
+            "strength": 5
+          },
+          "scaling": {
+            "strength": 0.8
+          },
+          "affixes": {
+            "max_durability": 5,
+            "def": 2
+          },
+          "tags": [
+            "melee",
+            "quality"
+          ],
+          "refinement_count": 1
+        },
+        "armor_slot": null,
+        "tool_slot": null
+      }
+    },
+    {
+      "step": 9,
+      "node": "node_boss_overseer",
+      "event_id": "evt_boss_overseer",
+      "option_index": 0,
+      "warning_signals": [
+        "WARNING: radiation will continue to threaten future travel.",
+        "DANGER: this choice carries a high combat risk."
+      ],
+      "pre_choice_state": {
+        "hp": 19,
+        "food": 8,
+        "ammo": 1,
+        "medkits": 7,
+        "scrap": 38,
+        "radiation": 2,
+        "archetype": null,
+        "character": null,
+        "weapon_slot": {
+          "id": "hardened_blade",
+          "slot": "weapon",
+          "durability": 9,
+          "max_durability": 10,
+          "rarity": "legendary",
+          "requirements": {
+            "strength": 5
+          },
+          "scaling": {
+            "strength": 0.8
+          },
+          "affixes": {
+            "max_durability": 5,
+            "def": 2
+          },
+          "tags": [
+            "melee",
+            "quality"
+          ],
+          "refinement_count": 1
+        },
+        "armor_slot": null,
+        "tool_slot": null
+      },
+      "pressure": true,
+      "combat_triggered": true,
+      "combat_loot": [],
+      "effects": {
+        "xp": 10
+      },
+      "equipment_change": null,
+      "equipment_summary": null,
+      "player_after": {
+        "hp": -1,
+        "food": 8,
+        "ammo": 0,
+        "medkits": 0,
+        "scrap": 38,
+        "radiation": 2,
+        "archetype": null,
+        "character": null,
+        "weapon_slot": {
+          "id": "hardened_blade",
+          "slot": "weapon",
+          "durability": 8,
+          "max_durability": 10,
+          "rarity": "legendary",
+          "requirements": {
+            "strength": 5
+          },
+          "scaling": {
+            "strength": 0.8
+          },
+          "affixes": {
+            "max_durability": 5,
+            "def": 2
+          },
+          "tags": [
+            "melee",
+            "quality"
+          ],
+          "refinement_count": 1
         },
         "armor_slot": null,
         "tool_slot": null
@@ -130,60 +810,73 @@
     }
   ],
   "summary": {
-    "pressure_count": 1,
+    "pressure_count": 8,
     "death_cause_attribution": true,
-    "resource_signature": "hp:-1|food:11|ammo:0|medkits:0|scrap:0|radiation:0|weapon:EquipmentState(id='makeshift_blade', slot='weapon', durability=9, max_durability=10, rarity='common', requirements={}, scaling={'strength': 0.5}, affixes={}, tags=['melee', 'makeshift'], refinement_count=0)|armor:None|tool:None"
+    "resource_signature": "hp:-1|food:8|ammo:0|medkits:0|scrap:38|radiation:2|weapon:EquipmentState(id='hardened_blade', slot='weapon', durability=8, max_durability=10, rarity='legendary', requirements={'strength': 5}, scaling={'strength': 0.8}, affixes={'max_durability': 5, 'def': 2}, tags=['melee', 'quality'], refinement_count=1)|armor:None|tool:None"
   },
   "failure_analysis": {
-    "death_chain_length": 1,
-    "primary_blame_factor": "combat",
+    "death_chain_length": 3,
+    "primary_blame_factor": "radiation",
     "regret_nodes": [
       {
+        "node_id": "node_deadzone_1",
+        "event_id": "evt_radioactive_orchard",
+        "blame_score": 0.28,
+        "description": "took +3 radiation, carried radiation into later travel",
+        "steps_to_death": 3
+      },
+      {
         "node_id": "node_fringe_1",
-        "event_id": "evt_scrapyard",
-        "blame_score": 1.0,
+        "event_id": "evt_factory_ruins",
+        "blame_score": 0.18,
+        "description": "took +1 radiation, lost 1 hp, carried radiation into later travel",
+        "steps_to_death": 7
+      },
+      {
+        "node_id": "node_boss_overseer",
+        "event_id": "evt_boss_overseer",
+        "blame_score": 0.16,
         "description": "accepted combat risk",
         "steps_to_death": 0
       }
     ],
-    "steps_from_regret_to_death": 0,
+    "steps_from_regret_to_death": 3,
     "is_trash_time_death": false
   },
   "run_summary": {
-    "headline": "standard_journey_none_batch_10: loss via event_or_resource_death after 1 steps",
+    "headline": "standard_journey_none_batch_10: loss via combat_death after 9 steps",
     "route_family": "unknown",
-    "outcome": "event_or_resource_death",
-    "key_turning_point": "node_fringe_1 (accepted combat risk)",
-    "notable_equipment": [
-      "makeshift_blade"
-    ],
+    "outcome": "combat_death",
+    "key_turning_point": "node_deadzone_1 (took +3 radiation, carried radiation into later travel)",
+    "notable_equipment": [],
     "telemetry": {
-      "total_steps": 1,
-      "pressure_count": 1,
-      "combat_count": 1,
-      "loot_drop_count": 0,
-      "loot_total_amount": 0,
-      "equipment_change_count": 1,
-      "rarity_distribution": {
-        "common": 1
-      },
+      "total_steps": 9,
+      "pressure_count": 8,
+      "combat_count": 2,
+      "loot_drop_count": 2,
+      "loot_total_amount": 50,
+      "equipment_change_count": 0,
+      "rarity_distribution": {},
       "total_atk_affix_gain": 0,
       "total_def_affix_gain": 0,
-      "equipment_ids": [
-        "makeshift_blade"
-      ],
-      "loot_resources": {},
-      "max_radiation": 0,
-      "min_food": 11,
+      "equipment_ids": [],
+      "loot_resources": {
+        "xp": 25,
+        "scrap": 25
+      },
+      "max_radiation": 3,
+      "min_food": 8,
       "min_hp": 0,
       "low_resource_flags": [
         "low_hp",
-        "low_ammo"
+        "low_ammo",
+        "high_radiation"
       ],
       "risk_tags": [
         "combat_seen",
-        "equipment_arc",
-        "end_event_or_resource_death"
+        "radiation_pressure",
+        "end_combat_death",
+        "radiation_carryover"
       ],
       "character": null
     }

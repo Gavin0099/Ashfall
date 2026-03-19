@@ -13,15 +13,15 @@
     "node_final"
   ],
   "ended": true,
-  "victory": false,
-  "end_reason": "radiation_death",
+  "victory": true,
+  "end_reason": "reached_final_node",
   "player_final": {
-    "hp": -2,
-    "food": 6,
-    "ammo": 0,
-    "medkits": 0,
-    "scrap": 18,
-    "radiation": 1,
+    "hp": 14,
+    "food": 4,
+    "ammo": 6,
+    "medkits": 2,
+    "scrap": 90,
+    "radiation": 2,
     "archetype": null,
     "character": {
       "background_id": "wasteland_medic",
@@ -38,315 +38,66 @@
       "traits": [],
       "perks": [],
       "tags": [],
-      "level": 2,
-      "xp": 0
+      "level": 5,
+      "xp": 10
     },
-    "weapon_slot": null,
+    "weapon_slot": {
+      "id": "sledgehammer",
+      "slot": "weapon",
+      "durability": 9,
+      "max_durability": 10,
+      "rarity": "legendary",
+      "requirements": {
+        "strength": 7
+      },
+      "scaling": {
+        "strength": 1.2
+      },
+      "affixes": {
+        "def": 2,
+        "atk": 2
+      },
+      "tags": [
+        "melee",
+        "heavy"
+      ],
+      "refinement_count": 0
+    },
     "armor_slot": null,
-    "tool_slot": null
+    "tool_slot": {
+      "id": "field_pack",
+      "slot": "tool",
+      "durability": 10,
+      "max_durability": 10,
+      "rarity": "rare",
+      "requirements": {
+        "strength": 4
+      },
+      "scaling": {},
+      "affixes": {
+        "atk": 1,
+        "def": 1
+      },
+      "tags": [
+        "exploration"
+      ],
+      "refinement_count": 1
+    }
   },
   "decision_log": [
     {
       "step": 1,
-      "node": "node_fringe_1",
-      "event_id": "evt_factory_ruins",
+      "node": "node_start",
+      "event_id": "evt_departure",
       "option_index": 0,
-      "warning_signals": [
-        "WARNING: radiation will continue to threaten future travel.",
-        "WARNING: this option adds radiation and increases long-term risk."
-      ],
+      "warning_signals": [],
       "pre_choice_state": {
         "hp": 20,
-        "food": 9,
-        "ammo": 3,
-        "medkits": 2,
+        "food": 10,
+        "ammo": 7,
+        "medkits": 5,
         "scrap": 0,
         "radiation": 0,
-        "archetype": null,
-        "character": {
-          "background_id": "wasteland_medic",
-          "display_name": "wasteland_medic",
-          "special": {
-            "strength": 5,
-            "perception": 5,
-            "endurance": 5,
-            "charisma": 5,
-            "intelligence": 5,
-            "agility": 5,
-            "luck": 5
-          },
-          "traits": [],
-          "perks": [],
-          "tags": [],
-          "level": 1,
-          "xp": 0
-        },
-        "weapon_slot": null,
-        "armor_slot": null,
-        "tool_slot": null
-      },
-      "pressure": true,
-      "combat_triggered": false,
-      "combat_loot": [],
-      "effects": {
-        "scrap": 3,
-        "hp": -1,
-        "radiation": 1
-      },
-      "equipment_change": null,
-      "equipment_summary": null,
-      "player_after": {
-        "hp": 19,
-        "food": 9,
-        "ammo": 3,
-        "medkits": 2,
-        "scrap": 3,
-        "radiation": 1,
-        "archetype": null,
-        "character": {
-          "background_id": "wasteland_medic",
-          "display_name": "wasteland_medic",
-          "special": {
-            "strength": 5,
-            "perception": 5,
-            "endurance": 5,
-            "charisma": 5,
-            "intelligence": 5,
-            "agility": 5,
-            "luck": 5
-          },
-          "traits": [],
-          "perks": [],
-          "tags": [],
-          "level": 1,
-          "xp": 0
-        },
-        "weapon_slot": null,
-        "armor_slot": null,
-        "tool_slot": null
-      }
-    },
-    {
-      "step": 2,
-      "node": "node_fringe_2",
-      "event_id": "evt_mutant_burrow",
-      "option_index": 0,
-      "warning_signals": [
-        "WARNING: radiation will continue to threaten future travel.",
-        "DANGER: this choice carries a high combat risk."
-      ],
-      "pre_choice_state": {
-        "hp": 19,
-        "food": 8,
-        "ammo": 3,
-        "medkits": 2,
-        "scrap": 3,
-        "radiation": 1,
-        "archetype": null,
-        "character": {
-          "background_id": "wasteland_medic",
-          "display_name": "wasteland_medic",
-          "special": {
-            "strength": 5,
-            "perception": 5,
-            "endurance": 5,
-            "charisma": 5,
-            "intelligence": 5,
-            "agility": 5,
-            "luck": 5
-          },
-          "traits": [],
-          "perks": [],
-          "tags": [],
-          "level": 1,
-          "xp": 0
-        },
-        "weapon_slot": null,
-        "armor_slot": null,
-        "tool_slot": null
-      },
-      "pressure": true,
-      "combat_triggered": true,
-      "combat_loot": [
-        {
-          "resource": "scrap",
-          "amount": 4
-        },
-        {
-          "resource": "medkits",
-          "amount": 1
-        }
-      ],
-      "effects": {
-        "hp": -1,
-        "scrap": 6,
-        "medkits": 1,
-        "xp": 5
-      },
-      "equipment_change": null,
-      "equipment_summary": null,
-      "player_after": {
-        "hp": 15,
-        "food": 8,
-        "ammo": 0,
-        "medkits": 4,
-        "scrap": 13,
-        "radiation": 1,
-        "archetype": null,
-        "character": {
-          "background_id": "wasteland_medic",
-          "display_name": "wasteland_medic",
-          "special": {
-            "strength": 5,
-            "perception": 5,
-            "endurance": 5,
-            "charisma": 5,
-            "intelligence": 5,
-            "agility": 5,
-            "luck": 5
-          },
-          "traits": [],
-          "perks": [],
-          "tags": [],
-          "level": 1,
-          "xp": 5
-        },
-        "weapon_slot": null,
-        "armor_slot": null,
-        "tool_slot": null
-      }
-    },
-    {
-      "step": 3,
-      "node": "node_fringe_3",
-      "event_id": "evt_tech_vault",
-      "option_index": 2,
-      "warning_signals": [
-        "WARNING: radiation will continue to threaten future travel."
-      ],
-      "pre_choice_state": {
-        "hp": 20,
-        "food": 7,
-        "ammo": 0,
-        "medkits": 3,
-        "scrap": 13,
-        "radiation": 1,
-        "archetype": null,
-        "character": {
-          "background_id": "wasteland_medic",
-          "display_name": "wasteland_medic",
-          "special": {
-            "strength": 5,
-            "perception": 5,
-            "endurance": 5,
-            "charisma": 5,
-            "intelligence": 5,
-            "agility": 5,
-            "luck": 5
-          },
-          "traits": [],
-          "perks": [],
-          "tags": [],
-          "level": 1,
-          "xp": 5
-        },
-        "weapon_slot": null,
-        "armor_slot": null,
-        "tool_slot": null
-      },
-      "pressure": true,
-      "combat_triggered": false,
-      "combat_loot": [],
-      "effects": {
-        "scrap": 5
-      },
-      "equipment_change": null,
-      "equipment_summary": null,
-      "player_after": {
-        "hp": 20,
-        "food": 7,
-        "ammo": 0,
-        "medkits": 3,
-        "scrap": 18,
-        "radiation": 1,
-        "archetype": null,
-        "character": {
-          "background_id": "wasteland_medic",
-          "display_name": "wasteland_medic",
-          "special": {
-            "strength": 5,
-            "perception": 5,
-            "endurance": 5,
-            "charisma": 5,
-            "intelligence": 5,
-            "agility": 5,
-            "luck": 5
-          },
-          "traits": [],
-          "perks": [],
-          "tags": [],
-          "level": 1,
-          "xp": 5
-        },
-        "weapon_slot": null,
-        "armor_slot": null,
-        "tool_slot": null
-      }
-    },
-    {
-      "step": 4,
-      "node": "node_boss_gatekeeper",
-      "event_id": "evt_boss_gatekeeper",
-      "option_index": 0,
-      "warning_signals": [
-        "WARNING: radiation will continue to threaten future travel.",
-        "DANGER: this choice carries a high combat risk."
-      ],
-      "pre_choice_state": {
-        "hp": 19,
-        "food": 6,
-        "ammo": 0,
-        "medkits": 3,
-        "scrap": 18,
-        "radiation": 1,
-        "archetype": null,
-        "character": {
-          "background_id": "wasteland_medic",
-          "display_name": "wasteland_medic",
-          "special": {
-            "strength": 5,
-            "perception": 5,
-            "endurance": 5,
-            "charisma": 5,
-            "intelligence": 5,
-            "agility": 5,
-            "luck": 5
-          },
-          "traits": [],
-          "perks": [],
-          "tags": [],
-          "level": 1,
-          "xp": 5
-        },
-        "weapon_slot": null,
-        "armor_slot": null,
-        "tool_slot": null
-      },
-      "pressure": true,
-      "combat_triggered": true,
-      "combat_loot": [],
-      "effects": {
-        "xp": 5
-      },
-      "equipment_change": null,
-      "equipment_summary": null,
-      "player_after": {
-        "hp": -2,
-        "food": 6,
-        "ammo": 0,
-        "medkits": 0,
-        "scrap": 18,
-        "radiation": 1,
         "archetype": null,
         "character": {
           "background_id": "wasteland_medic",
@@ -369,75 +120,1438 @@
         "weapon_slot": null,
         "armor_slot": null,
         "tool_slot": null
+      },
+      "pressure": false,
+      "combat_triggered": false,
+      "effects": {
+        "food": 3,
+        "medkits": 1,
+        "xp": 10
+      },
+      "player_after": {
+        "hp": 20,
+        "food": 13,
+        "ammo": 7,
+        "medkits": 6,
+        "scrap": 0,
+        "radiation": 0,
+        "archetype": null,
+        "character": {
+          "background_id": "wasteland_medic",
+          "display_name": "wasteland_medic",
+          "special": {
+            "strength": 5,
+            "perception": 5,
+            "endurance": 5,
+            "charisma": 5,
+            "intelligence": 5,
+            "agility": 5,
+            "luck": 5
+          },
+          "traits": [],
+          "perks": [],
+          "tags": [],
+          "level": 2,
+          "xp": 0
+        },
+        "weapon_slot": {
+          "id": "rust_rifle",
+          "slot": "weapon",
+          "durability": 10,
+          "max_durability": 10,
+          "rarity": "rare",
+          "requirements": {
+            "agility": 3
+          },
+          "scaling": {
+            "perception": 0.5
+          },
+          "affixes": {},
+          "tags": [
+            "ranged",
+            "firearm"
+          ],
+          "refinement_count": 0
+        },
+        "armor_slot": null,
+        "tool_slot": null
+      }
+    },
+    {
+      "step": 2,
+      "node": "node_fringe_1",
+      "event_id": "evt_factory_ruins",
+      "option_index": 0,
+      "warning_signals": [
+        "WARNING: radiation will continue to threaten future travel.",
+        "WARNING: this option adds radiation and increases long-term risk."
+      ],
+      "pre_choice_state": {
+        "hp": 20,
+        "food": 12,
+        "ammo": 7,
+        "medkits": 6,
+        "scrap": 0,
+        "radiation": 0,
+        "archetype": null,
+        "character": {
+          "background_id": "wasteland_medic",
+          "display_name": "wasteland_medic",
+          "special": {
+            "strength": 5,
+            "perception": 5,
+            "endurance": 5,
+            "charisma": 5,
+            "intelligence": 5,
+            "agility": 5,
+            "luck": 5
+          },
+          "traits": [],
+          "perks": [],
+          "tags": [],
+          "level": 2,
+          "xp": 0
+        },
+        "weapon_slot": {
+          "id": "rust_rifle",
+          "slot": "weapon",
+          "durability": 10,
+          "max_durability": 10,
+          "rarity": "rare",
+          "requirements": {
+            "agility": 3
+          },
+          "scaling": {
+            "perception": 0.5
+          },
+          "affixes": {},
+          "tags": [
+            "ranged",
+            "firearm"
+          ],
+          "refinement_count": 0
+        },
+        "armor_slot": null,
+        "tool_slot": null
+      },
+      "pressure": true,
+      "combat_triggered": false,
+      "combat_loot": [],
+      "effects": {
+        "scrap": 3,
+        "hp": -1,
+        "radiation": 1
+      },
+      "equipment_change": null,
+      "equipment_summary": null,
+      "player_after": {
+        "hp": 19,
+        "food": 12,
+        "ammo": 7,
+        "medkits": 6,
+        "scrap": 3,
+        "radiation": 1,
+        "archetype": null,
+        "character": {
+          "background_id": "wasteland_medic",
+          "display_name": "wasteland_medic",
+          "special": {
+            "strength": 5,
+            "perception": 5,
+            "endurance": 5,
+            "charisma": 5,
+            "intelligence": 5,
+            "agility": 5,
+            "luck": 5
+          },
+          "traits": [],
+          "perks": [],
+          "tags": [],
+          "level": 2,
+          "xp": 0
+        },
+        "weapon_slot": {
+          "id": "rust_rifle",
+          "slot": "weapon",
+          "durability": 10,
+          "max_durability": 10,
+          "rarity": "rare",
+          "requirements": {
+            "agility": 3
+          },
+          "scaling": {
+            "perception": 0.5
+          },
+          "affixes": {},
+          "tags": [
+            "ranged",
+            "firearm"
+          ],
+          "refinement_count": 0
+        },
+        "armor_slot": null,
+        "tool_slot": null
+      }
+    },
+    {
+      "step": 3,
+      "node": "node_fringe_2",
+      "event_id": "evt_mutant_burrow",
+      "option_index": 0,
+      "warning_signals": [
+        "WARNING: radiation will continue to threaten future travel.",
+        "DANGER: this choice carries a high combat risk."
+      ],
+      "pre_choice_state": {
+        "hp": 19,
+        "food": 11,
+        "ammo": 7,
+        "medkits": 6,
+        "scrap": 3,
+        "radiation": 1,
+        "archetype": null,
+        "character": {
+          "background_id": "wasteland_medic",
+          "display_name": "wasteland_medic",
+          "special": {
+            "strength": 5,
+            "perception": 5,
+            "endurance": 5,
+            "charisma": 5,
+            "intelligence": 5,
+            "agility": 5,
+            "luck": 5
+          },
+          "traits": [],
+          "perks": [],
+          "tags": [],
+          "level": 2,
+          "xp": 0
+        },
+        "weapon_slot": {
+          "id": "rust_rifle",
+          "slot": "weapon",
+          "durability": 10,
+          "max_durability": 10,
+          "rarity": "rare",
+          "requirements": {
+            "agility": 3
+          },
+          "scaling": {
+            "perception": 0.5
+          },
+          "affixes": {},
+          "tags": [
+            "ranged",
+            "firearm"
+          ],
+          "refinement_count": 0
+        },
+        "armor_slot": null,
+        "tool_slot": null
+      },
+      "pressure": true,
+      "combat_triggered": true,
+      "combat_loot": [
+        {
+          "resource": "ammo",
+          "amount": 5
+        },
+        {
+          "resource": "scrap",
+          "amount": 2
+        }
+      ],
+      "effects": {
+        "hp": -1,
+        "scrap": 6,
+        "medkits": 1,
+        "xp": 5
+      },
+      "equipment_change": null,
+      "equipment_summary": null,
+      "player_after": {
+        "hp": 16,
+        "food": 11,
+        "ammo": 10,
+        "medkits": 7,
+        "scrap": 11,
+        "radiation": 1,
+        "archetype": null,
+        "character": {
+          "background_id": "wasteland_medic",
+          "display_name": "wasteland_medic",
+          "special": {
+            "strength": 5,
+            "perception": 5,
+            "endurance": 5,
+            "charisma": 5,
+            "intelligence": 5,
+            "agility": 5,
+            "luck": 5
+          },
+          "traits": [],
+          "perks": [],
+          "tags": [],
+          "level": 2,
+          "xp": 5
+        },
+        "weapon_slot": {
+          "id": "rust_rifle",
+          "slot": "weapon",
+          "durability": 9,
+          "max_durability": 10,
+          "rarity": "rare",
+          "requirements": {
+            "agility": 3
+          },
+          "scaling": {
+            "perception": 0.5
+          },
+          "affixes": {},
+          "tags": [
+            "ranged",
+            "firearm"
+          ],
+          "refinement_count": 0
+        },
+        "armor_slot": null,
+        "tool_slot": null
+      }
+    },
+    {
+      "step": 4,
+      "node": "node_fringe_3",
+      "event_id": "evt_tech_vault",
+      "option_index": 2,
+      "warning_signals": [
+        "WARNING: radiation will continue to threaten future travel."
+      ],
+      "pre_choice_state": {
+        "hp": 16,
+        "food": 10,
+        "ammo": 10,
+        "medkits": 7,
+        "scrap": 11,
+        "radiation": 1,
+        "archetype": null,
+        "character": {
+          "background_id": "wasteland_medic",
+          "display_name": "wasteland_medic",
+          "special": {
+            "strength": 5,
+            "perception": 5,
+            "endurance": 5,
+            "charisma": 5,
+            "intelligence": 5,
+            "agility": 5,
+            "luck": 5
+          },
+          "traits": [],
+          "perks": [],
+          "tags": [],
+          "level": 2,
+          "xp": 5
+        },
+        "weapon_slot": {
+          "id": "rust_rifle",
+          "slot": "weapon",
+          "durability": 9,
+          "max_durability": 10,
+          "rarity": "rare",
+          "requirements": {
+            "agility": 3
+          },
+          "scaling": {
+            "perception": 0.5
+          },
+          "affixes": {},
+          "tags": [
+            "ranged",
+            "firearm"
+          ],
+          "refinement_count": 0
+        },
+        "armor_slot": null,
+        "tool_slot": null
+      },
+      "pressure": true,
+      "combat_triggered": true,
+      "combat_loot": [
+        {
+          "resource": "ammo",
+          "amount": 5
+        },
+        {
+          "resource": "scrap",
+          "amount": 7
+        }
+      ],
+      "effects": {
+        "scrap": 5
+      },
+      "equipment_change": null,
+      "equipment_summary": null,
+      "player_after": {
+        "hp": 10,
+        "food": 10,
+        "ammo": 12,
+        "medkits": 6,
+        "scrap": 23,
+        "radiation": 1,
+        "archetype": null,
+        "character": {
+          "background_id": "wasteland_medic",
+          "display_name": "wasteland_medic",
+          "special": {
+            "strength": 5,
+            "perception": 5,
+            "endurance": 5,
+            "charisma": 5,
+            "intelligence": 5,
+            "agility": 5,
+            "luck": 5
+          },
+          "traits": [],
+          "perks": [],
+          "tags": [],
+          "level": 2,
+          "xp": 5
+        },
+        "weapon_slot": {
+          "id": "rust_rifle",
+          "slot": "weapon",
+          "durability": 8,
+          "max_durability": 10,
+          "rarity": "rare",
+          "requirements": {
+            "agility": 3
+          },
+          "scaling": {
+            "perception": 0.5
+          },
+          "affixes": {},
+          "tags": [
+            "ranged",
+            "firearm"
+          ],
+          "refinement_count": 0
+        },
+        "armor_slot": null,
+        "tool_slot": null
+      }
+    },
+    {
+      "step": 5,
+      "node": "node_boss_gatekeeper",
+      "event_id": "evt_boss_gatekeeper",
+      "option_index": 0,
+      "warning_signals": [
+        "WARNING: radiation will continue to threaten future travel.",
+        "DANGER: this choice carries a high combat risk."
+      ],
+      "pre_choice_state": {
+        "hp": 20,
+        "food": 9,
+        "ammo": 12,
+        "medkits": 5,
+        "scrap": 23,
+        "radiation": 1,
+        "archetype": null,
+        "character": {
+          "background_id": "wasteland_medic",
+          "display_name": "wasteland_medic",
+          "special": {
+            "strength": 5,
+            "perception": 5,
+            "endurance": 5,
+            "charisma": 5,
+            "intelligence": 5,
+            "agility": 5,
+            "luck": 5
+          },
+          "traits": [],
+          "perks": [],
+          "tags": [],
+          "level": 2,
+          "xp": 5
+        },
+        "weapon_slot": {
+          "id": "rust_rifle",
+          "slot": "weapon",
+          "durability": 8,
+          "max_durability": 10,
+          "rarity": "rare",
+          "requirements": {
+            "agility": 3
+          },
+          "scaling": {
+            "perception": 0.5
+          },
+          "affixes": {},
+          "tags": [
+            "ranged",
+            "firearm"
+          ],
+          "refinement_count": 0
+        },
+        "armor_slot": null,
+        "tool_slot": null
+      },
+      "pressure": true,
+      "combat_triggered": true,
+      "combat_loot": [
+        {
+          "resource": "xp",
+          "amount": 25
+        },
+        {
+          "resource": "scrap",
+          "amount": 25
+        }
+      ],
+      "effects": {
+        "xp": 5
+      },
+      "equipment_change": null,
+      "equipment_summary": null,
+      "player_after": {
+        "hp": 9,
+        "food": 9,
+        "ammo": 8,
+        "medkits": 4,
+        "scrap": 48,
+        "radiation": 1,
+        "archetype": null,
+        "character": {
+          "background_id": "wasteland_medic",
+          "display_name": "wasteland_medic",
+          "special": {
+            "strength": 5,
+            "perception": 5,
+            "endurance": 5,
+            "charisma": 5,
+            "intelligence": 5,
+            "agility": 5,
+            "luck": 5
+          },
+          "traits": [],
+          "perks": [],
+          "tags": [],
+          "level": 2,
+          "xp": 35
+        },
+        "weapon_slot": {
+          "id": "hardened_blade",
+          "slot": "weapon",
+          "durability": 9,
+          "max_durability": 10,
+          "rarity": "legendary",
+          "requirements": {
+            "strength": 5
+          },
+          "scaling": {
+            "strength": 0.8
+          },
+          "affixes": {
+            "def": 2,
+            "atk": 1
+          },
+          "tags": [
+            "melee",
+            "quality"
+          ],
+          "refinement_count": 0
+        },
+        "armor_slot": null,
+        "tool_slot": null
+      }
+    },
+    {
+      "step": 6,
+      "node": "node_deadzone_1",
+      "event_id": "evt_floodplain",
+      "option_index": 0,
+      "warning_signals": [
+        "WARNING: radiation will continue to threaten future travel.",
+        "WARNING: this option adds radiation and increases long-term risk."
+      ],
+      "pre_choice_state": {
+        "hp": 19,
+        "food": 8,
+        "ammo": 8,
+        "medkits": 3,
+        "scrap": 48,
+        "radiation": 1,
+        "archetype": null,
+        "character": {
+          "background_id": "wasteland_medic",
+          "display_name": "wasteland_medic",
+          "special": {
+            "strength": 5,
+            "perception": 5,
+            "endurance": 5,
+            "charisma": 5,
+            "intelligence": 5,
+            "agility": 5,
+            "luck": 5
+          },
+          "traits": [],
+          "perks": [],
+          "tags": [],
+          "level": 2,
+          "xp": 35
+        },
+        "weapon_slot": {
+          "id": "hardened_blade",
+          "slot": "weapon",
+          "durability": 9,
+          "max_durability": 10,
+          "rarity": "legendary",
+          "requirements": {
+            "strength": 5
+          },
+          "scaling": {
+            "strength": 0.8
+          },
+          "affixes": {
+            "def": 2,
+            "atk": 1
+          },
+          "tags": [
+            "melee",
+            "quality"
+          ],
+          "refinement_count": 0
+        },
+        "armor_slot": null,
+        "tool_slot": null
+      },
+      "pressure": true,
+      "combat_triggered": false,
+      "combat_loot": [],
+      "effects": {
+        "food": -1,
+        "radiation": 1
+      },
+      "equipment_change": {
+        "slot": "tool",
+        "item": "field_pack",
+        "item_data": {
+          "id": "field_pack",
+          "slot": "tool",
+          "durability": 10,
+          "max_durability": 10,
+          "rarity": "common",
+          "requirements": {
+            "strength": 4
+          },
+          "scaling": {},
+          "affixes": {
+            "atk": 1,
+            "def": 1
+          },
+          "tags": [
+            "exploration"
+          ],
+          "refinement_count": 0
+        },
+        "changed": true
+      },
+      "equipment_summary": "tool -> field_pack (replaced empty)",
+      "player_after": {
+        "hp": 19,
+        "food": 9,
+        "ammo": 8,
+        "medkits": 3,
+        "scrap": 48,
+        "radiation": 2,
+        "archetype": null,
+        "character": {
+          "background_id": "wasteland_medic",
+          "display_name": "wasteland_medic",
+          "special": {
+            "strength": 5,
+            "perception": 5,
+            "endurance": 5,
+            "charisma": 5,
+            "intelligence": 5,
+            "agility": 5,
+            "luck": 5
+          },
+          "traits": [],
+          "perks": [],
+          "tags": [],
+          "level": 3,
+          "xp": 15
+        },
+        "weapon_slot": {
+          "id": "hardened_blade",
+          "slot": "weapon",
+          "durability": 9,
+          "max_durability": 10,
+          "rarity": "legendary",
+          "requirements": {
+            "strength": 5
+          },
+          "scaling": {
+            "strength": 0.8
+          },
+          "affixes": {
+            "def": 2,
+            "atk": 1
+          },
+          "tags": [
+            "melee",
+            "quality"
+          ],
+          "refinement_count": 0
+        },
+        "armor_slot": null,
+        "tool_slot": {
+          "id": "field_pack",
+          "slot": "tool",
+          "durability": 10,
+          "max_durability": 10,
+          "rarity": "common",
+          "requirements": {
+            "strength": 4
+          },
+          "scaling": {},
+          "affixes": {
+            "atk": 1,
+            "def": 1
+          },
+          "tags": [
+            "exploration"
+          ],
+          "refinement_count": 0
+        }
+      }
+    },
+    {
+      "step": 7,
+      "node": "node_deadzone_2",
+      "event_id": "evt_checkpoint",
+      "option_index": 0,
+      "warning_signals": [
+        "WARNING: radiation will continue to threaten future travel.",
+        "DANGER: this choice carries a high combat risk."
+      ],
+      "pre_choice_state": {
+        "hp": 18,
+        "food": 8,
+        "ammo": 8,
+        "medkits": 3,
+        "scrap": 48,
+        "radiation": 2,
+        "archetype": null,
+        "character": {
+          "background_id": "wasteland_medic",
+          "display_name": "wasteland_medic",
+          "special": {
+            "strength": 5,
+            "perception": 5,
+            "endurance": 5,
+            "charisma": 5,
+            "intelligence": 5,
+            "agility": 5,
+            "luck": 5
+          },
+          "traits": [],
+          "perks": [],
+          "tags": [],
+          "level": 3,
+          "xp": 15
+        },
+        "weapon_slot": {
+          "id": "hardened_blade",
+          "slot": "weapon",
+          "durability": 9,
+          "max_durability": 10,
+          "rarity": "legendary",
+          "requirements": {
+            "strength": 5
+          },
+          "scaling": {
+            "strength": 0.8
+          },
+          "affixes": {
+            "def": 2,
+            "atk": 1
+          },
+          "tags": [
+            "melee",
+            "quality"
+          ],
+          "refinement_count": 0
+        },
+        "armor_slot": null,
+        "tool_slot": {
+          "id": "field_pack",
+          "slot": "tool",
+          "durability": 10,
+          "max_durability": 10,
+          "rarity": "common",
+          "requirements": {
+            "strength": 4
+          },
+          "scaling": {},
+          "affixes": {
+            "atk": 1,
+            "def": 1
+          },
+          "tags": [
+            "exploration"
+          ],
+          "refinement_count": 0
+        }
+      },
+      "pressure": true,
+      "combat_triggered": true,
+      "combat_loot": [
+        {
+          "resource": "ammo",
+          "amount": 5
+        },
+        {
+          "resource": "scrap",
+          "amount": 7
+        }
+      ],
+      "effects": {
+        "ammo": 0,
+        "xp": 5
+      },
+      "equipment_change": {
+        "slot": "weapon",
+        "item": "rust_rifle",
+        "item_data": {
+          "id": "rust_rifle",
+          "slot": "weapon",
+          "durability": 10,
+          "max_durability": 10,
+          "rarity": "rare",
+          "requirements": {
+            "agility": 4
+          },
+          "scaling": {
+            "perception": 0.5
+          },
+          "affixes": {
+            "atk": 2
+          },
+          "tags": [
+            "ranged",
+            "firearm"
+          ],
+          "refinement_count": 0
+        },
+        "changed": true
+      },
+      "equipment_summary": "weapon -> rust_rifle (replaced empty)",
+      "player_after": {
+        "hp": 13,
+        "food": 8,
+        "ammo": 10,
+        "medkits": 2,
+        "scrap": 55,
+        "radiation": 2,
+        "archetype": null,
+        "character": {
+          "background_id": "wasteland_medic",
+          "display_name": "wasteland_medic",
+          "special": {
+            "strength": 5,
+            "perception": 5,
+            "endurance": 5,
+            "charisma": 5,
+            "intelligence": 5,
+            "agility": 5,
+            "luck": 5
+          },
+          "traits": [],
+          "perks": [],
+          "tags": [],
+          "level": 3,
+          "xp": 20
+        },
+        "weapon_slot": {
+          "id": "rust_rifle",
+          "slot": "weapon",
+          "durability": 9,
+          "max_durability": 10,
+          "rarity": "rare",
+          "requirements": {
+            "agility": 4
+          },
+          "scaling": {
+            "perception": 0.5
+          },
+          "affixes": {
+            "atk": 2
+          },
+          "tags": [
+            "ranged",
+            "firearm"
+          ],
+          "refinement_count": 0
+        },
+        "armor_slot": null,
+        "tool_slot": {
+          "id": "field_pack",
+          "slot": "tool",
+          "durability": 10,
+          "max_durability": 10,
+          "rarity": "common",
+          "requirements": {
+            "strength": 4
+          },
+          "scaling": {},
+          "affixes": {
+            "atk": 1,
+            "def": 1
+          },
+          "tags": [
+            "exploration"
+          ],
+          "refinement_count": 0
+        }
+      }
+    },
+    {
+      "step": 8,
+      "node": "node_deadzone_3",
+      "event_id": "evt_tech_vault",
+      "option_index": 2,
+      "warning_signals": [
+        "WARNING: radiation will continue to threaten future travel."
+      ],
+      "pre_choice_state": {
+        "hp": 20,
+        "food": 7,
+        "ammo": 10,
+        "medkits": 1,
+        "scrap": 35,
+        "radiation": 2,
+        "archetype": null,
+        "character": {
+          "background_id": "wasteland_medic",
+          "display_name": "wasteland_medic",
+          "special": {
+            "strength": 5,
+            "perception": 5,
+            "endurance": 5,
+            "charisma": 5,
+            "intelligence": 5,
+            "agility": 5,
+            "luck": 5
+          },
+          "traits": [],
+          "perks": [],
+          "tags": [],
+          "level": 3,
+          "xp": 20
+        },
+        "weapon_slot": {
+          "id": "rust_rifle",
+          "slot": "weapon",
+          "durability": 9,
+          "max_durability": 10,
+          "rarity": "rare",
+          "requirements": {
+            "agility": 4
+          },
+          "scaling": {
+            "perception": 0.5
+          },
+          "affixes": {
+            "atk": 2
+          },
+          "tags": [
+            "ranged",
+            "firearm"
+          ],
+          "refinement_count": 1
+        },
+        "armor_slot": null,
+        "tool_slot": {
+          "id": "field_pack",
+          "slot": "tool",
+          "durability": 10,
+          "max_durability": 10,
+          "rarity": "rare",
+          "requirements": {
+            "strength": 4
+          },
+          "scaling": {},
+          "affixes": {
+            "atk": 1,
+            "def": 1
+          },
+          "tags": [
+            "exploration"
+          ],
+          "refinement_count": 1
+        }
+      },
+      "pressure": true,
+      "combat_triggered": false,
+      "combat_loot": [],
+      "effects": {
+        "scrap": 5
+      },
+      "equipment_change": null,
+      "equipment_summary": null,
+      "player_after": {
+        "hp": 20,
+        "food": 7,
+        "ammo": 10,
+        "medkits": 1,
+        "scrap": 40,
+        "radiation": 2,
+        "archetype": null,
+        "character": {
+          "background_id": "wasteland_medic",
+          "display_name": "wasteland_medic",
+          "special": {
+            "strength": 5,
+            "perception": 5,
+            "endurance": 5,
+            "charisma": 5,
+            "intelligence": 5,
+            "agility": 5,
+            "luck": 5
+          },
+          "traits": [],
+          "perks": [],
+          "tags": [],
+          "level": 3,
+          "xp": 20
+        },
+        "weapon_slot": {
+          "id": "rust_rifle",
+          "slot": "weapon",
+          "durability": 9,
+          "max_durability": 10,
+          "rarity": "rare",
+          "requirements": {
+            "agility": 4
+          },
+          "scaling": {
+            "perception": 0.5
+          },
+          "affixes": {
+            "atk": 2
+          },
+          "tags": [
+            "ranged",
+            "firearm"
+          ],
+          "refinement_count": 1
+        },
+        "armor_slot": null,
+        "tool_slot": {
+          "id": "field_pack",
+          "slot": "tool",
+          "durability": 10,
+          "max_durability": 10,
+          "rarity": "rare",
+          "requirements": {
+            "strength": 4
+          },
+          "scaling": {},
+          "affixes": {
+            "atk": 1,
+            "def": 1
+          },
+          "tags": [
+            "exploration"
+          ],
+          "refinement_count": 1
+        }
+      }
+    },
+    {
+      "step": 9,
+      "node": "node_boss_overseer",
+      "event_id": "evt_boss_overseer",
+      "option_index": 0,
+      "warning_signals": [
+        "WARNING: radiation will continue to threaten future travel.",
+        "DANGER: this choice carries a high combat risk."
+      ],
+      "pre_choice_state": {
+        "hp": 19,
+        "food": 6,
+        "ammo": 10,
+        "medkits": 1,
+        "scrap": 40,
+        "radiation": 2,
+        "archetype": null,
+        "character": {
+          "background_id": "wasteland_medic",
+          "display_name": "wasteland_medic",
+          "special": {
+            "strength": 5,
+            "perception": 5,
+            "endurance": 5,
+            "charisma": 5,
+            "intelligence": 5,
+            "agility": 5,
+            "luck": 5
+          },
+          "traits": [],
+          "perks": [],
+          "tags": [],
+          "level": 3,
+          "xp": 20
+        },
+        "weapon_slot": {
+          "id": "rust_rifle",
+          "slot": "weapon",
+          "durability": 9,
+          "max_durability": 10,
+          "rarity": "rare",
+          "requirements": {
+            "agility": 4
+          },
+          "scaling": {
+            "perception": 0.5
+          },
+          "affixes": {
+            "atk": 2
+          },
+          "tags": [
+            "ranged",
+            "firearm"
+          ],
+          "refinement_count": 1
+        },
+        "armor_slot": null,
+        "tool_slot": {
+          "id": "field_pack",
+          "slot": "tool",
+          "durability": 10,
+          "max_durability": 10,
+          "rarity": "rare",
+          "requirements": {
+            "strength": 4
+          },
+          "scaling": {},
+          "affixes": {
+            "atk": 1,
+            "def": 1
+          },
+          "tags": [
+            "exploration"
+          ],
+          "refinement_count": 1
+        }
+      },
+      "pressure": true,
+      "combat_triggered": true,
+      "combat_loot": [
+        {
+          "resource": "xp",
+          "amount": 50
+        },
+        {
+          "resource": "scrap",
+          "amount": 50
+        },
+        {
+          "resource": "medkits",
+          "amount": 3
+        }
+      ],
+      "effects": {
+        "xp": 10
+      },
+      "equipment_change": null,
+      "equipment_summary": null,
+      "player_after": {
+        "hp": 5,
+        "food": 6,
+        "ammo": 6,
+        "medkits": 3,
+        "scrap": 90,
+        "radiation": 2,
+        "archetype": null,
+        "character": {
+          "background_id": "wasteland_medic",
+          "display_name": "wasteland_medic",
+          "special": {
+            "strength": 5,
+            "perception": 5,
+            "endurance": 5,
+            "charisma": 5,
+            "intelligence": 5,
+            "agility": 5,
+            "luck": 5
+          },
+          "traits": [],
+          "perks": [],
+          "tags": [],
+          "level": 4,
+          "xp": 50
+        },
+        "weapon_slot": {
+          "id": "sledgehammer",
+          "slot": "weapon",
+          "durability": 9,
+          "max_durability": 10,
+          "rarity": "legendary",
+          "requirements": {
+            "strength": 7
+          },
+          "scaling": {
+            "strength": 1.2
+          },
+          "affixes": {
+            "def": 2,
+            "atk": 2
+          },
+          "tags": [
+            "melee",
+            "heavy"
+          ],
+          "refinement_count": 0
+        },
+        "armor_slot": null,
+        "tool_slot": {
+          "id": "field_pack",
+          "slot": "tool",
+          "durability": 10,
+          "max_durability": 10,
+          "rarity": "rare",
+          "requirements": {
+            "strength": 4
+          },
+          "scaling": {},
+          "affixes": {
+            "atk": 1,
+            "def": 1
+          },
+          "tags": [
+            "exploration"
+          ],
+          "refinement_count": 1
+        }
+      }
+    },
+    {
+      "step": 10,
+      "node": "node_final",
+      "event_id": "evt_final",
+      "option_index": 0,
+      "warning_signals": [
+        "WARNING: radiation will continue to threaten future travel."
+      ],
+      "pre_choice_state": {
+        "hp": 14,
+        "food": 5,
+        "ammo": 6,
+        "medkits": 2,
+        "scrap": 90,
+        "radiation": 2,
+        "archetype": null,
+        "character": {
+          "background_id": "wasteland_medic",
+          "display_name": "wasteland_medic",
+          "special": {
+            "strength": 5,
+            "perception": 5,
+            "endurance": 5,
+            "charisma": 5,
+            "intelligence": 5,
+            "agility": 5,
+            "luck": 5
+          },
+          "traits": [],
+          "perks": [],
+          "tags": [],
+          "level": 4,
+          "xp": 50
+        },
+        "weapon_slot": {
+          "id": "sledgehammer",
+          "slot": "weapon",
+          "durability": 9,
+          "max_durability": 10,
+          "rarity": "legendary",
+          "requirements": {
+            "strength": 7
+          },
+          "scaling": {
+            "strength": 1.2
+          },
+          "affixes": {
+            "def": 2,
+            "atk": 2
+          },
+          "tags": [
+            "melee",
+            "heavy"
+          ],
+          "refinement_count": 0
+        },
+        "armor_slot": null,
+        "tool_slot": {
+          "id": "field_pack",
+          "slot": "tool",
+          "durability": 10,
+          "max_durability": 10,
+          "rarity": "rare",
+          "requirements": {
+            "strength": 4
+          },
+          "scaling": {},
+          "affixes": {
+            "atk": 1,
+            "def": 1
+          },
+          "tags": [
+            "exploration"
+          ],
+          "refinement_count": 1
+        }
+      },
+      "pressure": true,
+      "combat_triggered": false,
+      "combat_loot": [],
+      "effects": {
+        "food": -1
+      },
+      "equipment_change": null,
+      "equipment_summary": null,
+      "player_after": {
+        "hp": 14,
+        "food": 4,
+        "ammo": 6,
+        "medkits": 2,
+        "scrap": 90,
+        "radiation": 2,
+        "archetype": null,
+        "character": {
+          "background_id": "wasteland_medic",
+          "display_name": "wasteland_medic",
+          "special": {
+            "strength": 5,
+            "perception": 5,
+            "endurance": 5,
+            "charisma": 5,
+            "intelligence": 5,
+            "agility": 5,
+            "luck": 5
+          },
+          "traits": [],
+          "perks": [],
+          "tags": [],
+          "level": 5,
+          "xp": 10
+        },
+        "weapon_slot": {
+          "id": "sledgehammer",
+          "slot": "weapon",
+          "durability": 9,
+          "max_durability": 10,
+          "rarity": "legendary",
+          "requirements": {
+            "strength": 7
+          },
+          "scaling": {
+            "strength": 1.2
+          },
+          "affixes": {
+            "def": 2,
+            "atk": 2
+          },
+          "tags": [
+            "melee",
+            "heavy"
+          ],
+          "refinement_count": 0
+        },
+        "armor_slot": null,
+        "tool_slot": {
+          "id": "field_pack",
+          "slot": "tool",
+          "durability": 10,
+          "max_durability": 10,
+          "rarity": "rare",
+          "requirements": {
+            "strength": 4
+          },
+          "scaling": {},
+          "affixes": {
+            "atk": 1,
+            "def": 1
+          },
+          "tags": [
+            "exploration"
+          ],
+          "refinement_count": 1
+        }
       }
     }
   ],
   "summary": {
-    "pressure_count": 4,
+    "pressure_count": 9,
     "death_cause_attribution": true,
-    "resource_signature": "hp:-2|food:6|ammo:0|medkits:0|scrap:18|radiation:1|weapon:None|armor:None|tool:None"
+    "resource_signature": "hp:14|food:4|ammo:6|medkits:2|scrap:90|radiation:2|weapon:EquipmentState(id='sledgehammer', slot='weapon', durability=9, max_durability=10, rarity='legendary', requirements={'strength': 7}, scaling={'strength': 1.2}, affixes={'def': 2, 'atk': 2}, tags=['melee', 'heavy'], refinement_count=0)|armor:None|tool:EquipmentState(id='field_pack', slot='tool', durability=10, max_durability=10, rarity='rare', requirements={'strength': 4}, scaling={}, affixes={'atk': 1, 'def': 1}, tags=['exploration'], refinement_count=1)"
   },
   "failure_analysis": {
-    "death_chain_length": 3,
-    "primary_blame_factor": "radiation",
-    "regret_nodes": [
-      {
-        "node_id": "node_fringe_1",
-        "event_id": "evt_factory_ruins",
-        "blame_score": 0.45,
-        "description": "took +1 radiation, lost 1 hp, carried radiation into later travel",
-        "steps_to_death": 3
-      },
-      {
-        "node_id": "node_fringe_2",
-        "event_id": "evt_mutant_burrow",
-        "blame_score": 0.32,
-        "description": "lost 1 hp, accepted combat risk, carried radiation into later travel",
-        "steps_to_death": 2
-      },
-      {
-        "node_id": "node_fringe_3",
-        "event_id": "evt_tech_vault",
-        "blame_score": 0.15,
-        "description": "carried radiation into later travel",
-        "steps_to_death": 1
-      }
-    ],
-    "steps_from_regret_to_death": 3,
+    "death_chain_length": 0,
+    "primary_blame_factor": null,
+    "regret_nodes": [],
+    "steps_from_regret_to_death": 0,
     "is_trash_time_death": false
   },
   "run_summary": {
-    "headline": "standard_journey_wasteland_medic_batch_3: loss via radiation_death after 4 steps",
+    "headline": "standard_journey_wasteland_medic_batch_3: victory via reached_final_node after 10 steps",
     "route_family": "unknown",
-    "outcome": "radiation_death",
-    "key_turning_point": "node_fringe_1 (took +1 radiation, lost 1 hp, carried radiation into later travel)",
-    "notable_equipment": [],
+    "outcome": "victory",
+    "key_turning_point": "node_deadzone_1 (tool -> field_pack (replaced empty))",
+    "notable_equipment": [
+      "rust_rifle",
+      "field_pack"
+    ],
     "telemetry": {
-      "total_steps": 4,
-      "pressure_count": 4,
-      "combat_count": 2,
-      "loot_drop_count": 2,
-      "loot_total_amount": 5,
-      "equipment_change_count": 0,
-      "rarity_distribution": {},
-      "total_atk_affix_gain": 0,
-      "total_def_affix_gain": 0,
-      "equipment_ids": [],
-      "loot_resources": {
-        "scrap": 4,
-        "medkits": 1
+      "total_steps": 10,
+      "pressure_count": 9,
+      "combat_count": 5,
+      "loot_drop_count": 11,
+      "loot_total_amount": 184,
+      "equipment_change_count": 2,
+      "rarity_distribution": {
+        "common": 1,
+        "rare": 1
       },
-      "max_radiation": 1,
-      "min_food": 6,
-      "min_hp": 0,
+      "total_atk_affix_gain": 3,
+      "total_def_affix_gain": 1,
+      "equipment_ids": [
+        "rust_rifle",
+        "field_pack"
+      ],
+      "loot_resources": {
+        "ammo": 15,
+        "scrap": 91,
+        "xp": 75,
+        "medkits": 3
+      },
+      "max_radiation": 2,
+      "min_food": 4,
+      "min_hp": 5,
       "low_resource_flags": [
-        "low_hp",
-        "low_ammo"
+        "high_radiation"
       ],
       "risk_tags": [
         "combat_seen",
         "radiation_pressure",
-        "end_radiation_death"
+        "equipment_arc",
+        "end_reached_final_node",
+        "radiation_carryover"
       ],
       "character": {
         "background_id": "wasteland_medic",

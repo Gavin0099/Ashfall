@@ -14,14 +14,14 @@
   ],
   "ended": true,
   "victory": false,
-  "end_reason": "radiation_death",
+  "end_reason": "combat_death",
   "player_final": {
-    "hp": 0,
-    "food": 9,
+    "hp": -2,
+    "food": 11,
     "ammo": 0,
     "medkits": 0,
-    "scrap": 3,
-    "radiation": 1,
+    "scrap": 50,
+    "radiation": 4,
     "archetype": null,
     "character": {
       "background_id": "vault_technician",
@@ -38,28 +38,43 @@
       "traits": [],
       "perks": [],
       "tags": [],
-      "level": 1,
-      "xp": 0
+      "level": 3,
+      "xp": 20
     },
-    "weapon_slot": null,
+    "weapon_slot": {
+      "id": "rust_rifle",
+      "slot": "weapon",
+      "durability": 9,
+      "max_durability": 10,
+      "rarity": "common",
+      "requirements": {
+        "agility": 4
+      },
+      "scaling": {
+        "perception": 0.5
+      },
+      "affixes": {},
+      "tags": [
+        "ranged",
+        "firearm"
+      ],
+      "refinement_count": 0
+    },
     "armor_slot": null,
     "tool_slot": null
   },
   "decision_log": [
     {
       "step": 1,
-      "node": "node_fringe_1",
-      "event_id": "evt_factory_ruins",
+      "node": "node_start",
+      "event_id": "evt_departure",
       "option_index": 0,
-      "warning_signals": [
-        "WARNING: radiation will continue to threaten future travel.",
-        "WARNING: this option adds radiation and increases long-term risk."
-      ],
+      "warning_signals": [],
       "pre_choice_state": {
         "hp": 20,
-        "food": 9,
-        "ammo": 3,
-        "medkits": 2,
+        "food": 10,
+        "ammo": 7,
+        "medkits": 5,
         "scrap": 0,
         "radiation": 0,
         "archetype": null,
@@ -78,15 +93,132 @@
           "traits": [],
           "perks": [],
           "tags": [],
-          "level": 1,
+          "level": 2,
           "xp": 0
         },
         "weapon_slot": null,
         "armor_slot": null,
         "tool_slot": null
       },
+      "pressure": false,
+      "combat_triggered": false,
+      "effects": {
+        "food": 3,
+        "medkits": 1,
+        "xp": 10
+      },
+      "player_after": {
+        "hp": 20,
+        "food": 13,
+        "ammo": 7,
+        "medkits": 6,
+        "scrap": 0,
+        "radiation": 0,
+        "archetype": null,
+        "character": {
+          "background_id": "vault_technician",
+          "display_name": "vault_technician",
+          "special": {
+            "strength": 5,
+            "perception": 5,
+            "endurance": 5,
+            "charisma": 5,
+            "intelligence": 5,
+            "agility": 5,
+            "luck": 5
+          },
+          "traits": [],
+          "perks": [],
+          "tags": [],
+          "level": 2,
+          "xp": 0
+        },
+        "weapon_slot": {
+          "id": "rust_rifle",
+          "slot": "weapon",
+          "durability": 10,
+          "max_durability": 10,
+          "rarity": "common",
+          "requirements": {
+            "agility": 4
+          },
+          "scaling": {
+            "perception": 0.5
+          },
+          "affixes": {
+            "atk": 3
+          },
+          "tags": [
+            "ranged",
+            "firearm"
+          ],
+          "refinement_count": 0
+        },
+        "armor_slot": null,
+        "tool_slot": null
+      }
+    },
+    {
+      "step": 2,
+      "node": "node_fringe_1",
+      "event_id": "evt_factory_ruins",
+      "option_index": 0,
+      "warning_signals": [
+        "WARNING: radiation will continue to threaten future travel.",
+        "WARNING: this option adds radiation and increases long-term risk."
+      ],
+      "pre_choice_state": {
+        "hp": 20,
+        "food": 12,
+        "ammo": 7,
+        "medkits": 6,
+        "scrap": 0,
+        "radiation": 0,
+        "archetype": null,
+        "character": {
+          "background_id": "vault_technician",
+          "display_name": "vault_technician",
+          "special": {
+            "strength": 5,
+            "perception": 5,
+            "endurance": 5,
+            "charisma": 5,
+            "intelligence": 5,
+            "agility": 5,
+            "luck": 5
+          },
+          "traits": [],
+          "perks": [],
+          "tags": [],
+          "level": 2,
+          "xp": 0
+        },
+        "weapon_slot": {
+          "id": "rust_rifle",
+          "slot": "weapon",
+          "durability": 10,
+          "max_durability": 10,
+          "rarity": "common",
+          "requirements": {
+            "agility": 4
+          },
+          "scaling": {
+            "perception": 0.5
+          },
+          "affixes": {
+            "atk": 3
+          },
+          "tags": [
+            "ranged",
+            "firearm"
+          ],
+          "refinement_count": 0
+        },
+        "armor_slot": null,
+        "tool_slot": null
+      },
       "pressure": true,
-      "combat_triggered": true,
+      "combat_triggered": false,
       "combat_loot": [],
       "effects": {
         "scrap": 3,
@@ -96,10 +228,10 @@
       "equipment_change": null,
       "equipment_summary": null,
       "player_after": {
-        "hp": 0,
-        "food": 9,
-        "ammo": 0,
-        "medkits": 0,
+        "hp": 19,
+        "food": 12,
+        "ammo": 7,
+        "medkits": 6,
         "scrap": 3,
         "radiation": 1,
         "archetype": null,
@@ -118,64 +250,757 @@
           "traits": [],
           "perks": [],
           "tags": [],
-          "level": 1,
+          "level": 2,
           "xp": 0
         },
-        "weapon_slot": null,
+        "weapon_slot": {
+          "id": "rust_rifle",
+          "slot": "weapon",
+          "durability": 10,
+          "max_durability": 10,
+          "rarity": "common",
+          "requirements": {
+            "agility": 4
+          },
+          "scaling": {
+            "perception": 0.5
+          },
+          "affixes": {
+            "atk": 3
+          },
+          "tags": [
+            "ranged",
+            "firearm"
+          ],
+          "refinement_count": 0
+        },
+        "armor_slot": null,
+        "tool_slot": null
+      }
+    },
+    {
+      "step": 3,
+      "node": "node_fringe_2",
+      "event_id": "evt_mutant_burrow",
+      "option_index": 0,
+      "warning_signals": [
+        "WARNING: radiation will continue to threaten future travel.",
+        "DANGER: this choice carries a high combat risk."
+      ],
+      "pre_choice_state": {
+        "hp": 19,
+        "food": 11,
+        "ammo": 7,
+        "medkits": 6,
+        "scrap": 3,
+        "radiation": 1,
+        "archetype": null,
+        "character": {
+          "background_id": "vault_technician",
+          "display_name": "vault_technician",
+          "special": {
+            "strength": 5,
+            "perception": 5,
+            "endurance": 5,
+            "charisma": 5,
+            "intelligence": 5,
+            "agility": 5,
+            "luck": 5
+          },
+          "traits": [],
+          "perks": [],
+          "tags": [],
+          "level": 2,
+          "xp": 0
+        },
+        "weapon_slot": {
+          "id": "rust_rifle",
+          "slot": "weapon",
+          "durability": 10,
+          "max_durability": 10,
+          "rarity": "common",
+          "requirements": {
+            "agility": 4
+          },
+          "scaling": {
+            "perception": 0.5
+          },
+          "affixes": {
+            "atk": 3
+          },
+          "tags": [
+            "ranged",
+            "firearm"
+          ],
+          "refinement_count": 0
+        },
+        "armor_slot": null,
+        "tool_slot": null
+      },
+      "pressure": true,
+      "combat_triggered": true,
+      "combat_loot": [
+        {
+          "resource": "scrap",
+          "amount": 4
+        },
+        {
+          "resource": "medkits",
+          "amount": 1
+        }
+      ],
+      "effects": {
+        "hp": -1,
+        "scrap": 6,
+        "medkits": 1,
+        "xp": 5
+      },
+      "equipment_change": null,
+      "equipment_summary": null,
+      "player_after": {
+        "hp": 16,
+        "food": 11,
+        "ammo": 5,
+        "medkits": 8,
+        "scrap": 13,
+        "radiation": 1,
+        "archetype": null,
+        "character": {
+          "background_id": "vault_technician",
+          "display_name": "vault_technician",
+          "special": {
+            "strength": 5,
+            "perception": 5,
+            "endurance": 5,
+            "charisma": 5,
+            "intelligence": 5,
+            "agility": 5,
+            "luck": 5
+          },
+          "traits": [],
+          "perks": [],
+          "tags": [],
+          "level": 2,
+          "xp": 5
+        },
+        "weapon_slot": {
+          "id": "rust_rifle",
+          "slot": "weapon",
+          "durability": 9,
+          "max_durability": 10,
+          "rarity": "common",
+          "requirements": {
+            "agility": 4
+          },
+          "scaling": {
+            "perception": 0.5
+          },
+          "affixes": {
+            "atk": 3
+          },
+          "tags": [
+            "ranged",
+            "firearm"
+          ],
+          "refinement_count": 0
+        },
+        "armor_slot": null,
+        "tool_slot": null
+      }
+    },
+    {
+      "step": 4,
+      "node": "node_fringe_3",
+      "event_id": "evt_tech_vault",
+      "option_index": 2,
+      "warning_signals": [
+        "WARNING: radiation will continue to threaten future travel."
+      ],
+      "pre_choice_state": {
+        "hp": 16,
+        "food": 10,
+        "ammo": 5,
+        "medkits": 8,
+        "scrap": 8,
+        "radiation": 1,
+        "archetype": null,
+        "character": {
+          "background_id": "vault_technician",
+          "display_name": "vault_technician",
+          "special": {
+            "strength": 5,
+            "perception": 5,
+            "endurance": 5,
+            "charisma": 5,
+            "intelligence": 5,
+            "agility": 5,
+            "luck": 5
+          },
+          "traits": [],
+          "perks": [],
+          "tags": [],
+          "level": 2,
+          "xp": 5
+        },
+        "weapon_slot": {
+          "id": "rust_rifle",
+          "slot": "weapon",
+          "durability": 9,
+          "max_durability": 10,
+          "rarity": "rare",
+          "requirements": {
+            "agility": 4
+          },
+          "scaling": {
+            "perception": 0.5
+          },
+          "affixes": {
+            "atk": 3
+          },
+          "tags": [
+            "ranged",
+            "firearm"
+          ],
+          "refinement_count": 1
+        },
+        "armor_slot": null,
+        "tool_slot": null
+      },
+      "pressure": false,
+      "combat_triggered": false,
+      "combat_loot": [],
+      "effects": {
+        "scrap": 5
+      },
+      "equipment_change": null,
+      "equipment_summary": null,
+      "player_after": {
+        "hp": 16,
+        "food": 10,
+        "ammo": 5,
+        "medkits": 8,
+        "scrap": 13,
+        "radiation": 1,
+        "archetype": null,
+        "character": {
+          "background_id": "vault_technician",
+          "display_name": "vault_technician",
+          "special": {
+            "strength": 5,
+            "perception": 5,
+            "endurance": 5,
+            "charisma": 5,
+            "intelligence": 5,
+            "agility": 5,
+            "luck": 5
+          },
+          "traits": [],
+          "perks": [],
+          "tags": [],
+          "level": 2,
+          "xp": 5
+        },
+        "weapon_slot": {
+          "id": "rust_rifle",
+          "slot": "weapon",
+          "durability": 9,
+          "max_durability": 10,
+          "rarity": "rare",
+          "requirements": {
+            "agility": 4
+          },
+          "scaling": {
+            "perception": 0.5
+          },
+          "affixes": {
+            "atk": 3
+          },
+          "tags": [
+            "ranged",
+            "firearm"
+          ],
+          "refinement_count": 1
+        },
+        "armor_slot": null,
+        "tool_slot": null
+      }
+    },
+    {
+      "step": 5,
+      "node": "node_boss_gatekeeper",
+      "event_id": "evt_boss_gatekeeper",
+      "option_index": 0,
+      "warning_signals": [
+        "WARNING: radiation will continue to threaten future travel.",
+        "DANGER: this choice carries a high combat risk."
+      ],
+      "pre_choice_state": {
+        "hp": 16,
+        "food": 9,
+        "ammo": 5,
+        "medkits": 8,
+        "scrap": 13,
+        "radiation": 1,
+        "archetype": null,
+        "character": {
+          "background_id": "vault_technician",
+          "display_name": "vault_technician",
+          "special": {
+            "strength": 5,
+            "perception": 5,
+            "endurance": 5,
+            "charisma": 5,
+            "intelligence": 5,
+            "agility": 5,
+            "luck": 5
+          },
+          "traits": [],
+          "perks": [],
+          "tags": [],
+          "level": 2,
+          "xp": 5
+        },
+        "weapon_slot": {
+          "id": "rust_rifle",
+          "slot": "weapon",
+          "durability": 9,
+          "max_durability": 10,
+          "rarity": "rare",
+          "requirements": {
+            "agility": 4
+          },
+          "scaling": {
+            "perception": 0.5
+          },
+          "affixes": {
+            "atk": 3
+          },
+          "tags": [
+            "ranged",
+            "firearm"
+          ],
+          "refinement_count": 1
+        },
+        "armor_slot": null,
+        "tool_slot": null
+      },
+      "pressure": true,
+      "combat_triggered": true,
+      "combat_loot": [
+        {
+          "resource": "xp",
+          "amount": 25
+        },
+        {
+          "resource": "scrap",
+          "amount": 25
+        }
+      ],
+      "effects": {
+        "xp": 5
+      },
+      "equipment_change": null,
+      "equipment_summary": null,
+      "player_after": {
+        "hp": 9,
+        "food": 9,
+        "ammo": 3,
+        "medkits": 8,
+        "scrap": 38,
+        "radiation": 1,
+        "archetype": null,
+        "character": {
+          "background_id": "vault_technician",
+          "display_name": "vault_technician",
+          "special": {
+            "strength": 5,
+            "perception": 5,
+            "endurance": 5,
+            "charisma": 5,
+            "intelligence": 5,
+            "agility": 5,
+            "luck": 5
+          },
+          "traits": [],
+          "perks": [],
+          "tags": [],
+          "level": 2,
+          "xp": 35
+        },
+        "weapon_slot": {
+          "id": "hardened_blade",
+          "slot": "weapon",
+          "durability": 9,
+          "max_durability": 10,
+          "rarity": "legendary",
+          "requirements": {
+            "strength": 5
+          },
+          "scaling": {
+            "strength": 0.8
+          },
+          "affixes": {
+            "loot_scrap": 1,
+            "atk": 1
+          },
+          "tags": [
+            "melee",
+            "quality"
+          ],
+          "refinement_count": 0
+        },
+        "armor_slot": null,
+        "tool_slot": null
+      }
+    },
+    {
+      "step": 6,
+      "node": "node_deadzone_1",
+      "event_id": "evt_radioactive_orchard",
+      "option_index": 0,
+      "warning_signals": [
+        "WARNING: radiation will continue to threaten future travel.",
+        "WARNING: this option adds radiation and increases long-term risk."
+      ],
+      "pre_choice_state": {
+        "hp": 19,
+        "food": 8,
+        "ammo": 3,
+        "medkits": 7,
+        "scrap": 38,
+        "radiation": 1,
+        "archetype": null,
+        "character": {
+          "background_id": "vault_technician",
+          "display_name": "vault_technician",
+          "special": {
+            "strength": 5,
+            "perception": 5,
+            "endurance": 5,
+            "charisma": 5,
+            "intelligence": 5,
+            "agility": 5,
+            "luck": 5
+          },
+          "traits": [],
+          "perks": [],
+          "tags": [],
+          "level": 2,
+          "xp": 35
+        },
+        "weapon_slot": {
+          "id": "hardened_blade",
+          "slot": "weapon",
+          "durability": 9,
+          "max_durability": 10,
+          "rarity": "legendary",
+          "requirements": {
+            "strength": 5
+          },
+          "scaling": {
+            "strength": 0.8
+          },
+          "affixes": {
+            "loot_scrap": 1,
+            "atk": 1
+          },
+          "tags": [
+            "melee",
+            "quality"
+          ],
+          "refinement_count": 0
+        },
+        "armor_slot": null,
+        "tool_slot": null
+      },
+      "pressure": true,
+      "combat_triggered": true,
+      "combat_loot": [
+        {
+          "resource": "medkits",
+          "amount": 2
+        },
+        {
+          "resource": "scrap",
+          "amount": 12
+        }
+      ],
+      "effects": {
+        "food": 4,
+        "radiation": 3
+      },
+      "equipment_change": null,
+      "equipment_summary": null,
+      "player_after": {
+        "hp": 11,
+        "food": 12,
+        "ammo": 0,
+        "medkits": 9,
+        "scrap": 50,
+        "radiation": 4,
+        "archetype": null,
+        "character": {
+          "background_id": "vault_technician",
+          "display_name": "vault_technician",
+          "special": {
+            "strength": 5,
+            "perception": 5,
+            "endurance": 5,
+            "charisma": 5,
+            "intelligence": 5,
+            "agility": 5,
+            "luck": 5
+          },
+          "traits": [],
+          "perks": [],
+          "tags": [],
+          "level": 3,
+          "xp": 15
+        },
+        "weapon_slot": {
+          "id": "hardened_blade",
+          "slot": "weapon",
+          "durability": 8,
+          "max_durability": 10,
+          "rarity": "legendary",
+          "requirements": {
+            "strength": 5
+          },
+          "scaling": {
+            "strength": 0.8
+          },
+          "affixes": {
+            "loot_scrap": 1,
+            "atk": 1
+          },
+          "tags": [
+            "melee",
+            "quality"
+          ],
+          "refinement_count": 0
+        },
+        "armor_slot": null,
+        "tool_slot": null
+      }
+    },
+    {
+      "step": 7,
+      "node": "node_deadzone_2",
+      "event_id": "evt_checkpoint",
+      "option_index": 0,
+      "warning_signals": [
+        "WARNING: radiation will continue to threaten future travel.",
+        "DANGER: this choice carries a high combat risk."
+      ],
+      "pre_choice_state": {
+        "hp": 19,
+        "food": 11,
+        "ammo": 0,
+        "medkits": 8,
+        "scrap": 50,
+        "radiation": 4,
+        "archetype": null,
+        "character": {
+          "background_id": "vault_technician",
+          "display_name": "vault_technician",
+          "special": {
+            "strength": 5,
+            "perception": 5,
+            "endurance": 5,
+            "charisma": 5,
+            "intelligence": 5,
+            "agility": 5,
+            "luck": 5
+          },
+          "traits": [],
+          "perks": [],
+          "tags": [],
+          "level": 3,
+          "xp": 15
+        },
+        "weapon_slot": {
+          "id": "hardened_blade",
+          "slot": "weapon",
+          "durability": 8,
+          "max_durability": 10,
+          "rarity": "legendary",
+          "requirements": {
+            "strength": 5
+          },
+          "scaling": {
+            "strength": 0.8
+          },
+          "affixes": {
+            "loot_scrap": 1,
+            "atk": 1
+          },
+          "tags": [
+            "melee",
+            "quality"
+          ],
+          "refinement_count": 0
+        },
+        "armor_slot": null,
+        "tool_slot": null
+      },
+      "pressure": true,
+      "combat_triggered": true,
+      "combat_loot": [],
+      "effects": {
+        "ammo": 0,
+        "xp": 5
+      },
+      "equipment_change": {
+        "slot": "weapon",
+        "item": "rust_rifle",
+        "item_data": {
+          "id": "rust_rifle",
+          "slot": "weapon",
+          "durability": 10,
+          "max_durability": 10,
+          "rarity": "common",
+          "requirements": {
+            "agility": 4
+          },
+          "scaling": {
+            "perception": 0.5
+          },
+          "affixes": {},
+          "tags": [
+            "ranged",
+            "firearm"
+          ],
+          "refinement_count": 0
+        },
+        "changed": true
+      },
+      "equipment_summary": "weapon -> rust_rifle (replaced empty)",
+      "player_after": {
+        "hp": -2,
+        "food": 11,
+        "ammo": 0,
+        "medkits": 0,
+        "scrap": 50,
+        "radiation": 4,
+        "archetype": null,
+        "character": {
+          "background_id": "vault_technician",
+          "display_name": "vault_technician",
+          "special": {
+            "strength": 5,
+            "perception": 5,
+            "endurance": 5,
+            "charisma": 5,
+            "intelligence": 5,
+            "agility": 5,
+            "luck": 5
+          },
+          "traits": [],
+          "perks": [],
+          "tags": [],
+          "level": 3,
+          "xp": 20
+        },
+        "weapon_slot": {
+          "id": "rust_rifle",
+          "slot": "weapon",
+          "durability": 9,
+          "max_durability": 10,
+          "rarity": "common",
+          "requirements": {
+            "agility": 4
+          },
+          "scaling": {
+            "perception": 0.5
+          },
+          "affixes": {},
+          "tags": [
+            "ranged",
+            "firearm"
+          ],
+          "refinement_count": 0
+        },
         "armor_slot": null,
         "tool_slot": null
       }
     }
   ],
   "summary": {
-    "pressure_count": 1,
+    "pressure_count": 5,
     "death_cause_attribution": true,
-    "resource_signature": "hp:0|food:9|ammo:0|medkits:0|scrap:3|radiation:1|weapon:None|armor:None|tool:None"
+    "resource_signature": "hp:-2|food:11|ammo:0|medkits:0|scrap:50|radiation:4|weapon:EquipmentState(id='rust_rifle', slot='weapon', durability=9, max_durability=10, rarity='common', requirements={'agility': 4}, scaling={'perception': 0.5}, affixes={}, tags=['ranged', 'firearm'], refinement_count=0)|armor:None|tool:None"
   },
   "failure_analysis": {
-    "death_chain_length": 1,
-    "primary_blame_factor": "radiation",
+    "death_chain_length": 3,
+    "primary_blame_factor": "combat",
     "regret_nodes": [
+      {
+        "node_id": "node_deadzone_1",
+        "event_id": "evt_radioactive_orchard",
+        "blame_score": 0.35,
+        "description": "took +3 radiation, accepted combat risk, carried radiation into later travel",
+        "steps_to_death": 1
+      },
+      {
+        "node_id": "node_fringe_2",
+        "event_id": "evt_mutant_burrow",
+        "blame_score": 0.2,
+        "description": "lost 1 hp, accepted combat risk, carried radiation into later travel",
+        "steps_to_death": 4
+      },
       {
         "node_id": "node_fringe_1",
         "event_id": "evt_factory_ruins",
-        "blame_score": 1.0,
-        "description": "took +1 radiation, lost 1 hp, accepted combat risk",
-        "steps_to_death": 0
+        "blame_score": 0.15,
+        "description": "took +1 radiation, lost 1 hp, carried radiation into later travel",
+        "steps_to_death": 5
       }
     ],
-    "steps_from_regret_to_death": 0,
+    "steps_from_regret_to_death": 1,
     "is_trash_time_death": false
   },
   "run_summary": {
-    "headline": "standard_journey_vault_technician_batch_4: loss via radiation_death after 1 steps",
+    "headline": "standard_journey_vault_technician_batch_4: loss via combat_death after 7 steps",
     "route_family": "unknown",
-    "outcome": "radiation_death",
-    "key_turning_point": "node_fringe_1 (took +1 radiation, lost 1 hp, accepted combat risk)",
-    "notable_equipment": [],
+    "outcome": "combat_death",
+    "key_turning_point": "node_deadzone_1 (took +3 radiation, accepted combat risk, carried radiation into later travel)",
+    "notable_equipment": [
+      "rust_rifle"
+    ],
     "telemetry": {
-      "total_steps": 1,
-      "pressure_count": 1,
-      "combat_count": 1,
-      "loot_drop_count": 0,
-      "loot_total_amount": 0,
-      "equipment_change_count": 0,
-      "rarity_distribution": {},
+      "total_steps": 7,
+      "pressure_count": 5,
+      "combat_count": 4,
+      "loot_drop_count": 6,
+      "loot_total_amount": 69,
+      "equipment_change_count": 1,
+      "rarity_distribution": {
+        "common": 1
+      },
       "total_atk_affix_gain": 0,
       "total_def_affix_gain": 0,
-      "equipment_ids": [],
-      "loot_resources": {},
-      "max_radiation": 1,
+      "equipment_ids": [
+        "rust_rifle"
+      ],
+      "loot_resources": {
+        "scrap": 41,
+        "medkits": 3,
+        "xp": 25
+      },
+      "max_radiation": 4,
       "min_food": 9,
       "min_hp": 0,
       "low_resource_flags": [
         "low_hp",
-        "low_ammo"
+        "low_ammo",
+        "high_radiation"
       ],
       "risk_tags": [
         "combat_seen",
         "radiation_pressure",
-        "end_radiation_death"
+        "equipment_arc",
+        "end_combat_death",
+        "radiation_carryover"
       ],
       "character": {
         "background_id": "vault_technician",
