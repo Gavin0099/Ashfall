@@ -24,7 +24,9 @@ If the prototype proves replayable, prepare the project for Steam release.
 - Phase A complete: specs and schemas are defined and validated.
 - Phase B complete: deterministic run loop works from start to victory/death.
 - Phase C complete: combat, event-triggered combat, pressure validation, and run analytics are working.
-- Phase D in progress: analytics-driven balancing and the first irreversible-state signal are complete; balancing notes and external playtest remain.
+- Phase v0.3~v9.0 complete: Meta-progression, Merchant, Quests, and advanced mechanics are implemented.
+- Phase 10.0 complete: Interactive Dashboard (Vite + React + FastAPI) is functional.
+- Phase 11.0 in progress: Documentation alignment and human validation closure (PT-2).
 
 ## Evidence Status
 
@@ -213,15 +215,12 @@ Generated artifacts:
 
 ## Next Work
 
-- PT-1: run first external playtest round using `PLAYTEST_PROTOCOL.md`
+- PT-1: run first external playtest round using `PLAYTEST_PROTOCOL.md` (Update: PT-1 in progress/partial)
 - PT-2: compare human hesitation/regret logs against machine `failure_analysis`
 - OBS-1: run first-node dominance test from `SEED_101_OBSERVATION.md`
 - OBS-2: test conservative survivability across multiple seeds
 - OBS-3: sample high-risk vs low-risk event payoff across >=100 runs
-- EXP-2: only if PT-1 confirms low consequence depth, evaluate `travel mode` as a controlled experiment
-- EXP-3: evaluate character background as a route-identity layer
-- EXP-4: evaluate minimal equipment slots as run-shaping modifiers
-- EXP-1: evaluate explicit irreversible trade only after Blind CLI results
+- DOC-1: resolve document drift between README.md, PLAN.md and implementation.
 
 ## Repository Note
 

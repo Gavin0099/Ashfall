@@ -48,7 +48,11 @@ Prototype validation contract: `PROTOTYPE_SUCCESS_CRITERIA.md`
 ├─ [✓] Phase v1.2: Perks & Dynamic Progression 成長系統 (2026-03-17 完成)
 ├─ [✓] Phase v1.3: Durability & Repair System 耐久度與修復系統 (2026-03-17 完成)
 ├─ [✓] Phase v1.4: Ruins & Camp Special Nodes 遺蹟與營地系統 (2026-03-17 完成)
-└─ [ ] Phase 7.0: Environment & Resource Tuning 環境威脅調整與資源優化 (進行中)
+├─ [✓] Phase 7.0: Environment & Resource Tuning      (2026/03/19 完成)
+├─ [✓] Phase 8.0: AI Governance Integration         (2026/03/19 完成)
+├─ [✓] Phase 9.0: World Depth & Quest Evolution      (2026/03/19 完成)
+├─ [✓] Phase 10.0: Interactive Dashboard (UI)        (2026/03/19 完成)
+└─ [ ] Phase 11.0: Human Validation & Narrative Alignment (進行中)
 ```
 
-**當前階段：Phase 7.0 進行中 — 目標：解決勝率過低問題，最佳化輻射公式與廢料產出。**
+**當前階段：Phase 11.0 進行中 — 目標：修復文檔漂移、完成 PT-2 人機對比、優化代理指標。**
