@@ -219,7 +219,7 @@ def test_combat_boundaries() -> None:
     engine = CombatEngine(seed=7)
     player = PlayerState(hp=10, food=5, ammo=1, medkits=1)
     enemy = EnemyState(id="e2", name="hound", hp=1, damage_min=1, damage_max=1)
-    dealt = engine.player_attack(player, enemy)
+    dealt, _ = engine.player_attack(player, enemy)
     if dealt < 1 or dealt > 3:
         raise AssertionError("player_attack damage out of spec range")
     if player.ammo != 0:
@@ -242,8 +242,8 @@ def test_enemy_special_abilities() -> None:
         archetype="mutant",
         special_ability="thick_hide",
     )
-    first_damage = engine.player_attack(player_vs_mutant, mutant)
-    second_damage = engine.player_attack(player_vs_mutant, mutant)
+    first_damage, _ = engine.player_attack(player_vs_mutant, mutant)
+    second_damage, _ = engine.player_attack(player_vs_mutant, mutant)
     if first_damage < 1 or second_damage < 1:
         raise AssertionError("enemy special abilities should not reduce damage below 1")
     if first_damage > second_damage:
@@ -439,7 +439,7 @@ def test_equipment_rewards_and_replacement() -> None:
         raise AssertionError("weapon replacement should report previous item")
 
     enemy = EnemyState(id="e3", name="raider", hp=10, damage_min=1, damage_max=1)
-    damage = CombatEngine(seed=3).player_attack(player, enemy)
+    damage, _ = CombatEngine(seed=3).player_attack(player, enemy)
     if damage < 2 or damage > 4:
         raise AssertionError("rust_rifle should add +1 damage to attack roll")
 

@@ -49,6 +49,9 @@ class FreshnessResult:
     policy: Optional[str]
     threshold_days: Optional[int]
     days_since_update: Optional[int]
+    pt1_completed_count: int = 0
+    latest_balance_mtime: Optional[float] = None
+    pt1_latest_mtime: Optional[float] = None
     errors: list[str] = field(default_factory=list)
     warnings: list[str] = field(default_factory=list)
 
@@ -99,6 +102,8 @@ def check_freshness(
     plan_path: Path,
     threshold_override: Optional[int] = None,
     today: Optional[date] = None,
+    pt1_dir: Optional[Path] = None,
+    balance_summary_path: Optional[Path] = None,
 ) -> FreshnessResult:
     """主檢查邏輯。"""
     if today is None:
@@ -122,18 +127,18 @@ def check_freshness(
     errors = []
     warnings = []
 
-    # ── 解析 最後更新 ──────────────────────────────────────────────────────
-    raw_date = fields.get("最後更新", "").strip()
+    # ── 解析 最後更新 (支援 中/英) ──────────────────────────────────────────
+    raw_date = fields.get("最後更新", fields.get("Last Updated", "")).strip()
     last_updated: Optional[date] = None
 
     if not raw_date:
-        errors.append("'最後更新' 欄位缺失（需格式: YYYY-MM-DD）")
+        errors.append("'最後更新' (Last Updated) 欄位缺失（需格式: YYYY-MM-DD）")
     else:
         try:
             last_updated = datetime.strptime(raw_date, "%Y-%m-%d").date()
         except ValueError:
             errors.append(
-                f"'最後更新' 格式錯誤: '{raw_date}'（正確格式: YYYY-MM-DD）"
+                f"'最後更新' (Last Updated) 格式錯誤: '{raw_date}'（正確格式: YYYY-MM-DD）"
             )
 
     # ── 解析 Owner ────────────────────────────────────────────────────────
@@ -191,6 +196,27 @@ def check_freshness(
             f" — 計畫可能已失效，請立即更新"
         )
 
+    # ── PT-1 新鮮度檢查 (與最近一次 balance 調整對比) ────────────────────────
+    latest_balance_mtime = None
+    latest_pt1_mtime = None
+    pt1_count = 0
+
+    if pt1_dir and pt1_dir.exists() and balance_summary_path and balance_summary_path.exists():
+        latest_balance_mtime = balance_summary_path.stat().st_mtime
+        logs = list(pt1_dir.glob("*_session_log.json"))
+        pt1_count = len(logs)
+        
+        if logs:
+            latest_pt1_mtime = max(p.stat().st_mtime for p in logs)
+            if latest_pt1_mtime < latest_balance_mtime:
+                status = STATUS_CRITICAL
+                dt_balance = datetime.fromtimestamp(latest_balance_mtime).strftime("%Y-%m-%d %H:%M")
+                dt_pt1 = datetime.fromtimestamp(latest_pt1_mtime).strftime("%Y-%m-%d %H:%M")
+                errors.append(
+                    f"PT-1 data is older than most recent balance adjustment. "
+                    f"Balance: {dt_balance}, PT-1: {dt_pt1}"
+                )
+
     return FreshnessResult(
         status=status,
         last_updated=last_updated,
@@ -198,6 +224,9 @@ def check_freshness(
         policy=policy_raw,
         threshold_days=threshold_days,
         days_since_update=days_since,
+        pt1_completed_count=pt1_count,
+        latest_balance_mtime=latest_balance_mtime,
+        pt1_latest_mtime=latest_pt1_mtime,
         errors=errors,
         warnings=warnings,
     )
@@ -255,6 +284,8 @@ def format_json(result: FreshnessResult, plan_path: Path) -> str:
         "policy": result.policy,
         "threshold_days": result.threshold_days,
         "days_since_update": result.days_since_update,
+        "pt1_completed_count": result.pt1_completed_count,
+        "latest_balance_mtime": result.latest_balance_mtime,
         "errors": result.errors,
         "warnings": result.warnings,
     }
