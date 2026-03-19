@@ -202,7 +202,7 @@ class RunEngine:
         event_payload = self._event_payload_for_difficulty(event_payload, run.player)
         event_payload = self._patch_event_for_travel_mode(event_payload, run.travel_mode)
         
-        outcome = resolve_event_choice(run.player, event_payload, option_index, self.rng)
+        outcome = resolve_event_choice(run.player, event_payload, option_index, self.rng, run_flags=run.flags)
         
         # Phase 5.0: Equipment reward
         if "equipment_reward" in outcome:

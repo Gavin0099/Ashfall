@@ -53,8 +53,19 @@ class CombatEngine:
         if enemy.special_ability == "thick_hide" and not enemy.special_used:
             damage = max(1, damage - 1)
             enemy.special_used = True
+        
+        # Elite Passives
+        if "shielded" in getattr(enemy, "passives", []):
+            damage = max(1, damage - 1)
+        
+        # Thorns: reflect 1 damage if hit
+        thorns_damage = 0
+        if "thorns" in getattr(enemy, "passives", []) and damage > 0:
+            thorns_damage = 1
+            player.hp -= thorns_damage
+
         enemy.hp -= damage
-        return damage
+        return damage, thorns_damage
 
     def player_use_medkit(self, player: PlayerState) -> int:
         if player.medkits <= 0:
@@ -144,8 +155,13 @@ class CombatEngine:
                 log.append(f"第 {rounds} 回合：你使用醫療包，回復 {healed} 點生命")
             elif player.ammo > 0:
                 special_before = enemy.special_used
-                dealt = self.player_attack(player, enemy)
+                dealt, thorns = self.player_attack(player, enemy)
                 log.append(f"第 {rounds} 回合：你攻擊並造成 {dealt} 點傷害")
+                if "shielded" in getattr(enemy, "passives", []):
+                    log.append(f"第 {rounds} 回合：敵人的護盾減弱了傷害")
+                if thorns > 0:
+                    log.append(f"第 {rounds} 回合：【荊棘】反震！你受到 {thorns} 點傷害")
+                
                 if enemy.special_ability == "thick_hide" and not special_before and enemy.special_used:
                     log.append(f"第 {rounds} 回合：敵人的厚皮減少了 1 點傷害")
             else:

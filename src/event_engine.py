@@ -33,33 +33,53 @@ def pick_event_id(node: NodeState, rng: random.Random, run_flags: Dict[str, Any]
     return rng.choice(candidates)
 
 
-def get_available_options(player: PlayerState, event_payload: Dict[str, Any]) -> list[Dict[str, Any]]:
-    """回傳玩家目前可選的選項清單（包含標註是否符合職業）。"""
+def get_available_options(player: PlayerState, event_payload: Dict[str, Any], run_flags: Dict[str, Any] | None = None) -> list[Dict[str, Any]]:
+    """回傳玩家目前可選的選項清單（包含標註是否符合職業與旗標條件）。"""
+    run_flags = run_flags or {}
     options = event_payload.get("options", [])
     available = []
     for opt in options:
         req = opt.get("archetype_requirement")
         is_met = (req is None or player.archetype == req)
 
-        # v1.0 Character Filters
-        filters = opt.get("character_filters")
-        if filters:
-            # Tag check
-            req_tags = filters.get("require_any_tag", [])
-            if req_tags:
-                player_tags = set(player.character.tags) if (player.character and player.character.tags) else set()
-                if not any(t in player_tags for t in req_tags):
-                    is_met = False
-            
-            # SPECIAL check
-            req_special = filters.get("require_special", {})
-            if req_special and player.character:
-                for attr, limits in req_special.items():
-                    val = player.character.special.get(attr, 5)
-                    if "min" in limits and val < limits["min"]:
+        # Flag requirement check
+        required_flags = opt.get("required_flags", {})
+        for f_key, f_val in required_flags.items():
+            if run_flags.get(f_key) != f_val:
+                is_met = False
+                break
+        
+        # Resource requirement check
+        resource_req = opt.get("resource_requirement", {})
+        for res_key, res_val in resource_req.items():
+            current_val = getattr(player, res_key, 0)
+            if current_val < res_val:
+                is_met = False
+                break
+
+        if not is_met:
+             # If combined requirements already failed, skip further checks
+             pass
+        else:
+            # v1.0 Character Filters
+            filters = opt.get("character_filters")
+            if filters:
+                # Tag check
+                req_tags = filters.get("require_any_tag", [])
+                if req_tags:
+                    player_tags = set(player.character.tags) if (player.character and player.character.tags) else set()
+                    if not any(t in player_tags for t in req_tags):
                         is_met = False
-                    if "max" in limits and val > limits["max"]:
-                        is_met = False
+                
+                # SPECIAL check
+                req_special = filters.get("require_special", {})
+                if req_special and player.character:
+                    for attr, limits in req_special.items():
+                        val = player.character.special.get(attr, 5)
+                        if "min" in limits and val < limits["min"]:
+                            is_met = False
+                        if "max" in limits and val > limits["max"]:
+                            is_met = False
         
         # Pick display text
         display_text = opt.get("text", "")
@@ -81,7 +101,9 @@ def resolve_event_choice(
     event_payload: Dict[str, Any],
     option_index: int,
     rng: random.Random,
+    run_flags: Dict[str, Any] | None = None,
 ) -> Dict[str, Any]:
+    run_flags = run_flags or {}
     options = event_payload.get("options")
     if not isinstance(options, list) or not options:
         raise ValueError(f"Event {event_payload.get('id', '<unknown>')} has no options")
@@ -90,6 +112,18 @@ def resolve_event_choice(
 
     option = options[option_index]
     
+    # Flag requirement check
+    required_flags = option.get("required_flags", {})
+    for f_key, f_val in required_flags.items():
+        if run_flags.get(f_key) != f_val:
+            raise ValueError(f"Flag requirement failed: {f_key} expected {f_val}")
+
+    # Resource requirement check
+    resource_req = option.get("resource_requirement", {})
+    for res_key, res_val in resource_req.items():
+        if getattr(player, res_key, 0) < res_val:
+            raise ValueError(f"Insufficient {res_key}: required {res_val}")
+
     # Archetype check
     req = option.get("archetype_requirement")
     if req and player.archetype != req:

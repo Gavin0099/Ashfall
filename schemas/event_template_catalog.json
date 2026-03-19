@@ -250,6 +250,9 @@
             "拿彈藥換醫療包",
             "用子彈換一點能活下去的補給"
           ],
+          "resource_requirement": {
+            "ammo": 1
+          },
           "effects": {
             "ammo": -1,
             "medkits": 1,
@@ -549,6 +552,9 @@
             "主動交易，用廢料換食物",
             "拿零件換幾袋糧食"
           ],
+          "resource_requirement": {
+            "scrap": 2
+          },
           "effects": {
             "scrap": -2,
             "food": 3
@@ -579,6 +585,9 @@
         {
           "text": "利用高級零件與主人交換稀有物資",
           "archetype_requirement": "scavenger",
+          "resource_requirement": {
+            "scrap": 2
+          },
           "effects": {
             "scrap": -2,
             "food": 6,
@@ -1486,6 +1495,68 @@
           "fixed_enemy_id": "boss_overseer"
         }
       ]
+    },
+    {
+      "event_id": "evt_merchant_caravan",
+      "template_type": "survivor_contact",
+      "description_variants": [
+        "一支裝備精良的商隊在路口停了下來，巨大的載重氂牛身上掛滿了各式生存物資。",
+        "「喂，旅人！我們這兒有灰燼平原上最乾淨的食物和子彈。只要你手頭有廢料，一切好談。」",
+        "這群商隊守衛警惕地看著你，但他們的領頭人熱情地展示著貨架上的商品。"
+      ],
+      "options": [
+        {
+          "text": "購買口糧 (5 廢料 -> 5 食物)",
+          "resource_requirement": {
+            "scrap": 5
+          },
+          "effects": {
+            "scrap": -5,
+            "food": 5
+          },
+          "combat_chance": 0.0
+        },
+        {
+          "text": "補充彈藥 (8 廢料 -> 5 彈藥)",
+          "resource_requirement": {
+            "scrap": 8
+          },
+          "effects": {
+            "scrap": -8,
+            "ammo": 5
+          },
+          "combat_chance": 0.0
+        },
+        {
+          "text": "購買醫療包 (10 廢料 -> 1 醫療包)",
+          "resource_requirement": {
+            "scrap": 10
+          },
+          "effects": {
+            "scrap": -10,
+            "medkits": 1
+          },
+          "combat_chance": 0.0
+        },
+        {
+          "text": "【拾荒者特惠】大量購入物資 (15 廢料 -> 10 食物, 5 彈藥)",
+          "archetype_requirement": "scavenger",
+          "resource_requirement": {
+            "scrap": 15
+          },
+          "effects": {
+            "scrap": -15,
+            "food": 10,
+            "ammo": 5
+          },
+          "combat_chance": 0.0
+        },
+        {
+          "text": "只是路過，繼續旅行",
+          "effects": {},
+          "combat_chance": 0.0
+        }
+      ]
     }
   ]
-}
+}

@@ -211,6 +211,7 @@ class EnemyState:
     special_ability: Optional[str] = None
     special_used: bool = False
     is_elite: bool = False
+    passives: List[str] = field(default_factory=list)
     loot_table: List[Dict[str, Any]] = field(default_factory=list)
 
     def is_dead(self) -> bool:

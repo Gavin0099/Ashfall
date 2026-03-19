@@ -41,12 +41,14 @@ def build_node_payloads() -> Dict[str, dict]:
         # Fringe (Depth 0-3)
         "node_start": {"id": "node_start", "node_type": "story", "connections": ["node_fringe_1"], "event_pool": ["evt_departure"], "is_start": True},
         "node_fringe_1": {"id": "node_fringe_1", "node_type": "resource", "connections": ["node_fringe_2"], "event_pool": ["evt_scrapyard", "evt_factory_ruins"]},
-        "node_fringe_2": {"id": "node_fringe_2", "node_type": "combat", "connections": ["node_fringe_3"], "event_pool": ["evt_tunnel", "evt_mutant_burrow"]},
+        "node_fringe_2": {"id": "node_fringe_2", "node_type": "combat", "connections": ["node_trade_1"], "event_pool": ["evt_tunnel", "evt_mutant_burrow"]},
+        "node_trade_1": {"id": "node_trade_1", "node_type": "trade", "connections": ["node_fringe_3"], "event_pool": ["evt_merchant_caravan", "evt_village"]},
         "node_fringe_3": {"id": "node_fringe_3", "node_type": "camp", "connections": ["node_boss_gatekeeper"], "event_pool": ["evt_tech_vault"], "metadata": {"facilities": {"repair_bench": True}}},
 
         # Dead Zone (Depth 4-7)
         "node_boss_gatekeeper": {"id": "node_boss_gatekeeper", "node_type": "combat", "connections": ["node_deadzone_1"], "event_pool": ["evt_boss_gatekeeper"]},
-        "node_deadzone_1": {"id": "node_deadzone_1", "node_type": "resource", "connections": ["node_deadzone_2"], "event_pool": ["evt_floodplain", "evt_radioactive_orchard"]},
+        "node_deadzone_1": {"id": "node_deadzone_1", "node_type": "resource", "connections": ["node_trade_2"], "event_pool": ["evt_floodplain", "evt_radioactive_orchard"]},
+        "node_trade_2": {"id": "node_trade_2", "node_type": "trade", "connections": ["node_deadzone_2"], "event_pool": ["evt_merchant_caravan", "evt_isolated_farm"]},
         "node_deadzone_2": {"id": "node_deadzone_2", "node_type": "combat", "connections": ["node_deadzone_3"], "event_pool": ["evt_sniper_nest", "evt_checkpoint"]},
         "node_deadzone_3": {"id": "node_deadzone_3", "node_type": "camp", "connections": ["node_boss_overseer"], "event_pool": ["evt_tech_vault"]},
 
@@ -76,12 +78,12 @@ def build_enemy_catalog() -> Dict[str, dict]:
 def route_plans() -> List[RoutePlan]:
     return [
         RoutePlan("standard_journey", 101, [
-            "node_fringe_1", "node_fringe_2", "node_fringe_3", 
-            "node_boss_gatekeeper", "node_deadzone_1", "node_deadzone_2", 
+            "node_fringe_1", "node_fringe_2", "node_trade_1", "node_fringe_3", 
+            "node_boss_gatekeeper", "node_deadzone_1", "node_trade_2", "node_deadzone_2", 
             "node_deadzone_3", "node_boss_overseer", "node_final"
         ], {
-            "node_fringe_1": 0, "node_fringe_2": 0, "node_fringe_3": 0,
-            "node_boss_gatekeeper": 0, "node_deadzone_1": 0, "node_deadzone_2": 0,
+            "node_fringe_1": 0, "node_fringe_2": 0, "node_trade_1": 0, "node_fringe_3": 0,
+            "node_boss_gatekeeper": 0, "node_deadzone_1": 0, "node_trade_2": 0, "node_deadzone_2": 0,
             "node_deadzone_3": 0, "node_boss_overseer": 0, "node_final": 0
         }),
     ]
