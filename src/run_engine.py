@@ -340,7 +340,13 @@ class RunEngine:
                 run.player.hp = min(10, run.player.hp + 1)
                 result["log"].append("吸血：裝備的微弱生命脈衝治癒了你的傷口 (+1 HP)")
 
-        return {"skipped": False, "enemy_id": enemy_id, "loot": loot, **result}
+        return {
+            "skipped": False, 
+            "enemy_id": enemy_id, 
+            "enemy": _enemy_to_summary(enemy),
+            "loot": loot, 
+            **result
+        }
 
     def _pick_enemy_id(self, run: RunState, encounter_bias: Dict[str, float] | None = None) -> str:
         enemy_ids = sorted(self.enemy_catalog.keys())
@@ -549,6 +555,16 @@ def _bfs_reachable(map_state: MapState, start_node_id: str) -> set[str]:
         queue.extend(map_state.get_node(node_id).connections)
     return visited
 
+
+def _enemy_to_summary(enemy: EnemyState) -> Dict[str, Any]:
+    return {
+        "id": enemy.id,
+        "name": enemy.name,
+        "hp": enemy.hp,
+        "max_hp": enemy.hp, # Simplified for prototype
+        "archetype": enemy.archetype,
+        "is_elite": enemy.is_elite
+    }
 
 def _enemy_from_payload(payload: Dict[str, Any]) -> EnemyState:
     damage = payload.get("damage_range", {})

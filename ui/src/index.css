@@ -452,3 +452,67 @@ body {
 .name-input:focus {
   border-color: var(--accent-primary);
 }
+
+/* Combat Visuals */
+.combat-stage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  padding: 20px;
+  animation: shake 0.5s cubic-bezier(.36,.07,.19,.97) both;
+  animation-iteration-count: 0;
+}
+
+.enemy-container {
+  position: relative;
+  width: 300px;
+  text-align: center;
+}
+
+.enemy-portrait {
+  width: 100%;
+  aspect-ratio: 1;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 4px solid var(--accent-danger);
+  box-shadow: 0 0 30px rgba(255, 77, 77, 0.3);
+  margin-bottom: 16px;
+  background: var(--bg-color);
+}
+
+.enemy-name {
+  font-family: var(--font-heading);
+  font-size: 1.5rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  color: var(--accent-danger);
+  text-shadow: 0 0 10px rgba(255, 77, 77, 0.5);
+}
+
+.hp-bar-enemy {
+  height: 12px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 6px;
+  overflow: hidden;
+  margin-top: 10px;
+  border: 1px solid rgba(255, 77, 77, 0.3);
+}
+
+.hp-fill-enemy {
+  height: 100%;
+  background: linear-gradient(90deg, #ff4d4d, #ff8080);
+  transition: width 1s ease-out;
+}
+
+@keyframes shake {
+  10%, 90% { transform: translate3d(-1px, 0, 0); }
+  20%, 80% { transform: translate3d(2px, 0, 0); }
+  30%, 50%, 70% { transform: translate3d(-4px, 0, 0); }
+  40%, 60% { transform: translate3d(4px, 0, 0); }
+}
+
+.combat-resolved {
+  opacity: 0.6;
+  filter: grayscale(0.5);
+}
