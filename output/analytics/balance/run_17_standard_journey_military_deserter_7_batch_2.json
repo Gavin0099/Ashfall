@@ -18,10 +18,10 @@
   "victory": true,
   "end_reason": "reached_final_node",
   "player_final": {
-    "hp": 17,
+    "hp": 11,
     "food": 9,
     "ammo": 3,
-    "medkits": 4,
+    "medkits": 6,
     "scrap": 74,
     "radiation": 4,
     "archetype": null,
@@ -48,7 +48,8 @@
         "tag_military_deserter"
       ],
       "level": 5,
-      "xp": 18
+      "xp": 18,
+      "can_level_up": false
     },
     "weapon_slot": {
       "id": "sledgehammer",
@@ -131,7 +132,8 @@
             "tag_military_deserter"
           ],
           "level": 2,
-          "xp": 0
+          "xp": 0,
+          "can_level_up": false
         },
         "weapon_slot": null,
         "armor_slot": null,
@@ -175,7 +177,8 @@
             "tag_military_deserter"
           ],
           "level": 2,
-          "xp": 0
+          "xp": 0,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "rust_rifle",
@@ -242,7 +245,8 @@
             "tag_military_deserter"
           ],
           "level": 2,
-          "xp": 0
+          "xp": 0,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "rust_rifle",
@@ -309,7 +313,8 @@
             "tag_military_deserter"
           ],
           "level": 2,
-          "xp": 0
+          "xp": 0,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "rust_rifle",
@@ -376,7 +381,8 @@
             "tag_military_deserter"
           ],
           "level": 2,
-          "xp": 0
+          "xp": 0,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "rust_rifle",
@@ -444,7 +450,8 @@
             "tag_military_deserter"
           ],
           "level": 2,
-          "xp": 5
+          "xp": 5,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "rust_rifle",
@@ -510,7 +517,8 @@
             "tag_military_deserter"
           ],
           "level": 2,
-          "xp": 5
+          "xp": 5,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "rust_rifle",
@@ -599,7 +607,8 @@
             "tag_military_deserter"
           ],
           "level": 2,
-          "xp": 8
+          "xp": 8,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "rust_rifle",
@@ -682,7 +691,8 @@
             "tag_military_deserter"
           ],
           "level": 2,
-          "xp": 8
+          "xp": 8,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "rust_rifle",
@@ -775,7 +785,8 @@
             "tag_military_deserter"
           ],
           "level": 2,
-          "xp": 13
+          "xp": 13,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "rust_rifle",
@@ -859,7 +870,8 @@
             "tag_military_deserter"
           ],
           "level": 2,
-          "xp": 13
+          "xp": 13,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "rust_rifle",
@@ -950,7 +962,8 @@
             "tag_military_deserter"
           ],
           "level": 2,
-          "xp": 43
+          "xp": 43,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "hardened_blade",
@@ -1035,7 +1048,8 @@
             "tag_military_deserter"
           ],
           "level": 2,
-          "xp": 43
+          "xp": 43,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "hardened_blade",
@@ -1119,7 +1133,8 @@
             "tag_military_deserter"
           ],
           "level": 3,
-          "xp": 23
+          "xp": 23,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "hardened_blade",
@@ -1173,7 +1188,7 @@
         "WARNING: radiation will continue to threaten future travel."
       ],
       "pre_choice_state": {
-        "hp": 18,
+        "hp": 20,
         "food": 11,
         "ammo": 6,
         "medkits": 5,
@@ -1203,7 +1218,8 @@
             "tag_military_deserter"
           ],
           "level": 3,
-          "xp": 23
+          "xp": 23,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "hardened_blade",
@@ -1257,7 +1273,7 @@
       "equipment_change": null,
       "equipment_summary": null,
       "player_after": {
-        "hp": 18,
+        "hp": 20,
         "food": 15,
         "ammo": 6,
         "medkits": 5,
@@ -1287,7 +1303,8 @@
             "tag_military_deserter"
           ],
           "level": 3,
-          "xp": 23
+          "xp": 23,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "hardened_blade",
@@ -1342,7 +1359,7 @@
         "DANGER: this choice carries a high combat risk."
       ],
       "pre_choice_state": {
-        "hp": 16,
+        "hp": 20,
         "food": 14,
         "ammo": 6,
         "medkits": 5,
@@ -1372,7 +1389,8 @@
             "tag_military_deserter"
           ],
           "level": 3,
-          "xp": 23
+          "xp": 23,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "hardened_blade",
@@ -1426,7 +1444,7 @@
       "equipment_change": null,
       "equipment_summary": null,
       "player_after": {
-        "hp": 16,
+        "hp": 20,
         "food": 13,
         "ammo": 6,
         "medkits": 5,
@@ -1456,7 +1474,8 @@
             "tag_military_deserter"
           ],
           "level": 3,
-          "xp": 23
+          "xp": 23,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "hardened_blade",
@@ -1513,7 +1532,7 @@
         "hp": 20,
         "food": 12,
         "ammo": 6,
-        "medkits": 4,
+        "medkits": 5,
         "scrap": 11,
         "radiation": 4,
         "archetype": null,
@@ -1540,7 +1559,8 @@
             "tag_military_deserter"
           ],
           "level": 3,
-          "xp": 23
+          "xp": 23,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "hardened_blade",
@@ -1598,7 +1618,7 @@
         "hp": 18,
         "food": 12,
         "ammo": 6,
-        "medkits": 4,
+        "medkits": 5,
         "scrap": 24,
         "radiation": 4,
         "archetype": null,
@@ -1625,7 +1645,8 @@
             "tag_military_deserter"
           ],
           "level": 3,
-          "xp": 28
+          "xp": 28,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "hardened_blade",
@@ -1680,10 +1701,10 @@
         "DANGER: this choice carries a high combat risk."
       ],
       "pre_choice_state": {
-        "hp": 16,
+        "hp": 18,
         "food": 11,
         "ammo": 6,
-        "medkits": 4,
+        "medkits": 5,
         "scrap": 24,
         "radiation": 4,
         "archetype": null,
@@ -1710,7 +1731,8 @@
             "tag_military_deserter"
           ],
           "level": 3,
-          "xp": 28
+          "xp": 28,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "hardened_blade",
@@ -1776,10 +1798,10 @@
       "equipment_change": null,
       "equipment_summary": null,
       "player_after": {
-        "hp": 9,
+        "hp": 11,
         "food": 11,
         "ammo": 3,
-        "medkits": 5,
+        "medkits": 6,
         "scrap": 74,
         "radiation": 4,
         "archetype": null,
@@ -1806,7 +1828,8 @@
             "tag_military_deserter"
           ],
           "level": 4,
-          "xp": 58
+          "xp": 58,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "sledgehammer",
@@ -1861,10 +1884,10 @@
         "WARNING: radiation will continue to threaten future travel."
       ],
       "pre_choice_state": {
-        "hp": 17,
+        "hp": 11,
         "food": 10,
         "ammo": 3,
-        "medkits": 4,
+        "medkits": 6,
         "scrap": 74,
         "radiation": 4,
         "archetype": null,
@@ -1891,7 +1914,8 @@
             "tag_military_deserter"
           ],
           "level": 4,
-          "xp": 58
+          "xp": 58,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "sledgehammer",
@@ -1945,10 +1969,10 @@
       "equipment_change": null,
       "equipment_summary": null,
       "player_after": {
-        "hp": 17,
+        "hp": 11,
         "food": 9,
         "ammo": 3,
-        "medkits": 4,
+        "medkits": 6,
         "scrap": 74,
         "radiation": 4,
         "archetype": null,
@@ -1975,7 +1999,8 @@
             "tag_military_deserter"
           ],
           "level": 5,
-          "xp": 18
+          "xp": 18,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "sledgehammer",
@@ -2025,7 +2050,7 @@
   "summary": {
     "pressure_count": 11,
     "death_cause_attribution": true,
-    "resource_signature": "hp:17|food:9|ammo:3|medkits:4|scrap:74|radiation:4|weapon:EquipmentState(id='sledgehammer', slot='weapon', durability=9, max_durability=10, rarity='legendary', requirements={'strength': 7}, scaling={'strength': 1.2}, affixes={'atk': 1, 'def': 1}, tags=['melee', 'heavy', 'lead_lined'], refinement_count=0)|armor:None|tool:EquipmentState(id='scavenger_kit', slot='tool', durability=10, max_durability=10, rarity='rare', requirements={'luck': 4}, scaling={}, affixes={'atk': 2}, tags=['scavenging'], refinement_count=0)"
+    "resource_signature": "hp:11|food:9|ammo:3|medkits:6|scrap:74|radiation:4|weapon:EquipmentState(id='sledgehammer', slot='weapon', durability=9, max_durability=10, rarity='legendary', requirements={'strength': 7}, scaling={'strength': 1.2}, affixes={'atk': 1, 'def': 1}, tags=['melee', 'heavy', 'lead_lined'], refinement_count=0)|armor:None|tool:EquipmentState(id='scavenger_kit', slot='tool', durability=10, max_durability=10, rarity='rare', requirements={'luck': 4}, scaling={}, affixes={'atk': 2}, tags=['scavenging'], refinement_count=0)"
   },
   "failure_analysis": {
     "death_chain_length": 0,
@@ -2065,7 +2090,7 @@
       },
       "max_radiation": 4,
       "min_food": 8,
-      "min_hp": 9,
+      "min_hp": 10,
       "low_resource_flags": [
         "high_radiation"
       ],

@@ -46,7 +46,8 @@
         "tag_raider_defector"
       ],
       "level": 4,
-      "xp": 0
+      "xp": 0,
+      "can_level_up": false
     },
     "weapon_slot": {
       "id": "rust_rifle",
@@ -106,7 +107,8 @@
             "tag_raider_defector"
           ],
           "level": 2,
-          "xp": 0
+          "xp": 0,
+          "can_level_up": false
         },
         "weapon_slot": null,
         "armor_slot": null,
@@ -148,7 +150,8 @@
             "tag_raider_defector"
           ],
           "level": 2,
-          "xp": 0
+          "xp": 0,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "rust_rifle",
@@ -213,7 +216,8 @@
             "tag_raider_defector"
           ],
           "level": 2,
-          "xp": 0
+          "xp": 0,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "rust_rifle",
@@ -278,7 +282,8 @@
             "tag_raider_defector"
           ],
           "level": 2,
-          "xp": 0
+          "xp": 0,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "rust_rifle",
@@ -343,7 +348,8 @@
             "tag_raider_defector"
           ],
           "level": 2,
-          "xp": 0
+          "xp": 0,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "rust_rifle",
@@ -418,7 +424,8 @@
             "tag_raider_defector"
           ],
           "level": 2,
-          "xp": 5
+          "xp": 5,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "rust_rifle",
@@ -482,7 +489,8 @@
             "tag_raider_defector"
           ],
           "level": 2,
-          "xp": 5
+          "xp": 5,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "rust_rifle",
@@ -546,7 +554,8 @@
             "tag_raider_defector"
           ],
           "level": 2,
-          "xp": 5
+          "xp": 5,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "rust_rifle",
@@ -608,7 +617,8 @@
             "tag_raider_defector"
           ],
           "level": 2,
-          "xp": 5
+          "xp": 5,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "rust_rifle",
@@ -674,7 +684,8 @@
             "tag_raider_defector"
           ],
           "level": 2,
-          "xp": 15
+          "xp": 15,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "rust_rifle",
@@ -738,7 +749,8 @@
             "tag_raider_defector"
           ],
           "level": 2,
-          "xp": 15
+          "xp": 15,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "rust_rifle",
@@ -810,7 +822,8 @@
             "tag_raider_defector"
           ],
           "level": 3,
-          "xp": 25
+          "xp": 25,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "hardened_blade",
@@ -876,7 +889,8 @@
             "tag_raider_defector"
           ],
           "level": 3,
-          "xp": 25
+          "xp": 25,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "hardened_blade",
@@ -950,7 +964,8 @@
             "tag_raider_defector"
           ],
           "level": 3,
-          "xp": 25
+          "xp": 25,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "hardened_blade",
@@ -987,10 +1002,10 @@
         "WARNING: radiation will continue to threaten future travel."
       ],
       "pre_choice_state": {
-        "hp": 20,
+        "hp": 11,
         "food": 15,
         "ammo": 1,
-        "medkits": 10,
+        "medkits": 11,
         "scrap": 65,
         "radiation": 3,
         "archetype": null,
@@ -1015,7 +1030,8 @@
             "tag_raider_defector"
           ],
           "level": 3,
-          "xp": 25
+          "xp": 25,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "hardened_blade",
@@ -1052,10 +1068,10 @@
       "equipment_change": null,
       "equipment_summary": null,
       "player_after": {
-        "hp": 20,
+        "hp": 11,
         "food": 18,
         "ammo": 1,
-        "medkits": 10,
+        "medkits": 11,
         "scrap": 63,
         "radiation": 3,
         "archetype": null,
@@ -1080,7 +1096,8 @@
             "tag_raider_defector"
           ],
           "level": 3,
-          "xp": 25
+          "xp": 25,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "hardened_blade",
@@ -1118,10 +1135,10 @@
         "DANGER: this choice carries a high combat risk."
       ],
       "pre_choice_state": {
-        "hp": 19,
+        "hp": 11,
         "food": 17,
         "ammo": 1,
-        "medkits": 10,
+        "medkits": 11,
         "scrap": 63,
         "radiation": 3,
         "archetype": null,
@@ -1146,7 +1163,8 @@
             "tag_raider_defector"
           ],
           "level": 3,
-          "xp": 25
+          "xp": 25,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "hardened_blade",
@@ -1234,7 +1252,8 @@
             "tag_raider_defector"
           ],
           "level": 4,
-          "xp": 0
+          "xp": 0,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "rust_rifle",

@@ -50,13 +50,31 @@ Ashfall 的平衡開發已從「手動調參」進化為「證據導向 (Evidenc
 
 ## 🏛️ AI 治理體系 (Governance Infrastructure)
 
-### 1. 治理工具分級 (Tool Classes)
-我們將 51 項工具按職責與風險等級進行分級：
-- **[BLOCKING]**: Phase Gates 必備。攔截 Contract 違規 (如 `contract_validator.py`)。
-- **[DIAGNOSTIC]**: 輔助診斷。檢查 PLAN 新鮮度與趨勢 (如 `plan_freshness.py`)。
-- **[HYGIENE]**: 倉庫整潔。定期清理記憶與垃圾內容 (如 `memory_janitor.py`)。
+### 1. 漂移分類學 (Drift Taxonomy)
+為了系統化捕捉偏差，我們定義了四類 Drift 模式：
+- **Contract Drift**: 代碼實作與規格介面 (Spec Interface) 不一致。
+- **Logic Drift**: 機制失效。例如輻射傷害消失或 healing 被歸零。
+- **Metric Drift**: 數值公式或權重變更，導致舊有的測試斷言失效。
+- **Gameplay Drift**: **[NEW]** 數值合法但決策空間壓縮。例如出現 Pick Rate > 80% 的單一最佳策略 (Meta Collapse) 或流派坍塌。
 
-### 2. Metadata 職責邊界 (Metadata Matrix)
+### 2. 治理工具分級 (Tool Classes)
+我們將 51 項工具按職責與風險等級進行分級：
+- **[BLOCKING]**: Phase Gates 必備。攔截 Contract/Logic 違規。
+- **[DIAGNOSTIC]**: 輔助診斷。監測 Metric/Gameplay 趨勢與 PLAN 新鮮度。
+- **[HYGIENE]**: 倉庫整潔。定期清理記憶與垃圾內容。
+
+### 3. 未來展望：Phase 變更分級 (Readiness Grading)
+為平衡開發速度與治理成本，建立變更分級矩陣：
+
+| 等級 | 類型 | 影響範圍 (Scope) | 治理深度 |
+| :--- | :--- | :--- | :--- |
+| **L1** | Content-Only | **Local**: 單一物件/文字 | Gate 1 (Unit Tests) |
+| **L2** | Balance-Sensitive | **Global**: 多物件連鎖/經濟 | Gate 2 (Simulator) + Drift Audit |
+| **L3** | Arch-Sensitive | **Cross-System**: 核心引擎修改 | 5/5 Phase Gates + Manual Review |
+
+---
+
+### 4. Metadata 職責邊界 (Metadata Matrix)
 為防止 AI 記憶漂移 (Drift)，明確定義了四類核心文件的職責：
 - **SOUL.md**: 核心指令集 (內化規則)。
 - **IDENTITY.md**: 技術角色定位與標籤 (靜態屬性)。
@@ -67,11 +85,23 @@ Ashfall 的平衡開發已從「手動調參」進化為「證據導向 (Evidenc
 
 治理框架不僅是文件，而是真實攔截並導正開發漂移 (Drift) 的機制。
 
-### 案例：`test_failure_paths.py` 迴歸攔截
-- **情境**: 在實施 V2.2 的 `Last Stand` (絕地求生) 補償機制時，開發者（我）修改了底層 healing 權重。
-- **Drift**: 這次改動無意中改變了 `test_radiation_attrition` 的預期生存步數，導致既有的驗證腳本失敗。
-- **攔截**: **Phase Gate 2 (Gameplay Validation)** 在 Commit 前即時報錯，攔截了這次潛在的「隱性邏輯更改」。
-- **導正**: 通過 `violation_triage.py` 診斷後，確認這是「數值進化而非 Bug」，隨即同步更新了測試案例與 [PT1_CHECKLIST.md](file:///e:/BackUp/Git_EE/Ashfall/PT1_CHECKLIST.md)，確保規則與實作再次對齊。
+### 案例 1：`test_failure_paths.py` 迴歸攔截 [Metric Drift]
+- **情境**: 在實施 V2.2 的 `Last Stand` 補償機制時，修改了底層 healing 權重。
+- **攔截**: **Phase Gate 2** 即時報錯，攔截了潛在的隱性數值更改。
+- **導正**: 通過 `violation_triage.py` 診斷後，確認為預期內的 Metric Drift 並同步更新測試。
+
+### 案例 2：輻射邏輯失效測試 [Logic Drift]
+- **情境**: 刻意將 `src/run_engine.py` 中的輻射傷害計算歸零 (Injected Logic Drift)。
+- **攔截**: **Phase Gate 2** 的 `test_radiation_attrition` 發生斷言失敗（預期 HP 損失未發生）。
+- **驗證**: 證明了治理系統具備自動化攔截「核心機制失效」的能力，而非僅依賴人工 Code Review。
+
+---
+
+## 🚧 未來展望：Phase 11 變更分級 (Readiness Grading)
+為平衡開發速度與治理成本，未來變更將按風險分級：
+- **L1: Content-Only**: 僅新增 Perk 敘事或翻譯。僅需通過 Gate 1。
+- **L2: Balance-Sensitive**: 調整數值乘數。需通過 Gate 2 的完整 Simulator 壓力測試。
+- **L3: Architecture-Sensitive**: 修改核心引擎或狀態模型。必須通過 5/5 Phase Gates。
 
 ---
 

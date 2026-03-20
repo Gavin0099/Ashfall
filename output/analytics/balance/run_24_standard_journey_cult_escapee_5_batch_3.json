@@ -18,7 +18,7 @@
   "victory": false,
   "end_reason": "combat_death",
   "player_final": {
-    "hp": 0,
+    "hp": -4,
     "food": 11,
     "ammo": 0,
     "medkits": 0,
@@ -46,7 +46,8 @@
         "tag_cult_escapee"
       ],
       "level": 3,
-      "xp": 28
+      "xp": 28,
+      "can_level_up": false
     },
     "weapon_slot": {
       "id": "hardened_blade",
@@ -126,7 +127,8 @@
             "tag_cult_escapee"
           ],
           "level": 2,
-          "xp": 0
+          "xp": 0,
+          "can_level_up": false
         },
         "weapon_slot": null,
         "armor_slot": null,
@@ -168,7 +170,8 @@
             "tag_cult_escapee"
           ],
           "level": 2,
-          "xp": 0
+          "xp": 0,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "rust_rifle",
@@ -231,7 +234,8 @@
             "tag_cult_escapee"
           ],
           "level": 2,
-          "xp": 0
+          "xp": 0,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "rust_rifle",
@@ -294,7 +298,8 @@
             "tag_cult_escapee"
           ],
           "level": 2,
-          "xp": 0
+          "xp": 0,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "rust_rifle",
@@ -357,7 +362,8 @@
             "tag_cult_escapee"
           ],
           "level": 2,
-          "xp": 0
+          "xp": 0,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "rust_rifle",
@@ -430,7 +436,8 @@
             "tag_cult_escapee"
           ],
           "level": 2,
-          "xp": 5
+          "xp": 5,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "rust_rifle",
@@ -492,7 +499,8 @@
             "tag_cult_escapee"
           ],
           "level": 2,
-          "xp": 5
+          "xp": 5,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "rust_rifle",
@@ -586,7 +594,8 @@
             "tag_cult_escapee"
           ],
           "level": 2,
-          "xp": 8
+          "xp": 8,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "rust_rifle",
@@ -665,7 +674,8 @@
             "tag_cult_escapee"
           ],
           "level": 2,
-          "xp": 8
+          "xp": 8,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "rust_rifle",
@@ -743,7 +753,8 @@
             "tag_cult_escapee"
           ],
           "level": 2,
-          "xp": 8
+          "xp": 8,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "rust_rifle",
@@ -823,7 +834,8 @@
             "tag_cult_escapee"
           ],
           "level": 2,
-          "xp": 8
+          "xp": 8,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "rust_rifle",
@@ -910,7 +922,8 @@
             "tag_cult_escapee"
           ],
           "level": 2,
-          "xp": 38
+          "xp": 38,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "hardened_blade",
@@ -993,7 +1006,8 @@
             "tag_cult_escapee"
           ],
           "level": 2,
-          "xp": 38
+          "xp": 38,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "hardened_blade",
@@ -1075,7 +1089,8 @@
             "tag_cult_escapee"
           ],
           "level": 3,
-          "xp": 18
+          "xp": 18,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "hardened_blade",
@@ -1129,7 +1144,7 @@
         "WARNING: radiation will continue to threaten future travel."
       ],
       "pre_choice_state": {
-        "hp": 12,
+        "hp": 14,
         "food": 11,
         "ammo": 5,
         "medkits": 9,
@@ -1157,7 +1172,8 @@
             "tag_cult_escapee"
           ],
           "level": 3,
-          "xp": 18
+          "xp": 18,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "hardened_blade",
@@ -1211,7 +1227,7 @@
       "equipment_change": null,
       "equipment_summary": null,
       "player_after": {
-        "hp": 12,
+        "hp": 14,
         "food": 15,
         "ammo": 5,
         "medkits": 9,
@@ -1239,7 +1255,8 @@
             "tag_cult_escapee"
           ],
           "level": 3,
-          "xp": 18
+          "xp": 18,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "hardened_blade",
@@ -1294,10 +1311,10 @@
         "DANGER: this choice carries a high combat risk."
       ],
       "pre_choice_state": {
-        "hp": 20,
+        "hp": 14,
         "food": 14,
         "ammo": 5,
-        "medkits": 8,
+        "medkits": 9,
         "scrap": 32,
         "radiation": 4,
         "archetype": null,
@@ -1322,7 +1339,8 @@
             "tag_cult_escapee"
           ],
           "level": 3,
-          "xp": 18
+          "xp": 18,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "hardened_blade",
@@ -1376,10 +1394,10 @@
       "equipment_change": null,
       "equipment_summary": null,
       "player_after": {
-        "hp": 20,
+        "hp": 14,
         "food": 13,
         "ammo": 5,
-        "medkits": 8,
+        "medkits": 9,
         "scrap": 31,
         "radiation": 4,
         "archetype": null,
@@ -1404,7 +1422,8 @@
             "tag_cult_escapee"
           ],
           "level": 3,
-          "xp": 18
+          "xp": 18,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "hardened_blade",
@@ -1458,7 +1477,7 @@
         "WARNING: radiation will continue to threaten future travel."
       ],
       "pre_choice_state": {
-        "hp": 18,
+        "hp": 20,
         "food": 12,
         "ammo": 5,
         "medkits": 8,
@@ -1486,7 +1505,8 @@
             "tag_cult_escapee"
           ],
           "level": 3,
-          "xp": 18
+          "xp": 18,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "hardened_blade",
@@ -1548,7 +1568,7 @@
       "equipment_change": null,
       "equipment_summary": null,
       "player_after": {
-        "hp": 17,
+        "hp": 19,
         "food": 12,
         "ammo": 2,
         "medkits": 10,
@@ -1576,7 +1596,8 @@
             "tag_cult_escapee"
           ],
           "level": 3,
-          "xp": 18
+          "xp": 18,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "hardened_blade",
@@ -1631,7 +1652,7 @@
         "DANGER: this choice carries a high combat risk."
       ],
       "pre_choice_state": {
-        "hp": 15,
+        "hp": 19,
         "food": 11,
         "ammo": 2,
         "medkits": 10,
@@ -1659,7 +1680,8 @@
             "tag_cult_escapee"
           ],
           "level": 3,
-          "xp": 18
+          "xp": 18,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "hardened_blade",
@@ -1712,7 +1734,7 @@
       "equipment_change": null,
       "equipment_summary": null,
       "player_after": {
-        "hp": 0,
+        "hp": -4,
         "food": 11,
         "ammo": 0,
         "medkits": 0,
@@ -1740,7 +1762,8 @@
             "tag_cult_escapee"
           ],
           "level": 3,
-          "xp": 28
+          "xp": 28,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "hardened_blade",
@@ -1789,7 +1812,7 @@
   "summary": {
     "pressure_count": 9,
     "death_cause_attribution": true,
-    "resource_signature": "hp:0|food:11|ammo:0|medkits:0|scrap:29|radiation:4|weapon:EquipmentState(id='hardened_blade', slot='weapon', durability=7, max_durability=10, rarity='legendary', requirements={'strength': 5}, scaling={'strength': 0.8}, affixes={'def': 2, 'atk': 3}, tags=['melee', 'quality'], refinement_count=0)|armor:None|tool:EquipmentState(id='scavenger_kit', slot='tool', durability=10, max_durability=10, rarity='rare', requirements={'luck': 4}, scaling={}, affixes={'def': 2}, tags=['scavenging'], refinement_count=2)"
+    "resource_signature": "hp:-4|food:11|ammo:0|medkits:0|scrap:29|radiation:4|weapon:EquipmentState(id='hardened_blade', slot='weapon', durability=7, max_durability=10, rarity='legendary', requirements={'strength': 5}, scaling={'strength': 0.8}, affixes={'def': 2, 'atk': 3}, tags=['melee', 'quality'], refinement_count=0)|armor:None|tool:EquipmentState(id='scavenger_kit', slot='tool', durability=10, max_durability=10, rarity='rare', requirements={'luck': 4}, scaling={}, affixes={'def': 2}, tags=['scavenging'], refinement_count=2)"
   },
   "failure_analysis": {
     "death_chain_length": 3,

@@ -1210,8 +1210,8 @@
     "outcome": "combat_death",
     "key_turning_point": "node_deadzone_2 (lost 1 food, accepted combat risk, carried radiation into later travel)",
     "notable_equipment": [
-      "field_pack",
-      "makeshift_blade"
+      "makeshift_blade",
+      "field_pack"
     ],
     "telemetry": {
       "total_steps": 11,
@@ -1226,8 +1226,8 @@
       "total_atk_affix_gain": 0,
       "total_def_affix_gain": 2,
       "equipment_ids": [
-        "field_pack",
-        "makeshift_blade"
+        "makeshift_blade",
+        "field_pack"
       ],
       "loot_resources": {
         "ammo": 5,

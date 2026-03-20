@@ -787,7 +787,7 @@
         "WARNING: radiation will continue to threaten future travel."
       ],
       "pre_choice_state": {
-        "hp": 18,
+        "hp": 19,
         "food": 14,
         "ammo": 6,
         "medkits": 9,
@@ -845,7 +845,7 @@
       "equipment_change": null,
       "equipment_summary": null,
       "player_after": {
-        "hp": 18,
+        "hp": 19,
         "food": 20,
         "ammo": 6,
         "medkits": 9,
@@ -904,7 +904,7 @@
         "DANGER: this choice carries a high combat risk."
       ],
       "pre_choice_state": {
-        "hp": 17,
+        "hp": 19,
         "food": 19,
         "ammo": 6,
         "medkits": 9,
@@ -1076,9 +1076,9 @@
     "outcome": "combat_death",
     "key_turning_point": "node_deadzone_1 (took +3 radiation, carried radiation into later travel)",
     "notable_equipment": [
-      "scavenger_kit",
       "rust_rifle",
-      "makeshift_blade"
+      "makeshift_blade",
+      "scavenger_kit"
     ],
     "telemetry": {
       "total_steps": 9,
@@ -1094,9 +1094,9 @@
       "total_atk_affix_gain": 1,
       "total_def_affix_gain": 0,
       "equipment_ids": [
-        "scavenger_kit",
         "rust_rifle",
-        "makeshift_blade"
+        "makeshift_blade",
+        "scavenger_kit"
       ],
       "loot_resources": {
         "ammo": 5,

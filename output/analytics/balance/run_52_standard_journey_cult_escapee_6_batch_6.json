@@ -18,7 +18,7 @@
   "victory": false,
   "end_reason": "combat_death",
   "player_final": {
-    "hp": -1,
+    "hp": -2,
     "food": 16,
     "ammo": 0,
     "medkits": 0,
@@ -48,7 +48,8 @@
         "tag_cult_escapee"
       ],
       "level": 4,
-      "xp": 23
+      "xp": 23,
+      "can_level_up": false
     },
     "weapon_slot": {
       "id": "hardened_blade",
@@ -130,7 +131,8 @@
             "tag_cult_escapee"
           ],
           "level": 2,
-          "xp": 0
+          "xp": 0,
+          "can_level_up": false
         },
         "weapon_slot": null,
         "armor_slot": null,
@@ -174,7 +176,8 @@
             "tag_cult_escapee"
           ],
           "level": 2,
-          "xp": 0
+          "xp": 0,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "rust_rifle",
@@ -238,7 +241,8 @@
             "tag_cult_escapee"
           ],
           "level": 2,
-          "xp": 0
+          "xp": 0,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "rust_rifle",
@@ -334,7 +338,8 @@
             "tag_cult_escapee"
           ],
           "level": 2,
-          "xp": 8
+          "xp": 8,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "makeshift_blade",
@@ -396,7 +401,8 @@
             "tag_cult_escapee"
           ],
           "level": 2,
-          "xp": 8
+          "xp": 8,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "makeshift_blade",
@@ -460,7 +466,8 @@
             "tag_cult_escapee"
           ],
           "level": 2,
-          "xp": 13
+          "xp": 13,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "makeshift_blade",
@@ -520,7 +527,8 @@
             "tag_cult_escapee"
           ],
           "level": 2,
-          "xp": 13
+          "xp": 13,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "makeshift_blade",
@@ -582,7 +590,8 @@
             "tag_cult_escapee"
           ],
           "level": 2,
-          "xp": 13
+          "xp": 13,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "makeshift_blade",
@@ -642,7 +651,8 @@
             "tag_cult_escapee"
           ],
           "level": 2,
-          "xp": 13
+          "xp": 13,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "makeshift_blade",
@@ -706,7 +716,8 @@
             "tag_cult_escapee"
           ],
           "level": 3,
-          "xp": 3
+          "xp": 3,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "makeshift_blade",
@@ -768,7 +779,8 @@
             "tag_cult_escapee"
           ],
           "level": 3,
-          "xp": 3
+          "xp": 3,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "makeshift_blade",
@@ -838,7 +850,8 @@
             "tag_cult_escapee"
           ],
           "level": 3,
-          "xp": 33
+          "xp": 33,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "hardened_blade",
@@ -906,7 +919,8 @@
             "tag_cult_escapee"
           ],
           "level": 3,
-          "xp": 33
+          "xp": 33,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "hardened_blade",
@@ -995,7 +1009,8 @@
             "tag_cult_escapee"
           ],
           "level": 4,
-          "xp": 3
+          "xp": 3,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "hardened_blade",
@@ -1079,7 +1094,8 @@
             "tag_cult_escapee"
           ],
           "level": 4,
-          "xp": 3
+          "xp": 3,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "hardened_blade",
@@ -1163,7 +1179,8 @@
             "tag_cult_escapee"
           ],
           "level": 4,
-          "xp": 3
+          "xp": 3,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "hardened_blade",
@@ -1248,7 +1265,8 @@
             "tag_cult_escapee"
           ],
           "level": 4,
-          "xp": 3
+          "xp": 3,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "hardened_blade",
@@ -1341,7 +1359,8 @@
             "tag_cult_escapee"
           ],
           "level": 4,
-          "xp": 3
+          "xp": 3,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "hardened_blade",
@@ -1423,7 +1442,8 @@
             "tag_cult_escapee"
           ],
           "level": 4,
-          "xp": 3
+          "xp": 3,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "hardened_blade",
@@ -1509,7 +1529,8 @@
             "tag_cult_escapee"
           ],
           "level": 4,
-          "xp": 13
+          "xp": 13,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "hardened_blade",
@@ -1593,7 +1614,8 @@
             "tag_cult_escapee"
           ],
           "level": 4,
-          "xp": 13
+          "xp": 13,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "hardened_blade",
@@ -1646,7 +1668,7 @@
       "equipment_change": null,
       "equipment_summary": null,
       "player_after": {
-        "hp": -1,
+        "hp": -2,
         "food": 16,
         "ammo": 0,
         "medkits": 0,
@@ -1676,7 +1698,8 @@
             "tag_cult_escapee"
           ],
           "level": 4,
-          "xp": 23
+          "xp": 23,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "hardened_blade",
@@ -1725,7 +1748,7 @@
   "summary": {
     "pressure_count": 10,
     "death_cause_attribution": true,
-    "resource_signature": "hp:-1|food:16|ammo:0|medkits:0|scrap:31|radiation:0|weapon:EquipmentState(id='hardened_blade', slot='weapon', durability=7, max_durability=10, rarity='legendary', requirements={'strength': 5}, scaling={'strength': 0.8}, affixes={'max_durability': 5}, tags=['melee', 'quality', 'lead_lined'], refinement_count=1)|armor:None|tool:EquipmentState(id='field_pack', slot='tool', durability=10, max_durability=10, rarity='rare', requirements={'strength': 4}, scaling={}, affixes={'def': 2}, tags=['exploration'], refinement_count=1)"
+    "resource_signature": "hp:-2|food:16|ammo:0|medkits:0|scrap:31|radiation:0|weapon:EquipmentState(id='hardened_blade', slot='weapon', durability=7, max_durability=10, rarity='legendary', requirements={'strength': 5}, scaling={'strength': 0.8}, affixes={'max_durability': 5}, tags=['melee', 'quality', 'lead_lined'], refinement_count=1)|armor:None|tool:EquipmentState(id='field_pack', slot='tool', durability=10, max_durability=10, rarity='rare', requirements={'strength': 4}, scaling={}, affixes={'def': 2}, tags=['exploration'], refinement_count=1)"
   },
   "failure_analysis": {
     "death_chain_length": 3,
@@ -1762,8 +1785,8 @@
     "outcome": "combat_death",
     "key_turning_point": "node_deadzone_2 (lost 1 food, accepted combat risk, carried radiation into later travel)",
     "notable_equipment": [
-      "field_pack",
-      "makeshift_blade"
+      "makeshift_blade",
+      "field_pack"
     ],
     "telemetry": {
       "total_steps": 11,
@@ -1778,8 +1801,8 @@
       "total_atk_affix_gain": 0,
       "total_def_affix_gain": 2,
       "equipment_ids": [
-        "field_pack",
-        "makeshift_blade"
+        "makeshift_blade",
+        "field_pack"
       ],
       "loot_resources": {
         "ammo": 5,

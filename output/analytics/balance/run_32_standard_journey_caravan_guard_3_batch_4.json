@@ -18,10 +18,10 @@
   "victory": true,
   "end_reason": "reached_final_node",
   "player_final": {
-    "hp": 18,
+    "hp": 20,
     "food": 13,
     "ammo": 1,
-    "medkits": 4,
+    "medkits": 8,
     "scrap": 107,
     "radiation": 4,
     "archetype": null,
@@ -46,7 +46,8 @@
         "tag_caravan_guard"
       ],
       "level": 5,
-      "xp": 20
+      "xp": 20,
+      "can_level_up": false
     },
     "weapon_slot": {
       "id": "sledgehammer",
@@ -109,7 +110,8 @@
             "tag_caravan_guard"
           ],
           "level": 2,
-          "xp": 0
+          "xp": 0,
+          "can_level_up": false
         },
         "weapon_slot": null,
         "armor_slot": null,
@@ -151,7 +153,8 @@
             "tag_caravan_guard"
           ],
           "level": 2,
-          "xp": 0
+          "xp": 0,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "rust_rifle",
@@ -216,7 +219,8 @@
             "tag_caravan_guard"
           ],
           "level": 2,
-          "xp": 0
+          "xp": 0,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "rust_rifle",
@@ -281,7 +285,8 @@
             "tag_caravan_guard"
           ],
           "level": 2,
-          "xp": 0
+          "xp": 0,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "rust_rifle",
@@ -346,7 +351,8 @@
             "tag_caravan_guard"
           ],
           "level": 2,
-          "xp": 0
+          "xp": 0,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "rust_rifle",
@@ -421,7 +427,8 @@
             "tag_caravan_guard"
           ],
           "level": 2,
-          "xp": 5
+          "xp": 5,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "rust_rifle",
@@ -485,7 +492,8 @@
             "tag_caravan_guard"
           ],
           "level": 2,
-          "xp": 5
+          "xp": 5,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "rust_rifle",
@@ -549,7 +557,8 @@
             "tag_caravan_guard"
           ],
           "level": 2,
-          "xp": 5
+          "xp": 5,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "rust_rifle",
@@ -613,7 +622,8 @@
             "tag_caravan_guard"
           ],
           "level": 2,
-          "xp": 5
+          "xp": 5,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "rust_rifle",
@@ -678,7 +688,8 @@
             "tag_caravan_guard"
           ],
           "level": 2,
-          "xp": 10
+          "xp": 10,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "rust_rifle",
@@ -743,7 +754,8 @@
             "tag_caravan_guard"
           ],
           "level": 2,
-          "xp": 10
+          "xp": 10,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "rust_rifle",
@@ -815,7 +827,8 @@
             "tag_caravan_guard"
           ],
           "level": 2,
-          "xp": 40
+          "xp": 40,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "hardened_blade",
@@ -881,7 +894,8 @@
             "tag_caravan_guard"
           ],
           "level": 2,
-          "xp": 40
+          "xp": 40,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "hardened_blade",
@@ -955,7 +969,8 @@
             "tag_caravan_guard"
           ],
           "level": 3,
-          "xp": 20
+          "xp": 20,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "hardened_blade",
@@ -992,7 +1007,7 @@
         "WARNING: radiation will continue to threaten future travel."
       ],
       "pre_choice_state": {
-        "hp": 14,
+        "hp": 16,
         "food": 15,
         "ammo": 2,
         "medkits": 9,
@@ -1020,7 +1035,8 @@
             "tag_caravan_guard"
           ],
           "level": 3,
-          "xp": 20
+          "xp": 20,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "hardened_blade",
@@ -1057,7 +1073,7 @@
       "equipment_change": null,
       "equipment_summary": null,
       "player_after": {
-        "hp": 14,
+        "hp": 16,
         "food": 18,
         "ammo": 2,
         "medkits": 9,
@@ -1085,7 +1101,8 @@
             "tag_caravan_guard"
           ],
           "level": 3,
-          "xp": 20
+          "xp": 20,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "hardened_blade",
@@ -1123,7 +1140,7 @@
         "DANGER: this choice carries a high combat risk."
       ],
       "pre_choice_state": {
-        "hp": 12,
+        "hp": 16,
         "food": 17,
         "ammo": 2,
         "medkits": 9,
@@ -1151,7 +1168,8 @@
             "tag_caravan_guard"
           ],
           "level": 3,
-          "xp": 20
+          "xp": 20,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "hardened_blade",
@@ -1218,10 +1236,10 @@
       },
       "equipment_summary": "weapon -> rust_rifle (replaced empty)",
       "player_after": {
-        "hp": 16,
+        "hp": 12,
         "food": 17,
         "ammo": 5,
-        "medkits": 8,
+        "medkits": 9,
         "scrap": 50,
         "radiation": 4,
         "archetype": null,
@@ -1246,7 +1264,8 @@
             "tag_caravan_guard"
           ],
           "level": 3,
-          "xp": 25
+          "xp": 25,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "rust_rifle",
@@ -1285,7 +1304,7 @@
         "hp": 20,
         "food": 16,
         "ammo": 5,
-        "medkits": 7,
+        "medkits": 8,
         "scrap": 45,
         "radiation": 4,
         "archetype": null,
@@ -1310,7 +1329,8 @@
             "tag_caravan_guard"
           ],
           "level": 3,
-          "xp": 25
+          "xp": 25,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "rust_rifle",
@@ -1350,7 +1370,7 @@
         "hp": 18,
         "food": 16,
         "ammo": 5,
-        "medkits": 7,
+        "medkits": 8,
         "scrap": 57,
         "radiation": 4,
         "archetype": null,
@@ -1375,7 +1395,8 @@
             "tag_caravan_guard"
           ],
           "level": 4,
-          "xp": 0
+          "xp": 0,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "rust_rifle",
@@ -1412,10 +1433,10 @@
         "DANGER: this choice carries a high combat risk."
       ],
       "pre_choice_state": {
-        "hp": 16,
+        "hp": 18,
         "food": 15,
         "ammo": 5,
-        "medkits": 7,
+        "medkits": 8,
         "scrap": 57,
         "radiation": 4,
         "archetype": null,
@@ -1440,7 +1461,8 @@
             "tag_caravan_guard"
           ],
           "level": 4,
-          "xp": 0
+          "xp": 0,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "rust_rifle",
@@ -1491,7 +1513,7 @@
         "hp": 10,
         "food": 15,
         "ammo": 1,
-        "medkits": 5,
+        "medkits": 9,
         "scrap": 107,
         "radiation": 4,
         "archetype": null,
@@ -1516,7 +1538,8 @@
             "tag_caravan_guard"
           ],
           "level": 4,
-          "xp": 60
+          "xp": 60,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "sledgehammer",
@@ -1553,10 +1576,10 @@
         "WARNING: radiation will continue to threaten future travel."
       ],
       "pre_choice_state": {
-        "hp": 18,
+        "hp": 20,
         "food": 14,
         "ammo": 1,
-        "medkits": 4,
+        "medkits": 8,
         "scrap": 107,
         "radiation": 4,
         "archetype": null,
@@ -1581,7 +1604,8 @@
             "tag_caravan_guard"
           ],
           "level": 4,
-          "xp": 60
+          "xp": 60,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "sledgehammer",
@@ -1617,10 +1641,10 @@
       "equipment_change": null,
       "equipment_summary": null,
       "player_after": {
-        "hp": 18,
+        "hp": 20,
         "food": 13,
         "ammo": 1,
-        "medkits": 4,
+        "medkits": 8,
         "scrap": 107,
         "radiation": 4,
         "archetype": null,
@@ -1645,7 +1669,8 @@
             "tag_caravan_guard"
           ],
           "level": 5,
-          "xp": 20
+          "xp": 20,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "sledgehammer",
@@ -1677,7 +1702,7 @@
   "summary": {
     "pressure_count": 11,
     "death_cause_attribution": true,
-    "resource_signature": "hp:18|food:13|ammo:1|medkits:4|scrap:107|radiation:4|weapon:EquipmentState(id='sledgehammer', slot='weapon', durability=9, max_durability=10, rarity='legendary', requirements={'strength': 7}, scaling={'strength': 1.2}, affixes={'def': 2}, tags=['melee', 'heavy', 'vampiric'], refinement_count=0)|armor:None|tool:None"
+    "resource_signature": "hp:20|food:13|ammo:1|medkits:8|scrap:107|radiation:4|weapon:EquipmentState(id='sledgehammer', slot='weapon', durability=9, max_durability=10, rarity='legendary', requirements={'strength': 7}, scaling={'strength': 1.2}, affixes={'def': 2}, tags=['melee', 'heavy', 'vampiric'], refinement_count=0)|armor:None|tool:None"
   },
   "failure_analysis": {
     "death_chain_length": 0,

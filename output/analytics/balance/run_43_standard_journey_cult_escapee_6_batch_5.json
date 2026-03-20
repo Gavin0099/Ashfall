@@ -48,7 +48,8 @@
         "tag_cult_escapee"
       ],
       "level": 3,
-      "xp": 23
+      "xp": 23,
+      "can_level_up": false
     },
     "weapon_slot": {
       "id": "hardened_blade",
@@ -130,7 +131,8 @@
             "tag_cult_escapee"
           ],
           "level": 2,
-          "xp": 0
+          "xp": 0,
+          "can_level_up": false
         },
         "weapon_slot": null,
         "armor_slot": null,
@@ -174,7 +176,8 @@
             "tag_cult_escapee"
           ],
           "level": 2,
-          "xp": 0
+          "xp": 0,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "rust_rifle",
@@ -241,7 +244,8 @@
             "tag_cult_escapee"
           ],
           "level": 2,
-          "xp": 0
+          "xp": 0,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "rust_rifle",
@@ -308,7 +312,8 @@
             "tag_cult_escapee"
           ],
           "level": 2,
-          "xp": 0
+          "xp": 0,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "rust_rifle",
@@ -375,7 +380,8 @@
             "tag_cult_escapee"
           ],
           "level": 2,
-          "xp": 0
+          "xp": 0,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "rust_rifle",
@@ -443,7 +449,8 @@
             "tag_cult_escapee"
           ],
           "level": 2,
-          "xp": 0
+          "xp": 0,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "rust_rifle",
@@ -509,7 +516,8 @@
             "tag_cult_escapee"
           ],
           "level": 2,
-          "xp": 0
+          "xp": 0,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "rust_rifle",
@@ -598,7 +606,8 @@
             "tag_cult_escapee"
           ],
           "level": 2,
-          "xp": 3
+          "xp": 3,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "rust_rifle",
@@ -679,7 +688,8 @@
             "tag_cult_escapee"
           ],
           "level": 2,
-          "xp": 3
+          "xp": 3,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "rust_rifle",
@@ -764,7 +774,8 @@
             "tag_cult_escapee"
           ],
           "level": 2,
-          "xp": 13
+          "xp": 13,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "rust_rifle",
@@ -847,7 +858,8 @@
             "tag_cult_escapee"
           ],
           "level": 2,
-          "xp": 13
+          "xp": 13,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "rust_rifle",
@@ -938,7 +950,8 @@
             "tag_cult_escapee"
           ],
           "level": 2,
-          "xp": 43
+          "xp": 43,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "hardened_blade",
@@ -1023,7 +1036,8 @@
             "tag_cult_escapee"
           ],
           "level": 2,
-          "xp": 43
+          "xp": 43,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "hardened_blade",
@@ -1129,7 +1143,8 @@
             "tag_cult_escapee"
           ],
           "level": 3,
-          "xp": 23
+          "xp": 23,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "hardened_blade",
@@ -1213,7 +1228,8 @@
             "tag_cult_escapee"
           ],
           "level": 3,
-          "xp": 23
+          "xp": 23,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "hardened_blade",
@@ -1297,7 +1313,8 @@
             "tag_cult_escapee"
           ],
           "level": 3,
-          "xp": 23
+          "xp": 23,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "hardened_blade",
@@ -1382,7 +1399,8 @@
             "tag_cult_escapee"
           ],
           "level": 3,
-          "xp": 23
+          "xp": 23,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "hardened_blade",
@@ -1466,7 +1484,8 @@
             "tag_cult_escapee"
           ],
           "level": 3,
-          "xp": 23
+          "xp": 23,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "hardened_blade",

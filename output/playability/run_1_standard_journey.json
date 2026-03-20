@@ -19,7 +19,7 @@
   "victory": false,
   "end_reason": "combat_death",
   "player_final": {
-    "hp": 0,
+    "hp": -3,
     "food": 19,
     "ammo": 0,
     "medkits": 0,
@@ -161,6 +161,14 @@
         "combat": {
           "skipped": false,
           "enemy_id": "enemy_mutant_brute",
+          "enemy": {
+            "id": "enemy_mutant_brute",
+            "name": "Mutant Brute",
+            "hp": -2,
+            "max_hp": -2,
+            "archetype": "mutant",
+            "is_elite": false
+          },
           "loot": [
             {
               "resource": "scrap",
@@ -524,6 +532,14 @@
         "combat": {
           "skipped": false,
           "enemy_id": "boss_gatekeeper",
+          "enemy": {
+            "id": "boss_gatekeeper",
+            "name": "\u5340\u57df\u5b88\u9580\u54e1\uff1a\u92fc\u9435\u54e8\u5175 (Steel Sentinel)",
+            "hp": -3,
+            "max_hp": -3,
+            "archetype": "boss",
+            "is_elite": true
+          },
           "loot": [
             {
               "resource": "xp",
@@ -765,7 +781,7 @@
         "WARNING: radiation will continue to threaten future travel."
       ],
       "pre_choice_state": {
-        "hp": 19,
+        "hp": 20,
         "food": 15,
         "ammo": 3,
         "medkits": 7,
@@ -801,7 +817,7 @@
       },
       "equipment_summary": null,
       "player": {
-        "hp": 19,
+        "hp": 20,
         "food": 20,
         "ammo": 3,
         "medkits": 7,
@@ -882,10 +898,18 @@
         "combat": {
           "skipped": false,
           "enemy_id": "enemy_mutant_behemoth_elite",
+          "enemy": {
+            "id": "enemy_mutant_behemoth_elite",
+            "name": "Mutant Behemoth (Elite)",
+            "hp": 16,
+            "max_hp": 16,
+            "archetype": "mutant",
+            "is_elite": true
+          },
           "loot": [],
           "victory": false,
-          "rounds": 21,
-          "player_hp": 0,
+          "rounds": 22,
+          "player_hp": -3,
           "enemy_hp": 16,
           "log": [
             "\u26a0\ufe0f \u906d\u9047\u7cbe\u82f1\u6575\u4eba\uff1aMutant Behemoth (Elite)\uff01",
@@ -908,13 +932,13 @@
             "\u7b2c 8 \u56de\u5408\uff1a\u6575\u4eba\u653b\u64ca\uff0c\u9020\u6210 3 \u9ede\u50b7\u5bb3",
             "\u7b2c 9 \u56de\u5408\uff1a\u4f60\u7121\u6cd5\u6709\u6548\u53cd\u64ca",
             "\u7b2c 9 \u56de\u5408\uff1a\u6575\u4eba\u653b\u64ca\uff0c\u9020\u6210 5 \u9ede\u50b7\u5bb3",
-            "\u7b2c 10 \u56de\u5408\uff1a\u4f60\u4f7f\u7528\u91ab\u7642\u5305\uff0c\u56de\u5fa9 10 \u9ede\u751f\u547d",
+            "\u7b2c 10 \u56de\u5408\uff1a\u4f60\u7121\u6cd5\u6709\u6548\u53cd\u64ca",
             "\u7b2c 10 \u56de\u5408\uff1a\u6575\u4eba\u653b\u64ca\uff0c\u9020\u6210 4 \u9ede\u50b7\u5bb3",
-            "\u7b2c 11 \u56de\u5408\uff1a\u4f60\u7121\u6cd5\u6709\u6548\u53cd\u64ca",
+            "\u7b2c 11 \u56de\u5408\uff1a\u4f60\u4f7f\u7528\u91ab\u7642\u5305\uff0c\u56de\u5fa9 10 \u9ede\u751f\u547d",
             "\u7b2c 11 \u56de\u5408\uff1a\u6575\u4eba\u653b\u64ca\uff0c\u9020\u6210 5 \u9ede\u50b7\u5bb3",
-            "\u7b2c 12 \u56de\u5408\uff1a\u4f60\u4f7f\u7528\u91ab\u7642\u5305\uff0c\u56de\u5fa9 10 \u9ede\u751f\u547d",
+            "\u7b2c 12 \u56de\u5408\uff1a\u4f60\u7121\u6cd5\u6709\u6548\u53cd\u64ca",
             "\u7b2c 12 \u56de\u5408\uff1a\u6575\u4eba\u653b\u64ca\uff0c\u9020\u6210 4 \u9ede\u50b7\u5bb3",
-            "\u7b2c 13 \u56de\u5408\uff1a\u4f60\u7121\u6cd5\u6709\u6548\u53cd\u64ca",
+            "\u7b2c 13 \u56de\u5408\uff1a\u4f60\u4f7f\u7528\u91ab\u7642\u5305\uff0c\u56de\u5fa9 10 \u9ede\u751f\u547d",
             "\u7b2c 13 \u56de\u5408\uff1a\u6575\u4eba\u653b\u64ca\uff0c\u9020\u6210 5 \u9ede\u50b7\u5bb3",
             "\u7b2c 14 \u56de\u5408\uff1a\u4f60\u7121\u6cd5\u6709\u6548\u53cd\u64ca",
             "\u7b2c 14 \u56de\u5408\uff1a\u6575\u4eba\u653b\u64ca\uff0c\u9020\u6210 3 \u9ede\u50b7\u5bb3",
@@ -922,16 +946,18 @@
             "\u7b2c 15 \u56de\u5408\uff1a\u6575\u4eba\u653b\u64ca\uff0c\u9020\u6210 3 \u9ede\u50b7\u5bb3",
             "\u7b2c 16 \u56de\u5408\uff1a\u4f60\u7121\u6cd5\u6709\u6548\u53cd\u64ca",
             "\u7b2c 16 \u56de\u5408\uff1a\u6575\u4eba\u653b\u64ca\uff0c\u9020\u6210 5 \u9ede\u50b7\u5bb3",
-            "\u7b2c 17 \u56de\u5408\uff1a\u4f60\u4f7f\u7528\u91ab\u7642\u5305\uff0c\u56de\u5fa9 10 \u9ede\u751f\u547d",
+            "\u7b2c 17 \u56de\u5408\uff1a\u4f60\u7121\u6cd5\u6709\u6548\u53cd\u64ca",
             "\u7b2c 17 \u56de\u5408\uff1a\u6575\u4eba\u653b\u64ca\uff0c\u9020\u6210 3 \u9ede\u50b7\u5bb3",
-            "\u7b2c 18 \u56de\u5408\uff1a\u4f60\u7121\u6cd5\u6709\u6548\u53cd\u64ca",
+            "\u7b2c 18 \u56de\u5408\uff1a\u4f60\u4f7f\u7528\u91ab\u7642\u5305\uff0c\u56de\u5fa9 10 \u9ede\u751f\u547d",
             "\u7b2c 18 \u56de\u5408\uff1a\u6575\u4eba\u653b\u64ca\uff0c\u9020\u6210 3 \u9ede\u50b7\u5bb3",
             "\u7b2c 19 \u56de\u5408\uff1a\u4f60\u7121\u6cd5\u6709\u6548\u53cd\u64ca",
             "\u7b2c 19 \u56de\u5408\uff1a\u6575\u4eba\u653b\u64ca\uff0c\u9020\u6210 4 \u9ede\u50b7\u5bb3",
             "\u7b2c 20 \u56de\u5408\uff1a\u4f60\u7121\u6cd5\u6709\u6548\u53cd\u64ca",
             "\u7b2c 20 \u56de\u5408\uff1a\u6575\u4eba\u653b\u64ca\uff0c\u9020\u6210 5 \u9ede\u50b7\u5bb3",
             "\u7b2c 21 \u56de\u5408\uff1a\u4f60\u7121\u6cd5\u6709\u6548\u53cd\u64ca",
-            "\u7b2c 21 \u56de\u5408\uff1a\u6575\u4eba\u653b\u64ca\uff0c\u9020\u6210 3 \u9ede\u50b7\u5bb3"
+            "\u7b2c 21 \u56de\u5408\uff1a\u6575\u4eba\u653b\u64ca\uff0c\u9020\u6210 3 \u9ede\u50b7\u5bb3",
+            "\u7b2c 22 \u56de\u5408\uff1a\u4f60\u7121\u6cd5\u6709\u6548\u53cd\u64ca",
+            "\u7b2c 22 \u56de\u5408\uff1a\u6575\u4eba\u653b\u64ca\uff0c\u9020\u6210 5 \u9ede\u50b7\u5bb3"
           ]
         }
       },
@@ -940,7 +966,7 @@
         "DANGER: this choice carries a high combat risk."
       ],
       "pre_choice_state": {
-        "hp": 18,
+        "hp": 20,
         "food": 19,
         "ammo": 3,
         "medkits": 7,
@@ -976,7 +1002,7 @@
       },
       "equipment_summary": "weapon -> rust_rifle (replaced empty)",
       "player": {
-        "hp": 0,
+        "hp": -3,
         "food": 19,
         "ammo": 0,
         "medkits": 0,
@@ -1032,7 +1058,7 @@
     "victory": false,
     "end_reason": "combat_death",
     "player_final": {
-      "hp": 0,
+      "hp": -3,
       "food": 19,
       "ammo": 0,
       "medkits": 0,
@@ -1664,7 +1690,7 @@
           "WARNING: radiation will continue to threaten future travel."
         ],
         "pre_choice_state": {
-          "hp": 19,
+          "hp": 20,
           "food": 15,
           "ammo": 3,
           "medkits": 7,
@@ -1708,7 +1734,7 @@
         "equipment_change": null,
         "equipment_summary": null,
         "player_after": {
-          "hp": 19,
+          "hp": 20,
           "food": 20,
           "ammo": 3,
           "medkits": 7,
@@ -1753,7 +1779,7 @@
           "DANGER: this choice carries a high combat risk."
         ],
         "pre_choice_state": {
-          "hp": 18,
+          "hp": 20,
           "food": 19,
           "ammo": 3,
           "medkits": 7,
@@ -1823,7 +1849,7 @@
         },
         "equipment_summary": "weapon -> rust_rifle (replaced empty)",
         "player_after": {
-          "hp": 0,
+          "hp": -3,
           "food": 19,
           "ammo": 0,
           "medkits": 0,
@@ -1861,7 +1887,7 @@
     "summary": {
       "pressure_count": 8,
       "death_cause_attribution": true,
-      "resource_signature": "hp:0|food:19|ammo:0|medkits:0|scrap:53|radiation:3|weapon:EquipmentState(id='rust_rifle', slot='weapon', durability=9, max_durability=10, rarity='rare', requirements={'agility': 4}, scaling={'perception': 0.5}, affixes={'atk': 1, 'def': 1}, tags=['ranged', 'firearm'], refinement_count=0)|armor:None|tool:None"
+      "resource_signature": "hp:-3|food:19|ammo:0|medkits:0|scrap:53|radiation:3|weapon:EquipmentState(id='rust_rifle', slot='weapon', durability=9, max_durability=10, rarity='rare', requirements={'agility': 4}, scaling={'perception': 0.5}, affixes={'atk': 1, 'def': 1}, tags=['ranged', 'firearm'], refinement_count=0)|armor:None|tool:None"
     },
     "failure_analysis": {
       "death_chain_length": 3,

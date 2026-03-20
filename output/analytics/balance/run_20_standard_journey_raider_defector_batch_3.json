@@ -41,7 +41,8 @@
       "perks": [],
       "tags": [],
       "level": 3,
-      "xp": 18
+      "xp": 18,
+      "can_level_up": false
     },
     "weapon_slot": {
       "id": "hardened_blade",
@@ -116,7 +117,8 @@
           "perks": [],
           "tags": [],
           "level": 2,
-          "xp": 0
+          "xp": 0,
+          "can_level_up": false
         },
         "weapon_slot": null,
         "armor_slot": null,
@@ -153,7 +155,8 @@
           "perks": [],
           "tags": [],
           "level": 2,
-          "xp": 0
+          "xp": 0,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "rust_rifle",
@@ -211,7 +214,8 @@
           "perks": [],
           "tags": [],
           "level": 2,
-          "xp": 0
+          "xp": 0,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "rust_rifle",
@@ -269,7 +273,8 @@
           "perks": [],
           "tags": [],
           "level": 2,
-          "xp": 0
+          "xp": 0,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "rust_rifle",
@@ -327,7 +332,8 @@
           "perks": [],
           "tags": [],
           "level": 2,
-          "xp": 0
+          "xp": 0,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "rust_rifle",
@@ -395,7 +401,8 @@
           "perks": [],
           "tags": [],
           "level": 2,
-          "xp": 5
+          "xp": 5,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "rust_rifle",
@@ -452,7 +459,8 @@
           "perks": [],
           "tags": [],
           "level": 2,
-          "xp": 5
+          "xp": 5,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "rust_rifle",
@@ -541,7 +549,8 @@
           "perks": [],
           "tags": [],
           "level": 2,
-          "xp": 8
+          "xp": 8,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "rust_rifle",
@@ -615,7 +624,8 @@
           "perks": [],
           "tags": [],
           "level": 2,
-          "xp": 8
+          "xp": 8,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "rust_rifle",
@@ -688,7 +698,8 @@
           "perks": [],
           "tags": [],
           "level": 2,
-          "xp": 8
+          "xp": 8,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "rust_rifle",
@@ -763,7 +774,8 @@
           "perks": [],
           "tags": [],
           "level": 2,
-          "xp": 8
+          "xp": 8,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "rust_rifle",
@@ -845,7 +857,8 @@
           "perks": [],
           "tags": [],
           "level": 2,
-          "xp": 38
+          "xp": 38,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "hardened_blade",
@@ -923,7 +936,8 @@
           "perks": [],
           "tags": [],
           "level": 2,
-          "xp": 38
+          "xp": 38,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "hardened_blade",
@@ -1000,7 +1014,8 @@
           "perks": [],
           "tags": [],
           "level": 3,
-          "xp": 18
+          "xp": 18,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "hardened_blade",
@@ -1054,10 +1069,10 @@
         "WARNING: radiation will continue to threaten future travel."
       ],
       "pre_choice_state": {
-        "hp": 19,
+        "hp": 11,
         "food": 11,
         "ammo": 2,
-        "medkits": 7,
+        "medkits": 8,
         "scrap": 34,
         "radiation": 4,
         "archetype": null,
@@ -1077,7 +1092,8 @@
           "perks": [],
           "tags": [],
           "level": 3,
-          "xp": 18
+          "xp": 18,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "hardened_blade",
@@ -1131,10 +1147,10 @@
       "equipment_change": null,
       "equipment_summary": null,
       "player_after": {
-        "hp": 19,
+        "hp": 11,
         "food": 15,
         "ammo": 2,
-        "medkits": 7,
+        "medkits": 8,
         "scrap": 32,
         "radiation": 4,
         "archetype": null,
@@ -1154,7 +1170,8 @@
           "perks": [],
           "tags": [],
           "level": 3,
-          "xp": 18
+          "xp": 18,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "hardened_blade",
@@ -1209,10 +1226,10 @@
         "DANGER: this choice carries a high combat risk."
       ],
       "pre_choice_state": {
-        "hp": 17,
+        "hp": 11,
         "food": 14,
         "ammo": 2,
-        "medkits": 7,
+        "medkits": 8,
         "scrap": 32,
         "radiation": 4,
         "archetype": null,
@@ -1232,7 +1249,8 @@
           "perks": [],
           "tags": [],
           "level": 3,
-          "xp": 18
+          "xp": 18,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "hardened_blade",
@@ -1286,10 +1304,10 @@
       "equipment_change": null,
       "equipment_summary": null,
       "player_after": {
-        "hp": 17,
+        "hp": 11,
         "food": 13,
         "ammo": 2,
-        "medkits": 7,
+        "medkits": 8,
         "scrap": 31,
         "radiation": 4,
         "archetype": null,
@@ -1309,7 +1327,8 @@
           "perks": [],
           "tags": [],
           "level": 3,
-          "xp": 18
+          "xp": 18,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "hardened_blade",
@@ -1363,7 +1382,7 @@
         "WARNING: radiation will continue to threaten future travel."
       ],
       "pre_choice_state": {
-        "hp": 15,
+        "hp": 20,
         "food": 12,
         "ammo": 2,
         "medkits": 7,
@@ -1386,7 +1405,8 @@
           "perks": [],
           "tags": [],
           "level": 3,
-          "xp": 18
+          "xp": 18,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "hardened_blade",
@@ -1462,7 +1482,8 @@
           "perks": [],
           "tags": [],
           "level": 3,
-          "xp": 18
+          "xp": 18,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "hardened_blade",

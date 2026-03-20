@@ -18,7 +18,7 @@
   "victory": true,
   "end_reason": "reached_final_node",
   "player_final": {
-    "hp": 19,
+    "hp": 20,
     "food": 9,
     "ammo": 0,
     "medkits": 13,
@@ -46,7 +46,8 @@
         "tag_raider_defector"
       ],
       "level": 5,
-      "xp": 28
+      "xp": 28,
+      "can_level_up": false
     },
     "weapon_slot": {
       "id": "sledgehammer",
@@ -126,7 +127,8 @@
             "tag_raider_defector"
           ],
           "level": 2,
-          "xp": 0
+          "xp": 0,
+          "can_level_up": false
         },
         "weapon_slot": null,
         "armor_slot": null,
@@ -168,7 +170,8 @@
             "tag_raider_defector"
           ],
           "level": 2,
-          "xp": 0
+          "xp": 0,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "rust_rifle",
@@ -231,7 +234,8 @@
             "tag_raider_defector"
           ],
           "level": 2,
-          "xp": 0
+          "xp": 0,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "rust_rifle",
@@ -294,7 +298,8 @@
             "tag_raider_defector"
           ],
           "level": 2,
-          "xp": 0
+          "xp": 0,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "rust_rifle",
@@ -357,7 +362,8 @@
             "tag_raider_defector"
           ],
           "level": 2,
-          "xp": 0
+          "xp": 0,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "rust_rifle",
@@ -430,7 +436,8 @@
             "tag_raider_defector"
           ],
           "level": 2,
-          "xp": 5
+          "xp": 5,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "rust_rifle",
@@ -492,7 +499,8 @@
             "tag_raider_defector"
           ],
           "level": 2,
-          "xp": 5
+          "xp": 5,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "rust_rifle",
@@ -586,7 +594,8 @@
             "tag_raider_defector"
           ],
           "level": 2,
-          "xp": 8
+          "xp": 8,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "rust_rifle",
@@ -663,7 +672,8 @@
             "tag_raider_defector"
           ],
           "level": 2,
-          "xp": 8
+          "xp": 8,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "rust_rifle",
@@ -744,7 +754,8 @@
             "tag_raider_defector"
           ],
           "level": 2,
-          "xp": 18
+          "xp": 18,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "rust_rifle",
@@ -823,7 +834,8 @@
             "tag_raider_defector"
           ],
           "level": 2,
-          "xp": 18
+          "xp": 18,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "rust_rifle",
@@ -910,7 +922,8 @@
             "tag_raider_defector"
           ],
           "level": 3,
-          "xp": 28
+          "xp": 28,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "hardened_blade",
@@ -993,7 +1006,8 @@
             "tag_raider_defector"
           ],
           "level": 3,
-          "xp": 28
+          "xp": 28,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "hardened_blade",
@@ -1075,7 +1089,8 @@
             "tag_raider_defector"
           ],
           "level": 3,
-          "xp": 28
+          "xp": 28,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "hardened_blade",
@@ -1129,10 +1144,10 @@
         "WARNING: radiation will continue to threaten future travel."
       ],
       "pre_choice_state": {
-        "hp": 20,
+        "hp": 11,
         "food": 11,
         "ammo": 3,
-        "medkits": 9,
+        "medkits": 10,
         "scrap": 54,
         "radiation": 3,
         "archetype": null,
@@ -1157,7 +1172,8 @@
             "tag_raider_defector"
           ],
           "level": 3,
-          "xp": 28
+          "xp": 28,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "hardened_blade",
@@ -1211,10 +1227,10 @@
       "equipment_change": null,
       "equipment_summary": null,
       "player_after": {
-        "hp": 20,
+        "hp": 11,
         "food": 15,
         "ammo": 3,
-        "medkits": 9,
+        "medkits": 10,
         "scrap": 52,
         "radiation": 3,
         "archetype": null,
@@ -1239,7 +1255,8 @@
             "tag_raider_defector"
           ],
           "level": 3,
-          "xp": 28
+          "xp": 28,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "hardened_blade",
@@ -1294,10 +1311,10 @@
         "DANGER: this choice carries a high combat risk."
       ],
       "pre_choice_state": {
-        "hp": 19,
+        "hp": 11,
         "food": 14,
         "ammo": 3,
-        "medkits": 9,
+        "medkits": 10,
         "scrap": 52,
         "radiation": 3,
         "archetype": null,
@@ -1322,7 +1339,8 @@
             "tag_raider_defector"
           ],
           "level": 3,
-          "xp": 28
+          "xp": 28,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "hardened_blade",
@@ -1376,10 +1394,10 @@
       "equipment_change": null,
       "equipment_summary": null,
       "player_after": {
-        "hp": 19,
+        "hp": 11,
         "food": 13,
         "ammo": 3,
-        "medkits": 9,
+        "medkits": 10,
         "scrap": 51,
         "radiation": 3,
         "archetype": null,
@@ -1404,7 +1422,8 @@
             "tag_raider_defector"
           ],
           "level": 3,
-          "xp": 28
+          "xp": 28,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "hardened_blade",
@@ -1458,7 +1477,7 @@
         "WARNING: radiation will continue to threaten future travel."
       ],
       "pre_choice_state": {
-        "hp": 18,
+        "hp": 20,
         "food": 12,
         "ammo": 3,
         "medkits": 9,
@@ -1486,7 +1505,8 @@
             "tag_raider_defector"
           ],
           "level": 3,
-          "xp": 28
+          "xp": 28,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "hardened_blade",
@@ -1542,7 +1562,7 @@
       "equipment_change": null,
       "equipment_summary": null,
       "player_after": {
-        "hp": 18,
+        "hp": 20,
         "food": 12,
         "ammo": 3,
         "medkits": 11,
@@ -1570,7 +1590,8 @@
             "tag_raider_defector"
           ],
           "level": 4,
-          "xp": 8
+          "xp": 8,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "hardened_blade",
@@ -1625,7 +1646,7 @@
         "DANGER: this choice carries a high combat risk."
       ],
       "pre_choice_state": {
-        "hp": 17,
+        "hp": 20,
         "food": 11,
         "ammo": 3,
         "medkits": 11,
@@ -1653,7 +1674,8 @@
             "tag_raider_defector"
           ],
           "level": 4,
-          "xp": 8
+          "xp": 8,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "hardened_blade",
@@ -1747,7 +1769,8 @@
             "tag_raider_defector"
           ],
           "level": 4,
-          "xp": 68
+          "xp": 68,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "sledgehammer",
@@ -1801,7 +1824,7 @@
         "WARNING: radiation will continue to threaten future travel."
       ],
       "pre_choice_state": {
-        "hp": 19,
+        "hp": 20,
         "food": 10,
         "ammo": 0,
         "medkits": 13,
@@ -1829,7 +1852,8 @@
             "tag_raider_defector"
           ],
           "level": 4,
-          "xp": 68
+          "xp": 68,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "sledgehammer",
@@ -1882,7 +1906,7 @@
       "equipment_change": null,
       "equipment_summary": null,
       "player_after": {
-        "hp": 19,
+        "hp": 20,
         "food": 9,
         "ammo": 0,
         "medkits": 13,
@@ -1910,7 +1934,8 @@
             "tag_raider_defector"
           ],
           "level": 5,
-          "xp": 28
+          "xp": 28,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "sledgehammer",
@@ -1959,7 +1984,7 @@
   "summary": {
     "pressure_count": 11,
     "death_cause_attribution": true,
-    "resource_signature": "hp:19|food:9|ammo:0|medkits:13|scrap:87|radiation:2|weapon:EquipmentState(id='sledgehammer', slot='weapon', durability=9, max_durability=10, rarity='legendary', requirements={'strength': 7}, scaling={'strength': 1.2}, affixes={'loot_scrap': 1}, tags=['melee', 'heavy', 'vampiric'], refinement_count=0)|armor:None|tool:EquipmentState(id='scavenger_kit', slot='tool', durability=10, max_durability=10, rarity='rare', requirements={'luck': 4}, scaling={}, affixes={'def': 2}, tags=['scavenging'], refinement_count=1)"
+    "resource_signature": "hp:20|food:9|ammo:0|medkits:13|scrap:87|radiation:2|weapon:EquipmentState(id='sledgehammer', slot='weapon', durability=9, max_durability=10, rarity='legendary', requirements={'strength': 7}, scaling={'strength': 1.2}, affixes={'loot_scrap': 1}, tags=['melee', 'heavy', 'vampiric'], refinement_count=0)|armor:None|tool:EquipmentState(id='scavenger_kit', slot='tool', durability=10, max_durability=10, rarity='rare', requirements={'luck': 4}, scaling={}, affixes={'def': 2}, tags=['scavenging'], refinement_count=1)"
   },
   "failure_analysis": {
     "death_chain_length": 0,

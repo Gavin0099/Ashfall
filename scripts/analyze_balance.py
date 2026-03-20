@@ -2,6 +2,7 @@ import sys
 import os
 from pathlib import Path
 from typing import List, Dict, Any
+from collections import Counter
 
 # Add project root to path
 sys.path.append(str(Path(__file__).parent.parent))
@@ -45,7 +46,6 @@ def analyze_build_v2():
     for strat in strategies:
         reasons = [r['stats']['death_reason'] for r in results[strat] if not r['survived']]
         if reasons:
-            from collections import Counter
             dist = Counter(reasons)
             dist_str = ", ".join([f"{k}: {v/len(reasons):.0%}" for k, v in dist.most_common()])
             print(f"  {strat:16} | {dist_str}")
@@ -93,6 +93,23 @@ def analyze_build_v2():
         print(f"  {b_id:16} | Pick Rate: {pick_rate:.1%} | Survival Impact: {surv_with - surv_with:.1f} (Δ)") # Simplified
         if pick_rate > 0.6:
             print(f"  >> WARNING: Bridge Perk '{b_id}' is too universal! Pick rate is {pick_rate:.1%}.")
+
+    # KPI 7: Gameplay Drift - Meta Collapse (v2.5)
+    print(f"\n[KPI] Gameplay Drift Detection (Meta Collapse)")
+    all_picks = Counter([p for s in strategies for r in results[s] for p in r['perks']])
+    drift_found = False
+    
+    for p_id, count in all_picks.items():
+        rate = count / (len(strategies) * iterations)
+        if rate > 0.8:
+            print(f"  >> CRITICAL_DRIFT (Gameplay): Perk '{p_id}' has {rate:.1%} pick rate! Meta is collapsing.")
+            drift_found = True
+        elif rate > 0.6:
+            print(f"  >> WARNING (Gameplay): Perk '{p_id}' is becoming a dominant strategy ({rate:.1%}).")
+            drift_found = True
+    
+    if not drift_found:
+        print("  >> OK: Decision space is healthy (no single perk > 60%).")
 
 if __name__ == "__main__":
     analyze_build_v2()

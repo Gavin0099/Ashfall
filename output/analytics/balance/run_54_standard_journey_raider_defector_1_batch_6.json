@@ -18,10 +18,10 @@
   "victory": true,
   "end_reason": "reached_final_node",
   "player_final": {
-    "hp": 13,
+    "hp": 28,
     "food": 14,
     "ammo": 3,
-    "medkits": 13,
+    "medkits": 14,
     "scrap": 81,
     "radiation": 0,
     "archetype": null,
@@ -46,7 +46,8 @@
         "tag_raider_defector"
       ],
       "level": 5,
-      "xp": 33
+      "xp": 33,
+      "can_level_up": false
     },
     "weapon_slot": {
       "id": "sledgehammer",
@@ -125,7 +126,8 @@
             "tag_raider_defector"
           ],
           "level": 2,
-          "xp": 0
+          "xp": 0,
+          "can_level_up": false
         },
         "weapon_slot": null,
         "armor_slot": null,
@@ -167,7 +169,8 @@
             "tag_raider_defector"
           ],
           "level": 2,
-          "xp": 0
+          "xp": 0,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "rust_rifle",
@@ -229,7 +232,8 @@
             "tag_raider_defector"
           ],
           "level": 2,
-          "xp": 0
+          "xp": 0,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "rust_rifle",
@@ -323,7 +327,8 @@
             "tag_raider_defector"
           ],
           "level": 2,
-          "xp": 8
+          "xp": 8,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "makeshift_blade",
@@ -383,7 +388,8 @@
             "tag_raider_defector"
           ],
           "level": 2,
-          "xp": 8
+          "xp": 8,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "makeshift_blade",
@@ -445,7 +451,8 @@
             "tag_raider_defector"
           ],
           "level": 2,
-          "xp": 13
+          "xp": 13,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "makeshift_blade",
@@ -503,7 +510,8 @@
             "tag_raider_defector"
           ],
           "level": 2,
-          "xp": 13
+          "xp": 13,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "makeshift_blade",
@@ -563,7 +571,8 @@
             "tag_raider_defector"
           ],
           "level": 2,
-          "xp": 13
+          "xp": 13,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "makeshift_blade",
@@ -621,7 +630,8 @@
             "tag_raider_defector"
           ],
           "level": 2,
-          "xp": 13
+          "xp": 13,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "makeshift_blade",
@@ -683,7 +693,8 @@
             "tag_raider_defector"
           ],
           "level": 3,
-          "xp": 3
+          "xp": 3,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "makeshift_blade",
@@ -743,7 +754,8 @@
             "tag_raider_defector"
           ],
           "level": 3,
-          "xp": 3
+          "xp": 3,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "makeshift_blade",
@@ -811,7 +823,8 @@
             "tag_raider_defector"
           ],
           "level": 3,
-          "xp": 33
+          "xp": 33,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "hardened_blade",
@@ -877,7 +890,8 @@
             "tag_raider_defector"
           ],
           "level": 3,
-          "xp": 33
+          "xp": 33,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "hardened_blade",
@@ -964,7 +978,8 @@
             "tag_raider_defector"
           ],
           "level": 4,
-          "xp": 3
+          "xp": 3,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "hardened_blade",
@@ -1046,7 +1061,8 @@
             "tag_raider_defector"
           ],
           "level": 4,
-          "xp": 3
+          "xp": 3,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "hardened_blade",
@@ -1128,7 +1144,8 @@
             "tag_raider_defector"
           ],
           "level": 4,
-          "xp": 3
+          "xp": 3,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "hardened_blade",
@@ -1211,7 +1228,8 @@
             "tag_raider_defector"
           ],
           "level": 4,
-          "xp": 3
+          "xp": 3,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "hardened_blade",
@@ -1302,7 +1320,8 @@
             "tag_raider_defector"
           ],
           "level": 4,
-          "xp": 3
+          "xp": 3,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "hardened_blade",
@@ -1382,7 +1401,8 @@
             "tag_raider_defector"
           ],
           "level": 4,
-          "xp": 3
+          "xp": 3,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "hardened_blade",
@@ -1466,7 +1486,8 @@
             "tag_raider_defector"
           ],
           "level": 4,
-          "xp": 13
+          "xp": 13,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "hardened_blade",
@@ -1548,7 +1569,8 @@
             "tag_raider_defector"
           ],
           "level": 4,
-          "xp": 13
+          "xp": 13,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "hardened_blade",
@@ -1614,10 +1636,10 @@
       "equipment_change": null,
       "equipment_summary": null,
       "player_after": {
-        "hp": 13,
+        "hp": 28,
         "food": 16,
         "ammo": 3,
-        "medkits": 13,
+        "medkits": 14,
         "scrap": 81,
         "radiation": 0,
         "archetype": null,
@@ -1642,7 +1664,8 @@
             "tag_raider_defector"
           ],
           "level": 4,
-          "xp": 73
+          "xp": 73,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "sledgehammer",
@@ -1693,10 +1716,10 @@
       "option_index": 0,
       "warning_signals": [],
       "pre_choice_state": {
-        "hp": 13,
+        "hp": 28,
         "food": 15,
         "ammo": 3,
-        "medkits": 13,
+        "medkits": 14,
         "scrap": 81,
         "radiation": 0,
         "archetype": null,
@@ -1721,7 +1744,8 @@
             "tag_raider_defector"
           ],
           "level": 4,
-          "xp": 73
+          "xp": 73,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "sledgehammer",
@@ -1773,10 +1797,10 @@
       "equipment_change": null,
       "equipment_summary": null,
       "player_after": {
-        "hp": 13,
+        "hp": 28,
         "food": 14,
         "ammo": 3,
-        "medkits": 13,
+        "medkits": 14,
         "scrap": 81,
         "radiation": 0,
         "archetype": null,
@@ -1801,7 +1825,8 @@
             "tag_raider_defector"
           ],
           "level": 5,
-          "xp": 33
+          "xp": 33,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "sledgehammer",
@@ -1849,7 +1874,7 @@
   "summary": {
     "pressure_count": 11,
     "death_cause_attribution": true,
-    "resource_signature": "hp:13|food:14|ammo:3|medkits:13|scrap:81|radiation:0|weapon:EquipmentState(id='sledgehammer', slot='weapon', durability=9, max_durability=10, rarity='legendary', requirements={'strength': 6}, scaling={'strength': 1.2}, affixes={'def': 2}, tags=['melee', 'heavy'], refinement_count=0)|armor:None|tool:EquipmentState(id='field_pack', slot='tool', durability=10, max_durability=10, rarity='rare', requirements={'strength': 4}, scaling={}, affixes={'def': 2}, tags=['exploration'], refinement_count=1)"
+    "resource_signature": "hp:28|food:14|ammo:3|medkits:14|scrap:81|radiation:0|weapon:EquipmentState(id='sledgehammer', slot='weapon', durability=9, max_durability=10, rarity='legendary', requirements={'strength': 6}, scaling={'strength': 1.2}, affixes={'def': 2}, tags=['melee', 'heavy'], refinement_count=0)|armor:None|tool:EquipmentState(id='field_pack', slot='tool', durability=10, max_durability=10, rarity='rare', requirements={'strength': 4}, scaling={}, affixes={'def': 2}, tags=['exploration'], refinement_count=1)"
   },
   "failure_analysis": {
     "death_chain_length": 0,
@@ -1864,8 +1889,8 @@
     "outcome": "victory",
     "key_turning_point": "node_fringe_1 (weapon -> makeshift_blade (replaced empty))",
     "notable_equipment": [
-      "field_pack",
-      "makeshift_blade"
+      "makeshift_blade",
+      "field_pack"
     ],
     "telemetry": {
       "total_steps": 12,
@@ -1880,8 +1905,8 @@
       "total_atk_affix_gain": 0,
       "total_def_affix_gain": 2,
       "equipment_ids": [
-        "field_pack",
-        "makeshift_blade"
+        "makeshift_blade",
+        "field_pack"
       ],
       "loot_resources": {
         "ammo": 5,

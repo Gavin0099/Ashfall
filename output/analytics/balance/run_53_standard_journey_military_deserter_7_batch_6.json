@@ -48,7 +48,8 @@
         "tag_military_deserter"
       ],
       "level": 5,
-      "xp": 23
+      "xp": 23,
+      "can_level_up": false
     },
     "weapon_slot": {
       "id": "sledgehammer",
@@ -130,7 +131,8 @@
             "tag_military_deserter"
           ],
           "level": 2,
-          "xp": 0
+          "xp": 0,
+          "can_level_up": false
         },
         "weapon_slot": null,
         "armor_slot": null,
@@ -174,7 +176,8 @@
             "tag_military_deserter"
           ],
           "level": 2,
-          "xp": 0
+          "xp": 0,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "rust_rifle",
@@ -238,7 +241,8 @@
             "tag_military_deserter"
           ],
           "level": 2,
-          "xp": 0
+          "xp": 0,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "rust_rifle",
@@ -334,7 +338,8 @@
             "tag_military_deserter"
           ],
           "level": 2,
-          "xp": 8
+          "xp": 8,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "makeshift_blade",
@@ -396,7 +401,8 @@
             "tag_military_deserter"
           ],
           "level": 2,
-          "xp": 8
+          "xp": 8,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "makeshift_blade",
@@ -460,7 +466,8 @@
             "tag_military_deserter"
           ],
           "level": 2,
-          "xp": 13
+          "xp": 13,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "makeshift_blade",
@@ -520,7 +527,8 @@
             "tag_military_deserter"
           ],
           "level": 2,
-          "xp": 13
+          "xp": 13,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "makeshift_blade",
@@ -582,7 +590,8 @@
             "tag_military_deserter"
           ],
           "level": 2,
-          "xp": 13
+          "xp": 13,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "makeshift_blade",
@@ -642,7 +651,8 @@
             "tag_military_deserter"
           ],
           "level": 2,
-          "xp": 13
+          "xp": 13,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "makeshift_blade",
@@ -705,7 +715,8 @@
             "tag_military_deserter"
           ],
           "level": 2,
-          "xp": 18
+          "xp": 18,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "makeshift_blade",
@@ -767,7 +778,8 @@
             "tag_military_deserter"
           ],
           "level": 2,
-          "xp": 18
+          "xp": 18,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "makeshift_blade",
@@ -837,7 +849,8 @@
             "tag_military_deserter"
           ],
           "level": 3,
-          "xp": 28
+          "xp": 28,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "hardened_blade",
@@ -905,7 +918,8 @@
             "tag_military_deserter"
           ],
           "level": 3,
-          "xp": 28
+          "xp": 28,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "hardened_blade",
@@ -994,7 +1008,8 @@
             "tag_military_deserter"
           ],
           "level": 3,
-          "xp": 28
+          "xp": 28,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "hardened_blade",
@@ -1078,7 +1093,8 @@
             "tag_military_deserter"
           ],
           "level": 3,
-          "xp": 28
+          "xp": 28,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "hardened_blade",
@@ -1162,7 +1178,8 @@
             "tag_military_deserter"
           ],
           "level": 3,
-          "xp": 28
+          "xp": 28,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "hardened_blade",
@@ -1247,7 +1264,8 @@
             "tag_military_deserter"
           ],
           "level": 3,
-          "xp": 28
+          "xp": 28,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "hardened_blade",
@@ -1340,7 +1358,8 @@
             "tag_military_deserter"
           ],
           "level": 3,
-          "xp": 28
+          "xp": 28,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "hardened_blade",
@@ -1424,7 +1443,8 @@
             "tag_military_deserter"
           ],
           "level": 3,
-          "xp": 28
+          "xp": 28,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "hardened_blade",
@@ -1518,7 +1538,8 @@
             "tag_military_deserter"
           ],
           "level": 4,
-          "xp": 3
+          "xp": 3,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "hardened_blade",
@@ -1603,7 +1624,8 @@
             "tag_military_deserter"
           ],
           "level": 4,
-          "xp": 3
+          "xp": 3,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "hardened_blade",
@@ -1699,7 +1721,8 @@
             "tag_military_deserter"
           ],
           "level": 4,
-          "xp": 63
+          "xp": 63,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "sledgehammer",
@@ -1783,7 +1806,8 @@
             "tag_military_deserter"
           ],
           "level": 4,
-          "xp": 63
+          "xp": 63,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "sledgehammer",
@@ -1866,7 +1890,8 @@
             "tag_military_deserter"
           ],
           "level": 5,
-          "xp": 23
+          "xp": 23,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "sledgehammer",
@@ -1930,8 +1955,8 @@
     "outcome": "victory",
     "key_turning_point": "node_fringe_1 (weapon -> makeshift_blade (replaced empty))",
     "notable_equipment": [
-      "field_pack",
-      "makeshift_blade"
+      "makeshift_blade",
+      "field_pack"
     ],
     "telemetry": {
       "total_steps": 12,
@@ -1946,8 +1971,8 @@
       "total_atk_affix_gain": 1,
       "total_def_affix_gain": 0,
       "equipment_ids": [
-        "field_pack",
-        "makeshift_blade"
+        "makeshift_blade",
+        "field_pack"
       ],
       "loot_resources": {
         "ammo": 5,

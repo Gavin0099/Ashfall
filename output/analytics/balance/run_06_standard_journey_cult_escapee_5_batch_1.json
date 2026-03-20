@@ -18,10 +18,10 @@
   "victory": true,
   "end_reason": "reached_final_node",
   "player_final": {
-    "hp": 18,
+    "hp": 20,
     "food": 12,
     "ammo": 3,
-    "medkits": 7,
+    "medkits": 9,
     "scrap": 62,
     "radiation": 4,
     "archetype": null,
@@ -46,7 +46,8 @@
         "tag_cult_escapee"
       ],
       "level": 5,
-      "xp": 5
+      "xp": 5,
+      "can_level_up": false
     },
     "weapon_slot": {
       "id": "sledgehammer",
@@ -109,7 +110,8 @@
             "tag_cult_escapee"
           ],
           "level": 2,
-          "xp": 0
+          "xp": 0,
+          "can_level_up": false
         },
         "weapon_slot": null,
         "armor_slot": null,
@@ -151,7 +153,8 @@
             "tag_cult_escapee"
           ],
           "level": 2,
-          "xp": 0
+          "xp": 0,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "rust_rifle",
@@ -216,7 +219,8 @@
             "tag_cult_escapee"
           ],
           "level": 2,
-          "xp": 0
+          "xp": 0,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "rust_rifle",
@@ -286,7 +290,8 @@
             "tag_cult_escapee"
           ],
           "level": 2,
-          "xp": 0
+          "xp": 0,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "rust_rifle",
@@ -351,7 +356,8 @@
             "tag_cult_escapee"
           ],
           "level": 2,
-          "xp": 0
+          "xp": 0,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "rust_rifle",
@@ -417,7 +423,8 @@
             "tag_cult_escapee"
           ],
           "level": 2,
-          "xp": 5
+          "xp": 5,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "rust_rifle",
@@ -481,7 +488,8 @@
             "tag_cult_escapee"
           ],
           "level": 2,
-          "xp": 5
+          "xp": 5,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "rust_rifle",
@@ -545,7 +553,8 @@
             "tag_cult_escapee"
           ],
           "level": 2,
-          "xp": 5
+          "xp": 5,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "rust_rifle",
@@ -609,7 +618,8 @@
             "tag_cult_escapee"
           ],
           "level": 2,
-          "xp": 5
+          "xp": 5,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "rust_rifle",
@@ -681,7 +691,8 @@
             "tag_cult_escapee"
           ],
           "level": 2,
-          "xp": 5
+          "xp": 5,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "rust_rifle",
@@ -746,7 +757,8 @@
             "tag_cult_escapee"
           ],
           "level": 2,
-          "xp": 5
+          "xp": 5,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "rust_rifle",
@@ -818,7 +830,8 @@
             "tag_cult_escapee"
           ],
           "level": 2,
-          "xp": 35
+          "xp": 35,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "hardened_blade",
@@ -884,7 +897,8 @@
             "tag_cult_escapee"
           ],
           "level": 2,
-          "xp": 35
+          "xp": 35,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "hardened_blade",
@@ -949,7 +963,8 @@
             "tag_cult_escapee"
           ],
           "level": 3,
-          "xp": 15
+          "xp": 15,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "hardened_blade",
@@ -986,10 +1001,10 @@
         "WARNING: radiation will continue to threaten future travel."
       ],
       "pre_choice_state": {
-        "hp": 19,
+        "hp": 11,
         "food": 15,
         "ammo": 2,
-        "medkits": 7,
+        "medkits": 8,
         "scrap": 50,
         "radiation": 4,
         "archetype": null,
@@ -1014,7 +1029,8 @@
             "tag_cult_escapee"
           ],
           "level": 3,
-          "xp": 15
+          "xp": 15,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "hardened_blade",
@@ -1051,10 +1067,10 @@
       "equipment_change": null,
       "equipment_summary": null,
       "player_after": {
-        "hp": 19,
+        "hp": 11,
         "food": 18,
         "ammo": 2,
-        "medkits": 7,
+        "medkits": 8,
         "scrap": 48,
         "radiation": 4,
         "archetype": null,
@@ -1079,7 +1095,8 @@
             "tag_cult_escapee"
           ],
           "level": 3,
-          "xp": 15
+          "xp": 15,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "hardened_blade",
@@ -1117,10 +1134,10 @@
         "DANGER: this choice carries a high combat risk."
       ],
       "pre_choice_state": {
-        "hp": 17,
+        "hp": 11,
         "food": 17,
         "ammo": 2,
-        "medkits": 7,
+        "medkits": 8,
         "scrap": 48,
         "radiation": 4,
         "archetype": null,
@@ -1145,7 +1162,8 @@
             "tag_cult_escapee"
           ],
           "level": 3,
-          "xp": 15
+          "xp": 15,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "hardened_blade",
@@ -1187,10 +1205,10 @@
       "equipment_change": null,
       "equipment_summary": null,
       "player_after": {
-        "hp": 17,
+        "hp": 11,
         "food": 16,
         "ammo": 6,
-        "medkits": 7,
+        "medkits": 8,
         "scrap": 47,
         "radiation": 4,
         "archetype": null,
@@ -1215,7 +1233,8 @@
             "tag_cult_escapee"
           ],
           "level": 3,
-          "xp": 15
+          "xp": 15,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "hardened_blade",
@@ -1252,7 +1271,7 @@
         "WARNING: radiation will continue to threaten future travel."
       ],
       "pre_choice_state": {
-        "hp": 15,
+        "hp": 20,
         "food": 15,
         "ammo": 6,
         "medkits": 7,
@@ -1280,7 +1299,8 @@
             "tag_cult_escapee"
           ],
           "level": 3,
-          "xp": 15
+          "xp": 15,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "hardened_blade",
@@ -1316,7 +1336,7 @@
       "equipment_change": null,
       "equipment_summary": null,
       "player_after": {
-        "hp": 15,
+        "hp": 20,
         "food": 15,
         "ammo": 6,
         "medkits": 7,
@@ -1344,7 +1364,8 @@
             "tag_cult_escapee"
           ],
           "level": 3,
-          "xp": 15
+          "xp": 15,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "hardened_blade",
@@ -1382,7 +1403,7 @@
         "DANGER: this choice carries a high combat risk."
       ],
       "pre_choice_state": {
-        "hp": 13,
+        "hp": 20,
         "food": 14,
         "ammo": 6,
         "medkits": 7,
@@ -1410,7 +1431,8 @@
             "tag_cult_escapee"
           ],
           "level": 3,
-          "xp": 15
+          "xp": 15,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "hardened_blade",
@@ -1462,7 +1484,7 @@
         "hp": 10,
         "food": 14,
         "ammo": 3,
-        "medkits": 8,
+        "medkits": 10,
         "scrap": 62,
         "radiation": 4,
         "archetype": null,
@@ -1487,7 +1509,8 @@
             "tag_cult_escapee"
           ],
           "level": 3,
-          "xp": 75
+          "xp": 75,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "sledgehammer",
@@ -1524,10 +1547,10 @@
         "WARNING: radiation will continue to threaten future travel."
       ],
       "pre_choice_state": {
-        "hp": 18,
+        "hp": 20,
         "food": 13,
         "ammo": 3,
-        "medkits": 7,
+        "medkits": 9,
         "scrap": 62,
         "radiation": 4,
         "archetype": null,
@@ -1552,7 +1575,8 @@
             "tag_cult_escapee"
           ],
           "level": 3,
-          "xp": 75
+          "xp": 75,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "sledgehammer",
@@ -1588,10 +1612,10 @@
       "equipment_change": null,
       "equipment_summary": null,
       "player_after": {
-        "hp": 18,
+        "hp": 20,
         "food": 12,
         "ammo": 3,
-        "medkits": 7,
+        "medkits": 9,
         "scrap": 62,
         "radiation": 4,
         "archetype": null,
@@ -1616,7 +1640,8 @@
             "tag_cult_escapee"
           ],
           "level": 5,
-          "xp": 5
+          "xp": 5,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "sledgehammer",
@@ -1648,7 +1673,7 @@
   "summary": {
     "pressure_count": 11,
     "death_cause_attribution": true,
-    "resource_signature": "hp:18|food:12|ammo:3|medkits:7|scrap:62|radiation:4|weapon:EquipmentState(id='sledgehammer', slot='weapon', durability=9, max_durability=10, rarity='legendary', requirements={'strength': 7}, scaling={'strength': 1.2}, affixes={'atk': 3}, tags=['melee', 'heavy', 'vampiric'], refinement_count=0)|armor:None|tool:None"
+    "resource_signature": "hp:20|food:12|ammo:3|medkits:9|scrap:62|radiation:4|weapon:EquipmentState(id='sledgehammer', slot='weapon', durability=9, max_durability=10, rarity='legendary', requirements={'strength': 7}, scaling={'strength': 1.2}, affixes={'atk': 3}, tags=['melee', 'heavy', 'vampiric'], refinement_count=0)|armor:None|tool:None"
   },
   "failure_analysis": {
     "death_chain_length": 0,

@@ -48,7 +48,8 @@
         "tag_cult_escapee"
       ],
       "level": 5,
-      "xp": 3
+      "xp": 3,
+      "can_level_up": false
     },
     "weapon_slot": {
       "id": "sledgehammer",
@@ -132,7 +133,8 @@
             "tag_cult_escapee"
           ],
           "level": 2,
-          "xp": 0
+          "xp": 0,
+          "can_level_up": false
         },
         "weapon_slot": null,
         "armor_slot": null,
@@ -176,7 +178,8 @@
             "tag_cult_escapee"
           ],
           "level": 2,
-          "xp": 0
+          "xp": 0,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "rust_rifle",
@@ -244,7 +247,8 @@
             "tag_cult_escapee"
           ],
           "level": 2,
-          "xp": 0
+          "xp": 0,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "rust_rifle",
@@ -312,7 +316,8 @@
             "tag_cult_escapee"
           ],
           "level": 2,
-          "xp": 0
+          "xp": 0,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "rust_rifle",
@@ -380,7 +385,8 @@
             "tag_cult_escapee"
           ],
           "level": 2,
-          "xp": 0
+          "xp": 0,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "rust_rifle",
@@ -449,7 +455,8 @@
             "tag_cult_escapee"
           ],
           "level": 2,
-          "xp": 5
+          "xp": 5,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "rust_rifle",
@@ -516,7 +523,8 @@
             "tag_cult_escapee"
           ],
           "level": 2,
-          "xp": 5
+          "xp": 5,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "rust_rifle",
@@ -606,7 +614,8 @@
             "tag_cult_escapee"
           ],
           "level": 2,
-          "xp": 8
+          "xp": 8,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "rust_rifle",
@@ -688,7 +697,8 @@
             "tag_cult_escapee"
           ],
           "level": 2,
-          "xp": 8
+          "xp": 8,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "rust_rifle",
@@ -774,7 +784,8 @@
             "tag_cult_escapee"
           ],
           "level": 2,
-          "xp": 18
+          "xp": 18,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "rust_rifle",
@@ -858,7 +869,8 @@
             "tag_cult_escapee"
           ],
           "level": 2,
-          "xp": 18
+          "xp": 18,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "rust_rifle",
@@ -941,7 +953,8 @@
             "tag_cult_escapee"
           ],
           "level": 3,
-          "xp": 3
+          "xp": 3,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "rust_rifle",
@@ -1026,7 +1039,8 @@
             "tag_cult_escapee"
           ],
           "level": 3,
-          "xp": 3
+          "xp": 3,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "rust_rifle",
@@ -1142,7 +1156,8 @@
             "tag_cult_escapee"
           ],
           "level": 3,
-          "xp": 3
+          "xp": 3,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "rust_rifle",
@@ -1227,7 +1242,8 @@
             "tag_cult_escapee"
           ],
           "level": 3,
-          "xp": 3
+          "xp": 3,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "rust_rifle",
@@ -1312,7 +1328,8 @@
             "tag_cult_escapee"
           ],
           "level": 3,
-          "xp": 3
+          "xp": 3,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "rust_rifle",
@@ -1398,7 +1415,8 @@
             "tag_cult_escapee"
           ],
           "level": 3,
-          "xp": 3
+          "xp": 3,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "rust_rifle",
@@ -1483,7 +1501,8 @@
             "tag_cult_escapee"
           ],
           "level": 3,
-          "xp": 3
+          "xp": 3,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "rust_rifle",
@@ -1566,7 +1585,8 @@
             "tag_cult_escapee"
           ],
           "level": 3,
-          "xp": 3
+          "xp": 3,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "rust_rifle",
@@ -1653,7 +1673,8 @@
             "tag_cult_escapee"
           ],
           "level": 3,
-          "xp": 13
+          "xp": 13,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "rust_rifle",
@@ -1738,7 +1759,8 @@
             "tag_cult_escapee"
           ],
           "level": 3,
-          "xp": 13
+          "xp": 13,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "rust_rifle",
@@ -1835,7 +1857,8 @@
             "tag_cult_escapee"
           ],
           "level": 3,
-          "xp": 73
+          "xp": 73,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "sledgehammer",
@@ -1919,7 +1942,8 @@
             "tag_cult_escapee"
           ],
           "level": 3,
-          "xp": 73
+          "xp": 73,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "sledgehammer",
@@ -2004,7 +2028,8 @@
             "tag_cult_escapee"
           ],
           "level": 5,
-          "xp": 3
+          "xp": 3,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "sledgehammer",

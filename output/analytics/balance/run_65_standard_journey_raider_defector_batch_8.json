@@ -18,7 +18,7 @@
   "victory": false,
   "end_reason": "combat_death",
   "player_final": {
-    "hp": -4,
+    "hp": -3,
     "food": 17,
     "ammo": 0,
     "medkits": 0,
@@ -41,7 +41,8 @@
       "perks": [],
       "tags": [],
       "level": 4,
-      "xp": 6
+      "xp": 6,
+      "can_level_up": false
     },
     "weapon_slot": {
       "id": "rust_rifle",
@@ -115,7 +116,8 @@
           "perks": [],
           "tags": [],
           "level": 2,
-          "xp": 0
+          "xp": 0,
+          "can_level_up": false
         },
         "weapon_slot": null,
         "armor_slot": null,
@@ -152,7 +154,8 @@
           "perks": [],
           "tags": [],
           "level": 2,
-          "xp": 0
+          "xp": 0,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "rust_rifle",
@@ -209,7 +212,8 @@
           "perks": [],
           "tags": [],
           "level": 2,
-          "xp": 0
+          "xp": 0,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "rust_rifle",
@@ -296,7 +300,8 @@
           "perks": [],
           "tags": [],
           "level": 2,
-          "xp": 8
+          "xp": 8,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "makeshift_blade",
@@ -353,7 +358,8 @@
           "perks": [],
           "tags": [],
           "level": 2,
-          "xp": 8
+          "xp": 8,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "makeshift_blade",
@@ -412,7 +418,8 @@
           "perks": [],
           "tags": [],
           "level": 2,
-          "xp": 8
+          "xp": 8,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "makeshift_blade",
@@ -467,7 +474,8 @@
           "perks": [],
           "tags": [],
           "level": 2,
-          "xp": 8
+          "xp": 8,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "makeshift_blade",
@@ -547,7 +555,8 @@
           "perks": [],
           "tags": [],
           "level": 2,
-          "xp": 11
+          "xp": 11,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "makeshift_blade",
@@ -619,7 +628,8 @@
           "perks": [],
           "tags": [],
           "level": 2,
-          "xp": 11
+          "xp": 11,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "makeshift_blade",
@@ -692,7 +702,8 @@
           "perks": [],
           "tags": [],
           "level": 2,
-          "xp": 11
+          "xp": 11,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "makeshift_blade",
@@ -766,7 +777,8 @@
           "perks": [],
           "tags": [],
           "level": 2,
-          "xp": 11
+          "xp": 11,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "makeshift_blade",
@@ -848,7 +860,8 @@
           "perks": [],
           "tags": [],
           "level": 2,
-          "xp": 41
+          "xp": 41,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "hardened_blade",
@@ -926,7 +939,8 @@
           "perks": [],
           "tags": [],
           "level": 2,
-          "xp": 41
+          "xp": 41,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "hardened_blade",
@@ -1003,7 +1017,8 @@
           "perks": [],
           "tags": [],
           "level": 3,
-          "xp": 21
+          "xp": 21,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "hardened_blade",
@@ -1057,7 +1072,7 @@
         "WARNING: radiation will continue to threaten future travel."
       ],
       "pre_choice_state": {
-        "hp": 19,
+        "hp": 20,
         "food": 14,
         "ammo": 8,
         "medkits": 8,
@@ -1080,7 +1095,8 @@
           "perks": [],
           "tags": [],
           "level": 3,
-          "xp": 21
+          "xp": 21,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "hardened_blade",
@@ -1134,7 +1150,7 @@
       "equipment_change": null,
       "equipment_summary": null,
       "player_after": {
-        "hp": 19,
+        "hp": 20,
         "food": 20,
         "ammo": 8,
         "medkits": 8,
@@ -1157,7 +1173,8 @@
           "perks": [],
           "tags": [],
           "level": 3,
-          "xp": 21
+          "xp": 21,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "hardened_blade",
@@ -1212,7 +1229,7 @@
         "DANGER: this choice carries a high combat risk."
       ],
       "pre_choice_state": {
-        "hp": 18,
+        "hp": 20,
         "food": 19,
         "ammo": 8,
         "medkits": 8,
@@ -1235,7 +1252,8 @@
           "perks": [],
           "tags": [],
           "level": 3,
-          "xp": 21
+          "xp": 21,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "hardened_blade",
@@ -1323,10 +1341,10 @@
       },
       "equipment_summary": "weapon -> rust_rifle (replaced empty)",
       "player_after": {
-        "hp": 9,
+        "hp": 19,
         "food": 19,
         "ammo": 2,
-        "medkits": 7,
+        "medkits": 9,
         "scrap": 42,
         "radiation": 3,
         "archetype": null,
@@ -1346,7 +1364,8 @@
           "perks": [],
           "tags": [],
           "level": 3,
-          "xp": 26
+          "xp": 26,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "rust_rifle",
@@ -1399,10 +1418,10 @@
         "WARNING: radiation will continue to threaten future travel."
       ],
       "pre_choice_state": {
-        "hp": 18,
+        "hp": 19,
         "food": 18,
         "ammo": 2,
-        "medkits": 6,
+        "medkits": 9,
         "scrap": 22,
         "radiation": 3,
         "archetype": null,
@@ -1422,7 +1441,8 @@
           "perks": [],
           "tags": [],
           "level": 3,
-          "xp": 26
+          "xp": 26,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "rust_rifle",
@@ -1474,10 +1494,10 @@
       "equipment_change": null,
       "equipment_summary": null,
       "player_after": {
-        "hp": 18,
+        "hp": 19,
         "food": 18,
         "ammo": 2,
-        "medkits": 6,
+        "medkits": 9,
         "scrap": 28,
         "radiation": 3,
         "archetype": null,
@@ -1497,7 +1517,8 @@
           "perks": [],
           "tags": [],
           "level": 3,
-          "xp": 26
+          "xp": 26,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "rust_rifle",
@@ -1551,10 +1572,10 @@
         "DANGER: this choice carries a high combat risk."
       ],
       "pre_choice_state": {
-        "hp": 17,
+        "hp": 19,
         "food": 17,
         "ammo": 2,
-        "medkits": 6,
+        "medkits": 9,
         "scrap": 28,
         "radiation": 3,
         "archetype": null,
@@ -1574,7 +1595,8 @@
           "perks": [],
           "tags": [],
           "level": 3,
-          "xp": 26
+          "xp": 26,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "rust_rifle",
@@ -1626,7 +1648,7 @@
       "equipment_change": null,
       "equipment_summary": null,
       "player_after": {
-        "hp": -4,
+        "hp": -3,
         "food": 17,
         "ammo": 0,
         "medkits": 0,
@@ -1649,7 +1671,8 @@
           "perks": [],
           "tags": [],
           "level": 4,
-          "xp": 6
+          "xp": 6,
+          "can_level_up": false
         },
         "weapon_slot": {
           "id": "rust_rifle",
@@ -1697,7 +1720,7 @@
   "summary": {
     "pressure_count": 9,
     "death_cause_attribution": true,
-    "resource_signature": "hp:-4|food:17|ammo:0|medkits:0|scrap:28|radiation:3|weapon:EquipmentState(id='rust_rifle', slot='weapon', durability=8, max_durability=10, rarity='rare', requirements={'agility': 4}, scaling={'perception': 0.5}, affixes={'max_durability': 5}, tags=['ranged', 'firearm'], refinement_count=1)|armor:None|tool:EquipmentState(id='scavenger_kit', slot='tool', durability=10, max_durability=10, rarity='rare', requirements={'luck': 4}, scaling={}, affixes={'atk': 3}, tags=['scavenging'], refinement_count=1)"
+    "resource_signature": "hp:-3|food:17|ammo:0|medkits:0|scrap:28|radiation:3|weapon:EquipmentState(id='rust_rifle', slot='weapon', durability=8, max_durability=10, rarity='rare', requirements={'agility': 4}, scaling={'perception': 0.5}, affixes={'max_durability': 5}, tags=['ranged', 'firearm'], refinement_count=1)|armor:None|tool:EquipmentState(id='scavenger_kit', slot='tool', durability=10, max_durability=10, rarity='rare', requirements={'luck': 4}, scaling={}, affixes={'atk': 3}, tags=['scavenging'], refinement_count=1)"
   },
   "failure_analysis": {
     "death_chain_length": 3,
@@ -1734,9 +1757,9 @@
     "outcome": "combat_death",
     "key_turning_point": "node_deadzone_1 (took +3 radiation, carried radiation into later travel)",
     "notable_equipment": [
-      "scavenger_kit",
       "rust_rifle",
-      "makeshift_blade"
+      "makeshift_blade",
+      "scavenger_kit"
     ],
     "telemetry": {
       "total_steps": 11,
@@ -1752,9 +1775,9 @@
       "total_atk_affix_gain": 4,
       "total_def_affix_gain": 0,
       "equipment_ids": [
-        "scavenger_kit",
         "rust_rifle",
-        "makeshift_blade"
+        "makeshift_blade",
+        "scavenger_kit"
       ],
       "loot_resources": {
         "ammo": 5,
