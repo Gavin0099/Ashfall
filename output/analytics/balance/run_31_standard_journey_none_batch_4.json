@@ -4,9 +4,11 @@
   "route": [
     "node_fringe_1",
     "node_fringe_2",
+    "node_trade_1",
     "node_fringe_3",
     "node_boss_gatekeeper",
     "node_deadzone_1",
+    "node_trade_2",
     "node_deadzone_2",
     "node_deadzone_3",
     "node_boss_overseer",
@@ -16,11 +18,11 @@
   "victory": false,
   "end_reason": "combat_death",
   "player_final": {
-    "hp": -3,
-    "food": 12,
+    "hp": -1,
+    "food": 16,
     "ammo": 0,
     "medkits": 0,
-    "scrap": 58,
+    "scrap": 53,
     "radiation": 3,
     "archetype": null,
     "character": null,
@@ -98,7 +100,7 @@
             "perception": 0.5
           },
           "affixes": {
-            "atk": 3
+            "atk": 1
           },
           "tags": [
             "ranged",
@@ -141,7 +143,7 @@
             "perception": 0.5
           },
           "affixes": {
-            "atk": 3
+            "atk": 1
           },
           "tags": [
             "ranged",
@@ -184,7 +186,7 @@
             "perception": 0.5
           },
           "affixes": {
-            "atk": 3
+            "atk": 1
           },
           "tags": [
             "ranged",
@@ -227,7 +229,7 @@
             "perception": 0.5
           },
           "affixes": {
-            "atk": 3
+            "atk": 1
           },
           "tags": [
             "ranged",
@@ -280,7 +282,7 @@
             "perception": 0.5
           },
           "affixes": {
-            "atk": 3
+            "atk": 1
           },
           "tags": [
             "ranged",
@@ -294,16 +296,100 @@
     },
     {
       "step": 4,
+      "node": "node_trade_1",
+      "event_id": "evt_merchant_caravan",
+      "option_index": 0,
+      "warning_signals": [
+        "WARNING: radiation will continue to threaten future travel."
+      ],
+      "pre_choice_state": {
+        "hp": 15,
+        "food": 10,
+        "ammo": 4,
+        "medkits": 8,
+        "scrap": 13,
+        "radiation": 1,
+        "archetype": null,
+        "character": null,
+        "weapon_slot": {
+          "id": "rust_rifle",
+          "slot": "weapon",
+          "durability": 9,
+          "max_durability": 10,
+          "rarity": "common",
+          "requirements": {
+            "agility": 4
+          },
+          "scaling": {
+            "perception": 0.5
+          },
+          "affixes": {
+            "atk": 1
+          },
+          "tags": [
+            "ranged",
+            "firearm"
+          ],
+          "refinement_count": 0
+        },
+        "armor_slot": null,
+        "tool_slot": null
+      },
+      "pressure": true,
+      "combat_triggered": false,
+      "combat_loot": [],
+      "effects": {
+        "scrap": -5,
+        "food": 5
+      },
+      "equipment_change": null,
+      "equipment_summary": null,
+      "player_after": {
+        "hp": 15,
+        "food": 15,
+        "ammo": 4,
+        "medkits": 8,
+        "scrap": 8,
+        "radiation": 1,
+        "archetype": null,
+        "character": null,
+        "weapon_slot": {
+          "id": "rust_rifle",
+          "slot": "weapon",
+          "durability": 9,
+          "max_durability": 10,
+          "rarity": "common",
+          "requirements": {
+            "agility": 4
+          },
+          "scaling": {
+            "perception": 0.5
+          },
+          "affixes": {
+            "atk": 1
+          },
+          "tags": [
+            "ranged",
+            "firearm"
+          ],
+          "refinement_count": 0
+        },
+        "armor_slot": null,
+        "tool_slot": null
+      }
+    },
+    {
+      "step": 5,
       "node": "node_fringe_3",
       "event_id": "evt_tech_vault",
       "option_index": 0,
       "warning_signals": [],
       "pre_choice_state": {
         "hp": 15,
-        "food": 10,
+        "food": 14,
         "ammo": 4,
         "medkits": 8,
-        "scrap": 8,
+        "scrap": 3,
         "radiation": 1,
         "archetype": null,
         "character": null,
@@ -320,7 +406,7 @@
             "perception": 0.5
           },
           "affixes": {
-            "atk": 3
+            "atk": 1
           },
           "tags": [
             "ranged",
@@ -344,10 +430,10 @@
       "equipment_summary": null,
       "player_after": {
         "hp": 15,
-        "food": 10,
+        "food": 14,
         "ammo": 4,
         "medkits": 10,
-        "scrap": 33,
+        "scrap": 28,
         "radiation": 0,
         "archetype": null,
         "character": null,
@@ -364,7 +450,7 @@
             "perception": 0.5
           },
           "affixes": {
-            "atk": 3
+            "atk": 1
           },
           "tags": [
             "ranged",
@@ -377,7 +463,7 @@
       }
     },
     {
-      "step": 5,
+      "step": 6,
       "node": "node_boss_gatekeeper",
       "event_id": "evt_boss_gatekeeper",
       "option_index": 0,
@@ -386,10 +472,10 @@
       ],
       "pre_choice_state": {
         "hp": 15,
-        "food": 9,
+        "food": 13,
         "ammo": 4,
         "medkits": 10,
-        "scrap": 33,
+        "scrap": 28,
         "radiation": 0,
         "archetype": null,
         "character": null,
@@ -406,7 +492,7 @@
             "perception": 0.5
           },
           "affixes": {
-            "atk": 3
+            "atk": 1
           },
           "tags": [
             "ranged",
@@ -436,10 +522,10 @@
       "equipment_summary": null,
       "player_after": {
         "hp": 10,
-        "food": 9,
-        "ammo": 1,
-        "medkits": 9,
-        "scrap": 58,
+        "food": 13,
+        "ammo": 0,
+        "medkits": 8,
+        "scrap": 53,
         "radiation": 0,
         "archetype": null,
         "character": null,
@@ -470,7 +556,7 @@
       }
     },
     {
-      "step": 6,
+      "step": 7,
       "node": "node_deadzone_1",
       "event_id": "evt_radioactive_orchard",
       "option_index": 0,
@@ -480,10 +566,10 @@
       ],
       "pre_choice_state": {
         "hp": 20,
-        "food": 8,
-        "ammo": 1,
-        "medkits": 8,
-        "scrap": 58,
+        "food": 12,
+        "ammo": 0,
+        "medkits": 7,
+        "scrap": 53,
         "radiation": 0,
         "archetype": null,
         "character": null,
@@ -522,11 +608,11 @@
       "equipment_change": null,
       "equipment_summary": null,
       "player_after": {
-        "hp": -3,
-        "food": 12,
+        "hp": -1,
+        "food": 16,
         "ammo": 0,
         "medkits": 0,
-        "scrap": 58,
+        "scrap": 53,
         "radiation": 3,
         "archetype": null,
         "character": null,
@@ -558,9 +644,9 @@
     }
   ],
   "summary": {
-    "pressure_count": 5,
+    "pressure_count": 6,
     "death_cause_attribution": true,
-    "resource_signature": "hp:-3|food:12|ammo:0|medkits:0|scrap:58|radiation:3|weapon:EquipmentState(id='hardened_blade', slot='weapon', durability=8, max_durability=10, rarity='legendary', requirements={'strength': 5}, scaling={'strength': 0.8}, affixes={'loot_scrap': 1, 'atk': 1}, tags=['melee', 'quality'], refinement_count=0)|armor:None|tool:None"
+    "resource_signature": "hp:-1|food:16|ammo:0|medkits:0|scrap:53|radiation:3|weapon:EquipmentState(id='hardened_blade', slot='weapon', durability=8, max_durability=10, rarity='legendary', requirements={'strength': 5}, scaling={'strength': 0.8}, affixes={'loot_scrap': 1, 'atk': 1}, tags=['melee', 'quality'], refinement_count=0)|armor:None|tool:None"
   },
   "failure_analysis": {
     "death_chain_length": 3,
@@ -569,37 +655,37 @@
       {
         "node_id": "node_deadzone_1",
         "event_id": "evt_radioactive_orchard",
-        "blame_score": 0.41,
+        "blame_score": 0.4,
         "description": "took +3 radiation, accepted combat risk",
         "steps_to_death": 0
       },
       {
         "node_id": "node_fringe_2",
         "event_id": "evt_mutant_burrow",
-        "blame_score": 0.25,
+        "blame_score": 0.24,
         "description": "lost 1 hp, accepted combat risk, carried radiation into later travel",
-        "steps_to_death": 3
+        "steps_to_death": 4
       },
       {
         "node_id": "node_fringe_1",
         "event_id": "evt_factory_ruins",
         "blame_score": 0.18,
         "description": "took +1 radiation, lost 1 hp, carried radiation into later travel",
-        "steps_to_death": 4
+        "steps_to_death": 5
       }
     ],
     "steps_from_regret_to_death": 0,
     "is_trash_time_death": false
   },
   "run_summary": {
-    "headline": "standard_journey_none_batch_4: loss via combat_death after 6 steps",
+    "headline": "standard_journey_none_batch_4: loss via combat_death after 7 steps",
     "route_family": "unknown",
     "outcome": "combat_death",
     "key_turning_point": "node_deadzone_1 (took +3 radiation, accepted combat risk)",
     "notable_equipment": [],
     "telemetry": {
-      "total_steps": 6,
-      "pressure_count": 5,
+      "total_steps": 7,
+      "pressure_count": 6,
       "combat_count": 3,
       "loot_drop_count": 4,
       "loot_total_amount": 55,
@@ -614,7 +700,7 @@
         "xp": 25
       },
       "max_radiation": 3,
-      "min_food": 9,
+      "min_food": 11,
       "min_hp": 0,
       "low_resource_flags": [
         "low_hp",

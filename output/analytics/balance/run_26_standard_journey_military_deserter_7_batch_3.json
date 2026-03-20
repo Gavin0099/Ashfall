@@ -4,24 +4,26 @@
   "route": [
     "node_fringe_1",
     "node_fringe_2",
+    "node_trade_1",
     "node_fringe_3",
     "node_boss_gatekeeper",
     "node_deadzone_1",
+    "node_trade_2",
     "node_deadzone_2",
     "node_deadzone_3",
     "node_boss_overseer",
     "node_final"
   ],
   "ended": true,
-  "victory": true,
-  "end_reason": "reached_final_node",
+  "victory": false,
+  "end_reason": "combat_death",
   "player_final": {
-    "hp": 13,
-    "food": 4,
-    "ammo": 8,
-    "medkits": 2,
-    "scrap": 104,
-    "radiation": 2,
+    "hp": 0,
+    "food": 11,
+    "ammo": 0,
+    "medkits": 0,
+    "scrap": 43,
+    "radiation": 4,
     "archetype": null,
     "character": {
       "background_id": "military_deserter",
@@ -45,50 +47,49 @@
         "heavy_weapons",
         "tag_military_deserter"
       ],
-      "level": 5,
-      "xp": 20
+      "level": 4,
+      "xp": 8
     },
     "weapon_slot": {
-      "id": "sledgehammer",
+      "id": "hardened_blade",
       "slot": "weapon",
-      "durability": 9,
+      "durability": 7,
       "max_durability": 10,
       "rarity": "legendary",
       "requirements": {
-        "strength": 7
+        "strength": 5
       },
       "scaling": {
-        "strength": 1.2
+        "strength": 0.8
       },
       "affixes": {
         "def": 2,
-        "atk": 2
+        "atk": 3
       },
       "tags": [
         "melee",
-        "heavy"
+        "quality"
       ],
       "refinement_count": 0
     },
     "armor_slot": null,
     "tool_slot": {
-      "id": "field_pack",
+      "id": "scavenger_kit",
       "slot": "tool",
       "durability": 10,
       "max_durability": 10,
       "rarity": "rare",
       "requirements": {
-        "strength": 4
+        "luck": 4
       },
       "scaling": {},
       "affixes": {
-        "atk": 1,
-        "def": 1
+        "def": 2
       },
       "tags": [
-        "exploration"
+        "scavenging"
       ],
-      "refinement_count": 1
+      "refinement_count": 2
     }
   },
   "decision_log": [
@@ -470,9 +471,9 @@
     },
     {
       "step": 4,
-      "node": "node_fringe_3",
-      "event_id": "evt_tech_vault",
-      "option_index": 1,
+      "node": "node_trade_1",
+      "event_id": "evt_village",
+      "option_index": 0,
       "warning_signals": [
         "WARNING: radiation will continue to threaten future travel."
       ],
@@ -535,27 +536,49 @@
       "combat_triggered": true,
       "combat_loot": [
         {
-          "resource": "ammo",
-          "amount": 5
+          "resource": "medkits",
+          "amount": 2
         },
         {
           "resource": "scrap",
-          "amount": 7
+          "amount": 12
         }
       ],
       "effects": {
-        "scrap": 12,
-        "hp": -2,
-        "xp": 5
+        "ammo": -1,
+        "medkits": 1,
+        "xp": 3
       },
-      "equipment_change": null,
-      "equipment_summary": null,
+      "equipment_change": {
+        "slot": "tool",
+        "item": "scavenger_kit",
+        "item_data": {
+          "id": "scavenger_kit",
+          "slot": "tool",
+          "durability": 10,
+          "max_durability": 10,
+          "rarity": "common",
+          "requirements": {
+            "luck": 4
+          },
+          "scaling": {},
+          "affixes": {
+            "def": 2
+          },
+          "tags": [
+            "scavenging"
+          ],
+          "refinement_count": 0
+        },
+        "changed": true
+      },
+      "equipment_summary": "tool -> scavenger_kit (replaced empty)",
       "player_after": {
-        "hp": 10,
+        "hp": 14,
         "food": 10,
-        "ammo": 13,
-        "medkits": 6,
-        "scrap": 30,
+        "ammo": 6,
+        "medkits": 9,
+        "scrap": 23,
         "radiation": 1,
         "archetype": null,
         "character": {
@@ -581,7 +604,7 @@
             "tag_military_deserter"
           ],
           "level": 2,
-          "xp": 10
+          "xp": 8
         },
         "weapon_slot": {
           "id": "rust_rifle",
@@ -603,532 +626,29 @@
           "refinement_count": 0
         },
         "armor_slot": null,
-        "tool_slot": null
+        "tool_slot": {
+          "id": "scavenger_kit",
+          "slot": "tool",
+          "durability": 10,
+          "max_durability": 10,
+          "rarity": "common",
+          "requirements": {
+            "luck": 4
+          },
+          "scaling": {},
+          "affixes": {
+            "def": 2
+          },
+          "tags": [
+            "scavenging"
+          ],
+          "refinement_count": 0
+        }
       }
     },
     {
       "step": 5,
-      "node": "node_boss_gatekeeper",
-      "event_id": "evt_boss_gatekeeper",
-      "option_index": 0,
-      "warning_signals": [
-        "WARNING: radiation will continue to threaten future travel.",
-        "DANGER: this choice carries a high combat risk."
-      ],
-      "pre_choice_state": {
-        "hp": 20,
-        "food": 9,
-        "ammo": 13,
-        "medkits": 5,
-        "scrap": 30,
-        "radiation": 1,
-        "archetype": null,
-        "character": {
-          "background_id": "military_deserter",
-          "display_name": "Sergeant Thorne",
-          "special": {
-            "strength": 8,
-            "perception": 6,
-            "endurance": 8,
-            "charisma": 2,
-            "intelligence": 4,
-            "agility": 6,
-            "luck": 6
-          },
-          "traits": [
-            "heavy_handed",
-            "trigger_discipline"
-          ],
-          "perks": [],
-          "tags": [
-            "tactical_combat",
-            "heavy_weapons",
-            "tag_military_deserter"
-          ],
-          "level": 2,
-          "xp": 10
-        },
-        "weapon_slot": {
-          "id": "rust_rifle",
-          "slot": "weapon",
-          "durability": 8,
-          "max_durability": 10,
-          "rarity": "rare",
-          "requirements": {
-            "agility": 3
-          },
-          "scaling": {
-            "perception": 0.5
-          },
-          "affixes": {},
-          "tags": [
-            "ranged",
-            "firearm"
-          ],
-          "refinement_count": 0
-        },
-        "armor_slot": null,
-        "tool_slot": null
-      },
-      "pressure": true,
-      "combat_triggered": true,
-      "combat_loot": [
-        {
-          "resource": "xp",
-          "amount": 25
-        },
-        {
-          "resource": "scrap",
-          "amount": 25
-        }
-      ],
-      "effects": {
-        "xp": 5
-      },
-      "equipment_change": null,
-      "equipment_summary": null,
-      "player_after": {
-        "hp": 13,
-        "food": 9,
-        "ammo": 10,
-        "medkits": 4,
-        "scrap": 55,
-        "radiation": 1,
-        "archetype": null,
-        "character": {
-          "background_id": "military_deserter",
-          "display_name": "Sergeant Thorne",
-          "special": {
-            "strength": 8,
-            "perception": 6,
-            "endurance": 8,
-            "charisma": 2,
-            "intelligence": 4,
-            "agility": 6,
-            "luck": 6
-          },
-          "traits": [
-            "heavy_handed",
-            "trigger_discipline"
-          ],
-          "perks": [],
-          "tags": [
-            "tactical_combat",
-            "heavy_weapons",
-            "tag_military_deserter"
-          ],
-          "level": 2,
-          "xp": 40
-        },
-        "weapon_slot": {
-          "id": "hardened_blade",
-          "slot": "weapon",
-          "durability": 9,
-          "max_durability": 10,
-          "rarity": "legendary",
-          "requirements": {
-            "strength": 5
-          },
-          "scaling": {
-            "strength": 0.8
-          },
-          "affixes": {
-            "def": 2,
-            "atk": 1
-          },
-          "tags": [
-            "melee",
-            "quality"
-          ],
-          "refinement_count": 0
-        },
-        "armor_slot": null,
-        "tool_slot": null
-      }
-    },
-    {
-      "step": 6,
-      "node": "node_deadzone_1",
-      "event_id": "evt_floodplain",
-      "option_index": 0,
-      "warning_signals": [
-        "WARNING: radiation will continue to threaten future travel.",
-        "WARNING: this option adds radiation and increases long-term risk."
-      ],
-      "pre_choice_state": {
-        "hp": 13,
-        "food": 8,
-        "ammo": 10,
-        "medkits": 4,
-        "scrap": 55,
-        "radiation": 1,
-        "archetype": null,
-        "character": {
-          "background_id": "military_deserter",
-          "display_name": "Sergeant Thorne",
-          "special": {
-            "strength": 8,
-            "perception": 6,
-            "endurance": 8,
-            "charisma": 2,
-            "intelligence": 4,
-            "agility": 6,
-            "luck": 6
-          },
-          "traits": [
-            "heavy_handed",
-            "trigger_discipline"
-          ],
-          "perks": [],
-          "tags": [
-            "tactical_combat",
-            "heavy_weapons",
-            "tag_military_deserter"
-          ],
-          "level": 2,
-          "xp": 40
-        },
-        "weapon_slot": {
-          "id": "hardened_blade",
-          "slot": "weapon",
-          "durability": 9,
-          "max_durability": 10,
-          "rarity": "legendary",
-          "requirements": {
-            "strength": 5
-          },
-          "scaling": {
-            "strength": 0.8
-          },
-          "affixes": {
-            "def": 2,
-            "atk": 1
-          },
-          "tags": [
-            "melee",
-            "quality"
-          ],
-          "refinement_count": 0
-        },
-        "armor_slot": null,
-        "tool_slot": null
-      },
-      "pressure": true,
-      "combat_triggered": false,
-      "combat_loot": [],
-      "effects": {
-        "food": -1,
-        "radiation": 1
-      },
-      "equipment_change": {
-        "slot": "tool",
-        "item": "field_pack",
-        "item_data": {
-          "id": "field_pack",
-          "slot": "tool",
-          "durability": 10,
-          "max_durability": 10,
-          "rarity": "common",
-          "requirements": {
-            "strength": 4
-          },
-          "scaling": {},
-          "affixes": {
-            "atk": 1,
-            "def": 1
-          },
-          "tags": [
-            "exploration"
-          ],
-          "refinement_count": 0
-        },
-        "changed": true
-      },
-      "equipment_summary": "tool -> field_pack (replaced empty)",
-      "player_after": {
-        "hp": 13,
-        "food": 9,
-        "ammo": 10,
-        "medkits": 4,
-        "scrap": 55,
-        "radiation": 2,
-        "archetype": null,
-        "character": {
-          "background_id": "military_deserter",
-          "display_name": "Sergeant Thorne",
-          "special": {
-            "strength": 8,
-            "perception": 6,
-            "endurance": 8,
-            "charisma": 2,
-            "intelligence": 4,
-            "agility": 6,
-            "luck": 6
-          },
-          "traits": [
-            "heavy_handed",
-            "trigger_discipline"
-          ],
-          "perks": [],
-          "tags": [
-            "tactical_combat",
-            "heavy_weapons",
-            "tag_military_deserter"
-          ],
-          "level": 3,
-          "xp": 20
-        },
-        "weapon_slot": {
-          "id": "hardened_blade",
-          "slot": "weapon",
-          "durability": 9,
-          "max_durability": 10,
-          "rarity": "legendary",
-          "requirements": {
-            "strength": 5
-          },
-          "scaling": {
-            "strength": 0.8
-          },
-          "affixes": {
-            "def": 2,
-            "atk": 1
-          },
-          "tags": [
-            "melee",
-            "quality"
-          ],
-          "refinement_count": 0
-        },
-        "armor_slot": null,
-        "tool_slot": {
-          "id": "field_pack",
-          "slot": "tool",
-          "durability": 10,
-          "max_durability": 10,
-          "rarity": "common",
-          "requirements": {
-            "strength": 4
-          },
-          "scaling": {},
-          "affixes": {
-            "atk": 1,
-            "def": 1
-          },
-          "tags": [
-            "exploration"
-          ],
-          "refinement_count": 0
-        }
-      }
-    },
-    {
-      "step": 7,
-      "node": "node_deadzone_2",
-      "event_id": "evt_checkpoint",
-      "option_index": 0,
-      "warning_signals": [
-        "WARNING: radiation will continue to threaten future travel.",
-        "DANGER: this choice carries a high combat risk."
-      ],
-      "pre_choice_state": {
-        "hp": 12,
-        "food": 8,
-        "ammo": 10,
-        "medkits": 4,
-        "scrap": 55,
-        "radiation": 2,
-        "archetype": null,
-        "character": {
-          "background_id": "military_deserter",
-          "display_name": "Sergeant Thorne",
-          "special": {
-            "strength": 8,
-            "perception": 6,
-            "endurance": 8,
-            "charisma": 2,
-            "intelligence": 4,
-            "agility": 6,
-            "luck": 6
-          },
-          "traits": [
-            "heavy_handed",
-            "trigger_discipline"
-          ],
-          "perks": [],
-          "tags": [
-            "tactical_combat",
-            "heavy_weapons",
-            "tag_military_deserter"
-          ],
-          "level": 3,
-          "xp": 20
-        },
-        "weapon_slot": {
-          "id": "hardened_blade",
-          "slot": "weapon",
-          "durability": 9,
-          "max_durability": 10,
-          "rarity": "legendary",
-          "requirements": {
-            "strength": 5
-          },
-          "scaling": {
-            "strength": 0.8
-          },
-          "affixes": {
-            "def": 2,
-            "atk": 1
-          },
-          "tags": [
-            "melee",
-            "quality"
-          ],
-          "refinement_count": 0
-        },
-        "armor_slot": null,
-        "tool_slot": {
-          "id": "field_pack",
-          "slot": "tool",
-          "durability": 10,
-          "max_durability": 10,
-          "rarity": "common",
-          "requirements": {
-            "strength": 4
-          },
-          "scaling": {},
-          "affixes": {
-            "atk": 1,
-            "def": 1
-          },
-          "tags": [
-            "exploration"
-          ],
-          "refinement_count": 0
-        }
-      },
-      "pressure": true,
-      "combat_triggered": true,
-      "combat_loot": [
-        {
-          "resource": "ammo",
-          "amount": 5
-        },
-        {
-          "resource": "scrap",
-          "amount": 7
-        }
-      ],
-      "effects": {
-        "ammo": 0,
-        "xp": 5
-      },
-      "equipment_change": {
-        "slot": "weapon",
-        "item": "rust_rifle",
-        "item_data": {
-          "id": "rust_rifle",
-          "slot": "weapon",
-          "durability": 10,
-          "max_durability": 10,
-          "rarity": "rare",
-          "requirements": {
-            "agility": 4
-          },
-          "scaling": {
-            "perception": 0.5
-          },
-          "affixes": {
-            "atk": 2
-          },
-          "tags": [
-            "ranged",
-            "firearm"
-          ],
-          "refinement_count": 0
-        },
-        "changed": true
-      },
-      "equipment_summary": "weapon -> rust_rifle (replaced empty)",
-      "player_after": {
-        "hp": 11,
-        "food": 8,
-        "ammo": 12,
-        "medkits": 2,
-        "scrap": 62,
-        "radiation": 2,
-        "archetype": null,
-        "character": {
-          "background_id": "military_deserter",
-          "display_name": "Sergeant Thorne",
-          "special": {
-            "strength": 8,
-            "perception": 6,
-            "endurance": 8,
-            "charisma": 2,
-            "intelligence": 4,
-            "agility": 6,
-            "luck": 6
-          },
-          "traits": [
-            "heavy_handed",
-            "trigger_discipline"
-          ],
-          "perks": [],
-          "tags": [
-            "tactical_combat",
-            "heavy_weapons",
-            "tag_military_deserter"
-          ],
-          "level": 3,
-          "xp": 25
-        },
-        "weapon_slot": {
-          "id": "rust_rifle",
-          "slot": "weapon",
-          "durability": 9,
-          "max_durability": 10,
-          "rarity": "rare",
-          "requirements": {
-            "agility": 4
-          },
-          "scaling": {
-            "perception": 0.5
-          },
-          "affixes": {
-            "atk": 2
-          },
-          "tags": [
-            "ranged",
-            "firearm"
-          ],
-          "refinement_count": 0
-        },
-        "armor_slot": null,
-        "tool_slot": {
-          "id": "field_pack",
-          "slot": "tool",
-          "durability": 10,
-          "max_durability": 10,
-          "rarity": "common",
-          "requirements": {
-            "strength": 4
-          },
-          "scaling": {},
-          "affixes": {
-            "atk": 1,
-            "def": 1
-          },
-          "tags": [
-            "exploration"
-          ],
-          "refinement_count": 0
-        }
-      }
-    },
-    {
-      "step": 8,
-      "node": "node_deadzone_3",
+      "node": "node_fringe_3",
       "event_id": "evt_tech_vault",
       "option_index": 1,
       "warning_signals": [
@@ -1136,11 +656,11 @@
       ],
       "pre_choice_state": {
         "hp": 20,
-        "food": 7,
-        "ammo": 12,
-        "medkits": 1,
-        "scrap": 42,
-        "radiation": 2,
+        "food": 9,
+        "ammo": 6,
+        "medkits": 8,
+        "scrap": 3,
+        "radiation": 1,
         "archetype": null,
         "character": {
           "background_id": "military_deserter",
@@ -1164,24 +684,22 @@
             "heavy_weapons",
             "tag_military_deserter"
           ],
-          "level": 3,
-          "xp": 25
+          "level": 2,
+          "xp": 8
         },
         "weapon_slot": {
           "id": "rust_rifle",
           "slot": "weapon",
-          "durability": 9,
+          "durability": 8,
           "max_durability": 10,
           "rarity": "rare",
           "requirements": {
-            "agility": 4
+            "agility": 3
           },
           "scaling": {
             "perception": 0.5
           },
-          "affixes": {
-            "atk": 2
-          },
+          "affixes": {},
           "tags": [
             "ranged",
             "firearm"
@@ -1190,21 +708,20 @@
         },
         "armor_slot": null,
         "tool_slot": {
-          "id": "field_pack",
+          "id": "scavenger_kit",
           "slot": "tool",
           "durability": 10,
           "max_durability": 10,
           "rarity": "rare",
           "requirements": {
-            "strength": 4
+            "luck": 4
           },
           "scaling": {},
           "affixes": {
-            "atk": 1,
-            "def": 1
+            "def": 2
           },
           "tags": [
-            "exploration"
+            "scavenging"
           ],
           "refinement_count": 1
         }
@@ -1221,11 +738,11 @@
       "equipment_summary": null,
       "player_after": {
         "hp": 18,
-        "food": 7,
-        "ammo": 12,
-        "medkits": 1,
-        "scrap": 54,
-        "radiation": 2,
+        "food": 9,
+        "ammo": 6,
+        "medkits": 8,
+        "scrap": 16,
+        "radiation": 1,
         "archetype": null,
         "character": {
           "background_id": "military_deserter",
@@ -1249,24 +766,22 @@
             "heavy_weapons",
             "tag_military_deserter"
           ],
-          "level": 4,
-          "xp": 0
+          "level": 2,
+          "xp": 13
         },
         "weapon_slot": {
           "id": "rust_rifle",
           "slot": "weapon",
-          "durability": 9,
+          "durability": 8,
           "max_durability": 10,
           "rarity": "rare",
           "requirements": {
-            "agility": 4
+            "agility": 3
           },
           "scaling": {
             "perception": 0.5
           },
-          "affixes": {
-            "atk": 2
-          },
+          "affixes": {},
           "tags": [
             "ranged",
             "firearm"
@@ -1275,42 +790,41 @@
         },
         "armor_slot": null,
         "tool_slot": {
-          "id": "field_pack",
+          "id": "scavenger_kit",
           "slot": "tool",
           "durability": 10,
           "max_durability": 10,
           "rarity": "rare",
           "requirements": {
-            "strength": 4
+            "luck": 4
           },
           "scaling": {},
           "affixes": {
-            "atk": 1,
-            "def": 1
+            "def": 2
           },
           "tags": [
-            "exploration"
+            "scavenging"
           ],
           "refinement_count": 1
         }
       }
     },
     {
-      "step": 9,
-      "node": "node_boss_overseer",
-      "event_id": "evt_boss_overseer",
+      "step": 6,
+      "node": "node_boss_gatekeeper",
+      "event_id": "evt_boss_gatekeeper",
       "option_index": 0,
       "warning_signals": [
         "WARNING: radiation will continue to threaten future travel.",
         "DANGER: this choice carries a high combat risk."
       ],
       "pre_choice_state": {
-        "hp": 17,
-        "food": 6,
-        "ammo": 12,
-        "medkits": 1,
-        "scrap": 54,
-        "radiation": 2,
+        "hp": 18,
+        "food": 8,
+        "ammo": 6,
+        "medkits": 8,
+        "scrap": 16,
+        "radiation": 1,
         "archetype": null,
         "character": {
           "background_id": "military_deserter",
@@ -1334,24 +848,22 @@
             "heavy_weapons",
             "tag_military_deserter"
           ],
-          "level": 4,
-          "xp": 0
+          "level": 2,
+          "xp": 13
         },
         "weapon_slot": {
           "id": "rust_rifle",
           "slot": "weapon",
-          "durability": 9,
+          "durability": 8,
           "max_durability": 10,
           "rarity": "rare",
           "requirements": {
-            "agility": 4
+            "agility": 3
           },
           "scaling": {
             "perception": 0.5
           },
-          "affixes": {
-            "atk": 2
-          },
+          "affixes": {},
           "tags": [
             "ranged",
             "firearm"
@@ -1360,21 +872,20 @@
         },
         "armor_slot": null,
         "tool_slot": {
-          "id": "field_pack",
+          "id": "scavenger_kit",
           "slot": "tool",
           "durability": 10,
           "max_durability": 10,
           "rarity": "rare",
           "requirements": {
-            "strength": 4
+            "luck": 4
           },
           "scaling": {},
           "affixes": {
-            "atk": 1,
-            "def": 1
+            "def": 2
           },
           "tags": [
-            "exploration"
+            "scavenging"
           ],
           "refinement_count": 1
         }
@@ -1384,29 +895,25 @@
       "combat_loot": [
         {
           "resource": "xp",
-          "amount": 50
+          "amount": 25
         },
         {
           "resource": "scrap",
-          "amount": 50
-        },
-        {
-          "resource": "medkits",
-          "amount": 3
+          "amount": 25
         }
       ],
       "effects": {
-        "xp": 10
+        "xp": 5
       },
       "equipment_change": null,
       "equipment_summary": null,
       "player_after": {
-        "hp": 4,
-        "food": 6,
-        "ammo": 8,
-        "medkits": 3,
-        "scrap": 104,
-        "radiation": 2,
+        "hp": 9,
+        "food": 8,
+        "ammo": 3,
+        "medkits": 8,
+        "scrap": 41,
+        "radiation": 1,
         "archetype": null,
         "character": {
           "background_id": "military_deserter",
@@ -1430,68 +937,68 @@
             "heavy_weapons",
             "tag_military_deserter"
           ],
-          "level": 4,
-          "xp": 60
+          "level": 2,
+          "xp": 43
         },
         "weapon_slot": {
-          "id": "sledgehammer",
+          "id": "hardened_blade",
           "slot": "weapon",
           "durability": 9,
           "max_durability": 10,
           "rarity": "legendary",
           "requirements": {
-            "strength": 7
+            "strength": 5
           },
           "scaling": {
-            "strength": 1.2
+            "strength": 0.8
           },
           "affixes": {
             "def": 2,
-            "atk": 2
+            "atk": 3
           },
           "tags": [
             "melee",
-            "heavy"
+            "quality"
           ],
           "refinement_count": 0
         },
         "armor_slot": null,
         "tool_slot": {
-          "id": "field_pack",
+          "id": "scavenger_kit",
           "slot": "tool",
           "durability": 10,
           "max_durability": 10,
           "rarity": "rare",
           "requirements": {
-            "strength": 4
+            "luck": 4
           },
           "scaling": {},
           "affixes": {
-            "atk": 1,
-            "def": 1
+            "def": 2
           },
           "tags": [
-            "exploration"
+            "scavenging"
           ],
           "refinement_count": 1
         }
       }
     },
     {
-      "step": 10,
-      "node": "node_final",
-      "event_id": "evt_final",
+      "step": 7,
+      "node": "node_deadzone_1",
+      "event_id": "evt_radioactive_orchard",
       "option_index": 0,
       "warning_signals": [
-        "WARNING: radiation will continue to threaten future travel."
+        "WARNING: radiation will continue to threaten future travel.",
+        "WARNING: this option adds radiation and increases long-term risk."
       ],
       "pre_choice_state": {
-        "hp": 13,
-        "food": 5,
-        "ammo": 8,
-        "medkits": 2,
-        "scrap": 104,
-        "radiation": 2,
+        "hp": 19,
+        "food": 7,
+        "ammo": 3,
+        "medkits": 7,
+        "scrap": 41,
+        "radiation": 1,
         "archetype": null,
         "character": {
           "background_id": "military_deserter",
@@ -1515,48 +1022,47 @@
             "heavy_weapons",
             "tag_military_deserter"
           ],
-          "level": 4,
-          "xp": 60
+          "level": 2,
+          "xp": 43
         },
         "weapon_slot": {
-          "id": "sledgehammer",
+          "id": "hardened_blade",
           "slot": "weapon",
           "durability": 9,
           "max_durability": 10,
           "rarity": "legendary",
           "requirements": {
-            "strength": 7
+            "strength": 5
           },
           "scaling": {
-            "strength": 1.2
+            "strength": 0.8
           },
           "affixes": {
             "def": 2,
-            "atk": 2
+            "atk": 3
           },
           "tags": [
             "melee",
-            "heavy"
+            "quality"
           ],
           "refinement_count": 0
         },
         "armor_slot": null,
         "tool_slot": {
-          "id": "field_pack",
+          "id": "scavenger_kit",
           "slot": "tool",
           "durability": 10,
           "max_durability": 10,
           "rarity": "rare",
           "requirements": {
-            "strength": 4
+            "luck": 4
           },
           "scaling": {},
           "affixes": {
-            "atk": 1,
-            "def": 1
+            "def": 2
           },
           "tags": [
-            "exploration"
+            "scavenging"
           ],
           "refinement_count": 1
         }
@@ -1565,17 +1071,18 @@
       "combat_triggered": false,
       "combat_loot": [],
       "effects": {
-        "food": -1
+        "food": 4,
+        "radiation": 3
       },
       "equipment_change": null,
       "equipment_summary": null,
       "player_after": {
-        "hp": 13,
-        "food": 4,
-        "ammo": 8,
-        "medkits": 2,
-        "scrap": 104,
-        "radiation": 2,
+        "hp": 19,
+        "food": 12,
+        "ammo": 3,
+        "medkits": 7,
+        "scrap": 41,
+        "radiation": 4,
         "archetype": null,
         "character": {
           "background_id": "military_deserter",
@@ -1599,109 +1106,812 @@
             "heavy_weapons",
             "tag_military_deserter"
           ],
-          "level": 5,
-          "xp": 20
+          "level": 3,
+          "xp": 23
         },
         "weapon_slot": {
-          "id": "sledgehammer",
+          "id": "hardened_blade",
           "slot": "weapon",
           "durability": 9,
           "max_durability": 10,
           "rarity": "legendary",
           "requirements": {
-            "strength": 7
+            "strength": 5
           },
           "scaling": {
-            "strength": 1.2
+            "strength": 0.8
           },
           "affixes": {
             "def": 2,
-            "atk": 2
+            "atk": 3
           },
           "tags": [
             "melee",
-            "heavy"
+            "quality"
           ],
           "refinement_count": 0
         },
         "armor_slot": null,
         "tool_slot": {
-          "id": "field_pack",
+          "id": "scavenger_kit",
           "slot": "tool",
           "durability": 10,
           "max_durability": 10,
           "rarity": "rare",
           "requirements": {
-            "strength": 4
+            "luck": 4
           },
           "scaling": {},
           "affixes": {
-            "atk": 1,
-            "def": 1
+            "def": 2
           },
           "tags": [
-            "exploration"
+            "scavenging"
           ],
           "refinement_count": 1
+        }
+      }
+    },
+    {
+      "step": 8,
+      "node": "node_trade_2",
+      "event_id": "evt_isolated_farm",
+      "option_index": 0,
+      "warning_signals": [
+        "WARNING: radiation will continue to threaten future travel."
+      ],
+      "pre_choice_state": {
+        "hp": 17,
+        "food": 11,
+        "ammo": 3,
+        "medkits": 7,
+        "scrap": 41,
+        "radiation": 4,
+        "archetype": null,
+        "character": {
+          "background_id": "military_deserter",
+          "display_name": "Sergeant Thorne",
+          "special": {
+            "strength": 8,
+            "perception": 6,
+            "endurance": 8,
+            "charisma": 2,
+            "intelligence": 4,
+            "agility": 6,
+            "luck": 6
+          },
+          "traits": [
+            "heavy_handed",
+            "trigger_discipline"
+          ],
+          "perks": [],
+          "tags": [
+            "tactical_combat",
+            "heavy_weapons",
+            "tag_military_deserter"
+          ],
+          "level": 3,
+          "xp": 23
+        },
+        "weapon_slot": {
+          "id": "hardened_blade",
+          "slot": "weapon",
+          "durability": 9,
+          "max_durability": 10,
+          "rarity": "legendary",
+          "requirements": {
+            "strength": 5
+          },
+          "scaling": {
+            "strength": 0.8
+          },
+          "affixes": {
+            "def": 2,
+            "atk": 3
+          },
+          "tags": [
+            "melee",
+            "quality"
+          ],
+          "refinement_count": 0
+        },
+        "armor_slot": null,
+        "tool_slot": {
+          "id": "scavenger_kit",
+          "slot": "tool",
+          "durability": 10,
+          "max_durability": 10,
+          "rarity": "rare",
+          "requirements": {
+            "luck": 4
+          },
+          "scaling": {},
+          "affixes": {
+            "def": 2
+          },
+          "tags": [
+            "scavenging"
+          ],
+          "refinement_count": 1
+        }
+      },
+      "pressure": true,
+      "combat_triggered": false,
+      "combat_loot": [],
+      "effects": {
+        "scrap": -2,
+        "food": 3
+      },
+      "equipment_change": null,
+      "equipment_summary": null,
+      "player_after": {
+        "hp": 17,
+        "food": 15,
+        "ammo": 3,
+        "medkits": 7,
+        "scrap": 39,
+        "radiation": 4,
+        "archetype": null,
+        "character": {
+          "background_id": "military_deserter",
+          "display_name": "Sergeant Thorne",
+          "special": {
+            "strength": 8,
+            "perception": 6,
+            "endurance": 8,
+            "charisma": 2,
+            "intelligence": 4,
+            "agility": 6,
+            "luck": 6
+          },
+          "traits": [
+            "heavy_handed",
+            "trigger_discipline"
+          ],
+          "perks": [],
+          "tags": [
+            "tactical_combat",
+            "heavy_weapons",
+            "tag_military_deserter"
+          ],
+          "level": 3,
+          "xp": 23
+        },
+        "weapon_slot": {
+          "id": "hardened_blade",
+          "slot": "weapon",
+          "durability": 9,
+          "max_durability": 10,
+          "rarity": "legendary",
+          "requirements": {
+            "strength": 5
+          },
+          "scaling": {
+            "strength": 0.8
+          },
+          "affixes": {
+            "def": 2,
+            "atk": 3
+          },
+          "tags": [
+            "melee",
+            "quality"
+          ],
+          "refinement_count": 0
+        },
+        "armor_slot": null,
+        "tool_slot": {
+          "id": "scavenger_kit",
+          "slot": "tool",
+          "durability": 10,
+          "max_durability": 10,
+          "rarity": "rare",
+          "requirements": {
+            "luck": 4
+          },
+          "scaling": {},
+          "affixes": {
+            "def": 2
+          },
+          "tags": [
+            "scavenging"
+          ],
+          "refinement_count": 1
+        }
+      }
+    },
+    {
+      "step": 9,
+      "node": "node_deadzone_2",
+      "event_id": "evt_sniper_nest",
+      "option_index": 0,
+      "warning_signals": [
+        "WARNING: radiation will continue to threaten future travel.",
+        "DANGER: this choice carries a high combat risk."
+      ],
+      "pre_choice_state": {
+        "hp": 15,
+        "food": 14,
+        "ammo": 3,
+        "medkits": 7,
+        "scrap": 39,
+        "radiation": 4,
+        "archetype": null,
+        "character": {
+          "background_id": "military_deserter",
+          "display_name": "Sergeant Thorne",
+          "special": {
+            "strength": 8,
+            "perception": 6,
+            "endurance": 8,
+            "charisma": 2,
+            "intelligence": 4,
+            "agility": 6,
+            "luck": 6
+          },
+          "traits": [
+            "heavy_handed",
+            "trigger_discipline"
+          ],
+          "perks": [],
+          "tags": [
+            "tactical_combat",
+            "heavy_weapons",
+            "tag_military_deserter"
+          ],
+          "level": 3,
+          "xp": 23
+        },
+        "weapon_slot": {
+          "id": "hardened_blade",
+          "slot": "weapon",
+          "durability": 9,
+          "max_durability": 10,
+          "rarity": "legendary",
+          "requirements": {
+            "strength": 5
+          },
+          "scaling": {
+            "strength": 0.8
+          },
+          "affixes": {
+            "def": 2,
+            "atk": 3
+          },
+          "tags": [
+            "melee",
+            "quality"
+          ],
+          "refinement_count": 0
+        },
+        "armor_slot": null,
+        "tool_slot": {
+          "id": "scavenger_kit",
+          "slot": "tool",
+          "durability": 10,
+          "max_durability": 10,
+          "rarity": "rare",
+          "requirements": {
+            "luck": 4
+          },
+          "scaling": {},
+          "affixes": {
+            "def": 2
+          },
+          "tags": [
+            "scavenging"
+          ],
+          "refinement_count": 1
+        }
+      },
+      "pressure": true,
+      "combat_triggered": false,
+      "combat_loot": [],
+      "effects": {
+        "scrap": -1,
+        "food": -1
+      },
+      "equipment_change": null,
+      "equipment_summary": null,
+      "player_after": {
+        "hp": 15,
+        "food": 13,
+        "ammo": 3,
+        "medkits": 7,
+        "scrap": 38,
+        "radiation": 4,
+        "archetype": null,
+        "character": {
+          "background_id": "military_deserter",
+          "display_name": "Sergeant Thorne",
+          "special": {
+            "strength": 8,
+            "perception": 6,
+            "endurance": 8,
+            "charisma": 2,
+            "intelligence": 4,
+            "agility": 6,
+            "luck": 6
+          },
+          "traits": [
+            "heavy_handed",
+            "trigger_discipline"
+          ],
+          "perks": [],
+          "tags": [
+            "tactical_combat",
+            "heavy_weapons",
+            "tag_military_deserter"
+          ],
+          "level": 3,
+          "xp": 23
+        },
+        "weapon_slot": {
+          "id": "hardened_blade",
+          "slot": "weapon",
+          "durability": 9,
+          "max_durability": 10,
+          "rarity": "legendary",
+          "requirements": {
+            "strength": 5
+          },
+          "scaling": {
+            "strength": 0.8
+          },
+          "affixes": {
+            "def": 2,
+            "atk": 3
+          },
+          "tags": [
+            "melee",
+            "quality"
+          ],
+          "refinement_count": 0
+        },
+        "armor_slot": null,
+        "tool_slot": {
+          "id": "scavenger_kit",
+          "slot": "tool",
+          "durability": 10,
+          "max_durability": 10,
+          "rarity": "rare",
+          "requirements": {
+            "luck": 4
+          },
+          "scaling": {},
+          "affixes": {
+            "def": 2
+          },
+          "tags": [
+            "scavenging"
+          ],
+          "refinement_count": 1
+        }
+      }
+    },
+    {
+      "step": 10,
+      "node": "node_deadzone_3",
+      "event_id": "evt_tech_vault",
+      "option_index": 1,
+      "warning_signals": [
+        "WARNING: radiation will continue to threaten future travel."
+      ],
+      "pre_choice_state": {
+        "hp": 20,
+        "food": 12,
+        "ammo": 3,
+        "medkits": 6,
+        "scrap": 18,
+        "radiation": 4,
+        "archetype": null,
+        "character": {
+          "background_id": "military_deserter",
+          "display_name": "Sergeant Thorne",
+          "special": {
+            "strength": 8,
+            "perception": 6,
+            "endurance": 8,
+            "charisma": 2,
+            "intelligence": 4,
+            "agility": 6,
+            "luck": 6
+          },
+          "traits": [
+            "heavy_handed",
+            "trigger_discipline"
+          ],
+          "perks": [],
+          "tags": [
+            "tactical_combat",
+            "heavy_weapons",
+            "tag_military_deserter"
+          ],
+          "level": 3,
+          "xp": 23
+        },
+        "weapon_slot": {
+          "id": "hardened_blade",
+          "slot": "weapon",
+          "durability": 9,
+          "max_durability": 10,
+          "rarity": "legendary",
+          "requirements": {
+            "strength": 5
+          },
+          "scaling": {
+            "strength": 0.8
+          },
+          "affixes": {
+            "def": 2,
+            "atk": 3
+          },
+          "tags": [
+            "melee",
+            "quality"
+          ],
+          "refinement_count": 0
+        },
+        "armor_slot": null,
+        "tool_slot": {
+          "id": "scavenger_kit",
+          "slot": "tool",
+          "durability": 10,
+          "max_durability": 10,
+          "rarity": "rare",
+          "requirements": {
+            "luck": 4
+          },
+          "scaling": {},
+          "affixes": {
+            "def": 2
+          },
+          "tags": [
+            "scavenging"
+          ],
+          "refinement_count": 2
+        }
+      },
+      "pressure": true,
+      "combat_triggered": true,
+      "combat_loot": [
+        {
+          "resource": "medkits",
+          "amount": 2
+        },
+        {
+          "resource": "scrap",
+          "amount": 12
+        }
+      ],
+      "effects": {
+        "scrap": 12,
+        "hp": -2,
+        "xp": 5
+      },
+      "equipment_change": null,
+      "equipment_summary": null,
+      "player_after": {
+        "hp": 17,
+        "food": 12,
+        "ammo": 0,
+        "medkits": 8,
+        "scrap": 43,
+        "radiation": 4,
+        "archetype": null,
+        "character": {
+          "background_id": "military_deserter",
+          "display_name": "Sergeant Thorne",
+          "special": {
+            "strength": 8,
+            "perception": 6,
+            "endurance": 8,
+            "charisma": 2,
+            "intelligence": 4,
+            "agility": 6,
+            "luck": 6
+          },
+          "traits": [
+            "heavy_handed",
+            "trigger_discipline"
+          ],
+          "perks": [],
+          "tags": [
+            "tactical_combat",
+            "heavy_weapons",
+            "tag_military_deserter"
+          ],
+          "level": 3,
+          "xp": 28
+        },
+        "weapon_slot": {
+          "id": "hardened_blade",
+          "slot": "weapon",
+          "durability": 8,
+          "max_durability": 10,
+          "rarity": "legendary",
+          "requirements": {
+            "strength": 5
+          },
+          "scaling": {
+            "strength": 0.8
+          },
+          "affixes": {
+            "def": 2,
+            "atk": 3
+          },
+          "tags": [
+            "melee",
+            "quality"
+          ],
+          "refinement_count": 0
+        },
+        "armor_slot": null,
+        "tool_slot": {
+          "id": "scavenger_kit",
+          "slot": "tool",
+          "durability": 10,
+          "max_durability": 10,
+          "rarity": "rare",
+          "requirements": {
+            "luck": 4
+          },
+          "scaling": {},
+          "affixes": {
+            "def": 2
+          },
+          "tags": [
+            "scavenging"
+          ],
+          "refinement_count": 2
+        }
+      }
+    },
+    {
+      "step": 11,
+      "node": "node_boss_overseer",
+      "event_id": "evt_boss_overseer",
+      "option_index": 0,
+      "warning_signals": [
+        "WARNING: radiation will continue to threaten future travel.",
+        "DANGER: this choice carries a high combat risk."
+      ],
+      "pre_choice_state": {
+        "hp": 15,
+        "food": 11,
+        "ammo": 0,
+        "medkits": 8,
+        "scrap": 43,
+        "radiation": 4,
+        "archetype": null,
+        "character": {
+          "background_id": "military_deserter",
+          "display_name": "Sergeant Thorne",
+          "special": {
+            "strength": 8,
+            "perception": 6,
+            "endurance": 8,
+            "charisma": 2,
+            "intelligence": 4,
+            "agility": 6,
+            "luck": 6
+          },
+          "traits": [
+            "heavy_handed",
+            "trigger_discipline"
+          ],
+          "perks": [],
+          "tags": [
+            "tactical_combat",
+            "heavy_weapons",
+            "tag_military_deserter"
+          ],
+          "level": 3,
+          "xp": 28
+        },
+        "weapon_slot": {
+          "id": "hardened_blade",
+          "slot": "weapon",
+          "durability": 8,
+          "max_durability": 10,
+          "rarity": "legendary",
+          "requirements": {
+            "strength": 5
+          },
+          "scaling": {
+            "strength": 0.8
+          },
+          "affixes": {
+            "def": 2,
+            "atk": 3
+          },
+          "tags": [
+            "melee",
+            "quality"
+          ],
+          "refinement_count": 0
+        },
+        "armor_slot": null,
+        "tool_slot": {
+          "id": "scavenger_kit",
+          "slot": "tool",
+          "durability": 10,
+          "max_durability": 10,
+          "rarity": "rare",
+          "requirements": {
+            "luck": 4
+          },
+          "scaling": {},
+          "affixes": {
+            "def": 2
+          },
+          "tags": [
+            "scavenging"
+          ],
+          "refinement_count": 2
+        }
+      },
+      "pressure": true,
+      "combat_triggered": true,
+      "combat_loot": [],
+      "effects": {
+        "xp": 10
+      },
+      "equipment_change": null,
+      "equipment_summary": null,
+      "player_after": {
+        "hp": 0,
+        "food": 11,
+        "ammo": 0,
+        "medkits": 0,
+        "scrap": 43,
+        "radiation": 4,
+        "archetype": null,
+        "character": {
+          "background_id": "military_deserter",
+          "display_name": "Sergeant Thorne",
+          "special": {
+            "strength": 8,
+            "perception": 6,
+            "endurance": 8,
+            "charisma": 2,
+            "intelligence": 4,
+            "agility": 6,
+            "luck": 6
+          },
+          "traits": [
+            "heavy_handed",
+            "trigger_discipline"
+          ],
+          "perks": [],
+          "tags": [
+            "tactical_combat",
+            "heavy_weapons",
+            "tag_military_deserter"
+          ],
+          "level": 4,
+          "xp": 8
+        },
+        "weapon_slot": {
+          "id": "hardened_blade",
+          "slot": "weapon",
+          "durability": 7,
+          "max_durability": 10,
+          "rarity": "legendary",
+          "requirements": {
+            "strength": 5
+          },
+          "scaling": {
+            "strength": 0.8
+          },
+          "affixes": {
+            "def": 2,
+            "atk": 3
+          },
+          "tags": [
+            "melee",
+            "quality"
+          ],
+          "refinement_count": 0
+        },
+        "armor_slot": null,
+        "tool_slot": {
+          "id": "scavenger_kit",
+          "slot": "tool",
+          "durability": 10,
+          "max_durability": 10,
+          "rarity": "rare",
+          "requirements": {
+            "luck": 4
+          },
+          "scaling": {},
+          "affixes": {
+            "def": 2
+          },
+          "tags": [
+            "scavenging"
+          ],
+          "refinement_count": 2
         }
       }
     }
   ],
   "summary": {
-    "pressure_count": 9,
+    "pressure_count": 10,
     "death_cause_attribution": true,
-    "resource_signature": "hp:13|food:4|ammo:8|medkits:2|scrap:104|radiation:2|weapon:EquipmentState(id='sledgehammer', slot='weapon', durability=9, max_durability=10, rarity='legendary', requirements={'strength': 7}, scaling={'strength': 1.2}, affixes={'def': 2, 'atk': 2}, tags=['melee', 'heavy'], refinement_count=0)|armor:None|tool:EquipmentState(id='field_pack', slot='tool', durability=10, max_durability=10, rarity='rare', requirements={'strength': 4}, scaling={}, affixes={'atk': 1, 'def': 1}, tags=['exploration'], refinement_count=1)"
+    "resource_signature": "hp:0|food:11|ammo:0|medkits:0|scrap:43|radiation:4|weapon:EquipmentState(id='hardened_blade', slot='weapon', durability=7, max_durability=10, rarity='legendary', requirements={'strength': 5}, scaling={'strength': 0.8}, affixes={'def': 2, 'atk': 3}, tags=['melee', 'quality'], refinement_count=0)|armor:None|tool:EquipmentState(id='scavenger_kit', slot='tool', durability=10, max_durability=10, rarity='rare', requirements={'luck': 4}, scaling={}, affixes={'def': 2}, tags=['scavenging'], refinement_count=2)"
   },
   "failure_analysis": {
-    "death_chain_length": 0,
-    "primary_blame_factor": null,
-    "regret_nodes": [],
-    "steps_from_regret_to_death": 0,
+    "death_chain_length": 3,
+    "primary_blame_factor": "combat",
+    "regret_nodes": [
+      {
+        "node_id": "node_deadzone_3",
+        "event_id": "evt_tech_vault",
+        "blame_score": 0.19,
+        "description": "lost 2 hp, accepted combat risk, carried radiation into later travel",
+        "steps_to_death": 1
+      },
+      {
+        "node_id": "node_deadzone_1",
+        "event_id": "evt_radioactive_orchard",
+        "blame_score": 0.15,
+        "description": "took +3 radiation, carried radiation into later travel",
+        "steps_to_death": 4
+      },
+      {
+        "node_id": "node_fringe_2",
+        "event_id": "evt_mutant_burrow",
+        "blame_score": 0.13,
+        "description": "lost 1 hp, accepted combat risk, carried radiation into later travel",
+        "steps_to_death": 8
+      }
+    ],
+    "steps_from_regret_to_death": 1,
     "is_trash_time_death": false
   },
   "run_summary": {
-    "headline": "standard_journey_military_deserter_7_batch_3: victory via reached_final_node after 10 steps",
+    "headline": "standard_journey_military_deserter_7_batch_3: loss via combat_death after 11 steps",
     "route_family": "unknown",
-    "outcome": "victory",
-    "key_turning_point": "node_deadzone_1 (tool -> field_pack (replaced empty))",
+    "outcome": "combat_death",
+    "key_turning_point": "node_deadzone_3 (lost 2 hp, accepted combat risk, carried radiation into later travel)",
     "notable_equipment": [
-      "rust_rifle",
-      "field_pack"
+      "scavenger_kit"
     ],
     "telemetry": {
-      "total_steps": 10,
-      "pressure_count": 9,
+      "total_steps": 11,
+      "pressure_count": 10,
       "combat_count": 5,
-      "loot_drop_count": 11,
-      "loot_total_amount": 184,
-      "equipment_change_count": 2,
+      "loot_drop_count": 8,
+      "loot_total_amount": 85,
+      "equipment_change_count": 1,
       "rarity_distribution": {
-        "common": 1,
-        "rare": 1
+        "common": 1
       },
-      "total_atk_affix_gain": 3,
-      "total_def_affix_gain": 1,
+      "total_atk_affix_gain": 0,
+      "total_def_affix_gain": 2,
       "equipment_ids": [
-        "rust_rifle",
-        "field_pack"
+        "scavenger_kit"
       ],
       "loot_resources": {
-        "ammo": 15,
-        "scrap": 91,
-        "xp": 75,
-        "medkits": 3
+        "ammo": 5,
+        "scrap": 51,
+        "medkits": 4,
+        "xp": 25
       },
-      "max_radiation": 2,
-      "min_food": 4,
-      "min_hp": 4,
+      "max_radiation": 4,
+      "min_food": 8,
+      "min_hp": 0,
       "low_resource_flags": [
+        "low_hp",
+        "low_ammo",
         "high_radiation"
       ],
       "risk_tags": [
         "combat_seen",
         "radiation_pressure",
         "equipment_arc",
-        "end_reached_final_node",
+        "end_combat_death",
         "radiation_carryover"
       ],
       "character": {

@@ -4,9 +4,11 @@
   "route": [
     "node_fringe_1",
     "node_fringe_2",
+    "node_trade_1",
     "node_fringe_3",
     "node_boss_gatekeeper",
     "node_deadzone_1",
+    "node_trade_2",
     "node_deadzone_2",
     "node_deadzone_3",
     "node_boss_overseer",
@@ -16,11 +18,11 @@
   "victory": false,
   "end_reason": "combat_death",
   "player_final": {
-    "hp": 0,
+    "hp": -3,
     "food": 9,
     "ammo": 0,
     "medkits": 0,
-    "scrap": 63,
+    "scrap": 57,
     "radiation": 1,
     "archetype": null,
     "character": {
@@ -45,29 +47,25 @@
         "stealth_expert",
         "tag_cult_escapee"
       ],
-      "level": 3,
-      "xp": 25
+      "level": 4,
+      "xp": 3
     },
     "weapon_slot": {
-      "id": "hardened_blade",
+      "id": "rust_rifle",
       "slot": "weapon",
-      "durability": 8,
+      "durability": 9,
       "max_durability": 10,
-      "rarity": "legendary",
+      "rarity": "common",
       "requirements": {
-        "strength": 5
+        "agility": 4
       },
       "scaling": {
-        "strength": 0.8
+        "perception": 0.5
       },
-      "affixes": {
-        "def": 3,
-        "max_durability": 10
-      },
+      "affixes": {},
       "tags": [
-        "melee",
-        "quality",
-        "lead_lined"
+        "ranged",
+        "firearm"
       ],
       "refinement_count": 0
     },
@@ -79,10 +77,13 @@
       "max_durability": 10,
       "rarity": "rare",
       "requirements": {
-        "strength": 3
+        "strength": 4
       },
       "scaling": {},
-      "affixes": {},
+      "affixes": {
+        "atk": 1,
+        "def": 1
+      },
       "tags": [
         "exploration"
       ],
@@ -483,10 +484,12 @@
     },
     {
       "step": 4,
-      "node": "node_fringe_3",
-      "event_id": "evt_tech_vault",
+      "node": "node_trade_1",
+      "event_id": "evt_village",
       "option_index": 0,
-      "warning_signals": [],
+      "warning_signals": [
+        "WARNING: radiation will continue to threaten future travel."
+      ],
       "pre_choice_state": {
         "hp": 20,
         "food": 10,
@@ -549,6 +552,195 @@
       "combat_triggered": false,
       "combat_loot": [],
       "effects": {
+        "ammo": -1,
+        "medkits": 1,
+        "xp": 3
+      },
+      "equipment_change": {
+        "slot": "tool",
+        "item": "scavenger_kit",
+        "item_data": {
+          "id": "scavenger_kit",
+          "slot": "tool",
+          "durability": 10,
+          "max_durability": 10,
+          "rarity": "common",
+          "requirements": {
+            "luck": 4
+          },
+          "scaling": {},
+          "affixes": {
+            "def": 2
+          },
+          "tags": [
+            "scavenging"
+          ],
+          "refinement_count": 0
+        },
+        "changed": true
+      },
+      "equipment_summary": "tool -> scavenger_kit (replaced empty)",
+      "player_after": {
+        "hp": 20,
+        "food": 10,
+        "ammo": 5,
+        "medkits": 8,
+        "scrap": 13,
+        "radiation": 1,
+        "archetype": null,
+        "character": {
+          "background_id": "cult_escapee",
+          "display_name": "Brother Malachi",
+          "special": {
+            "strength": 4,
+            "perception": 8,
+            "endurance": 5,
+            "charisma": 7,
+            "intelligence": 7,
+            "agility": 5,
+            "luck": 4
+          },
+          "traits": [
+            "paranoid_reflex",
+            "radiation_adapted"
+          ],
+          "perks": [],
+          "tags": [
+            "religious_lore",
+            "stealth_expert",
+            "tag_cult_escapee"
+          ],
+          "level": 2,
+          "xp": 8
+        },
+        "weapon_slot": {
+          "id": "rust_rifle",
+          "slot": "weapon",
+          "durability": 9,
+          "max_durability": 10,
+          "rarity": "legendary",
+          "requirements": {
+            "agility": 4
+          },
+          "scaling": {
+            "perception": 0.5
+          },
+          "affixes": {
+            "loot_scrap": 1
+          },
+          "tags": [
+            "ranged",
+            "firearm",
+            "vampiric"
+          ],
+          "refinement_count": 0
+        },
+        "armor_slot": null,
+        "tool_slot": {
+          "id": "scavenger_kit",
+          "slot": "tool",
+          "durability": 10,
+          "max_durability": 10,
+          "rarity": "common",
+          "requirements": {
+            "luck": 4
+          },
+          "scaling": {},
+          "affixes": {
+            "def": 2
+          },
+          "tags": [
+            "scavenging"
+          ],
+          "refinement_count": 0
+        }
+      }
+    },
+    {
+      "step": 5,
+      "node": "node_fringe_3",
+      "event_id": "evt_tech_vault",
+      "option_index": 0,
+      "warning_signals": [],
+      "pre_choice_state": {
+        "hp": 20,
+        "food": 9,
+        "ammo": 5,
+        "medkits": 8,
+        "scrap": 8,
+        "radiation": 1,
+        "archetype": null,
+        "character": {
+          "background_id": "cult_escapee",
+          "display_name": "Brother Malachi",
+          "special": {
+            "strength": 4,
+            "perception": 8,
+            "endurance": 5,
+            "charisma": 7,
+            "intelligence": 7,
+            "agility": 5,
+            "luck": 4
+          },
+          "traits": [
+            "paranoid_reflex",
+            "radiation_adapted"
+          ],
+          "perks": [],
+          "tags": [
+            "religious_lore",
+            "stealth_expert",
+            "tag_cult_escapee"
+          ],
+          "level": 2,
+          "xp": 8
+        },
+        "weapon_slot": {
+          "id": "rust_rifle",
+          "slot": "weapon",
+          "durability": 9,
+          "max_durability": 10,
+          "rarity": "legendary",
+          "requirements": {
+            "agility": 4
+          },
+          "scaling": {
+            "perception": 0.5
+          },
+          "affixes": {
+            "loot_scrap": 1
+          },
+          "tags": [
+            "ranged",
+            "firearm",
+            "vampiric"
+          ],
+          "refinement_count": 0
+        },
+        "armor_slot": null,
+        "tool_slot": {
+          "id": "scavenger_kit",
+          "slot": "tool",
+          "durability": 10,
+          "max_durability": 10,
+          "rarity": "rare",
+          "requirements": {
+            "luck": 4
+          },
+          "scaling": {},
+          "affixes": {
+            "def": 2
+          },
+          "tags": [
+            "scavenging"
+          ],
+          "refinement_count": 1
+        }
+      },
+      "pressure": true,
+      "combat_triggered": false,
+      "combat_loot": [],
+      "effects": {
         "scrap": 25,
         "medkits": 2,
         "radiation": -1,
@@ -558,10 +750,10 @@
       "equipment_summary": null,
       "player_after": {
         "hp": 20,
-        "food": 10,
-        "ammo": 6,
-        "medkits": 9,
-        "scrap": 38,
+        "food": 9,
+        "ammo": 5,
+        "medkits": 10,
+        "scrap": 34,
         "radiation": 0,
         "archetype": null,
         "character": {
@@ -587,7 +779,7 @@
             "tag_cult_escapee"
           ],
           "level": 2,
-          "xp": 15
+          "xp": 18
         },
         "weapon_slot": {
           "id": "rust_rifle",
@@ -612,11 +804,28 @@
           "refinement_count": 0
         },
         "armor_slot": null,
-        "tool_slot": null
+        "tool_slot": {
+          "id": "scavenger_kit",
+          "slot": "tool",
+          "durability": 10,
+          "max_durability": 10,
+          "rarity": "rare",
+          "requirements": {
+            "luck": 4
+          },
+          "scaling": {},
+          "affixes": {
+            "def": 2
+          },
+          "tags": [
+            "scavenging"
+          ],
+          "refinement_count": 1
+        }
       }
     },
     {
-      "step": 5,
+      "step": 6,
       "node": "node_boss_gatekeeper",
       "event_id": "evt_boss_gatekeeper",
       "option_index": 0,
@@ -625,10 +834,10 @@
       ],
       "pre_choice_state": {
         "hp": 20,
-        "food": 9,
-        "ammo": 6,
-        "medkits": 9,
-        "scrap": 38,
+        "food": 8,
+        "ammo": 5,
+        "medkits": 10,
+        "scrap": 34,
         "radiation": 0,
         "archetype": null,
         "character": {
@@ -654,7 +863,7 @@
             "tag_cult_escapee"
           ],
           "level": 2,
-          "xp": 15
+          "xp": 18
         },
         "weapon_slot": {
           "id": "rust_rifle",
@@ -679,7 +888,24 @@
           "refinement_count": 0
         },
         "armor_slot": null,
-        "tool_slot": null
+        "tool_slot": {
+          "id": "scavenger_kit",
+          "slot": "tool",
+          "durability": 10,
+          "max_durability": 10,
+          "rarity": "rare",
+          "requirements": {
+            "luck": 4
+          },
+          "scaling": {},
+          "affixes": {
+            "def": 2
+          },
+          "tags": [
+            "scavenging"
+          ],
+          "refinement_count": 1
+        }
       },
       "pressure": true,
       "combat_triggered": true,
@@ -699,11 +925,11 @@
       "equipment_change": null,
       "equipment_summary": null,
       "player_after": {
-        "hp": 9,
-        "food": 9,
-        "ammo": 3,
-        "medkits": 9,
-        "scrap": 63,
+        "hp": 14,
+        "food": 8,
+        "ammo": 2,
+        "medkits": 10,
+        "scrap": 59,
         "radiation": 0,
         "archetype": null,
         "character": {
@@ -729,7 +955,7 @@
             "tag_cult_escapee"
           ],
           "level": 3,
-          "xp": 25
+          "xp": 28
         },
         "weapon_slot": {
           "id": "hardened_blade",
@@ -744,22 +970,39 @@
             "strength": 0.8
           },
           "affixes": {
-            "def": 3,
-            "max_durability": 10
+            "loot_scrap": 1,
+            "atk": 1,
+            "def": 1
           },
           "tags": [
             "melee",
-            "quality",
-            "lead_lined"
+            "quality"
           ],
           "refinement_count": 0
         },
         "armor_slot": null,
-        "tool_slot": null
+        "tool_slot": {
+          "id": "scavenger_kit",
+          "slot": "tool",
+          "durability": 10,
+          "max_durability": 10,
+          "rarity": "rare",
+          "requirements": {
+            "luck": 4
+          },
+          "scaling": {},
+          "affixes": {
+            "def": 2
+          },
+          "tags": [
+            "scavenging"
+          ],
+          "refinement_count": 1
+        }
       }
     },
     {
-      "step": 6,
+      "step": 7,
       "node": "node_deadzone_1",
       "event_id": "evt_floodplain",
       "option_index": 0,
@@ -768,11 +1011,11 @@
         "WARNING: this option adds radiation and increases long-term risk."
       ],
       "pre_choice_state": {
-        "hp": 19,
-        "food": 8,
-        "ammo": 3,
-        "medkits": 8,
-        "scrap": 63,
+        "hp": 14,
+        "food": 7,
+        "ammo": 2,
+        "medkits": 10,
+        "scrap": 59,
         "radiation": 0,
         "archetype": null,
         "character": {
@@ -798,7 +1041,7 @@
             "tag_cult_escapee"
           ],
           "level": 3,
-          "xp": 25
+          "xp": 28
         },
         "weapon_slot": {
           "id": "hardened_blade",
@@ -813,21 +1056,38 @@
             "strength": 0.8
           },
           "affixes": {
-            "def": 3,
-            "max_durability": 10
+            "loot_scrap": 1,
+            "atk": 1,
+            "def": 1
           },
           "tags": [
             "melee",
-            "quality",
-            "lead_lined"
+            "quality"
           ],
           "refinement_count": 0
         },
         "armor_slot": null,
-        "tool_slot": null
+        "tool_slot": {
+          "id": "scavenger_kit",
+          "slot": "tool",
+          "durability": 10,
+          "max_durability": 10,
+          "rarity": "rare",
+          "requirements": {
+            "luck": 4
+          },
+          "scaling": {},
+          "affixes": {
+            "def": 2
+          },
+          "tags": [
+            "scavenging"
+          ],
+          "refinement_count": 1
+        }
       },
       "pressure": true,
-      "combat_triggered": true,
+      "combat_triggered": false,
       "combat_loot": [],
       "effects": {
         "food": -1,
@@ -843,10 +1103,13 @@
           "max_durability": 10,
           "rarity": "rare",
           "requirements": {
-            "strength": 3
+            "strength": 4
           },
           "scaling": {},
-          "affixes": {},
+          "affixes": {
+            "atk": 1,
+            "def": 1
+          },
           "tags": [
             "exploration"
           ],
@@ -856,11 +1119,11 @@
       },
       "equipment_summary": "tool -> field_pack (replaced empty)",
       "player_after": {
-        "hp": 0,
-        "food": 9,
-        "ammo": 0,
-        "medkits": 0,
-        "scrap": 63,
+        "hp": 14,
+        "food": 8,
+        "ammo": 2,
+        "medkits": 10,
+        "scrap": 59,
         "radiation": 1,
         "archetype": null,
         "character": {
@@ -886,12 +1149,12 @@
             "tag_cult_escapee"
           ],
           "level": 3,
-          "xp": 25
+          "xp": 28
         },
         "weapon_slot": {
           "id": "hardened_blade",
           "slot": "weapon",
-          "durability": 8,
+          "durability": 9,
           "max_durability": 10,
           "rarity": "legendary",
           "requirements": {
@@ -901,13 +1164,13 @@
             "strength": 0.8
           },
           "affixes": {
-            "def": 3,
-            "max_durability": 10
+            "loot_scrap": 1,
+            "atk": 1,
+            "def": 1
           },
           "tags": [
             "melee",
-            "quality",
-            "lead_lined"
+            "quality"
           ],
           "refinement_count": 0
         },
@@ -919,10 +1182,377 @@
           "max_durability": 10,
           "rarity": "rare",
           "requirements": {
-            "strength": 3
+            "strength": 4
           },
           "scaling": {},
+          "affixes": {
+            "atk": 1,
+            "def": 1
+          },
+          "tags": [
+            "exploration"
+          ],
+          "refinement_count": 0
+        }
+      }
+    },
+    {
+      "step": 8,
+      "node": "node_trade_2",
+      "event_id": "evt_isolated_farm",
+      "option_index": 0,
+      "warning_signals": [
+        "WARNING: radiation will continue to threaten future travel."
+      ],
+      "pre_choice_state": {
+        "hp": 14,
+        "food": 7,
+        "ammo": 2,
+        "medkits": 10,
+        "scrap": 59,
+        "radiation": 1,
+        "archetype": null,
+        "character": {
+          "background_id": "cult_escapee",
+          "display_name": "Brother Malachi",
+          "special": {
+            "strength": 4,
+            "perception": 8,
+            "endurance": 5,
+            "charisma": 7,
+            "intelligence": 7,
+            "agility": 5,
+            "luck": 4
+          },
+          "traits": [
+            "paranoid_reflex",
+            "radiation_adapted"
+          ],
+          "perks": [],
+          "tags": [
+            "religious_lore",
+            "stealth_expert",
+            "tag_cult_escapee"
+          ],
+          "level": 3,
+          "xp": 28
+        },
+        "weapon_slot": {
+          "id": "hardened_blade",
+          "slot": "weapon",
+          "durability": 9,
+          "max_durability": 10,
+          "rarity": "legendary",
+          "requirements": {
+            "strength": 5
+          },
+          "scaling": {
+            "strength": 0.8
+          },
+          "affixes": {
+            "loot_scrap": 1,
+            "atk": 1,
+            "def": 1
+          },
+          "tags": [
+            "melee",
+            "quality"
+          ],
+          "refinement_count": 0
+        },
+        "armor_slot": null,
+        "tool_slot": {
+          "id": "field_pack",
+          "slot": "tool",
+          "durability": 10,
+          "max_durability": 10,
+          "rarity": "rare",
+          "requirements": {
+            "strength": 4
+          },
+          "scaling": {},
+          "affixes": {
+            "atk": 1,
+            "def": 1
+          },
+          "tags": [
+            "exploration"
+          ],
+          "refinement_count": 0
+        }
+      },
+      "pressure": true,
+      "combat_triggered": false,
+      "combat_loot": [],
+      "effects": {
+        "scrap": -2,
+        "food": 3
+      },
+      "equipment_change": null,
+      "equipment_summary": null,
+      "player_after": {
+        "hp": 14,
+        "food": 10,
+        "ammo": 2,
+        "medkits": 10,
+        "scrap": 57,
+        "radiation": 1,
+        "archetype": null,
+        "character": {
+          "background_id": "cult_escapee",
+          "display_name": "Brother Malachi",
+          "special": {
+            "strength": 4,
+            "perception": 8,
+            "endurance": 5,
+            "charisma": 7,
+            "intelligence": 7,
+            "agility": 5,
+            "luck": 4
+          },
+          "traits": [
+            "paranoid_reflex",
+            "radiation_adapted"
+          ],
+          "perks": [],
+          "tags": [
+            "religious_lore",
+            "stealth_expert",
+            "tag_cult_escapee"
+          ],
+          "level": 3,
+          "xp": 28
+        },
+        "weapon_slot": {
+          "id": "hardened_blade",
+          "slot": "weapon",
+          "durability": 9,
+          "max_durability": 10,
+          "rarity": "legendary",
+          "requirements": {
+            "strength": 5
+          },
+          "scaling": {
+            "strength": 0.8
+          },
+          "affixes": {
+            "loot_scrap": 1,
+            "atk": 1,
+            "def": 1
+          },
+          "tags": [
+            "melee",
+            "quality"
+          ],
+          "refinement_count": 0
+        },
+        "armor_slot": null,
+        "tool_slot": {
+          "id": "field_pack",
+          "slot": "tool",
+          "durability": 10,
+          "max_durability": 10,
+          "rarity": "rare",
+          "requirements": {
+            "strength": 4
+          },
+          "scaling": {},
+          "affixes": {
+            "atk": 1,
+            "def": 1
+          },
+          "tags": [
+            "exploration"
+          ],
+          "refinement_count": 0
+        }
+      }
+    },
+    {
+      "step": 9,
+      "node": "node_deadzone_2",
+      "event_id": "evt_checkpoint",
+      "option_index": 0,
+      "warning_signals": [
+        "WARNING: radiation will continue to threaten future travel.",
+        "DANGER: this choice carries a high combat risk."
+      ],
+      "pre_choice_state": {
+        "hp": 14,
+        "food": 9,
+        "ammo": 2,
+        "medkits": 10,
+        "scrap": 57,
+        "radiation": 1,
+        "archetype": null,
+        "character": {
+          "background_id": "cult_escapee",
+          "display_name": "Brother Malachi",
+          "special": {
+            "strength": 4,
+            "perception": 8,
+            "endurance": 5,
+            "charisma": 7,
+            "intelligence": 7,
+            "agility": 5,
+            "luck": 4
+          },
+          "traits": [
+            "paranoid_reflex",
+            "radiation_adapted"
+          ],
+          "perks": [],
+          "tags": [
+            "religious_lore",
+            "stealth_expert",
+            "tag_cult_escapee"
+          ],
+          "level": 3,
+          "xp": 28
+        },
+        "weapon_slot": {
+          "id": "hardened_blade",
+          "slot": "weapon",
+          "durability": 9,
+          "max_durability": 10,
+          "rarity": "legendary",
+          "requirements": {
+            "strength": 5
+          },
+          "scaling": {
+            "strength": 0.8
+          },
+          "affixes": {
+            "loot_scrap": 1,
+            "atk": 1,
+            "def": 1
+          },
+          "tags": [
+            "melee",
+            "quality"
+          ],
+          "refinement_count": 0
+        },
+        "armor_slot": null,
+        "tool_slot": {
+          "id": "field_pack",
+          "slot": "tool",
+          "durability": 10,
+          "max_durability": 10,
+          "rarity": "rare",
+          "requirements": {
+            "strength": 4
+          },
+          "scaling": {},
+          "affixes": {
+            "atk": 1,
+            "def": 1
+          },
+          "tags": [
+            "exploration"
+          ],
+          "refinement_count": 0
+        }
+      },
+      "pressure": true,
+      "combat_triggered": true,
+      "combat_loot": [],
+      "effects": {
+        "ammo": 0,
+        "xp": 5
+      },
+      "equipment_change": {
+        "slot": "weapon",
+        "item": "rust_rifle",
+        "item_data": {
+          "id": "rust_rifle",
+          "slot": "weapon",
+          "durability": 10,
+          "max_durability": 10,
+          "rarity": "common",
+          "requirements": {
+            "agility": 4
+          },
+          "scaling": {
+            "perception": 0.5
+          },
           "affixes": {},
+          "tags": [
+            "ranged",
+            "firearm"
+          ],
+          "refinement_count": 0
+        },
+        "changed": true
+      },
+      "equipment_summary": "weapon -> rust_rifle (replaced empty)",
+      "player_after": {
+        "hp": -3,
+        "food": 9,
+        "ammo": 0,
+        "medkits": 0,
+        "scrap": 57,
+        "radiation": 1,
+        "archetype": null,
+        "character": {
+          "background_id": "cult_escapee",
+          "display_name": "Brother Malachi",
+          "special": {
+            "strength": 4,
+            "perception": 8,
+            "endurance": 5,
+            "charisma": 7,
+            "intelligence": 7,
+            "agility": 5,
+            "luck": 4
+          },
+          "traits": [
+            "paranoid_reflex",
+            "radiation_adapted"
+          ],
+          "perks": [],
+          "tags": [
+            "religious_lore",
+            "stealth_expert",
+            "tag_cult_escapee"
+          ],
+          "level": 4,
+          "xp": 3
+        },
+        "weapon_slot": {
+          "id": "rust_rifle",
+          "slot": "weapon",
+          "durability": 9,
+          "max_durability": 10,
+          "rarity": "common",
+          "requirements": {
+            "agility": 4
+          },
+          "scaling": {
+            "perception": 0.5
+          },
+          "affixes": {},
+          "tags": [
+            "ranged",
+            "firearm"
+          ],
+          "refinement_count": 0
+        },
+        "armor_slot": null,
+        "tool_slot": {
+          "id": "field_pack",
+          "slot": "tool",
+          "durability": 10,
+          "max_durability": 10,
+          "rarity": "rare",
+          "requirements": {
+            "strength": 4
+          },
+          "scaling": {},
+          "affixes": {
+            "atk": 1,
+            "def": 1
+          },
           "tags": [
             "exploration"
           ],
@@ -932,61 +1562,66 @@
     }
   ],
   "summary": {
-    "pressure_count": 5,
+    "pressure_count": 8,
     "death_cause_attribution": true,
-    "resource_signature": "hp:0|food:9|ammo:0|medkits:0|scrap:63|radiation:1|weapon:EquipmentState(id='hardened_blade', slot='weapon', durability=8, max_durability=10, rarity='legendary', requirements={'strength': 5}, scaling={'strength': 0.8}, affixes={'def': 3, 'max_durability': 10}, tags=['melee', 'quality', 'lead_lined'], refinement_count=0)|armor:None|tool:EquipmentState(id='field_pack', slot='tool', durability=10, max_durability=10, rarity='rare', requirements={'strength': 3}, scaling={}, affixes={}, tags=['exploration'], refinement_count=0)"
+    "resource_signature": "hp:-3|food:9|ammo:0|medkits:0|scrap:57|radiation:1|weapon:EquipmentState(id='rust_rifle', slot='weapon', durability=9, max_durability=10, rarity='common', requirements={'agility': 4}, scaling={'perception': 0.5}, affixes={}, tags=['ranged', 'firearm'], refinement_count=0)|armor:None|tool:EquipmentState(id='field_pack', slot='tool', durability=10, max_durability=10, rarity='rare', requirements={'strength': 4}, scaling={}, affixes={'atk': 1, 'def': 1}, tags=['exploration'], refinement_count=0)"
   },
   "failure_analysis": {
     "death_chain_length": 3,
     "primary_blame_factor": "combat",
     "regret_nodes": [
       {
-        "node_id": "node_deadzone_1",
-        "event_id": "evt_floodplain",
-        "blame_score": 0.35,
-        "description": "took +1 radiation, lost 1 food, accepted combat risk",
-        "steps_to_death": 0
-      },
-      {
         "node_id": "node_fringe_2",
         "event_id": "evt_mutant_burrow",
-        "blame_score": 0.28,
+        "blame_score": 0.25,
         "description": "lost 1 hp, accepted combat risk, carried radiation into later travel",
-        "steps_to_death": 3
+        "steps_to_death": 6
+      },
+      {
+        "node_id": "node_deadzone_1",
+        "event_id": "evt_floodplain",
+        "blame_score": 0.19,
+        "description": "took +1 radiation, lost 1 food, carried radiation into later travel",
+        "steps_to_death": 2
       },
       {
         "node_id": "node_fringe_1",
         "event_id": "evt_factory_ruins",
-        "blame_score": 0.2,
+        "blame_score": 0.18,
         "description": "took +1 radiation, lost 1 hp, carried radiation into later travel",
-        "steps_to_death": 4
+        "steps_to_death": 7
       }
     ],
-    "steps_from_regret_to_death": 0,
+    "steps_from_regret_to_death": 6,
     "is_trash_time_death": false
   },
   "run_summary": {
-    "headline": "standard_journey_cult_escapee_6_batch_9: loss via combat_death after 6 steps",
+    "headline": "standard_journey_cult_escapee_6_batch_9: loss via combat_death after 9 steps",
     "route_family": "unknown",
     "outcome": "combat_death",
-    "key_turning_point": "node_deadzone_1 (took +1 radiation, lost 1 food, accepted combat risk)",
+    "key_turning_point": "node_fringe_2 (lost 1 hp, accepted combat risk, carried radiation into later travel)",
     "notable_equipment": [
-      "field_pack"
+      "scavenger_kit",
+      "field_pack",
+      "rust_rifle"
     ],
     "telemetry": {
-      "total_steps": 6,
-      "pressure_count": 5,
+      "total_steps": 9,
+      "pressure_count": 8,
       "combat_count": 3,
       "loot_drop_count": 4,
       "loot_total_amount": 55,
-      "equipment_change_count": 1,
+      "equipment_change_count": 3,
       "rarity_distribution": {
+        "common": 2,
         "rare": 1
       },
-      "total_atk_affix_gain": 0,
-      "total_def_affix_gain": 0,
+      "total_atk_affix_gain": 1,
+      "total_def_affix_gain": 3,
       "equipment_ids": [
-        "field_pack"
+        "scavenger_kit",
+        "field_pack",
+        "rust_rifle"
       ],
       "loot_resources": {
         "scrap": 29,
@@ -994,7 +1629,7 @@
         "xp": 25
       },
       "max_radiation": 1,
-      "min_food": 9,
+      "min_food": 8,
       "min_hp": 0,
       "low_resource_flags": [
         "low_hp",

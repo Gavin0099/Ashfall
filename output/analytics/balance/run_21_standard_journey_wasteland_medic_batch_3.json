@@ -4,24 +4,26 @@
   "route": [
     "node_fringe_1",
     "node_fringe_2",
+    "node_trade_1",
     "node_fringe_3",
     "node_boss_gatekeeper",
     "node_deadzone_1",
+    "node_trade_2",
     "node_deadzone_2",
     "node_deadzone_3",
     "node_boss_overseer",
     "node_final"
   ],
   "ended": true,
-  "victory": true,
-  "end_reason": "reached_final_node",
+  "victory": false,
+  "end_reason": "combat_death",
   "player_final": {
-    "hp": 14,
-    "food": 4,
-    "ammo": 6,
-    "medkits": 2,
-    "scrap": 90,
-    "radiation": 2,
+    "hp": -1,
+    "food": 12,
+    "ammo": 0,
+    "medkits": 0,
+    "scrap": 17,
+    "radiation": 4,
     "archetype": null,
     "character": {
       "background_id": "wasteland_medic",
@@ -38,50 +40,49 @@
       "traits": [],
       "perks": [],
       "tags": [],
-      "level": 5,
-      "xp": 10
+      "level": 3,
+      "xp": 18
     },
     "weapon_slot": {
-      "id": "sledgehammer",
+      "id": "hardened_blade",
       "slot": "weapon",
-      "durability": 9,
+      "durability": 8,
       "max_durability": 10,
       "rarity": "legendary",
       "requirements": {
-        "strength": 7
+        "strength": 5
       },
       "scaling": {
-        "strength": 1.2
+        "strength": 0.8
       },
       "affixes": {
         "def": 2,
-        "atk": 2
+        "atk": 3
       },
       "tags": [
         "melee",
-        "heavy"
+        "quality"
       ],
       "refinement_count": 0
     },
     "armor_slot": null,
     "tool_slot": {
-      "id": "field_pack",
+      "id": "scavenger_kit",
       "slot": "tool",
       "durability": 10,
       "max_durability": 10,
       "rarity": "rare",
       "requirements": {
-        "strength": 4
+        "luck": 4
       },
       "scaling": {},
       "affixes": {
-        "atk": 1,
-        "def": 1
+        "def": 2
       },
       "tags": [
-        "exploration"
+        "scavenging"
       ],
-      "refinement_count": 1
+      "refinement_count": 2
     }
   },
   "decision_log": [
@@ -421,9 +422,9 @@
     },
     {
       "step": 4,
-      "node": "node_fringe_3",
-      "event_id": "evt_tech_vault",
-      "option_index": 2,
+      "node": "node_trade_1",
+      "event_id": "evt_village",
+      "option_index": 0,
       "warning_signals": [
         "WARNING: radiation will continue to threaten future travel."
       ],
@@ -479,24 +480,48 @@
       "combat_triggered": true,
       "combat_loot": [
         {
-          "resource": "ammo",
-          "amount": 5
+          "resource": "medkits",
+          "amount": 2
         },
         {
           "resource": "scrap",
-          "amount": 7
+          "amount": 12
         }
       ],
       "effects": {
-        "scrap": 5
+        "ammo": -1,
+        "medkits": 1,
+        "xp": 3
       },
-      "equipment_change": null,
-      "equipment_summary": null,
+      "equipment_change": {
+        "slot": "tool",
+        "item": "scavenger_kit",
+        "item_data": {
+          "id": "scavenger_kit",
+          "slot": "tool",
+          "durability": 10,
+          "max_durability": 10,
+          "rarity": "common",
+          "requirements": {
+            "luck": 4
+          },
+          "scaling": {},
+          "affixes": {
+            "def": 2
+          },
+          "tags": [
+            "scavenging"
+          ],
+          "refinement_count": 0
+        },
+        "changed": true
+      },
+      "equipment_summary": "tool -> scavenger_kit (replaced empty)",
       "player_after": {
-        "hp": 10,
+        "hp": 12,
         "food": 10,
-        "ammo": 12,
-        "medkits": 6,
+        "ammo": 5,
+        "medkits": 9,
         "scrap": 23,
         "radiation": 1,
         "archetype": null,
@@ -516,7 +541,7 @@
           "perks": [],
           "tags": [],
           "level": 2,
-          "xp": 5
+          "xp": 8
         },
         "weapon_slot": {
           "id": "rust_rifle",
@@ -538,11 +563,175 @@
           "refinement_count": 0
         },
         "armor_slot": null,
-        "tool_slot": null
+        "tool_slot": {
+          "id": "scavenger_kit",
+          "slot": "tool",
+          "durability": 10,
+          "max_durability": 10,
+          "rarity": "common",
+          "requirements": {
+            "luck": 4
+          },
+          "scaling": {},
+          "affixes": {
+            "def": 2
+          },
+          "tags": [
+            "scavenging"
+          ],
+          "refinement_count": 0
+        }
       }
     },
     {
       "step": 5,
+      "node": "node_fringe_3",
+      "event_id": "evt_tech_vault",
+      "option_index": 2,
+      "warning_signals": [
+        "WARNING: radiation will continue to threaten future travel."
+      ],
+      "pre_choice_state": {
+        "hp": 20,
+        "food": 9,
+        "ammo": 5,
+        "medkits": 8,
+        "scrap": 3,
+        "radiation": 1,
+        "archetype": null,
+        "character": {
+          "background_id": "wasteland_medic",
+          "display_name": "wasteland_medic",
+          "special": {
+            "strength": 5,
+            "perception": 5,
+            "endurance": 5,
+            "charisma": 5,
+            "intelligence": 5,
+            "agility": 5,
+            "luck": 5
+          },
+          "traits": [],
+          "perks": [],
+          "tags": [],
+          "level": 2,
+          "xp": 8
+        },
+        "weapon_slot": {
+          "id": "rust_rifle",
+          "slot": "weapon",
+          "durability": 8,
+          "max_durability": 10,
+          "rarity": "rare",
+          "requirements": {
+            "agility": 3
+          },
+          "scaling": {
+            "perception": 0.5
+          },
+          "affixes": {},
+          "tags": [
+            "ranged",
+            "firearm"
+          ],
+          "refinement_count": 1
+        },
+        "armor_slot": null,
+        "tool_slot": {
+          "id": "scavenger_kit",
+          "slot": "tool",
+          "durability": 10,
+          "max_durability": 10,
+          "rarity": "rare",
+          "requirements": {
+            "luck": 4
+          },
+          "scaling": {},
+          "affixes": {
+            "def": 2
+          },
+          "tags": [
+            "scavenging"
+          ],
+          "refinement_count": 1
+        }
+      },
+      "pressure": false,
+      "combat_triggered": false,
+      "combat_loot": [],
+      "effects": {
+        "scrap": 5
+      },
+      "equipment_change": null,
+      "equipment_summary": null,
+      "player_after": {
+        "hp": 20,
+        "food": 9,
+        "ammo": 5,
+        "medkits": 8,
+        "scrap": 9,
+        "radiation": 1,
+        "archetype": null,
+        "character": {
+          "background_id": "wasteland_medic",
+          "display_name": "wasteland_medic",
+          "special": {
+            "strength": 5,
+            "perception": 5,
+            "endurance": 5,
+            "charisma": 5,
+            "intelligence": 5,
+            "agility": 5,
+            "luck": 5
+          },
+          "traits": [],
+          "perks": [],
+          "tags": [],
+          "level": 2,
+          "xp": 8
+        },
+        "weapon_slot": {
+          "id": "rust_rifle",
+          "slot": "weapon",
+          "durability": 8,
+          "max_durability": 10,
+          "rarity": "rare",
+          "requirements": {
+            "agility": 3
+          },
+          "scaling": {
+            "perception": 0.5
+          },
+          "affixes": {},
+          "tags": [
+            "ranged",
+            "firearm"
+          ],
+          "refinement_count": 1
+        },
+        "armor_slot": null,
+        "tool_slot": {
+          "id": "scavenger_kit",
+          "slot": "tool",
+          "durability": 10,
+          "max_durability": 10,
+          "rarity": "rare",
+          "requirements": {
+            "luck": 4
+          },
+          "scaling": {},
+          "affixes": {
+            "def": 2
+          },
+          "tags": [
+            "scavenging"
+          ],
+          "refinement_count": 1
+        }
+      }
+    },
+    {
+      "step": 6,
       "node": "node_boss_gatekeeper",
       "event_id": "evt_boss_gatekeeper",
       "option_index": 0,
@@ -552,10 +741,10 @@
       ],
       "pre_choice_state": {
         "hp": 20,
-        "food": 9,
-        "ammo": 12,
-        "medkits": 5,
-        "scrap": 23,
+        "food": 8,
+        "ammo": 5,
+        "medkits": 8,
+        "scrap": 9,
         "radiation": 1,
         "archetype": null,
         "character": {
@@ -574,7 +763,7 @@
           "perks": [],
           "tags": [],
           "level": 2,
-          "xp": 5
+          "xp": 8
         },
         "weapon_slot": {
           "id": "rust_rifle",
@@ -593,10 +782,27 @@
             "ranged",
             "firearm"
           ],
-          "refinement_count": 0
+          "refinement_count": 1
         },
         "armor_slot": null,
-        "tool_slot": null
+        "tool_slot": {
+          "id": "scavenger_kit",
+          "slot": "tool",
+          "durability": 10,
+          "max_durability": 10,
+          "rarity": "rare",
+          "requirements": {
+            "luck": 4
+          },
+          "scaling": {},
+          "affixes": {
+            "def": 2
+          },
+          "tags": [
+            "scavenging"
+          ],
+          "refinement_count": 1
+        }
       },
       "pressure": true,
       "combat_triggered": true,
@@ -616,11 +822,11 @@
       "equipment_change": null,
       "equipment_summary": null,
       "player_after": {
-        "hp": 9,
-        "food": 9,
-        "ammo": 8,
-        "medkits": 4,
-        "scrap": 48,
+        "hp": 11,
+        "food": 8,
+        "ammo": 2,
+        "medkits": 8,
+        "scrap": 34,
         "radiation": 1,
         "archetype": null,
         "character": {
@@ -639,7 +845,7 @@
           "perks": [],
           "tags": [],
           "level": 2,
-          "xp": 35
+          "xp": 38
         },
         "weapon_slot": {
           "id": "hardened_blade",
@@ -655,7 +861,7 @@
           },
           "affixes": {
             "def": 2,
-            "atk": 1
+            "atk": 3
           },
           "tags": [
             "melee",
@@ -664,24 +870,41 @@
           "refinement_count": 0
         },
         "armor_slot": null,
-        "tool_slot": null
+        "tool_slot": {
+          "id": "scavenger_kit",
+          "slot": "tool",
+          "durability": 10,
+          "max_durability": 10,
+          "rarity": "rare",
+          "requirements": {
+            "luck": 4
+          },
+          "scaling": {},
+          "affixes": {
+            "def": 2
+          },
+          "tags": [
+            "scavenging"
+          ],
+          "refinement_count": 1
+        }
       }
     },
     {
-      "step": 6,
+      "step": 7,
       "node": "node_deadzone_1",
-      "event_id": "evt_floodplain",
+      "event_id": "evt_radioactive_orchard",
       "option_index": 0,
       "warning_signals": [
         "WARNING: radiation will continue to threaten future travel.",
         "WARNING: this option adds radiation and increases long-term risk."
       ],
       "pre_choice_state": {
-        "hp": 19,
-        "food": 8,
-        "ammo": 8,
-        "medkits": 3,
-        "scrap": 48,
+        "hp": 11,
+        "food": 7,
+        "ammo": 2,
+        "medkits": 8,
+        "scrap": 34,
         "radiation": 1,
         "archetype": null,
         "character": {
@@ -700,7 +923,7 @@
           "perks": [],
           "tags": [],
           "level": 2,
-          "xp": 35
+          "xp": 38
         },
         "weapon_slot": {
           "id": "hardened_blade",
@@ -716,7 +939,7 @@
           },
           "affixes": {
             "def": 2,
-            "atk": 1
+            "atk": 3
           },
           "tags": [
             "melee",
@@ -725,47 +948,41 @@
           "refinement_count": 0
         },
         "armor_slot": null,
-        "tool_slot": null
+        "tool_slot": {
+          "id": "scavenger_kit",
+          "slot": "tool",
+          "durability": 10,
+          "max_durability": 10,
+          "rarity": "rare",
+          "requirements": {
+            "luck": 4
+          },
+          "scaling": {},
+          "affixes": {
+            "def": 2
+          },
+          "tags": [
+            "scavenging"
+          ],
+          "refinement_count": 1
+        }
       },
       "pressure": true,
       "combat_triggered": false,
       "combat_loot": [],
       "effects": {
-        "food": -1,
-        "radiation": 1
+        "food": 4,
+        "radiation": 3
       },
-      "equipment_change": {
-        "slot": "tool",
-        "item": "field_pack",
-        "item_data": {
-          "id": "field_pack",
-          "slot": "tool",
-          "durability": 10,
-          "max_durability": 10,
-          "rarity": "common",
-          "requirements": {
-            "strength": 4
-          },
-          "scaling": {},
-          "affixes": {
-            "atk": 1,
-            "def": 1
-          },
-          "tags": [
-            "exploration"
-          ],
-          "refinement_count": 0
-        },
-        "changed": true
-      },
-      "equipment_summary": "tool -> field_pack (replaced empty)",
+      "equipment_change": null,
+      "equipment_summary": null,
       "player_after": {
-        "hp": 19,
-        "food": 9,
-        "ammo": 8,
-        "medkits": 3,
-        "scrap": 48,
-        "radiation": 2,
+        "hp": 11,
+        "food": 12,
+        "ammo": 2,
+        "medkits": 8,
+        "scrap": 34,
+        "radiation": 4,
         "archetype": null,
         "character": {
           "background_id": "wasteland_medic",
@@ -783,7 +1000,7 @@
           "perks": [],
           "tags": [],
           "level": 3,
-          "xp": 15
+          "xp": 18
         },
         "weapon_slot": {
           "id": "hardened_blade",
@@ -799,7 +1016,7 @@
           },
           "affixes": {
             "def": 2,
-            "atk": 1
+            "atk": 3
           },
           "tags": [
             "melee",
@@ -809,231 +1026,40 @@
         },
         "armor_slot": null,
         "tool_slot": {
-          "id": "field_pack",
+          "id": "scavenger_kit",
           "slot": "tool",
-          "durability": 10,
-          "max_durability": 10,
-          "rarity": "common",
-          "requirements": {
-            "strength": 4
-          },
-          "scaling": {},
-          "affixes": {
-            "atk": 1,
-            "def": 1
-          },
-          "tags": [
-            "exploration"
-          ],
-          "refinement_count": 0
-        }
-      }
-    },
-    {
-      "step": 7,
-      "node": "node_deadzone_2",
-      "event_id": "evt_checkpoint",
-      "option_index": 0,
-      "warning_signals": [
-        "WARNING: radiation will continue to threaten future travel.",
-        "DANGER: this choice carries a high combat risk."
-      ],
-      "pre_choice_state": {
-        "hp": 18,
-        "food": 8,
-        "ammo": 8,
-        "medkits": 3,
-        "scrap": 48,
-        "radiation": 2,
-        "archetype": null,
-        "character": {
-          "background_id": "wasteland_medic",
-          "display_name": "wasteland_medic",
-          "special": {
-            "strength": 5,
-            "perception": 5,
-            "endurance": 5,
-            "charisma": 5,
-            "intelligence": 5,
-            "agility": 5,
-            "luck": 5
-          },
-          "traits": [],
-          "perks": [],
-          "tags": [],
-          "level": 3,
-          "xp": 15
-        },
-        "weapon_slot": {
-          "id": "hardened_blade",
-          "slot": "weapon",
-          "durability": 9,
-          "max_durability": 10,
-          "rarity": "legendary",
-          "requirements": {
-            "strength": 5
-          },
-          "scaling": {
-            "strength": 0.8
-          },
-          "affixes": {
-            "def": 2,
-            "atk": 1
-          },
-          "tags": [
-            "melee",
-            "quality"
-          ],
-          "refinement_count": 0
-        },
-        "armor_slot": null,
-        "tool_slot": {
-          "id": "field_pack",
-          "slot": "tool",
-          "durability": 10,
-          "max_durability": 10,
-          "rarity": "common",
-          "requirements": {
-            "strength": 4
-          },
-          "scaling": {},
-          "affixes": {
-            "atk": 1,
-            "def": 1
-          },
-          "tags": [
-            "exploration"
-          ],
-          "refinement_count": 0
-        }
-      },
-      "pressure": true,
-      "combat_triggered": true,
-      "combat_loot": [
-        {
-          "resource": "ammo",
-          "amount": 5
-        },
-        {
-          "resource": "scrap",
-          "amount": 7
-        }
-      ],
-      "effects": {
-        "ammo": 0,
-        "xp": 5
-      },
-      "equipment_change": {
-        "slot": "weapon",
-        "item": "rust_rifle",
-        "item_data": {
-          "id": "rust_rifle",
-          "slot": "weapon",
           "durability": 10,
           "max_durability": 10,
           "rarity": "rare",
           "requirements": {
-            "agility": 4
-          },
-          "scaling": {
-            "perception": 0.5
-          },
-          "affixes": {
-            "atk": 2
-          },
-          "tags": [
-            "ranged",
-            "firearm"
-          ],
-          "refinement_count": 0
-        },
-        "changed": true
-      },
-      "equipment_summary": "weapon -> rust_rifle (replaced empty)",
-      "player_after": {
-        "hp": 13,
-        "food": 8,
-        "ammo": 10,
-        "medkits": 2,
-        "scrap": 55,
-        "radiation": 2,
-        "archetype": null,
-        "character": {
-          "background_id": "wasteland_medic",
-          "display_name": "wasteland_medic",
-          "special": {
-            "strength": 5,
-            "perception": 5,
-            "endurance": 5,
-            "charisma": 5,
-            "intelligence": 5,
-            "agility": 5,
-            "luck": 5
-          },
-          "traits": [],
-          "perks": [],
-          "tags": [],
-          "level": 3,
-          "xp": 20
-        },
-        "weapon_slot": {
-          "id": "rust_rifle",
-          "slot": "weapon",
-          "durability": 9,
-          "max_durability": 10,
-          "rarity": "rare",
-          "requirements": {
-            "agility": 4
-          },
-          "scaling": {
-            "perception": 0.5
-          },
-          "affixes": {
-            "atk": 2
-          },
-          "tags": [
-            "ranged",
-            "firearm"
-          ],
-          "refinement_count": 0
-        },
-        "armor_slot": null,
-        "tool_slot": {
-          "id": "field_pack",
-          "slot": "tool",
-          "durability": 10,
-          "max_durability": 10,
-          "rarity": "common",
-          "requirements": {
-            "strength": 4
+            "luck": 4
           },
           "scaling": {},
           "affixes": {
-            "atk": 1,
-            "def": 1
+            "def": 2
           },
           "tags": [
-            "exploration"
+            "scavenging"
           ],
-          "refinement_count": 0
+          "refinement_count": 1
         }
       }
     },
     {
       "step": 8,
-      "node": "node_deadzone_3",
-      "event_id": "evt_tech_vault",
-      "option_index": 2,
+      "node": "node_trade_2",
+      "event_id": "evt_isolated_farm",
+      "option_index": 0,
       "warning_signals": [
         "WARNING: radiation will continue to threaten future travel."
       ],
       "pre_choice_state": {
-        "hp": 20,
-        "food": 7,
-        "ammo": 10,
-        "medkits": 1,
-        "scrap": 35,
-        "radiation": 2,
+        "hp": 19,
+        "food": 11,
+        "ammo": 2,
+        "medkits": 7,
+        "scrap": 34,
+        "radiation": 4,
         "archetype": null,
         "character": {
           "background_id": "wasteland_medic",
@@ -1051,46 +1077,46 @@
           "perks": [],
           "tags": [],
           "level": 3,
-          "xp": 20
+          "xp": 18
         },
         "weapon_slot": {
-          "id": "rust_rifle",
+          "id": "hardened_blade",
           "slot": "weapon",
           "durability": 9,
           "max_durability": 10,
-          "rarity": "rare",
+          "rarity": "legendary",
           "requirements": {
-            "agility": 4
+            "strength": 5
           },
           "scaling": {
-            "perception": 0.5
+            "strength": 0.8
           },
           "affixes": {
-            "atk": 2
+            "def": 2,
+            "atk": 3
           },
           "tags": [
-            "ranged",
-            "firearm"
+            "melee",
+            "quality"
           ],
-          "refinement_count": 1
+          "refinement_count": 0
         },
         "armor_slot": null,
         "tool_slot": {
-          "id": "field_pack",
+          "id": "scavenger_kit",
           "slot": "tool",
           "durability": 10,
           "max_durability": 10,
           "rarity": "rare",
           "requirements": {
-            "strength": 4
+            "luck": 4
           },
           "scaling": {},
           "affixes": {
-            "atk": 1,
-            "def": 1
+            "def": 2
           },
           "tags": [
-            "exploration"
+            "scavenging"
           ],
           "refinement_count": 1
         }
@@ -1099,17 +1125,18 @@
       "combat_triggered": false,
       "combat_loot": [],
       "effects": {
-        "scrap": 5
+        "scrap": -2,
+        "food": 3
       },
       "equipment_change": null,
       "equipment_summary": null,
       "player_after": {
-        "hp": 20,
-        "food": 7,
-        "ammo": 10,
-        "medkits": 1,
-        "scrap": 40,
-        "radiation": 2,
+        "hp": 19,
+        "food": 15,
+        "ammo": 2,
+        "medkits": 7,
+        "scrap": 32,
+        "radiation": 4,
         "archetype": null,
         "character": {
           "background_id": "wasteland_medic",
@@ -1127,46 +1154,46 @@
           "perks": [],
           "tags": [],
           "level": 3,
-          "xp": 20
+          "xp": 18
         },
         "weapon_slot": {
-          "id": "rust_rifle",
+          "id": "hardened_blade",
           "slot": "weapon",
           "durability": 9,
           "max_durability": 10,
-          "rarity": "rare",
+          "rarity": "legendary",
           "requirements": {
-            "agility": 4
+            "strength": 5
           },
           "scaling": {
-            "perception": 0.5
+            "strength": 0.8
           },
           "affixes": {
-            "atk": 2
+            "def": 2,
+            "atk": 3
           },
           "tags": [
-            "ranged",
-            "firearm"
+            "melee",
+            "quality"
           ],
-          "refinement_count": 1
+          "refinement_count": 0
         },
         "armor_slot": null,
         "tool_slot": {
-          "id": "field_pack",
+          "id": "scavenger_kit",
           "slot": "tool",
           "durability": 10,
           "max_durability": 10,
           "rarity": "rare",
           "requirements": {
-            "strength": 4
+            "luck": 4
           },
           "scaling": {},
           "affixes": {
-            "atk": 1,
-            "def": 1
+            "def": 2
           },
           "tags": [
-            "exploration"
+            "scavenging"
           ],
           "refinement_count": 1
         }
@@ -1174,20 +1201,20 @@
     },
     {
       "step": 9,
-      "node": "node_boss_overseer",
-      "event_id": "evt_boss_overseer",
+      "node": "node_deadzone_2",
+      "event_id": "evt_sniper_nest",
       "option_index": 0,
       "warning_signals": [
         "WARNING: radiation will continue to threaten future travel.",
         "DANGER: this choice carries a high combat risk."
       ],
       "pre_choice_state": {
-        "hp": 19,
-        "food": 6,
-        "ammo": 10,
-        "medkits": 1,
-        "scrap": 40,
-        "radiation": 2,
+        "hp": 17,
+        "food": 14,
+        "ammo": 2,
+        "medkits": 7,
+        "scrap": 32,
+        "radiation": 4,
         "archetype": null,
         "character": {
           "background_id": "wasteland_medic",
@@ -1205,214 +1232,46 @@
           "perks": [],
           "tags": [],
           "level": 3,
-          "xp": 20
+          "xp": 18
         },
         "weapon_slot": {
-          "id": "rust_rifle",
-          "slot": "weapon",
-          "durability": 9,
-          "max_durability": 10,
-          "rarity": "rare",
-          "requirements": {
-            "agility": 4
-          },
-          "scaling": {
-            "perception": 0.5
-          },
-          "affixes": {
-            "atk": 2
-          },
-          "tags": [
-            "ranged",
-            "firearm"
-          ],
-          "refinement_count": 1
-        },
-        "armor_slot": null,
-        "tool_slot": {
-          "id": "field_pack",
-          "slot": "tool",
-          "durability": 10,
-          "max_durability": 10,
-          "rarity": "rare",
-          "requirements": {
-            "strength": 4
-          },
-          "scaling": {},
-          "affixes": {
-            "atk": 1,
-            "def": 1
-          },
-          "tags": [
-            "exploration"
-          ],
-          "refinement_count": 1
-        }
-      },
-      "pressure": true,
-      "combat_triggered": true,
-      "combat_loot": [
-        {
-          "resource": "xp",
-          "amount": 50
-        },
-        {
-          "resource": "scrap",
-          "amount": 50
-        },
-        {
-          "resource": "medkits",
-          "amount": 3
-        }
-      ],
-      "effects": {
-        "xp": 10
-      },
-      "equipment_change": null,
-      "equipment_summary": null,
-      "player_after": {
-        "hp": 5,
-        "food": 6,
-        "ammo": 6,
-        "medkits": 3,
-        "scrap": 90,
-        "radiation": 2,
-        "archetype": null,
-        "character": {
-          "background_id": "wasteland_medic",
-          "display_name": "wasteland_medic",
-          "special": {
-            "strength": 5,
-            "perception": 5,
-            "endurance": 5,
-            "charisma": 5,
-            "intelligence": 5,
-            "agility": 5,
-            "luck": 5
-          },
-          "traits": [],
-          "perks": [],
-          "tags": [],
-          "level": 4,
-          "xp": 50
-        },
-        "weapon_slot": {
-          "id": "sledgehammer",
+          "id": "hardened_blade",
           "slot": "weapon",
           "durability": 9,
           "max_durability": 10,
           "rarity": "legendary",
           "requirements": {
-            "strength": 7
+            "strength": 5
           },
           "scaling": {
-            "strength": 1.2
+            "strength": 0.8
           },
           "affixes": {
             "def": 2,
-            "atk": 2
+            "atk": 3
           },
           "tags": [
             "melee",
-            "heavy"
+            "quality"
           ],
           "refinement_count": 0
         },
         "armor_slot": null,
         "tool_slot": {
-          "id": "field_pack",
+          "id": "scavenger_kit",
           "slot": "tool",
           "durability": 10,
           "max_durability": 10,
           "rarity": "rare",
           "requirements": {
-            "strength": 4
+            "luck": 4
           },
           "scaling": {},
           "affixes": {
-            "atk": 1,
-            "def": 1
+            "def": 2
           },
           "tags": [
-            "exploration"
-          ],
-          "refinement_count": 1
-        }
-      }
-    },
-    {
-      "step": 10,
-      "node": "node_final",
-      "event_id": "evt_final",
-      "option_index": 0,
-      "warning_signals": [
-        "WARNING: radiation will continue to threaten future travel."
-      ],
-      "pre_choice_state": {
-        "hp": 14,
-        "food": 5,
-        "ammo": 6,
-        "medkits": 2,
-        "scrap": 90,
-        "radiation": 2,
-        "archetype": null,
-        "character": {
-          "background_id": "wasteland_medic",
-          "display_name": "wasteland_medic",
-          "special": {
-            "strength": 5,
-            "perception": 5,
-            "endurance": 5,
-            "charisma": 5,
-            "intelligence": 5,
-            "agility": 5,
-            "luck": 5
-          },
-          "traits": [],
-          "perks": [],
-          "tags": [],
-          "level": 4,
-          "xp": 50
-        },
-        "weapon_slot": {
-          "id": "sledgehammer",
-          "slot": "weapon",
-          "durability": 9,
-          "max_durability": 10,
-          "rarity": "legendary",
-          "requirements": {
-            "strength": 7
-          },
-          "scaling": {
-            "strength": 1.2
-          },
-          "affixes": {
-            "def": 2,
-            "atk": 2
-          },
-          "tags": [
-            "melee",
-            "heavy"
-          ],
-          "refinement_count": 0
-        },
-        "armor_slot": null,
-        "tool_slot": {
-          "id": "field_pack",
-          "slot": "tool",
-          "durability": 10,
-          "max_durability": 10,
-          "rarity": "rare",
-          "requirements": {
-            "strength": 4
-          },
-          "scaling": {},
-          "affixes": {
-            "atk": 1,
-            "def": 1
-          },
-          "tags": [
-            "exploration"
+            "scavenging"
           ],
           "refinement_count": 1
         }
@@ -1421,17 +1280,18 @@
       "combat_triggered": false,
       "combat_loot": [],
       "effects": {
+        "scrap": -1,
         "food": -1
       },
       "equipment_change": null,
       "equipment_summary": null,
       "player_after": {
-        "hp": 14,
-        "food": 4,
-        "ammo": 6,
-        "medkits": 2,
-        "scrap": 90,
-        "radiation": 2,
+        "hp": 17,
+        "food": 13,
+        "ammo": 2,
+        "medkits": 7,
+        "scrap": 31,
+        "radiation": 4,
         "archetype": null,
         "character": {
           "background_id": "wasteland_medic",
@@ -1448,109 +1308,282 @@
           "traits": [],
           "perks": [],
           "tags": [],
-          "level": 5,
-          "xp": 10
+          "level": 3,
+          "xp": 18
         },
         "weapon_slot": {
-          "id": "sledgehammer",
+          "id": "hardened_blade",
           "slot": "weapon",
           "durability": 9,
           "max_durability": 10,
           "rarity": "legendary",
           "requirements": {
-            "strength": 7
+            "strength": 5
           },
           "scaling": {
-            "strength": 1.2
+            "strength": 0.8
           },
           "affixes": {
             "def": 2,
-            "atk": 2
+            "atk": 3
           },
           "tags": [
             "melee",
-            "heavy"
+            "quality"
           ],
           "refinement_count": 0
         },
         "armor_slot": null,
         "tool_slot": {
-          "id": "field_pack",
+          "id": "scavenger_kit",
           "slot": "tool",
           "durability": 10,
           "max_durability": 10,
           "rarity": "rare",
           "requirements": {
-            "strength": 4
+            "luck": 4
           },
           "scaling": {},
           "affixes": {
-            "atk": 1,
-            "def": 1
+            "def": 2
           },
           "tags": [
-            "exploration"
+            "scavenging"
           ],
           "refinement_count": 1
+        }
+      }
+    },
+    {
+      "step": 10,
+      "node": "node_deadzone_3",
+      "event_id": "evt_tech_vault",
+      "option_index": 2,
+      "warning_signals": [
+        "WARNING: radiation will continue to threaten future travel."
+      ],
+      "pre_choice_state": {
+        "hp": 15,
+        "food": 12,
+        "ammo": 2,
+        "medkits": 7,
+        "scrap": 11,
+        "radiation": 4,
+        "archetype": null,
+        "character": {
+          "background_id": "wasteland_medic",
+          "display_name": "wasteland_medic",
+          "special": {
+            "strength": 5,
+            "perception": 5,
+            "endurance": 5,
+            "charisma": 5,
+            "intelligence": 5,
+            "agility": 5,
+            "luck": 5
+          },
+          "traits": [],
+          "perks": [],
+          "tags": [],
+          "level": 3,
+          "xp": 18
+        },
+        "weapon_slot": {
+          "id": "hardened_blade",
+          "slot": "weapon",
+          "durability": 9,
+          "max_durability": 10,
+          "rarity": "legendary",
+          "requirements": {
+            "strength": 5
+          },
+          "scaling": {
+            "strength": 0.8
+          },
+          "affixes": {
+            "def": 2,
+            "atk": 3
+          },
+          "tags": [
+            "melee",
+            "quality"
+          ],
+          "refinement_count": 0
+        },
+        "armor_slot": null,
+        "tool_slot": {
+          "id": "scavenger_kit",
+          "slot": "tool",
+          "durability": 10,
+          "max_durability": 10,
+          "rarity": "rare",
+          "requirements": {
+            "luck": 4
+          },
+          "scaling": {},
+          "affixes": {
+            "def": 2
+          },
+          "tags": [
+            "scavenging"
+          ],
+          "refinement_count": 2
+        }
+      },
+      "pressure": true,
+      "combat_triggered": true,
+      "combat_loot": [],
+      "effects": {
+        "scrap": 5
+      },
+      "equipment_change": null,
+      "equipment_summary": null,
+      "player_after": {
+        "hp": -1,
+        "food": 12,
+        "ammo": 0,
+        "medkits": 0,
+        "scrap": 17,
+        "radiation": 4,
+        "archetype": null,
+        "character": {
+          "background_id": "wasteland_medic",
+          "display_name": "wasteland_medic",
+          "special": {
+            "strength": 5,
+            "perception": 5,
+            "endurance": 5,
+            "charisma": 5,
+            "intelligence": 5,
+            "agility": 5,
+            "luck": 5
+          },
+          "traits": [],
+          "perks": [],
+          "tags": [],
+          "level": 3,
+          "xp": 18
+        },
+        "weapon_slot": {
+          "id": "hardened_blade",
+          "slot": "weapon",
+          "durability": 8,
+          "max_durability": 10,
+          "rarity": "legendary",
+          "requirements": {
+            "strength": 5
+          },
+          "scaling": {
+            "strength": 0.8
+          },
+          "affixes": {
+            "def": 2,
+            "atk": 3
+          },
+          "tags": [
+            "melee",
+            "quality"
+          ],
+          "refinement_count": 0
+        },
+        "armor_slot": null,
+        "tool_slot": {
+          "id": "scavenger_kit",
+          "slot": "tool",
+          "durability": 10,
+          "max_durability": 10,
+          "rarity": "rare",
+          "requirements": {
+            "luck": 4
+          },
+          "scaling": {},
+          "affixes": {
+            "def": 2
+          },
+          "tags": [
+            "scavenging"
+          ],
+          "refinement_count": 2
         }
       }
     }
   ],
   "summary": {
-    "pressure_count": 9,
+    "pressure_count": 8,
     "death_cause_attribution": true,
-    "resource_signature": "hp:14|food:4|ammo:6|medkits:2|scrap:90|radiation:2|weapon:EquipmentState(id='sledgehammer', slot='weapon', durability=9, max_durability=10, rarity='legendary', requirements={'strength': 7}, scaling={'strength': 1.2}, affixes={'def': 2, 'atk': 2}, tags=['melee', 'heavy'], refinement_count=0)|armor:None|tool:EquipmentState(id='field_pack', slot='tool', durability=10, max_durability=10, rarity='rare', requirements={'strength': 4}, scaling={}, affixes={'atk': 1, 'def': 1}, tags=['exploration'], refinement_count=1)"
+    "resource_signature": "hp:-1|food:12|ammo:0|medkits:0|scrap:17|radiation:4|weapon:EquipmentState(id='hardened_blade', slot='weapon', durability=8, max_durability=10, rarity='legendary', requirements={'strength': 5}, scaling={'strength': 0.8}, affixes={'def': 2, 'atk': 3}, tags=['melee', 'quality'], refinement_count=0)|armor:None|tool:EquipmentState(id='scavenger_kit', slot='tool', durability=10, max_durability=10, rarity='rare', requirements={'luck': 4}, scaling={}, affixes={'def': 2}, tags=['scavenging'], refinement_count=2)"
   },
   "failure_analysis": {
-    "death_chain_length": 0,
-    "primary_blame_factor": null,
-    "regret_nodes": [],
-    "steps_from_regret_to_death": 0,
+    "death_chain_length": 3,
+    "primary_blame_factor": "radiation",
+    "regret_nodes": [
+      {
+        "node_id": "node_deadzone_1",
+        "event_id": "evt_radioactive_orchard",
+        "blame_score": 0.2,
+        "description": "took +3 radiation, carried radiation into later travel",
+        "steps_to_death": 3
+      },
+      {
+        "node_id": "node_fringe_2",
+        "event_id": "evt_mutant_burrow",
+        "blame_score": 0.18,
+        "description": "lost 1 hp, accepted combat risk, carried radiation into later travel",
+        "steps_to_death": 7
+      },
+      {
+        "node_id": "node_fringe_1",
+        "event_id": "evt_factory_ruins",
+        "blame_score": 0.13,
+        "description": "took +1 radiation, lost 1 hp, carried radiation into later travel",
+        "steps_to_death": 8
+      }
+    ],
+    "steps_from_regret_to_death": 3,
     "is_trash_time_death": false
   },
   "run_summary": {
-    "headline": "standard_journey_wasteland_medic_batch_3: victory via reached_final_node after 10 steps",
+    "headline": "standard_journey_wasteland_medic_batch_3: loss via combat_death after 10 steps",
     "route_family": "unknown",
-    "outcome": "victory",
-    "key_turning_point": "node_deadzone_1 (tool -> field_pack (replaced empty))",
+    "outcome": "combat_death",
+    "key_turning_point": "node_deadzone_1 (took +3 radiation, carried radiation into later travel)",
     "notable_equipment": [
-      "rust_rifle",
-      "field_pack"
+      "scavenger_kit"
     ],
     "telemetry": {
       "total_steps": 10,
-      "pressure_count": 9,
-      "combat_count": 5,
-      "loot_drop_count": 11,
-      "loot_total_amount": 184,
-      "equipment_change_count": 2,
+      "pressure_count": 8,
+      "combat_count": 4,
+      "loot_drop_count": 6,
+      "loot_total_amount": 71,
+      "equipment_change_count": 1,
       "rarity_distribution": {
-        "common": 1,
-        "rare": 1
+        "common": 1
       },
-      "total_atk_affix_gain": 3,
-      "total_def_affix_gain": 1,
+      "total_atk_affix_gain": 0,
+      "total_def_affix_gain": 2,
       "equipment_ids": [
-        "rust_rifle",
-        "field_pack"
+        "scavenger_kit"
       ],
       "loot_resources": {
-        "ammo": 15,
-        "scrap": 91,
-        "xp": 75,
-        "medkits": 3
+        "ammo": 5,
+        "scrap": 39,
+        "medkits": 2,
+        "xp": 25
       },
-      "max_radiation": 2,
-      "min_food": 4,
-      "min_hp": 5,
+      "max_radiation": 4,
+      "min_food": 8,
+      "min_hp": 0,
       "low_resource_flags": [
+        "low_hp",
+        "low_ammo",
         "high_radiation"
       ],
       "risk_tags": [
         "combat_seen",
         "radiation_pressure",
         "equipment_arc",
-        "end_reached_final_node",
+        "end_combat_death",
         "radiation_carryover"
       ],
       "character": {

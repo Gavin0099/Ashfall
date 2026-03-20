@@ -14,12 +14,12 @@
 ## Freshness Findings
 - status: CRITICAL
 - threshold_days: 7
-- days_since_update: 0
+- days_since_update: 2
 - pt1_completed_count: 6
-- latest_balance_mtime: 1773738637.7295024
+- latest_balance_mtime: 1773899115.9889498
 - pt1_latest_mtime: 1773727402.2667387
 - errors:
-  - PT-1 data is older than most recent balance adjustment. Balance: 2026-03-17 17:10, PT-1: 2026-03-17 14:03
+  - PT-1 data is older than most recent balance adjustment. Balance: 2026-03-19 13:45, PT-1: 2026-03-17 14:03
 
 ## Next Session Prompt
 - Prioritize the failing governance gates before adding new systems.

@@ -1,8 +1,10 @@
 {
   "profile_id": "default",
-  "total_scrap": 74,
+  "total_scrap": 69,
   "lifetime_scrap_earned": 134,
-  "unlock_levels": {},
+  "unlock_levels": {
+    "up_health_boost": 1
+  },
   "unlocked_archetypes": [
     "soldier",
     "pathfinder",
