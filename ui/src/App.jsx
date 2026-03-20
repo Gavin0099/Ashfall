@@ -4,6 +4,7 @@ import StoryViewport from './components/StoryViewport';
 import ActionConsole from './components/ActionConsole';
 import BaseView from './components/BaseView';
 import CharacterCreator from './components/CharacterCreator';
+import LevelUpModal from './components/LevelUpModal';
 
 const API_BASE = 'http://localhost:8000/api';
 
@@ -14,6 +15,7 @@ function App() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [showHelp, setShowHelp] = useState(false);
+  const [showLevelUp, setShowLevelUp] = useState(false);
 
   const fetchState = async () => {
     try {
@@ -60,8 +62,28 @@ function App() {
       const data = await res.json();
       setGameState(data.state);
       setLastOutcome(data.outcome);
+      if (data.state.player.character?.can_level_up) {
+        setShowLevelUp(true);
+      }
     } catch (err) {
       console.error('Action failed', err);
+    }
+  };
+
+  const handlePerkSelect = async (perkId) => {
+    try {
+      const res = await fetch(`${API_BASE}/run/level_up/select`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ perk_id: perkId })
+      });
+      const data = await res.json();
+      if (data.success) {
+        setGameState(data.state);
+        setShowLevelUp(false);
+      }
+    } catch (err) {
+      console.error('Perk selection failed', err);
     }
   };
 
@@ -75,6 +97,9 @@ function App() {
       });
       const data = await res.json();
       setGameState(data);
+      if (data.player.character?.can_level_up) {
+        setShowLevelUp(true);
+      }
     } catch (err) {
       console.error('Movement failed', err);
     }
@@ -181,6 +206,8 @@ function App() {
           </div>
         )}
       </main>
+
+      {showLevelUp && <LevelUpModal onSelect={handlePerkSelect} />}
 
       <aside className="right-sidebar">
         <div className="glass h-full flex flex-col">

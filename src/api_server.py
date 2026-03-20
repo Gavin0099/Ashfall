@@ -102,7 +102,7 @@ def state_to_dict(run: RunState) -> Dict[str, Any]:
         "run": {
             "current_node": run.current_node,
             "visited_nodes": run.visited_nodes,
-            "is_ended": run.is_ended,
+            "is_ended": run.ended,
             "victory": run.victory,
             "end_reason": run.end_reason,
             "flags": run.flags
@@ -116,6 +116,7 @@ def state_to_dict(run: RunState) -> Dict[str, Any]:
             "scrap": p.scrap,
             "radiation": p.radiation,
             "archetype": p.archetype,
+            "character": p.character.to_dict() if p.character else None,
             "items": items
         },
         "event": {
@@ -139,8 +140,14 @@ def start_run(seed: int = 42, profile_data: Optional[Dict[str, Any]] = None):
     init_engine(seed)
     
     if profile_data:
-        char = CharacterProfile.from_dict(profile_data)
-        player = build_starting_player(character=char, meta_profile=session.meta_profile)
+        # Translate frontend keys (name, background, traits) to model keys
+        char_data = {
+            "background_id": profile_data.get("background"),
+            "display_name": profile_data.get("name"),
+            "traits": profile_data.get("traits", [])
+        }
+        char = CharacterProfile.from_dict(char_data)
+        player = build_starting_player("normal", char, session.meta_profile)
     else:
         player = build_starting_player(meta_profile=session.meta_profile)
         
@@ -232,6 +239,83 @@ def refine_action(req: RefineRequest):
     if res["success"]:
         return {"success": True, "detail": res, "state": state_to_dict(session.run)}
     raise HTTPException(status_code=400, detail=res["reason"])
+
+# --- Level Up Endpoints ---
+PERKS_DATA = []
+perk_file = ROOT / "data" / "perks.json"
+if perk_file.exists():
+    try:
+        with open(perk_file, "r", encoding="utf-8") as f:
+            PERKS_DATA = json.load(f)
+    except Exception as e:
+        print(f"Error loading perks: {e}")
+
+@app.get("/api/run/level_up/options")
+def get_levelup_options():
+    if not session.run or not session.run.player.character:
+        raise HTTPException(status_code=400, detail="No active character")
+    
+    char = session.run.player.character
+    
+    # Filter perks: not already owned AND meets requirements
+    eligible = []
+    for perk in PERKS_DATA:
+        if perk["id"] in char.perks: continue
+        
+        reqs = perk.get("requirements", {})
+        # Level requirement (checks if eligible for current level target)
+        if char.level + 1 < reqs.get("level", 0): continue
+        
+        # SPECIAL requirement
+        special_reqs = reqs.get("special", {})
+        met_special = True
+        for stat, bounds in special_reqs.items():
+            val = char.special.get(stat, 5)
+            if "min" in bounds and val < bounds["min"]: met_special = False; break
+            if "max" in bounds and val > bounds["max"]: met_special = False; break
+        
+        if met_special:
+            eligible.append(perk)
+            
+    # Pick up to 3 random selection
+    import random as py_random
+    py_random.seed(random.randint(0, 1000000)) # Use shared seed or local for variety
+    count = min(3, len(eligible))
+    options = py_random.sample(eligible, count) if eligible else []
+    return {"options": options}
+
+class LevelUpSelectRequest(BaseModel):
+    perk_id: str
+
+@app.post("/api/run/level_up/select")
+def select_perk(req: LevelUpSelectRequest):
+    if not session.run or not session.run.player.character:
+        raise HTTPException(status_code=400, detail="No active character")
+    
+    char = session.run.player.character
+    player = session.run.player
+    
+    if not char.can_level_up():
+        raise HTTPException(status_code=400, detail="Not eligible for level-up")
+        
+    perk = next((p for p in PERKS_DATA if p["id"] == req.perk_id), None)
+    if not perk:
+        raise HTTPException(status_code=400, detail="Invalid perk ID")
+        
+    # Apply perk
+    char.perks.append(perk["id"])
+    char.level += 1
+    
+    # Apply effects
+    effects = perk.get("effects", {})
+    if "max_hp_bonus" in effects:
+        player.max_hp += effects["max_hp_bonus"]
+        player.hp += effects["max_hp_bonus"]
+    if "max_food_bonus" in effects:
+        # Placeholder for future expansion
+        pass
+        
+    return {"success": True, "level": char.level, "state": state_to_dict(session.run)}
 
 # --- Meta Progression Endpoints ---
 @app.get("/api/meta/profile")

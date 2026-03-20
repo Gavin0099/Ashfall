@@ -94,6 +94,20 @@ class CharacterProfile:
     level: int = 1
     xp: int = 0
 
+    XP_THRESHOLDS = {
+        2: 100,
+        3: 300,
+        4: 600,
+        5: 1000,
+        6: 1500
+    }
+
+    def get_xp_for_next_level(self) -> int:
+        return self.XP_THRESHOLDS.get(self.level + 1, 999999)
+
+    def can_level_up(self) -> bool:
+        return self.xp >= self.get_xp_for_next_level()
+
     def to_dict(self) -> Dict[str, Any]:
         return {
             "background_id": self.background_id,
@@ -103,7 +117,8 @@ class CharacterProfile:
             "perks": self.perks,
             "tags": self.tags,
             "level": self.level,
-            "xp": self.xp
+            "xp": self.xp,
+            "can_level_up": self.can_level_up()
         }
 
     @staticmethod
@@ -239,6 +254,7 @@ class RunState:
     ended: bool = False
     victory: bool = False
     end_reason: Optional[str] = None
+    node_events: Dict[str, str] = field(default_factory=dict) # node_id -> event_id
     
     # Phase 3.0: Ruins exploration state
     current_ruins_stage: int = 0
@@ -272,6 +288,7 @@ class RunState:
             "decision_log": self.decision_log,
             "travel_mode": self.travel_mode,
             "flags": self.flags,
+            "node_events": self.node_events,
         }
 
     @staticmethod
@@ -285,6 +302,7 @@ class RunState:
             ended=data["ended"],
             victory=data["victory"],
             end_reason=data["end_reason"],
+            node_events=data.get("node_events", {}),
             decision_log=data.get("decision_log", []),
             travel_mode=data.get("travel_mode", "normal"),
             flags=data.get("flags", {}),
