@@ -1,0 +1,14 @@
+﻿Starting Balance Lab v2 (50 iterations per strategy)...
+
+==============================================================================================================
+STRATEGY         | SURVIVE | AVG STEP | TOP DEATH NODE  | PERK SYNERGY T1/T2
+--------------------------------------------------------------------------------------------------------------
+survival         |   0.0% |     22.2 | resource        | T1: 0 / T2:14
+scavenge         |   0.0% |     22.2 | resource        | T1: 0 / T2:14
+hybrid_scav_surv |   0.0% |     22.2 | resource        | T1: 0 / T2:14
+==============================================================================================================
+
+[DIAGNOSTIC] Decision Trace for Scavenge (Run 1):
+  Step  3: Options ['tough_as_nails', 'scrappie_perk', 'lead_stomach'] -> Picked: tough_as_nails
+  Step  8: Options ['scavengers_luck', 'pack_rat_perk', 'scrappie_perk'] -> Picked: scavengers_luck
+  Step 16: Options ['eagle_eye_perk', 'field_medic_perk', 'lead_stomach'] -> Picked: eagle_eye_perk

@@ -30,39 +30,36 @@ class ModifierRegistry:
         return cls._perks_cache.get(perk_id)
 
     @classmethod
-    def get_active_tags(cls, player: PlayerState) -> Dict[str, int]:
-        """Counts the occurrences of each tag across all active perks."""
+    def get_active_tags(cls, player: PlayerState) -> Dict[str, Dict[str, int]]:
+        """Counts the occurrences of each primary and secondary tag."""
         if not player.character:
-            return {}
+            return {"primary": {}, "secondary": {}}
         
-        tags_count: Dict[str, int] = {}
+        counts = {"primary": {}, "secondary": {}}
         for perk_id in player.character.perks:
-            perk_def = cls.get_perk_definition(perk_id)
-            if not perk_def:
-                continue
-            for tag in perk_def.get("tags", []):
-                tags_count[tag] = tags_count.get(tag, 0) + 1
-        return tags_count
+            pdef = cls.get_perk_definition(perk_id)
+            if not pdef: continue
+            
+            # Handle Primary Tag (Bridge Perk support)
+            p_tag = pdef.get("primary_tag")
+            if isinstance(p_tag, list):
+                for t in p_tag:
+                    counts["primary"][t] = counts["primary"].get(t, 0) + 1
+            elif p_tag:
+                counts["primary"][p_tag] = counts["primary"].get(p_tag, 0) + 1
+            
+            # Handle Secondary Tags (mechanism)
+            for s_tag in pdef.get("secondary_tags", []):
+                counts["secondary"][s_tag] = counts["secondary"].get(s_tag, 0) + 1
+        return counts
 
     @classmethod
     def get_build_archetype(cls, player: PlayerState) -> str:
-        """Determines the dominant archetype based on active perks."""
-        if not player.character:
-            return "neutral"
-            
-        archetype_counts: Dict[str, int] = {}
-        for perk_id in player.character.perks:
-            perk_def = cls.get_perk_definition(perk_id)
-            if not perk_def:
-                continue
-            arch = perk_def.get("archetype", "unknown")
-            archetype_counts[arch] = archetype_counts.get(arch, 0) + 1
-            
-        if not archetype_counts:
-            return "neutral"
-            
-        # Return the one with highest count
-        return max(archetype_counts, key=archetype_counts.get)
+        """Determines dominant archetype based on primary tags."""
+        tags = cls.get_active_tags(player)
+        p_counts = tags["primary"]
+        if not p_counts: return "neutral"
+        return max(p_counts, key=p_counts.get)
 
     @classmethod
     def get_available_perks(cls, player: PlayerState, count: int = 3, target_level: Optional[int] = None) -> List[Dict[str, Any]]:
@@ -106,13 +103,9 @@ class ModifierRegistry:
         """Calculates global bonuses based on archetype perk counts (Tier 1: 2, Tier 2: 4, Tier 3: 6)."""
         if not player.character: return []
         
-        # Count perks per archetype
-        arch_counts: Dict[str, int] = {}
-        for perk_id in player.character.perks:
-            pdef = cls.get_perk_definition(perk_id)
-            if pdef:
-                arch = pdef.get("archetype", "neutral")
-                arch_counts[arch] = arch_counts.get(arch, 0) + 1
+        # Count primary tags for archetype tiers
+        tags = cls.get_active_tags(player)
+        arch_counts = tags["primary"]
         
         bonuses = []
         # Define Tiered Rules
@@ -131,6 +124,7 @@ class ModifierRegistry:
             ]
         }
         
+        active_tiers = 0
         for arch, count in arch_counts.items():
             if arch in rules:
                 for threshold, effect, val, name in rules[arch]:
@@ -139,9 +133,28 @@ class ModifierRegistry:
                             "name": name,
                             "effect": effect,
                             "value": val,
-                            "threshold": threshold,
-                            "archetype": arch
+                            "archetype": arch,
+                            "threshold": threshold
                         })
+                        if threshold == 2: active_tiers += 1
+        
+        # --- Conversion Bonus (Pivot Mechanic) ---
+        if active_tiers >= 2:
+            bonuses.append({
+                "name": "多才多藝 (Resourceful)",
+                "effect": "max_hp_bonus",
+                "value": 3, # Super Tuning for 15-step safety
+                "archetype": "hybrid",
+                "threshold": 0
+            })
+            bonuses.append({
+                "name": "物資活用 (Versatile)",
+                "effect": "medkit_heal_bonus",
+                "value": 2, # Increased from 1
+                "archetype": "hybrid",
+                "threshold": 0
+            })
+            
         return bonuses
 
     @classmethod
@@ -188,19 +201,14 @@ def get_modifier_breakdown(player: PlayerState) -> Dict[str, Any]:
         "scrap_bonus", "medkit_heal_bonus"
     ]
     
-    # Count perks per archetype for UI
-    arch_counts: Dict[str, int] = {}
-    if player.character:
-        for perk_id in player.character.perks:
-            pdef = ModifierRegistry.get_perk_definition(perk_id)
-            if pdef:
-                arch = pdef.get("archetype", "neutral")
-                arch_counts[arch] = arch_counts.get(arch, 0) + 1
-
+    # Count tags for UI
+    tags = ModifierRegistry.get_active_tags(player)
+    arch_counts = tags["primary"]
+    
     breakdown = {
         "archetype": ModifierRegistry.get_build_archetype(player),
         "archetype_counts": arch_counts,
-        "tags": ModifierRegistry.get_active_tags(player),
+        "tags": tags, # {primary: {}, secondary: {}}
         "stats": {}
     }
     

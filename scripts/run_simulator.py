@@ -76,12 +76,17 @@ def run_sim(player_strategy: str, num_steps: int = 30, seed: int = 42, luck_mode
     )
     
     player = build_starting_player("normal", char, MetaProfile())
+    player.base_max_food = 30 # Super Tuning v2.1
+    player.recompute_stats()
+    
     run = engine.create_run(player, seed)
     sim_player = SimulationPlayer(player_strategy)
     
     stats = {
         "steps": 0, "xp_gained": 0, "perks_count": 0,
         "death_reason": None,
+        "death_snapshot": None,
+        "decision_trace": [], # List of {step, options, picked}
         "history": {"scrap": [], "food": [], "hp": []},
         "synergy_times": {}
     }
@@ -95,19 +100,36 @@ def run_sim(player_strategy: str, num_steps: int = 30, seed: int = 42, luck_mode
         if run.player.hp <= 0:
             if run.player.food <= 0: stats["death_reason"] = "Starvation"
             else: stats["death_reason"] = "Combat/Injury"
+            
+            # Record Death Snapshot
+            from src.modifiers import get_modifier_breakdown
+            stats["death_snapshot"] = {
+                "step": i,
+                "player": run.player.to_dict(),
+                "breakdown": get_modifier_breakdown(run.player),
+                "last_node": engine.map_state.get_node(run.current_node).node_type
+            }
             return {"survived": False, "step": i, "state": run.player.to_dict(), "stats": stats, "perks": run.player.character.perks[:]}
             
-        # 1. Level Up
-        xp_thresholds = [0, 100, 300, 600, 1000, 2000]
+        # 1. Level Up (Super Tuning v2.1)
+        xp_thresholds = [0, 70, 150, 300, 500, 800]
         cur_lvl = run.player.character.level
-        target_xp = xp_thresholds[cur_lvl] if cur_lvl < len(xp_thresholds) else 5000
+        target_xp = xp_thresholds[cur_lvl] if cur_lvl < len(xp_thresholds) else 4000
         
         if run.player.character.xp >= target_xp:
-            available = ModifierRegistry.get_available_perks(run.player, count=3, target_level=cur_lvl + 1)
-            available = [p for p in available if p['id'] not in run.player.character.perks]
-            choice = sim_player.select_perk(available, i)
-            if choice:
-                run.player.character.perks.append(choice)
+            options = ModifierRegistry.get_available_perks(run.player, count=3, target_level=cur_lvl + 1)
+            options = [p for p in options if p['id'] not in run.player.character.perks]
+            choice_id = sim_player.select_perk(options, i)
+            
+            # Record Decision Trace
+            stats["decision_trace"].append({
+                "step": i,
+                "options": [p['id'] for p in options],
+                "picked": choice_id
+            })
+            
+            if choice_id:
+                run.player.character.perks.append(choice_id)
                 run.player.character.level += 1
                 run.player.recompute_stats()
                 stats["perks_count"] += 1
@@ -161,37 +183,33 @@ def run_sim(player_strategy: str, num_steps: int = 30, seed: int = 42, luck_mode
     return {"survived": True, "step": num_steps, "state": run.player.to_dict(), "stats": stats, "perks": run.player.character.perks[:]}
 
 def main():
-    strategies = ["random", "combat", "scavenge", "survival", "hybrid_scav_surv"]
+    strategies = ["survival", "scavenge", "hybrid_scav_surv"]
     iterations = 50
     results = {}
     
-    print(f"Starting Balance Lab Simulation ({iterations} iterations per strategy)...")
+    print(f"Starting Balance Lab v2 ({iterations} iterations per strategy)...")
     
     for strat in strategies:
         results[strat] = []
         for i in range(iterations):
-            # Normal Luck Run
-            res = run_sim(strat, num_steps=30, seed=i*137)
+            res = run_sim(strat, num_steps=30, seed=i*2024)
             results[strat].append(res)
             
-    # Print Advanced Summary
+    # --- Causal Analysis ---
     print("\n" + "="*110)
-    header = f"{'STRATEGY':16} | {'SURVIVE':7} | {'SCRAP':5} | {'PERKS':5} | {'DEATH REASON':15} | {'SYNERGY T1/T2 (STEP)'}"
-    print(header)
+    print(f"{'STRATEGY':16} | {'SURVIVE':7} | {'AVG STEP':8} | {'TOP DEATH NODE':15} | {'PERK SYNERGY T1/T2'}")
     print("-" * 110)
     
     for strat, data in results.items():
         survived_count = sum(1 for r in data if r['survived'])
-        avg_scrap = sum(r['state']['scrap'] for r in data) / iterations
-        avg_perks = sum(r['stats']['perks_count'] for r in data) / iterations
+        avg_step = sum(r['step'] for r in data) / iterations
         
-        # Death reason analysis
-        deaths = [r['stats']['death_reason'] for r in data if not r['survived']]
-        death_summary = "N/A"
-        if deaths:
+        # Death snapshot analysis
+        death_nodes = [r['stats']['death_snapshot']['last_node'] for r in data if not r['survived'] and r['stats']['death_snapshot']]
+        top_death_node = "N/A"
+        if death_nodes:
             from collections import Counter
-            common_death = Counter(deaths).most_common(1)[0]
-            death_summary = f"{common_death[0]} ({common_death[1]})"
+            top_death_node = Counter(death_nodes).most_common(1)[0][0]
             
         # Synergy timing
         t1_times = []
@@ -203,24 +221,16 @@ def main():
         
         avg_t1 = sum(t1_times)/len(t1_times) if t1_times else 0
         avg_t2 = sum(t2_times)/len(t2_times) if t2_times else 0
-        sync_info = f"T1:{avg_t1:2.0f} / T2:{avg_t2:2.0f}"
+        sync_info = f"T1:{avg_t1:2.0f} / T2:{avg_t1+avg_t2:2.0f}" # Cumulative relative to start
         
-        print(f"{strat:16} | {survived_count/iterations:6.1%} | {avg_scrap:5.0f} | {avg_perks:5.1f} | {death_summary:15} | {sync_info}")
+        print(f"{strat:16} | {survived_count/iterations:6.1%} | {avg_step:8.1f} | {top_death_node:15} | {sync_info}")
     print("="*110)
 
-    # Stress Test: Bottom-up protection (Luck Mode: Bad)
-    print("\n[STRESS TEST] Low-Roll Survival Floor (10 iterations per strategy)...")
-    print("-" * 60)
-    for strat in ["survival", "scavenge", "hybrid_scav_surv"]:
-        stress_results = []
-        for i in range(10):
-            res = run_sim(strat, num_steps=30, seed=i*999, luck_mode="bad")
-            stress_results.append(res)
-        
-        survived = sum(1 for r in stress_results if r['survived'])
-        avg_step = sum(r['step'] for r in stress_results) / 10
-        print(f"{strat:16} | Survival Floor: {survived/10:4.1%} | Avg Lifespan: {avg_step:4.1f} steps")
-    print("="*110)
+    # Decision Trace Sample (Scavenge)
+    print("\n[DIAGNOSTIC] Decision Trace for Scavenge (Run 1):")
+    scav_sample = results['scavenge'][0]['stats']['decision_trace']
+    for d in scav_sample:
+        print(f"  Step {d['step']:2}: Options {d['options']} -> Picked: {d['picked']}")
 
 if __name__ == "__main__":
     main()

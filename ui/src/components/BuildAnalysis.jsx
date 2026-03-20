@@ -33,52 +33,12 @@ const BuildAnalysis = ({ player, apiBase }) => {
 
       {/* Archetype Tiers */}
       <div className="mb-6 space-y-4">
-        {Object.entries(breakdown.tags).length > 0 ? (
-          ["survivor", "scavenger", "hunter", "mechanic"].map(arch => {
-            const count = (breakdown.archetype_counts && breakdown.archetype_counts[arch]) || 0;
-            const isDominant = breakdown.archetype === arch;
-            
-            if (count === 0 && !isDominant) return null;
-
-            return (
-              <div key={arch} className="space-y-2">
-                <div className="flex justify-between text-[10px] uppercase font-bold">
-                  <span className={isDominant ? "text-accent-primary" : "text-secondary"}>{arch}</span>
-                  <span className="text-secondary">Level {Math.floor(count / 2)}</span>
-                </div>
-                <div className="flex gap-1">
-                  {[1, 2, 3, 4, 5, 6].map(i => (
-                    <div 
-                      key={i} 
-                      className={`h-1.5 flex-1 rounded-full ${i <= count ? "bg-accent-primary shadow-[0_0_8px_rgba(0,255,163,0.5)]" : "bg-white bg-opacity-10"}`}
-                      title={`${i}/6 Perks`}
-                    />
-                  ))}
-                </div>
-                <div className="flex justify-between text-[8px] opacity-50">
-                  <span>Start</span>
-                  <span>Tier 1 (2)</span>
-                  <span>Tier 2 (4)</span>
-                  <span>Tier 3 (6)</span>
-                </div>
-              </div>
-            );
-          })
+        {Object.entries(breakdown.tags?.primary || {}).length > 0 || breakdown.archetype ? (
+          renderArchetypeTiers()
         ) : (
-          <div className="text-[10px] opacity-30 italic text-center py-2">No perks selected yet</div>
+          <div className="text-[10px] opacity-30 italic text-center py-2">No primary archetypes detected</div>
         )}
-      </div>
-
-      <div className="mb-6">
-        <div className="text-[10px] text-secondary uppercase mb-2">Mechanism Tags</div>
-        <div className="flex flex-wrap gap-2">
-          {Object.entries(breakdown.tags).map(([tag, count]) => (
-            <div key={tag} className="flex items-center">
-              <span className="px-2 py-0.5 bg-white bg-opacity-5 rounded-l text-[9px] uppercase">{tag}</span>
-              <span className="px-2 py-0.5 bg-accent-secondary text-black font-bold rounded-r text-[10px]">{count}</span>
-            </div>
-          ))}
-        </div>
+        {renderMechanismTags()}
       </div>
 
       {/* Modifier Breakdown - Collapsible or Mini */}

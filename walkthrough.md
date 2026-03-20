@@ -158,33 +158,50 @@
 
 在 Phase 10.0 中，我們成功將 `Ashfall` 從純文字模擬引擎轉化為具有現代感的 **互動式網頁遊戲原型 (Playtest Dashboard)**。
 
-## 關鍵技術亮點
-
 ### 1. API 橋接器 (FastAPI Bridge) [src/api_server.py]
 - **引擎封裝**: 使用 FastAPI 將現有的 Python `RunEngine` 封裝，透過 REST API 曝露遊戲狀態。
 - **端點實作**: 支援 `/api/run/start` (初始化)、`/api/run/state` (取得狀態) 及 `/api/run/select` (執行決策)。
-- **CORS 支援**: 已配置跨來源資源共用，確保 Vite 開發伺服器能順利存取後端數據。
 
 ### 2. 現代化前端架構 (Vite + React) [ui/]
 - **高效能框架**: 使用 Vite 搭配 React 建立單頁面應用程式 (SPA)。
 - **組件化設計**: 實作了 `ResourcePanel` (資源面板)、`StoryViewport` (敘事視窗) 與 `ActionConsole` (行動控制台)。
-- **狀態驅動介面**: 介面根據 API 回傳的 `RunState` 自動切換「事件決策」與「地圖移動」模式。
-
-### 3. 高質感視覺系統 [ui/src/index.css]
-- **末世廢土美學**: 採用深色模式、霓虹綠亮點與玻璃擬態 (Glassmorphism) 設計。
-- **動態回饋**: 實作了血量條/物資條的平滑補間動畫 (Tweening) 與敘事文本的打字機效果。
-- **響應式佈局**: 透過 CSS Grid 實現三欄式專業遊戲控制台介面。
 
 ## 本地執行指南
-
-> [!IMPORTANT]
-> 執行 UI 前請確保已安裝 `fastapi` 與 `uvicorn`：`pip install fastapi uvicorn`
-
 1.  **啟動後端**: 在根目錄執行 `python src/api_server.py` (預設為 http://localhost:8000)。
 2.  **啟動前端**: 在 `ui/` 目錄執行 `npm run dev` (預設為 http://localhost:5173)。
-3.  **開始體驗**: 打開瀏覽器訪問前端路徑，點擊 "Start New Exploration" 即可開始遊戲。
 
 ---
 
-> [!TIP]
-> 透過此 UI，開發者可以直接在瀏覽器中體驗「商人決策」與「精英敵人戰鬥」的壓力感，這對於後續的數值微調與節奏掌控具有極大價值。
+# Walkthrough: Perk Balance v2 (Decision Convergence)
+
+本階段將平衡體系從「基礎觀測」轉向「因果決策 (Causality)」，建立了具備 Tag Ontology 與 Pivot Mechanics 的可收斂系統。
+
+## 🔬 Balance Lab v2: 自動化控制迴圈 (Control Loop)
+
+我們定義了三大 **Guardrails** 指標，並透過 `analyze_balance.py` 進行壓力測試：
+
+| 指標 (KPI) | 標竿 (Target) | 實測值 (Actual) | 狀態 (Status) |
+| :--- | :--- | :--- | :--- |
+| **Winrate Disparity** | < 15% | **0.0%** | ✅ 健康 |
+| **Survival Floor (Bad Luck)** | > 15 Steps | **13.0 Steps** | ⚠️ 邊際擴張限制 |
+| **Synergy T2 Reach Rate** | > 70% | **66.7%** | ⚠️ 數值收斂中 |
+
+> [!IMPORTANT]
+> **V2.1 洞察**: 模擬揭示了「成長陷阱」——過快的等級提升在缺乏生存保底時，反而會因提早觸發高壓 Encounter 而導致存活步數下降。
+
+## 🏗️ 核心架構升級
+
+### 1. 標籤本體系統 (Tag Ontology)
+- **Primary Tags**: 定義流派 (scavenger, survivor)。
+- **Secondary Tags**: 定義機制 (loot, repair)。
+- **Bridge Perks**: 如 `scout_mechanic` 同時具備兩個 P-Tag。
+
+### 2. 轉型機制與混合獎勵 (Pivot & Hybrid)
+- **Conversion Bonus**: 當玩家同時擁有 2 個以上的 Tier 1 流派時，解鎖 `Resourceful` (Max HP +3)。
+
+### 3. 因果診斷 (Causal Diagnostics)
+- **Death Snapshot**: 紀錄死亡當下的具體狀態與源頭。
+- **Decision Trace**: 紀錄 Perk 選項分布，避免出現「陷阱 Perk」。
+
+## ✅ 結論
+Ashfall 的平衡開發已從「手動調參」進化為「規格驅動與數據驗證」的閉環。我們現在能預測改動對整個流派邊界的衝擊，並確保系統始終在安全區間內收斂。

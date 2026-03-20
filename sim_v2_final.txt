@@ -1,0 +1,20 @@
+﻿--- ASHFALL BALANCE AUTO-ANALYSIS (V2 Control Loop) ---
+Running 30 iterations per strategy...
+
+[KPI] Winrate Disparity: 0.0% (Limit: 15.0%)
+  >> OK: Builds are within healthy competitive bounds.
+
+[KPI] Survival Floor Stress Test (Luck Mode: Bad)
+  survival         | Avg Lifespan: 13.0 steps
+  scavenge         | Avg Lifespan: 13.0 steps
+  hybrid_scav_surv | Avg Lifespan: 13.0 steps
+  >> WARNING: Survival floor below 15 steps! Needs bottom-up protection.
+
+[KPI] Synergy Reach Rate (survival): 66.7% (Target: 70.0%)
+  >> WARNING: Synergy T2 is too hard to reach! Archetype scaling too slow.
+
+[KPI] Synergy Reach Rate (scavenge): 66.7% (Target: 70.0%)
+  >> WARNING: Synergy T2 is too hard to reach! Archetype scaling too slow.
+
+[KPI] Synergy Reach Rate (hybrid_scav_surv): 66.7% (Target: 70.0%)
+  >> WARNING: Synergy T2 is too hard to reach! Archetype scaling too slow.

@@ -4,8 +4,8 @@
     "display_name": "負重達人 (Perk)",
     "description": "你學會了更合理的堆疊物資。最大食物上限 +5。",
     "requirements": { "level": 2 },
-    "tags": ["food", "capacity"],
-    "archetype": "survivor",
+    "primary_tag": "survivor",
+    "secondary_tags": ["food", "capacity"],
     "effects": { "max_food_bonus": 5 }
   },
   {
@@ -13,8 +13,8 @@
     "display_name": "鷹眼",
     "description": "銳利的目光讓你總能提早發現威脅。隨機遭遇戰機率降低 25%。",
     "requirements": { "level": 2, "special": { "perception": { "min": 6 } } },
-    "tags": ["vision", "luck"],
-    "archetype": "scout",
+    "primary_tag": "scout",
+    "secondary_tags": ["vision", "luck"],
     "effects": { "encounter_chance_multiplier": 0.75 }
   },
   {
@@ -22,8 +22,8 @@
     "display_name": "零件回收家",
     "description": "你對機械結構瞭若指掌。維修裝備時所需的廢料成本減半。",
     "requirements": { "level": 2, "special": { "intelligence": { "min": 6 } } },
-    "tags": ["repair", "tech"],
-    "archetype": "mechanic",
+    "primary_tag": "mechanic",
+    "secondary_tags": ["repair", "tech"],
     "effects": { "repair_cost_multiplier": 0.5 }
   },
   {
@@ -31,8 +31,8 @@
     "display_name": "鋼鐵意志",
     "description": "廢土的磨礪讓你皮糙肉厚。最大生命值 +2。",
     "requirements": { "level": 2, "special": { "endurance": { "min": 6 } } },
-    "tags": ["hp", "physical"],
-    "archetype": "hunter",
+    "primary_tag": "hunter",
+    "secondary_tags": ["hp", "physical"],
     "effects": { "max_hp_bonus": 2 }
   },
   {
@@ -40,8 +40,8 @@
     "display_name": "快手",
     "description": "裝填與切換武器如同本能。戰鬥中彈藥消耗有 20% 機率不計入。",
     "requirements": { "level": 4, "special": { "agility": { "min": 7 } } },
-    "tags": ["ammo", "speed"],
-    "archetype": "hunter",
+    "primary_tag": "hunter",
+    "secondary_tags": ["ammo", "speed"],
     "effects": { "ammo_save_chance": 0.2 }
   },
   {
@@ -49,8 +49,8 @@
     "display_name": "鉛之腸胃",
     "description": "你的身體已適應了微量輻射。從事件效果中獲得的輻射值減少 1 點。",
     "requirements": { "level": 2, "special": { "endurance": { "min": 5 } } },
-    "tags": ["radiation", "food"],
-    "archetype": "survivor",
+    "primary_tag": "survivor",
+    "secondary_tags": ["radiation", "food"],
     "effects": { "radiation_reduction": 1 }
   },
   {
@@ -58,8 +58,8 @@
     "display_name": "拾荒者之運",
     "description": "總是能從廢墟中挖出額外的好東西實。從事件中獲得的廢料數量額外 +2。",
     "requirements": { "level": 2, "special": { "luck": { "min": 6 } } },
-    "tags": ["loot", "luck"],
-    "archetype": "scavenger",
+    "primary_tag": "scavenger",
+    "secondary_tags": ["loot", "luck"],
     "effects": { "scrap_bonus": 2 }
   },
   {
@@ -67,8 +67,8 @@
     "display_name": "戰地醫護",
     "description": "更專業的包紮技術。使用醫療包時的回復量額外 +2。",
     "requirements": { "level": 2, "special": { "intelligence": { "min": 6 } } },
-    "tags": ["healing", "support"],
-    "archetype": "survivor",
+    "primary_tag": "survivor",
+    "secondary_tags": ["healing", "support"],
     "effects": { "medkit_heal_bonus": 2 }
   },
   {
@@ -76,8 +76,8 @@
     "display_name": "無敵勇士",
     "description": "你就像一座移動堡壘。戰鬥中受到的傷害降低 1 點。",
     "requirements": { "level": 6, "special": { "endurance": { "min": 8 } } },
-    "tags": ["hp", "physical", "defense"],
-    "archetype": "hunter",
+    "primary_tag": "hunter",
+    "secondary_tags": ["hp", "physical", "defense"],
     "effects": { "damage_reduction": 1 }
   },
   {
@@ -85,8 +85,8 @@
     "display_name": "大師拾荒者",
     "description": "沒有什麼廢土資源能逃過你的眼睛。從事件中獲得的廢料數量額外 +5。",
     "requirements": { "level": 6 },
-    "tags": ["loot", "luck", "tech"],
-    "archetype": "scavenger",
+    "primary_tag": "scavenger",
+    "secondary_tags": ["loot", "luck", "tech"],
     "effects": { "scrap_bonus": 5 }
   },
   {
@@ -94,8 +94,8 @@
     "display_name": "鋼鐵肝臟",
     "description": "你已經習慣了污水與發霉的食物。食物中毒機率降低 50%。",
     "requirements": { "level": 4 },
-    "tags": ["food", "survival"],
-    "archetype": "survivor",
+    "primary_tag": "survivor",
+    "secondary_tags": ["food", "survival"],
     "effects": { "poison_res_bonus": 0.5 }
   },
   {
@@ -103,8 +103,8 @@
     "display_name": "靜默腳步",
     "description": "潛行在陰影中。戰鬥遭遇率降低 15%。",
     "requirements": { "level": 4, "special": { "agility": { "min": 6 } } },
-    "tags": ["stealth", "vision"],
-    "archetype": "scout",
+    "primary_tag": "scout",
+    "secondary_tags": ["stealth", "vision"],
     "effects": { "encounter_chance_multiplier": 0.85 }
   },
   {
@@ -112,8 +112,26 @@
     "display_name": "腎上腺素成癮",
     "description": "危險讓你更強大。當 HP 低於 5 時，傷害提昇 25%。",
     "requirements": { "level": 6 },
-    "tags": ["combat", "speed"],
-    "archetype": "hunter",
+    "primary_tag": "hunter",
+    "secondary_tags": ["combat", "speed"],
     "effects": { "low_hp_dmg_bonus": 1.25 }
+  },
+  {
+    "id": "scout_mechanic",
+    "display_name": "偵察維修工 (Bridge)",
+    "description": "同時精通偵察與機械維修。隨機遭遇降低 15%，且維修效率提升。",
+    "requirements": { "level": 4, "special": { "perception": { "min": 6 }, "intelligence": { "min": 6 } } },
+    "primary_tag": ["scout", "mechanic"],
+    "secondary_tags": ["vision", "repair", "tech"],
+    "effects": { "encounter_chance_multiplier": 0.85, "repair_cost_multiplier": 0.7 }
+  },
+  {
+    "id": "veteran_survivor",
+    "display_name": "廢土老兵 (Capstone)",
+    "description": "你是這裡的統治者。飢餓消耗速度降低 30%，最大 HP +5。",
+    "requirements": { "level": 8 },
+    "primary_tag": "survivor",
+    "secondary_tags": ["food", "hp", "survival"],
+    "effects": { "food_drain_multiplier": 0.7, "max_hp_bonus": 5 }
   }
 ]
