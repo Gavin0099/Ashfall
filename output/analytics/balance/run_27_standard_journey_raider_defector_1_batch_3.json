@@ -18,7 +18,7 @@
   "victory": true,
   "end_reason": "reached_final_node",
   "player_final": {
-    "hp": 20,
+    "hp": 19,
     "food": 9,
     "ammo": 0,
     "medkits": 13,
@@ -1144,10 +1144,10 @@
         "WARNING: radiation will continue to threaten future travel."
       ],
       "pre_choice_state": {
-        "hp": 11,
+        "hp": 20,
         "food": 11,
         "ammo": 3,
-        "medkits": 10,
+        "medkits": 9,
         "scrap": 54,
         "radiation": 3,
         "archetype": null,
@@ -1227,10 +1227,10 @@
       "equipment_change": null,
       "equipment_summary": null,
       "player_after": {
-        "hp": 11,
+        "hp": 20,
         "food": 15,
         "ammo": 3,
-        "medkits": 10,
+        "medkits": 9,
         "scrap": 52,
         "radiation": 3,
         "archetype": null,
@@ -1311,10 +1311,10 @@
         "DANGER: this choice carries a high combat risk."
       ],
       "pre_choice_state": {
-        "hp": 11,
+        "hp": 19,
         "food": 14,
         "ammo": 3,
-        "medkits": 10,
+        "medkits": 9,
         "scrap": 52,
         "radiation": 3,
         "archetype": null,
@@ -1394,10 +1394,10 @@
       "equipment_change": null,
       "equipment_summary": null,
       "player_after": {
-        "hp": 11,
+        "hp": 19,
         "food": 13,
         "ammo": 3,
-        "medkits": 10,
+        "medkits": 9,
         "scrap": 51,
         "radiation": 3,
         "archetype": null,
@@ -1477,7 +1477,7 @@
         "WARNING: radiation will continue to threaten future travel."
       ],
       "pre_choice_state": {
-        "hp": 20,
+        "hp": 18,
         "food": 12,
         "ammo": 3,
         "medkits": 9,
@@ -1562,7 +1562,7 @@
       "equipment_change": null,
       "equipment_summary": null,
       "player_after": {
-        "hp": 20,
+        "hp": 18,
         "food": 12,
         "ammo": 3,
         "medkits": 11,
@@ -1646,7 +1646,7 @@
         "DANGER: this choice carries a high combat risk."
       ],
       "pre_choice_state": {
-        "hp": 20,
+        "hp": 17,
         "food": 11,
         "ammo": 3,
         "medkits": 11,
@@ -1824,7 +1824,7 @@
         "WARNING: radiation will continue to threaten future travel."
       ],
       "pre_choice_state": {
-        "hp": 20,
+        "hp": 19,
         "food": 10,
         "ammo": 0,
         "medkits": 13,
@@ -1906,7 +1906,7 @@
       "equipment_change": null,
       "equipment_summary": null,
       "player_after": {
-        "hp": 20,
+        "hp": 19,
         "food": 9,
         "ammo": 0,
         "medkits": 13,
@@ -1984,7 +1984,7 @@
   "summary": {
     "pressure_count": 11,
     "death_cause_attribution": true,
-    "resource_signature": "hp:20|food:9|ammo:0|medkits:13|scrap:87|radiation:2|weapon:EquipmentState(id='sledgehammer', slot='weapon', durability=9, max_durability=10, rarity='legendary', requirements={'strength': 7}, scaling={'strength': 1.2}, affixes={'loot_scrap': 1}, tags=['melee', 'heavy', 'vampiric'], refinement_count=0)|armor:None|tool:EquipmentState(id='scavenger_kit', slot='tool', durability=10, max_durability=10, rarity='rare', requirements={'luck': 4}, scaling={}, affixes={'def': 2}, tags=['scavenging'], refinement_count=1)"
+    "resource_signature": "hp:19|food:9|ammo:0|medkits:13|scrap:87|radiation:2|weapon:EquipmentState(id='sledgehammer', slot='weapon', durability=9, max_durability=10, rarity='legendary', requirements={'strength': 7}, scaling={'strength': 1.2}, affixes={'loot_scrap': 1}, tags=['melee', 'heavy', 'vampiric'], refinement_count=0)|armor:None|tool:EquipmentState(id='scavenger_kit', slot='tool', durability=10, max_durability=10, rarity='rare', requirements={'luck': 4}, scaling={}, affixes={'def': 2}, tags=['scavenging'], refinement_count=1)"
   },
   "failure_analysis": {
     "death_chain_length": 0,

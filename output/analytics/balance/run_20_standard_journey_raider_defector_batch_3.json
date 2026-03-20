@@ -1069,10 +1069,10 @@
         "WARNING: radiation will continue to threaten future travel."
       ],
       "pre_choice_state": {
-        "hp": 11,
+        "hp": 19,
         "food": 11,
         "ammo": 2,
-        "medkits": 8,
+        "medkits": 7,
         "scrap": 34,
         "radiation": 4,
         "archetype": null,
@@ -1147,10 +1147,10 @@
       "equipment_change": null,
       "equipment_summary": null,
       "player_after": {
-        "hp": 11,
+        "hp": 19,
         "food": 15,
         "ammo": 2,
-        "medkits": 8,
+        "medkits": 7,
         "scrap": 32,
         "radiation": 4,
         "archetype": null,
@@ -1226,10 +1226,10 @@
         "DANGER: this choice carries a high combat risk."
       ],
       "pre_choice_state": {
-        "hp": 11,
+        "hp": 17,
         "food": 14,
         "ammo": 2,
-        "medkits": 8,
+        "medkits": 7,
         "scrap": 32,
         "radiation": 4,
         "archetype": null,
@@ -1304,10 +1304,10 @@
       "equipment_change": null,
       "equipment_summary": null,
       "player_after": {
-        "hp": 11,
+        "hp": 17,
         "food": 13,
         "ammo": 2,
-        "medkits": 8,
+        "medkits": 7,
         "scrap": 31,
         "radiation": 4,
         "archetype": null,
@@ -1382,7 +1382,7 @@
         "WARNING: radiation will continue to threaten future travel."
       ],
       "pre_choice_state": {
-        "hp": 20,
+        "hp": 15,
         "food": 12,
         "ammo": 2,
         "medkits": 7,

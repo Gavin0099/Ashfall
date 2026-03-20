@@ -18,7 +18,7 @@
   "victory": true,
   "end_reason": "reached_final_node",
   "player_final": {
-    "hp": 26,
+    "hp": 11,
     "food": 6,
     "ammo": 4,
     "medkits": 13,
@@ -1771,7 +1771,7 @@
       "equipment_change": null,
       "equipment_summary": null,
       "player_after": {
-        "hp": 26,
+        "hp": 11,
         "food": 8,
         "ammo": 4,
         "medkits": 13,
@@ -1852,7 +1852,7 @@
       "option_index": 0,
       "warning_signals": [],
       "pre_choice_state": {
-        "hp": 26,
+        "hp": 11,
         "food": 7,
         "ammo": 4,
         "medkits": 13,
@@ -1934,7 +1934,7 @@
       "equipment_change": null,
       "equipment_summary": null,
       "player_after": {
-        "hp": 26,
+        "hp": 11,
         "food": 6,
         "ammo": 4,
         "medkits": 13,
@@ -2012,7 +2012,7 @@
   "summary": {
     "pressure_count": 11,
     "death_cause_attribution": true,
-    "resource_signature": "hp:26|food:6|ammo:4|medkits:13|scrap:84|radiation:0|weapon:EquipmentState(id='sledgehammer', slot='weapon', durability=9, max_durability=10, rarity='legendary', requirements={'strength': 7}, scaling={'strength': 1.2}, affixes={'def': 5, 'max_durability': 10}, tags=['melee', 'heavy'], refinement_count=0)|armor:None|tool:EquipmentState(id='field_pack', slot='tool', durability=10, max_durability=10, rarity='rare', requirements={'strength': 4}, scaling={}, affixes={'atk': 1}, tags=['exploration'], refinement_count=0)"
+    "resource_signature": "hp:11|food:6|ammo:4|medkits:13|scrap:84|radiation:0|weapon:EquipmentState(id='sledgehammer', slot='weapon', durability=9, max_durability=10, rarity='legendary', requirements={'strength': 7}, scaling={'strength': 1.2}, affixes={'def': 5, 'max_durability': 10}, tags=['melee', 'heavy'], refinement_count=0)|armor:None|tool:EquipmentState(id='field_pack', slot='tool', durability=10, max_durability=10, rarity='rare', requirements={'strength': 4}, scaling={}, affixes={'atk': 1}, tags=['exploration'], refinement_count=0)"
   },
   "failure_analysis": {
     "death_chain_length": 0,
@@ -2027,8 +2027,8 @@
     "outcome": "victory",
     "key_turning_point": "node_trade_1 (tool -> scavenger_kit (replaced empty))",
     "notable_equipment": [
-      "scavenger_kit",
-      "field_pack"
+      "field_pack",
+      "scavenger_kit"
     ],
     "telemetry": {
       "total_steps": 12,
@@ -2044,8 +2044,8 @@
       "total_atk_affix_gain": 3,
       "total_def_affix_gain": 0,
       "equipment_ids": [
-        "scavenger_kit",
-        "field_pack"
+        "field_pack",
+        "scavenger_kit"
       ],
       "loot_resources": {
         "xp": 75,

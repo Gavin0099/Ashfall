@@ -18,10 +18,10 @@
   "victory": true,
   "end_reason": "reached_final_node",
   "player_final": {
-    "hp": 12,
+    "hp": 18,
     "food": 9,
     "ammo": 4,
-    "medkits": 8,
+    "medkits": 6,
     "scrap": 74,
     "radiation": 4,
     "archetype": null,
@@ -1158,7 +1158,7 @@
         "WARNING: radiation will continue to threaten future travel."
       ],
       "pre_choice_state": {
-        "hp": 20,
+        "hp": 18,
         "food": 11,
         "ammo": 6,
         "medkits": 5,
@@ -1241,7 +1241,7 @@
       "equipment_change": null,
       "equipment_summary": null,
       "player_after": {
-        "hp": 20,
+        "hp": 18,
         "food": 15,
         "ammo": 6,
         "medkits": 5,
@@ -1325,7 +1325,7 @@
         "DANGER: this choice carries a high combat risk."
       ],
       "pre_choice_state": {
-        "hp": 20,
+        "hp": 16,
         "food": 14,
         "ammo": 6,
         "medkits": 5,
@@ -1408,7 +1408,7 @@
       "equipment_change": null,
       "equipment_summary": null,
       "player_after": {
-        "hp": 20,
+        "hp": 16,
         "food": 13,
         "ammo": 6,
         "medkits": 5,
@@ -1494,7 +1494,7 @@
         "hp": 20,
         "food": 12,
         "ammo": 6,
-        "medkits": 5,
+        "medkits": 4,
         "scrap": 11,
         "radiation": 4,
         "archetype": null,
@@ -1578,7 +1578,7 @@
         "hp": 18,
         "food": 12,
         "ammo": 6,
-        "medkits": 5,
+        "medkits": 4,
         "scrap": 24,
         "radiation": 4,
         "archetype": null,
@@ -1659,10 +1659,10 @@
         "DANGER: this choice carries a high combat risk."
       ],
       "pre_choice_state": {
-        "hp": 18,
+        "hp": 16,
         "food": 11,
         "ammo": 6,
-        "medkits": 5,
+        "medkits": 4,
         "scrap": 24,
         "radiation": 4,
         "archetype": null,
@@ -1754,10 +1754,10 @@
       "equipment_change": null,
       "equipment_summary": null,
       "player_after": {
-        "hp": 12,
+        "hp": 10,
         "food": 11,
         "ammo": 4,
-        "medkits": 8,
+        "medkits": 7,
         "scrap": 74,
         "radiation": 4,
         "archetype": null,
@@ -1838,10 +1838,10 @@
         "WARNING: radiation will continue to threaten future travel."
       ],
       "pre_choice_state": {
-        "hp": 12,
+        "hp": 18,
         "food": 10,
         "ammo": 4,
-        "medkits": 8,
+        "medkits": 6,
         "scrap": 74,
         "radiation": 4,
         "archetype": null,
@@ -1921,10 +1921,10 @@
       "equipment_change": null,
       "equipment_summary": null,
       "player_after": {
-        "hp": 12,
+        "hp": 18,
         "food": 9,
         "ammo": 4,
-        "medkits": 8,
+        "medkits": 6,
         "scrap": 74,
         "radiation": 4,
         "archetype": null,
@@ -2000,7 +2000,7 @@
   "summary": {
     "pressure_count": 11,
     "death_cause_attribution": true,
-    "resource_signature": "hp:12|food:9|ammo:4|medkits:8|scrap:74|radiation:4|weapon:EquipmentState(id='sledgehammer', slot='weapon', durability=9, max_durability=10, rarity='legendary', requirements={'strength': 7}, scaling={'strength': 1.2}, affixes={'atk': 1, 'def': 1}, tags=['melee', 'heavy', 'lead_lined'], refinement_count=0)|armor:None|tool:EquipmentState(id='scavenger_kit', slot='tool', durability=10, max_durability=10, rarity='rare', requirements={'luck': 4}, scaling={}, affixes={'atk': 2}, tags=['scavenging'], refinement_count=0)"
+    "resource_signature": "hp:18|food:9|ammo:4|medkits:6|scrap:74|radiation:4|weapon:EquipmentState(id='sledgehammer', slot='weapon', durability=9, max_durability=10, rarity='legendary', requirements={'strength': 7}, scaling={'strength': 1.2}, affixes={'atk': 1, 'def': 1}, tags=['melee', 'heavy', 'lead_lined'], refinement_count=0)|armor:None|tool:EquipmentState(id='scavenger_kit', slot='tool', durability=10, max_durability=10, rarity='rare', requirements={'luck': 4}, scaling={}, affixes={'atk': 2}, tags=['scavenging'], refinement_count=0)"
   },
   "failure_analysis": {
     "death_chain_length": 0,

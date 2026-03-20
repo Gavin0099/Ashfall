@@ -18,10 +18,10 @@
   "victory": false,
   "end_reason": "combat_death",
   "player_final": {
-    "hp": -3,
+    "hp": 0,
     "food": 16,
     "ammo": 0,
-    "medkits": 0,
+    "medkits": 5,
     "scrap": 43,
     "radiation": 1,
     "archetype": null,
@@ -1364,7 +1364,7 @@
       "equipment_change": null,
       "equipment_summary": null,
       "player_after": {
-        "hp": 28,
+        "hp": 13,
         "food": 17,
         "ammo": 3,
         "medkits": 9,
@@ -1443,7 +1443,7 @@
         "DANGER: this choice carries a high combat risk."
       ],
       "pre_choice_state": {
-        "hp": 28,
+        "hp": 13,
         "food": 16,
         "ammo": 3,
         "medkits": 9,
@@ -1520,10 +1520,10 @@
       "equipment_change": null,
       "equipment_summary": null,
       "player_after": {
-        "hp": -3,
+        "hp": 0,
         "food": 16,
         "ammo": 0,
-        "medkits": 0,
+        "medkits": 5,
         "scrap": 43,
         "radiation": 1,
         "archetype": null,
@@ -1593,7 +1593,7 @@
   "summary": {
     "pressure_count": 9,
     "death_cause_attribution": true,
-    "resource_signature": "hp:-3|food:16|ammo:0|medkits:0|scrap:43|radiation:1|weapon:EquipmentState(id='hardened_blade', slot='weapon', durability=6, max_durability=10, rarity='legendary', requirements={'strength': 5}, scaling={'strength': 0.8}, affixes={'max_durability': 5}, tags=['melee', 'quality', 'lead_lined'], refinement_count=0)|armor:None|tool:EquipmentState(id='field_pack', slot='tool', durability=10, max_durability=10, rarity='rare', requirements={'strength': 4}, scaling={}, affixes={'atk': 1}, tags=['exploration'], refinement_count=1)"
+    "resource_signature": "hp:0|food:16|ammo:0|medkits:5|scrap:43|radiation:1|weapon:EquipmentState(id='hardened_blade', slot='weapon', durability=6, max_durability=10, rarity='legendary', requirements={'strength': 5}, scaling={'strength': 0.8}, affixes={'max_durability': 5}, tags=['melee', 'quality', 'lead_lined'], refinement_count=0)|armor:None|tool:EquipmentState(id='field_pack', slot='tool', durability=10, max_durability=10, rarity='rare', requirements={'strength': 4}, scaling={}, affixes={'atk': 1}, tags=['exploration'], refinement_count=1)"
   },
   "failure_analysis": {
     "death_chain_length": 3,
@@ -1630,8 +1630,8 @@
     "outcome": "combat_death",
     "key_turning_point": "node_deadzone_2 (lost 1 food, accepted combat risk, carried radiation into later travel)",
     "notable_equipment": [
-      "makeshift_blade",
-      "field_pack"
+      "field_pack",
+      "makeshift_blade"
     ],
     "telemetry": {
       "total_steps": 11,
@@ -1646,8 +1646,8 @@
       "total_atk_affix_gain": 1,
       "total_def_affix_gain": 0,
       "equipment_ids": [
-        "makeshift_blade",
-        "field_pack"
+        "field_pack",
+        "makeshift_blade"
       ],
       "loot_resources": {
         "ammo": 5,

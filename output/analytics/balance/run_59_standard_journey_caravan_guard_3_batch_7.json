@@ -15,14 +15,14 @@
     "node_final"
   ],
   "ended": true,
-  "victory": true,
-  "end_reason": "reached_final_node",
+  "victory": false,
+  "end_reason": "combat_death",
   "player_final": {
-    "hp": 12,
-    "food": 15,
-    "ammo": 1,
-    "medkits": 10,
-    "scrap": 77,
+    "hp": 0,
+    "food": 17,
+    "ammo": 4,
+    "medkits": 6,
+    "scrap": 27,
     "radiation": 1,
     "archetype": null,
     "character": {
@@ -45,31 +45,28 @@
       "tags": [
         "tag_caravan_guard"
       ],
-      "level": 5,
-      "xp": 23,
+      "level": 4,
+      "xp": 13,
       "can_level_up": false
     },
     "weapon_slot": {
-      "id": "sledgehammer",
+      "id": "rust_rifle",
       "slot": "weapon",
-      "durability": 9,
+      "durability": 8,
       "max_durability": 10,
-      "rarity": "legendary",
+      "rarity": "rare",
       "requirements": {
-        "strength": 7
+        "agility": 3
       },
       "scaling": {
-        "strength": 1.2
+        "perception": 0.5
       },
-      "affixes": {
-        "atk": 1,
-        "def": 2
-      },
+      "affixes": {},
       "tags": [
-        "melee",
-        "heavy"
+        "ranged",
+        "firearm"
       ],
-      "refinement_count": 0
+      "refinement_count": 1
     },
     "armor_slot": null,
     "tool_slot": {
@@ -1342,10 +1339,10 @@
       },
       "equipment_summary": "weapon -> rust_rifle (replaced empty)",
       "player_after": {
-        "hp": 12,
+        "hp": 15,
         "food": 19,
         "ammo": 6,
-        "medkits": 9,
+        "medkits": 7,
         "scrap": 45,
         "radiation": 1,
         "archetype": null,
@@ -1422,10 +1419,10 @@
         "WARNING: radiation will continue to threaten future travel."
       ],
       "pre_choice_state": {
-        "hp": 20,
+        "hp": 15,
         "food": 18,
         "ammo": 6,
-        "medkits": 8,
+        "medkits": 7,
         "scrap": 15,
         "radiation": 1,
         "archetype": null,
@@ -1503,10 +1500,10 @@
       "equipment_change": null,
       "equipment_summary": null,
       "player_after": {
-        "hp": 18,
+        "hp": 13,
         "food": 18,
         "ammo": 6,
-        "medkits": 8,
+        "medkits": 7,
         "scrap": 27,
         "radiation": 1,
         "archetype": null,
@@ -1584,10 +1581,10 @@
         "DANGER: this choice carries a high combat risk."
       ],
       "pre_choice_state": {
-        "hp": 18,
+        "hp": 13,
         "food": 17,
         "ammo": 6,
-        "medkits": 8,
+        "medkits": 7,
         "scrap": 27,
         "radiation": 1,
         "archetype": null,
@@ -1656,31 +1653,18 @@
       },
       "pressure": true,
       "combat_triggered": true,
-      "combat_loot": [
-        {
-          "resource": "xp",
-          "amount": 50
-        },
-        {
-          "resource": "scrap",
-          "amount": 50
-        },
-        {
-          "resource": "medkits",
-          "amount": 3
-        }
-      ],
+      "combat_loot": [],
       "effects": {
         "xp": 10
       },
       "equipment_change": null,
       "equipment_summary": null,
       "player_after": {
-        "hp": 12,
+        "hp": 0,
         "food": 17,
-        "ammo": 1,
-        "medkits": 10,
-        "scrap": 77,
+        "ammo": 4,
+        "medkits": 6,
+        "scrap": 27,
         "radiation": 1,
         "archetype": null,
         "character": {
@@ -1704,195 +1688,27 @@
             "tag_caravan_guard"
           ],
           "level": 4,
-          "xp": 63,
+          "xp": 13,
           "can_level_up": false
         },
         "weapon_slot": {
-          "id": "sledgehammer",
+          "id": "rust_rifle",
           "slot": "weapon",
-          "durability": 9,
-          "max_durability": 10,
-          "rarity": "legendary",
-          "requirements": {
-            "strength": 7
-          },
-          "scaling": {
-            "strength": 1.2
-          },
-          "affixes": {
-            "atk": 1,
-            "def": 2
-          },
-          "tags": [
-            "melee",
-            "heavy"
-          ],
-          "refinement_count": 0
-        },
-        "armor_slot": null,
-        "tool_slot": {
-          "id": "field_pack",
-          "slot": "tool",
-          "durability": 10,
+          "durability": 8,
           "max_durability": 10,
           "rarity": "rare",
           "requirements": {
-            "strength": 4
-          },
-          "scaling": {},
-          "affixes": {
-            "atk": 2
-          },
-          "tags": [
-            "exploration"
-          ],
-          "refinement_count": 1
-        }
-      }
-    },
-    {
-      "step": 12,
-      "node": "node_final",
-      "event_id": "evt_final",
-      "option_index": 0,
-      "warning_signals": [
-        "WARNING: radiation will continue to threaten future travel."
-      ],
-      "pre_choice_state": {
-        "hp": 12,
-        "food": 16,
-        "ammo": 1,
-        "medkits": 10,
-        "scrap": 77,
-        "radiation": 1,
-        "archetype": null,
-        "character": {
-          "background_id": "caravan_guard",
-          "display_name": "Generated Caravan guard",
-          "special": {
-            "strength": 12,
-            "perception": 7,
-            "endurance": 4,
-            "charisma": 2,
-            "intelligence": 3,
-            "agility": 5,
-            "luck": 7
-          },
-          "traits": [
-            "paranoid_reflex",
-            "lone_wolf"
-          ],
-          "perks": [],
-          "tags": [
-            "tag_caravan_guard"
-          ],
-          "level": 4,
-          "xp": 63,
-          "can_level_up": false
-        },
-        "weapon_slot": {
-          "id": "sledgehammer",
-          "slot": "weapon",
-          "durability": 9,
-          "max_durability": 10,
-          "rarity": "legendary",
-          "requirements": {
-            "strength": 7
+            "agility": 3
           },
           "scaling": {
-            "strength": 1.2
+            "perception": 0.5
           },
-          "affixes": {
-            "atk": 1,
-            "def": 2
-          },
+          "affixes": {},
           "tags": [
-            "melee",
-            "heavy"
-          ],
-          "refinement_count": 0
-        },
-        "armor_slot": null,
-        "tool_slot": {
-          "id": "field_pack",
-          "slot": "tool",
-          "durability": 10,
-          "max_durability": 10,
-          "rarity": "rare",
-          "requirements": {
-            "strength": 4
-          },
-          "scaling": {},
-          "affixes": {
-            "atk": 2
-          },
-          "tags": [
-            "exploration"
+            "ranged",
+            "firearm"
           ],
           "refinement_count": 1
-        }
-      },
-      "pressure": true,
-      "combat_triggered": false,
-      "combat_loot": [],
-      "effects": {
-        "food": -1
-      },
-      "equipment_change": null,
-      "equipment_summary": null,
-      "player_after": {
-        "hp": 12,
-        "food": 15,
-        "ammo": 1,
-        "medkits": 10,
-        "scrap": 77,
-        "radiation": 1,
-        "archetype": null,
-        "character": {
-          "background_id": "caravan_guard",
-          "display_name": "Generated Caravan guard",
-          "special": {
-            "strength": 12,
-            "perception": 7,
-            "endurance": 4,
-            "charisma": 2,
-            "intelligence": 3,
-            "agility": 5,
-            "luck": 7
-          },
-          "traits": [
-            "paranoid_reflex",
-            "lone_wolf"
-          ],
-          "perks": [],
-          "tags": [
-            "tag_caravan_guard"
-          ],
-          "level": 5,
-          "xp": 23,
-          "can_level_up": false
-        },
-        "weapon_slot": {
-          "id": "sledgehammer",
-          "slot": "weapon",
-          "durability": 9,
-          "max_durability": 10,
-          "rarity": "legendary",
-          "requirements": {
-            "strength": 7
-          },
-          "scaling": {
-            "strength": 1.2
-          },
-          "affixes": {
-            "atk": 1,
-            "def": 2
-          },
-          "tags": [
-            "melee",
-            "heavy"
-          ],
-          "refinement_count": 0
         },
         "armor_slot": null,
         "tool_slot": {
@@ -1917,33 +1733,55 @@
     }
   ],
   "summary": {
-    "pressure_count": 11,
+    "pressure_count": 10,
     "death_cause_attribution": true,
-    "resource_signature": "hp:12|food:15|ammo:1|medkits:10|scrap:77|radiation:1|weapon:EquipmentState(id='sledgehammer', slot='weapon', durability=9, max_durability=10, rarity='legendary', requirements={'strength': 7}, scaling={'strength': 1.2}, affixes={'atk': 1, 'def': 2}, tags=['melee', 'heavy'], refinement_count=0)|armor:None|tool:EquipmentState(id='field_pack', slot='tool', durability=10, max_durability=10, rarity='rare', requirements={'strength': 4}, scaling={}, affixes={'atk': 2}, tags=['exploration'], refinement_count=1)"
+    "resource_signature": "hp:0|food:17|ammo:4|medkits:6|scrap:27|radiation:1|weapon:EquipmentState(id='rust_rifle', slot='weapon', durability=8, max_durability=10, rarity='rare', requirements={'agility': 3}, scaling={'perception': 0.5}, affixes={}, tags=['ranged', 'firearm'], refinement_count=1)|armor:None|tool:EquipmentState(id='field_pack', slot='tool', durability=10, max_durability=10, rarity='rare', requirements={'strength': 4}, scaling={}, affixes={'atk': 2}, tags=['exploration'], refinement_count=1)"
   },
   "failure_analysis": {
-    "death_chain_length": 0,
-    "primary_blame_factor": null,
-    "regret_nodes": [],
-    "steps_from_regret_to_death": 0,
+    "death_chain_length": 3,
+    "primary_blame_factor": "combat",
+    "regret_nodes": [
+      {
+        "node_id": "node_fringe_2",
+        "event_id": "evt_tunnel",
+        "blame_score": 0.17,
+        "description": "lost 1 hp, accepted combat risk",
+        "steps_to_death": 8
+      },
+      {
+        "node_id": "node_deadzone_3",
+        "event_id": "evt_tech_vault",
+        "blame_score": 0.16,
+        "description": "lost 2 hp, carried radiation into later travel",
+        "steps_to_death": 1
+      },
+      {
+        "node_id": "node_deadzone_2",
+        "event_id": "evt_checkpoint",
+        "blame_score": 0.15,
+        "description": "accepted combat risk, carried radiation into later travel",
+        "steps_to_death": 2
+      }
+    ],
+    "steps_from_regret_to_death": 8,
     "is_trash_time_death": false
   },
   "run_summary": {
-    "headline": "standard_journey_caravan_guard_3_batch_7: victory via reached_final_node after 12 steps",
+    "headline": "standard_journey_caravan_guard_3_batch_7: loss via combat_death after 11 steps",
     "route_family": "unknown",
-    "outcome": "victory",
-    "key_turning_point": "node_fringe_1 (weapon -> makeshift_blade (replaced empty))",
+    "outcome": "combat_death",
+    "key_turning_point": "node_fringe_2 (lost 1 hp, accepted combat risk)",
     "notable_equipment": [
-      "rust_rifle",
+      "field_pack",
       "makeshift_blade",
-      "field_pack"
+      "rust_rifle"
     ],
     "telemetry": {
-      "total_steps": 12,
-      "pressure_count": 11,
+      "total_steps": 11,
+      "pressure_count": 10,
       "combat_count": 4,
-      "loot_drop_count": 9,
-      "loot_total_amount": 179,
+      "loot_drop_count": 6,
+      "loot_total_amount": 76,
       "equipment_change_count": 3,
       "rarity_distribution": {
         "common": 1,
@@ -1952,27 +1790,27 @@
       "total_atk_affix_gain": 3,
       "total_def_affix_gain": 1,
       "equipment_ids": [
-        "rust_rifle",
+        "field_pack",
         "makeshift_blade",
-        "field_pack"
+        "rust_rifle"
       ],
       "loot_resources": {
         "ammo": 5,
-        "scrap": 94,
-        "xp": 75,
-        "medkits": 5
+        "scrap": 44,
+        "xp": 25,
+        "medkits": 2
       },
       "max_radiation": 1,
       "min_food": 13,
-      "min_hp": 11,
+      "min_hp": 0,
       "low_resource_flags": [
-        "low_ammo"
+        "low_hp"
       ],
       "risk_tags": [
         "combat_seen",
         "radiation_pressure",
         "equipment_arc",
-        "end_reached_final_node"
+        "end_combat_death"
       ],
       "character": {
         "background_id": "caravan_guard",

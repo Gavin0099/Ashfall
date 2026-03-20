@@ -1955,8 +1955,8 @@
     "outcome": "victory",
     "key_turning_point": "node_fringe_1 (weapon -> makeshift_blade (replaced empty))",
     "notable_equipment": [
-      "makeshift_blade",
-      "field_pack"
+      "field_pack",
+      "makeshift_blade"
     ],
     "telemetry": {
       "total_steps": 12,
@@ -1971,8 +1971,8 @@
       "total_atk_affix_gain": 1,
       "total_def_affix_gain": 0,
       "equipment_ids": [
-        "makeshift_blade",
-        "field_pack"
+        "field_pack",
+        "makeshift_blade"
       ],
       "loot_resources": {
         "ammo": 5,

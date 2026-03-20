@@ -18,7 +18,7 @@
   "victory": false,
   "end_reason": "combat_death",
   "player_final": {
-    "hp": -1,
+    "hp": 0,
     "food": 11,
     "ammo": 0,
     "medkits": 0,
@@ -1176,7 +1176,7 @@
         "WARNING: radiation will continue to threaten future travel."
       ],
       "pre_choice_state": {
-        "hp": 19,
+        "hp": 17,
         "food": 11,
         "ammo": 3,
         "medkits": 7,
@@ -1261,7 +1261,7 @@
       "equipment_change": null,
       "equipment_summary": null,
       "player_after": {
-        "hp": 19,
+        "hp": 17,
         "food": 15,
         "ammo": 3,
         "medkits": 7,
@@ -1347,7 +1347,7 @@
         "DANGER: this choice carries a high combat risk."
       ],
       "pre_choice_state": {
-        "hp": 19,
+        "hp": 15,
         "food": 14,
         "ammo": 3,
         "medkits": 7,
@@ -1432,7 +1432,7 @@
       "equipment_change": null,
       "equipment_summary": null,
       "player_after": {
-        "hp": 19,
+        "hp": 15,
         "food": 13,
         "ammo": 3,
         "medkits": 7,
@@ -1517,10 +1517,10 @@
         "WARNING: radiation will continue to threaten future travel."
       ],
       "pre_choice_state": {
-        "hp": 19,
+        "hp": 20,
         "food": 12,
         "ammo": 3,
-        "medkits": 7,
+        "medkits": 6,
         "scrap": 18,
         "radiation": 4,
         "archetype": null,
@@ -1612,10 +1612,10 @@
       "equipment_change": null,
       "equipment_summary": null,
       "player_after": {
-        "hp": 16,
+        "hp": 17,
         "food": 12,
         "ammo": 0,
-        "medkits": 9,
+        "medkits": 8,
         "scrap": 43,
         "radiation": 4,
         "archetype": null,
@@ -1698,10 +1698,10 @@
         "DANGER: this choice carries a high combat risk."
       ],
       "pre_choice_state": {
-        "hp": 16,
+        "hp": 15,
         "food": 11,
         "ammo": 0,
-        "medkits": 9,
+        "medkits": 8,
         "scrap": 43,
         "radiation": 4,
         "archetype": null,
@@ -1782,7 +1782,7 @@
       "equipment_change": null,
       "equipment_summary": null,
       "player_after": {
-        "hp": -1,
+        "hp": 0,
         "food": 11,
         "ammo": 0,
         "medkits": 0,
@@ -1862,7 +1862,7 @@
   "summary": {
     "pressure_count": 10,
     "death_cause_attribution": true,
-    "resource_signature": "hp:-1|food:11|ammo:0|medkits:0|scrap:43|radiation:4|weapon:EquipmentState(id='hardened_blade', slot='weapon', durability=7, max_durability=10, rarity='legendary', requirements={'strength': 5}, scaling={'strength': 0.8}, affixes={'def': 2, 'atk': 3}, tags=['melee', 'quality'], refinement_count=0)|armor:None|tool:EquipmentState(id='scavenger_kit', slot='tool', durability=10, max_durability=10, rarity='rare', requirements={'luck': 4}, scaling={}, affixes={'def': 2}, tags=['scavenging'], refinement_count=2)"
+    "resource_signature": "hp:0|food:11|ammo:0|medkits:0|scrap:43|radiation:4|weapon:EquipmentState(id='hardened_blade', slot='weapon', durability=7, max_durability=10, rarity='legendary', requirements={'strength': 5}, scaling={'strength': 0.8}, affixes={'def': 2, 'atk': 3}, tags=['melee', 'quality'], refinement_count=0)|armor:None|tool:EquipmentState(id='scavenger_kit', slot='tool', durability=10, max_durability=10, rarity='rare', requirements={'luck': 4}, scaling={}, affixes={'def': 2}, tags=['scavenging'], refinement_count=2)"
   },
   "failure_analysis": {
     "death_chain_length": 3,

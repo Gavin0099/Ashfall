@@ -52,7 +52,7 @@ Prototype validation contract: `PROTOTYPE_SUCCESS_CRITERIA.md`
 ├─ [✓] Phase 8.0: AI Governance Integration         (2026/03/19 完成)
 ├─ [✓] Phase 9.0: World Depth & Quest Evolution      (2026/03/19 完成)
 ├─ [✓] Phase 10.0: Interactive Dashboard (UI)        (2026/03/19 完成)
-└─ [ ] Phase 11.0: Human Validation & Narrative Alignment (進行中)
-```
+├─ [✓] Phase 11.0: Gameplay Drift Detection Framework v1 (完成)
+└─ [ ] Phase 12.0: Playable System & Impact-based Governance (進行中)
 
-**當前階段：Phase 11.0 進行中 — 目標：修復文檔漂移、完成 PT-2 人機對比、優化代理指標。**
+**當前階段：Phase 12.0 進行中 — 目標：從「平衡分析」進化為「影響力分析」(Win Contribution)，建立對中度漂移的偵測能力，並探索 Playability 訊號與複合健康指標。**

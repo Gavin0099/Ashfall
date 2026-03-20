@@ -1653,9 +1653,9 @@
     "outcome": "combat_death",
     "key_turning_point": "node_fringe_2 (lost 1 hp, accepted combat risk)",
     "notable_equipment": [
-      "rust_rifle",
+      "field_pack",
       "makeshift_blade",
-      "field_pack"
+      "rust_rifle"
     ],
     "telemetry": {
       "total_steps": 11,
@@ -1671,9 +1671,9 @@
       "total_atk_affix_gain": 3,
       "total_def_affix_gain": 1,
       "equipment_ids": [
-        "rust_rifle",
+        "field_pack",
         "makeshift_blade",
-        "field_pack"
+        "rust_rifle"
       ],
       "loot_resources": {
         "ammo": 5,

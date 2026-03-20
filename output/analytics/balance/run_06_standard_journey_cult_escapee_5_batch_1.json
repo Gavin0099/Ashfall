@@ -18,10 +18,10 @@
   "victory": true,
   "end_reason": "reached_final_node",
   "player_final": {
-    "hp": 20,
+    "hp": 18,
     "food": 12,
     "ammo": 3,
-    "medkits": 9,
+    "medkits": 8,
     "scrap": 62,
     "radiation": 4,
     "archetype": null,
@@ -1001,10 +1001,10 @@
         "WARNING: radiation will continue to threaten future travel."
       ],
       "pre_choice_state": {
-        "hp": 11,
+        "hp": 19,
         "food": 15,
         "ammo": 2,
-        "medkits": 8,
+        "medkits": 7,
         "scrap": 50,
         "radiation": 4,
         "archetype": null,
@@ -1067,10 +1067,10 @@
       "equipment_change": null,
       "equipment_summary": null,
       "player_after": {
-        "hp": 11,
+        "hp": 19,
         "food": 18,
         "ammo": 2,
-        "medkits": 8,
+        "medkits": 7,
         "scrap": 48,
         "radiation": 4,
         "archetype": null,
@@ -1134,10 +1134,10 @@
         "DANGER: this choice carries a high combat risk."
       ],
       "pre_choice_state": {
-        "hp": 11,
+        "hp": 17,
         "food": 17,
         "ammo": 2,
-        "medkits": 8,
+        "medkits": 7,
         "scrap": 48,
         "radiation": 4,
         "archetype": null,
@@ -1205,10 +1205,10 @@
       "equipment_change": null,
       "equipment_summary": null,
       "player_after": {
-        "hp": 11,
+        "hp": 17,
         "food": 16,
         "ammo": 6,
-        "medkits": 8,
+        "medkits": 7,
         "scrap": 47,
         "radiation": 4,
         "archetype": null,
@@ -1271,7 +1271,7 @@
         "WARNING: radiation will continue to threaten future travel."
       ],
       "pre_choice_state": {
-        "hp": 20,
+        "hp": 15,
         "food": 15,
         "ammo": 6,
         "medkits": 7,
@@ -1336,7 +1336,7 @@
       "equipment_change": null,
       "equipment_summary": null,
       "player_after": {
-        "hp": 20,
+        "hp": 15,
         "food": 15,
         "ammo": 6,
         "medkits": 7,
@@ -1403,7 +1403,7 @@
         "DANGER: this choice carries a high combat risk."
       ],
       "pre_choice_state": {
-        "hp": 20,
+        "hp": 13,
         "food": 14,
         "ammo": 6,
         "medkits": 7,
@@ -1484,7 +1484,7 @@
         "hp": 10,
         "food": 14,
         "ammo": 3,
-        "medkits": 10,
+        "medkits": 9,
         "scrap": 62,
         "radiation": 4,
         "archetype": null,
@@ -1547,10 +1547,10 @@
         "WARNING: radiation will continue to threaten future travel."
       ],
       "pre_choice_state": {
-        "hp": 20,
+        "hp": 18,
         "food": 13,
         "ammo": 3,
-        "medkits": 9,
+        "medkits": 8,
         "scrap": 62,
         "radiation": 4,
         "archetype": null,
@@ -1612,10 +1612,10 @@
       "equipment_change": null,
       "equipment_summary": null,
       "player_after": {
-        "hp": 20,
+        "hp": 18,
         "food": 12,
         "ammo": 3,
-        "medkits": 9,
+        "medkits": 8,
         "scrap": 62,
         "radiation": 4,
         "archetype": null,
@@ -1673,7 +1673,7 @@
   "summary": {
     "pressure_count": 11,
     "death_cause_attribution": true,
-    "resource_signature": "hp:20|food:12|ammo:3|medkits:9|scrap:62|radiation:4|weapon:EquipmentState(id='sledgehammer', slot='weapon', durability=9, max_durability=10, rarity='legendary', requirements={'strength': 7}, scaling={'strength': 1.2}, affixes={'atk': 3}, tags=['melee', 'heavy', 'vampiric'], refinement_count=0)|armor:None|tool:None"
+    "resource_signature": "hp:18|food:12|ammo:3|medkits:8|scrap:62|radiation:4|weapon:EquipmentState(id='sledgehammer', slot='weapon', durability=9, max_durability=10, rarity='legendary', requirements={'strength': 7}, scaling={'strength': 1.2}, affixes={'atk': 3}, tags=['melee', 'heavy', 'vampiric'], refinement_count=0)|armor:None|tool:None"
   },
   "failure_analysis": {
     "death_chain_length": 0,

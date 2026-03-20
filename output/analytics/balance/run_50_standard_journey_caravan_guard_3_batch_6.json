@@ -18,7 +18,7 @@
   "victory": true,
   "end_reason": "reached_final_node",
   "player_final": {
-    "hp": 29,
+    "hp": 14,
     "food": 14,
     "ammo": 5,
     "medkits": 12,
@@ -1647,7 +1647,7 @@
       "equipment_change": null,
       "equipment_summary": null,
       "player_after": {
-        "hp": 29,
+        "hp": 14,
         "food": 16,
         "ammo": 5,
         "medkits": 12,
@@ -1730,7 +1730,7 @@
         "WARNING: radiation will continue to threaten future travel."
       ],
       "pre_choice_state": {
-        "hp": 29,
+        "hp": 14,
         "food": 15,
         "ammo": 5,
         "medkits": 12,
@@ -1812,7 +1812,7 @@
       "equipment_change": null,
       "equipment_summary": null,
       "player_after": {
-        "hp": 29,
+        "hp": 14,
         "food": 14,
         "ammo": 5,
         "medkits": 12,
@@ -1890,7 +1890,7 @@
   "summary": {
     "pressure_count": 11,
     "death_cause_attribution": true,
-    "resource_signature": "hp:29|food:14|ammo:5|medkits:12|scrap:107|radiation:1|weapon:EquipmentState(id='sledgehammer', slot='weapon', durability=9, max_durability=10, rarity='legendary', requirements={'strength': 7}, scaling={'strength': 1.2}, affixes={'atk': 4, 'def': 1}, tags=['melee', 'heavy'], refinement_count=0)|armor:None|tool:EquipmentState(id='field_pack', slot='tool', durability=10, max_durability=10, rarity='rare', requirements={'strength': 4}, scaling={}, affixes={'atk': 1}, tags=['exploration'], refinement_count=1)"
+    "resource_signature": "hp:14|food:14|ammo:5|medkits:12|scrap:107|radiation:1|weapon:EquipmentState(id='sledgehammer', slot='weapon', durability=9, max_durability=10, rarity='legendary', requirements={'strength': 7}, scaling={'strength': 1.2}, affixes={'atk': 4, 'def': 1}, tags=['melee', 'heavy'], refinement_count=0)|armor:None|tool:EquipmentState(id='field_pack', slot='tool', durability=10, max_durability=10, rarity='rare', requirements={'strength': 4}, scaling={}, affixes={'atk': 1}, tags=['exploration'], refinement_count=1)"
   },
   "failure_analysis": {
     "death_chain_length": 0,
@@ -1905,8 +1905,8 @@
     "outcome": "victory",
     "key_turning_point": "node_fringe_1 (weapon -> makeshift_blade (replaced empty))",
     "notable_equipment": [
-      "makeshift_blade",
-      "field_pack"
+      "field_pack",
+      "makeshift_blade"
     ],
     "telemetry": {
       "total_steps": 12,
@@ -1921,8 +1921,8 @@
       "total_atk_affix_gain": 1,
       "total_def_affix_gain": 0,
       "equipment_ids": [
-        "makeshift_blade",
-        "field_pack"
+        "field_pack",
+        "makeshift_blade"
       ],
       "loot_resources": {
         "ammo": 5,

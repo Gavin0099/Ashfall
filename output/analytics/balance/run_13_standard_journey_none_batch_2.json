@@ -845,8 +845,8 @@
     "outcome": "combat_death",
     "key_turning_point": "node_deadzone_1 (took +1 radiation, lost 1 food, accepted combat risk)",
     "notable_equipment": [
-      "scavenger_kit",
-      "field_pack"
+      "field_pack",
+      "scavenger_kit"
     ],
     "telemetry": {
       "total_steps": 7,
@@ -862,8 +862,8 @@
       "total_atk_affix_gain": 2,
       "total_def_affix_gain": 0,
       "equipment_ids": [
-        "scavenger_kit",
-        "field_pack"
+        "field_pack",
+        "scavenger_kit"
       ],
       "loot_resources": {
         "xp": 25,

@@ -18,10 +18,10 @@
   "victory": true,
   "end_reason": "reached_final_node",
   "player_final": {
-    "hp": 24,
+    "hp": 19,
     "food": 15,
     "ammo": 4,
-    "medkits": 7,
+    "medkits": 6,
     "scrap": 63,
     "radiation": 1,
     "archetype": null,
@@ -1651,7 +1651,7 @@
       "equipment_change": null,
       "equipment_summary": null,
       "player_after": {
-        "hp": 24,
+        "hp": 9,
         "food": 17,
         "ammo": 4,
         "medkits": 7,
@@ -1734,10 +1734,10 @@
         "WARNING: radiation will continue to threaten future travel."
       ],
       "pre_choice_state": {
-        "hp": 24,
+        "hp": 19,
         "food": 16,
         "ammo": 4,
-        "medkits": 7,
+        "medkits": 6,
         "scrap": 63,
         "radiation": 1,
         "archetype": null,
@@ -1816,10 +1816,10 @@
       "equipment_change": null,
       "equipment_summary": null,
       "player_after": {
-        "hp": 24,
+        "hp": 19,
         "food": 15,
         "ammo": 4,
-        "medkits": 7,
+        "medkits": 6,
         "scrap": 63,
         "radiation": 1,
         "archetype": null,
@@ -1894,7 +1894,7 @@
   "summary": {
     "pressure_count": 9,
     "death_cause_attribution": true,
-    "resource_signature": "hp:24|food:15|ammo:4|medkits:7|scrap:63|radiation:1|weapon:EquipmentState(id='sledgehammer', slot='weapon', durability=9, max_durability=10, rarity='legendary', requirements={'strength': 7}, scaling={'strength': 1.2}, affixes={'max_durability': 5, 'atk': 2}, tags=['melee', 'heavy'], refinement_count=0)|armor:None|tool:EquipmentState(id='field_pack', slot='tool', durability=10, max_durability=10, rarity='rare', requirements={'strength': 4}, scaling={}, affixes={'loot_scrap': 1}, tags=['exploration'], refinement_count=1)"
+    "resource_signature": "hp:19|food:15|ammo:4|medkits:6|scrap:63|radiation:1|weapon:EquipmentState(id='sledgehammer', slot='weapon', durability=9, max_durability=10, rarity='legendary', requirements={'strength': 7}, scaling={'strength': 1.2}, affixes={'max_durability': 5, 'atk': 2}, tags=['melee', 'heavy'], refinement_count=0)|armor:None|tool:EquipmentState(id='field_pack', slot='tool', durability=10, max_durability=10, rarity='rare', requirements={'strength': 4}, scaling={}, affixes={'loot_scrap': 1}, tags=['exploration'], refinement_count=1)"
   },
   "failure_analysis": {
     "death_chain_length": 0,
@@ -1909,9 +1909,9 @@
     "outcome": "victory",
     "key_turning_point": "node_fringe_1 (weapon -> makeshift_blade (replaced empty))",
     "notable_equipment": [
-      "rust_rifle",
+      "field_pack",
       "makeshift_blade",
-      "field_pack"
+      "rust_rifle"
     ],
     "telemetry": {
       "total_steps": 12,
@@ -1927,9 +1927,9 @@
       "total_atk_affix_gain": 1,
       "total_def_affix_gain": 1,
       "equipment_ids": [
-        "rust_rifle",
+        "field_pack",
         "makeshift_blade",
-        "field_pack"
+        "rust_rifle"
       ],
       "loot_resources": {
         "ammo": 5,

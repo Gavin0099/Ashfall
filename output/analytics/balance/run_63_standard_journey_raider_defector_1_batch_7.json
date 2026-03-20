@@ -18,7 +18,7 @@
   "victory": false,
   "end_reason": "combat_death",
   "player_final": {
-    "hp": -4,
+    "hp": -6,
     "food": 17,
     "ammo": 0,
     "medkits": 0,
@@ -1659,7 +1659,7 @@
       "equipment_change": null,
       "equipment_summary": null,
       "player_after": {
-        "hp": -4,
+        "hp": -6,
         "food": 17,
         "ammo": 0,
         "medkits": 0,
@@ -1734,7 +1734,7 @@
   "summary": {
     "pressure_count": 10,
     "death_cause_attribution": true,
-    "resource_signature": "hp:-4|food:17|ammo:0|medkits:0|scrap:53|radiation:0|weapon:EquipmentState(id='rust_rifle', slot='weapon', durability=8, max_durability=10, rarity='rare', requirements={'agility': 3}, scaling={'perception': 0.5}, affixes={}, tags=['ranged', 'firearm'], refinement_count=1)|armor:None|tool:EquipmentState(id='field_pack', slot='tool', durability=10, max_durability=10, rarity='rare', requirements={'strength': 4}, scaling={}, affixes={'atk': 2}, tags=['exploration'], refinement_count=1)"
+    "resource_signature": "hp:-6|food:17|ammo:0|medkits:0|scrap:53|radiation:0|weapon:EquipmentState(id='rust_rifle', slot='weapon', durability=8, max_durability=10, rarity='rare', requirements={'agility': 3}, scaling={'perception': 0.5}, affixes={}, tags=['ranged', 'firearm'], refinement_count=1)|armor:None|tool:EquipmentState(id='field_pack', slot='tool', durability=10, max_durability=10, rarity='rare', requirements={'strength': 4}, scaling={}, affixes={'atk': 2}, tags=['exploration'], refinement_count=1)"
   },
   "failure_analysis": {
     "death_chain_length": 3,
@@ -1771,9 +1771,9 @@
     "outcome": "combat_death",
     "key_turning_point": "node_fringe_2 (lost 1 hp, accepted combat risk)",
     "notable_equipment": [
-      "rust_rifle",
+      "field_pack",
       "makeshift_blade",
-      "field_pack"
+      "rust_rifle"
     ],
     "telemetry": {
       "total_steps": 11,
@@ -1789,9 +1789,9 @@
       "total_atk_affix_gain": 3,
       "total_def_affix_gain": 1,
       "equipment_ids": [
-        "rust_rifle",
+        "field_pack",
         "makeshift_blade",
-        "field_pack"
+        "rust_rifle"
       ],
       "loot_resources": {
         "ammo": 5,

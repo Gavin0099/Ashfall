@@ -18,10 +18,10 @@
   "victory": true,
   "end_reason": "reached_final_node",
   "player_final": {
-    "hp": 20,
+    "hp": 19,
     "food": 13,
     "ammo": 9,
-    "medkits": 11,
+    "medkits": 10,
     "scrap": 59,
     "radiation": 3,
     "archetype": null,
@@ -1112,7 +1112,7 @@
         "WARNING: radiation will continue to threaten future travel."
       ],
       "pre_choice_state": {
-        "hp": 17,
+        "hp": 16,
         "food": 14,
         "ammo": 12,
         "medkits": 10,
@@ -1190,7 +1190,7 @@
       "equipment_change": null,
       "equipment_summary": null,
       "player_after": {
-        "hp": 17,
+        "hp": 16,
         "food": 18,
         "ammo": 12,
         "medkits": 10,
@@ -1269,7 +1269,7 @@
         "DANGER: this choice carries a high combat risk."
       ],
       "pre_choice_state": {
-        "hp": 17,
+        "hp": 15,
         "food": 17,
         "ammo": 12,
         "medkits": 10,
@@ -1372,7 +1372,7 @@
       },
       "equipment_summary": "weapon -> rust_rifle (replaced empty)",
       "player_after": {
-        "hp": 17,
+        "hp": 15,
         "food": 17,
         "ammo": 12,
         "medkits": 10,
@@ -1452,10 +1452,10 @@
         "WARNING: radiation will continue to threaten future travel."
       ],
       "pre_choice_state": {
-        "hp": 17,
+        "hp": 20,
         "food": 16,
         "ammo": 12,
-        "medkits": 10,
+        "medkits": 9,
         "scrap": 3,
         "radiation": 3,
         "archetype": null,
@@ -1531,10 +1531,10 @@
       "equipment_change": null,
       "equipment_summary": null,
       "player_after": {
-        "hp": 17,
+        "hp": 20,
         "food": 16,
         "ammo": 12,
-        "medkits": 10,
+        "medkits": 9,
         "scrap": 9,
         "radiation": 3,
         "archetype": null,
@@ -1612,10 +1612,10 @@
         "DANGER: this choice carries a high combat risk."
       ],
       "pre_choice_state": {
-        "hp": 17,
+        "hp": 19,
         "food": 15,
         "ammo": 12,
-        "medkits": 10,
+        "medkits": 9,
         "scrap": 9,
         "radiation": 3,
         "archetype": null,
@@ -1707,7 +1707,7 @@
         "hp": 10,
         "food": 15,
         "ammo": 9,
-        "medkits": 12,
+        "medkits": 11,
         "scrap": 59,
         "radiation": 3,
         "archetype": null,
@@ -1785,10 +1785,10 @@
         "WARNING: radiation will continue to threaten future travel."
       ],
       "pre_choice_state": {
-        "hp": 20,
+        "hp": 19,
         "food": 14,
         "ammo": 9,
-        "medkits": 11,
+        "medkits": 10,
         "scrap": 59,
         "radiation": 3,
         "archetype": null,
@@ -1865,10 +1865,10 @@
       "equipment_change": null,
       "equipment_summary": null,
       "player_after": {
-        "hp": 20,
+        "hp": 19,
         "food": 13,
         "ammo": 9,
-        "medkits": 11,
+        "medkits": 10,
         "scrap": 59,
         "radiation": 3,
         "archetype": null,
@@ -1941,7 +1941,7 @@
   "summary": {
     "pressure_count": 10,
     "death_cause_attribution": true,
-    "resource_signature": "hp:20|food:13|ammo:9|medkits:11|scrap:59|radiation:3|weapon:EquipmentState(id='sledgehammer', slot='weapon', durability=9, max_durability=10, rarity='legendary', requirements={'strength': 7}, scaling={'strength': 1.2}, affixes={'atk': 2}, tags=['melee', 'heavy', 'vampiric'], refinement_count=0)|armor:None|tool:EquipmentState(id='scavenger_kit', slot='tool', durability=10, max_durability=10, rarity='common', requirements={'luck': 4}, scaling={}, affixes={}, tags=['scavenging'], refinement_count=0)"
+    "resource_signature": "hp:19|food:13|ammo:9|medkits:10|scrap:59|radiation:3|weapon:EquipmentState(id='sledgehammer', slot='weapon', durability=9, max_durability=10, rarity='legendary', requirements={'strength': 7}, scaling={'strength': 1.2}, affixes={'atk': 2}, tags=['melee', 'heavy', 'vampiric'], refinement_count=0)|armor:None|tool:EquipmentState(id='scavenger_kit', slot='tool', durability=10, max_durability=10, rarity='common', requirements={'luck': 4}, scaling={}, affixes={}, tags=['scavenging'], refinement_count=0)"
   },
   "failure_analysis": {
     "death_chain_length": 0,
@@ -1956,8 +1956,8 @@
     "outcome": "victory",
     "key_turning_point": "node_fringe_1 (weapon -> makeshift_blade (replaced empty))",
     "notable_equipment": [
-      "rust_rifle",
       "makeshift_blade",
+      "rust_rifle",
       "scavenger_kit"
     ],
     "telemetry": {
@@ -1974,8 +1974,8 @@
       "total_atk_affix_gain": 4,
       "total_def_affix_gain": 0,
       "equipment_ids": [
-        "rust_rifle",
         "makeshift_blade",
+        "rust_rifle",
         "scavenger_kit"
       ],
       "loot_resources": {

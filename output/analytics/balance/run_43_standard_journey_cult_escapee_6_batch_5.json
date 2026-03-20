@@ -1571,8 +1571,8 @@
     "outcome": "combat_death",
     "key_turning_point": "node_deadzone_2 (lost 1 food, accepted combat risk)",
     "notable_equipment": [
-      "scavenger_kit",
-      "field_pack"
+      "field_pack",
+      "scavenger_kit"
     ],
     "telemetry": {
       "total_steps": 9,
@@ -1588,8 +1588,8 @@
       "total_atk_affix_gain": 3,
       "total_def_affix_gain": 0,
       "equipment_ids": [
-        "scavenger_kit",
-        "field_pack"
+        "field_pack",
+        "scavenger_kit"
       ],
       "loot_resources": {
         "xp": 25,

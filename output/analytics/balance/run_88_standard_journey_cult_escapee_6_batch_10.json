@@ -2095,8 +2095,8 @@
     "outcome": "victory",
     "key_turning_point": "node_trade_1 (tool -> scavenger_kit (replaced empty))",
     "notable_equipment": [
-      "scavenger_kit",
-      "field_pack"
+      "field_pack",
+      "scavenger_kit"
     ],
     "telemetry": {
       "total_steps": 12,
@@ -2112,8 +2112,8 @@
       "total_atk_affix_gain": 3,
       "total_def_affix_gain": 1,
       "equipment_ids": [
-        "scavenger_kit",
-        "field_pack"
+        "field_pack",
+        "scavenger_kit"
       ],
       "loot_resources": {
         "ammo": 5,

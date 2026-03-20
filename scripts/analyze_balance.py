@@ -26,7 +26,7 @@ def analyze_build_v2():
     
     for strat in strategies:
         for i in range(iterations):
-            res = run_sim(strat, num_steps=30, seed=i*111)
+            res = run_sim(strat, num_steps=30, seed=i*111, luck_mode="normal")
             results[strat].append(res)
             
     # KPI 1: Winrate Disparity
@@ -94,22 +94,59 @@ def analyze_build_v2():
         if pick_rate > 0.6:
             print(f"  >> WARNING: Bridge Perk '{b_id}' is too universal! Pick rate is {pick_rate:.1%}.")
 
-    # KPI 7: Gameplay Drift - Meta Collapse (v2.5)
-    print(f"\n[KPI] Gameplay Drift Detection (Meta Collapse)")
-    all_picks = Counter([p for s in strategies for r in results[s] for p in r['perks']])
+    # KPI 7: Gameplay Drift - Impact Analysis (v2.6)
+    print(f"\n[KPI] Gameplay Drift & Impact Analysis (Win Contribution)")
+    all_perks = set([p for s in strategies for r in results[s] for p in r['perks']])
     drift_found = False
     
-    for p_id, count in all_picks.items():
-        rate = count / (len(strategies) * iterations)
+    total_runs_list = [r for s in strategies for r in results[s]]
+    
+    impact_data = []
+    for p_id in all_perks:
+        runs_with = [r for r in total_runs_list if p_id in r['perks']]
+        runs_without = [r for r in total_runs_list if p_id not in r['perks']]
+        
+        wr_with = sum(1 for r in runs_with if r['survived']) / len(runs_with) if runs_with else 0
+        wr_without = sum(1 for r in runs_without if r['survived']) / len(runs_without) if runs_without else 0
+        win_contrib = wr_with - wr_without
+        
+        avg_step_with = sum(r['step'] for r in runs_with) / len(runs_with) if runs_with else 0
+        avg_step_without = sum(r['step'] for r in runs_without) / len(runs_without) if runs_without else 0
+        step_delta = avg_step_with - avg_step_without
+        
+        pick_rate = len(runs_with) / len(total_runs_list)
+        impact_data.append({
+            "id": p_id, 
+            "pick_rate": pick_rate, 
+            "win_contrib": win_contrib,
+            "step_delta": step_delta
+        })
+    
+    # Sort by impact
+    for d in sorted(impact_data, key=lambda x: x['win_contrib'], reverse=True):
+        p_id = d['id']
+        rate = d['pick_rate']
+        contrib = d['win_contrib']
+        delta = d['step_delta']
+        
+        status = "Healthy"
         if rate > 0.8:
-            print(f"  >> CRITICAL_DRIFT (Gameplay): Perk '{p_id}' has {rate:.1%} pick rate! Meta is collapsing.")
+            status = "CRITICAL_DRIFT (Meta Collapse)"
             drift_found = True
         elif rate > 0.6:
-            print(f"  >> WARNING (Gameplay): Perk '{p_id}' is becoming a dominant strategy ({rate:.1%}).")
+            status = "WARNING (Dominant Meta)"
             drift_found = True
+        elif contrib > 0.20:
+            status = "WARNING (High Impact Drift)"
+            drift_found = True
+        elif contrib < -0.15:
+            status = "WARNING (Trap Perk / Negative Impact)"
+            drift_found = True
+            
+        print(f"  -- Perk '{p_id:16}': Pick:{rate:5.1%} | WinContrib:{contrib:+6.1%} | StepDelta:{delta:+4.1f} [{status}]")
     
     if not drift_found:
-        print("  >> OK: Decision space is healthy (no single perk > 60%).")
+        print("\n  >> OK: All perks are within stability and impact bounds.")
 
 if __name__ == "__main__":
     analyze_build_v2()

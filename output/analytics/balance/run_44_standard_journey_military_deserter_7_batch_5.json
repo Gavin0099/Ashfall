@@ -1208,7 +1208,7 @@
         "WARNING: radiation will continue to threaten future travel."
       ],
       "pre_choice_state": {
-        "hp": 16,
+        "hp": 15,
         "food": 7,
         "ammo": 5,
         "medkits": 6,
@@ -1293,7 +1293,7 @@
       "equipment_change": null,
       "equipment_summary": null,
       "player_after": {
-        "hp": 16,
+        "hp": 15,
         "food": 12,
         "ammo": 5,
         "medkits": 6,
@@ -1379,7 +1379,7 @@
         "DANGER: this choice carries a high combat risk."
       ],
       "pre_choice_state": {
-        "hp": 16,
+        "hp": 14,
         "food": 11,
         "ammo": 5,
         "medkits": 6,
@@ -1498,10 +1498,10 @@
       },
       "equipment_summary": "weapon -> rust_rifle (replaced empty)",
       "player_after": {
-        "hp": 20,
+        "hp": 14,
         "food": 11,
         "ammo": 0,
-        "medkits": 7,
+        "medkits": 5,
         "scrap": 54,
         "radiation": 2,
         "archetype": null,
@@ -1585,7 +1585,7 @@
         "hp": 20,
         "food": 10,
         "ammo": 0,
-        "medkits": 7,
+        "medkits": 4,
         "scrap": 44,
         "radiation": 2,
         "archetype": null,
@@ -1670,7 +1670,7 @@
         "hp": 18,
         "food": 10,
         "ammo": 0,
-        "medkits": 7,
+        "medkits": 4,
         "scrap": 56,
         "radiation": 2,
         "archetype": null,
@@ -1752,10 +1752,10 @@
         "DANGER: this choice carries a high combat risk."
       ],
       "pre_choice_state": {
-        "hp": 18,
+        "hp": 17,
         "food": 9,
         "ammo": 0,
-        "medkits": 7,
+        "medkits": 4,
         "scrap": 56,
         "radiation": 2,
         "archetype": null,
@@ -1951,9 +1951,9 @@
     "outcome": "combat_death",
     "key_turning_point": "node_fringe_3 (lost 2 hp, accepted combat risk, carried radiation into later travel)",
     "notable_equipment": [
+      "field_pack",
       "rust_rifle",
-      "scavenger_kit",
-      "field_pack"
+      "scavenger_kit"
     ],
     "telemetry": {
       "total_steps": 11,
@@ -1968,9 +1968,9 @@
       "total_atk_affix_gain": 3,
       "total_def_affix_gain": 2,
       "equipment_ids": [
+        "field_pack",
         "rust_rifle",
-        "scavenger_kit",
-        "field_pack"
+        "scavenger_kit"
       ],
       "loot_resources": {
         "ammo": 5,

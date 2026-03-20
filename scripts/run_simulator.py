@@ -53,8 +53,14 @@ class SimulationPlayer:
         scored_options = []
         for opt in options:
             score = 0
-            opt_tags = opt.get("tags", [])
-            for t in opt_tags:
+            # Support both primary_tag (string or list) and secondary_tags
+            p_tag = opt.get("primary_tag")
+            tags = []
+            if isinstance(p_tag, list): tags.extend(p_tag)
+            elif p_tag: tags.append(p_tag)
+            tags.extend(opt.get("secondary_tags", []))
+            
+            for t in tags:
                 if t in target_tags:
                     score += 1
             scored_options.append((score, opt['id']))
@@ -178,7 +184,8 @@ def run_sim(player_strategy: str, num_steps: int = 30, seed: int = 42, luck_mode
             stats["steps"] += 1
             
             # Survival mechanics
-            run.player.food -= 1
+            food_drain = apply_modifier(run.player, "food_drain_multiplier", 1.0)
+            run.player.food -= food_drain
             if run.player.food < 0:
                 run.player.hp -= 1
                 run.player.food = 0
