@@ -1,6 +1,8 @@
-# AGENTS.md - Your Workspace
+# AGENTS.md - Workspace Protocols (工作空間操作規範)
 
-This folder is home. Treat it that way.
+> [!NOTE]
+> **Role**: 工作空間操作規範與具體工具用法。記錄導覽、工具呼叫、記憶管理等「如何做事」的 Sop。
+> **Boundary**: 這裡記錄「怎麼做」，不涉及人格或技術定位。
 
 ## First Run
 
