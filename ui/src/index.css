@@ -184,6 +184,9 @@ body {
   display: flex;
   flex-direction: column;
   gap: 16px;
+  overflow-y: auto;
+  max-height: 100%;
+  padding-right: 4px; /* Space for scrollbar */
 }
 
 .center-content {

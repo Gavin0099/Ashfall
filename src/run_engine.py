@@ -36,7 +36,10 @@ class RunEngine:
     def create_run(self, player: PlayerState, seed: int) -> RunState:
         start = self.map_state.start_node_id
         player_copy = replace(player)
-        player_copy.max_hp = self.difficulty_profile.starting_hp
+        player_copy.base_max_hp = self.difficulty_profile.starting_hp
+        player_copy.base_max_food = 20 # Default base
+        player_copy.recompute_stats()
+        
         run = RunState(player=player_copy, map_seed=seed, current_node=start)
         run.visit(start)
         return run
@@ -84,15 +87,17 @@ class RunEngine:
             return {"success": False, "reason": "no_equipment"}
 
         if action == "repair":
-            cost = 2
-            if player.character and "scrappie_perk" in player.character.perks:
-                cost = 1
-            elif player.character and player.character.special.get("intelligence", 5) >= 7:
-                cost = 1
+            from .modifiers import apply_modifier
+            base_cost = 2
+            cost = int(apply_modifier(player, "repair_cost_multiplier", float(base_cost)))
+            
+            # Special logic for intelligence and campsite facilities
+            if player.character and player.character.special.get("intelligence", 5) >= 7:
+                cost = min(cost, 1)
             
             current_node = self.map_state.get_node(run.current_node)
             if current_node.node_type == "camp" and current_node.metadata.get("facilities", {}).get("repair_bench"):
-                if cost > 1: cost = 1
+                cost = min(cost, 1)
                 
             needed = equipment.max_durability - equipment.durability
             if needed <= 0: return {"success": False, "reason": "already_max"}
@@ -212,18 +217,34 @@ class RunEngine:
                 run.player.equip(st)
                 outcome["equipment_change"] = {"slot": st.slot, "item": st.id, "item_data": st.to_dict(), "changed": True}
         
-        # Scavenger passive: +1 to any positive resource gain from event effects
-        if run.player.archetype == "scavenger" and not run.player.is_dead():
+        # perk bonus for resources
+        from .modifiers import apply_modifier
+        if not run.player.is_dead():
             effects = outcome.get("effects", {})
-            scavenged = False
-            for res_key in ("food", "ammo", "scrap", "medkits"):
-                if effects.get(res_key, 0) > 0:
-                    setattr(run.player, res_key, getattr(run.player, res_key) + 1)
-                    scavenged = True
-                    break
-            if scavenged:
-                # Add a note to the outcome for the UI (optional display)
-                outcome["scavenger_bonus_active"] = True
+            
+            # 1. Scavengers Luck Perk: +2 scrap
+            scrap_bonus = int(apply_modifier(run.player, "scrap_bonus", 0.0))
+            if scrap_bonus > 0 and effects.get("scrap", 0) > 0:
+                run.player.scrap += scrap_bonus
+                outcome["scavenger_perk_active"] = True
+
+            # 2. Lead Stomach Perk: subtract rad gain
+            rad_reduction = int(apply_modifier(run.player, "radiation_reduction", 0.0))
+            if rad_reduction > 0 and effects.get("radiation", 0) > 0:
+                # Note: rad is already applied in resolve_event_choice, so we counteract it
+                run.player.radiation = max(0, run.player.radiation - rad_reduction)
+                outcome["lead_stomach_active"] = True
+
+            # 3. Scavenger ARCHETYPE: +1 to any first positive gain
+            if run.player.archetype == "scavenger":
+                scavenged = False
+                for res_key in ("food", "ammo", "scrap", "medkits"):
+                    if effects.get(res_key, 0) > 0:
+                        setattr(run.player, res_key, getattr(run.player, res_key) + 1)
+                        scavenged = True
+                        break
+                if scavenged:
+                    outcome["scavenger_bonus_active"] = True
 
         # Apply flag updates from event
         if outcome.get("set_flags"):
@@ -458,11 +479,12 @@ class RunEngine:
         delta = self.difficulty_profile.event_combat_delta
         
         # Eagle Eye Perk or High Perception effect
-        encounter_multiplier = 1.0
-        if player and player.character:
-            if "eagle_eye_perk" in player.character.perks:
-                encounter_multiplier = 0.75
-            elif player.character.special.get("perception", 5) >= 8:
+        from .modifiers import apply_modifier
+        encounter_multiplier = apply_modifier(player, "encounter_chance_multiplier", 1.0)
+        
+        # Perception fallback if no perk but high stat
+        if encounter_multiplier == 1.0 and player and player.character:
+            if player.character.special.get("perception", 5) >= 8:
                 encounter_multiplier = 0.9
 
         if delta == 0.0 and encounter_multiplier == 1.0:

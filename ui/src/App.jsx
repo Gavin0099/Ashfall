@@ -5,6 +5,7 @@ import ActionConsole from './components/ActionConsole';
 import BaseView from './components/BaseView';
 import CharacterCreator from './components/CharacterCreator';
 import LevelUpModal from './components/LevelUpModal';
+import BuildAnalysis from './components/BuildAnalysis';
 
 const API_BASE = 'http://localhost:8000/api';
 
@@ -249,6 +250,9 @@ function App() {
                 <div className="font-heading font-bold text-lg">{gameState.player.character.display_name}</div>
                 <div className="text-xs text-accent-primary mt-1">Level {gameState.player.character.level} {gameState.player.character.background_id.replace(/_/g, ' ')}</div>
              </div>
+           )}
+           {gameState.player.character && (
+             <BuildAnalysis player={gameState.player} apiBase={API_BASE} />
            )}
         </div>
       </aside>

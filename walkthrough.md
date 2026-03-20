@@ -36,6 +36,53 @@
 
 ### 2. 戰鬥邏輯與生存提升 [src/combat_engine.py]
 - **醫療包強化**: 回復量從 8 HP 提升至 **10 HP**。
+# Walkthrough: Perk Balance Infrastructure Expansion
+
+本階段將 Perk 系統從「單點功能」提升至「可量化的平衡基礎建設 (Balance Infrastructure)」，建立了語義標籤、分層協同、平衡實驗室與玩家視圖。
+
+## 📊 Balance Lab: 模擬實驗結果 (30 Steps)
+
+| 策略 (Strategy) | 存活率 (Win Rate) | 廢料平均 | Perk 數量 | 主要死因 | Synergy 觸發 (T1/T2) |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| **Survival** | 14.0% | 51 | 3.1 | Combat (43) | Step 0 / Step 10 |
+| **Scavenge** | 12.0% | 58 | 3.0 | Combat (45) | Step 0 / Step 17 |
+| **Hybrid** | 14.0% | 51 | 3.0 | Combat (43) | Step 0 / Step 16 |
+| **Random** | 10.0% | 58 | 3.0 | Combat (45) | Step 0 / Step 17 |
+
+> [!NOTE]
+> **T1: 0** 表示 Tier 1 (2 Perks) 在初期（Step 0-5）即達成，流派傾向確立極快。
+> **T2: 10-17** 表示 Tier 2 (4 Perks) 在中期達成，符合設計預期。
+
+### 🚨 [STRESS TEST] Low-Roll Survival Floor
+在極端倒楣（資源最低 roll、戰鬥傷害最高 roll）的情況下：
+*   **Survival Floor**: 0% (所有策略均無法達到 30 步)。
+*   **平均壽命**: 11-14 步。
+*   **結論**: 目前的「下限保護」不足，未來需針對生存流派增加更強的低血量補償或保底食物。
+
+## 🛠️ 核心變動
+
+### 1. 語義標籤層 (Semantic Tagging)
+在 [perks.json](file:///e:/BackUp/Git_EE/Ashfall/data/perks.json) 中將 **Mechanic Tags** (loot, food, radiation) 與 **Design Archetypes** (scavenger, survivor) 分離。一個 Perk 現在可以擁有多個機制標籤，支持更靈活的混搭。
+
+### 2. 分層協同邏輯 (Tiered Synergy 2/4/6)
+在 [modifiers.py](file:///e:/BackUp/Git_EE/Ashfall/src/modifiers.py) 實作了全域分層獎勵：
+*   **Tier 1 (2 個)**: 基礎屬性加成 (如 Scrap +2)。
+*   **Tier 2 (4 個)**: 核心機制強化 (如 輻射減免)。
+*   **Tier 3 (6 個)**: 終極回報 (Capstone Padding)。
+
+### 3. 玩家中心 HUD (Build Analysis UI)
+重新設計了 [BuildAnalysis.jsx](file:///e:/BackUp/Git_EE/Ashfall/ui/src/components/BuildAnalysis.jsx)：
+*   **Tier Progress Bars**: 直觀顯示各流派進度 (2/4/6)。
+*   **Mechanism Tags**: 顯示具體的機制堆疊。
+*   **Collapsible Details**: 隱藏冗長的 Debug 數據，優先顯示遊戲性相關的 Synergy 來源。
+
+## ✅ 結論
+我們現在不僅讓 Perk 能夠運作，更擁有了一套可以**精準觀察、量化模擬、並針對「極端值」進度修復**的開發體系。
+
+## 驗證截圖/紀錄
+
+
+---
 - **治療門檻調優**: AI 治療門檻從 HP <= 6 提升至 **HP <= 8**，有效防止被高傷敵人（如 Overseer）直接擊殺。
 - **無窮循環防護**: 增加了 100 回合戰鬥限制，解決了因防禦力持平導致的模擬卡死。
 

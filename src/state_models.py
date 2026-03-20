@@ -149,7 +149,20 @@ class PlayerState:
     armor_slot: Optional[EquipmentState] = None
     tool_slot: Optional[EquipmentState] = None
     buffs: Dict[str, int] = field(default_factory=dict) # buff_id: duration_steps
+    base_max_hp: int = 20
+    base_max_food: int = 20
     max_hp: int = 20
+    max_food: int = 20
+
+    def recompute_stats(self) -> None:
+        """根據 Perk 與 Buff 重新計算當前屬性上限。"""
+        from .modifiers import apply_modifier
+        self.max_hp = int(apply_modifier(self, "max_hp_bonus", float(self.base_max_hp)))
+        self.max_food = int(apply_modifier(self, "max_food_bonus", float(self.base_max_food)))
+
+        # 確保當前值不超過上限
+        self.hp = min(self.hp, self.max_hp)
+        self.food = min(self.food, self.max_food)
 
     def is_dead(self) -> bool:
         return self.hp <= 0 or self.food <= 0
@@ -178,7 +191,11 @@ class PlayerState:
             "weapon_slot": self.weapon_slot.to_dict() if self.weapon_slot else None,
             "armor_slot": self.armor_slot.to_dict() if self.armor_slot else None,
             "tool_slot": self.tool_slot.to_dict() if self.tool_slot else None,
-            "buffs": self.buffs
+            "buffs": self.buffs,
+            "max_hp": self.max_hp,
+            "max_food": self.max_food,
+            "base_max_hp": self.base_max_hp,
+            "base_max_food": self.base_max_food
         }
 
     @staticmethod
@@ -199,7 +216,11 @@ class PlayerState:
             weapon_slot=EquipmentState.from_dict(w_data) if isinstance(w_data, dict) else None,
             armor_slot=EquipmentState.from_dict(a_data) if isinstance(a_data, dict) else None,
             tool_slot=EquipmentState.from_dict(t_data) if isinstance(t_data, dict) else None,
-            buffs=data.get("buffs", {})
+            buffs=data.get("buffs", {}),
+            base_max_hp=data.get("base_max_hp", data.get("max_hp", 20)),
+            base_max_food=data.get("base_max_food", data.get("max_food", 20)),
+            max_hp=data.get("max_hp", 20),
+            max_food=data.get("max_food", 20)
         )
 
 
@@ -250,6 +271,7 @@ class RunState:
     player: PlayerState
     map_seed: int
     current_node: str
+    depth: int = 0
     visited_nodes: List[str] = field(default_factory=list)
     ended: bool = False
     victory: bool = False
@@ -334,9 +356,9 @@ def apply_effects(player: PlayerState, effects: Dict[str, int]) -> None:
     """Apply event effects to player resources/state in-place."""
     for key, delta in effects.items():
         if key == "hp":
-            player.hp += delta
+            player.hp = min(player.max_hp, player.hp + delta)
         elif key == "food":
-            player.food += delta
+            player.food = min(player.max_food, player.food + delta)
         elif key == "ammo":
             player.ammo += delta
         elif key == "medkits":

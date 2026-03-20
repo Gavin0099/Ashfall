@@ -16,8 +16,10 @@ class CombatEngine:
         if player.ammo <= 0:
             raise ValueError("Cannot attack without ammo")
         
-        # Quick Hands Perk: 20% chance to save ammo
-        if player.character and "quick_hands" in player.character.perks and self.rng.random() < 0.2:
+        # Quick Hands Perk: ammo_save_chance
+        from .modifiers import apply_modifier
+        save_chance = apply_modifier(player, "ammo_save_chance", 0.0)
+        if save_chance > 0 and self.rng.random() < save_chance:
             pass
         else:
             player.ammo -= 1
@@ -75,9 +77,10 @@ class CombatEngine:
         if player.archetype == "medic":
             heal += 1
         
-        # Field Medic Perk: +2 heal
-        if player.character and "field_medic_perk" in player.character.perks:
-            heal += 2
+        # Field Medic Perk: medkit_heal_bonus
+        from .modifiers import apply_modifier
+        heal_bonus = int(apply_modifier(player, "medkit_heal_bonus", 0.0))
+        heal += heal_bonus
         
         # Bloodlust penalty: healing halved
         if player.character and "bloodlust" in player.character.tags:

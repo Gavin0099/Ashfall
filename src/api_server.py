@@ -110,13 +110,17 @@ def state_to_dict(run: RunState) -> Dict[str, Any]:
         "player": {
             "hp": p.hp,
             "max_hp": p.max_hp,
+            "base_max_hp": p.base_max_hp,
             "food": p.food,
+            "max_food": p.max_food,
+            "base_max_food": p.base_max_food,
             "ammo": p.ammo,
             "medkits": p.medkits,
             "scrap": p.scrap,
             "radiation": p.radiation,
             "archetype": p.archetype,
             "character": p.character.to_dict() if p.character else None,
+            "perks": p.character.perks if p.character else [],
             "items": items
         },
         "event": {
@@ -134,6 +138,13 @@ def state_to_dict(run: RunState) -> Dict[str, Any]:
 @app.get("/api/health")
 def health():
     return {"status": "ok"}
+
+@app.get("/api/run/modifiers/breakdown")
+def get_modifiers_breakdown():
+    if not session.run:
+        raise HTTPException(status_code=400, detail="No active run")
+    from .modifiers import get_modifier_breakdown
+    return get_modifier_breakdown(session.run.player)
 
 @app.post("/api/run/start")
 def start_run(seed: int = 42, profile_data: Optional[Dict[str, Any]] = None):
@@ -306,14 +317,12 @@ def select_perk(req: LevelUpSelectRequest):
     char.perks.append(perk["id"])
     char.level += 1
     
-    # Apply effects
-    effects = perk.get("effects", {})
+    # Recompute stats
+    player.recompute_stats()
+    
+    # Optional: Heal player if max HP increased (Legacy logic preserved)
     if "max_hp_bonus" in effects:
-        player.max_hp += effects["max_hp_bonus"]
         player.hp += effects["max_hp_bonus"]
-    if "max_food_bonus" in effects:
-        # Placeholder for future expansion
-        pass
         
     return {"success": True, "level": char.level, "state": state_to_dict(session.run)}
 
