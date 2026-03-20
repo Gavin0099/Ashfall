@@ -155,6 +155,23 @@ class ModifierRegistry:
                 "threshold": 0
             })
             
+        # --- Last Stand (Pacing Buffer v2.2) ---
+        if player.hp < player.max_hp * 0.3:
+            bonuses.append({
+                "name": "絕地求生 (Last Stand)",
+                "effect": "medkit_heal_bonus",
+                "value": 5, # Large boost to medkits when desperate
+                "archetype": "pacing",
+                "threshold": 0
+            })
+            bonuses.append({
+                "name": "腎上腺素 (Adrenaline)",
+                "effect": "encounter_chance_multiplier",
+                "value": -0.2, # Lower encounter chance when near death
+                "archetype": "pacing",
+                "threshold": 0
+            })
+            
         return bonuses
 
     @classmethod

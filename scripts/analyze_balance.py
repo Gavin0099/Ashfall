@@ -28,7 +28,7 @@ def analyze_build_v2():
             res = run_sim(strat, num_steps=30, seed=i*111)
             results[strat].append(res)
             
-    # KPI 1: Survival Disparity
+    # KPI 1: Winrate Disparity
     winrates = {s: sum(1 for r in results[s] if r['survived'])/iterations for s in strategies}
     max_w = max(winrates.values())
     min_w = min(winrates.values())
@@ -40,7 +40,19 @@ def analyze_build_v2():
     else:
         print("  >> OK: Builds are within healthy competitive bounds.")
 
-    # KPI 2: Survival Floor (Bad Luck stress test)
+    # KPI 2: Death Taxonomy Distribution (v2.2 Diagnosis)
+    print(f"\n[KPI] Death Taxonomy Distribution (Why are they dying?)")
+    for strat in strategies:
+        reasons = [r['stats']['death_reason'] for r in results[strat] if not r['survived']]
+        if reasons:
+            from collections import Counter
+            dist = Counter(reasons)
+            dist_str = ", ".join([f"{k}: {v/len(reasons):.0%}" for k, v in dist.most_common()])
+            print(f"  {strat:16} | {dist_str}")
+        else:
+            print(f"  {strat:16} | No deaths recorded")
+
+    # KPI 3: Survival Floor Stress Test
     print(f"\n[KPI] Survival Floor Stress Test (Luck Mode: Bad)")
     floor_ok = True
     for strat in strategies:
@@ -66,5 +78,21 @@ def analyze_build_v2():
         if rate < GUARDRAILS["min_synergy_reach_rate"]:
             print(f"  >> WARNING: Synergy T2 is too hard to reach! Archetype scaling too slow.")
             
+    # KPI 6: Bridge Perk Audit (v2.2 Governance)
+    print(f"\n[KPI] Bridge Perk Audit (Are they over-universal?)")
+    bridge_ids = ["scout_mechanic"] # For now
+    for b_id in bridge_ids:
+        picks = sum(1 for s in strategies for r in results[s] if b_id in r['perks'])
+        total_runs = len(strategies) * iterations
+        pick_rate = picks / total_runs
+        
+        # Survival impact
+        surv_with = sum(1 for s in strategies for r in results[s] if b_id in r['perks'] and r['survived'])
+        surv_without = sum(1 for s in strategies for r in results[s] if b_id not in r['perks'] and r['survived'])
+        
+        print(f"  {b_id:16} | Pick Rate: {pick_rate:.1%} | Survival Impact: {surv_with - surv_with:.1f} (Δ)") # Simplified
+        if pick_rate > 0.6:
+            print(f"  >> WARNING: Bridge Perk '{b_id}' is too universal! Pick rate is {pick_rate:.1%}.")
+
 if __name__ == "__main__":
     analyze_build_v2()

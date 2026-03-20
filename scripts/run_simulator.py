@@ -62,6 +62,35 @@ class SimulationPlayer:
         scored_options.sort(key=lambda x: x[0], reverse=True)
         return scored_options[0][1]
 
+def get_death_taxonomy(run, i, stats) -> str:
+    """Categorizes the reason for death into a diagnostic taxonomy."""
+    hp_history = stats["history"]["hp"]
+    food_history = stats["history"]["food"]
+    
+    # 1. Hunger Collapse
+    if run.player.food <= 0:
+        return "HUNGER_COLLAPSE"
+        
+    # 2. Combat Spike (Sudden massive damage)
+    if len(hp_history) >= 2:
+        last_hp = hp_history[-1]
+        prev_hp = hp_history[-2]
+        if prev_hp - last_hp > run.player.max_hp * 0.4:
+            return "COMBAT_SPIKE"
+            
+    # 3. Attrition Crisis (Long term low HP)
+    if len(hp_history) >= 5:
+        recent_avg = sum(hp_history[-5:]) / 5
+        if recent_avg < run.player.max_hp * 0.25:
+            return "ATTRITION_CRISIS"
+            
+    # 4. Synergy Miss (Bad build scaling)
+    t1_synergies = [k for k in stats["synergy_times"].keys() if "_T1" in k]
+    if run.player.character.level >= 5 and len(t1_synergies) == 0:
+        return "SYNERGY_MISS"
+        
+    return "GENERAL_FAILURE"
+
 def run_sim(player_strategy: str, num_steps: int = 30, seed: int = 42, luck_mode: str = "normal"):
     random.seed(seed)
     mock_map = create_mock_map(num_nodes=num_steps + 5)
@@ -98,8 +127,8 @@ def run_sim(player_strategy: str, num_steps: int = 30, seed: int = 42, luck_mode
         stats["history"]["hp"].append(run.player.hp)
 
         if run.player.hp <= 0:
-            if run.player.food <= 0: stats["death_reason"] = "Starvation"
-            else: stats["death_reason"] = "Combat/Injury"
+            # Record Death Taxonomy (v2.2)
+            stats["death_reason"] = get_death_taxonomy(run, i, stats)
             
             # Record Death Snapshot
             from src.modifiers import get_modifier_breakdown
@@ -171,6 +200,13 @@ def run_sim(player_strategy: str, num_steps: int = 30, seed: int = 42, luck_mode
                 damage = random.randint(dmg_min, dmg_max)
                 dr = apply_modifier(run.player, "damage_reduction", 0)
                 run.player.hp -= max(0, damage - int(dr))
+                
+                # Victory Recovery (v2.2 Context)
+                # Helps test medkit_heal_bonus and "Last Stand" protection
+                heal_base = 1
+                heal_mod = apply_modifier(run.player, "medkit_heal_bonus", 0)
+                run.player.hp = min(run.player.max_hp, run.player.hp + heal_base + int(heal_mod))
+                
                 xp_gain = random.randint(40, 70)
             else:
                 xp_gain = random.randint(20, 35)
