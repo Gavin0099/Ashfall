@@ -16,9 +16,12 @@
 - [x] Make the build-driven viewer the default UI entry.
 - [x] Translate the build-driven UI to Traditional Chinese.
 - [x] Add local scene assets for clinic, checkpoint, and underground market states.
+- [x] Connect the build-driven UI to P3 payloads through a `ChoiceView` adapter.
+- [x] Add focused tests for the UI payload adapter.
 - [x] Verify focused Python tests, Phase A validator, UI production build, browser desktop, and browser 390px checks.
-- [ ] Next: connect the UI to P3 payloads instead of hardcoded prototype state.
-- [ ] Next: produce instrumented player/debug summaries for comparing the three builds.
+- [x] Produce instrumented player/debug summaries for comparing the three builds.
+- [x] Package the build-driven viewer into a Steam-demo-facing web prototype flow.
+- [ ] Next: decide whether to add runtime-backed save/export logs or broaden the demo with one more build-reactive branch.
 
 ## Context
 
@@ -35,5 +38,8 @@
 - `npm run build` in `ui/`: passed.
 - Browser desktop check at `http://127.0.0.1:5174/`: Chinese build-driven viewer rendered with scene image and no old Base first screen.
 - Browser 390px check: Chinese UI and scene image rendered without horizontal overflow.
+- `python -m pytest tests/test_build_driven_ui_payload_adapter.py tests/test_build_driven_p3_payloads.py tests/test_build_driven_slice_contract.py tests/test_trait_flow.py`: 10 passed after P4-UI-C.
+- P4-UI-D adds active-build `Machine Summary` plus a three-build `Instrumented Summary` comparison for `build_id`, opened options, locked options, triggered/consumed flags, and ending attribution.
+- Steam demo-facing web prototype flow now lets a player choose a build, start the five-event run, click available choices, see locked temptations, reach an ending, and inspect the machine summary.
 - Memory workflow check must be run from the framework path until Ashfall imports `governance_tools.memory_workflow` locally:
   `PYTHONPATH=E:\BackUp\Git_EE\ai-governance-framework python -X utf8 -m governance_tools.memory_workflow --check --repo . --run-guard --format json`
