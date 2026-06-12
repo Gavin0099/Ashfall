@@ -229,7 +229,7 @@ def resolve_event_interactively(engine, run, node, events, map_state, is_ruins=F
     print(f"\n{C_CYAN}{'─' * 40}{C_END}\n{C_BOLD}【 {stage_prefix}事件：{event_payload['description']} 】{C_END}")
     rem = estimate_remaining_steps(map_state, node.id)
     
-    avail_opts = get_available_options(run.player, event_payload)
+    avail_opts = get_available_options(run.player, event_payload, run_flags=run.flags)
     option_lines = []
     for i, info in enumerate(avail_opts):
         opt = info["option"]
@@ -264,6 +264,12 @@ def resolve_event_interactively(engine, run, node, events, map_state, is_ruins=F
                 else:
                     prefix += f"{C_RED}[需 {req_label}]{C_END} "
         
+        if info.get("locked"):
+            reasons = ", ".join(info.get("lock_reasons", []))
+            prefix += f"{C_RED}[LOCKED{': ' + reasons if reasons else ''}]{C_END} "
+            if info.get("locked_text"):
+                warn_str = f"{warn_str} {C_DIM}{info['locked_text']}{C_END}"
+
         option_lines.append(f"{prefix}{info['text']}{warn_str}")
 
     # Add Retreat option if it's ruins and not the first stage
@@ -291,7 +297,7 @@ def resolve_event_interactively(engine, run, node, events, map_state, is_ruins=F
                 print(f"{C_RED}❌ 你不符合該選項的特質或屬性要求！{C_END}")
 
     pre_state = {"hp": run.player.hp, "food": run.player.food, "ammo": run.player.ammo, "medkits": run.player.medkits, "radiation": run.player.radiation}
-    outcome = resolve_event_choice(run.player, event_payload, opt_idx, engine.rng)
+    outcome = resolve_event_choice(run.player, event_payload, opt_idx, engine.rng, run_flags=run.flags)
     
     decision_data = {
         "node": node.id,

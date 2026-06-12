@@ -11,9 +11,9 @@
 # ── PROVENANCE ────────────────────────────────────────────────────────────────
 schema_version: "1"
 baseline_version: 1.0.0
-source_commit: f5087b058b89be18255c2d0e371362d577289ffc
-framework_root: E:\BackUp\Git_EE\Ashfall
-initialized_at: 2026-06-08T03:18:02Z
+source_commit: 82361fa7b21818506ca735203e4ce9e6b421d7fd
+framework_root: E:\BackUp\Git_EE\ai-governance-framework
+initialized_at: 2026-06-12T09:12:49Z
 initialized_by: governance_tools/adopt_governance.py
 
 # ── INTEGRITY ─────────────────────────────────────────────────────────────────
@@ -22,7 +22,7 @@ initialized_by: governance_tools/adopt_governance.py
 sha256.AGENTS.base.md: f3daf5037a36606d546dc8d621dbb32963c6e3067f419187e4afd6f2d6dc14a7
 sha256.PLAN.md: 51d1370417efb2e3bd523ec88246b02214fd5073afe5e87efd0eda527635c24b
 sha256.contract.yaml: 58e8eedca6bf4ead0894644cba1dc463f2b97b6919df80f01dbe8fa2e4535a66
-sha256.AGENTS.md: 29bf7a53997d9deeb212785f7bf3cfb3e0b2b09629ddb5067a69d249b1f32ed5
+sha256.AGENTS.md: 99128567fead5c1479ff8ca9357d1b59d18582cf2f01d7a02df3d3a3800af90a
 overridable.AGENTS.base.md: protected
 overridable.PLAN.md: overridable
 overridable.contract.yaml: overridable

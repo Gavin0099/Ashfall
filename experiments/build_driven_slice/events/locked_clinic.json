@@ -1,0 +1,73 @@
+{
+  "id": "locked_clinic",
+  "description": "A roadside clinic still hums on backup power. The front lock is dead, the window bars are loose, and someone inside is trying not to breathe loudly.",
+  "options": [
+    {
+      "id": "force_clinic_window",
+      "text": "Force the clinic window open.",
+      "effects": {
+        "hp": -1
+      },
+      "set_flags": {
+        "clinic_forced_entry": true
+      },
+      "summary_consequence": "Entered without build leverage and created noise risk."
+    },
+    {
+      "id": "repair_clinic_door",
+      "text": "Repair the door relay and walk in quietly.",
+      "requirements": {
+        "trait": [
+          "mechanic"
+        ]
+      },
+      "visible_if_locked": true,
+      "locked_text": "The relay still has power, but the repair is beyond your training.",
+      "effects": {
+        "medkits": 1
+      },
+      "set_flags": {
+        "clinic_entered_safely": true
+      },
+      "summary_consequence": "Used old-world repair skill to preserve resources and unlock medical leverage."
+    },
+    {
+      "id": "intimidate_squatters",
+      "text": "Tell the squatters exactly what happens if they keep the door shut.",
+      "requirements": {
+        "trait": [
+          "intimidator"
+        ]
+      },
+      "visible_if_locked": true,
+      "locked_text": "You can threaten them, but they will not believe you know how to back it up.",
+      "effects": {
+        "ammo": -1,
+        "medkits": 1
+      },
+      "set_flags": {
+        "clinic_squatters_cowed": true
+      },
+      "summary_consequence": "Gained access through threat, increasing later distrust risk."
+    },
+    {
+      "id": "fake_medical_authorization",
+      "text": "Flash fake relief credentials and claim the clinic inventory.",
+      "requirements": {
+        "trait": [
+          "liar"
+        ]
+      },
+      "visible_if_locked": true,
+      "locked_text": "The lie is obvious to you only after the words are already too late.",
+      "effects": {
+        "medkits": 1,
+        "scrap": 1
+      },
+      "set_flags": {
+        "clinic_fake_credentials": true
+      },
+      "summary_consequence": "Used false authority to turn a locked clinic into social cover."
+    }
+  ]
+}

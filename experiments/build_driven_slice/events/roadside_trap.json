@@ -1,0 +1,70 @@
+{
+  "id": "roadside_trap",
+  "description": "A strip of cracked asphalt narrows between two burned cars. Wire glints between the bumpers, and someone has painted a warning mark on the road.",
+  "options": [
+    {
+      "id": "push_through_trap",
+      "text": "Push through before anyone notices you.",
+      "effects": {
+        "hp": -1,
+        "food": -1
+      },
+      "combat_chance": 0.0,
+      "summary_consequence": "Chose a common survival route and lost resources without gaining leverage."
+    },
+    {
+      "id": "detect_tripwire",
+      "text": "Trace the wire and disarm the trigger.",
+      "requirements": {
+        "attribute": {
+          "PER": 4
+        }
+      },
+      "visible_if_locked": true,
+      "locked_text": "You can see the wire, but not the pressure point that keeps it armed.",
+      "effects": {
+        "scrap": 1
+      },
+      "set_flags": {
+        "trap_disarmed": true
+      },
+      "summary_consequence": "Used perception to turn a trap into safe passage."
+    },
+    {
+      "id": "turn_trap_into_warning",
+      "text": "Read the raider mark and leave your own answer.",
+      "requirements": {
+        "trait": [
+          "ex_raider"
+        ]
+      },
+      "visible_if_locked": true,
+      "locked_text": "The symbol means something, but you do not know what kind of answer it demands.",
+      "effects": {
+        "ammo": 1
+      },
+      "set_flags": {
+        "raider_reputation_seen": true
+      },
+      "summary_consequence": "Used raider knowledge to gain future intimidation leverage."
+    },
+    {
+      "id": "sell_fake_safe_route",
+      "text": "Turn the trap into a fake toll route for the next scavenger.",
+      "requirements": {
+        "trait": [
+          "liar"
+        ]
+      },
+      "visible_if_locked": true,
+      "locked_text": "You see the angle, but not the confidence needed to sell danger as protection.",
+      "effects": {
+        "scrap": 1
+      },
+      "set_flags": {
+        "market_contact_earned": true
+      },
+      "summary_consequence": "Converted roadside danger into a social bargaining chip."
+    }
+  ]
+}

@@ -6,11 +6,12 @@ import BaseView from './components/BaseView';
 import CharacterCreator from './components/CharacterCreator';
 import LevelUpModal from './components/LevelUpModal';
 import BuildAnalysis from './components/BuildAnalysis';
+import BuildDrivenPrototype from './components/BuildDrivenPrototype';
 
 const API_BASE = 'http://localhost:8000/api';
 
 function App() {
-  const [view, setView] = useState('base'); // 'base' | 'creator' | 'run'
+  const [view, setView] = useState('buildPrototype'); // 'base' | 'creator' | 'run' | 'buildPrototype'
   const [gameState, setGameState] = useState(null);
   const [lastOutcome, setLastOutcome] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -24,7 +25,6 @@ function App() {
       if (res.ok) {
         const data = await res.json();
         setGameState(data);
-        setView('run');
       }
       setLoading(false);
     } catch (err) {
@@ -140,10 +140,19 @@ function App() {
     fetchState();
   }, []);
 
-  if (loading) return <div className="loading-screen">INITIALIZING HUD...</div>;
+  if (loading && view !== 'buildPrototype') return <div className="loading-screen">INITIALIZING HUD...</div>;
 
   if (view === 'base') {
-    return <BaseView onStartRun={() => setView('creator')} />;
+    return (
+      <BaseView
+        onStartRun={() => setView('creator')}
+        onBuildPrototype={() => setView('buildPrototype')}
+      />
+    );
+  }
+
+  if (view === 'buildPrototype') {
+    return <BuildDrivenPrototype onBack={() => setView('base')} />;
   }
 
   if (view === 'creator') {

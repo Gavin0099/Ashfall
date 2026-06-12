@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 520" role="img" aria-labelledby="title desc">
+  <title id="title">地下市場</title>
+  <desc id="desc">地下市場藏在裂開的加油站下方，攤位、電纜與舊幫派標記交錯。</desc>
+  <defs>
+    <linearGradient id="marketBg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#211d18"/>
+      <stop offset="1" stop-color="#0f1312"/>
+    </linearGradient>
+  </defs>
+  <rect width="900" height="520" fill="url(#marketBg)"/>
+  <path d="M80 120 H820 L760 220 H140 Z" fill="#2d241b" stroke="#8b5d3f" stroke-width="5"/>
+  <path d="M145 220 H755 V410 H145 Z" fill="#171915" stroke="#534639" stroke-width="3"/>
+  <path d="M205 410 V245 M350 410 V245 M540 410 V245 M690 410 V245" stroke="#4b4034" stroke-width="5"/>
+  <rect x="210" y="300" width="110" height="66" fill="#2b2119" stroke="#d07145" stroke-width="3"/>
+  <rect x="390" y="275" width="130" height="92" fill="#1e2421" stroke="#64c7bb" stroke-width="3"/>
+  <rect x="585" y="310" width="90" height="58" fill="#30251b" stroke="#e1b84d" stroke-width="3"/>
+  <path d="M150 248 C220 215 280 260 345 230 C420 196 500 242 580 210 C650 180 718 205 755 188" fill="none" stroke="#d07145" stroke-width="4" stroke-dasharray="16 12"/>
+  <circle cx="455" cy="318" r="24" fill="#64c7bb" opacity="0.8"/>
+  <path d="M664 165 l35 20 l-35 20 l-35 -20 Z" fill="#151915" stroke="#d65b58" stroke-width="4"/>
+  <path d="M638 185 H690" stroke="#d65b58" stroke-width="5"/>
+  <path d="M100 440 H800" stroke="#e7dcc0" stroke-width="3" opacity="0.25"/>
+  <path d="M155 465 H745" stroke="#e7dcc0" stroke-width="2" opacity="0.18"/>
+</svg>

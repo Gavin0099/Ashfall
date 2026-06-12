@@ -1,0 +1,68 @@
+{
+  "id": "underground_market",
+  "description": "Below a collapsed transit stair, the market smells like battery acid, boiled grain, and old paper money. Everyone is watching what you offer first.",
+  "options": [
+    {
+      "id": "buy_overpriced_pass",
+      "text": "Buy an overpriced vault approach pass.",
+      "effects": {
+        "scrap": -2
+      },
+      "summary_consequence": "Bought access without special leverage."
+    },
+    {
+      "id": "forge_market_contact",
+      "text": "Trade names until someone admits they know the gate broker.",
+      "requirements": {
+        "trait": [
+          "trader"
+        ]
+      },
+      "visible_if_locked": true,
+      "locked_text": "You know this is a relationship market, but you do not know which names are safe to say.",
+      "effects": {
+        "scrap": 1
+      },
+      "set_flags": {
+        "market_contact_earned": true
+      },
+      "summary_consequence": "Converted social skill into finale access."
+    },
+    {
+      "id": "repair_vendor_scanner",
+      "text": "Repair the vendor scanner in exchange for a gate favor.",
+      "requirements": {
+        "trait": [
+          "mechanic"
+        ]
+      },
+      "visible_if_locked": true,
+      "locked_text": "The scanner fault is visible, but the fix requires old-world repair confidence.",
+      "effects": {
+        "scrap": 1
+      },
+      "set_flags": {
+        "guard_scanner_disabled": true
+      },
+      "summary_consequence": "Disabled a finale obstacle through technical favor."
+    },
+    {
+      "id": "call_in_raider_debt",
+      "text": "Invoke an old raider debt and let the room go quiet.",
+      "requirements": {
+        "trait": [
+          "ex_raider"
+        ]
+      },
+      "visible_if_locked": true,
+      "locked_text": "You can copy the threat, but nobody here owes you fear.",
+      "effects": {
+        "ammo": 1
+      },
+      "set_flags": {
+        "raider_debt_called": true
+      },
+      "summary_consequence": "Used violent reputation, with possible ending cost."
+    }
+  ]
+}

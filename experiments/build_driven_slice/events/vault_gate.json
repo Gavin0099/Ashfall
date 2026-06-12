@@ -1,0 +1,87 @@
+{
+  "id": "vault_gate",
+  "description": "The vault gate is not a door so much as a verdict. Its scanner is cracked, its guards are nervous, and every route here has left a trace.",
+  "options": [
+    {
+      "id": "force_vault_wait",
+      "text": "Wait for a shift change and force your way through the confusion.",
+      "effects": {
+        "food": -1,
+        "hp": -1
+      },
+      "ending_id": "vault_entry_costly_survival",
+      "summary_consequence": "Reached the vault through costly survival instead of build leverage."
+    },
+    {
+      "id": "technical_override",
+      "text": "Use the disabled scanner loop to trigger a technical override.",
+      "requirements": {
+        "trait": [
+          "mechanic"
+        ]
+      },
+      "required_flags": {
+        "guard_scanner_disabled": true
+      },
+      "visible_if_locked": true,
+      "locked_text": "You need both technical skill and a prior scanner opening to make this look like a system fault.",
+      "effects": {
+        "scrap": 1
+      },
+      "ending_id": "vault_entry_technical_success",
+      "summary_consequence": "Old-world systems opened because the player understood and prepared them."
+    },
+    {
+      "id": "social_bypass",
+      "text": "Cash in your market contact and walk through under a borrowed name.",
+      "requirements": {
+        "trait": [
+          "liar"
+        ]
+      },
+      "required_flags": {
+        "market_contact_earned": true
+      },
+      "visible_if_locked": true,
+      "locked_text": "The guards are ready to believe someone, but no one here is ready to believe you.",
+      "effects": {
+        "scrap": 1
+      },
+      "ending_id": "vault_entry_social_fraud",
+      "summary_consequence": "The player lied their way into a system built on trust."
+    },
+    {
+      "id": "raider_pressure",
+      "text": "Let the gate crew understand which raider debt follows you.",
+      "requirements": {
+        "trait": [
+          "intimidator"
+        ]
+      },
+      "required_flags": {
+        "raider_debt_called": true
+      },
+      "visible_if_locked": true,
+      "locked_text": "A threat without recognized history is just noise at the vault gate.",
+      "effects": {
+        "ammo": -1
+      },
+      "ending_id": "vault_entry_intimidation",
+      "summary_consequence": "Violent credibility opened the gate but changed how survivors remember the player."
+    },
+    {
+      "id": "medical_clearance",
+      "text": "Use your clean checkpoint record to enter under medical clearance.",
+      "required_flags": {
+        "infection_screening_passed": true
+      },
+      "visible_if_locked": true,
+      "locked_text": "The medical lane exists, but your earlier choices left you without a clean record.",
+      "effects": {
+        "medkits": 1
+      },
+      "ending_id": "vault_entry_medical_clearance",
+      "summary_consequence": "Earlier safe clinic and checkpoint choices created a nonviolent vault entry."
+    }
+  ]
+}

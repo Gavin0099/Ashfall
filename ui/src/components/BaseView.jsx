@@ -2,7 +2,20 @@ import React, { useState, useEffect } from 'react';
 
 const API_BASE = 'http://localhost:8000/api';
 
-const BaseView = ({ onStartRun }) => {
+const FALLBACK_PROFILE = {
+  total_scrap: 0,
+  lifetime_scrap_earned: 0,
+  unlock_levels: {},
+  unlocked_archetypes: [],
+};
+
+const FALLBACK_METADATA = {
+  upgrades: {},
+  upgrade_costs: [0],
+  archetypes: {},
+};
+
+const BaseView = ({ onStartRun, onBuildPrototype }) => {
   const [profile, setProfile] = useState(null);
   const [metadata, setMetadata] = useState(null);
   const [activeTab, setActiveTab] = useState('upgrades');
@@ -21,6 +34,9 @@ const BaseView = ({ onStartRun }) => {
       setLoading(false);
     } catch (err) {
       console.error('Failed to fetch meta data', err);
+      setProfile(FALLBACK_PROFILE);
+      setMetadata(FALLBACK_METADATA);
+      setLoading(false);
     }
   };
 
@@ -166,6 +182,10 @@ const BaseView = ({ onStartRun }) => {
           
           <button className="btn-primary start-btn" onClick={onStartRun}>
             Initialize Mission Protocol
+          </button>
+          <button className="btn-action prototype-entry-btn" onClick={onBuildPrototype}>
+            <span>Open Build Reactivity Viewer</span>
+            <span className="text-secondary">P4-UI-B</span>
           </button>
         </aside>
       </div>

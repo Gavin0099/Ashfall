@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 520" role="img" aria-labelledby="title desc">
+  <title id="title">感染檢查站</title>
+  <desc id="desc">兩名守衛在臨時檢查站旁看守，一台老舊掃描器閃著紅燈。</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#20231e"/>
+      <stop offset="1" stop-color="#0d1215"/>
+    </linearGradient>
+  </defs>
+  <rect width="900" height="520" fill="url(#bg)"/>
+  <path d="M0 355 C170 300 300 355 440 322 C600 284 700 330 900 292 L900 520 L0 520 Z" fill="#171915"/>
+  <rect x="120" y="170" width="660" height="50" rx="6" fill="#30251c" stroke="#8f6344" stroke-width="3"/>
+  <rect x="160" y="220" width="34" height="205" fill="#211c17"/>
+  <rect x="704" y="220" width="34" height="205" fill="#211c17"/>
+  <path d="M186 280 C300 250 440 305 560 270 C640 247 693 260 720 250" fill="none" stroke="#d1b05d" stroke-width="6" stroke-dasharray="18 12"/>
+  <rect x="390" y="150" width="120" height="210" rx="12" fill="#151915" stroke="#6c725d" stroke-width="4"/>
+  <circle cx="450" cy="218" r="34" fill="#221612" stroke="#d65b58" stroke-width="5"/>
+  <circle cx="450" cy="218" r="13" fill="#d65b58"/>
+  <rect x="420" y="282" width="60" height="18" fill="#64c7bb" opacity="0.85"/>
+  <path d="M300 425 L326 280 L352 425 Z" fill="#2a241c"/>
+  <circle cx="326" cy="252" r="28" fill="#2a241c"/>
+  <path d="M548 425 L574 280 L600 425 Z" fill="#2a241c"/>
+  <circle cx="574" cy="252" r="28" fill="#2a241c"/>
+  <path d="M250 430 H650" stroke="#e7dcc0" stroke-width="3" opacity="0.35"/>
+  <path d="M220 460 H690" stroke="#e7dcc0" stroke-width="2" opacity="0.22"/>
+</svg>

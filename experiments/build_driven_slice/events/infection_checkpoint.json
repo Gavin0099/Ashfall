@@ -1,0 +1,64 @@
+{
+  "id": "infection_checkpoint",
+  "description": "A quarantine line blocks the road. A tired guard points a cracked scanner at each traveler and sends the coughing ones toward a fenced tent.",
+  "options": [
+    {
+      "id": "wait_out_screening",
+      "text": "Wait out the screening line.",
+      "effects": {
+        "food": -1
+      },
+      "summary_consequence": "Accepted attrition because no prior leverage applied."
+    },
+    {
+      "id": "use_sterile_clinic_supplies",
+      "text": "Show sterile clinic supplies and bypass the quarantine tent.",
+      "required_flags": {
+        "clinic_entered_safely": true
+      },
+      "visible_if_locked": true,
+      "locked_text": "You never got clean supplies from the clinic, so the guard has no reason to wave you through.",
+      "effects": {
+        "medkits": 1
+      },
+      "set_flags": {
+        "infection_screening_passed": true
+      },
+      "summary_consequence": "Earlier safe clinic access created a later survival shortcut."
+    },
+    {
+      "id": "talk_through_checkpoint",
+      "text": "Talk the guard into believing your checkpoint story.",
+      "requirements": {
+        "trait": [
+          "trader"
+        ]
+      },
+      "visible_if_locked": true,
+      "locked_text": "The guard wants a story with official rhythm, and you cannot find it fast enough.",
+      "effects": {
+        "food": 0
+      },
+      "set_flags": {
+        "checkpoint_story_believed": true
+      },
+      "summary_consequence": "Used social cover to avoid quarantine."
+    },
+    {
+      "id": "recognize_raider_scar_protocol",
+      "text": "Answer the guard's scar-code like an old raider.",
+      "required_flags": {
+        "raider_reputation_seen": true
+      },
+      "visible_if_locked": true,
+      "locked_text": "The guard's scar pattern is a question, but you do not know the answer.",
+      "effects": {
+        "ammo": 1
+      },
+      "set_flags": {
+        "checkpoint_guard_spooked": true
+      },
+      "summary_consequence": "Violent past opened a shortcut but made authority hostility plausible."
+    }
+  ]
+}
